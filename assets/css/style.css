@@ -1,0 +1,570 @@
+/*@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");:root{--header-height: 3rem;--nav-width: 68px;--first-color: #4723D9;--first-color-light: #AFA5D9;--white-color: #F7F6FB;--body-font: 'Nunito', sans-serif;--normal-font-size: 1rem;--z-fixed: 100}*,::before,::after{box-sizing: border-box}body{position: relative;margin: var(--header-height) 0 0 0;padding: 0 1rem;font-family: var(--body-font);font-size: var(--normal-font-size);transition: .5s}a{text-decoration: none}.header{width: 100%;height: var(--header-height);position: fixed;top: 0;left: 0;display: flex;align-items: center;justify-content: space-between;padding: 0 1rem;background-color: var(--white-color);z-index: var(--z-fixed);transition: .5s}.header_toggle{color: var(--first-color);font-size: 1.5rem;cursor: pointer}.header_img{width: 35px;height: 35px;display: flex;justify-content: center;border-radius: 50%;overflow: hidden}.header_img img{width: 40px}.l-navbar{position: fixed;top: 0;left: -30%;width: var(--nav-width);height: 100vh;background-color: var(--first-color);padding: .5rem 1rem 0 0;transition: .5s;z-index: var(--z-fixed)}.nav{height: 100%;display: flex;flex-direction: column;justify-content: space-between;overflow: hidden}.nav_logo, .nav_link{display: grid;grid-template-columns: max-content max-content;align-items: center;column-gap: 1rem;padding: .5rem 0 .5rem 1.5rem}.nav_logo{margin-bottom: 2rem}.nav_logo-icon{font-size: 1.25rem;color: var(--white-color)}.nav_logo-name{color: var(--white-color);font-weight: 700}.nav_link{position: relative;color: var(--first-color-light);margin-bottom: 1.5rem;transition: .3s}.nav_link:hover{color: var(--white-color)}.nav_icon{font-size: 1.25rem}.show{left: 0}.body-pd{padding-left: calc(var(--nav-width) + 1rem)}.active{color: var(--white-color)}.active::before{content: '';position: absolute;left: 0;width: 2px;height: 32px;background-color: var(--white-color)}.height-100{height:100vh}@media screen and (min-width: 768px){body{margin: calc(var(--header-height) + 1rem) 0 0 0;padding-left: calc(var(--nav-width) + 2rem)}.header{height: calc(var(--header-height) + 1rem);padding: 0 2rem 0 calc(var(--nav-width) + 2rem)}.header_img{width: 40px;height: 40px}.header_img img{width: 45px}.l-navbar{left: 0;padding: 1rem 1rem 0 0}.show{width: calc(var(--nav-width) + 156px)}.body-pd{padding-left: calc(var(--nav-width) + 188px)}}*/
+
+/*.username{
+    text-align: center;
+    color: #fff;
+}*/
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap'); 
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+body{
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+.sidebar{
+    position: fixed;
+    
+    z-index: 2;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 78px;
+    background: #344F21;
+    padding: 6px 14px;
+    transition: all 0.5s ease;
+
+}
+.sidebar.active{
+    width: 240px;
+     overflow-y: auto;
+    overflow-x: hidden;
+}
+.admin{
+    color: #fff;
+    opacity: 0;
+    pointer-events: none;
+}
+.admin hr{ 
+    background-color: white;
+}
+.admin img{
+    display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50%;
+    max-width: 65%;
+    max-height: 65%;
+}
+.admin h3{
+    font-size: 20px;
+    text-align: center;
+}
+.sidebar.active .admin{
+    opacity: 1;
+    pointer-events: none;
+}
+.logo img{
+    display: flex;
+    height: 50px;
+    width: 88%;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+}
+.sidebar.active .logo img{
+    opacity: 1;
+    pointer-events: none;
+}
+.sidebar #btn{
+    position: absolute;
+    color: #fff;
+    left: 50%;
+    top: 6px;
+    font-size: 20px;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    line-height: 50px;
+    transform: translateX(-50%);
+}
+.sidebar.active #btn{
+    left: 92%;
+}
+.sidebar ul{
+    margin-top: -100px;
+}
+.sidebar.active ul{
+    margin-top: 20px;
+}
+.sidebar ul li{
+    position: relative;
+
+    height: 50px;
+    width: 100%;
+    margin: 0 5px;
+    list-style: none;
+    line-height: 50px;
+
+}
+.dropdown-btn 
+{
+    padding: 10px 20px 10px 14px;
+    text-decoration: none;
+    height: 50px;
+    color: white;
+    display: block;
+    border: none;
+    background: none;
+    background-color: #344F21;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+}
+/* On mouse-over */
+.dropdown-btn:hover 
+{
+    border-radius: 12px;
+    background-color: white;
+    color: #344F21;
+}
+
+.sidebar ul li .dropdown-btn:hover, .nav-item:hover 
+{
+    background-color: #344F21;
+    color: #fff;
+}
+.dropdown-container .nav-item a{
+    color: white;
+}
+/* Add an active class to the active dropdown button */
+.active
+{
+    background-color: #344F21;
+    color: #fff;
+}
+/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+.dropdown-container
+{
+    display: none;
+    background-color: #344F21;
+    padding-left: 10px;
+}
+/* Optional: Style the caret down icon */
+.fa-caret-down 
+{
+    float: right;
+    margin-top: -65px;
+    margin-right: -20px;
+    padding-right: 2px;
+}
+.sidebar.active .fa-caret-down {
+    margin-top: 0;
+
+}
+.down2
+{
+    float: right;
+    margin-top: -35px;
+    margin-right: -15px;
+    padding-right: 2px;
+}
+.sidebar.active .down2 {
+    margin-top: 0;
+    margin-right: 70px;
+}
+.sidebar ul li .tooltip{
+    position: absolute;
+    left: 122px;
+    top: 50px;
+    transform: translate(-80% , -50%);
+    border-radius: 6px;
+    height: 35px;
+    width: 122px;
+    background: #fff;
+    line-height: 35px;
+    text-align: center;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    transition: 0s;
+    opacity: 0;
+    pointer-events: none;
+    display: block;
+}
+.sidebar.active ul li .tooltip{
+    display: none;
+}
+.sidebar ul li:hover .tooltip{
+    transition: all 0.5s ease;
+    opacity: 1;
+    top: 50%;
+}
+.dropdown-btn .tooltip2, .tooltip4{
+    position: absolute;
+    left: 150px;
+    top: 50px;
+    transform: translate(-80% , -50%);
+    border-radius: 6px;
+    height: 35px;
+    width: 122px;
+    background: #fff;
+    line-height: 35px;
+    text-align: center;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    transition: 0s;
+    opacity: 0;
+    pointer-events: none;
+    display: block;
+}
+.sidebar.active .dropdown-btn .tooltip2{
+    display: none;
+}
+.dropdown-btn:hover .tooltip2{
+    transition: all 0.1s ease;
+    opacity: 1;
+    top: 40%;
+}
+.dropdown-btn:hover .tooltip4{
+    transition: all 0.1s ease;
+    opacity: 1;
+    top: 55%;
+}
+.sidebar ul li .tooltip3{
+    position: absolute;
+    left: 122px;
+    top: 50px;
+    transform: translate(-80% , -50%);
+    border-radius: 6px;
+    height: 35px;
+    width: 122px;
+    background: #fff;
+    color: #344F21;
+    line-height: 35px;
+    text-align: center;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    transition: 0s;
+    opacity: 0;
+    pointer-events: none;
+    display: block;
+}
+.sidebar.active ul li .tooltip3{
+    display: none;
+}
+.sidebar ul li:hover .tooltip3{
+    transition: all 0.5s ease;
+    opacity: 1;
+    top: 50%;
+}
+.sidebar ul li a{
+    color: #fff;
+    display: flex;
+    align-items: center;
+    margin-left: -10px;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    border-radius: 12px;
+    white-space: nowrap;
+}
+.sidebar ul li a:hover{
+    color: #344F21;
+    background: #fff;
+}
+.sidebar ul li i{
+    height: 50px;
+    min-width: 50px;
+    border-radius: 12px;
+    line-height: 50px;
+    text-align: center;
+}
+.sidebar .links_name{
+    opacity: 0;
+    pointer-events: none;
+}
+.sidebar.active .links_name{
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.sidebar-header{
+    position: absolute;
+    background-color: #F2F8EE;
+    overflow: auto;
+    height: 100%;
+    width: calc(100% - 78px);
+    left: 78px;
+    transition: all 0.5s ease;
+}
+.sidebar-header .text{
+    padding: 10px 5px;
+    background-color: #fff;
+    font-size: 30px;
+    color: #344F21;
+    font-weight: bold;
+}
+.sidebar.active ~ .sidebar-header{
+    width: calc(100% - 240px);
+    left: 240px;
+}
+
+.body-content{
+    position: absolute;
+    z-index: 1;
+    left: 78px;
+    height: 70%;
+    width: calc(100% - 78px);
+    transition: all 0.5s ease;
+}
+.sidebar.active ~ .body-content{
+    width: calc(100% - 240px);
+    left: 240px;
+}
+.card{
+    background-color: #F2F8EE;
+}
+.body-content .crud-text{
+    margin-left: -50px;
+}
+.body-content .crud-text h1 {
+    font-size: 50px;
+    font-weight: bold;
+    color: #344F21;
+}
+ .d-flex{
+     margin-left: -50px;
+ }
+ .d-flex .btn{
+    margin-right: 5px;
+    font-size: 15px;
+    color: white;
+    background-color: #344F21;
+}
+.d-flex .btn:hover{
+   
+    font-size: 15px;
+    color: white;
+    background-color: #01381D;
+}
+
+.body-content .mt-3{
+    margin-left: -50px;
+    margin-right: 10px;
+    color:  #344F21;
+}
+.body-content .mt-3 th{
+    background-color: #344F21;
+    color: white;
+    font-weight: normal;
+}
+.body-content .add-form h1{
+    color: #344F21;
+    
+    font-weight: bold;
+}
+.body-content .add-form form{
+    margin-left: -50px;
+    margin-right: 20px;
+}
+.body-content .add-form form .form-content{
+    position: absolute;
+    background-color: white;
+    border-radius: 20px;
+    width: 40%;
+    height: 65%;
+    left: 25%;
+    top: 15%;
+}
+.body-content .add-form form .long{
+    position: absolute;
+    background-color: white;
+    border-radius: 20px;
+    width: 40%;
+    height: 95%;
+    left: 25%;
+    top: 15%;
+}
+.body-content .add-form form .form-group label{
+    color: #344F21;
+    
+    margin-left: 20px;
+    font-size: 20px;
+}
+.body-content .add-form form .form-group #label1{
+    margin-top: 50px;
+}
+.body-content .add-form form .form-group input{
+    width: 80%;
+
+    margin-left: 20px;
+}
+.body-content .add-form form .form-group .btn{
+    float: right;
+    margin-right: 17%;
+    border-radius: 12px;
+}
+.body-content .add-form form .form-group .back{
+    margin-right: 10px;
+}
+.body-content .add-form form .form-group .back:hover{
+    color: white;
+}
+.body-content .Top1{
+    background-color: #fff;
+    margin-top: 20px;
+    width: 35%;
+    height: 400px;
+    float: left;
+    border-radius: 50px;
+    margin-left: -50px;
+}
+.body-content .Top1 .Form1 img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    /*margin-left: 28%;*/
+    border-radius: 50%;
+    width: 250px;
+    height: 250px;
+}
+.body-content .Top1 .Form1 h1{
+    /*margin-left: 17%;*/
+    text-align: center;
+    font-family: Arial,Sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.body-content .Top1 .Form1 h4{
+    text-align: center;
+    color: blue;
+}
+.body-content .Top{
+    background-color: #fff;
+    border-radius: 50px;
+    float: right;
+    margin-right: 150px;
+    width: 50%;
+    padding: 25px 50px;
+}
+.body-content .event-header{
+    margin-left: -50px;
+    color: #344F21;
+}
+/*css for events button*/
+.body-content .tsk .btn{
+    left: 10px;
+   /* float: left;*/
+    font-size: 15px;
+    color: white;
+    background-color: #344F21;
+}
+
+
+.body-content .tsk .btn:hover{
+    background-color: black;
+    color: white;
+}
+.body-content .event-header .filter{
+    background-color: #FFFF;
+    margin-top: 10px;
+    width: 700px;
+    margin-left: 200px;
+}
+.body-content .event-header .filter #sub{
+    margin-top: 25px;
+    float: left;
+}
+.body-content .event-header .filter #print{
+    margin-top: 10px;
+    margin-left: 5px;
+}
+.body-content .edit-form h1{
+    color: #344F21;
+    
+    font-weight: bold;
+}
+.body-content .edit-form form{
+    margin-left: -50px;
+    margin-right: 20px;
+}
+.body-content .edit-form form .form-content{
+    position: absolute;
+    background-color: white;
+    border-radius: 20px;
+    width: 40%;
+    height: 65%;
+    left: 25%;
+    top: 15%;
+}
+.body-content .edit-form form .long{
+    position: absolute;
+    background-color: white;
+    border-radius: 20px;
+    width: 40%;
+    height: 95%;
+    left: 25%;
+    top: 15%;
+}
+.body-content .edit-form form .img{
+    position: absolute;
+    background-color: white;
+    border-radius: 20px;
+    width: 40%;
+    height: 95%;
+    margin-left: -320px;
+    margin-top: 20px;
+
+}.body-content .edit-form form .long{
+    position: absolute;
+    background-color: white;
+    border-radius: 20px;
+    width: 40%;
+    height: 95%;
+    left: 25%;
+    top: 15%;
+}
+.body-content .edit-form form .form-group label{
+    color: #344F21;
+    
+    margin-left: 20px;
+    font-size: 20px;
+}
+.body-content .edit-form form .form-group #label1{
+    margin-top: 50px;
+}
+.body-content .edit-form form .form-group input{
+    width: 80%;
+
+    margin-left: 20px;
+}
+.body-content .edit-form form .form-group .btn{
+    float: right;
+    margin-right: 17%;
+    border-radius: 12px;
+}
+.body-content .edit-form form .form-group .back{
+    margin-right: 10px;
+}
+.body-content .edit-form form .form-group .back:hover{
+    color: white;
+}
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: yellowgreen;
+    color: white;
+}
+.body-content .add-form form .form-group textarea{
+    margin-left: 15px;
+    width: auto;
+}
+.body-content .edit-form form .form-group textarea{
+    margin-left: 15px;
+    width: auto;
+}
+.body-content .image_edit{
+    float: right;   
+    margin-top: -20px;
+    margin-right: 100px;
+}
+.body-content .image_edit h5{
+    color: #344F21;
+}
+
+/*All Tables CRUD*/
+table{
+    font-size: 14px;
+}

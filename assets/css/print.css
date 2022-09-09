@@ -1,0 +1,37 @@
+.body-content{
+	left: 10px;
+}
+.card1{
+	top: -10px;
+	height: 150px;
+	color: #344F21;
+}
+.card1, .card2{
+	background-color: #fff;
+}
+.card1 .card-header{
+	height: 60px;
+
+}
+.card1 .card-header h3{
+	font-weight: bold;
+}
+#sub{
+	float: left;
+	margin-top: 22px;
+}
+#print{
+	margin-top: 7px;
+	margin-left: 20px;
+}
+
+.header-img,
+.title{
+	display: none;
+	visibility: none;
+}
+#table1 th{
+	background-color: #A8D08D;
+	/*color: #fff;*/
+}
+

@@ -1,0 +1,30 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+h1{
+	padding: 10px;
+	margin-left: 80px;
+	color: black;
+}
+hr{
+	margin-left: -50px;
+	color: black;
+	border: 1px solid;
+	width: 560px;
+}
+#para1{
+	margin-left: -50px;
+	margin-right: 600px;
+	text-align: left;
+	font-size: 20px;
+}
+.abtpic{
+	float: right;
+}
+/*body{
+	background-image: url(../image/bg.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: fixed;
+}*/

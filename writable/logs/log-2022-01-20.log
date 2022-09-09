@@ -1,0 +1,6 @@
+CRITICAL - 2022-01-20 22:31:32 --> Undefined constant "App\Controllers\APPATH"
+#0 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->showme('co')
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\tsms\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}

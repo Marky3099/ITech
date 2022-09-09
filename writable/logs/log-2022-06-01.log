@@ -1,0 +1,11 @@
+CRITICAL - 2022-06-01 20:54:18 --> Undefined variable $validation1
+#0 C:\xampp\htdocs\tsms\app\Views\pages\login.php(19): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined varia...', 'C:\\xampp\\htdocs...', 19)
+#1 C:\xampp\htdocs\tsms\system\View\View.php(214): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('pages/login', Array, true)
+#4 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(28): view('pages/login')
+#5 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->login()
+#6 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#7 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
