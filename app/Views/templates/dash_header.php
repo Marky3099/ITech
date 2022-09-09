@@ -120,7 +120,7 @@
                     <i class="fa-solid fa-file-import"></i>
                     <span class="links_name">Upload Reports</span>
                 </a>
-                <span class="tooltip">Upload Reports</span>
+                <span class="tooltip">Upload</span>
             </li>
         <?php else:?>
             <li>
