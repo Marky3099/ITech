@@ -96,7 +96,8 @@ class CalllogsCrud extends Controller{
         $data['call_fcu'] = $Call_fcu->orderBy('cl_id', 'ASC')->findAll();
         $data['aircon'] = $Aircon->orderBy('aircon_id', 'ASC')->findAll();
         $data['device_brand'] = $Aircon->select('device_brand')->groupBy('device_brand')->findAll();
-
+        $date = new \DateTime();
+        $date->setTimezone(new \DateTimeZone('+0800'));
     
         if(isset($_GET['start_date']) && isset($_GET['to_date']))
         {
@@ -144,6 +145,8 @@ class CalllogsCrud extends Controller{
         $Aircon = new Aircon();
         $fcu_no = new Fcu_no();
         $Call_fcu = new Call_fcu_views();
+
+        
         $data['date'] = [$strt,$end];
 
         $data['view_calllogs'] = [];

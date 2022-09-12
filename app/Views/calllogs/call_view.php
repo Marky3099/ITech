@@ -1,38 +1,39 @@
 <div class="body-content">
-       <div class="crud-text"><h1>Daily Call Logs</h1></div>
+    <div class="crud-text"><h1>Daily Call Logs</h1></div>
     <div class="d-flex">
         <a href="<?= base_url('calllogs/create/view') ?>" class="btn">Add Log</a>
-   </div>
-   <div class="card-body filter">
-                  <form action="<?= base_url("/calllogs/filtered"); ?>" method="GET">
-                     
-                     <div class="row">
-                        <div class="col-md-4">
-                           <div class="form-group">
-                              <label>Start Date:</label><br>
-                              <input type="date" name="start_date" class="form-control" value="<?php if(isset($_GET['start_date'])){echo $_GET['start_date'];} ?>">
-                           </div>
-                        </div>
-                        <div class="col-md-4">
-                           <div class="form-group">
-                              <label>To Date:</label><br>
-                              <input type="date" name="to_date" class="form-control" value="<?php if(isset($_GET['to_date'])){echo $_GET['to_date'];} ?>">
-                           </div>
-                        </div>
-                        <div class="col-md-4">
-                           <div class="form-group">
-                              <button type="submit" class="btn btn-success" id="sub">Generate</button>
-                           </div>
-                           <div class="form-group">
-                              <?php if(isset($_GET['start_date']) && isset($_GET['to_date'])): ?>
-                              <a href="<?= base_url('/calllogs/filtered/print/'.$_GET['start_date']."/".$_GET['to_date'])?>" target="_blank" class="btn btn-success" id="print">Download</a>
-                              <?php endif; ?>
-                           </div>
-                        </div>
-                     </div>
-                  
-                  </form>
-               </div>   
+    </div>
+    <div class="event-header">
+    <div class="card-body filter">
+        <form action="<?= base_url("/calllogs/filtered"); ?>" method="GET">           
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Start Date:</label><br>
+                        <input type="date" name="start_date" class="form-control" value="<?php if(isset($_GET['start_date'])){echo $_GET['start_date'];} ?>">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>To Date:</label><br>
+                        <input type="date" name="to_date" class="form-control" value="<?php if(isset($_GET['to_date'])){echo $_GET['to_date'];} ?>">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success" id="gen">Generate</button>
+                    </div>
+                    <div class="form-group">
+                        <?php if(isset($_GET['start_date']) && isset($_GET['to_date'])): ?>
+                            <a href="<?= base_url('/calllogs/filtered/print/'.$_GET['start_date']."/".$_GET['to_date'])?>" target="_blank" class="btn btn-success" id="dl">Download</a>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>         
+        </form>
+    </div>   
+    </div>
+   
     <?php
      if(isset($_SESSION['success'])){
         echo $_SESSION['success'];

@@ -465,13 +465,17 @@ body{
     width: 700px;
     margin-left: 200px;
 }
-.body-content .event-header .filter #sub{
+.body-content .event-header .filter #sub, #gen{
     margin-top: 25px;
     float: left;
 }
 .body-content .event-header .filter #print{
     margin-top: 10px;
     margin-left: 5px;
+}
+#dl{
+    margin-top: 8px;
+    margin-left: 2px;
 }
 .body-content .edit-form h1{
     color: #344F21;
@@ -563,6 +567,7 @@ body{
 .body-content .image_edit h5{
     color: #344F21;
 }
+
 
 /*All Tables CRUD*/
 table{
