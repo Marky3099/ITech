@@ -1,0 +1,107 @@
+CRITICAL - 2022-09-11 23:17:59 --> Undefined variable: data
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(101): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 101, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->getfilter()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-09-11 23:18:21 --> Undefined index: call_fcu
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(101): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 101, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->getfilter()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-09-11 23:18:48 --> Undefined index: call_fcu
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(110): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 110, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->getfilter()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-09-11 23:18:49 --> Undefined index: call_fcu
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(110): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 110, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->getfilter()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-09-11 23:18:50 --> Undefined index: call_fcu
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(110): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 110, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->getfilter()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-09-11 23:35:43 --> Undefined variable: event
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(158): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 158, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->printpdf('2022-08-01', '2022-08-31')
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-09-11 23:36:00 --> syntax error, unexpected ';', expecting ')'
+#0 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#1 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('calllogs/callPr...', Array, true)
+#2 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(186): view('calllogs/callPr...', Array)
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->printpdf('2022-08-01', '2022-08-31')
+#4 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#5 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2022-09-11 23:36:42 --> Undefined variable: date
+#0 C:\xampp\htdocs\tsms\app\Views\calllogs\callPrint.php(129): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 129, Array)
+#1 C:\xampp\htdocs\tsms\system\View\View.php(214): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('calllogs/callPr...', Array, true)
+#4 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(186): view('calllogs/callPr...', Array)
+#5 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->printpdf('2022-08-01', '2022-08-31')
+#6 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#7 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-09-11 23:38:50 --> Undefined variable: date
+#0 C:\xampp\htdocs\tsms\app\Views\calllogs\callPrint.php(129): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 129, Array)
+#1 C:\xampp\htdocs\tsms\system\View\View.php(214): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('calllogs/callPr...', Array, true)
+#4 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(188): view('calllogs/callPr...', Array)
+#5 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->printpdf('2022-08-01', '2022-08-31')
+#6 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#7 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-09-11 23:39:50 --> Undefined variable: date
+#0 C:\xampp\htdocs\tsms\app\Views\calllogs\callPrint.php(129): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 129, Array)
+#1 C:\xampp\htdocs\tsms\system\View\View.php(214): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('calllogs/callPr...', Array, true)
+#4 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(186): view('calllogs/callPr...', Array)
+#5 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->printpdf('2022-08-01', '2022-08-31')
+#6 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#7 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-09-11 23:42:00 --> Cannot use object of type DateTime as array
+#0 C:\xampp\htdocs\tsms\system\View\View.php(214): include()
+#1 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#2 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('calllogs/callPr...', Array, true)
+#3 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(189): view('calllogs/callPr...', Array)
+#4 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->printpdf('2022-08-01', '2022-08-31')
+#5 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#6 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2022-09-11 23:43:33 --> Undefined index: cols
+#0 C:\xampp\htdocs\tsms\app\Libraries\tcpdf\tcpdf.php(17071): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 17071, Array)
+#1 C:\xampp\htdocs\tsms\app\Libraries\tcpdf\tcpdf.php(17343): TCPDF->getHtmlDomArray('<span style="te...')
+#2 C:\xampp\htdocs\tsms\app\Views\calllogs\callPrint.php(184): TCPDF->writeHTML('<span style="te...', true, 0, true, true)
+#3 C:\xampp\htdocs\tsms\system\View\View.php(214): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#5 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('calllogs/callPr...', Array, true)
+#6 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(187): view('calllogs/callPr...', Array)
+#7 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->printpdf('2022-08-01', '2022-08-31')
+#8 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#9 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#11 {main}

@@ -78,7 +78,115 @@ class CalllogsCrud extends Controller{
         $data['main'] = 'calllogs/call_view';
         return view("dashboard/template",$data);
     }
+    public function getfilter(){
+        if($_SESSION['position'] != USER_ROLE_ADMIN){
+            return $this->response->redirect(site_url('/dashboard'));
+        }
+        $Call_logs = new Calllogs_views();
+        $Client = new Client();
+        $Aircon = new Aircon();
+        $fcu_no = new Fcu_no();
+        $Call_fcu = new Call_fcu_views();
 
+        $data['view_calllogs'] = [];
+        $data['client'] = $Client->orderBy('client_id', 'ASC')->findAll();
+        $data['area'] = $Client->select('area')->groupBy('area')->findAll();
+        $data['call_logs'] = $Call_logs->orderBy('cl_id', 'ASC')->findAll();
+        $data['fcu_no'] = $fcu_no->orderBy('fcuno', 'ASC')->findAll();
+        $data['call_fcu'] = $Call_fcu->orderBy('cl_id', 'ASC')->findAll();
+        $data['aircon'] = $Aircon->orderBy('aircon_id', 'ASC')->findAll();
+        $data['device_brand'] = $Aircon->select('device_brand')->groupBy('device_brand')->findAll();
+
+    
+        if(isset($_GET['start_date']) && isset($_GET['to_date']))
+        {
+            $start_date = $_GET['start_date'];
+            $to_date = $_GET['to_date'];
+
+            $data['calllogs_data'] = $Call_logs->where('date BETWEEN "'. date('Y-m-d', strtotime($start_date)). '" and "'. date('Y-m-d', strtotime($to_date)).'"')->findAll();
+
+         foreach ($data['calllogs_data'] as $key => $value) {
+            $fcu_arr = "";
+                foreach ($data['call_fcu'] as $key => $value_fcu) {
+                    if ( $value['cl_id'] == $value_fcu['cl_id']) {
+                       $fcu_arr .= $data['call_fcu'][$key]['fcu'].",";
+                    }
+                }    
+            $data['view_calllogs'][]= (object)[
+                "cl_id"=> $value['cl_id'],
+                "date"=> $value['date'],
+                "client_id"=> $value['client_id'],
+                "area"=> $value['area'],
+                "client_branch"=> $value['client_branch'],
+                "aircon_id"=> $value['aircon_id'],
+                "aircon_type"=> $value['aircon_type'],
+                "device_brand"=> $value['device_brand'],
+                "caller"=> $value['caller'],
+                "particulars"=> $value['particulars'],
+                "qty"=> $value['qty'],
+                "status"=> $value['status'],
+                "fcu_arr"=> $fcu_arr,
+            ];
+        }
+
+
+        }
+        $data['main'] = 'calllogs/call_view';
+        return view('dashboard/template',$data);
+    }
+    public function printpdf($strt,$end){
+        if($_SESSION['position'] != USER_ROLE_ADMIN){
+            return $this->response->redirect(site_url('/dashboard'));
+        }
+        $session = session();
+        $Call_logs = new Calllogs_views();
+        $Client = new Client();
+        $Aircon = new Aircon();
+        $fcu_no = new Fcu_no();
+        $Call_fcu = new Call_fcu_views();
+        $data['date'] = [$strt,$end];
+
+        $data['view_calllogs'] = [];
+        $data['client'] = $Client->orderBy('client_id', 'ASC')->findAll();
+        $data['area'] = $Client->select('area')->groupBy('area')->findAll();
+        $data['call_logs'] = $Call_logs->orderBy('cl_id', 'ASC')->findAll();
+        $data['fcu_no'] = $fcu_no->orderBy('fcuno', 'ASC')->findAll();
+        $data['call_fcu'] = $Call_fcu->orderBy('cl_id', 'ASC')->findAll();
+        $data['aircon'] = $Aircon->orderBy('aircon_id', 'ASC')->findAll();
+        $data['device_brand'] = $Aircon->select('device_brand')->groupBy('device_brand')->findAll();
+
+
+      $data['calllogs_data'] = $Call_logs->where('date BETWEEN "'. date('Y-m-d', strtotime($strt)). '" and "'. date('Y-m-d', strtotime($end)).'"')->findAll();
+
+       foreach ($data['calllogs_data'] as $key => $value) {
+            $fcu_arr = "";
+                foreach ($data['call_fcu'] as $key => $value_fcu) {
+                    if ( $value['cl_id'] == $value_fcu['cl_id']) {
+                       $fcu_arr .= $data['call_fcu'][$key]['fcu'].",";
+                    }
+                }    
+            $data['view_calllogs'][]= (object)[
+                "cl_id"=> $value['cl_id'],
+                "date"=> $value['date'],
+                "client_id"=> $value['client_id'],
+                "area"=> $value['area'],
+                "client_branch"=> $value['client_branch'],
+                "aircon_id"=> $value['aircon_id'],
+                "aircon_type"=> $value['aircon_type'],
+                "device_brand"=> $value['device_brand'],
+                "caller"=> $value['caller'],
+                "particulars"=> $value['particulars'],
+                "qty"=> $value['qty'],
+                "status"=> $value['status'],
+                "fcu_arr"=> $fcu_arr,
+            ];
+        }
+
+      
+        
+      return view('calllogs/callPrint',$data);
+     
+   }
     // add Call log form
     public function create(){
         if($_SESSION['position'] != USER_ROLE_ADMIN){

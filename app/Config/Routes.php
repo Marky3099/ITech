@@ -71,6 +71,8 @@ $routes->get('user/print', 'UsersCrud::printUser',['filter' => 'authGuard']);
 $routes->get('user/delete/(:num)', 'UsersCrud::delete/$1',['filter' => 'authGuard']);
 
 $routes->get('/calllogs', 'CalllogsCrud::index',['filter' => 'authGuard']);
+$routes->get('/calllogs/filtered', 'CalllogsCrud::getfilter',['filter' => 'authGuard']);
+$routes->get('/calllogs/filtered/print/(:any)/(:any)', 'CalllogsCrud::printpdf/$1/$2',['filter' => 'authGuard']);
 $routes->get('calllogs/create/view', 'CalllogsCrud::create',['filter' => 'authGuard']);
 $routes->post('/calllogs/add', 'CalllogsCrud::store',['filter' => 'authGuard']);
 // $routes->post('/calllogs/add2', 'CalllogsCrud::store2',['filter' => 'authGuard']);

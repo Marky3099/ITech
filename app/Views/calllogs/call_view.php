@@ -3,17 +3,46 @@
     <div class="d-flex">
         <a href="<?= base_url('calllogs/create/view') ?>" class="btn">Add Log</a>
    </div>
+   <div class="card-body filter">
+                  <form action="<?= base_url("/calllogs/filtered"); ?>" method="GET">
+                     
+                     <div class="row">
+                        <div class="col-md-4">
+                           <div class="form-group">
+                              <label>Start Date:</label><br>
+                              <input type="date" name="start_date" class="form-control" value="<?php if(isset($_GET['start_date'])){echo $_GET['start_date'];} ?>">
+                           </div>
+                        </div>
+                        <div class="col-md-4">
+                           <div class="form-group">
+                              <label>To Date:</label><br>
+                              <input type="date" name="to_date" class="form-control" value="<?php if(isset($_GET['to_date'])){echo $_GET['to_date'];} ?>">
+                           </div>
+                        </div>
+                        <div class="col-md-4">
+                           <div class="form-group">
+                              <button type="submit" class="btn btn-success" id="sub">Generate</button>
+                           </div>
+                           <div class="form-group">
+                              <?php if(isset($_GET['start_date']) && isset($_GET['to_date'])): ?>
+                              <a href="<?= base_url('/calllogs/filtered/print/'.$_GET['start_date']."/".$_GET['to_date'])?>" target="_blank" class="btn btn-success" id="print">Download</a>
+                              <?php endif; ?>
+                           </div>
+                        </div>
+                     </div>
+                  
+                  </form>
+               </div>   
     <?php
      if(isset($_SESSION['success'])){
         echo $_SESSION['success'];
       }
      ?>
   <div class="mt-3">
-    <?php if($view_calllogs): $c = 1;  ?>
+    <?php if($view_calllogs):?>
      <table class="table table-bordered" serv_id="users-list" id="table1" style="font-size: 11px;">
        <thead>
           <tr>
-             <th>ID</th>
              <th>DATE</th>
              <th>BRANCH AREA</th>
              <th>BRANCH NAME</th>
@@ -32,7 +61,6 @@
          
           <?php foreach($view_calllogs as $call_log):  ?>
           <tr>
-             <td><?php echo $c; ?></td>
              <td><?php echo $call_log->date; ?></td>
              <td><?php echo $call_log->area; ?></td>
              <td><?php echo $call_log->client_branch; ?></td>
@@ -63,7 +91,7 @@
              </td>
              
           </tr>
-          <?php $c=$c+1;endforeach; ?>
+          <?php endforeach; ?>
          
       </tbody>
       </table>
