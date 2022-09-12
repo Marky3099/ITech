@@ -14,7 +14,7 @@
 <!-- </head> -->
 
 <body>
-  <div class="body-content" style="top: 100px;left: 10px;">
+  <div class="body-content">
     <div class="col-sm-3">
       <h2 id="calendar-text"><b>Calendar</b></h2>
     <div class="tsk">
@@ -24,16 +24,16 @@
         <a href="<?= base_url('/aircon');?>" class="btn" >Aircon</a>
    </div>
  </div>
-   <div class="legend">
+   <div class="legend col-lg-12">
   <h3 id="legend-text">Legend:</h3>
   
   <ul><b>
     <?php foreach ($serv as $s): ?>
-      <li style="width: auto; margin-left: 5px; padding: 5px; white-space: nowrap; text-align: center; background-color:<?=$s['serv_color'];?>;"><?=$s['serv_name'];?></li>
+      <li style="background-color:<?=$s['serv_color'];?>;"><?=$s['serv_name'];?></li>
     <?php endforeach ?>
   </ul>
 </div>
-<div id='calendar' class="col-lg-12 calen"></div>
+<div id='calendar' class="col-md-10 calen"></div>
  <div id='datepicker'></div>
 </div>
 </div>
@@ -50,6 +50,7 @@
 
   var calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: 'dayGridMonth',
+    handleWindowResize: false,
     defaultDate: '',
     selectable: true,   
     // editable: true,

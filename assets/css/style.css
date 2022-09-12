@@ -212,7 +212,7 @@ body{
     pointer-events: none;
     display: block;
 }
-.sidebar.active .dropdown-btn .tooltip2{
+.sidebar.active .dropdown-btn .tooltip2, .tooltip4{
     display: none;
 }
 .dropdown-btn:hover .tooltip2{
