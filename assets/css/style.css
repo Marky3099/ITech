@@ -195,7 +195,7 @@ body{
     opacity: 1;
     top: 50%;
 }
-.dropdown-btn .tooltip2, .tooltip4{
+.dropdown-btn .tooltip2,.dropdown-btn .tooltip4{
     position: absolute;
     left: 150px;
     top: 50px;
@@ -212,7 +212,7 @@ body{
     pointer-events: none;
     display: block;
 }
-.sidebar.active .dropdown-btn .tooltip2, .tooltip4{
+.sidebar.active .dropdown-btn .tooltip2, .sidebar.active .dropdown-btn .tooltip4{
     display: none;
 }
 .dropdown-btn:hover .tooltip2{
