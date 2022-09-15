@@ -36,7 +36,7 @@ class UsersCrud extends Controller
         $User = new User();
         $user_data = $User->where('email', $this->request->getVar('email'))->first();
         if ($user_data) {
-            $data['error'] = "email existed!";
+            $data['error'] = "Email Already Registered, Please try another Email";
             $data['main'] = 'user/user_add';
             return view("dashboard/template",$data);
         }

@@ -465,7 +465,7 @@ class FullCalendar extends BaseController
                 }
                 for ($i=0; $i < count($weeklyEvent); $i++) { 
                     $_POST['start_event'] = $weeklyEvent[$i];
-                    $_POST["title"] = $_POST["time"]." ".$_POST["area"];
+                    $_POST["title"] = date("g:ia",strtotime($_POST["time"]))." ".$_POST["area"];
                     $success = $Event->insert($_POST);
                     foreach($_POST['emp_id'] as $key => $value) {
                         $Event_emp->insert([
@@ -497,7 +497,7 @@ class FullCalendar extends BaseController
 
                     for ($i=0; $i < count($monthlyEvent); $i++) { 
                         $_POST['start_event'] = $monthlyEvent[$i];
-                        $_POST["title"] = $_POST["time"]." ".$_POST["area"];
+                        $_POST["title"] = date("g:ia",strtotime($_POST["time"]))." ".$_POST["area"];
                         $success = $Event->insert($_POST);
                         foreach($_POST['emp_id'] as $key => $value) {
                             $Event_emp->insert([
@@ -516,7 +516,7 @@ class FullCalendar extends BaseController
                 }
 
                 else{
-                    $_POST["title"] = $_POST["time"]." ".$_POST["area"];
+                    $_POST["title"] = date("g:ia",strtotime($_POST["time"]))." ".$_POST["area"];
                     $success = $Event->insert($_POST);
                 
                     foreach($_POST['emp_id'] as $key => $value) {
