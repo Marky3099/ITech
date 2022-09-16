@@ -9,6 +9,12 @@ body {
   background-size: cover;
 }
 
+hr{
+  border: 1px solid #556C45;
+  margin-left: -40px;
+  width: 121%;
+}
+
 .login-box {
   position: absolute;
   top: 50%;
@@ -29,12 +35,13 @@ body {
 }
 .login-box .header a{
   font-weight: bold;
+  padding-bottom: 5px;
   text-decoration: none;
   color: #fff;
   display: flex;
   align-items: center;
   text-align: center;
-  text-transform: capitalize;
+
 }
 
 .login-box h4 {
@@ -52,7 +59,9 @@ body {
 }
 
 .login-box h3 {
-  margin: 0 0 30px;
+  margin: 5px 0 30px;
+  font-size: 1.75rem;
+  font-weight: lighter;
   padding: 0;
   color: #fff;
   text-align: center;
@@ -81,6 +90,11 @@ body {
   background: transparent;
   margin-top: 7px;
 }
+input:-webkit-autofill{
+  -webkit-box-shadow: 0 0 0 1000px #344F21 inset !important;
+  -webkit-text-fill-color: white !important;
+  background-color: #566C45 !important;
+}
 .login-box .user-box label {
   position: absolute;
   top:0;
@@ -97,7 +111,7 @@ body {
   top: -20px;
   left: 0;
   color: #fff;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .login-box form .btn {
@@ -115,11 +129,11 @@ body {
 }
 
 .login-box .btn:hover {
-  background: #288387;
+  background: #566C46;
   color: #fff;
   border-radius: 5px;
-  box-shadow: 0 0 5px #288387,
-              0 0 25px #03e9f4,
+  box-shadow: 0 0 5px #344F21,
+              0 0 25px #344F21,
 }
 
 .login-box .btn span {

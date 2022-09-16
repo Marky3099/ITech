@@ -372,7 +372,7 @@ class Dashboard extends BaseController
                             </html>";
             $email = \Config\Services::email();
             $email->setTo($to);
-            $email->setFrom('Maylaflor@gmail.com','Maylaflor TSMS');
+            $email->setFrom('Maylaflorairconditioningref27@gmail.com','Maylaflor TSMS');
             $email->setSubject($subject);
             $email->setMessage($message);
 

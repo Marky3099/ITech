@@ -15,7 +15,8 @@
 		  <div class="header">
                    <a href="<?= base_url('#home')?>" class="texthp"><img src="<?= base_url('assets/image/logo.png')?>">&nbsp;&nbsp;Tasks and Schedule Monitoring System</a>
                    </div>
-		  <h3>Login</h3>
+                   <hr>
+		  <h3>LOGIN</h3>
 		  <form class="login100-form validate-form" action="<?= base_url('pages/check');?>" method="post">
 
 		  	<?php 
