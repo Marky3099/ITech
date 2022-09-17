@@ -304,6 +304,7 @@ section{
 
 .footer .credit{
     font-size: 2rem;
+    text-transform: none;
     color:#344F21;
     font-weight: lighter;
     padding:1.5rem;
