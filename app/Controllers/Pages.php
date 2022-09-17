@@ -57,7 +57,6 @@ class Pages extends BaseController
 
         if (!$validation) {
             $data['main'] = 'pages/login';
-            $data['validation'] = 'Wrong Email/Password';
             return view('pages/login_temp',$data,['validation1' => $this->validator]);
             
         }else {

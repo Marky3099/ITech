@@ -21,13 +21,13 @@
 
 		  	<?php 
 					if(!empty($errorAcc)){ ?>
-			            <div style="background-color: red;"><b>
+			            <div style="background-color: red;">
 			             <h4><center><?php echo $errorAcc;?></center></h4>
 			            </div>
 			        <?php }?>
 			     <?php 
 					if(!empty($success)){ ?>
-			            <div style=" background-color: green;"><b>
+			            <div style=" background-color: green;">
 			             <h4><center><?php echo $success;?></center></h4>
 			            </div>
 			        <?php }?>
@@ -35,7 +35,7 @@
 					<div class="user-box">
 						<input class="email" type="text" name="email"
 						value="<?php if(isset($_POST['email'])) { echo $_POST['email']; } ?>"><label>Email</label><?php if($validation1->getError('email')) {?>
-			            <div style="color: #FF6969;"><b>
+			            <div style="color: #FF6969;">
 			              <?= $error = $validation1->getError('email'); ?>
 			            </div>
 			        <?php }?>
@@ -48,17 +48,17 @@
 						value="<?php if(isset($_POST['password'])) { echo $_POST['password']; } ?>"><label>Password</label>
 						
 					</div>
-					<div class="fpass" style="float:right;" >
-			        	<a href="<?=base_url('/forgot_password');?>" style="color: white; font-size: 12px;">Forgot Password?</a>
+					<div class="fpass" >
+			        	<a href="<?=base_url('/forgot_password');?>">Forgot Password?</a>
 			        </div>
 					<?php if($validation1->getError('password')) {?>
-			            <div style="color: #FF6969;"><b>
+			            <div style="color: #FF6969;">
 			              <?= $error = $validation1->getError('password'); ?>
 			            </div>
 			        <?php }?>
 			        <?php 
 					if(!empty($errorMessage)){ ?>
-			            <div style="color: #FF6969;"><b>
+			            <div style="color: #FF6969;">
 			             <?php echo $errorMessage;?>
 			            </div>
 			        <?php }?>
@@ -71,7 +71,9 @@
 				    
 				    </a>
 				    <br><br><br>
-				    <a href="<?= base_url();?>"><h5>Back to Website</h5></a>
+				    <div class="back">
+				    	<a href="<?= base_url();?>">Back to Website</a>
+				    </div>
 		  </form>
 		</div>	
  </body>
