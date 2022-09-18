@@ -3,7 +3,7 @@
     <form method="post" id="update_aircon" name="update_aircon" 
     action="<?= base_url('aircon/update');?>">
       <input type="hidden" name="aircon_id" id="id" value="<?php echo $Aircon_obj['aircon_id']; ?>">
-      <h1>Edit Aircon</h1>
+      <h1>Edit Aircon Details</h1>
       <div class="form-content long">
       <div class="form-group">
         <label id="label1">Device Brand</label>

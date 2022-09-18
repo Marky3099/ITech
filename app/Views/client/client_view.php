@@ -25,8 +25,8 @@
        <thead>
           <tr>
              <th>Client ID</th>
-             <th>Area</th>
-             <th>Client Branch</th>
+             <th>Branch Area</th>
+             <th>Branch Branch</th>
              <th>Address</th>
              <th>Contact</th>
              <th>Action</th>

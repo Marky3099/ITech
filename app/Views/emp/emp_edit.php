@@ -3,7 +3,7 @@
     <form method="post" id="update_emp" name="update_emp" 
     action="<?= base_url('/emp/update') ?>">
       <input type="hidden" name="emp_id" id="id" value="<?php echo $Emp_obj['emp_id']; ?>">
-      <h1>Edit Employee</h1>
+      <h1>Edit Employee Details</h1>
       <div class="form-content long">
       <div class="form-group">
         <label id="label1">Name</label>

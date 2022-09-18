@@ -298,7 +298,7 @@
           </div>
           <div class="form-group">
             <!-- Branch Name -->
-            <select id="client_id" name="client_id" class="form-control" >
+            <select id="client_id" name="client_id" class="form-control" required>
 
             </select>
           </div>
@@ -320,7 +320,7 @@
             <h5 id= "fcu">FCU No.</h5>
             <h5 id="qty">Qty</h5>
             <!-- Device Brand -->
-            <select id="device_brand" name="device_brand" class="form-control">
+            <select id="device_brand" name="device_brand" class="form-control" required>
               <?php foreach($device_brand as $d_b):  ?>
                   <option value=<?php echo $d_b['device_brand']; ?>><?php echo $d_b['device_brand'];?></option>
               <?php endforeach; ?>
@@ -328,13 +328,13 @@
           </div>
           <div class="form-group">
             <!-- Aircon Type -->
-            <select id="aircon_id" name="aircon_id" class="form-control">
+            <select id="aircon_id" name="aircon_id" class="form-control" required>
 
             </select>
           </div>
           <div class="form-group">
             <!-- FCU -->
-            <select id="fcuno" name="fcuno[]" class="form-control" multiple="multiple">
+            <select id="fcuno" name="fcuno[]" class="form-control" multiple="multiple" required>
                <?php foreach($fcu_no as $f):  ?>
                   <option value="<?php echo $f['fcuno']; ?>"><p id="s2option"><?php echo $f['fcu'];?></p></option>
               <?php endforeach; ?>
@@ -342,13 +342,13 @@
           </div>
           <div class="form-group">
             <!-- Quantity -->
-            <input type="number" name="quantity" id="quantity" min="1" value="1">
+            <input type="number" name="quantity" id="quantity" min="1" value="1" required>
           </div>
           
          <div class="form-group">
           
             <h5>Employee</h5>
-            <select id="emp_id" name="emp_id[]" class="form-control" multiple="multiple" style="width: 400px;">
+            <select id="emp_id" name="emp_id[]" class="form-control" multiple="multiple" style="width: 400px;" required>
               <?php foreach($emp as $em):  ?>
                   <option value=<?php echo $em['emp_id']; ?>><?php echo $em['emp_name'];?></option>
               <?php endforeach; ?>

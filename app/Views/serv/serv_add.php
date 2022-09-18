@@ -21,7 +21,7 @@
       </div>
       <div class="form-group">
         <label>Price</label>
-        <input type="text" name="price" class="form-control" required>
+        <input type="number" name="price" class="form-control" required>
       </div>
       <div class="form-group">
         <label>Color</label>

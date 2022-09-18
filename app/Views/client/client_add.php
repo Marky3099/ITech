@@ -11,12 +11,12 @@
     <h1>Add Client</h1>
     <div class="form-content long">
       <div class="form-group">
-        <label id="label1">Area</label>
+        <label id="label1">Branch Area</label>
         <input type="text" name="area" class="form-control" required>
       </div>
 
       <div class="form-group">
-        <label>Client Branch</label>
+        <label>Branch Name</label>
         <input type="text" name="client_branch" class="form-control" required>
       </div>
 

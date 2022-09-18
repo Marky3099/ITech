@@ -16,7 +16,7 @@
       </div>
       <div class="form-group">
         <label>Price</label>
-        <input type="text" name="price" class="form-control" value="<?php echo $Serv_obj['price']; ?>">
+        <input type="number" name="price" class="form-control" value="<?php echo $Serv_obj['price']; ?>">
       </div>
       <div class="form-group">
         <label>Color</label>

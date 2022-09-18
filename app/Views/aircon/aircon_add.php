@@ -8,7 +8,7 @@
                   </div>
               <?php }?>
   
-    <h1>Add Brand</h1>
+    <h1>Add Aircon</h1>
     <div class="form-content long">
       <div class="form-group">
         <label id="label1">Device Brand</label>

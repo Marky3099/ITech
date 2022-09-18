@@ -3,14 +3,14 @@
     <form method="post" id="update_client" name="update_client" 
     action="<?= base_url('client/update') ?>">
       <input type="hidden" name="client_id" id="id" value="<?php echo $Client_obj['client_id']; ?>">
-      <h1>Edit Client</h1>
+      <h1>Edit Client Details</h1>
       <div class="form-content long">
       <div class="form-group">
-        <label id="label1">Area</label>
+        <label id="label1">Branch Area</label>
         <input type="text" name="area" class="form-control" value="<?php echo $Client_obj['area']; ?>">
       </div>
       <div class="form-group">
-        <label>Client Branch</label>
+        <label>Branch Name</label>
         <input type="text" name="client_branch" class="form-control" value="<?php echo $Client_obj['client_branch']; ?>">
       </div>
 
