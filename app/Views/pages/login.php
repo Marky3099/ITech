@@ -46,7 +46,7 @@
 
 					<div class="user-box">
 						<input type="password" name="password" id="id_password"
-						value="<?php if(isset($_POST['password'])) { echo $_POST['password']; } ?>"><i class="far fa-eye" id="togglePassword" style="margin-left: -30px; color: white; cursor: pointer;"></i><label>Password</label>
+						value="<?php if(isset($_POST['password'])) { echo $_POST['password']; } ?>"><i class="far fa-eye fa-eye-slash" id="togglePassword" style="margin-left: -30px; color: white; cursor: pointer;"></i><label>Password</label>
 						
 					</div>
 					<div class="fpass" >
