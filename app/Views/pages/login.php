@@ -7,6 +7,7 @@
  	<meta name="viewport" content="width=device-width, initial-scale=1">
  	<title>Login</title>
  	<link rel="stylesheet" href="<?= base_url('assets/css/loginstyle.css')?>">
+ 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
  </head>
  <body>
 	 <div class="login-box" >
@@ -44,8 +45,8 @@
 					 
 
 					<div class="user-box">
-						<input type="password" name="password"  
-						value="<?php if(isset($_POST['password'])) { echo $_POST['password']; } ?>"><label>Password</label>
+						<input type="password" name="password" id="id_password"
+						value="<?php if(isset($_POST['password'])) { echo $_POST['password']; } ?>"><i class="far fa-eye" id="togglePassword" style="margin-left: -30px; color: white; cursor: pointer;"></i><label>Password</label>
 						
 					</div>
 					<div class="fpass" >
@@ -76,6 +77,18 @@
 				    </div>
 		  </form>
 		</div>	
+		 <script type="text/javascript">
+		 	const togglePassword = document.querySelector('#togglePassword');
+			  const password = document.querySelector('#id_password');
+
+			  togglePassword.addEventListener('click', function (e) {
+			    // toggle the type attribute
+			    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+			    password.setAttribute('type', type);
+			    // toggle the eye slash icon
+			    this.classList.toggle('fa-eye-slash');
+			});
+		 </script>
  </body>
  </html>
 
