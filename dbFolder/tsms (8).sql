@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 23, 2022 at 03:55 AM
+-- Generation Time: Sep 23, 2022 at 09:36 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -38,8 +38,8 @@ CREATE TABLE `aircon` (
 --
 
 INSERT INTO `aircon` (`aircon_id`, `device_brand`, `aircon_type`) VALUES
-(1, 'Mitsubishi', 'mits1'),
-(2, 'Mitsubishi', 'mits2'),
+(1, 'Mitsubishi', 'Ceiling cassette'),
+(2, 'Mitsubishi', 'Ceiling mounted'),
 (3, 'Mitsubishi', 'Wall Mounted'),
 (4, 'Mitsubishi', 'Floor Mounted'),
 (5, 'LG', 'Ceiling Cassette'),
@@ -98,7 +98,7 @@ CREATE TABLE `appointments` (
   `serv_id` int(11) NOT NULL,
   `aircon_id` int(11) NOT NULL,
   `qty` int(11) NOT NULL,
-  `appt_status` enum('Pending','Approved') NOT NULL
+  `appt_status` enum('Pending','Approved','Rejected') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -106,11 +106,7 @@ CREATE TABLE `appointments` (
 --
 
 INSERT INTO `appointments` (`appt_id`, `appt_date`, `appt_time`, `client_id`, `serv_id`, `aircon_id`, `qty`, `appt_status`) VALUES
-(4, '2022-09-22', '00:00:00', 9, 1, 13, 1, 'Pending'),
-(5, '2022-09-22', '00:00:00', 9, 1, 13, 1, 'Pending'),
-(6, '2022-09-22', '00:00:00', 9, 1, 13, 1, 'Pending'),
-(7, '2022-09-22', '00:00:00', 9, 1, 13, 1, 'Pending'),
-(8, '2022-09-22', '00:00:00', 9, 1, 13, 1, 'Pending');
+(10, '2022-09-23', '13:00:00', 4, 5, 10, 3, 'Pending');
 
 -- --------------------------------------------------------
 
@@ -128,7 +124,19 @@ CREATE TABLE `appt_fcu` (
 --
 
 INSERT INTO `appt_fcu` (`appt_id`, `fcuno`) VALUES
-(8, 1);
+(10, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `appt_fcu_views`
+-- (See below for the actual view)
+--
+CREATE TABLE `appt_fcu_views` (
+`appt_id` int(11)
+,`fcuno` int(11)
+,`fcu` varchar(225)
+);
 
 -- --------------------------------------------------------
 
@@ -170,8 +178,7 @@ INSERT INTO `call_fcu` (`cl_id`, `fcuno`) VALUES
 (41, 2),
 (41, 3),
 (38, 3),
-(38, 4),
-(38, 5);
+(38, 4);
 
 -- --------------------------------------------------------
 
@@ -300,7 +307,8 @@ CREATE TABLE `events` (
 
 INSERT INTO `events` (`id`, `title`, `start_event`, `time`, `end_event`, `repeatable`, `status`, `client_id`, `serv_id`, `aircon_id`, `quantity`) VALUES
 (1, '1:00pm FAIRVIEW', '2022-09-06', '13:00:00', NULL, 'None', 'Pending', 7, 1, 13, 1),
-(2, '6:00pm BLUMENTRITT', '2022-09-07', '18:00:00', NULL, 'None', 'Pending', 9, 5, 13, 1);
+(2, '6:00pm BLUMENTRITT', '2022-09-07', '18:00:00', NULL, 'None', 'Pending', 9, 5, 13, 1),
+(3, '12:00am BLUMENTRITT', '2022-09-08', '00:00:00', NULL, 'None', 'Pending', 9, 4, 13, 3);
 
 -- --------------------------------------------------------
 
@@ -319,7 +327,9 @@ CREATE TABLE `event_emp` (
 
 INSERT INTO `event_emp` (`id`, `emp_id`) VALUES
 (1, 1),
-(2, 1);
+(2, 1),
+(3, 1),
+(3, 5);
 
 -- --------------------------------------------------------
 
@@ -369,7 +379,9 @@ CREATE TABLE `event_fcu` (
 
 INSERT INTO `event_fcu` (`id`, `fcuno`) VALUES
 (1, 1),
-(2, 1);
+(2, 1),
+(3, 1),
+(3, 2);
 
 -- --------------------------------------------------------
 
@@ -501,14 +513,13 @@ CREATE TABLE `view_appointment` (
 ,`client_id` int(11)
 ,`area` varchar(225)
 ,`client_branch` varchar(225)
+,`serv_id` int(11)
 ,`serv_name` varchar(225)
 ,`aircon_id` int(11)
 ,`device_brand` varchar(225)
 ,`aircon_type` varchar(225)
-,`fcuno` int(11)
-,`fcu` varchar(225)
 ,`qty` int(11)
-,`appt_status` enum('Pending','Approved')
+,`appt_status` enum('Pending','Approved','Rejected')
 );
 
 -- --------------------------------------------------------
@@ -519,6 +530,15 @@ CREATE TABLE `view_appointment` (
 DROP TABLE IF EXISTS `all_events`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `all_events`  AS SELECT `events`.`serv_id` AS `serv_id`, `events`.`client_id` AS `client_id`, `events`.`aircon_id` AS `aircon_id`, `events`.`id` AS `id`, `events`.`title` AS `title`, `events`.`start_event` AS `start_event`, `events`.`time` AS `TIME`, `events`.`end_event` AS `end_event`, `events`.`status` AS `STATUS`, `clients`.`area` AS `area`, `clients`.`client_branch` AS `client_branch`, `clients`.`client_address` AS `client_address`, `clients`.`client_contact` AS `client_contact`, `services`.`serv_name` AS `serv_name`, `services`.`serv_description` AS `serv_description`, `services`.`price` AS `price`, `services`.`serv_color` AS `serv_color`, `aircon`.`device_brand` AS `device_brand`, `aircon`.`aircon_type` AS `aircon_type`, `events`.`quantity` AS `quantity` FROM (((`events` join `clients` on(`events`.`client_id` = `clients`.`client_id`)) join `services` on(`events`.`serv_id` = `services`.`serv_id`)) join `aircon` on(`events`.`aircon_id` = `aircon`.`aircon_id`))  ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `appt_fcu_views`
+--
+DROP TABLE IF EXISTS `appt_fcu_views`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `appt_fcu_views`  AS SELECT `appt_fcu`.`appt_id` AS `appt_id`, `appt_fcu`.`fcuno` AS `fcuno`, `fcu_no`.`fcu` AS `fcu` FROM (`appt_fcu` join `fcu_no`) WHERE `appt_fcu`.`fcuno` = `fcu_no`.`fcuno``fcuno`  ;
 
 -- --------------------------------------------------------
 
@@ -563,7 +583,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `view_appointment`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_appointment`  AS SELECT `appointments`.`appt_id` AS `appt_id`, `appointments`.`appt_date` AS `appt_date`, `appointments`.`appt_time` AS `appt_time`, `clients`.`client_id` AS `client_id`, `clients`.`area` AS `area`, `clients`.`client_branch` AS `client_branch`, `services`.`serv_name` AS `serv_name`, `aircon`.`aircon_id` AS `aircon_id`, `aircon`.`device_brand` AS `device_brand`, `aircon`.`aircon_type` AS `aircon_type`, `fcu_no`.`fcuno` AS `fcuno`, `fcu_no`.`fcu` AS `fcu`, `appointments`.`qty` AS `qty`, `appointments`.`appt_status` AS `appt_status` FROM (((((`appointments` join `clients` on(`appointments`.`client_id` = `clients`.`client_id`)) join `services` on(`appointments`.`serv_id` = `services`.`serv_id`)) join `aircon` on(`appointments`.`aircon_id` = `aircon`.`aircon_id`)) join `appt_fcu` on(`appointments`.`appt_id` = `appt_fcu`.`appt_id`)) join `fcu_no` on(`appt_fcu`.`fcuno` = `fcu_no`.`fcuno`))  ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_appointment`  AS SELECT `appointments`.`appt_id` AS `appt_id`, `appointments`.`appt_date` AS `appt_date`, `appointments`.`appt_time` AS `appt_time`, `clients`.`client_id` AS `client_id`, `clients`.`area` AS `area`, `clients`.`client_branch` AS `client_branch`, `services`.`serv_id` AS `serv_id`, `services`.`serv_name` AS `serv_name`, `aircon`.`aircon_id` AS `aircon_id`, `aircon`.`device_brand` AS `device_brand`, `aircon`.`aircon_type` AS `aircon_type`, `appointments`.`qty` AS `qty`, `appointments`.`appt_status` AS `appt_status` FROM (((`appointments` join `clients` on(`appointments`.`client_id` = `clients`.`client_id`)) join `services` on(`appointments`.`serv_id` = `services`.`serv_id`)) join `aircon` on(`appointments`.`aircon_id` = `aircon`.`aircon_id`))  ;
 
 --
 -- Indexes for dumped tables
@@ -679,7 +699,7 @@ ALTER TABLE `aircon`
 -- AUTO_INCREMENT for table `appointments`
 --
 ALTER TABLE `appointments`
-  MODIFY `appt_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `appt_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `call_logs`
@@ -703,7 +723,7 @@ ALTER TABLE `employees`
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `fcu_no`
