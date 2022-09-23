@@ -38,6 +38,9 @@ $routes->get('/login', 'Pages::login');
 $routes->get('/appointment', 'AppointmentCrud::index',['filter' => 'authGuard']);
 $routes->get('/appointment/create', 'AppointmentCrud::create',['filter' => 'authGuard']);
 $routes->post('/appointment/add', 'AppointmentCrud::store',['filter' => 'authGuard']);
+$routes->get('/appointment/(:num)', 'AppointmentCrud::singleAppt/$1',['filter' => 'authGuard']);
+$routes->post('/appointment/update', 'AppointmentCrud::update',['filter' => 'authGuard']);
+$routes->get('appointment/delete/(:num)', 'AppointmentCrud::delete/$1',['filter' => 'authGuard']);
 
 $routes->get('/serv', 'ServCrud::index',['filter' => 'authGuard']);
 $routes->get('serv/create/view', 'ServCrud::create',['filter' => 'authGuard']);

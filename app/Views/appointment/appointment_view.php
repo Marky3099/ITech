@@ -60,8 +60,8 @@
              <td><?php echo $appt->qty; ?></td>
              <td><?php echo $appt->appt_status; ?></td>
              <td>
-              <a href="#" class="btn btn-primary btn-sm">Edit</a>
-              <a href=#>Delete</a>
+              <a href="<?php echo base_url('/appointment/'.$appt->appt_id);?>" class="btn btn-primary btn-sm">Edit</a>
+              <a href="<?php echo base_url('/appointment/delete/'.$appt->appt_id);?>"class="btn btn-danger btn-sm">Delete</a>
               </td>
           </tr>
           <?php endforeach; ?>

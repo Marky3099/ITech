@@ -80,3 +80,4 @@ defined('EXIT__AUTO_MAX')      || define('EXIT__AUTO_MAX', 125); // highest auto
 
 defined('USER_ROLE_ADMIN')      || define('USER_ROLE_ADMIN', 'Admin'); 
 defined('USER_ROLE_EMPLOYEE')      || define('USER_ROLE_EMPLOYEE', 'Employee'); 
+defined('USER_ROLE_CLIENT')      || define('USER_ROLE_CLIENT', 'Client'); 
