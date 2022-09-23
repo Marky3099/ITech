@@ -94,9 +94,8 @@
 <script type="text/javascript">
 
   $('#fcuno_update').select2();
-
-
     var areas = <?php echo json_encode($client_area); ?> ;
+    var client_current_area = <?php echo json_encode($cl_obj); ?> ;
       //     $.each(areas[0], function(key, v) {
       //     // alert(value.client_id+" "+value.client_branch);
       //      // console.log(v);
@@ -116,8 +115,13 @@
           
            $.each(v, function(key, value) {
              
-          $("#client_id_update").append('<option value='+value.client_id+'>'+value.client_branch+'</option>')
-          });
+              if (client_current_area.client_id == value.client_id) {
+                $("#client_id_update").append('<option value='+value.client_id+' selected>'+value.client_branch+'</option>')
+                          
+              }else{
+                    $("#client_id_update").append('<option value='+value.client_id+'>'+value.client_branch+'</option>')
+                                  }
+             });
         });
         
     $("#area_update").change(function(){
@@ -138,15 +142,21 @@
 
   // ---------------------------------------------
   var devbrand = <?php echo json_encode($brand); ?> ;
+
   $("#aircon_id_update").empty();
         var current_value = document.getElementById("device_brand_update").selectedIndex;
         $.each(devbrand[current_value], function(key, v) {
           // alert(value.client_id+" "+value.client_branch);
-           console.log(v);
+           
            $.each(v, function(key, value) {
-          $("#aircon_id_update").append('<option value='+value.aircon_id+'>'+value.aircon_type+'</option>')
+          if (client_current_area.aircon_id == value.aircon_id) {
+            $("#aircon_id_update").append('<option value='+value.aircon_id+' selected>'+value.aircon_type+'</option>')
+          }else{
+            $("#aircon_id_update").append('<option value='+value.aircon_id+'>'+value.aircon_type+'</option>')
+          }
         });
         });
+
   $("#device_brand_update").change(function(){
       $("#aircon_id_update").empty();
         var current_value = document.getElementById("device_brand_update").selectedIndex;

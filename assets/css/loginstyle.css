@@ -83,7 +83,9 @@ hr{
     background-repeat:no-repeat;
     border: none;      
 }
-
+.btn:hover{
+  cursor: pointer;
+}
 .login-box .user-box input {
   width: 100%;
   padding: 10px 0;

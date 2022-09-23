@@ -23,7 +23,7 @@
     <?php endforeach ?>
   </ul>
 </div>
-<div id='calendar' class="col-lg-12 col-md-10 calen"></div>
+<div id='calendar' class="col-lg-12 col-md-10" style="width:100%;"></div>
  <div id='datepicker'></div>
 </div>
 </div>
@@ -46,6 +46,13 @@
     selectable: true,   
     // editable: true,
     selectHelper:true,
+    responsive: {
+      medium: {
+          controls: ['calendar'],
+          display: 'bottom',
+          touchUi: true
+        }
+    },
     headerToolbar: {
       left: 'prev,next',
       center: 'title',
@@ -481,11 +488,14 @@
 <script src = "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
 <!--  -->
 
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"></script> -->
+<script src="<?=base_url("assets/js/main.min.js")?>"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script type="text/javascript">
   
+
+
       // console.log(areas);
     $('#emp_id').select2({
         dropdownParent: $('#mymodal')

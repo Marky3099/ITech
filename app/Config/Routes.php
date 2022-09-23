@@ -35,7 +35,9 @@ $routes->setAutoRoute(true);
 
 $routes->get('/login', 'Pages::login');
 
-
+$routes->get('/appointment', 'AppointmentCrud::index',['filter' => 'authGuard']);
+$routes->get('/appointment/create', 'AppointmentCrud::create',['filter' => 'authGuard']);
+$routes->post('/appointment/add', 'AppointmentCrud::store',['filter' => 'authGuard']);
 
 $routes->get('/serv', 'ServCrud::index',['filter' => 'authGuard']);
 $routes->get('serv/create/view', 'ServCrud::create',['filter' => 'authGuard']);

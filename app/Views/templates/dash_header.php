@@ -24,7 +24,7 @@
 
 <body>
 	
-    <div class="sidebar active">
+    <div class="sidebar">
         <div class="logo_content">
             <div class="logo">
                 <img src="<?= base_url('assets/image/iicon.png');?>">
@@ -42,6 +42,7 @@
 	        	<h3><?php echo $_SESSION['username'] ?></h3>
 	        	<hr>
         	</div>
+        <?php if($_SESSION['position'] == USER_ROLE_ADMIN || $_SESSION['position'] == USER_ROLE_EMPLOYEE):?>
             <li>
                 <a href="<?= base_url('/dashboard')?>">
                     <i class="fa fa-th" aria-hidden="true"></i>
@@ -49,6 +50,7 @@
                 </a>
                 <span class="tooltip">Dashboard</span>
             </li>
+        <?php endif;?>
         <?php if($_SESSION['position'] == USER_ROLE_ADMIN):?>
             <li>
                 <a href="<?= base_url('/calendar')?>">
@@ -122,13 +124,21 @@
                 </a>
                 <span class="tooltip">Upload</span>
             </li>
-        <?php else:?>
+        <?php elseif($_SESSION['position'] == USER_ROLE_EMPLOYEE):?>
             <li>
                 <a href="<?= base_url('/calendar/emp')?>">
                     <i class="fa fa-calendar" aria-hidden="true"></i>
                     <span class="links_name">Calendar</span>
                 </a>
                 <span class="tooltip">Calendar</span>
+            </li>
+        <?php else:?>
+            <li>
+                <a href="<?=base_url("/appointment")?>">
+                    <i class="fa-regular fa-rectangle-list"></i>
+                    <span class="links_name">Appointment</span>
+                </a>
+                <span class="tooltip">Appointment</span>
             </li>
         <?php endif;?>
             <li>
@@ -158,7 +168,6 @@
     <script>
         let btn = document.querySelector("#btn");
         let sidebar = document.querySelector(".sidebar");
-
         btn.onclick = function(){
             sidebar.classList.toggle("active");
         }

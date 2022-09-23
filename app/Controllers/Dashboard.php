@@ -26,6 +26,10 @@ class Dashboard extends BaseController
     
     public function dashboard()
     {
+        if($_SESSION['position'] == !USER_ROLE_ADMIN || $_SESSION['position'] == !USER_ROLE_EMPLOYEE){
+            return $this->response->redirect(site_url('/profile/'.$_SESSION['user_id']));
+        }
+        
         $allevent = new All_events();
         $event = new Event();
         $client = new Client();
