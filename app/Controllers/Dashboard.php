@@ -224,7 +224,7 @@ class Dashboard extends BaseController
         foreach ($data['event_complete'] as $key => $value) {
             $data['complete_event']= (int)$value->count;
         }
-       $data['percent'] = ($data['complete_event']/$data['event_total'])*100;
+       $data['percent'] = round(($data['complete_event']/$data['event_total'])*100);
         // Pending task
           $query = $db->query('SELECT COUNT(start_event) as count FROM All_events WHERE status = "Pending"');
         $data['event_pending'] = $query->getResult();
