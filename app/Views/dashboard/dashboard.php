@@ -35,7 +35,7 @@
 
                     <div class="container">
                       <div class="modal fade" id="todayModal" role="dialog">
-                        <div class="modal-dialog" style="max-width: 600px;">
+                        <div class="modal-dialog" style="max-width: 800px;">
                           <div class="modal-content">
 
                             <div class="modal-header">
@@ -109,7 +109,7 @@
                     <!-- Modal for displaying Week's event -->
                     <div class="container">
                       <div class="modal fade" id="weekModal" role="dialog">
-                        <div class="modal-dialog" style="max-width: 600px;">
+                        <div class="modal-dialog" style="max-width: 800px;">
                           <div class="modal-content">
 
                             <div class="modal-header">
@@ -174,7 +174,7 @@
                     <!-- Modal for displaying Month's event -->
                     <div class="container">
                       <div class="modal fade" id="monthModal" role="dialog">
-                        <div class="modal-dialog" style="max-width: 600px;">
+                        <div class="modal-dialog" style="max-width: 800px;">
                           <div class="modal-content">
 
                             <div class="modal-header">
@@ -238,7 +238,7 @@
                     <!-- Modal for displaying Pending event -->
                     <div class="container">
                       <div class="modal fade" id="pendingModal" role="dialog">
-                        <div class="modal-dialog" style="max-width: 600px;">
+                        <div class="modal-dialog" style="max-width: 800px;">
                           <div class="modal-content">
 
                             <div class="modal-header">

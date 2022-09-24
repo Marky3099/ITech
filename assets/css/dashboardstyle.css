@@ -14,6 +14,7 @@
 .chart-container #chart{
     height: 50px;
 }
+
 .btn-primary {
   color: #fff;
   background-color: #4CAF50;
@@ -45,6 +46,6 @@
 .card-body1{
     background-color: #c7ddb5;
     flex: 1 1 auto;
-    min-height: 1px;
-    padding: 1.25rem;
+    min-height: 3px;
+    padding: 10px 10px;
 }
