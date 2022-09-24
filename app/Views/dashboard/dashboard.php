@@ -7,14 +7,14 @@
     <meta name="author" content="">
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="<?=base_url("css/all.min.css")?>" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="<?=base_url("css/sb-admin-2.min.css")?>" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/dashstyle.css')?>">
 
 
@@ -234,7 +234,69 @@
                         </div>
                       </div>
                     </div>
+                    <!-- Modal for displaying Completed event -->
+                    <div class="container">
+                      <div class="modal fade" id="completeModal" role="dialog">
+                        <div class="modal-dialog" style="max-width: 600px;">
+                          <div class="modal-content">
 
+                            <div class="modal-header">
+                              <h4 class="modal-title">Completed Task/s</h4>
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              
+                            </div>
+                            <div class="modal-body">
+                               <?php if($completed):?>
+                              <table class="table table-bordered">
+                                <thead>
+                                  <tr>
+                                    <th>Title</th>
+                                    <th>Date</th>
+                                    <th>Branch</th>
+                                    <th>Service</th>
+                                    <th>Employee</th>
+                                    <th>Status</th>
+                                    
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                 
+                                  <?php foreach($completed as $cm):  ?>
+                                    <tr>
+                                      <td><?php echo $cm->title; ?></td>
+                                      <td><?php echo date('m-d-Y',strtotime($cm->start_event)); ?></td>
+                                      <td><?php echo $cm->client_branch; ?></td>
+                                      <td><?php echo $cm->serv_name; ?></td>
+                                     <td>
+                                   <?php $data = explode(',',$cm->emp_array);
+                                         $count = 0;
+                                    ?>
+                                      <?php foreach($data as $emp):  ?>
+                                         <?php if($count < (count($data) - 1) ):  ?>
+                                         ` <?php echo $emp; $count+=1; ?> <br>
+                                          <?php endif;  ?>
+                                      <?php endforeach; ?>
+                                 </td> 
+                                      <td><?php echo $cm->status;?></td>
+                                      
+                                    </tr>
+                                  <?php endforeach;?>
+
+                                </tbody>
+                              </table>
+                               <?php else:?>
+                                <div class="Nowork">
+                                  <h2 style="text-align: center; ">Oops.. No Complete Task/s Yet!</h2>
+                                </div>
+                                <?php endif;?>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                     <!-- Modal for displaying Pending event -->
                     <div class="container">
                       <div class="modal fade" id="pendingModal" role="dialog">
@@ -370,12 +432,12 @@
                                             </div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" >50%</div>
+                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" ><a href="#" data-toggle="modal" data-target="#completeModal" style="color: #4b6043;"><?= json_encode($complete_event);?>%</a></div>
                                                 </div>
                                                 <div class="col">
                                                     <div class="progress progress-sm mr-2">
                                                         <div class="progress-bar bg-success" role="progressbar"
-                                                            style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                            style="width: <?= json_encode($complete_event);?>%;" aria-valuenow="<?= json_encode($complete_event);?>" aria-valuemin="0" aria-valuemax="100"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -424,7 +486,7 @@
                                     <div class="chart-area">
                                         <!-- <canvas id="myAreaChart"></canvas> -->
                                         <div class="chart-container">
-                                          <canvas id="chart"></canvas>
+                                          <canvas id="myAreaChart"></canvas>
                                         </div>
                                     </div>
                                     <hr>
@@ -518,16 +580,13 @@ var options = {
   }
 };
 
-new Chart('chart', {
+new Chart('myAreaChart', {
   type: 'line',
   options: options,
   data: data
 });
 
 
-
-  
-  
 </script>
 </body>
 
