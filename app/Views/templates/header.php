@@ -30,7 +30,7 @@
     </nav>
 
     <div class="icons">
-        <a href="<?= base_url('/login')?>"><span class="fas fa-user" id="user-btn"></span></a>
+        <a href="<?= base_url('/page1')?>"><span class="fas fa-user" id="user-btn"></span></a>
         <span class="fas fa-bars" id="menu-btn"></span>
     </div>
 

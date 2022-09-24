@@ -99,6 +99,7 @@ section{
     color:F2F8EE;
     border-bottom: .1rem solid #F2F8EE;
     padding-bottom: .5rem;
+    text-decoration: none;
 }
 
 .header .icons span{

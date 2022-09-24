@@ -92,7 +92,7 @@
                                   
                                 <?php else:?>
                                 <div class="Nowork">
-                                  <p class="noworkstatement">Relax.. No work for Today!</p>
+                                  <p class="noworkstatement"><i class="fa-solid text-success fa-circle-exclamation"></i>&nbsp;Relax.. No work for Today!</p>
                                 </div>
                                 <?php endif;?>
                               
@@ -159,7 +159,7 @@
                               </table>
                               <?php else:?>
                                 <div class="Nowork">
-                                 <p class="noworkstatement">Relax.. No work for this week!</p>
+                                 <p class="noworkstatement"><i class="fa-solid text-success fa-circle-exclamation"></i>&nbsp;Relax.. No work for this week!</p>
                                 </div>
                                 <?php endif;?>
                             </div>
@@ -223,7 +223,7 @@
                               </table>
                                <?php else:?>
                                 <div class="Nowork">
-                                  <p class="noworkstatement">Relax.. No work for this month!</p>
+                                  <p class="noworkstatement"><i class="fa-solid text-success fa-circle-exclamation"></i>&nbsp;Relax.. No work for this month!</p>
                                 </div>
                                 <?php endif;?>
                             </div>
@@ -241,7 +241,7 @@
                           <div class="modal-content">
 
                             <div class="modal-header">
-                              <h4 class="modal-title">Completed Task/s</h4>
+                              <h4 class="modal-title">Completed Tasks</h4>
                               <button type="button" class="close" data-dismiss="modal">&times;</button>
                               
                             </div>
@@ -286,12 +286,12 @@
                               </table>
                                <?php else:?>
                                 <div class="Nowork">
-                                  <h2 style="text-align: center; ">Oops.. No Complete Task/s Yet!</h2>
+                                   <p class="noworkstatement"><i class="fa-solid text-success fa-circle-exclamation"></i>&nbsp;No completed tasks so far.</p>
                                 </div>
                                 <?php endif;?>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
                             </div>
                           </div>
                         </div>
@@ -349,7 +349,7 @@
                               </table>
                                <?php else:?>
                                 <div class="Nowork">
-                                 <p class="noworkstatement">Hoorayyy!!.. All Tasks are Complete!</p>
+                                 <p class="noworkstatement"><i class="fa-solid text-success fa-circle-exclamation"></i>&nbsp;Hoorayyy!!.. All Tasks are Complete!</p>
                                 </div>
                                 <?php endif;?>
                             </div>

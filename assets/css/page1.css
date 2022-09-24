@@ -1,0 +1,114 @@
+/* Pen-specific styles */
+* {
+  box-sizing: border-box;
+}
+body {
+  overflow: hidden;
+  font-size: 1.25rem;
+  font-family: auto, sans-serif;
+  margin: 0px;
+}
+
+section {
+  text-align: center;
+}
+
+div {
+  height: 100%;
+}
+
+.left-half {
+  background: url(../image/home-img.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  left: 0px;
+  width: 65%;
+}
+
+.right-half {
+  background-color: #e2e5dc;
+  position: absolute;
+  right: 0px;
+  width: 35%;
+}
+
+.right-half .container{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 480px;
+  background-color: #fff;
+  opacity: 0.9;
+  transform: translate(-50%, -50%);
+  /*box-sizing: border-box; 344f21*/
+}
+
+.right-half .header{
+  height: 158px;
+}
+
+.right-half .header img{
+  height: 110px;
+  width: 400px;
+}
+.container .header a.texthp{
+  padding: 1.50rem;
+  display: flex;
+  align-items: center;
+}
+
+.container .box-content{
+  text-align: center;
+  color: #344f21;
+}
+
+.container .box-content h2{
+  margin-bottom: 0px;
+}
+.container .box-content p{
+  margin-top: 0px;
+  font-weight: bold;
+  font-size: 19px;
+}
+
+
+.container .box-content .btn-layer{
+  margin-top: 50px;
+  height: 150px;
+}
+
+.container .box-content .btn-layer .icon-box{
+    position: absolute;   
+    height: 30px;
+    width: 40px;
+    font-size: 20px;
+    line-height: 30px;
+    padding: 0.2rem;
+    background: transparent;
+}
+
+.container .box-content .btn-layer a.btn{
+  margin-bottom: 15px;
+  width: 280px;
+  height: 50px;
+  background-color: #344F21;
+  text-align: center;
+  padding: 0.7rem;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
+}
+
+.container .box-content p.para1{
+  font-size: 15px;
+  font-weight: 300px;
+}
+
+.container .box-content a.back2w{
+  position: absolute;
+  bottom: 0;
+  left: 10;
+  font-size: 15px;
+  font-weight: bold;
+  color: #344F21;
+}
