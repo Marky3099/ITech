@@ -14,3 +14,37 @@
 .chart-container #chart{
     height: 50px;
 }
+.btn-primary {
+  color: #fff;
+  background-color: #4CAF50;
+  border-color: #4CAF50;
+}
+
+.btn-primary:hover {
+  color: #fff;
+  background-color: #398439;
+  border-color: #398439;
+}
+
+.btn-primary:focus, .btn-primary.focus {
+  color: #fff;
+  background-color: #4CAF50;
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 0.2rem rgba(105, 136, 228, 0.5);
+}
+
+.container p.noworkstatement{
+    text-align: center;
+}
+
+.container .modal-body thead{
+    background-color: #398439;
+    color: #fff;
+}
+
+.card-body1{
+    background-color: #c7ddb5;
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.25rem;
+}
