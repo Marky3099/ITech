@@ -15,15 +15,21 @@
 					<p><i class="fas fa-chevron-circle-down"></i>&nbsp;Please click or tap type of account.</i></p>
 
 						<div class="btn-layer">
-							<a href="#" class="btn btn-success"><div class="icon-box"><i class="fas fa-user-shield"></i></div>Admin</a></br>
-							<a href="#" class="btn btn-success"><div class="icon-box"><i class="fas fa-user-alt"></i></div>Employee</a>
+							<a href="#" class="btn btn-success"><div class="icon-box"><i class="fas fa-user-shield"></i></div>Partner Company</a></br>
+							<a href="#" class="btn btn-success"><div class="icon-box"><i class="fas fa-user-alt"></i></div>Non-Partner Company</a>
 						</div>
-					
-					<p class="para1">Want to book an appartment?<a href="<?= base_url('/page2')?>" style="font-style: italic; color: limegreen;">&nbsp;Click here.</a></p>
+					</br>
 					</br>
 					</br>
 					<p class="para1"> By using this service, you understood and agree to Maylaflor’s Tasks and Schedule Monitoring System <i>Terms of Use and Privacy Statement.</i></p>
-					<a href="<?= base_url();?>" class="back2w">Back to Website</a>
+					<a href="<?= base_url('/page1');?>" class="btn btn-success" 
+						style="position: absolute;
+									 bottom: 5;
+									 left: 10;
+									 font-size: 15px;
+									 font-weight: bold;
+									 background-color: #344F21;
+									 color: #fff;">Back</a>
 			</div>
 		</div>
                         

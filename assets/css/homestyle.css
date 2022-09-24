@@ -58,6 +58,7 @@ section{
     text-transform: uppercase;
 }
 
+
 .btn{
     margin-top: 1rem;
     display: inline-block;
@@ -146,6 +147,7 @@ section{
     padding:1rem 0;
     color:#263D15;
 }
+
 .about .row{
     display: flex;
     align-items: center;
