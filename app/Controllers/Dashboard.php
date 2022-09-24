@@ -144,6 +144,16 @@ class Dashboard extends BaseController
         foreach ($data['event_week'] as $key => $value) {
             $data['weekly_event']= (int)$value->count;
         }
+        // Total
+        $query = $db->query('SELECT COUNT(start_event) as count FROM All_events');
+        $data['total_event'] = $query->getResult();
+        json_encode($data['total_event']);
+        foreach ($data['total_event'] as $key => $value) {
+            $data['event_total']= (int)$value->count;
+        }
+        //
+
+
         //count monthly tasks
         $query = $db->query('SELECT COUNT(start_event) as count FROM All_events WHERE MONTH(start_event) = MONTH(CURRENT_DATE())');
         $data['event_month'] = $query->getResult();
@@ -214,6 +224,7 @@ class Dashboard extends BaseController
         foreach ($data['event_complete'] as $key => $value) {
             $data['complete_event']= (int)$value->count;
         }
+       $data['percent'] = ($data['complete_event']/$data['event_total'])*100;
         // Pending task
           $query = $db->query('SELECT COUNT(start_event) as count FROM All_events WHERE status = "Pending"');
         $data['event_pending'] = $query->getResult();
