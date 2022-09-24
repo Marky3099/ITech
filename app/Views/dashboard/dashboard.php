@@ -422,7 +422,10 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="chart-area">
-                                        <canvas id="myAreaChart"></canvas>
+                                        <!-- <canvas id="myAreaChart"></canvas> -->
+                                        <div class="chart-container">
+                                          <canvas id="chart"></canvas>
+                                        </div>
                                     </div>
                                     <hr>
                                     Styling for the area chart can be found in the
@@ -435,20 +438,96 @@
 
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="<?=base_url("js/vendor/jquery/jquery.min.js")?>"></script>
+    <script src="<?=base_url("js/vendor/bootstrap/js/bootstrap.bundle.min.js")?>"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
+    <script src="<?=base_url("js/vendor/jquery-easing/jquery.easing.min.js")?>"></script>
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <script src="<?=base_url("js/sb-admin-2.min.js")?>"></script>
 
     <!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
+    <script src="<?=base_url("js/vendor/chart.js/Chart.min.js")?>"></script>
 
     <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
+    <script src="<?=base_url("js/chart-area-demo.js")?>"></script>
+    <script src="<?=base_url("js/chart-pie-demo.js")?>"></script>
+    <div class="row justify-content-center">
+    
+
+
+  </div>
+</div>
+</div>
+<!-- , "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript">
+
+  var data = {
+  labels: <?= json_encode($label); ?>,
+  datasets: [{
+    label: "total events",
+    backgroundColor: "rgba(255,99,132,0.2)",
+    borderColor: "rgba(255,99,132,1)",
+    borderWidth: 2,
+    hoverBackgroundColor: "rgba(255,99,132,0.4)",
+    hoverBorderColor: "rgba(255,99,132,1)",
+    data: <?= json_encode($linedata); ?>,
+  }]
+};
+
+var options = {
+  animations: {
+      radius: {
+        duration: 400,
+        easing: 'linear',
+        loop: (context) => context.active
+      }
+    },
+    hoverRadius: 12,
+    hoverBackgroundColor: 'yellow',
+    interaction: {
+      mode: 'nearest',
+      intersect: false,
+      axis: 'x'
+    },
+  maintainAspectRatio: false,
+  title: {
+        display: true,
+        text: 'Chart.js Line Chart'
+      },
+       responsive: true,
+  scales: {
+    y: {
+      stacked: true,
+      ticks: {
+          // forces step size to be 50 units
+          stepSize: 1
+        },
+      grid: {
+        display: true,
+        color: "rgba(255,99,132,0.2)"
+      }
+    },
+    x: {
+      grid: {
+        display: false
+      }
+    }
+  }
+};
+
+new Chart('chart', {
+  type: 'line',
+  options: options,
+  data: data
+});
+
+
+
+  
+  
+</script>
 </body>
 
