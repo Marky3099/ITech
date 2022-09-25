@@ -6,7 +6,12 @@
         <br><br><br>
         <p>We offer different services for various airconditioning units.</p>
         <br><br>
-        <a href="#contacts" class="btn">contact us</a>
+        <a href="#contacts" style="
+        text-decoration: none; 
+        color: #344F21; 
+        font-size: 20px; 
+        font-weight: bold;
+        ">Appoint us now!</a>
     </div>
 
 </section>

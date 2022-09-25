@@ -30,6 +30,16 @@ class Pages extends BaseController
         return view("pages/login");
     }
 
+    public function page1()
+    {
+        return view("pages/page1");
+    }
+
+    public function page2()
+    {
+        return view("pages/page2");
+    }
+
     public function check()
     {
         helper(['form']);

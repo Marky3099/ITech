@@ -58,6 +58,7 @@ section{
     text-transform: uppercase;
 }
 
+
 .btn{
     margin-top: 1rem;
     display: inline-block;
@@ -99,6 +100,7 @@ section{
     color:F2F8EE;
     border-bottom: .1rem solid #F2F8EE;
     padding-bottom: .5rem;
+    text-decoration: none;
 }
 
 .header .icons span{
@@ -145,6 +147,7 @@ section{
     padding:1rem 0;
     color:#263D15;
 }
+
 .about .row{
     display: flex;
     align-items: center;
