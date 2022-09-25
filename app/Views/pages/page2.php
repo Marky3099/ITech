@@ -15,7 +15,7 @@
 					<p><i class="fas fa-chevron-circle-down"></i>&nbsp;Please click or tap type of account.</i></p>
 
 						<div class="btn-layer">
-							<a href="#" class="btn btn-success"><div class="icon-box"><i class="fas fa-user-shield"></i></div>Partner Company</a></br>
+							<a href="#" class="btn btn-success"><div class="icon-box"><i class="fas fa-users"></i></div>Partner Company</a></br>
 							<a href="#" class="btn btn-success"><div class="icon-box"><i class="fas fa-user-alt"></i></div>Non-Partner Company</a>
 						</div>
 					</br>
