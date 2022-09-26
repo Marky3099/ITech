@@ -1,3 +1,21 @@
+<style>
+  a.apt-btn{
+        text-decoration: none; 
+        color: #344F21; 
+        font-size: 25px; 
+        font-weight: bold;
+}
+  a.apt-btn:hover {
+  background: #fff;
+  padding: 0.5rem;
+  color: #344F21;
+  box-shadow: 0 0 5px #344F21,
+              0 0 25px #344F21,
+}
+
+
+</style>
+
 <section class="home" id="home">
 
     <div class="content">
@@ -6,14 +24,8 @@
         <br><br><br>
         <p>We offer different services for various airconditioning units.</p>
         <br><br>
-        <a href="#contacts" style="
-        text-decoration: none; 
-        color: #344F21; 
-        font-size: 20px; 
-        font-weight: bold;
-        ">Appoint us now!</a>
+        <a href="<?= base_url('/page1');?>" class="apt-btn">Appoint us now!</a>
     </div>
-
 </section>
 
 <!-- home section ends -->
