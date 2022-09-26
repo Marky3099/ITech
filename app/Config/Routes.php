@@ -34,6 +34,7 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 
 $routes->get('/admin-login', 'Pages::adminLogin');
+$routes->get('/employee-login', 'Pages::employeeLogin');
 
 $routes->get('/user-type','Pages::userType');
 $routes->get('/client-type','Pages::clientType');

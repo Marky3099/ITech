@@ -203,10 +203,8 @@ class FullCalendar extends BaseController
             
              $datas['brand2'][]=$device_brand;
         }
-       
+        $datas['all_events'] = $event_emp_views->where('emp_id', $_SESSION['emp_id'])->findAll();
 
-        
-        $datas['all_events'] = $event_emp_views->where('emp_name', $_SESSION['username'])->findAll();
         // $datas['all_events'] = $event->where('STATUS', 'Done')->findAll();
         // dd($data[0]['title']);
         

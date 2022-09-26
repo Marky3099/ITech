@@ -16,8 +16,8 @@
       <div class="header">
         <a href="<?= base_url('#home')?>" class="texthp"><img src="<?= base_url('assets/image/iicon.png')?>"></a>
         </div>
-      <h3>Admin Login</h3>
-      <form class="login100-form validate-form" action="<?= base_url('pages/check');?>" method="post">
+      <h3>Employee Login</h3>
+      <form class="login100-form validate-form" action="<?= base_url('pages/checkEmployee');?>" method="post">
 
         <?php 
           if(!empty($errorAcc)){ ?>

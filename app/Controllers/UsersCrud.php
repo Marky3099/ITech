@@ -1,6 +1,7 @@
 <?php 
 namespace App\Controllers;
 use App\Models\User;
+use App\Models\Emp;
 use CodeIgniter\Controller;
 use App\Libraries\Phpmailer_lib;
 
@@ -23,6 +24,8 @@ class UsersCrud extends Controller
         if($_SESSION['position'] != USER_ROLE_ADMIN){
             return $this->response->redirect(site_url('/dashboard'));
         }
+        $Emp = new Emp();
+        $data['emp'] = $Emp->orderBy('emp_id', 'ASC')->findAll();
          $data['main'] = 'user/user_add';
           $data['error'] = null;
         return view("dashboard/template",$data);
@@ -34,6 +37,7 @@ class UsersCrud extends Controller
             return $this->response->redirect(site_url('/dashboard'));
         }
         $User = new User();
+
         $user_data = $User->where('email', $this->request->getVar('email'))->first();
         if ($user_data) {
             $data['error'] = "Email Already Registered, Please try another Email";
@@ -53,12 +57,13 @@ class UsersCrud extends Controller
             'address' => $this->request->getVar('address'),
             'contact'  => $this->request->getVar('contact'),
             'position' => $this->request->getVar('position'),
-            
+            'emp_id' => $this->request->getVar('emp_id'),
             'code' => $code,
             'active' => false,
             'password' => password_hash($password, PASSWORD_DEFAULT)
            
         ];
+        // dd($user_create);
         if( $id = $User->insert($user_create)){
             session()->setFlashdata('message', 'User Added!');
         }
@@ -113,7 +118,11 @@ class UsersCrud extends Controller
            $data['success']= 'Cannot activate account. Code didnt match';
         }
         $data['success']='Activated Successfully!';
-        $data['main'] = 'pages/login';
+        if($User_obj['position'] == "Admin"){
+            $data['main'] = 'pages/admin_login';
+        }else if($User_obj['position'] == "Employee"){
+            $data['main'] = 'pages/employee_login';
+        }
         return view('pages/login_temp',$data); 
         // return $this->response->redirect(site_url('/login'));
     }

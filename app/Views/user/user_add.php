@@ -67,7 +67,9 @@
                           <label>Account for</label>
 
                           <select id="emp_id" name="emp_id" class="form-control">
-
+                          <?php foreach($emp as $e):  ?>
+                              <option value=<?php echo $e['emp_id']; ?>><?php echo $e['emp_name'];?></option>
+                          <?php endforeach; ?>
                           `)
   }else{
     $('#for').hide();
