@@ -35,14 +35,14 @@
       <div class="form-group">
         <label>Role</label>
         <select id="position" name="position" class="form-control">
-          <option value="Employee">Employee</option>
           <option value="Admin">Admin</option>
+          <option value="Employee">Employee</option>
+          
         </select>
       </div>
-       <!-- <div class="form-group">
-        <label>Profile Pic</label>
-        <input type="file" name="user_img" class="form-control" required>
-      </div> -->
+       <div class="form-group" id="for">
+        
+      </div>
       <div class="form-group">
         <button type="submit" class="btn btn-success">Add Data</button>
       </div>
@@ -54,4 +54,27 @@
 </div>
 </div>
 </div>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>  
+<script type="text/javascript">
+  $emp = $('#position');
+  
+
+  $emp.change(function(){
+    $empPosition = $emp.val();
+    alert($empPosition);
+    if($empPosition === "Employee"){
+      $('#for').prepend(`
+                          <label>Account for</label>
+
+                          <select id="emp_id" name="emp_id" class="form-control">
+
+                          `)
+  }else{
+    $('#for').hide();
+  }
+  })
+
+  
+
+</script>
  

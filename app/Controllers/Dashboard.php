@@ -87,7 +87,8 @@ class Dashboard extends BaseController
                 GROUP BY YEAR(start_event), MONTH(start_event) ASC'
         );
         $data['data'] = $query->getResult();
-
+        $data['label'][] ="";
+        $data['linedata'][]="";
         json_encode($data['data']);
         foreach ($data['data'] as $key => $value) {
              
@@ -224,7 +225,10 @@ class Dashboard extends BaseController
         foreach ($data['event_complete'] as $key => $value) {
             $data['complete_event']= (int)$value->count;
         }
-       $data['percent'] = round(($data['complete_event']/$data['event_total'])*100);
+        if($data['event_total'] > 0){
+            $data['percent'] = round(($data['complete_event']/$data['event_total'])*100);
+        }
+       
         // Pending task
           $query = $db->query('SELECT COUNT(start_event) as count FROM All_events WHERE status = "Pending"');
         $data['event_pending'] = $query->getResult();

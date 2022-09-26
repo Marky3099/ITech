@@ -434,12 +434,21 @@
                                             </div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" ><a href="#" data-toggle="modal" data-target="#completeModal" style="color: #4b6043;"><?= json_encode($percent);?>%</a></div>
+                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" ><a href="#" data-toggle="modal" data-target="#completeModal" style="color: #4b6043;">
+
+                                                      <?php if(json_encode($event_total) > 0):?>
+                                                      <?= json_encode($percent);?>%
+                                                      <?php else:?>0%
+                                                    <?php endif;?>
+                                                    </a></div>
                                                 </div>
                                                 <div class="col">
                                                     <div class="progress progress-sm mr-2">
                                                         <div class="progress-bar bg-success" role="progressbar"
-                                                            style="width: <?= json_encode($percent);?>%;" aria-valuenow="<?= json_encode($complete_event);?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                                            style="width: <?php if(json_encode($event_total) > 0):?>
+                                                      <?= json_encode($percent);?>%
+                                                      <?php else:?>0%
+                                                    <?php endif;?>;" aria-valuenow="<?= json_encode($complete_event);?>" aria-valuemin="0" aria-valuemax="100"></div>
                                                     </div>
                                                 </div>
                                             </div>

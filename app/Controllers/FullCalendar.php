@@ -448,7 +448,7 @@ class FullCalendar extends BaseController
 
         if(isset($_POST["title"]))
         {
-            if ($_POST["title"] == null) {
+            
                 if($_POST['repeatable'] == "Weekly"){
                 function getWeekly($y) {
                     return new \DatePeriod(
@@ -463,6 +463,7 @@ class FullCalendar extends BaseController
                 foreach (getWeekly(date("Y",strtotime($_POST['start_event']))) as $getw) {
                     array_push($weeklyEvent, $getw->format("Y-m-d"));
                 }
+                // dd(count($weeklyEvent));
                 for ($i=0; $i < count($weeklyEvent); $i++) { 
                     $_POST['start_event'] = $weeklyEvent[$i];
                     $_POST["title"] = date("g:ia",strtotime($_POST["time"]))." ".$_POST["area"];
@@ -480,6 +481,7 @@ class FullCalendar extends BaseController
                         ]);
                     }
                 }
+                // dd($i);
                  } if($_POST['repeatable'] == "Monthly"){
                     function getMonthly($y) {
                         return new \DatePeriod(
@@ -534,91 +536,7 @@ class FullCalendar extends BaseController
 
                 }            
         
-            }else{
-            if($_POST['repeatable'] == "Weekly"){
-                function getWeekly($y) {
-                    return new \DatePeriod(
-                        new \DateTime("first ".date("l", strtotime($_POST['start_event']))." of $y"),
-                        \DateInterval::createFromDateString('next '.date("l", strtotime($_POST['start_event']))),
-                        new \DateTime("last day of december $y"),
-                        
-                    );
-                }
-
-                // Usage:
-                foreach (getWeekly(date("Y",strtotime($_POST['start_event']))) as $getw) {
-                    array_push($weeklyEvent, $getw->format("Y-m-d"));
-                }
-
-                for ($i=0; $i < count($weeklyEvent); $i++) { 
-                    $_POST['start_event'] = $weeklyEvent[$i];
-                    $success = $Event->insert($_POST);
-                    foreach($_POST['emp_id'] as $key => $value) {
-                        $Event_emp->insert([
-                            'emp_id'=> (int) $value,
-                            'id' => (int) $success
-                        ]);
-                    }
-                    foreach($_POST['fcuno'] as $key => $value) {
-                        $Event_fcu->insert([
-                            'fcuno'=>(int) $value,
-                            'id' => (int) $success
-                        ]);
-                    }
-                }
-
-             } if($_POST['repeatable'] == "Monthly"){
-                function getMonthly($y) {
-                    return new \DatePeriod(
-                        new \DateTime(date("Y-m-d", strtotime($_POST['start_event']))),
-                        \DateInterval::createFromDateString('next month'),
-                        new \DateTime("last day of december $y"),
-                        
-                    );
-                }
-
-                // Usage:
-                foreach (getMonthly(date("Y",strtotime($_POST['start_event']))) as $getm) {
-                    array_push($monthlyEvent, $getm->format("Y-m-d"));
-                }
-
-                for ($i=0; $i < count($monthlyEvent); $i++) { 
-                    $_POST['start_event'] = $monthlyEvent[$i];
-                    $success = $Event->insert($_POST);
-                    foreach($_POST['emp_id'] as $key => $value) {
-                        $Event_emp->insert([
-                            'emp_id'=> (int) $value,
-                            'id' => (int) $success
-                        ]);
-                    }
-                    foreach($_POST['fcuno'] as $key => $value) {
-                        $Event_fcu->insert([
-                            'fcuno'=>(int) $value,
-                            'id' => (int) $success
-                        ]);
-                    }
-                }
-
-            }
-
-            else{
-                $success = $Event->insert($_POST);
             
-                foreach($_POST['emp_id'] as $key => $value) {
-                    $Event_emp->insert([
-                        'emp_id'=> (int) $value,
-                        'id' => (int) $success
-                    ]);
-                }
-                foreach($_POST['fcuno'] as $key => $value) {
-                    $Event_fcu->insert([
-                        'fcuno'=>(int) $value,
-                        'id' => (int) $success
-                    ]);
-                }
-
-            }            
-        }
 
         return $this->response->redirect(site_url('/calendar'));
 
