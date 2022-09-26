@@ -24,7 +24,7 @@
         <br><br><br>
         <p>We offer different services for various airconditioning units.</p>
         <br><br>
-        <a href="<?= base_url('/page1');?>" class="apt-btn">Appoint us now!</a>
+        <a href="<?= base_url('/client-type');?>" class="apt-btn">Appoint us now!</a>
     </div>
 </section>
 

@@ -24,20 +24,20 @@ class Pages extends BaseController
         return view("pages/home",$data);
     }
 
-    public function login()
+    public function adminLogin()
     {
         // $data['main'] = 'pages/login';
-        return view("pages/login");
+        return view("pages/admin_login");
     }
 
-    public function page1()
+    public function userType()
     {
-        return view("pages/page1");
+        return view("pages/user");
     }
 
-    public function page2()
+    public function clientType()
     {
-        return view("pages/page2");
+        return view("pages/client");
     }
 
     public function check()

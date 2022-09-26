@@ -33,10 +33,10 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 
-$routes->get('/login', 'Pages::login');
+$routes->get('/admin-login', 'Pages::adminLogin');
 
-$routes->get('/page1','Pages::page1');
-$routes->get('/page2','Pages::page2');
+$routes->get('/user-type','Pages::userType');
+$routes->get('/client-type','Pages::clientType');
 
 $routes->get('/appointment', 'AppointmentCrud::index',['filter' => 'authGuard']);
 $routes->get('/appointment/create', 'AppointmentCrud::create',['filter' => 'authGuard']);
