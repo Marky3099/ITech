@@ -14,6 +14,6 @@ class Client extends Model
     protected $returnType     = 'array';
   
 
-    protected $allowedFields = ['area','client_branch','client_address','client_contact'];
+    protected $allowedFields = ['area','client_branch','client_address','client_email','client_contact','code'];
 
 }

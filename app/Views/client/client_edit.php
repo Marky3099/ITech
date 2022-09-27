@@ -18,14 +18,18 @@
         <label>Address</label>
         <input type="text" name="client_address" class="form-control" value="<?php echo $Client_obj['client_address']; ?>">
       </div>
-
       <div class="form-group">
-        <label>Contact Number</label>
-        <input type="text" name="client_contact" class="form-control" value="<?php echo $Client_obj['client_contact']; ?>">
+        <label>Email</label>
+        <input type="email" name="client_email" class="form-control" value="<?php echo $Client_obj['client_email']; ?>">
       </div>
 
       <div class="form-group">
-        <button type="submit" class="btn btn-success">Save Data</button>
+        <label>Contact Number</label>
+        <input type="tel" name="client_contact" class="form-control" pattern="[0-9]{11}" value="<?php echo $Client_obj['client_contact']; ?>">
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-success">Submit</button>
       </div>
       <div class="form-group">
         <a href="<?= base_url('/client');?>" class="btn btn-secondary back">Back</a>

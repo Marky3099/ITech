@@ -28,6 +28,7 @@
              <th>Branch Area</th>
              <th>Branch Branch</th>
              <th>Address</th>
+             <th>Email</th>
              <th>Contact</th>
              <th>Action</th>
           </tr>
@@ -40,6 +41,7 @@
              <td><?php echo $client['area']; ?></td>
              <td><?php echo $client['client_branch']; ?></td>
              <td><?php echo $client['client_address']; ?></td>
+             <td><?php echo $client['client_email']; ?></td>
              <td><?php echo $client['client_contact']; ?></td>
              <td>
               <a href="<?php echo base_url('/client/'.$client['client_id']);?>" class="btn btn-primary btn-sm">Edit</a>

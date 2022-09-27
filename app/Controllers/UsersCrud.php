@@ -72,7 +72,7 @@ class UsersCrud extends Controller
         $subject = "TSMS - Account Activation";
         $message = "<html>
                         <head>
-                            <title>Verification Code</title>
+                            <title>Activation of your Account</title>
                         </head>
                         <body>
                             <h2>You can now login to our system TSMS.</h2>
