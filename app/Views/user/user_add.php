@@ -26,7 +26,7 @@
 
       <div class="form-group">
         <label>Contact Number</label>
-        <input type="text" name="contact" id="contact" class="form-control" required>
+        <input type="tel" name="contact" id="contact" pattern="[0-9]{11}" placeholder="09XXXXXXXXX - 11 digits only" class="form-control" required>
       </div>
       <!-- <div class="form-group">
         <label>Password</label>
@@ -61,17 +61,16 @@
 
   $emp.change(function(){
     $empPosition = $emp.val();
-    alert($empPosition);
     if($empPosition === "Employee"){
       $('#for').prepend(`
-                          <label>Account for</label>
-
-                          <select id="emp_id" name="emp_id" class="form-control">
-                          <?php foreach($emp as $e):  ?>
-                              <option value=<?php echo $e['emp_id']; ?>><?php echo $e['emp_name'];?></option>
-                          <?php endforeach; ?>
-                          `)
-  }else{
+                                <label>Account for</label>
+      
+                                <select id="emp_id" name="emp_id" class="form-control">
+                                <?php foreach($emp as $e):  ?>
+                                    <option value=<?php echo $e['emp_id']; ?>><?php echo $e['emp_name'];?></option>
+                                <?php endforeach; ?>
+                                `)
+  }else if($empPosition === "Admin") {
     $('#for').hide();
   }
   })

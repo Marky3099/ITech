@@ -108,6 +108,9 @@
 
 <script type="text/javascript">
 $(document).ready( function () {
-    $('#table1').DataTable();
+    $('#table1').DataTable({
+    pageLength : 5,
+    lengthMenu: [[5, 10, 15,20], [5, 10, 15, 20,]]
+  });
 } );
 </script>

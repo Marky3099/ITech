@@ -605,6 +605,9 @@ new Chart('myAreaChart', {
 
 <script type="text/javascript">
 $(document).ready( function () {
-    $('.table').DataTable();
+    $('.table').DataTable({
+    pageLength : 5,
+    lengthMenu: [[5, 10, 15,20], [5, 10, 15, 20,]]
+  } );
 } );
 </script>
