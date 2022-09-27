@@ -15,7 +15,7 @@
 					<p><i class="fas fa-chevron-circle-down"></i>&nbsp;Please click or tap type of account.</i></p>
 
 						<div class="btn-layer">
-							<a href="<?= base_url('/admin-login')?>" class="btn btn-success"><div class="icon-box"><i class="fas fa-user-shield"></i></div>Admin</a></br>
+							<a href="<?= base_url('/admin_login')?>" class="btn btn-success"><div class="icon-box"><i class="fas fa-user-shield"></i></div>Admin</a></br>
 							<a href="<?= base_url('/employee-login')?>" class="btn btn-success"><div class="icon-box"><i class="fas fa-user-alt"></i></div>Employee</a>
 						</div>
 					
