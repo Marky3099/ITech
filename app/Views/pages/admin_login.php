@@ -7,10 +7,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Login</title>
   <link rel="stylesheet" href="<?= base_url('assets/css/loginstyle.css')?>">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
  </head>
  <body>
    <div class="login-box" >
+      <!-- <img src=" //base_url('assets/image/logo.png')" align="center"><br><br>
+      <h4>Tasks and Schedule Monitoring System</h4> -->
       <div class="header">
         <a href="<?= base_url('#home')?>" class="texthp"><img src="<?= base_url('assets/image/iicon.png')?>"></a>
         </div>
@@ -32,7 +35,7 @@
               <br>
           <div class="form-group user-box">
             <div class="icon-box"><i class="fas fa-user-alt"></i></div>
-            <input class="form-control" type="email" name="email" placeholder="Enter your Email"
+            <input class="form-control" type="text" name="email" placeholder="Enter your Email"
             value="<?php if(isset($_POST['email'])) { echo $_POST['email']; } ?>"><?php if($validation1->getError('email')) {?>
                   <span style="margin-left: 80px; color: #FF6969;">
                     <?= $error = $validation1->getError('email'); ?>

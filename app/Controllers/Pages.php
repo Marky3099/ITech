@@ -26,12 +26,10 @@ class Pages extends BaseController
 
     public function adminLogin()
     {
-        // $data['main'] = 'pages/login';
-        return view("pages/admin_login");
+        return view("pages/admin_login",$data);
     }
     public function employeeLogin()
     {
-        // $data['main'] = 'pages/login';
         return view("pages/employee_login");
     }
 
@@ -77,10 +75,11 @@ class Pages extends BaseController
                 ]
             ]
         ]);
-
         if (!$validation) {
-            $data['main'] = 'pages/admin_login';
-            return view('pages/login_temp',$data,['validation1' => $this->validator]);
+            //  session()->setFlashdata(['validation1' => $this->validator] );
+            // return $this->response->redirect(site_url('/admin-login'));
+            // $data['main'] = 'pages/admin_login';
+            return view('pages/admin_login',['validation1' => $this->validator]);
             
         }else {
             $user = new User();
@@ -111,19 +110,19 @@ class Pages extends BaseController
                         $session->set($getdata);
                         return redirect()->to('dashboard');
                         }  else{
-                            $data['main'] = 'pages/admin_login';
+                            // $data['main'] = 'pages/admin_login';
                           $data['errorAcc'] = "Account Not Activated";
-                          return view('pages/login_temp',$data);  
+                          return view('pages/admin_login',$data);  
                         }
                     }else{
-                          $data['main'] = 'pages/admin_login';
+                          // $data['main'] = 'pages/admin_login';
                           $data['errorMessage'] = "Wrong Password";
-                          return view('pages/login_temp',$data);   
+                          return view('pages/admin_login',$data);   
                     }
                 }else{
-                          $data['main'] = 'pages/admin_login';
+                          // $data['main'] = 'pages/admin_login';
                           $data['errorAcc'] = "Account is not registered as Admin";
-                          return view('pages/login_temp',$data);   
+                          return view('pages/admin_login',$data);   
                     }
         }
     }
@@ -153,8 +152,8 @@ class Pages extends BaseController
         ]);
 
         if (!$validation) {
-            $data['main'] = 'pages/employee_login';
-            return view('pages/login_temp',$data,['validation1' => $this->validator]);
+            // $data['main'] = 'pages/employee_login';
+            return view('pages/employee_login',['validation1' => $this->validator]);
             
         }else {
             $user = new User();
@@ -186,19 +185,19 @@ class Pages extends BaseController
                         $session->set($getdata);
                         return redirect()->to('dashboard');
                         }  else{
-                            $data['main'] = 'pages/employee_login';
+                            
                           $data['errorAcc'] = "Account Not Activated";
-                          return view('pages/login_temp',$data);  
+                          return view('pages/employee_login',$data);  
                         }
                     }else{
-                          $data['main'] = 'pages/employee_login';
+                         
                           $data['errorMessage'] = "Wrong Password";
-                          return view('pages/login_temp',$data);   
+                          return view('pages/employee_login',$data);    
                     }
                 }else{
-                          $data['main'] = 'pages/employee_login';
+                          
                           $data['errorAcc'] = "Account is not registered as Employee";
-                          return view('pages/login_temp',$data);   
+                          return view('pages/employee_login',$data);  
                     }
         }
     }
