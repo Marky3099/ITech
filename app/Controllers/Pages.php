@@ -35,6 +35,13 @@ class Pages extends BaseController
         return view("pages/employee_login");
     }
 
+    public function register_bdo(){
+        return view("pages/register_bdo");
+    }
+
+    public function register_nonbdo(){
+        return view("pages/register_nonbdo");
+    }
 
     public function userType()
     {

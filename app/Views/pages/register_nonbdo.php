@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
  </head>
  <body>
-   <div class="login-box" >
+   <div class="login-box" style="height: 85%;">
       <div class="header">
         <a href="<?= base_url('#home')?>" class="texthp"><img src="<?= base_url('assets/image/iicon.png')?>"></a>
         </div>
@@ -27,15 +27,11 @@
           </div>
           <div class="user-box">
             <div class="icon-box"><i class="fas fa-user-alt"></i></div>
-            <input class="cname" type="text" name="cname" placeholder="Company name (ex.BDO Taguig)">
+            <input class="cname" type="text" name="cname" placeholder="Company name">
           </div>
           <div class="user-box">
             <div class="icon-box"><i class="fas fa-user-alt"></i></div>
             <input class="address" type="text" name="address" placeholder="Address">
-          </div>
-          <div class="user-box">
-            <div class="icon-box"><i class="fas fa-user-alt"></i></div>
-            <input class="unqcode" type="text" name="unqcode" placeholder="Unique code">
           </div>
           <div class="user-box">
             <div class="icon-box"><i class="fas fa-key"></i></div>
@@ -45,9 +41,6 @@
             <div class="icon-box"><i class="fas fa-key"></i></div>
             <input class="cpassword" type="password" name="cpassword" id="cpassword" placeholder="Confirm your Password">
           </div>
-            
-            <p>NOTE: Partner Company’s account is subject to approval. Once approved, a message will be sent to your registered E-mail.</p>
-
             <button class="btn">
             <span></span>
             <span></span>
@@ -59,7 +52,7 @@
             <br><br><br>
               <button onclick="history.back()" class="back-btn">Back</button>
       </form>
-    </div>  
+    </div>
  </body>
  </html>
 
