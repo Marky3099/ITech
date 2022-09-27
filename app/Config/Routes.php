@@ -35,6 +35,8 @@ $routes->setAutoRoute(true);
 
 $routes->get('/admin-login', 'Pages::adminLogin');
 $routes->get('/employee-login', 'Pages::employeeLogin');
+$routes->get('/register-bdo', 'Pages::register_bdo');
+$routes->get('/register-nonbdo', 'Pages::register_nonbdo');
 
 $routes->get('/user-type','Pages::userType');
 $routes->get('/client-type','Pages::clientType');
