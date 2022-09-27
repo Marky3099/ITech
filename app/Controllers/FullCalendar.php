@@ -441,6 +441,9 @@ class FullCalendar extends BaseController
         $Event_fcu = new Event_fcu();
         $Client = new Client();
         
+        $client_name = $_POST["client_id"];
+        $client_branch = $Client->where('client_id',$client_name)->first();
+        
         $weeklyEvent = [];
         $monthlyEvent = [];
 
@@ -464,7 +467,7 @@ class FullCalendar extends BaseController
                 // dd(count($weeklyEvent));
                 for ($i=0; $i < count($weeklyEvent); $i++) { 
                     $_POST['start_event'] = $weeklyEvent[$i];
-                    $_POST["title"] = date("g:ia",strtotime($_POST["time"]))." ".$_POST["area"];
+                    $_POST["title"] = date("g:ia",strtotime($_POST["time"]))." ".$client_branch['client_branch'];
                     $success = $Event->insert($_POST);
                     foreach($_POST['emp_id'] as $key => $value) {
                         $Event_emp->insert([
@@ -497,7 +500,7 @@ class FullCalendar extends BaseController
 
                     for ($i=0; $i < count($monthlyEvent); $i++) { 
                         $_POST['start_event'] = $monthlyEvent[$i];
-                        $_POST["title"] = date("g:ia",strtotime($_POST["time"]))." ".$_POST["area"];
+                        $_POST["title"] = date("g:ia",strtotime($_POST["time"]))." ".$client_branch['client_branch'];
                         $success = $Event->insert($_POST);
                         foreach($_POST['emp_id'] as $key => $value) {
                             $Event_emp->insert([
@@ -516,7 +519,7 @@ class FullCalendar extends BaseController
                 }
 
                 else{
-                    $_POST["title"] = date("g:ia",strtotime($_POST["time"]))." ".$_POST["area"];
+                    $_POST["title"] = date("g:ia",strtotime($_POST["time"]))." ".$client_branch['client_branch'];
                     $success = $Event->insert($_POST);
                 
                     foreach($_POST['emp_id'] as $key => $value) {
@@ -556,9 +559,8 @@ class FullCalendar extends BaseController
            
             $event_update = [
             'start_event' => $this->request->getVar('start_event_update'),
-            'title' => $this->request->getVar('title_update'),
+            'title' => date("g:ia",strtotime($this->request->getVar('time_update')))." ".$this->request->getVar('area_update'),
             'time' => $this->request->getVar('time_update'),
-            
             'aircon_id' => (int)($this->request->getVar('aircon_id_update')),
             'client_id'  => (int)($this->request->getVar('client_id_update')),
             'fcuno' => (int)($this->request->getVar('fcuno_update')),

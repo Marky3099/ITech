@@ -277,7 +277,7 @@
 
             <input type="hidden" name="start_event" id="start_event" value="">
           <div class="form-group">
-            <input class="form-control" type="text" name="title" id="title" placeholder="Title">
+            <input class="form-control" type="hidden" name="title" id="title" placeholder="Title">
           </div>
           <div class="form-group">
             <h5>Time</h5>
@@ -393,8 +393,8 @@
           </div>
           <div class="form-group">
             
-            <h5>Title</h5>
-            <input class="form-control" type="text" name="title_update" id="title_update" placeholder="Title" style="width:150px;">
+            <!-- <h5>Title</h5> -->
+            <input class="form-control" type="hidden" name="title_update" id="title_update" placeholder="Title">
           </div>
           <div class="form-group">
             <h5>Time</h5>

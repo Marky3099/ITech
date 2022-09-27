@@ -27,7 +27,7 @@
 
       <div class="form-group">
         <label>Contact</label>
-        <input type="text" name="emp_contact" class="form-control">
+        <input type="tel" pattern="[0-9]{11}" placeholder="09XXXXXXXXX - 11 digits only" name="emp_contact" class="form-control">
       </div>
       
       <div class="form-group">

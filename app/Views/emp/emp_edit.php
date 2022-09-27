@@ -22,7 +22,7 @@
 
       <div class="form-group">
         <label>Contact</label>
-        <input type="text" name="emp_contact" class="form-control" value="<?php echo $Emp_obj['emp_contact']; ?>">
+        <input type="tel" pattern="[0-9]{11}" name="emp_contact" class="form-control" value="<?php echo $Emp_obj['emp_contact']; ?>">
       </div>
 
       <div class="form-group">

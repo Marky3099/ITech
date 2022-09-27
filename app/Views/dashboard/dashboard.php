@@ -371,7 +371,7 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-uppercase mb-1">
-                                                Daily: <?= date('F j Y');?></div>
+                                                Daily: <?= date('F j, Y');?></div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">Number of task:&nbsp;<a href="#" data-toggle="modal" data-target="#todayModal" style="color: #4b6043 ;"><?= json_encode($today_event);?></a></div>
                                         </div>
                                         <div class="col-auto">
@@ -393,7 +393,7 @@
                                                         $monday = strtotime('last monday', strtotime('tomorrow'));
 
                                                         $sunday = strtotime('+6 days', $monday);
-                                                        echo date('F j', $monday) . " - " . date('j Y', $sunday);?></div>
+                                                        echo date('F j', $monday) . " - " . date('F j, Y', $sunday);?></div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">Number of task: <a href="#" data-toggle="modal" data-target="#weekModal" style="color: #4b6043;"><?= json_encode($weekly_event);?></a></div>
                                         </div>
                                         <div class="col-auto">
