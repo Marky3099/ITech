@@ -17,7 +17,7 @@
         <a href="<?= base_url('#home')?>" class="texthp"><img src="<?= base_url('assets/image/iicon.png')?>"></a>
         </div>
       <h3>Employee Login</h3>
-      <form class="login100-form validate-form" action="<?= base_url('pages/checkEmployee');?>" method="post">
+      <form class="login100-form validate-form" action="<?= base_url('pages/check');?>" method="post">
 
         <?php 
           if(!empty($errorAcc)){ ?>
@@ -32,34 +32,33 @@
                   </div>
               <?php }?>
               <br>
-          <div class="user-box">
+          <div class="form-group user-box">
             <div class="icon-box"><i class="fas fa-user-alt"></i></div>
             <input class="email" type="text" name="email" placeholder="Enter your Email"
             value="<?php if(isset($_POST['email'])) { echo $_POST['email']; } ?>"><?php if($validation1->getError('email')) {?>
-                  <div style="color: #FF6969;">
+                  <span style="margin-left: 80px; color: #FF6969;">
                     <?= $error = $validation1->getError('email'); ?>
-                  </div>
+                  </span>
               <?php }?>
           </div>
-          <div class="user-box">
+          <div class="form-group user-box">
             <div class="icon-box"><i class="fas fa-key"></i></div>
             <input type="password" name="password" id="id_password" placeholder="Enter your Password"
             value="<?php if(isset($_POST['password'])) { echo $_POST['password']; }?>"><i class="far fa-eye fa-eye-slash" id="togglePassword" style="margin-left: -45px; color: #344F21; cursor: pointer;"></i>
-            
           </div>
           <div class="fpass" >
                 <a href="<?=base_url('/forgot_password');?>">Forgot Password?</a>
               </div>
           <?php if($validation1->getError('password')) {?>
-                  <div style="color: #FF6969;">
+                  <span style="margin-left: 80px; color: #FF6969;">
                     <?= $error = $validation1->getError('password'); ?>
-                  </div>
+                  </span>
               <?php }?>
               <?php 
           if(!empty($errorMessage)){ ?>
-                  <div style="color: #FF6969;">
+                  <span style="margin-left: 80px; color: #FF6969;">
                    <?php echo $errorMessage;?>
-                  </div>
+                  </span>
               <?php }?>
               
               <button class="btn">
