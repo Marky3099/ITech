@@ -11,8 +11,6 @@
  </head>
  <body>
    <div class="login-box" >
-      <!-- <img src=" //base_url('assets/image/logo.png')" align="center"><br><br>
-      <h4>Tasks and Schedule Monitoring System</h4> -->
       <div class="header">
         <a href="<?= base_url('#home')?>" class="texthp"><img src="<?= base_url('assets/image/iicon.png')?>"></a>
         </div>
@@ -34,7 +32,7 @@
               <br>
           <div class="form-group user-box">
             <div class="icon-box"><i class="fas fa-user-alt"></i></div>
-            <input class="email" type="text" name="email" placeholder="Enter your Email"
+            <input class="form-control" type="email" name="email" placeholder="Enter your Email"
             value="<?php if(isset($_POST['email'])) { echo $_POST['email']; } ?>"><?php if($validation1->getError('email')) {?>
                   <span style="margin-left: 80px; color: #FF6969;">
                     <?= $error = $validation1->getError('email'); ?>
@@ -43,7 +41,7 @@
           </div>
           <div class="form-group user-box">
             <div class="icon-box"><i class="fas fa-key"></i></div>
-            <input type="password" name="password" id="id_password" placeholder="Enter your Password"
+            <input type="password" class="form-control" name="password" id="id_password" placeholder="Enter your Password"
             value="<?php if(isset($_POST['password'])) { echo $_POST['password']; }?>"><i class="far fa-eye fa-eye-slash" id="togglePassword" style="margin-left: -45px; color: #344F21; cursor: pointer;"></i>
           </div>
           <div class="fpass" >
