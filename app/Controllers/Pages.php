@@ -26,7 +26,7 @@ class Pages extends BaseController
 
     public function adminLogin()
     {
-        return view("pages/admin_login",$data);
+        return view("pages/admin_login");
     }
     public function employeeLogin()
     {
