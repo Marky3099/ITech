@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="<?= base_url('assets/css/formstyle.css')?>">
 <div class="body-content">
   <div class="add-form"> 
     <form method="post" id="add_create" name="add_create" 
@@ -8,36 +9,35 @@
                   </div>
               <?php }?>
              
-    <h1>Add Service</h1>
-    <div class="form-content">
-      <div class="form-group">
-        <label id="label1">Service Name</label>
-        <input type="text" name="serv_name" class="form-control" required>
-      </div>
+    <div class="form-box">
+        <h3>Add Service</h3><br>
+        <div class="user-box">
+           <div class="icon-box"><i class="fas fa-wrench"></i></div>
+          <input type="text" name="serv_name" placeholder="Service Name" class="serv-name" required>
+        </div>
 
-      <div class="form-group">
-        <label>Description</label>
-        <input type="text" name="serv_description" class="form-control" required>
-      </div>
-      <div class="form-group">
-        <label>Price</label>
-        <input type="number" name="price" class="form-control" required>
-      </div>
-      <div class="form-group">
-        <label>Color</label>
-        <input type="color" name="serv_color" class="form-control" required>
-      </div>
-      
-      <div class="form-group">
-        <button type="submit" class="btn btn-success">Add Data</button>
-      </div>
-      <div class="form-group">
-        <a href="<?= base_url('/serv');?>" class="btn btn-secondary back">Back</a>
-      </div>
+        <div class="user-box">
+          <div class="icon-box"><i class="fas fa-wrench"></i></div>
+          <input type="text" name="serv_description" placeholder="Service Description" class="serv-desc" required>
+        </div>
+
+        <div class="user-box">
+          <div class="icon-box"><i class="fas fa-tags"></i></div>
+          <input type="number" name="price" placeholder="Price" class="price" required>
+        </div>
+
+        <div class="container">
+          <input type="color" name="serv_color" id="color-picker" required>
+          <label for="color-picker">Color</label>
+        </div><br>
+        
+        <div class="container1">
+          <button type="submit" class="btn btn-success">Add Data</button>
+          <button onclick="history.back()" class="back-btn">Back</button>
+        </div>
     </div>
     </form>
   </div>
-</div>
 </div>
 
  
