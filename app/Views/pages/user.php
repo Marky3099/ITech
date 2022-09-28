@@ -19,7 +19,7 @@
 							<a href="<?= base_url('/employee-login')?>" class="btn btn-success"><div class="icon-box"><i class="fas fa-user-alt"></i></div>Employee</a>
 						</div>
 					
-					<p class="para1">Want to book an appartment?<a href="<?= base_url('/client-type')?>" style="font-style: italic; color: limegreen;">&nbsp;Click here.</a></p>
+					<p class="para1">Want to book an Appointment?<a href="<?= base_url('/client-type')?>" style="font-style: italic; color: limegreen;">&nbsp;Click here.</a></p>
 					</br>
 					</br>
 					<p class="para1"> By using this service, you understood and agree to Maylaflor’s Tasks and Schedule Monitoring System <i>Terms of Use and Privacy Statement.</i></p>
