@@ -37,7 +37,7 @@
             <div class="icon-box"><i class="fas fa-user-alt"></i></div>
             <input class="form-control" type="text" name="email" placeholder="Enter your Email"
             value="<?php if(isset($_POST['email'])) { echo $_POST['email']; } ?>"><?php if($validation1->getError('email')) {?>
-                  <span style="margin-left: 80px; color: #FF6969;">
+                  <span style="margin-left: 80px; color: #FF6969; font-size: 12px;">
                     <?= $error = $validation1->getError('email'); ?>
                   </span>
               <?php }?>
@@ -51,7 +51,7 @@
                 <a href="<?=base_url('/forgot_password');?>">Forgot Password?</a>
               </div>
           <?php if($validation1->getError('password')) {?>
-                  <span style="margin-left: 80px; color: #FF6969;">
+                  <span style="margin-left: 80px; color: #FF6969; font-size: 12px;">
                     <?= $error = $validation1->getError('password'); ?>
                   </span>
               <?php }?>
