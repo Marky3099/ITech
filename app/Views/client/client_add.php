@@ -13,27 +13,27 @@
         <h3>Add Client</h3><br>
         <div class="user-box">
            <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
-           <input type="text" name="area" placeholder="Branch Area" class="area" required>
+           <input type="text" name="area" placeholder="Branch Area" required>
         </div>
 
         <div class="user-box">
           <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
-          <input type="text" name="client_branch" placeholder="Branch Name" class="client_branch" required>
+          <input type="text" name="client_branch" placeholder="Branch Name" required>
         </div>
 
         <div class="user-box">
           <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
-          <input type="text" name="client_address" placeholder="Address" class="address">
+          <input type="text" name="client_address" placeholder="Address">
         </div>
 
         <div class="user-box">
           <div class="icon-box"><i class="fas fa-phone"></i></div>
-          <input type="tel" name="client_contact" pattern="[0-9]{11}" placeholder="09XXXXXXXXX - 11 digits only" class="client_contact">
+          <input type="tel" name="client_contact" pattern="[0-9]{11}" placeholder="09XXXXXXXXX - 11 digits only">
         </div>
 
         <div class="user-box">
           <div class="icon-box"><i class="fas fa-user-alt"></i></div>
-          <input type="email" name="client_email" placeholder="E-mail" class="email">
+          <input type="email" name="client_email" placeholder="E-mail">
         </div><br>
         
         <div class="container1">

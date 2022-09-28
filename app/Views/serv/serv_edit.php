@@ -7,17 +7,17 @@
       <h3>Edit Service</h3><br>
       <div class="user-box">
          <div class="icon-box"><i class="fas fa-wrench"></i></div>
-        <input type="text" name="serv_name" class="serv-name" value="<?php echo $Serv_obj['serv_name']; ?>">
+        <input type="text" name="serv_name" value="<?php echo $Serv_obj['serv_name']; ?>">
       </div>
 
       <div class="user-box">
         <div class="icon-box"><i class="fas fa-wrench"></i></div>
-        <input type="text" name="serv_description" class="serv-desc" value="<?php echo $Serv_obj['serv_description']; ?>">
+        <input type="text" name="serv_description" value="<?php echo $Serv_obj['serv_description']; ?>">
       </div>
 
       <div class="user-box">
         <div class="icon-box"><i class="fas fa-tags"></i></div>
-        <input type="number" name="price" class="price" value="<?php echo $Serv_obj['price']; ?>">
+        <input type="number" name="price" value="<?php echo $Serv_obj['price']; ?>">
       </div>
 
       <div class="container">
@@ -26,7 +26,7 @@
       </div><br>
       
       <div class="container1">
-        <button type="submit" class="btn btn-success">Add Data</button>
+        <button type="submit" class="btn btn-success">Save Data</button>
         <button onclick="history.back()" class="back-btn">Back</button>
       </div>
     </div>

@@ -13,17 +13,17 @@
         <h3>Add Service</h3><br>
         <div class="user-box">
            <div class="icon-box"><i class="fas fa-wrench"></i></div>
-          <input type="text" name="serv_name" placeholder="Service Name" class="serv-name" required>
+          <input type="text" name="serv_name" placeholder="Service Name" required>
         </div>
 
         <div class="user-box">
           <div class="icon-box"><i class="fas fa-wrench"></i></div>
-          <input type="text" name="serv_description" placeholder="Service Description" class="serv-desc" required>
+          <input type="text" name="serv_description" placeholder="Service Description" required>
         </div>
 
         <div class="user-box">
           <div class="icon-box"><i class="fas fa-tags"></i></div>
-          <input type="number" name="price" placeholder="Price" class="price" required>
+          <input type="number" name="price" placeholder="Price" required>
         </div>
 
         <div class="container">
