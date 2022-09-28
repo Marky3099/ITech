@@ -44,7 +44,7 @@
         
       </div>
       <div class="form-group">
-        <button type="submit" class="btn btn-success">Add Data</button>
+        <button type="submit" class="btn btn-success">Submit</button>
       </div>
       <div class="form-group">
         <a href="<?= base_url('/user');?>" class="btn btn-secondary back">Back</a>

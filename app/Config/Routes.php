@@ -35,8 +35,11 @@ $routes->setAutoRoute(true);
 
 $routes->get('/admin-login', 'Pages::adminLogin');
 $routes->get('/employee-login', 'Pages::employeeLogin');
-$routes->get('/register-bdo', 'Pages::register_bdo');
-$routes->get('/register-nonbdo', 'Pages::register_nonbdo');
+$routes->get('/bdo-login', 'Pages::bdoLogin');
+$routes->get('/non-bdo-login', 'Pages::nonBdoLogin');
+$routes->get('/bdo-register', 'Pages::bdoRegister');
+$routes->post('/bdo-register/add', 'Pages::registerBdo');
+$routes->get('/non-bdo-register', 'Pages::nonBdoRegister');
 
 $routes->get('/user-type','Pages::userType');
 $routes->get('/client-type','Pages::clientType');

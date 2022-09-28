@@ -5,24 +5,23 @@
  <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Employee Login</title>
+  <title>BDO Login</title>
   <link rel="stylesheet" href="<?= base_url('assets/css/loginstyle.css')?>">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
  </head>
  <body>
    <div class="login-box" >
-      <!-- <img src=" //base_url('assets/image/logo.png')" align="center"><br><br>
-      <h4>Tasks and Schedule Monitoring System</h4> -->
       <div class="header">
         <a href="<?= base_url('#home')?>" class="texthp"><img src="<?= base_url('assets/image/iicon.png')?>"></a>
         </div>
-      <h3>Employee Login</h3>
-      <form class="login100-form validate-form" action="<?= base_url('pages/checkEmployee');?>" method="post">
+      <h3>Partnered BDO Login</h3>
+      <form class="login100-form validate-form" action="<?= base_url('pages/check');?>" method="post">
 
         <?php 
           if(!empty($errorAcc)){ ?>
-                  <div class="err-msg" style="background-color: red; ">
-                   <h4 style="color: white;"><center><?php echo $errorAcc;?></center></h4>
+                  <div class="err-msg">
+                   <h4><center><?php echo $errorAcc;?></center></h4>
                   </div>
               <?php }?>
            <?php 
@@ -43,7 +42,7 @@
           </div>
           <div class="form-group user-box">
             <div class="icon-box"><i class="fas fa-key"></i></div>
-            <input class="form-control" type="password" name="password" id="id_password" placeholder="Enter your Password"
+            <input type="password" class="form-control" name="password" id="id_password" placeholder="Enter your Password"
             value="<?php if(isset($_POST['password'])) { echo $_POST['password']; }?>"><i class="far fa-eye fa-eye-slash" id="togglePassword" style="margin-left: -45px; color: #344F21; cursor: pointer;"></i>
           </div>
           <div class="fpass" >
@@ -69,7 +68,13 @@
             
             </a>
             <br><br><br>
-              <a href="<?= base_url('/user-type');?>" class="back-btn">Back</a>
+            <div class="reg">
+              <p>Don't have an account yet?
+                <a href="<?= base_url('/bdo-register');?>">Register now</a></p>
+            </div>
+            
+              <a href="<?= base_url('/client-type');?>" class="back-btn">Back</a>
+              
       </form>
     </div>  
      <script type="text/javascript">

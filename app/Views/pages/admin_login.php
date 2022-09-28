@@ -5,7 +5,7 @@
  <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Login</title>
+  <title>Admin Login</title>
   <link rel="stylesheet" href="<?= base_url('assets/css/loginstyle.css')?>">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
@@ -22,14 +22,14 @@
 
         <?php 
           if(!empty($errorAcc)){ ?>
-                  <div style="background-color: red; ">
-                   <h4 style="color: white;"><center><?php echo $errorAcc;?></center></h4>
+                  <div class="err-msg">
+                   <center><h4><?php echo $errorAcc;?></h4></center>
                   </div>
               <?php }?>
            <?php 
           if(!empty($success)){ ?>
-                  <div style=" background-color: green;">
-                   <h4><center><?php echo $success;?></center></h4>
+                  <div class="suc-msg">
+                   <center><h4><?php echo $success;?></h4></center>
                   </div>
               <?php }?>
               <br>

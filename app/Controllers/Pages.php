@@ -3,6 +3,8 @@
 namespace App\Controllers;
 use App\Libraries\Hash;
 use App\Models\User;
+use App\Models\Client;
+use App\Models\User_bdo;
 
 
 class Pages extends BaseController
@@ -23,7 +25,10 @@ class Pages extends BaseController
         $data['main'] = 'pages/about';
         return view("pages/home",$data);
     }
-
+    public function userType()
+    {
+        return view("pages/user");
+    }
     public function adminLogin()
     {
         return view("pages/admin_login");
@@ -32,23 +37,22 @@ class Pages extends BaseController
     {
         return view("pages/employee_login");
     }
-
-    public function register_bdo(){
-        return view("pages/register_bdo");
-    }
-
-    public function register_nonbdo(){
-        return view("pages/register_nonbdo");
-    }
-
-    public function userType()
-    {
-        return view("pages/user");
-    }
-
-    public function clientType()
+     public function clientType()
     {
         return view("pages/client");
+    }
+    public function bdoLogin(){
+        return view("pages/bdo_login");
+    }
+    public function nonBdoLogin(){
+        return view("pages/nonbdo_login");
+    }
+    public function bdoRegister(){
+        return view("pages/bdo_register");
+    }
+
+    public function nonBdoRegister(){
+        return view("pages/nonbdo_register");
     }
 
     public function check()
@@ -200,6 +204,47 @@ class Pages extends BaseController
                           return view('pages/employee_login',$data);  
                     }
         }
+    }
+
+    public function registerBdo(){
+        $userBdo = new User_bdo();
+        $Client = new Client();
+
+        $client = $Client->orderBy('client_id', 'ASC')->findAll();
+        $code = $Client->where('code', $this->request->getVar('code'))->first();
+        $uniqueCode = $userBdo->orderBy('bdo_unique_code',$this->request->getVar('code'))->findAll();
+        if($code){
+            if(!$uniqueCode>0){
+                if($this->request->getVar('password') == $this->request->getVar('c_password')){
+                $userBdo_create = [
+                    'bdo_fname' => $this->request->getVar('fname'),
+                    'bdo_lname' => $this->request->getVar('lname'),
+                    'bdo_email'  => $this->request->getVar('email'),
+                    'bdo_address' => $this->request->getVar('address'),
+                    'bdo_contact'  => $this->request->getVar('contact'),
+                    'bdo_company' => $this->request->getVar('company'),
+                    'bdo_unique_code' => $this->request->getVar('code'),
+                    'bdo_password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
+                    'client_id' => $code['client_id'],
+                   
+                    ];
+                }else{
+                    $data['error'] = 'Password didn\'t match, Please try again';
+                    return view("pages/bdo_register",$data);
+                }
+                if($userBdo->insert($userBdo_create)){
+                    $data['success'] = 'Sign up successful. Please wait for your account to be activated.';
+                    return view("pages/bdo_register",$data);
+                }
+            }else{
+                $data['error'] = 'Code is already registered';
+                return view("pages/bdo_register",$data);
+            }
+        }else{
+            $data['error'] = 'Code is not Valid, try again with a valid code';
+            return view("pages/bdo_register",$data);
+        }
+        
     }
 }
 

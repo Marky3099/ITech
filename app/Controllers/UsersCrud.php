@@ -119,11 +119,11 @@ class UsersCrud extends Controller
         }
         $data['success']='Activated Successfully!';
         if($User_obj['position'] == "Admin"){
-            $data['main'] = 'pages/admin_login';
+            return view('pages/admin_login',$data);
         }else if($User_obj['position'] == "Employee"){
-            $data['main'] = 'pages/employee_login';
+            return view('pages/employee_login',$data);
         }
-        return view('pages/login_temp',$data); 
+        //return view('pages/login_temp',$data); 
         // return $this->response->redirect(site_url('/login'));
     }
     // show single User

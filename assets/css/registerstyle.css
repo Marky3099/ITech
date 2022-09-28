@@ -9,7 +9,7 @@ body {
   align-content: center;
 }
 
-.login-box{
+.register-box{
   position: absolute;
   top: 50%;
   left: 50%;
@@ -24,18 +24,18 @@ body {
   border-radius: 50px;
 }
 
-.login-box .header img{
+.register-box .header img{
   position: relative;
   left: 70px;
   height: 100px;
   width: 390px;
 }
 
-.login-box .back{
+.register-box .back{
   text-align: center;
 }
 
-.login-box h3 {
+.register-box h3 {
   margin: 5px 0 5px;
   font-size: 1.75rem;
   font-weight: bold;
@@ -44,13 +44,13 @@ body {
   text-align: center;
 }
 
-.login-box p{
+.register-box p{
   margin: 0px;
   font-size: 13px;
   color: #344F21;
 }
 
-.login-box .user-box{
+.register-box .user-box{
   position: relative;
 }
 
@@ -64,8 +64,9 @@ body {
   cursor: pointer;
 }
 
-.login-box .user-box input {
-  position: relative;
+.register-box .user-box input {
+  /*position: relative;*/
+  /*margin-left: 10px;*/
   padding: 0.45rem;
   font-size: 16px;
   color: #344F21;
@@ -73,18 +74,18 @@ body {
   border: 1px solid black;
   outline: none;
   background-color: transparent;
-  left: 35px;
+  margin-left: 35px;
 }
 
-.login-box .user-box input.lname, .login-box .user-box input.contact{
-  left: 90px;
+.register-box .user-box input.lname, .register-box .user-box input.contact{
+  margin-left: 57.5px;
 }
 
-.login-box .user-box input.cname, .login-box .user-box input.address, .login-box .user-box input.unqcode, .login-box .user-box input.password, .login-box .user-box input.cpassword{
+.register-box .user-box input.cname, .register-box .user-box input.address, .register-box .user-box input.unqcode, .register-box .user-box input.password, .register-box .user-box input.cpassword{
   width: 90%;
 }
 
-.login-box .user-box .icon-box{
+.register-box .user-box .icon-box{
     position: absolute;   
     height: 18.5px;
     width: 24px;
@@ -94,8 +95,9 @@ body {
     background-color: #344F21;
     color: #fff;
     margin-top: 5px;
+    margin-left: -5px;
 }
-.login-box .user-box .icon-box1{
+.register-box .user-box .icon-box1{
     position: absolute;   
     height: 18.5px;
     width: 24px;
@@ -105,7 +107,7 @@ body {
     background-color: #344F21;
     color: #fff;
     margin-top: 5px;
-    left: 280px;
+    left: 275px;
 }
 
 
@@ -115,7 +117,7 @@ input:-webkit-autofill{
   background-color: #566C45 !important;
 }
 
-.login-box .user-box label {
+.register-box .user-box label {
   position: absolute;
   padding: 5px 20px;
   font-size: 16px;
@@ -124,15 +126,15 @@ input:-webkit-autofill{
   transition: .5s;
 }
 
-.login-box .user-box input:focus ~ label,
-.login-box .user-box input:valid ~ label {
+.register-box .user-box input:focus ~ label,
+.register-box .user-box input:valid ~ label {
   top: -20px;
   left: 0;
   color: #344F21;
   font-size: 16px;
 }
 
-.login-box form .btn{
+.register-box form .btn{
   position: relative;
   display: inline-block;
   width: 82%;
@@ -150,25 +152,25 @@ input:-webkit-autofill{
   font-weight: bold;
 }
 
-.login-box .btn:hover {
+.register-box .btn:hover {
   background: #566C46;
   color: #fff;
   box-shadow: 0 0 5px #344F21,
               0 0 25px #344F21,
 }
 
-.login-box p.para1{
+.register-box p.para1{
   margin-top: 1px;
   text-align: center;
   margin-bottom: 0px;
 }
 
-.login-box p.para1 a{
+.register-box p.para1 a{
   text-decoration: none;
   color: #344F21;
 }
 
-.login-box button.back-btn{
+.register-box a.back-btn{
   position: relative;
   top: -40px;
   left: 10px;
@@ -180,11 +182,35 @@ input:-webkit-autofill{
   color: #344F21;
 }
 
-.login-box button.back-btn:hover {
+.register-box a.back-btn:hover {
   background: #566C46;
-  cursor: pointer;
+  padding: 0.5rem;
   color: #fff;
   border-radius: 10%;
   box-shadow: 0 0 5px #344F21,
               0 0 25px #344F21,
+}
+.register-box .err-msg{
+  background-color: red;
+  margin-top: -1rem;
+  margin-bottom: -1rem;
+}
+.register-box .err-msg h4{
+  font-size: 1rem;
+  color: #fff;
+}
+.register-box .suc-msg{
+  background-color: green;
+  margin-top: -1rem;
+  margin-bottom: -1rem;
+}
+.register-box .suc-msg h4{
+  font-size: 1rem;
+  color: #fff;
+}
+#togglePassword{
+  z-index: 10;
+}
+.far{
+  margin-left: -40px; color: #344F21; cursor: pointer;
 }
