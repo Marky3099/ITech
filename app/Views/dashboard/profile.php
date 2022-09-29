@@ -3,22 +3,7 @@
     <form method="post" id="updateuser" name="updateuser" enctype="multipart/form-data"
     action="<?= base_url('/profile/update') ?>">
       <input type="hidden" name="user_id" id="user_id" value="<?php echo $user_data['user_id']; ?>">
-     <?php 
-        // Display Response
-        if(session()->has('message')):
-        ?>
-           <div class="alert <?= session()->getFlashdata('alert-class') ?>" style="background-color: green;width: 400px; color: white;">
-              <?= session()->getFlashdata('message') ?>
-           </div>
-        
-        <?php 
-        // Display Response
-        elseif(session()->has('error')):
-        ?>
-           <div class="alert <?= session()->getFlashdata('alert-class') ?>" style="background-color: red; width: 400px; color: white;">
-              <?= session()->getFlashdata('error') ?>
-           </div>
-        <?php endif;?>
+     
         <!-- <a href = "Account.html" ><button class = "buttonp buttonp2"><i style = "color: white"></i> Profile </button></a> -->
         <!-- <a href = "Dashboard.html" ><button class = "buttonp buttonp1"><i style = "color: white"></i> Home </button></a> -->
        
@@ -63,3 +48,24 @@
     </form>
 </div>
 </div>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript">
+    <?php if(session()->has('message')) {?>
+      // alert('Delete');
+      Swal.fire({
+             icon: 'success',
+             title: 'Updated Successfully!',
+             text: 'Your Account has been updated.',
+             type: 'success'
+            })
+   <?php }?>
+   <?php if(session()->has('error')) {?>
+      // alert('Delete');
+      Swal.fire({
+             icon: 'error',
+             title: 'Password didn\'t match!',
+             text: 'Please try again.',
+            })
+   <?php }?>
+</script>
