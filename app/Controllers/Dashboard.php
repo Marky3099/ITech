@@ -449,6 +449,8 @@ class Dashboard extends BaseController
             'status' => "Done",
         ];
         $Event->update((int)$id, $data);
+        $session = session();
+        $session->setFlashdata('done', 'value');
         return $this->response->redirect(site_url('/dashboard/'));
     }
     public function pending_task($id){
@@ -459,6 +461,8 @@ class Dashboard extends BaseController
             'status' => "Pending",
         ];
         $Event->update((int)$id, $data);
+        $session = session();
+        $session->setFlashdata('pending', 'value');
         return $this->response->redirect(site_url('/dashboard/'));
     }
 

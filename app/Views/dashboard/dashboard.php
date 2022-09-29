@@ -7,14 +7,12 @@
     <meta name="author" content="">
 
     <!-- Custom fonts for this template-->
-    <link href="<?=base_url("css/all.min.css")?>" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
 
     <!-- Custom styles for this template-->
-    <link href="<?=base_url("css/sb-admin-2.min.css")?>" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/dashstyle.css')?>">
 
 
@@ -511,20 +509,7 @@
 
 
     <!-- Bootstrap core JavaScript-->
-    <script src="<?=base_url("js/jquery.min.js")?>"></script>
-    <script src="<?=base_url("js/bootstrap.bundle.min.js")?>"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="<?=base_url("js/jquery.easing.min.js")?>"></script>
-    <!-- Custom scripts for all pages-->
-    <script src="<?=base_url("js/sb-admin-2.min.js")?>"></script>
-
-    <!-- Page level plugins -->
-    <script src="<?=base_url("js/Chart.min.js")?>"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="<?=base_url("js/chart-area-demo.js")?>"></script>
-    <script src="<?=base_url("js/chart-pie-demo.js")?>"></script>
+    
     <div class="row justify-content-center">
     
 
@@ -533,10 +518,12 @@
 </div>
 </div>
 <!-- , "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" -->
-
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script type="text/javascript">
-
+// chart
   var data = {
   labels: <?= json_encode($label); ?>,
   datasets: [{
@@ -597,13 +584,28 @@ new Chart('myAreaChart', {
   data: data
 });
 
+// Sweet Alert
+<?php if(session()->has('done')) {?>
+      // alert('Delete');
+      Swal.fire({
+              position: 'top',
+              icon: 'success',
+              title: 'Task marked as Done',
+              showConfirmButton: false,
+              timer: 1500
+            })
+   <?php }elseif (session()->has('pending')) { ?>
+     Swal.fire({
+              position: 'top',
+              icon: 'info',
+              title: 'Task marked as Pending',
+              showConfirmButton: false,
+              timer: 1500
+            })
+   <?php } ?>
 
-</script>
-</body>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+// Data tables
 
-<script type="text/javascript">
 $(document).ready( function () {
     $('.table').DataTable({
     pageLength : 5,
@@ -611,3 +613,5 @@ $(document).ready( function () {
   } );
 } );
 </script>
+</body>
+
