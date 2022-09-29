@@ -32,8 +32,8 @@
         </div><br>
         
         <div class="container1">
-          <button type="submit" class="btn btn-success">Add Data</button>
-          <button onclick="history.back()" class="back-btn">Back</button>
+          <button type="submit" class="btn btn-success">Submit</button>
+          <a href='<?=base_url('/serv')?>' class="back-btn">Back</a>
         </div>
     </div>
     </form>

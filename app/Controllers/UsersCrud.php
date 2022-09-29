@@ -132,6 +132,8 @@ class UsersCrud extends Controller
             return $this->response->redirect(site_url('/dashboard'));
         }
         $User = new User();
+         $Emp = new Emp();
+        $data['emp'] = $Emp->orderBy('emp_id', 'ASC')->findAll();
         $data['User_obj'] = $User->where('user_id', $user_id)->first();
         $data['main'] = 'user/user_edit';
         return view("dashboard/template",$data);

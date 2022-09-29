@@ -39,7 +39,7 @@ body {
   position: relative;
 }
 
-.form-box .user-box input {
+.form-box .user-box input{
   padding: 0.45rem;
   font-size: 16px;
   width: 80%;
@@ -79,8 +79,9 @@ body {
   border: none;
 }
 
-.form-box button.back-btn{
+.form-box a.back-btn{
   position: relative;
+  float: right;
   display: inline-block;
   background-color: #344F21;
   padding: 5px;
@@ -90,11 +91,12 @@ body {
   overflow: hidden;
   transition: .5s;
   margin-top: 0px;
+  margin-right: 60px;
   border: none;
   border-radius: 3px;
 }
 
-.form-box .btn:hover, button.back-btn:hover {
+.form-box .btn:hover, a.back-btn:hover {
   background: #566C46;
   color: #fff;
   box-shadow: 0 0 5px #344F21,

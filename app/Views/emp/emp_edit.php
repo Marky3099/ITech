@@ -7,34 +7,35 @@
     
     <div class="form-box">
       <h3>Edit Employee Details</h3>
+      <br>
         <div class="user-box">
           <div class="icon-box"><i class="fas fa-user-alt"></i></div>
-          <input type="text" name="emp_name" value="<?php echo $Emp_obj['emp_name']; ?>">
+          <input type="text" name="emp_name" value="<?php echo $Emp_obj['emp_name']; ?>" placeholder="Name">
         </div>
 
         <div class="user-box">
           <div class="icon-box"><i class="fas fa-user-alt"></i></div>
-          <input type="email" name="emp_email" value="<?php echo $Emp_obj['emp_email']; ?>">
+          <input type="email" name="emp_email" value="<?php echo $Emp_obj['emp_email']; ?>" placeholder="E-mail">
         </div>
 
         <div class="user-box">
           <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
-          <input type="text" name="emp_address" value="<?php echo $Emp_obj['emp_address']; ?>">
+          <input type="text" name="emp_address" value="<?php echo $Emp_obj['emp_address']; ?>" placeholder="Address">
         </div>
 
         <div class="user-box">
           <div class="icon-box"><i class="fas fa-phone"></i></div>
-          <input type="tel" pattern="[0-9]{11}" name="emp_contact" value="<?php echo $Emp_obj['emp_contact']; ?>">
+          <input type="tel" pattern="[0-9]{11}" name="emp_contact" value="<?php echo $Emp_obj['emp_contact']; ?>" placeholder="09XXXXXXXXX - 11 digits only">
         </div>
 
-        <div class="user-box">
+        <!-- <div class="user-box">
           <div class="icon-box"><i class="fas fa-user-alt"></i></div>
           <input type="text" name="emp_position" value="<?php echo $Emp_obj['emp_position']; ?>">
-        </div><br>
+        </div> --><br>
 
         <div class="container1">
-          <button type="submit" class="btn btn-success">Save Data</button>
-          <button onclick="history.back()" class="back-btn">Back</button>
+          <button type="submit" class="btn btn-success">Submit</button>
+          <a href='<?=base_url('/emp')?>' class="back-btn">Back</a>
         </div>
     </div>
 

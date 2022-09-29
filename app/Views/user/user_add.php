@@ -13,7 +13,7 @@
         <h3>Add User</h3>
           <div class="user-box">
               <div class="icon-box"><i class="fas fa-user-alt"></i></div>
-              <input type="text" name="name" id="name" placeholder="User Name" required>
+              <input type="text" name="name" id="name" placeholder="Username" required>
           </div>
 
           <div class="user-box">
@@ -36,12 +36,15 @@
             <select id="position" name="position">
             <option value="Admin">Admin</option>
             <option value="Employee">Employee</option>
+            
             </select>
           </div><br>
-
+          <div id="for">
+            <!-- dont remove this div with id="for" -->
+          </div>
           <div class="container1">
           <button type="submit" class="btn btn-success">Submit</button>
-          <button onclick="history.back()" class="back-btn">Back</button>
+          <a href='<?=base_url('/user')?>' class="back-btn">Back</a>
           </div>
       </div>
     </form>
@@ -51,19 +54,23 @@
 <script src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>  
 <script type="text/javascript">
   $emp = $('#position');
-  
-
+  $count = 0;
   $emp.change(function(){
     $empPosition = $emp.val();
     if($empPosition === "Employee"){
-      $('#for').prepend(`
-                                <label>Account for</label>
+      $('#for').show();
       
-                                <select id="emp_id" name="emp_id" class="form-control">
-                                <?php foreach($emp as $e):  ?>
-                                    <option value=<?php echo $e['emp_id']; ?>><?php echo $e['emp_name'];?></option>
-                                <?php endforeach; ?>
-                                `)
+      if ($count===0) {
+        $('#for').append(`
+            <label>Account for</label>
+      
+            <select id="emp_id" name="emp_id">
+              <?php foreach($emp as $e):  ?>
+                <option value=<?php echo $e['emp_id']; ?>><?php echo $e['emp_name'];?></option>
+              <?php endforeach; ?>`);
+        $count++;
+    }
+      
   }else if($empPosition === "Admin") {
     $('#for').hide();
   }

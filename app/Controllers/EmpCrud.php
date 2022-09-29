@@ -45,7 +45,7 @@ class EmpCrud extends Controller
             'emp_email'  => $this->request->getVar('emp_email'),
             'emp_address' => $this->request->getVar('emp_address'),
             'emp_contact'  => $this->request->getVar('emp_contact'),
-            'emp_position' => $this->request->getVar('emp_position'),
+            'emp_position' => 'Employee',
             
         ];
         if($Emp->insert($emp_create)){
@@ -95,7 +95,7 @@ class EmpCrud extends Controller
                 "emp_email"=>$value['emp_email'],
                 "emp_address"=>$value['emp_address'],
                 "emp_contact"=>$value['emp_contact'],
-                "emp_position"=>$value['emp_position'],
+                // "emp_position"=>$value['emp_position'],
             ];
         }
         return view('emp/empReports',$data);

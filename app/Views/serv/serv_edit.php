@@ -7,17 +7,17 @@
       <h3>Edit Service</h3><br>
       <div class="user-box">
          <div class="icon-box"><i class="fas fa-wrench"></i></div>
-        <input type="text" name="serv_name" value="<?php echo $Serv_obj['serv_name']; ?>">
+        <input type="text" name="serv_name" value="<?php echo $Serv_obj['serv_name']; ?>" placeholder="Service Name">
       </div>
 
       <div class="user-box">
         <div class="icon-box"><i class="fas fa-wrench"></i></div>
-        <input type="text" name="serv_description" value="<?php echo $Serv_obj['serv_description']; ?>">
+        <input type="text" name="serv_description" value="<?php echo $Serv_obj['serv_description']; ?>" placeholder="Service Description">
       </div>
 
       <div class="user-box">
         <div class="icon-box"><i class="fas fa-tags"></i></div>
-        <input type="number" name="price" value="<?php echo $Serv_obj['price']; ?>">
+        <input type="number" name="price" value="<?php echo $Serv_obj['price']; ?>" placeholder="Price">
       </div>
 
       <div class="container">
@@ -26,8 +26,8 @@
       </div><br>
       
       <div class="container1">
-        <button type="submit" class="btn btn-success">Save Data</button>
-        <button onclick="history.back()" class="back-btn">Back</button>
+        <button type="submit" class="btn btn-success">Submit</button>
+        <a href='<?=base_url('/serv')?>' class="back-btn">Back</a>
       </div>
     </div>
     </form>
