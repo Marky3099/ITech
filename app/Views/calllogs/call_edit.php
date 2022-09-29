@@ -1,93 +1,90 @@
+<link rel="stylesheet" href="<?= base_url('assets/css/formstyle.css')?>">
 <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/select2.css');?>">
-<div class="body-content">
+<div class="body-content" style="height: 100%;">
   <div class="edit-form">
     <form method="post" id="update_user" name="update_user" 
     action="<?= base_url('/calllogs/update') ?>">
       <input type="hidden" name="cl_id" id="id" value="<?php echo $cl_obj['cl_id']; ?>">
-      <h1>Edit Log Information</h1>
-      <div class="form-content">
-
-      <div class="form-group">
-        <label id="label1">Date</label>
-        <input type="date" name="date" class="form-control" value="<?php echo $cl_obj['date']; ?>">
-      </div>
-
-      <div class="form-group">
-        <label>Branch Area</label>
-        <select id="area_update" name="area_update" class="form-control" >
-          <?php foreach($area as $a):  ?>
-            <option value="<?php echo $a['area'];?>"<?php if($a['area'] == $cl_views['area']) echo 'selected="selected"';?>><?php echo $a['area'];?></option>
-          <?php endforeach; ?>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label>Branch Name</label>
-        <select class="form-control" id="client_id_update" name="client_id_update">
-          
+      
+      <div class="form-box" style="height: 600px;">
+        <h3>Edit Log Information</h3>
+        
+          <div class="user-box">
+            <label>Branch Area</label>
+            <label class="tdate">Date</label><br>
+            <input type="date" name="date" class="datee" value="<?php echo $cl_obj['date']; ?>">
+            <div class="select-dropdown" style="width: 40%;">
+            <select id="area_update" name="area_update">
+              <?php foreach($area as $a):  ?>
+              <option value="<?php echo $a['area'];?>"<?php if($a['area'] == $cl_views['area']) echo 'selected="selected"';?>><?php echo $a['area'];?></option>
+              <?php endforeach; ?>
             </select>
-      </div>
+            </div>
+          </div>
 
-      <div class="form-group">
-        <label>Caller</label>
-        <input type="text" name="caller" class="form-control" value="<?php echo $cl_obj['caller']; ?>">
-      </div>
+          <label>Branch Name</label>
+          <div class="select-dropdown">
+            <select id="client_id" name="client_id"></select>
+          </div>
 
-      <div class="form-group">
-        <label>Particulars</label>
-        <input type="text" name="particulars" class="form-control" size="50" value="<?php echo $cl_obj['particulars']; ?>">
-      </div>
+          <div class="user-box">
+            <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
+            <input type="text" name="caller" value="<?php echo $cl_obj['caller']; ?>">
+          </div>
 
-      <div class="form-group">
-        <label>Device Brand</label>
-        <select id="device_brand_update" name="device_brand_update" class="form-control">
-               <?php foreach($device_brand as $d_b):  ?>
+          <div class="user-box">
+            <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
+            <input type="text" name="particulars" size="50" value="<?php echo $cl_obj['particulars']; ?>">
+          </div>
+
+          <div class="user-box" style="height: 75px">
+            <label>Device Brand</label>
+            <label id="Atype">Aircon Type</label>
+            <div class="select-dropdown" style="width: 40%; position: relative;">
+              <select id="device_brand_update" name="device_brand_update">
+                <?php foreach($device_brand as $d_b):  ?>
                   <option value="<?php echo $d_b['device_brand']; ?>"<?php if($d_b['device_brand']==$cl_views['device_brand'])echo 'selected="selected"';?>><?php echo $d_b['device_brand'];?></option>
-              <?php endforeach; ?>
+                <?php endforeach; ?>
+              </select>
+            </div>
+            <div class="select-dropdown" style="width: 40%; margin-left: 257px; top: -46px;">
+              <select id="aircon_id" name="aircon_id">
+              </select>
+            </div>
+          </div>
+
+        <div class="user-box">
+          <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
+          <input type="number" name="qty" min="1" value="<?php echo $cl_obj['qty']; ?>">
+        </div>
+
+        <div class="user-box" style="margin-top: 5px;">
+          <label>FCU Number</label>
+          <select id="fcuno_update" name="fcuno_update[]" multiple="multiple">
+            <?php foreach($fcu_no as $f):  ?>
+            <?php foreach($fcu_views as $fv):  ?>
+              <option value="<?php echo $f['fcuno'];?>"<?php if($f['fcuno']==$fv['fcuno'])echo 'selected';?>><p id="s2option"><?php echo $f['fcu'];?></p></option>
+            <?php endforeach; ?>
+            <?php endforeach; ?>
+          </select>
+          <label>Status</label>
+          <div class="select-dropdown" style="width: 40%; margin-left: 257px; top: -36px;" value="<?php echo $cl_obj['status']; ?>">
+            <select name="status">
+              <option value="Pending">Pending</option>
+              <option value="Done">Done</option>
             </select>
-      </div>
+          </div>
+        </div>
 
-      <div class="form-group">
-        <label>Aircon Type</label>
-        <select class="form-control" id="aircon_id_update" name="aircon_id_update"  required>
-          
-            </select>
-      </div>
+        <div class="container1">
+          <button type="submit" class="btn btn-success">Save Data</button>
+          <a href='<?= base_url('/calllogs');?>' class="back-btn">Back</a>
+          </div> 
+        </div>
 
-      <div class="form-group">
-        <label>Quantity</label>
-        <input type="text" name="qty" class="form-control" value="<?php echo $cl_obj['qty']; ?>">
       </div>
-
-      <div class="form-group">
-        <label>FCU Number</label>
-        <select id="fcuno_update" name="fcuno_update[]" class="form-control" multiple="multiple" required>
-              <?php foreach($fcu_no as $f):  ?>
-                <?php foreach($fcu_views as $fv):  ?>
-                  <option value="<?php echo $f['fcuno'];?>"<?php if($f['fcuno']==$fv['fcuno'])echo 'selected';?>><p id="s2option"><?php echo $f['fcu'];?></p></option>
-                  <?php endforeach; ?>
-              <?php endforeach; ?>
-            </select>
-      </div>
-
-      <div class="form-group">
-        <label>Status</label>
-        <select name="status" class="form-control" value="<?php echo $cl_obj['status']; ?>">
-          <option value="Pending">Pending</option>
-          <option value="Done">Done</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <button type="submit" class="btn btn-success">Save Data</button>
-      </div>
-      <div class="form-group">
-        <a href="<?= base_url('/calllogs');?>" class="btn btn-secondary back">Back</a>
-      </div>
-    </div>
     </form>
   </div>
-</div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
