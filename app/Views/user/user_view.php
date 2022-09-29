@@ -19,7 +19,7 @@
              <th>Address</th>
              <th>Contact Number</th>
              <th>Role</th>
-             <th>Status</th>
+             <!-- <th>Status</th> -->
              <th>Action</th>
           </tr>
        </thead>
@@ -35,12 +35,6 @@
              <td><?php echo $user['address']; ?></td>
              <td><?php echo $user['contact']; ?></td>
              <td><?php echo $user['position']; ?></td>
-             <td><?php if($user['active'] == 1): ?>
-                <p style="color:green; font-weight: bold"><?= "Active";?></p>
-            <?php else:?>
-                <p style="color:red; font-weight: bold"><?= "Not Active";?></p>
-                 <?php endif;?>
-             </td>
              
              <td>
                  <a href="<?php echo base_url('/user/'.$user['user_id']);?>" class="btn btn-primary btn-sm">Edit</a>

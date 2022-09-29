@@ -48,8 +48,8 @@ class UsersCrud extends Controller
         $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_?";
         $password = substr( str_shuffle( $chars ), 0, 8 );
         // Generate Random Code
-        $set = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $code = substr(str_shuffle($set), 0, 12);
+        // $set = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        // $code = substr(str_shuffle($set), 0, 12);
         $Username = ucfirst(strtolower($this->request->getVar('name')));
         $user_create = [
             'name' => $Username,
@@ -58,7 +58,7 @@ class UsersCrud extends Controller
             'contact'  => $this->request->getVar('contact'),
             'position' => $this->request->getVar('position'),
             'emp_id' => $this->request->getVar('emp_id'),
-            'code' => $code,
+            // 'code' => $code,
             'active' => false,
             'password' => password_hash($password, PASSWORD_DEFAULT)
            
@@ -69,20 +69,18 @@ class UsersCrud extends Controller
         }
         $to = $this->request->getVar('email');
 
-        $subject = "TSMS - Account Activation";
+        $subject = "TSMS - Your Account";
         $message = "<html>
                         <head>
-                            <title>Activation of your Account</title>
+                            <title>Credentials for your Account</title>
                         </head>
                         <body>
                             <h2>You can now login to our system TSMS.</h2>
                             <p>Your Account:</p>
                             <h3>Email: <b>".$to."</h3>
                             <h3>Password: <b>".$password."</h3>
-                            <p>Please click the \"Activate my Account\" to activate your Account to our system.</p>
-                            <h4><a href='".base_url("/user/activate/".$id."/".$code)." '>Activate My Account</a></h4>
                         </body>
-                        </html>";
+                    </html>";
         $email = \Config\Services::email();
         $email->setTo($to);
         $email->setFrom('Maylaflor@gmail.com','Maylaflor TSMS');
@@ -100,32 +98,32 @@ class UsersCrud extends Controller
         
         return $this->response->redirect(site_url('/user'));
     }
-    public function activate($id,$code){
-        // $id =  $this->uri->segment(3);
-        // $code = $this->uri->segment(4);
+    // public function activate($id,$code){
 
-        
-        $User = new User();
-        $User_obj = $User->where('user_id', $id)->first();
-        if($User_obj['code'] == $code){
-            //update user active status
-            $data['active'] = true;
-            $User->update($id, $data);
+    //     $User = new User();
+    //     $User_obj = $User->where('user_id', $id)->first();
+    //     if($User_obj['code'] == $code){
+    //         //update user active status
+    //         $data['active'] = true;
+    //         $User->update($id, $data);
             
-        }
-        else{
+    //     }
+    //     else{
            
-           $data['success']= 'Cannot activate account. Code didnt match';
-        }
-        $data['success']='Activated Successfully!';
-        if($User_obj['position'] == "Admin"){
-            return view('pages/admin_login',$data);
-        }else if($User_obj['position'] == "Employee"){
-            return view('pages/employee_login',$data);
-        }
-        //return view('pages/login_temp',$data); 
-        // return $this->response->redirect(site_url('/login'));
-    }
+    //        $data['success']= 'Cannot activate account. Code didnt match';
+    //        if($User_obj['position'] == "Admin"){
+    //             return view('pages/admin_login',$data);
+    //         }else if($User_obj['position'] == "Employee"){
+    //              return view('pages/employee_login',$data);
+    //         }
+    //     }
+    //     $data['success']='Activated Successfully!';
+    //     if($User_obj['position'] == "Admin"){
+    //         return view('pages/admin_login',$data);
+    //     }else if($User_obj['position'] == "Employee"){
+    //         return view('pages/employee_login',$data);
+    //     }
+    // }
     // show single User
     public function singleUser($user_id = null){
         if($_SESSION['position'] != USER_ROLE_ADMIN){

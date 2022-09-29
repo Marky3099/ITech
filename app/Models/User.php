@@ -13,7 +13,7 @@ class User extends Model
 
     protected $returnType     = 'array';
   
-    protected $allowedFields = ['name', 'email','address','contact','user_img','password','position','emp_id','code','active'];
+    protected $allowedFields = ['name', 'email','address','contact','user_img','password','position','emp_id'];
 
   
 }

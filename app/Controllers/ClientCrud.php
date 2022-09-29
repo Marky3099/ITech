@@ -1,6 +1,7 @@
 <?php 
 namespace App\Controllers;
 use App\Models\Client;
+use App\Models\User_bdo;
 use CodeIgniter\Controller;
 use App\Libraries\Phpmailer_lib;
 
@@ -16,6 +17,63 @@ class ClientCrud extends Controller
         $data['main'] = 'client/client_view';
         return view("dashboard/template",$data);
 
+    }
+    public function userClient(){
+        if($_SESSION['position'] != USER_ROLE_ADMIN){
+            return $this->response->redirect(site_url('/dashboard'));
+        }
+        $User = new User_bdo();
+        $data['user'] = $User->orderBy('bdo_id', 'ASC')->findAll();
+        $data['main'] = 'client/user_client';
+        return view("dashboard/template",$data);
+    }
+    public function updateStatus($id,$status){
+
+        if($_SESSION['position'] != USER_ROLE_ADMIN){
+            return $this->response->redirect(site_url('/dashboard'));
+        }
+
+        $User = new User_bdo();
+        $session = session();
+        $user = $User->where('bdo_id', $id)->first();
+        $data_insert = [
+            'status' => $status
+        ];
+        $User->update((int)$id, $data_insert);
+
+        // 
+        if($status == "Approved"){
+            $to = $user['bdo_email'];
+
+            $subject = "TSMS - Account Activation";
+            $message = "<html>
+                            <head>
+                                <title>Your Account has been Activated</title>
+                            </head>
+                            <body>
+                                <h2>You can now login to our system TSMS.</h2>
+                                <p>You can access by using your email: ".$to." with your password</p>
+                                <h4><a href='".base_url("/bdo-login")." '>Login Now</a></h4>
+                            </body>
+                            </html>";
+            $email = \Config\Services::email();
+            $email->setTo($to);
+            $email->setFrom('Maylaflor@gmail.com','Maylaflor TSMS');
+            $email->setSubject($subject);
+            $email->setMessage($message);
+
+            if ($email->send()) {
+                echo "Success";
+            }else{
+                $data = $email->printDebugger(['headers']);
+                print_r($data);
+            }
+        }
+        // 
+        
+        $session->setFlashdata('msg', $status);
+
+        return $this->response->redirect(site_url('/client-users'));
     }
 
     // add Client form
@@ -59,7 +117,7 @@ class ClientCrud extends Controller
                             <h2>Welcome to TSMS!</h2>
                             <p>You need to use the code below to register to our system.</p>
                             <h4>Code: <b>".$code."</b></h4>
-                            <h4><a href='".base_url("/client-type")."'>Register my Account</a></h4>
+                            <h4><a href='".base_url("/bdo-register")."'>Register my Account</a></h4>
                         </body>
                         </html>";
         $email = \Config\Services::email();

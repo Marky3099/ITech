@@ -79,10 +79,9 @@ class Pages extends BaseController
                 ]
             ]
         ]);
+
         if (!$validation) {
-            //  session()->setFlashdata(['validation1' => $this->validator] );
-            // return $this->response->redirect(site_url('/admin-login'));
-            // $data['main'] = 'pages/admin_login';
+            // $data['main'] = 'pages/employee_login';
             return view('pages/admin_login',['validation1' => $this->validator]);
             
         }else {
@@ -92,42 +91,45 @@ class Pages extends BaseController
 
             $user_info = $user->where('email', $email)->first();
             // if($user_info['position'] === "Admin"){
+            // if($user_info['active'] == 1){ 
                 if ($user_info['position'] === "Admin") {
-                    $pass = $user_info['password'];
+                    
+                        $pass = $user_info['password'];
 
-                    $check_password = password_verify($password,$pass);
-                   
-                    if ($check_password) {
-                        $getdata = [
-                            'user_id' => $user_info['user_id'],
-                            'username' => $user_info['name'],
-                            'email' => $user_info['email'],
-                            'address' => $user_info['address'],
-                            'contact' => $user_info['contact'],
-                            'position' => $user_info['position'],
-                            'user_img' => $user_info['user_img'],
-                            'password' => $user_info['password'],
-                            'active' => $user_info['active'],
-                            'isLoggedIn' => TRUE,
-                        ];
-                         if($user_info['active'] == 1){ 
-                        $session->set($getdata);
-                        return redirect()->to('dashboard');
-                        }  else{
-                            // $data['main'] = 'pages/admin_login';
-                          $data['errorAcc'] = "Account Not Activated";
-                          return view('pages/admin_login',$data);  
+                        $check_password = password_verify($password,$pass);
+                       
+                        if ($check_password) {
+                            $getdata = [
+                                'user_id' => $user_info['user_id'],
+                                'username' => $user_info['name'],
+                                'email' => $user_info['email'],
+                                'address' => $user_info['address'],
+                                'contact' => $user_info['contact'],
+                                'position' => $user_info['position'],
+                                'user_img' => $user_info['user_img'],
+                                'password' => $user_info['password'],
+                                // 'active' => $user_info['active'],
+                                'isLoggedIn' => TRUE,
+                            ];
+                             
+                            $session->set($getdata);
+                            return redirect()->to('dashboard');
+                        }else{
+                             
+                              $data['errorMessage'] = "Wrong Password";
+                              return view('pages/admin_login',$data);    
                         }
                     }else{
-                          // $data['main'] = 'pages/admin_login';
-                          $data['errorMessage'] = "Wrong Password";
-                          return view('pages/admin_login',$data);   
+                              
+                        $data['errorAcc'] = "Account is not registered as Admin";
+                        return view('pages/admin_login',$data);  
                     }
-                }else{
-                          // $data['main'] = 'pages/admin_login';
-                          $data['errorAcc'] = "Account is not registered as Admin";
-                          return view('pages/admin_login',$data);   
-                    }
+            
+            // } else{
+            //    $data['errorAcc'] = "Account Not Activated";
+            //     return view('pages/admin_login',$data);  
+            // }
+                
         }
     }
     public function checkEmployee()
@@ -167,41 +169,119 @@ class Pages extends BaseController
             $user_info = $user->where('email', $email)->first();
             // if($user_info['position'] === "Admin"){
                 if ($user_info['position'] === "Employee") {
-                    $pass = $user_info['password'];
+                    // if($user_info['active'] == 1){ 
+                        $pass = $user_info['password'];
 
-                    $check_password = password_verify($password,$pass);
-                   
-                    if ($check_password) {
-                        $getdata = [
-                            'user_id' => $user_info['user_id'],
-                            'username' => $user_info['name'],
-                            'email' => $user_info['email'],
-                            'address' => $user_info['address'],
-                            'contact' => $user_info['contact'],
-                            'position' => $user_info['position'],
-                            'emp_id' => $user_info['emp_id'],
-                            'user_img' => $user_info['user_img'],
-                            'password' => $user_info['password'],
-                            'active' => $user_info['active'],
-                            'isLoggedIn' => TRUE,
-                        ];
-                         if($user_info['active'] == 1){ 
+                        $check_password = password_verify($password,$pass);
+                       
+                        if ($check_password) {
+                            $getdata = [
+                                'user_id' => $user_info['user_id'],
+                                'username' => $user_info['name'],
+                                'email' => $user_info['email'],
+                                'address' => $user_info['address'],
+                                'contact' => $user_info['contact'],
+                                'position' => $user_info['position'],
+                                'emp_id' => $user_info['emp_id'],
+                                'user_img' => $user_info['user_img'],
+                                'password' => $user_info['password'],
+                                // 'active' => $user_info['active'],
+                                'isLoggedIn' => TRUE,
+                            ];
+                             
+                            $session->set($getdata);
+                            return redirect()->to('dashboard');
+                        }else{
+                             
+                              $data['errorMessage'] = "Wrong Password";
+                              return view('pages/employee_login',$data);    
+                        }
+                    
+                    // }else{
+                                
+                    //    $data['errorAcc'] = "Account Not Activated";
+                    //     return view('pages/employee_login',$data);  
+                    // }
+                }else{
+                              
+                    $data['errorAcc'] = "Account is not registered as Employee";
+                    return view('pages/employee_login',$data);  
+                }
+        }
+    }
+    public function checkClient()
+    {
+        helper(['form']);
+        
+        $validation =  \Config\Services::validation();
+        $session = session();
+        // login Validation
+        $validation = $this->validate([
+            'email'    => [
+                'rules'=>'required|valid_email|is_not_unique[users_bdo.bdo_email]',
+                'errors'=>[
+                    'required'=>'Email is Required',
+                    'valid_email'=>'Enter a valid Email',
+                    'is_not_unique'=>'Email does not exist'
+                ]
+            ],
+            'password' => [
+                'rules'=>'required|min_length[3]',
+                'errors'=>[
+                    'required'=>'Password is Required',
+                    'min_length'=>'Password must have at least 3 characters'
+                ]
+            ]
+        ]);
+        if (!$validation) {
+            
+            return view('pages/bdo_login',['validation1' => $this->validator]);
+            
+        }else {
+            $user = new User_bdo();
+            $email = $this->request->getPost('email');
+            $password = $this->request->getPost('password');
+
+            $user_info = $user->where('bdo_email', $email)->first();
+            // dd($user_info);
+            // if($user_info['position'] === "Admin"){
+                if ($user_info['position'] === "Client") {
+                    if($user_info['status'] === "Approved"){
+                        $pass = $user_info['bdo_password'];
+
+                        $check_password = password_verify($password,$pass);
+                       
+                        if ($check_password) {
+                            $getdata = [
+                                'user_id' => $user_info['bdo_id'],
+                                'username' => $user_info['bdo_fname'],
+                                'bdo_fname' => $user_info['bdo_fname'],
+                                'bdo_lname' => $user_info['bdo_lname'],
+                                'bdo_email' => $user_info['bdo_email'],
+                                'bdo_address' => $user_info['bdo_address'],
+                                'bdo_contact' => $user_info['bdo_contact'],
+                                'position' => $user_info['position'],
+                                'user_img' => $user_info['user_img'],
+                                'bdo_password' => $user_info['bdo_password'],
+                                'isLoggedIn' => TRUE,
+                            ];
+                             
+                        }else{
+                              // $data['main'] = 'pages/admin_login';
+                              $data['errorMessage'] = "Wrong Password";
+                              return view('pages/bdo_login',$data);   
+                        }
                         $session->set($getdata);
                         return redirect()->to('dashboard');
-                        }  else{
-                            
-                          $data['errorAcc'] = "Account Not Activated";
-                          return view('pages/employee_login',$data);  
-                        }
                     }else{
-                         
-                          $data['errorMessage'] = "Wrong Password";
-                          return view('pages/employee_login',$data);    
+                                
+                       $data['errorAcc'] = "This account is not approved yet";
+                        return view('pages/bdo_login',$data);  
                     }
                 }else{
-                          
-                          $data['errorAcc'] = "Account is not registered as Employee";
-                          return view('pages/employee_login',$data);  
+                          // $data['main'] = 'pages/admin_login';
+                          $data['errorAcc'] = "Account is not registered as Client";
+                          return view('pages/bdo_login',$data);   
                     }
         }
     }

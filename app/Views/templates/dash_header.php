@@ -82,7 +82,10 @@
 							    		<a href = "<?= base_url('/emp');?>" ><i class = "fa-solid fa-user"></i><span class="links_name">&nbsp;&nbsp;Employees</span></a>
 							    		<span class="tooltip3">Employees</span>
 							    	</li>
-							    	
+							    	<li class="nav-item">
+                                        <a href = "<?= base_url('/client-users');?>" ><i class = "fa-solid fa-user"></i><span class="links_name"> &nbsp;&nbsp;Client Users</span></a>
+                                        <span class="tooltip3">Client Users</span>
+                                    </li>
 							    	<li class="nav-item">
 							    		<a href = "<?= base_url('/user');?>" ><i class = "fa-solid fa-user"></i><span class="links_name"> &nbsp;&nbsp;Users</span></a>
                                         <span class="tooltip3">Users</span>
