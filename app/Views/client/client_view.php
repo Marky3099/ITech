@@ -5,21 +5,7 @@
         <a href="<?= base_url('client/create/view') ?>" class="btn">Add Client</a>
         <a href="<?= base_url('client/print') ?>" class="btn">Download</a>
    </div>
-<!--     <?php
-     if(isset($_SESSION['msg'])){
-        echo $_SESSION['msg'];
-      }
-     ?> -->
-     <?php 
-        // Display Response
-        if(session()->has('message')){
-        ?>
-           <div class="alert <?= session()->getFlashdata('alert-class') ?>">
-              <?= session()->getFlashdata('message') ?>
-           </div>
-        <?php
-        }
-        ?>
+   
   <div class="mt-3">
      <table class="table table-bordered" client_id="client-list" id="table1">
        <thead>
@@ -45,7 +31,7 @@
              <td><?php echo $client['client_contact']; ?></td>
              <td>
               <a href="<?php echo base_url('/client/'.$client['client_id']);?>" class="btn btn-primary btn-sm">Edit</a>
-              <a href="<?php echo base_url('/client/delete/'.$client['client_id']);?>" class="btn btn-danger btn-sm">Delete</a>
+              <a href="<?php echo base_url('/client/delete/'.$client['client_id']);?>" class="btn btn-danger btn-sm del">Delete</a>
               </td>
           </tr>
          <?php  $c=$c+1;
@@ -59,8 +45,37 @@
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
-
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript">
+   $('.del').click(function(e){
+    e.preventDefault();
+    const href = $(this).attr('href');
+    Swal.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            document.location.href = href;
+            
+          }
+        })
+
+ });
+   <?php if(session()->getFlashdata('msg')) {?>
+      // alert('Delete');
+      Swal.fire({
+             icon: 'success',
+             title: 'Deleted!',
+             text: 'Record has been deleted.',
+             type: 'success'
+            })
+   <?php }?>
+
 $(document).ready( function () {
     $('#table1').DataTable({
     pageLength : 5,

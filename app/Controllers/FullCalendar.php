@@ -602,6 +602,8 @@ class FullCalendar extends BaseController
         }
        $Event = new Event();
         $Event->where('id', $id)->delete($id);
+        $session = session();
+        $session->setFlashdata('msg', 'value');
         return $this->response->redirect(site_url('/calendar/events'));
     }
 

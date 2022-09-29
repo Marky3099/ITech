@@ -33,7 +33,7 @@
 
         <div class="user-box">
           <div class="icon-box"><i class="fas fa-user-alt"></i></div>
-          <input type="email" name="client_email" placeholder="E-mail">
+          <input type="email" name="client_email" placeholder="E-mail" required>
         </div><br>
         
         <div class="container1">

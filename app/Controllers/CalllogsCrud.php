@@ -395,6 +395,8 @@ class CalllogsCrud extends Controller{
         }
         $Call_logs = new Call_logs();
         $data['Call_logs'] = $Call_logs->where('cl_id', $cl_id)->delete($cl_id);
+        $session = session();
+        $session->setFlashdata('msg', 'value');
         return $this->response->redirect(site_url('/calllogs'));
     }
 }

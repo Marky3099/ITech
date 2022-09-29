@@ -134,7 +134,9 @@ class ClientCrud extends Controller
             return $this->response->redirect(site_url('/dashboard'));
         }
         $Client = new Client();
+        $session = session();
         $data['Client'] = $Client->where('client_id', $client_id)->delete($client_id);
+        $session->setFlashdata('msg', 'value');
         return $this->response->redirect(site_url('/client'));
     }    
 }

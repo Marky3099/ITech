@@ -98,6 +98,8 @@ class ImageCrud extends Controller
     		unlink("uploads/".$imagefile);
     	}
     	$Upload->delete($upload_id);
+        $session = session();
+        $session->setFlashdata('msg', 'value');
     	return $this->response->redirect(site_url('/service-reports'));
     }
 }

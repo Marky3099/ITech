@@ -79,6 +79,8 @@ class AirconCrud extends Controller
         }
         $Aircon = new Aircon();
         $data['device'] = $Aircon->where('aircon_id', $aircon_id)->delete($aircon_id);
+        $session = session();
+        $session->setFlashdata('msg', 'value');
         return $this->response->redirect(site_url('/aircon'));
     }    
 }

@@ -88,7 +88,7 @@
              </td>
              <td>
                  <a href="<?php echo base_url('/calllogs/'.$call_log->cl_id);?>" class="btn btn-primary btn-sm">Edit</a>
-                 <a href="<?php echo base_url('/calllogs/delete/'.$call_log->cl_id);?>" class="btn btn-danger btn-sm">Delete</a>
+                 <a href="<?php echo base_url('/calllogs/delete/'.$call_log->cl_id);?>" class="btn btn-danger btn-sm del">Delete</a>
              </td>
              
           </tr>
@@ -106,7 +106,36 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
 
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript">
+   $('.del').click(function(e){
+    e.preventDefault();
+    const href = $(this).attr('href');
+    Swal.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            document.location.href = href;
+            
+          }
+        })
+
+ });
+   <?php if(session()->getFlashdata('msg')) {?>
+      // alert('Delete');
+      Swal.fire({
+             icon: 'success',
+             title: 'Deleted!',
+             text: 'Record has been deleted.',
+             type: 'success'
+            })
+   <?php }?>
 $(document).ready( function () {
     $('#table1').DataTable({
     pageLength : 5,

@@ -182,7 +182,9 @@ class UsersCrud extends Controller
             return $this->response->redirect(site_url('/dashboard'));
         }
         $User = new User();
+        $session = session();
         $data['User'] = $User->where('user_id', $user_id)->delete($user_id);
+        $session->setFlashdata('msg', 'value');
         return $this->response->redirect(site_url('/user'));
     }    
 }

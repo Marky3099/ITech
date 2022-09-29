@@ -96,6 +96,8 @@ class ServCrud extends Controller
         }
         $Serv = new Serv();
         $data['Serv'] = $Serv->where('serv_id', $serv_id)->delete($serv_id);
+        $session = session();
+        $session->setFlashdata('msg', 'value');
         return $this->response->redirect(site_url('/serv'));
     }    
 }
