@@ -6,7 +6,7 @@
     action="<?= base_url('/calllogs/update') ?>">
       <input type="hidden" name="cl_id" id="id" value="<?php echo $cl_obj['cl_id']; ?>">
       
-      <div class="form-box" style="height: 600px;">
+      <div class="form-box" style="height: 600px; top: 45%;">
         <h3>Edit Log Information</h3>
         
           <div class="user-box">

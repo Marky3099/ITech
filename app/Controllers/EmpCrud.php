@@ -95,7 +95,7 @@ class EmpCrud extends Controller
                 "emp_email"=>$value['emp_email'],
                 "emp_address"=>$value['emp_address'],
                 "emp_contact"=>$value['emp_contact'],
-                // "emp_position"=>$value['emp_position'],
+                "emp_position"=>$value['emp_position'],
             ];
         }
         return view('emp/empReports',$data);

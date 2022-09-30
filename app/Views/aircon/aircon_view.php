@@ -2,7 +2,7 @@
 	<div class="crud-text"> <h1>Aircon Details</h1></div>
 
     <div class="d-flex justify-content-left">
-        <a href="<?= base_url('/aircon/create/view');?>" class="btn">Add Brand</a>
+        <a href="<?= base_url('/aircon/create/view');?>" class="btn">Add Aircon</a>
         <a href="<?= base_url('/calendar');?>" class="btn">Calendar</a>
    </div>
   <div class="mt-3">

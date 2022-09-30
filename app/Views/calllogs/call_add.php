@@ -10,7 +10,7 @@
                   </div>
               <?php }?>
              
-    <div class="form-box" style="height: 600px;">
+    <div class="form-box" style="height: 600px; top: 45%;">
       <h3>Add Log Information</h3>
         <div class="user-box">
           <label>Branch Area</label>

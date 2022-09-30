@@ -1,0 +1,22 @@
+CRITICAL - 2022-09-30 00:52:06 --> Undefined property: stdClass::$emp_position
+#0 C:\xampp\htdocs\tsms\app\Views\emp\empReports.php(154): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined prope...', 'C:\\xampp\\htdocs...', 154, Array)
+#1 C:\xampp\htdocs\tsms\system\View\View.php(214): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('emp/empReports', Array, true)
+#4 C:\xampp\htdocs\tsms\app\Controllers\EmpCrud.php(101): view('emp/empReports', Array)
+#5 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\EmpCrud->printEmp()
+#6 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\EmpCrud))
+#7 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-09-30 01:38:41 --> Undefined property: stdClass::$emp_position
+#0 C:\xampp\htdocs\tsms\app\Views\emp\empReports.php(154): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined prope...', 'C:\\xampp\\htdocs...', 154, Array)
+#1 C:\xampp\htdocs\tsms\system\View\View.php(214): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('emp/empReports', Array, true)
+#4 C:\xampp\htdocs\tsms\app\Controllers\EmpCrud.php(101): view('emp/empReports', Array)
+#5 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\EmpCrud->printEmp()
+#6 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\EmpCrud))
+#7 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
