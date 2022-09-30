@@ -78,7 +78,7 @@
         </div>
 
       <div class="container1">
-          <button type="submit" class="btn btn-success">Add Log</button>
+          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#schedModal">Submit</button>
           <a href='<?= base_url('/calllogs');?>' class="back-btn">Back</a>
           </div> 
       </div>
@@ -114,6 +114,7 @@
         $('#fcuno').select2();
 
         $("#submit1").click(function(e) {
+          e.preventDefault();
         var form = $('#add_create').serializeArray(); 
         console.log(form);
         console.log("yes");
@@ -128,7 +129,7 @@
          });
 
     $("#submit2").click(function(e) {
-        
+        e.preventDefault();
         var form = $('#add_create').serializeArray(); 
         $.ajax({
              type: "POST",
