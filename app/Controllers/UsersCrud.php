@@ -79,6 +79,7 @@ class UsersCrud extends Controller
                             <p>Your Account:</p>
                             <h3>Email: <b>".$to."</h3>
                             <h3>Password: <b>".$password."</h3>
+                            <a href=".base_url('/user-type').">Login Now</a>
                         </body>
                     </html>";
         $email = \Config\Services::email();
