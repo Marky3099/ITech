@@ -1,5 +1,6 @@
-<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/select2.css');?>">
-<div class="body-content">
+<link rel="stylesheet" href="<?= base_url('assets/css/formstyle.css')?>">
+<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/select2.css')?>">
+<div class="body-content" style="height: 100%;">
   <div class="add-form"> 
     <form method="post" id="add_create" name="add_create" >
       
@@ -9,88 +10,82 @@
                   </div>
               <?php }?>
              
-    <h1>Add Log Information</h1>
-    <div class="form-content">
-      <div class="form-group">
-        <label id="label1">Date</label>
-        <input type="date" name="date" class="form-control" required>
-      </div>
+    <div class="form-box" style="height: 600px;">
+      <h3>Add Log Information</h3>
+        <div class="user-box">
+          <label>Branch Area</label>
+          <label class="tdate">Date</label><br>
+          <input type="date" name="date" class="datee" required>
+          <div class="select-dropdown" style="width: 40%;">
+          <select id="area" name="area">
+            <?php foreach($area as $cl):  ?>
+            <option value=<?php echo $cl['area']; ?>><?php echo $cl['area'];?></option>
+            <?php endforeach; ?>
+          </select>
+          </div>
+        </div>
 
-     <div class="form-group">
-        <label>Branch Area</label>
-       <select id="area" name="area" class="form-control">
-              <?php foreach($area as $cl):  ?>
-                  <option value=<?php echo $cl['area']; ?>><?php echo $cl['area'];?></option>
-              <?php endforeach; ?>
-            </select>
-      </div>
-
-      <div class="form-group">
         <label>Branch Name</label>
-        <select id="client_id" name="client_id" class="form-control" >
+        <div class="select-dropdown">
+          <select id="client_id" name="client_id"></select>
+        </div>
 
-            </select>
-      </div>
+        <div class="user-box">
+          <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
+          <input type="text" name="caller" placeholder="Caller" required>
+        </div>
 
-      <div class="form-group">
-        <label>Caller</label>
-        <input type="text" name="caller" class="form-control" required>
-      </div>
-
-      <div class="form-group">
-        <label>Particulars</label>
-        <input type="text" name="particulars" class="form-control" size="50" required>
-      </div>
-
-      <div class="form-group">
-        <label>Device Brand</label>
-        <select id="device_brand" name="device_brand" class="form-control">
+        <div class="user-box">
+          <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
+          <input type="text" name="particulars" placeholder="Particulars" size="50" required>
+        </div>
+        
+        <div class="user-box" style="height: 75px">
+          <label>Device Brand</label>
+          <label id="Atype">Aircon Type</label>
+          <div class="select-dropdown" style="width: 40%; position: relative;">
+            <select id="device_brand" name="device_brand">
               <?php foreach($device_brand as $d_b):  ?>
-                  <option value=<?php echo $d_b['device_brand']; ?>><?php echo $d_b['device_brand'];?></option>
+              <option value=<?php echo $d_b['device_brand']; ?>><?php echo $d_b['device_brand'];?></opti>
               <?php endforeach; ?>
             </select>
-      </div>
-
-      <div class="form-group">
-        <label>Aircon Type</label>
-        <select id="aircon_id" name="aircon_id" class="form-control">
-
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label>Quantity</label>
-        <input type="number" name="qty" class="form-control" min="1" required>
-      </div>
-
-      <div class="form-group">
-        <label>FCU Number</label>
-        <select id="fcuno" name="fcuno[]" class="form-control" multiple="multiple">
-               <?php foreach($fcu_no as $f):  ?>
-                  <option value="<?php echo $f['fcuno']; ?>"><p id="s2option"><?php echo $f['fcu'];?></p></option>
-              <?php endforeach; ?>
+          </div>
+          <div class="select-dropdown" style="width: 40%; margin-left: 257px; top: -46px;">
+            <select id="aircon_id" name="aircon_id">
             </select>
-      </div>
+          </div>
+        </div>
 
-      <div class="form-group">
-        <label>Status</label>
-        <select name="status" class="form-control">
-          <option value="Pending">Pending</option>
-          <option value="Done">Done</option>
-        </select>
+        <div class="user-box">
+          <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
+          <input type="number" name="qty" placeholder="Quantity" min="1" required>
+        </div>
+
+        <div class="user-box" style="margin-top: 5px;">
+          <label>FCU Number</label>
+          <select id="fcuno" name="fcuno[]" multiple="multiple">
+            <?php foreach($fcu_no as $f):  ?>
+            <option value="<?php echo $f['fcuno']; ?>"><p id="s2option"><?php echo $f['fcu'];?></p></option>
+            <?php endforeach; ?>
+          </select>
+          <label>Status</label>
+          <div class="select-dropdown" style="width: 40%; margin-left: 257px; top: -36px;">
+            <select name="status">
+              <option value="Pending">Pending</option>
+              <option value="Done">Done</option>
+            </select>
+          </div>
+        </div>
+
+      <div class="container1">
+          <button type="submit" class="btn btn-success">Add Log</button>
+          <a href='<?= base_url('/calllogs');?>' class="back-btn">Back</a>
+          </div> 
       </div>
-      
-      <div class="form-group">
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#schedModal">Add Data</button>
-      </div>
-      <div class="form-group">
-        <a href="<?= base_url('/calllogs');?>" class="btn btn-secondary back">Back</a>
-      </div>
-    </div>
     </form>
   </div>
 </div>
-</div>
+
 <div class="modal"  id="schedModal" role="dialog">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -109,7 +104,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
       <script type="text/javascript">

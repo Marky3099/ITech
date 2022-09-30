@@ -5,7 +5,7 @@
     action="<?= base_url('/user/update/'.$User_obj['user_id']) ?>">
       <input type="hidden" name="serv_id" id="id" value="<?php echo $User_obj['user_id']; ?>">
     
-      <div class="form-box">
+      <div class="form-box" style="height: 95%;">
         <h3>Edit User</h3>
           <div class="user-box">
               <div class="icon-box"><i class="fas fa-user-alt"></i></div>

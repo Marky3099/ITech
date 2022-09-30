@@ -1,13 +1,62 @@
 <link rel="stylesheet" href="<?= base_url('assets/css/profilestyle.css')?>">
-<div class="body-content">
-    <form method="post" id="updateuser" name="updateuser" enctype="multipart/form-data"
-    action="<?= base_url('/profile/update') ?>">
-      <input type="hidden" name="user_id" id="user_id" value="<?php echo $user_data['user_id']; ?>">
+<link rel="stylesheet" href="<?= base_url('assets/css/formstyle.css')?>">
+<div class="body-content" style="height: 100%;">
+  <form method="post" id="updateuser" name="updateuser" enctype="multipart/form-data"
+  action="<?= base_url('/profile/update') ?>">
+    <input type="hidden" name="user_id" id="user_id" value="<?php echo $user_data['user_id']; ?>">
      
         <!-- <a href = "Account.html" ><button class = "buttonp buttonp2"><i style = "color: white"></i> Profile </button></a> -->
         <!-- <a href = "Dashboard.html" ><button class = "buttonp buttonp1"><i style = "color: white"></i> Home </button></a> -->
+  
+    <div class="form-box" style="width: 600px; height: 550px;" >
+      <h3 class="sidef">Profile</h3>
        
-        <div class="crud-text"><h1>Profile</h1></div>
+          <div class="profilee">
+          <?php if($_SESSION['user_img'] != NULL):?>
+              <img src="<?= base_url("uploads/".$_SESSION['user_img']);?>" class="pimg">
+                <?php else:?>
+                    <img src="<?= base_url("assets/image/profile.jpg");?>" class="pimg">
+                <?php endif;?>
+          </div>
+          <h2><?php echo $_SESSION['username'] ?> </h2>
+          <h3><?php echo $_SESSION['email'] ?></h3>
+
+          <hr>
+          <div class="user-box">
+              <div class="icon-box"><i class="fas fa-user-alt"></i></div>
+              <div class="icon-box1"><i class="fas fa-user-alt"></i></div>
+              <input type="text" class="pname" id="name" name = "name" size = "40" style="color: grey" value="<?php echo $user_data['username']; ?>" >
+              <input type="email" class="pemail" id="email" name = "email" size = "40" style="color: grey" value="<?php echo $user_data['email']; ?>">
+          </div>
+
+          <div class="user-box">
+              <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
+              <div class="icon-box1"><i class="fas fa-phone"></i></div>
+              <input type="text" id="address" class="paddress" name = "address" size = "40" style="color: grey" value="<?php echo $user_data['address']; ?>">
+              <input type="text" id="contact" class="pcontact"name = "contact" style="color: grey" value="<?php echo $user_data['contact']; ?>" size = "11" maxlength = "18">
+          </div>
+
+          <div class="user-box">
+            <div class="icon-box"><i class="fas fa-phone"></i></div>
+             <div class="icon-box1"><i class="fas fa-phone"></i></div>
+            <input type="password" class="ppassword" id="password" name = "password" style="color: grey" placeholder="Password">
+            <input type="password" class="pcpassword" id="c_password" name = "c_password" style="color: grey" placeholder="Confirm Password">
+          </div>
+
+          <div class="user-box">
+            <div class="icon-box"><i class="fas fa-file-image"></i></div>
+            <input type="file" id="user_img" name = "user_img" style="color: grey; width: 89%;" value="<?php echo $user_data['user_img']; ?>" >
+          </div><br>
+
+          <div class="container1">
+            <button type="submit" class="btn btn-success">Update Profile</button>
+          </div>
+          <br>
+    </div>     
+      
+  </form>
+</div>
+       <!--  <div class="crud-text"><h1>Profile</h1></div>
 
         <div class = "Top1">
         <div class = "Form1">
@@ -47,7 +96,7 @@
       </div>
     </form>
 </div>
-</div>
+</div> -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript">

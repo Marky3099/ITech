@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="<?= base_url('assets/css/formstyle.css')?>">
 <div class="body-content">
   <div class="add-form">
     <form method="post" id="add_image" name="add_image" 
@@ -7,33 +8,29 @@
                     <?//= $error ?>
                   </div>
               <?php //}?> -->
-  
-    <h1>Upload Service Report</h1>
-    <div class="form-content long">
-      <div class="form-group">
-        <label id="label1">Title</label>
-        <input type="text" name="upload_title" class="form-control" >
+    
+     <div class="form-box">
+        <h3>Upload Service Report</h3><br>
+          <div class="user-box">
+              <div class="icon-box"><i class="fas fa-file-image"></i></div>
+              <input type="text" name="upload_title" placeholder="Title">
+          </div>
+
+          <div class="user-box">
+            <textarea rows="3" cols="50" name="upload_description" placeholder="Enter Description" ></textarea>
+          </div>
+
+          <div class="user-box">
+              <div class="icon-box"><i class="fas fa-file-image"></i></div>
+              <input class="upimg" type="file" name="image" required>
+          </div><br>
+
+          <div class="container1">
+            <button type="submit" class="btn btn-success">Submit</button>
+            <a href='<?=base_url('/service-reports')?>' class="back-btn">Back</a>
+          </div>
       </div>
 
-      <div class="form-group">
-        <label>Description</label>
-        <textarea rows="3" cols="50" name="upload_description" class="form-control" placeholder="Enter Description" ></textarea> 
-      </div>
-
-      <div class="form-group">
-        <label>File</label>
-        <input type="file" name="image" class="form-control" required>
-      </div>
-
-      <div class="form-group">
-        <button type="submit" class="btn btn-success">Upload</button>
-      </div>
-      <div class="form-group">
-        <a href="<?= base_url('/service-reports');?>" class="btn btn-secondary back">Back</a>
-      </div>
-    </div>
     </form>
   </div>
 </div>
-</div>
- 

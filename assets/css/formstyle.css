@@ -11,6 +11,34 @@ body {
   overflow: hidden;
 }
 
+.image_edit{
+  position: absolute;
+  left: 73%; 
+  top: 60%;
+  height: 90%;
+  width: 570px;
+  padding: 20px;
+  background-color: #fff;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0,0,0,.8);
+  border-radius: 50px;
+}
+
+.image_edit h3 {
+  margin: 5px 0 5px;
+  font-size: 1.75rem;
+  font-weight: bold;
+  font-size: 20px;
+  color: #344F21;
+  text-align: center;
+}
+
+.image_edit img{
+  margin-left: 90px;
+  border-radius: 10%;
+}
+
 .form-box{
   position: absolute;
   top: 60%;
@@ -34,6 +62,29 @@ body {
   color: #344F21;
   text-align: center;
 }
+.form-box h3.sidef{
+  text-align: left;
+}
+
+.form-box h2{
+  margin: 5px 0 5px;
+  font-size: 1.75rem;
+  font-weight: bold;
+  font-size: 30px;
+  color: #344F21;
+  text-align: center;
+}
+
+.form-box .profilee{
+  margin-left: 225px;
+}
+
+.form-box .profilee img.pimg{
+  width: 120px;
+  height: 120px;
+  border: 2px solid #344F21;
+  border-radius: 50%;
+}
 
 .form-box .user-box{
   position: relative;
@@ -51,6 +102,43 @@ body {
   margin-left: 55px;
 }
 
+.form-box .user-box textarea{
+  padding: 0.45rem;
+  font-size: 16px;
+  width: 80%;
+  color: #344F21;
+  margin: 5px;
+  border: 1px solid black;
+  outline: none;
+  background-color: transparent;
+  margin-left: 55px;
+}
+
+.form-box .user-box input.datee{
+  width: 41%;
+  position: absolute;
+  left: 200px;
+  top: 23px;
+}
+
+.form-box .user-box input.upimg, #user_img{
+  padding: 4px 10px 3px;
+}
+
+.form-box .user-box input.pname, .form-box .user-box input.paddress, .form-box .user-box input.ppassword{
+    width: 40%;
+    left: 0px;
+}
+
+.form-box .user-box input.pemail, .form-box .user-box input.pcontact, .form-box .user-box input.pcpassword{
+  width: 41%;
+  position: absolute;
+  left: 270px;
+  top: 0px;
+}
+
+
+
 .form-box .user-box .icon-box{
     position: absolute;   
     height: 39.5px;
@@ -64,6 +152,19 @@ body {
     margin-left: 16px;
 }
 
+.form-box .user-box .icon-box1{
+    position: absolute;   
+    height: 40px;
+    width: 40px;
+    font-size: 20px;
+    line-height: 20px;
+    padding: 8px 9px;
+    background-color: #344F21;
+    color: #fff;
+    margin-top: 5px;
+    left: 285px;
+}
+
 .form-box .btn{
   position: relative;
   display: inline-block;
@@ -74,14 +175,13 @@ body {
   text-decoration: none;
   overflow: hidden;
   transition: .5s;
-  margin-top: 0px;
+  top: -12.5px;
   margin-left: 350px;
   border: none;
 }
 
 .form-box a.back-btn{
   position: relative;
-  float: right;
   display: inline-block;
   background-color: #344F21;
   padding: 5px;
@@ -91,7 +191,6 @@ body {
   overflow: hidden;
   transition: .5s;
   margin-top: 0px;
-  margin-right: 60px;
   border: none;
   border-radius: 3px;
 }
@@ -122,6 +221,10 @@ body {
   color: #344F21;
 }
 
+.form-box label.tdate, #Atype{
+  margin-left: 142px;
+}
+
 .form-box label{
   margin-left: 16px;
   margin-top: 5px;
@@ -143,12 +246,14 @@ body {
   border: 5px solid #344F21;
 }
 
+
 .form-box .select-dropdown, .select-dropdown * {
   margin-left: 15px;
   padding: 0;
   position: relative;
   width: 87%;
   box-sizing: border-box;
+  margin-bottom: 2px;
 }
 
 .form-box .select-dropdown {
@@ -188,4 +293,5 @@ body {
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
 }
+
 

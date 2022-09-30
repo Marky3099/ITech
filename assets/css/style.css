@@ -559,14 +559,6 @@ body{
     margin-left: 15px;
     width: auto;
 }
-.body-content .image_edit{
-    float: right;   
-    margin-top: -20px;
-    margin-right: 100px;
-}
-.body-content .image_edit h5{
-    color: #344F21;
-}
 
 
 /*All Tables CRUD*/
