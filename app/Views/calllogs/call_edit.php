@@ -77,7 +77,7 @@
         </div>
 
         <div class="container1">
-          <button type="submit" class="btn btn-success">Save Data</button>
+          <button type="submit" class="btn btn-success">Update</button>
           <a href='<?= base_url('/calllogs');?>' class="back-btn">Back</a>
           </div> 
         </div>

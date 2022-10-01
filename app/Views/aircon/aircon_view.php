@@ -3,13 +3,13 @@
 
     <div class="d-flex justify-content-left">
         <a href="<?= base_url('/aircon/create/view');?>" class="btn">Add Aircon</a>
-        <a href="<?= base_url('/calendar');?>" class="btn">Calendar</a>
+        
    </div>
   <div class="mt-3">
      <table class="table table-bordered" client_id="aircon-list" id="table1">
        <thead>
           <tr>
-             <th>Aircon ID</th>
+             <th>#</th>
              <th>Device Brand/Type</th>
              <th>Aircon Type</th>
              <th>Action</th>
@@ -65,6 +65,24 @@
              icon: 'success',
              title: 'Deleted!',
              text: 'Record has been deleted.',
+             type: 'success'
+            })
+   <?php }?>
+   <?php if(session()->getFlashdata('add')) {?>
+      // alert('Delete');
+      Swal.fire({
+             icon: 'success',
+             title: 'Aircon Added!',
+             text: 'New Aircon is added Successfully',
+             type: 'success'
+            })
+   <?php }?>
+   <?php if(session()->getFlashdata('update')) {?>
+      // alert('Delete');
+      Swal.fire({
+             icon: 'success',
+             title: 'Aircon Updated!',
+             text: 'Aircon details Updated Successfully',
              type: 'success'
             })
    <?php }?>

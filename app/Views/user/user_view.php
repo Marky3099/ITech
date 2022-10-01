@@ -84,6 +84,24 @@
              type: 'success'
             })
    <?php }?>
+   <?php if(session()->getFlashdata('add')) {?>
+      // alert('Delete');
+      Swal.fire({
+             icon: 'success',
+             title: 'User Added!',
+             text: 'New User is added Successfully',
+             type: 'success'
+            })
+   <?php }?>
+   <?php if(session()->getFlashdata('update')) {?>
+      // alert('Delete');
+      Swal.fire({
+             icon: 'success',
+             title: 'User Updated!',
+             text: 'User details Updated Successfully',
+             type: 'success'
+            })
+   <?php }?>
     
 
 $(document).ready( function () {

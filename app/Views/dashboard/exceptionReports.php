@@ -126,7 +126,7 @@
 </div>
 </div>
 
-<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
@@ -134,11 +134,8 @@
 <script type="text/javascript">
 $(document).ready( function () {
     $('#table1').DataTable({
-        dom: 'Bfrtip',
-        buttons: [
-            
-        ]
-    });
+    pageLength : 5,
+    lengthMenu: [[5, 10, 15,20], [5, 10, 15, 20,]]
+  });
 } );
 </script>
- -->

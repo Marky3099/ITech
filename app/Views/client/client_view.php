@@ -10,9 +10,9 @@
      <table class="table table-bordered" client_id="client-list" id="table1">
        <thead>
           <tr>
-             <th>Client ID</th>
+             <th>#</th>
              <th>Branch Area</th>
-             <th>Branch Branch</th>
+             <th>Branch Name</th>
              <th>Address</th>
              <th>Email</th>
              <th>Contact</th>
@@ -72,6 +72,24 @@
              icon: 'success',
              title: 'Deleted!',
              text: 'Record has been deleted.',
+             type: 'success'
+            })
+   <?php }?>
+   <?php if(session()->getFlashdata('add')) {?>
+      // alert('Delete');
+      Swal.fire({
+             icon: 'success',
+             title: 'Client Added!',
+             text: 'New Client is added Successfully',
+             type: 'success'
+            })
+   <?php }?>
+   <?php if(session()->getFlashdata('update')) {?>
+      // alert('Delete');
+      Swal.fire({
+             icon: 'success',
+             title: 'Client Updated!',
+             text: 'Client details Updated Successfully',
              type: 'success'
             })
    <?php }?>

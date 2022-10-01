@@ -22,7 +22,7 @@
         </div><br>
 
         <div class="container1">
-          <button type="submit" class="btn btn-success">Save</button>
+          <button type="submit" class="btn btn-success">Update</button>
           <a href='<?=base_url('/service-reports')?>' class="back-btn">Back</a>
       </div>
 

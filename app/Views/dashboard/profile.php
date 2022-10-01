@@ -25,15 +25,15 @@
           <div class="user-box">
               <div class="icon-box"><i class="fas fa-user-alt"></i></div>
               <div class="icon-box1"><i class="fas fa-user-alt"></i></div>
-              <input type="text" class="pname" id="name" name = "name" size = "40" style="color: grey" value="<?php echo $user_data['username']; ?>" >
-              <input type="email" class="pemail" id="email" name = "email" size = "40" style="color: grey" value="<?php echo $user_data['email']; ?>">
+              <input type="text" class="pname" id="name" name = "name" size = "40" style="color: grey" value="<?php echo $user_data['username']; ?>" placeholder="Username">
+              <input type="email" class="pemail" id="email" name = "email" size = "40" style="color: grey" value="<?php echo $user_data['email']; ?>" placeholder="E-mail">
           </div>
 
           <div class="user-box">
               <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
               <div class="icon-box1"><i class="fas fa-phone"></i></div>
-              <input type="text" id="address" class="paddress" name = "address" size = "40" style="color: grey" value="<?php echo $user_data['address']; ?>">
-              <input type="text" id="contact" class="pcontact"name = "contact" style="color: grey" value="<?php echo $user_data['contact']; ?>" size = "11" maxlength = "18">
+              <input type="text" id="address" class="paddress" name = "address" size = "40" style="color: grey" value="<?php echo $user_data['address']; ?>" placeholder="Address">
+              <input type="tel" id="contact" class="pcontact"name = "contact" style="color: grey" value="<?php echo $user_data['contact']; ?>" pattern="[0-9]{11}" placeholder="09XXXXXXXXX - 11 digits only">
           </div>
 
           <div class="user-box">

@@ -66,6 +66,15 @@
                 </a>
                 <span class="tooltip">Services</span>
             </li>
+            <li>
+                <a href="<?= base_url('/aircon');?>">
+                    <i class="fas fa-box"></i>
+                <span class="links_name">Aircon</span>
+                </a>
+                <span class="tooltip">Aircon</span>
+            </li>
+                
+
                 <button class = "dropdown-btn">
 									<i class = "fa-solid fa-user-pen"></i> <span class="links_name">&nbsp;&nbsp;Manage Profiles</span>
 							    	<i class = "fa fa-caret-down down"></i>

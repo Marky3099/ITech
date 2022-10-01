@@ -40,7 +40,8 @@ class AirconCrud extends Controller
             'aircon_type' => $airconFirst,
         ];
         $Aircon->insert($aircon_create);
-        $data['success'] ="New Aircon Details Added!";
+        $session = session();
+        $session->setFlashdata('add', 'value');
         return $this->response->redirect(site_url('/aircon'));
     }
 
@@ -69,6 +70,8 @@ class AirconCrud extends Controller
             'aircon_type' => $airconFirst,
         ];
         $Aircon->update($aircon_id, $data);
+        $session = session();
+        $session->setFlashdata('update', 'value');
         return $this->response->redirect(site_url('/aircon'));
     }
  

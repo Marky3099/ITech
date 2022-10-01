@@ -18,7 +18,7 @@
         </div><br>
 
         <div class="container1">
-          <button type="submit" class="btn btn-success">Add Data</button>
+          <button type="submit" class="btn btn-success">Update</button>
           <a href='<?=base_url('/aircon')?>' class="back-btn">Back</a>
         </div>
     </div>

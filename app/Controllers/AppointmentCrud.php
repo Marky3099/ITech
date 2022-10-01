@@ -165,8 +165,9 @@ class AppointmentCrud extends Controller
                 'appt_id' => (int) $success
             ]);
         }
-
-           return $this->response->redirect(site_url('/appointment'));
+        $session = session();
+        $session->setFlashdata('add', 'value');
+        return $this->response->redirect(site_url('/appointment'));
 
     }
     public function singleAppt($appt_id = null){
@@ -265,6 +266,8 @@ class AppointmentCrud extends Controller
             ]);
              }
         }
+        $session = session();
+        $session->setFlashdata('update', 'value');
         return $this->response->redirect(site_url('/appointment'));
     }
     public function delete($appt_id = null){

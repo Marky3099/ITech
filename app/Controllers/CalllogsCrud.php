@@ -280,7 +280,8 @@ class CalllogsCrud extends Controller{
                 'cl_id' => (int) $success
             ]);
         }
-
+        $session = session();
+        $session->setFlashdata('add', 'value');
            return "success" ;
         
     }
@@ -385,6 +386,8 @@ class CalllogsCrud extends Controller{
             ]);
              }
         }
+        $session = session();
+        $session->setFlashdata('update', 'value');
         return $this->response->redirect(site_url('/calllogs'));
     }
 

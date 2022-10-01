@@ -8,11 +8,11 @@
     <div class="col-sm-3">
       <h2 id="calendar-text"><b>Calendar</b></h2>
     <div class="tsk">
-        <a href="<?= base_url('calendar/events') ?>" class="btn" >Tasks</a>
+        <a href="<?= base_url('calendar/events') ?>" class="btn" >Tasks</a><br>
    </div>
-   <div class="tsk2">
-        <a href="<?= base_url('/aircon');?>" class="btn" >Aircon</a>
-   </div>
+   <!-- <div class="tsk2">
+        
+   </div> -->
  </div>
    <div class="legend col-lg-12">
   <h3 id="legend-text">Legend:</h3>

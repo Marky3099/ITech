@@ -70,7 +70,7 @@
       </div>
       
       <div class="form-group">
-        <button type="submit" class="btn btn-success">Save</button>
+        <button type="submit" class="btn btn-success">Submit</button>
       </div>
       <div class="form-group">
         <a href="<?= base_url('/appointment');?>" class="btn btn-secondary back">Back</a>

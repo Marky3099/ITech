@@ -27,6 +27,7 @@ class ImageCrud extends Controller
             return $this->response->redirect(site_url('/dashboard'));
         }
         $Upload = new Upload();
+        $session = session();
         $file = $this->request->getFile('image');
         $type = $file->getMimeType();
         $data['ext'] = $file->guessExtension();
@@ -44,7 +45,7 @@ class ImageCrud extends Controller
             
         ];
         $Upload->insert($upload_create);
-        $data['success'] ="File added";
+        $session->setFlashdata('add', 'value');
         return $this->response->redirect(site_url('/service-reports'));
     }
     public function singleUpload($upload_id = null){
@@ -61,6 +62,7 @@ class ImageCrud extends Controller
             return $this->response->redirect(site_url('/dashboard'));
         }
     	$Upload = new Upload();
+        $session = session();
         $Upload_obj = $Upload->find($upload_id);
         $old_img_name = $Upload_obj['image'];
         $file = $this->request->getFile('image');
@@ -83,7 +85,7 @@ class ImageCrud extends Controller
             
         ];
         $Upload->update($upload_id, $upload_update);
-        $data['success'] ="File added";
+        $session->setFlashdata('update', 'value');
         
         return $this->response->redirect(site_url('/service-reports'));
     }

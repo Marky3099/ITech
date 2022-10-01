@@ -67,15 +67,38 @@
         }).then((result) => {
           if (result.isConfirmed) {
             document.location.href = href;
-            Swal.fire(
-              'Deleted!',
-              'Your file has been deleted.',
-              'success'
-            )
+            
           }
         })
 
- })
+ });
+   <?php if(session()->getFlashdata('msg')) {?>
+      // alert('Delete');
+      Swal.fire({
+             icon: 'success',
+             title: 'Deleted!',
+             text: 'Record has been deleted.',
+             type: 'success'
+            })
+   <?php }?>
+   <?php if(session()->getFlashdata('add')) {?>
+      // alert('Delete');
+      Swal.fire({
+             icon: 'success',
+             title: 'Employee Added!',
+             text: 'New Employee is added Successfully',
+             type: 'success'
+            })
+   <?php }?>
+   <?php if(session()->getFlashdata('update')) {?>
+      // alert('Delete');
+      Swal.fire({
+             icon: 'success',
+             title: 'Employee Updated!',
+             text: 'Employee details Updated Successfully',
+             type: 'success'
+            })
+   <?php }?>
 $(document).ready( function () {
     $('#table1').DataTable({
     pageLength : 5,

@@ -118,6 +118,24 @@
              type: 'success'
             })
    <?php }?>
+   <?php if(session()->getFlashdata('add')) {?>
+      // alert('Delete');
+      Swal.fire({
+             icon: 'success',
+             title: 'File Added!',
+             text: 'New File is added Successfully',
+             type: 'success'
+            })
+   <?php }?>
+   <?php if(session()->getFlashdata('update')) {?>
+      // alert('Delete');
+      Swal.fire({
+             icon: 'success',
+             title: 'File Updated!',
+             text: 'File details Updated Successfully',
+             type: 'success'
+            })
+   <?php }?>
 $(document).ready( function () {
     $('#table1').DataTable({
     pageLength : 5,

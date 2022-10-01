@@ -92,6 +92,12 @@ class ClientCrud extends Controller
             return $this->response->redirect(site_url('/dashboard'));
         }
         $Client = new Client();
+        $session = session();
+        $cBranch = $Client->where('client_branch', $this->request->getVar('client_branch'))->first();
+        if ($cBranch) {
+            $session->setFlashdata('branchError', 'value');
+            return $this->response->redirect(site_url('/client/create/view'));
+        }
         $set = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $code = substr(str_shuffle($set), 0, 12);
         $areaUpper = strtoupper($this->request->getVar('area'));
@@ -133,7 +139,8 @@ class ClientCrud extends Controller
             print_r($data);
         }
 
-        $data['success'] ="Client added";
+        
+        $session->setFlashdata('add', 'value');
         return $this->response->redirect(site_url('/client'));
     }
 
@@ -165,6 +172,8 @@ class ClientCrud extends Controller
             'client_contact'  => $this->request->getVar('client_contact'),
         ];
         $Client->update($client_id, $data);
+        $session = session();
+        $session->setFlashdata('update', 'value');
         return $this->response->redirect(site_url('/client'));
     }
     public function printClient(){

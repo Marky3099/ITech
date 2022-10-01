@@ -33,12 +33,12 @@ class EmpCrud extends Controller
             return $this->response->redirect(site_url('/dashboard'));
         }
         $Emp = new Emp();
+        $session = session();
         $emp_data = $Emp->where('emp_email', $this->request->getVar('emp_email'))->first();
         $employeeName = ucfirst(strtolower($this->request->getVar('emp_name')));
         if ($emp_data) {
-            $data['error'] = "email existed!";
-            $data['main'] = 'emp/emp_add';
-            return view("dashboard/template",$data);
+            $session->setFlashdata('emailExist', 'value');
+            return $this->response->redirect(site_url('/emp/create/view'));
         }
         $emp_create = [
             'emp_name' => $employeeName,
@@ -48,9 +48,9 @@ class EmpCrud extends Controller
             'emp_position' => 'Employee',
             
         ];
-        if($Emp->insert($emp_create)){
-            session()->setFlashdata('message', 'Employee Added!');
-        }
+        $Emp->insert($emp_create);
+        
+        $session->setFlashdata('add', 'value');
         return $this->response->redirect(site_url('/emp'));
     }
 
@@ -78,9 +78,11 @@ class EmpCrud extends Controller
             'emp_email'  => $this->request->getVar('emp_email'),
             'emp_address' => $this->request->getVar('emp_address'),
             'emp_contact'  => $this->request->getVar('emp_contact'),
-            'emp_position' => $this->request->getVar('emp_position'),
+            // 'emp_position' => $this->request->getVar('emp_position'),
         ];
         $Emp->update($emp_id, $data);
+        $session = session();
+        $session->setFlashdata('update', 'value');
         return $this->response->redirect(site_url('/emp'));
     }
     public function printEmp(){
@@ -108,6 +110,8 @@ class EmpCrud extends Controller
         }
         $Emp = new Emp();
         $data['Emp'] = $Emp->where('emp_id', $emp_id)->delete($emp_id);
+        $session = session();
+        $session->setFlashdata('msg', 'value');
         return $this->response->redirect(site_url('/emp'));
     }    
 }

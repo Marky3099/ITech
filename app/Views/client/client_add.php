@@ -45,3 +45,17 @@
     </form>
   </div>
 </div>  
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript">
+  <?php if(session()->getFlashdata('branchError')) {?>
+      // alert('Delete');
+      Swal.fire({
+             icon: 'error',
+             title: 'Branch Name Existed!',
+             text: 'Branch Name already recorded.',
+             type: 'error'
+            })
+   <?php }?>
+</script>

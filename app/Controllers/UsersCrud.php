@@ -37,12 +37,11 @@ class UsersCrud extends Controller
             return $this->response->redirect(site_url('/dashboard'));
         }
         $User = new User();
-
+        $session = session();
         $user_data = $User->where('email', $this->request->getVar('email'))->first();
         if ($user_data) {
-            $data['error'] = "Email Already Registered, Please try another Email";
-            $data['main'] = 'user/user_add';
-            return view("dashboard/template",$data);
+            $session->setFlashdata('emailExist', 'value');
+            return $this->response->redirect(site_url('/user/create/view'));
         }
         // Generate Random Password
         $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_?";
@@ -64,9 +63,9 @@ class UsersCrud extends Controller
            
         ];
         // dd($user_create);
-        if( $id = $User->insert($user_create)){
-            session()->setFlashdata('message', 'User Added!');
-        }
+        $id = $User->insert($user_create);
+        $session->setFlashdata('add', 'value');
+        
         $to = $this->request->getVar('email');
 
         $subject = "TSMS - Your Account";
@@ -154,6 +153,8 @@ class UsersCrud extends Controller
             'user_img' => $this->request->getVar('user_img'),
         ];
         $User->update($id, $data);
+        $session = session();
+        $session->setFlashdata('update', 'value');
         return $this->response->redirect(site_url('/user'));
     }
     
