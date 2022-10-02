@@ -13,7 +13,7 @@
      <table class="table table-bordered" user_id="users-list" id="table1">
        <thead>
           <tr>
-             <th>User ID</th>
+             <th>#</th>
              <th>User Name</th>
              <th>Email Address</th>
              <th>Address</th>
@@ -24,12 +24,12 @@
           </tr>
        </thead>
        <tbody>
-          <?php if($users): ?>
+          <?php if($users): $n = 1;?>
           <?php foreach($users as $user):  
                   if($user['name'] != $_SESSION['username'] ):
             ?>
           <tr>
-             <td><?php echo $user['user_id']; ?></td>
+             <td><?php echo $n ?></td>
              <td><?php echo $user['name']; ?></td>
              <td><?php echo $user['email']; ?></td>
              <td><?php echo $user['address']; ?></td>
@@ -43,7 +43,7 @@
              </td>
           </tr>
           <?php endif; ?>
-          <?php endforeach; ?>
+          <?php $n=$n+1; endforeach; ?>
          <?php endif; ?>
        </tbody>
      </table>

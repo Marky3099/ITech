@@ -13,7 +13,7 @@
      <table class="table table-bordered" serv_id="users-list" id="table1">
        <thead>
           <tr>
-             <th>Service ID</th>
+             <th>#</th>
              <th>Service Name</th>
              <th>Price</th>
              <th>Color</th>
@@ -21,10 +21,10 @@
           </tr>
        </thead>
        <tbody>
-          <?php if($services): ?>
+          <?php if($services): $n = 1;?>
           <?php foreach($services as $service):  ?>
           <tr>
-             <td><?php echo $service['serv_id']; ?></td>
+             <td><?php echo $n ?></td>
              <td><?php echo $service['serv_name']; ?></td>
              <td><?php echo $service['price']; ?></td>
              <td style="background-color:<?php echo $service['serv_color']; ?>"></td>
@@ -33,7 +33,7 @@
                  <a href="<?php echo base_url('/serv/delete/'.$service['serv_id']);?>" class="btn btn-danger btn-sm del">Delete</a>
              </td>
           </tr>
-          <?php endforeach; ?>
+          <?php $n=$n+1; endforeach; ?>
          <?php endif; ?>
        </tbody>
      </table>

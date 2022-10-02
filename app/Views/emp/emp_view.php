@@ -13,7 +13,7 @@
      <table class="table table-bordered" emp_id="users-list" id="table1">
        <thead>
           <tr>
-             <th>Employee #</th>
+             <th>#</th>
              <th>Name</th>
              <th>Email</th>
              <th>Address</th>

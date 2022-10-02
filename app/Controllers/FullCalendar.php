@@ -483,7 +483,7 @@ class FullCalendar extends BaseController
                     }
                 }
                 // dd($i);
-                 } if($_POST['repeatable'] == "Monthly"){
+                 } else if($_POST['repeatable'] == "Monthly"){
                     function getMonthly($y) {
                         return new \DatePeriod(
                             new \DateTime(date("Y-m-d", strtotime($_POST['start_event']))),

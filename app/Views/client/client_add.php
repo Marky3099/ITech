@@ -13,27 +13,27 @@
         <h3>Add Client</h3><br>
         <div class="user-box">
            <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
-           <input type="text" name="area" placeholder="Branch Area" required>
+           <input type="text" name="area" placeholder="Branch Area" value="<?php if(isset($_POST['area'])) { echo $_POST['area']; } ?>" required>
         </div>
 
         <div class="user-box">
           <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
-          <input type="text" name="client_branch" placeholder="Branch Name" required>
+          <input type="text" name="client_branch" placeholder="Branch Name" value="<?php if(isset($_POST['client_branch'])) { echo $_POST['client_branch']; } ?>" required>
         </div>
 
         <div class="user-box">
           <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
-          <input type="text" name="client_address" placeholder="Address">
+          <input type="text" name="client_address" placeholder="Address" value="<?php if(isset($_POST['client_address'])) { echo $_POST['client_address']; } ?>">
         </div>
 
         <div class="user-box">
           <div class="icon-box"><i class="fas fa-phone"></i></div>
-          <input type="tel" name="client_contact" pattern="[0-9]{11}" placeholder="09XXXXXXXXX - 11 digits only">
+          <input type="tel" name="client_contact" pattern="[0-9]{11}" placeholder="09XXXXXXXXX - 11 digits only" value="<?php if(isset($_POST['client_contact'])) { echo $_POST['client_contact']; } ?>">
         </div>
 
         <div class="user-box">
           <div class="icon-box"><i class="fas fa-user-alt"></i></div>
-          <input type="email" name="client_email" placeholder="E-mail" required>
+          <input type="email" name="client_email" placeholder="E-mail" value="<?php if(isset($_POST['client_email'])) { echo $_POST['client_email']; } ?>" required>
         </div><br>
         
         <div class="container1">
@@ -54,7 +54,16 @@
       Swal.fire({
              icon: 'error',
              title: 'Branch Name Existed!',
-             text: 'Branch Name already recorded.',
+             text: 'This Branch is already registered.',
+             type: 'error'
+            })
+   <?php }?>
+   <?php if(session()->getFlashdata('emailExist')) {?>
+      // alert('Delete');
+      Swal.fire({
+             icon: 'error',
+             title: 'Email Existed!',
+             text: 'This Email is Already Registered, Please Use Another Email for this Client.',
              type: 'error'
             })
    <?php }?>

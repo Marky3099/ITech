@@ -10,7 +10,7 @@
      <table class="table table-bordered" client_id="client-list" id="table1">
        <thead>
           <tr>
-             <th></th>
+             <th>#</th>
              <th>First Name</th>
              <th>Last Name</th>
              <th>Email</th>

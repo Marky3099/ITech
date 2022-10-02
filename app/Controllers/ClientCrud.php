@@ -82,7 +82,7 @@ class ClientCrud extends Controller
             return $this->response->redirect(site_url('/dashboard'));
         }
          $data['main'] = 'client/client_add';
-          $data['error'] = null;
+          $data['error'] = '';
         return view("dashboard/template",$data);
     }
  
@@ -94,9 +94,19 @@ class ClientCrud extends Controller
         $Client = new Client();
         $session = session();
         $cBranch = $Client->where('client_branch', $this->request->getVar('client_branch'))->first();
+        $cEmail = $Client->where('client_email', $this->request->getVar('client_email'))->first();
         if ($cBranch) {
             $session->setFlashdata('branchError', 'value');
-            return $this->response->redirect(site_url('/client/create/view'));
+            // return $this->response->redirect(site_url('/client/create/view'));
+            $data['main'] = 'client/client_add';
+            $data['error'] = '';
+            return view("dashboard/template",$data);
+        }else if ($cEmail){
+            $session->setFlashdata('emailExist', 'value');
+            // return $this->response->redirect(site_url('/client/create/view'));
+            $data['main'] = 'client/client_add';
+            $data['error'] = '';
+            return view("dashboard/template",$data);
         }
         $set = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $code = substr(str_shuffle($set), 0, 12);
