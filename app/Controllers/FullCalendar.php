@@ -33,6 +33,7 @@ class FullCalendar extends BaseController
         
         $datas['events'] = $events->orderBy('id', 'ASC')->findAll();
         $datas['event'] = array();
+        $datas['branch'] = array();
         $datas['client'] = $client->orderBy('client_id', 'ASC')->findAll();
         $datas['area'] = $client->select('area')->groupBy('area')->findAll();
         $datas['emp'] = $emp->orderBy('emp_id', 'ASC')->findAll();
@@ -40,6 +41,8 @@ class FullCalendar extends BaseController
         $datas['event_fcu'] = $event_fcu->orderBy('id', 'ASC')->findAll();
         $datas['event_emp'] = $event_emp->orderBy('id', 'ASC')->findAll();
         $datas['serv'] = $serv->orderBy('serv_id', 'ASC')->findAll();
+        $datas['servName'] = $serv->select('serv_name, serv_color, serv_type')->groupBy('serv_name')->findAll();
+        $datas['servType'] = $serv->orderBy('serv_name','ASC')->findAll();
         $datas['aircon'] = $aircon->orderBy('aircon_id', 'ASC')->findAll();
         $datas['device_brand'] = $aircon->select('device_brand')->groupBy('device_brand')->findAll();
 
@@ -158,6 +161,8 @@ class FullCalendar extends BaseController
         $datas['event_fcu'] = $event_fcu->orderBy('id', 'ASC')->findAll();
         $datas['event_emp'] = $event_emp->orderBy('id', 'ASC')->findAll();
         $datas['serv'] = $serv->orderBy('serv_id', 'ASC')->findAll();
+        $datas['servName'] = $serv->select('serv_name, serv_color, serv_type')->groupBy('serv_name')->findAll();
+        $datas['servType'] = $serv->orderBy('serv_name','ASC')->findAll();
         $datas['aircon'] = $aircon->orderBy('aircon_id', 'ASC')->findAll();
         $datas['device_brand'] = $aircon->select('device_brand')->groupBy('device_brand')->findAll();
 
@@ -232,6 +237,7 @@ class FullCalendar extends BaseController
                  "aircon_id"=> $value['aircon_id'],
                  "client_id"=> $value['client_id'],
                  "serv_name"=> $value['serv_name'],
+                 "serv_type"=> $value['serv_type'],
                  "device_brand"=> $value['device_brand'],
                  "aircon_type"=> $value['aircon_type'],
                  "quantity"=> $value['quantity'],
@@ -248,7 +254,7 @@ class FullCalendar extends BaseController
        
          // dd($datas['event']);
 
-        $datas['main'] = 'employee/calendar/emp_calendar';
+        $datas['main'] = 'employee/calendar/calendar';
         return view("templates/template",$datas);
     }
    
@@ -296,6 +302,7 @@ class FullCalendar extends BaseController
                  "client_id"=>$value['client_id'],
                  "aircon_id"=>$value['aircon_id'],
                   "serv_name"=>$value['serv_name'],
+                  "serv_type"=>$value['serv_type'],
                   "device_brand"=> $value['device_brand'],
                   "aircon_type"=> $value['aircon_type'],
                   "quantity"=> $value['quantity'],
@@ -360,6 +367,7 @@ class FullCalendar extends BaseController
                   "area"=> $value['area'],
                   "status"=> $value['STATUS'],
                  "serv_name"=> $value['serv_name'],
+                 "serv_type"=> $value['serv_type'],
                  "device_brand"=> $value['device_brand'],
                  "aircon_type"=> $value['aircon_type'],
                  "quantity"=>$value['quantity'],
@@ -416,6 +424,7 @@ class FullCalendar extends BaseController
                   "area"=> $value['area'],
                   "status"=> $value['STATUS'],
                  "serv_name"=> $value['serv_name'],
+                 "serv_type"=>$value['serv_type'],
                  "device_brand"=> $value['device_brand'],
                  "aircon_type"=> $value['aircon_type'],
                  "quantity"=>$value['quantity'],
@@ -674,6 +683,7 @@ class FullCalendar extends BaseController
                  "client_id"=>$value['client_id'],
                  "aircon_id"=>$value['aircon_id'],
                   "serv_name"=>$value['serv_name'],
+                  "serv_type"=>$value['serv_type'],
                   "device_brand"=> $value['device_brand'],
                   "aircon_type"=> $value['aircon_type'],
                   "quantity"=> $value['quantity'],
@@ -737,6 +747,7 @@ class FullCalendar extends BaseController
                  "client_id"=>$value['client_id'],
                  "aircon_id"=>$value['aircon_id'],
                   "serv_name"=>$value['serv_name'],
+                  "serv_type"=>$value['serv_type'],
                   "device_brand"=> $value['device_brand'],
                   "aircon_type"=> $value['aircon_type'],
                   "quantity"=> $value['quantity'],
@@ -796,6 +807,7 @@ class FullCalendar extends BaseController
                  "client_id"=>$value['client_id'],
                  "aircon_id"=>$value['aircon_id'],
                   "serv_name"=>$value['serv_name'],
+                  "serv_type"=>$value['serv_type'],
                   "device_brand"=> $value['device_brand'],
                   "aircon_type"=> $value['aircon_type'],
                   "quantity"=> $value['quantity'],
@@ -855,6 +867,7 @@ class FullCalendar extends BaseController
                  "client_id"=>$value['client_id'],
                  "aircon_id"=>$value['aircon_id'],
                   "serv_name"=>$value['serv_name'],
+                  "serv_type"=>$value['serv_type'],
                   "device_brand"=> $value['device_brand'],
                   "aircon_type"=> $value['aircon_type'],
                   "quantity"=> $value['quantity'],
@@ -914,6 +927,7 @@ class FullCalendar extends BaseController
                  "client_id"=>$value['client_id'],
                  "aircon_id"=>$value['aircon_id'],
                   "serv_name"=>$value['serv_name'],
+                  "serv_type"=>$value['serv_type'],
                   "device_brand"=> $value['device_brand'],
                   "aircon_type"=> $value['aircon_type'],
                   "quantity"=> $value['quantity'],
@@ -973,6 +987,7 @@ class FullCalendar extends BaseController
                  "client_id"=>$value['client_id'],
                  "aircon_id"=>$value['aircon_id'],
                   "serv_name"=>$value['serv_name'],
+                  "serv_type"=>$value['serv_type'],
                   "device_brand"=> $value['device_brand'],
                   "aircon_type"=> $value['aircon_type'],
                   "quantity"=> $value['quantity'],

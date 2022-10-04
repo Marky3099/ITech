@@ -137,6 +137,7 @@ $html .= '<table cellspacing="0" cellpadding="15" border="1" id="table1">
                              <th>Branch Area</th>
                              <th>Branch Name</th>
                              <th>Service/Task</th> 
+                             <th>Service Type</th> 
                              <th>Device Brand/Type</th> 
                              <th>Aircon Type</th> 
                              <th>FCU No.</th>
@@ -158,6 +159,7 @@ $html .= '<table cellspacing="0" cellpadding="15" border="1" id="table1">
                              <td>'.$m->area.'</td>
                              <td>'.$m->client_branch.'</td>
                              <td>'.$m->serv_name.'</td>
+                             <td>'.$m->serv_type.'</td>
                              <td>'.$m->device_brand.'</td>
                              <td>'.$m->aircon_type.'</td><td>';
                     $data1 = explode(',',$m->fcu_array);

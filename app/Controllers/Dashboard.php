@@ -73,6 +73,7 @@ class Dashboard extends BaseController
                  "serv_id"=> $value['serv_id'],
                  "client_id"=>$value['client_id'],
                   "serv_name"=>$value['serv_name'],
+                  "serv_type"=>$value['serv_type'],
                   "area"=> $value['area'],
                    "emp_array"=> $emp_arr,
                  "client_branch"=> $value['client_branch'],
@@ -133,6 +134,7 @@ class Dashboard extends BaseController
                   "area"=> $value['area'],
                   "status"=> $value['STATUS'],
                  "serv_name"=> $value['serv_name'],
+                 "serv_type"=>$value['serv_type'],
                  "client_branch"=> $value['client_branch'],
                  "emp_array"=> $emp_arr,
              ];
@@ -177,6 +179,7 @@ class Dashboard extends BaseController
                   "area"=> $value['area'],
                   "status"=> $value['STATUS'],
                  "serv_name"=> $value['serv_name'],
+                 "serv_type"=>$value['serv_type'],
                  "client_branch"=> $value['client_branch'],
                  "emp_array"=> $emp_arr,
              ];
@@ -212,6 +215,7 @@ class Dashboard extends BaseController
                   "area"=> $value['area'],
                   "status"=> $value['STATUS'],
                  "serv_name"=> $value['serv_name'],
+                 "serv_type"=>$value['serv_type'],
                  "client_branch"=> $value['client_branch'],
                  "emp_array"=> $emp_arr,
              ];
@@ -251,6 +255,7 @@ class Dashboard extends BaseController
                   "area"=> $value['area'],
                   "status"=> $value['STATUS'],
                  "serv_name"=> $value['serv_name'],
+                 "serv_type"=>$value['serv_type'],
                  "client_branch"=> $value['client_branch'],
                  "emp_array"=> $emp_arr,
              ];

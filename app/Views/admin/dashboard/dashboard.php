@@ -48,6 +48,7 @@
                                     <th>Title</th>
                                     <th>Branch</th>
                                     <th>Service</th>
+                                    <th>Service Type</th>
                                     <th>Employee</th>
                                     <th>Status</th>
                                     <?php if($_SESSION['position'] == USER_ROLE_ADMIN):?>
@@ -62,6 +63,7 @@
                                       <td><?php echo $tday->title; ?></td>
                                       <td><?php echo $tday->client_branch; ?></td>
                                       <td><?php echo $tday->serv_name; ?></td>
+                                      <td><?php echo $tday->serv_type; ?></td>
                                      <td>
                                    <?php $data = explode(',',$tday->emp_array);
                                          $count = 0;
@@ -124,6 +126,7 @@
                                     <th>Date</th>
                                     <th>Branch</th>
                                     <th>Service</th>
+                                    <th>Service Type</th>
                                     <th>Employee</th>
                                     <th>Status</th>
                                     
@@ -137,6 +140,7 @@
                                       <td><?php echo date('m-d-Y',strtotime($week->start_event)); ?></td>
                                       <td><?php echo $week->client_branch; ?></td>
                                       <td><?php echo $week->serv_name; ?></td>
+                                      <td><?php echo $week->serv_type; ?></td>
                                      <td>
                                    <?php $data = explode(',',$week->emp_array);
                                          $count = 0;
@@ -189,6 +193,7 @@
                                     <th>Date</th>
                                     <th>Branch</th>
                                     <th>Service</th>
+                                    <th>Service Type</th>
                                     <th>Employee</th>
                                     <th>Status</th>
                                     
@@ -202,6 +207,7 @@
                                       <td><?php echo date('m-d-Y',strtotime($m->start_event)); ?></td>
                                       <td><?php echo $m->client_branch; ?></td>
                                       <td><?php echo $m->serv_name; ?></td>
+                                      <td><?php echo $m->serv_type; ?></td>
                                      <td>
                                    <?php $data = explode(',',$m->emp_array);
                                          $count = 0;
@@ -235,7 +241,7 @@
                     <!-- Modal for displaying Completed event -->
                     <div class="container">
                       <div class="modal fade" id="completeModal" role="dialog">
-                        <div class="modal-dialog" style="max-width: 600px;">
+                        <div class="modal-dialog" style="max-width: 800px;">
                           <div class="modal-content">
 
                             <div class="modal-header">
@@ -252,6 +258,7 @@
                                     <th>Date</th>
                                     <th>Branch</th>
                                     <th>Service</th>
+                                    <th>Service Type</th>
                                     <th>Employee</th>
                                     <th>Status</th>
                                     
@@ -265,6 +272,7 @@
                                       <td><?php echo date('m-d-Y',strtotime($cm->start_event)); ?></td>
                                       <td><?php echo $cm->client_branch; ?></td>
                                       <td><?php echo $cm->serv_name; ?></td>
+                                      <td><?php echo $cm->serv_type; ?></td>
                                      <td>
                                    <?php $data = explode(',',$cm->emp_array);
                                          $count = 0;
@@ -315,6 +323,7 @@
                                     <th>Date</th>
                                     <th>Branch</th>
                                     <th>Service</th>
+                                    <th>Service Type</th>
                                     <th>Employee</th>
                                     <th>Status</th>
                                     
@@ -328,6 +337,7 @@
                                       <td><?php echo date('m-d-Y',strtotime($nd->start_event)); ?></td>
                                       <td><?php echo $nd->client_branch; ?></td>
                                       <td><?php echo $nd->serv_name; ?></td>
+                                      <td><?php echo $nd->serv_type; ?></td>
                                      <td>
                                    <?php $data = explode(',',$nd->emp_array);
                                          $count = 0;

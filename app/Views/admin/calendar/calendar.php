@@ -18,7 +18,7 @@
   <h3 id="legend-text">Legend:</h3>
   
   <ul><b>
-    <?php foreach ($serv as $s): ?>
+    <?php foreach ($servName as $s): ?>
       <li style="background-color:<?=$s['serv_color'];?>;"><?=$s['serv_name'];?></li>
     <?php endforeach ?>
   </ul>
@@ -77,12 +77,17 @@
           <div class="form-group">
             
             <h5>Service</h5>
-            <select id="serv_id" name="serv_id" class="form-control" required>
-
-              <?php foreach($serv as $ser):  ?>
-                  <option value=<?php echo $ser['serv_id']; ?>><?php echo $ser['serv_name'];?></option>
-              <?php endforeach; ?>
-            </select>
+              <select id="serv_id" name="serv_id" class="form-control" required>
+                <?php foreach($servName as $s):  ?>
+                  <optgroup label="<?= $s['serv_name']; ?>">
+                    <?php foreach($servType as $st):  ?>
+                      <?php if($st['serv_name'] == $s['serv_name']):?>
+                        <option value=<?= $st['serv_id'];?>><?= $st['serv_type'];?></option>
+                      <?php endif;?>
+                    <?php endforeach; ?>
+                </optgroup>
+                <?php endforeach; ?>
+              </select>
           </div>
           <div class="form-group">
            
@@ -186,11 +191,17 @@
           <div class="form-group">
             
             <h5>Service</h5>
-            <select class="form-control" id="serv_id_update" name="serv_id_update"style="width: 120px;">
-              <?php foreach($serv as $ser):  ?>
-                  <option value=<?php echo $ser['serv_id']; ?>><?php echo $ser['serv_name'];?></option>
-              <?php endforeach; ?>
-            </select>
+            <select class="form-control" id="serv_id_update" name="serv_id_update">
+                <?php foreach($servName as $s):  ?>
+                  <optgroup label="<?= $s['serv_name']; ?>">
+                    <?php foreach($servType as $st):  ?>
+                      <?php if($st['serv_name'] == $s['serv_name']):?>
+                        <option value=<?= $st['serv_id'];?>><?= $st['serv_type'];?></option>
+                      <?php endif;?>
+                    <?php endforeach; ?>
+                </optgroup>
+                <?php endforeach; ?>
+              </select>
           </div>
            <div class="form-group">
             

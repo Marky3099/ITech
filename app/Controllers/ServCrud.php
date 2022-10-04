@@ -11,7 +11,8 @@ class ServCrud extends Controller
             return $this->response->redirect(site_url('/dashboard'));
         }
         $Serv = new Serv();
-        $data['services'] = $Serv->orderBy('serv_id', 'ASC')->findAll();
+        $data['services'] = $Serv->orderBy('serv_name', 'ASC')->findAll();
+        $data['ServName'] = $Serv->select('serv_name')->groupBy('serv_name')->findAll();
         $data['main'] = 'admin/serv/serv_view';
         return view("templates/template",$data);
 
@@ -33,13 +34,27 @@ class ServCrud extends Controller
             return $this->response->redirect(site_url('/dashboard'));
         }
         $Serv = new Serv();
+        $service = $Serv->orderBy('serv_name', 'ASC')->findAll();
         $ServName = ucfirst(strtolower($this->request->getVar('serv_name')));
-        $serv_create = [
-            'serv_name' => $ServName,
-            'serv_description' => $this->request->getVar('serv_description'),
-            'price' => $this->request->getVar('price'),
-            'serv_color' => $this->request->getVar('serv_color'),
-        ];
+        foreach($service as $serv){
+            if($ServName == $serv['serv_name']){
+                $serv_create = [
+                'serv_name' => $ServName,
+                'serv_type' => $this->request->getVar('serv_type'),
+                'serv_description' => $this->request->getVar('serv_description'),
+                'price' => $this->request->getVar('price'),
+                'serv_color' => $serv['serv_color'],
+                ];
+            }else{
+                $serv_create = [
+                'serv_name' => $ServName,
+                'serv_type' => $this->request->getVar('serv_type'),
+                'serv_description' => $this->request->getVar('serv_description'),
+                'price' => $this->request->getVar('price'),
+                'serv_color' => $this->request->getVar('serv_color'),
+                ];
+            }
+        }
         $Serv->insert($serv_create);
         $session = session();
         $session->setFlashdata('add', 'value');
@@ -64,13 +79,27 @@ class ServCrud extends Controller
         }
         $Serv = new Serv();
         $serv_id = $this->request->getVar('serv_id');
+        $service = $Serv->orderBy('serv_name', 'ASC')->findAll();
         $ServName = ucfirst(strtolower($this->request->getVar('serv_name')));
-        $data = [
-            'serv_name' => $ServName,
-            'serv_description' => $this->request->getVar('serv_description'),
-            'price' => $this->request->getVar('price'),
-            'serv_color' => $this->request->getVar('serv_color'),
-        ];
+        foreach($service as $serv){
+            if($ServName == $serv['serv_name']){
+                $data = [
+                'serv_name' => $ServName,
+                'serv_type' => $this->request->getVar('serv_type'),
+                'serv_description' => $this->request->getVar('serv_description'),
+                'price' => $this->request->getVar('price'),
+                'serv_color' => $serv['serv_color'],
+                ];
+            }else{
+                $data = [
+                'serv_name' => $ServName,
+                'serv_type' => $this->request->getVar('serv_type'),
+                'serv_description' => $this->request->getVar('serv_description'),
+                'price' => $this->request->getVar('price'),
+                'serv_color' => $this->request->getVar('serv_color'),
+                ];
+            }
+        }
         $Serv->update($serv_id, $data);
         $session = session();
         $session->setFlashdata('update', 'value');

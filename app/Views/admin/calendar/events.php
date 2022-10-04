@@ -51,11 +51,12 @@
              <th>Time</th>
              <th>Area</th>
              <th>Client Branch</th>
-             <th>Service</th>
+             <th>Service Name</th>
+             <th>Service Type</th>
              <th>Device Brand</th>
              <th>Aircon Type</th>
              <th>FCU No.</th>
-             <th>Quantity</th>
+             <th>Qty</th>
              <th>Employee</th>
              <th>Status</th>
              <th>Action</th>
@@ -83,6 +84,7 @@
              <td><?php echo $dat->area; ?></td>
              <td><?php echo $dat->client_branch; ?></td>
              <td><?php echo $dat->serv_name; ?></td>
+             <td><?php echo $dat->serv_type; ?></td>
              <td><?php echo $dat->device_brand; ?></td>
              <td><?php echo $dat->aircon_type; ?></td>
              <td>
@@ -138,6 +140,8 @@
 <script type="text/javascript">
    var msg = ''; 
   var del = '';
+  var add = '';
+  var update = '';
   <?php if(session()->has('msg')){?>
    msg = true;
    del = 'Aircon is Deleted Successfully';

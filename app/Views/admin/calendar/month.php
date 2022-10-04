@@ -20,10 +20,11 @@
              <th>Area</th>
              <th>Client Branch</th>
              <th>Service</th>
+             <th>Service Type</th>
              <th>Device Brand</th>
              <th>Aircon Type</th>
              <th>FCU No.</th>
-             <th>Quantity</th>
+             <th>Qty</th>
              <th>Employee</th>
              <th>Status</th>
              
@@ -51,6 +52,7 @@
              <td><?php echo $m->area; ?></td>
              <td><?php echo $m->client_branch; ?></td>
              <td><?php echo $m->serv_name; ?></td>
+             <td><?php echo $m->serv_type; ?></td>
              <td><?php echo $m->device_brand; ?></td>
              <td><?php echo $m->aircon_type; ?></td>
              <td>

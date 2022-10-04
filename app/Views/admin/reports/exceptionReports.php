@@ -1,18 +1,17 @@
 
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/print.css')?>">
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.csss">
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
 	
 
 	<div class="body-content">
-	<div class="header-img">
+	<!-- <div class="header-img">
 		<img src="<?= base_url('assets/image/imgicon.png');?>">
 		<h2>MAYLAFLOR AIRCONDITIONING & REF. SVCS INC.</h2>
 		<h4>  A. Dominguez  St., Malibay,  Pasay City,       1300 2958
 			Telefax #:  8851-1005 / 8425-9958 /  8697-4066  / 8806-4790 
 			Email Add:   maylaflorairconditioningref27@gmail.com
 		</h4>
-	</div>
+	</div> -->
 	<div class="title">
 		<h3>Detailed Exception Report</h3>
 		<h4>From <?php if(isset($_GET['start_date'])){echo $_GET['start_date'];} ?> to <?php if(isset($_GET['to_date'])){echo $_GET['to_date'];} ?> </h4>
@@ -67,6 +66,7 @@
 				             <th>Branch Area</th>
 				             <th>Branch Name</th>
 				             <th>Service/Task</th> 
+				             <th>Service Type</th> 
 				             <th>Device Brand/Type</th> 
 				             <th>Aircon Type</th>
 				             <th>FCU No.</th>
@@ -85,6 +85,7 @@
 				             <td><?php echo $dat->area; ?></td>
 				             <td><?php echo $dat->client_branch; ?></td>
 				             <td><?php echo $dat->serv_name; ?></td>
+				             <td><?php echo $dat->serv_type; ?></td>
 				             <td><?php echo $dat->device_brand; ?></td>
 				             <td><?php echo $dat->aircon_type; ?></td>
 				             <td>

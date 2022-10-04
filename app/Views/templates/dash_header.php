@@ -110,7 +110,7 @@
                                             <i class="fas fa-box"></i>
                                         <span class="links_name">Aircons</span>
                                         </a>
-                                        <span class="tooltip">Aircons</span>
+                                        <span class="tooltip3">Aircons</span>
                                     </li>
 								  	<li class="nav-item">
 								    	<a href = "<?= base_url('/client')?>" ><i class = "fa-solid fa-user"></i> <span class="links_name">&nbsp;&nbsp;Clients</span> </a> 
@@ -126,7 +126,7 @@
                                             <i class="fa fa-server" aria-hidden="true"></i>
                                             <span class="links_name">Services</span>
                                         </a>
-                                        <span class="tooltip">Services</span>
+                                        <span class="tooltip3">Services</span>
                                     </li>
 							    	
 							  	</div>

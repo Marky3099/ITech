@@ -15,6 +15,10 @@
            <div class="icon-box"><i class="fas fa-wrench"></i></div>
           <input type="text" name="serv_name" placeholder="Service Name" required>
         </div>
+        <div class="user-box">
+           <div class="icon-box"><i class="fas fa-wrench"></i></div>
+          <input type="text" name="serv_type" placeholder="Service Type" required>
+        </div>
 
         <div class="user-box">
           <div class="icon-box"><i class="fas fa-wrench"></i></div>

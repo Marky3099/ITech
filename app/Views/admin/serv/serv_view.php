@@ -11,6 +11,7 @@
           <tr>
              <th>#</th>
              <th>Service Name</th>
+             <th>Service Type</th>
              <th>Price</th>
              <th>Color</th>
              <th>Action</th>
@@ -22,6 +23,7 @@
           <tr>
              <td><?php echo $n ?></td>
              <td><?php echo $service['serv_name']; ?></td>
+             <td><?php echo $service['serv_type']; ?></td>
              <td><?php echo $service['price']; ?></td>
              <td style="background-color:<?php echo $service['serv_color']; ?>"></td>
              <td>

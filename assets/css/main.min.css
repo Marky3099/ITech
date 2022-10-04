@@ -229,7 +229,10 @@ tbody{
 }
 
 .form-group #serv_id{
-	width: 120px;
+	width: 150px;
+}
+.form-group #serv_id_update{
+	width: 150px;
 }
 .form-group #dbrand{
 	float: left;

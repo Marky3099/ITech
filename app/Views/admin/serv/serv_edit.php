@@ -9,7 +9,10 @@
          <div class="icon-box"><i class="fas fa-wrench"></i></div>
         <input type="text" name="serv_name" value="<?php echo $Serv_obj['serv_name']; ?>" placeholder="Service Name">
       </div>
-
+      <div class="user-box">
+           <div class="icon-box"><i class="fas fa-wrench"></i></div>
+          <input type="text" name="serv_type" placeholder="Service Type" value="<?php echo $Serv_obj['serv_type']; ?>" placeholder="Service Type" required>
+        </div>
       <div class="user-box">
         <div class="icon-box"><i class="fas fa-wrench"></i></div>
         <input type="text" name="serv_description" value="<?php echo $Serv_obj['serv_description']; ?>" placeholder="Service Description">

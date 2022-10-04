@@ -14,6 +14,6 @@ class Serv extends Model
     protected $returnType     = 'array';
   
 
-    protected $allowedFields = ['serv_name','serv_description','price','serv_color'];
+    protected $allowedFields = ['serv_name','serv_type','serv_description','price','serv_color'];
 
 }

@@ -4,7 +4,7 @@
                   $monday = strtotime('last monday', strtotime('tomorrow'));
 
                   $sunday = strtotime('+6 days', $monday);
-                  echo date('F j', $monday) . " to " . date('j Y', $sunday);?></b></h1>
+                  echo date('F j', $monday) . " to " . date('F j, Y', $sunday);?></b></h1>
    
     <div class="d-flex justify-content-left" style="margin-left:20px;">
         <a href="<?= base_url('/calendar');?>" class="btn">Calendar</a>
@@ -24,10 +24,11 @@
              <th>Area</th>
              <th>Client Branch</th>
              <th>Service</th>
+             <th>Service Type</th>
              <th>Device Brand</th>
              <th>Aircon Type</th>
              <th>FCU No.</th>
-             <th>Quantity</th>
+             <th>Qty</th>
              <th>Employee</th>
              <th>Status</th>
              
@@ -55,6 +56,7 @@
              <td><?php echo $w->area; ?></td>
              <td><?php echo $w->client_branch; ?></td>
              <td><?php echo $w->serv_name; ?></td>
+             <td><?php echo $w->serv_type; ?></td>
              <td><?php echo $w->device_brand; ?></td>
              <td><?php echo $w->aircon_type; ?></td>
              <td>
