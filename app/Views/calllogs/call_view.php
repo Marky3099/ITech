@@ -33,12 +33,6 @@
         </form>
     </div>   
     </div>
-   
-    <?php
-     if(isset($_SESSION['success'])){
-        echo $_SESSION['success'];
-      }
-     ?>
   <div class="mt-3">
     <?php if($view_calllogs):?>
      <table class="table table-bordered" serv_id="users-list" id="table1" style="font-size: 11px;">
@@ -108,56 +102,19 @@
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript">
-   $('.del').click(function(e){
-    e.preventDefault();
-    const href = $(this).attr('href');
-    Swal.fire({
-          title: 'Are you sure?',
-          text: "You won't be able to revert this!",
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            document.location.href = href;
-            
-          }
-        })
-
- });
-   <?php if(session()->getFlashdata('msg')) {?>
-      // alert('Delete');
-      Swal.fire({
-             icon: 'success',
-             title: 'Deleted!',
-             text: 'Record has been deleted.',
-             type: 'success'
-            })
-   <?php }?>
-   <?php if(session()->getFlashdata('add')) {?>
-      // alert('Delete');
-      Swal.fire({
-             icon: 'success',
-             title: 'Logs Added!',
-             text: 'New Logs is added Successfully',
-             type: 'success'
-            })
-   <?php }?>
-   <?php if(session()->getFlashdata('update')) {?>
-      // alert('Delete');
-      Swal.fire({
-             icon: 'success',
-             title: 'Logs Updated!',
-             text: 'Log details Updated Successfully',
-             type: 'success'
-            })
-   <?php }?>
-$(document).ready( function () {
-    $('#table1').DataTable({
-    pageLength : 5,
-    lengthMenu: [[5, 10, 15,20], [5, 10, 15, 20,]]
-  });
-} );
+   var msg = ''; 
+  var del = '';
+  var add = '';
+  var update = '';
+  <?php if(session()->has('msg')){?>
+   msg = true;
+   del = 'Log is Deleted Successfully';
+  <?php }elseif(session()->has('add')){?>
+   add = true;
+   del = 'New Log is Added Successfully';
+  <?php }elseif(session()->has('update')){?>
+   update = true;
+   del = 'Log Details are Updated Successfully';
+  <?php }?>;
 </script>
+<script type="text/javascript" src="<?= base_url('assets/js/crud.js')?>"></script>

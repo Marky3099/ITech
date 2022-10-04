@@ -41,7 +41,8 @@ class ServCrud extends Controller
             'serv_color' => $this->request->getVar('serv_color'),
         ];
         $Serv->insert($serv_create);
-        $data['success'] ="Service added";
+        $session = session();
+        $session->setFlashdata('add', 'value');
         return $this->response->redirect(site_url('/serv'));
     }
 
@@ -71,6 +72,8 @@ class ServCrud extends Controller
             'serv_color' => $this->request->getVar('serv_color'),
         ];
         $Serv->update($serv_id, $data);
+        $session = session();
+        $session->setFlashdata('update', 'value');
         return $this->response->redirect(site_url('/serv'));
     }
     public function printServ(){

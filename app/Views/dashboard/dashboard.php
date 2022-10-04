@@ -517,101 +517,24 @@
   </div>
 </div>
 </div>
-<!-- , "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" -->
+
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
 <script type="text/javascript">
-// chart
-  var data = {
-  labels: <?= json_encode($label); ?>,
-  datasets: [{
-    label: "total events",
-    backgroundColor: "rgba(255,99,132,0.2)",
-    borderColor: "rgba(255,99,132,1)",
-    borderWidth: 2,
-    hoverBackgroundColor: "rgba(255,99,132,0.4)",
-    hoverBorderColor: "rgba(255,99,132,1)",
-    data: <?= json_encode($linedata); ?>,
-  }]
-};
+  let label = <?= json_encode($label); ?>;
+  let lineData = <?= json_encode($linedata); ?>;
 
-var options = {
-  animations: {
-      radius: {
-        duration: 400,
-        easing: 'linear',
-        loop: (context) => context.active
-      }
-    },
-    hoverRadius: 12,
-    hoverBackgroundColor: 'yellow',
-    interaction: {
-      mode: 'nearest',
-      intersect: false,
-      axis: 'x'
-    },
-  maintainAspectRatio: false,
-  title: {
-        display: true,
-        text: 'Chart.js Line Chart'
-      },
-       responsive: true,
-  scales: {
-    y: {
-      stacked: true,
-      ticks: {
-          // forces step size to be 50 units
-          stepSize: 1
-        },
-      grid: {
-        display: true,
-        color: "rgba(255,99,132,0.2)"
-      }
-    },
-    x: {
-      grid: {
-        display: false
-      }
-    }
-  }
-};
+  let done = ''; 
+  let pending = '';
+  <?php if(session()->has('done')){?>
+   done = true;
+  <?php }elseif(session()->has('pending')){?>
+  pending = true;
+  <?php } ?>;
 
-new Chart('myAreaChart', {
-  type: 'line',
-  options: options,
-  data: data
-});
-
-// Sweet Alert
-<?php if(session()->has('done')) {?>
-      // alert('Delete');
-      Swal.fire({
-              position: 'top',
-              icon: 'success',
-              title: 'Task marked as Done',
-              showConfirmButton: false,
-              timer: 1500
-            })
-   <?php }elseif (session()->has('pending')) { ?>
-     Swal.fire({
-              position: 'top',
-              icon: 'info',
-              title: 'Task marked as Pending',
-              showConfirmButton: false,
-              timer: 1500
-            })
-   <?php } ?>
-
-// Data tables
-
-$(document).ready( function () {
-    $('.table').DataTable({
-    pageLength : 5,
-    lengthMenu: [[5, 10, 15,20], [5, 10, 15, 20,]]
-  } );
-} );
 </script>
+<script type="text/javascript" src="<?=base_url('assets/js/dashboardjs.js')?>"></script>
 </body>
 

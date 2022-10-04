@@ -86,7 +86,7 @@
   
         // -----------------
         
-        var getUrl = window.location;
+        // var getUrl = window.location;
         $('#fcuno').select2();
 // ---------------------------------
   var areas = <?php echo json_encode($client_area); ?> 

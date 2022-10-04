@@ -136,38 +136,11 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script type="text/javascript">
-$('.del').click(function(e){
-    e.preventDefault();
-    const href = $(this).attr('href');
-    Swal.fire({
-          title: 'Are you sure?',
-          text: "You won't be able to revert this!",
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            document.location.href = href;
-            
-          }
-        })
-
- });
-   <?php if(session()->getFlashdata('msg')) {?>
-      // alert('Delete');
-      Swal.fire({
-             icon: 'success',
-             title: 'Deleted!',
-             text: 'Record has been deleted.',
-             type: 'success'
-            })
-   <?php }?>
-$(document).ready( function () {
-    $('#table1').DataTable({
-    pageLength : 5,
-    lengthMenu: [[5, 10, 15,20], [5, 10, 15, 20,]]
-  });
-} );
+   var msg = ''; 
+  var del = '';
+  <?php if(session()->has('msg')){?>
+   msg = true;
+   del = 'Aircon is Deleted Successfully';
+  <?php }?>;
 </script>
+<script type="text/javascript" src="<?= base_url('assets/js/crud.js')?>"></script>

@@ -553,13 +553,17 @@ class FullCalendar extends BaseController
         // dd($this->request->getVar('emp_id_update'));
 
         $Event = new Event();
+        $Client = new Client();
         $Event_emp = new Event_emp();
         $Event_fcu = new Event_fcu();
         $event_id = $this->request->getVar('id');
-           
+        $client_name = $this->request->getVar('client_id_update');
+
+        $client_branch = $Client->where('client_id',$client_name)->first();
+        
             $event_update = [
             'start_event' => $this->request->getVar('start_event_update'),
-            'title' => date("g:ia",strtotime($this->request->getVar('time_update')))." ".$this->request->getVar('area_update'),
+            'title' => date("g:ia",strtotime($this->request->getVar('time_update')))." ".$client_branch['client_branch'],
             'time' => $this->request->getVar('time_update'),
             'aircon_id' => (int)($this->request->getVar('aircon_id_update')),
             'client_id'  => (int)($this->request->getVar('client_id_update')),

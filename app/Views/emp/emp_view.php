@@ -4,11 +4,6 @@
         <a href="<?= base_url('emp/create/view') ?>" class="btn">Add Employee</a>
         <a href="<?= base_url('emp/print') ?>" class="btn">Download</a>
    </div>
-    <?php
-     if(isset($_SESSION['success'])){
-        echo $_SESSION['success'];
-      }
-     ?>
   <div class="mt-3">
      <table class="table table-bordered" emp_id="users-list" id="table1">
        <thead>
@@ -50,59 +45,20 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 <script type="text/javascript">
-
- $('.del').click(function(e){
-    e.preventDefault();
-    const href = $(this).attr('href');
-    Swal.fire({
-          title: 'Are you sure?',
-          text: "You won't be able to revert this!",
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            document.location.href = href;
-            
-          }
-        })
-
- });
-   <?php if(session()->getFlashdata('msg')) {?>
-      // alert('Delete');
-      Swal.fire({
-             icon: 'success',
-             title: 'Deleted!',
-             text: 'Record has been deleted.',
-             type: 'success'
-            })
-   <?php }?>
-   <?php if(session()->getFlashdata('add')) {?>
-      // alert('Delete');
-      Swal.fire({
-             icon: 'success',
-             title: 'Employee Added!',
-             text: 'New Employee is added Successfully',
-             type: 'success'
-            })
-   <?php }?>
-   <?php if(session()->getFlashdata('update')) {?>
-      // alert('Delete');
-      Swal.fire({
-             icon: 'success',
-             title: 'Employee Updated!',
-             text: 'Employee details Updated Successfully',
-             type: 'success'
-            })
-   <?php }?>
-$(document).ready( function () {
-    $('#table1').DataTable({
-    pageLength : 5,
-    lengthMenu: [[5, 10, 15,20], [5, 10, 15, 20,]]
-  });
-} );
+   var msg = ''; 
+  var del = '';
+  var add = '';
+  var update = '';
+  <?php if(session()->has('msg')){?>
+   msg = true;
+   del = 'Employee is Deleted Successfully';
+  <?php }elseif(session()->has('add')){?>
+   add = true;
+   del = 'New Employee is Added Successfully';
+  <?php }elseif(session()->has('update')){?>
+   update = true;
+   del = 'Employee Details are Updated Successfully';
+  <?php }?>;
 </script>
+<script type="text/javascript" src="<?= base_url('assets/js/crud.js')?>"></script>

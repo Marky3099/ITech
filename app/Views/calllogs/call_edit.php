@@ -24,7 +24,7 @@
 
           <label>Branch Name</label>
           <div class="select-dropdown">
-            <select id="client_id" name="client_id"></select>
+            <select id="client_id_update" name="client_id_update"></select>
           </div>
 
           <div class="user-box">
@@ -48,7 +48,7 @@
               </select>
             </div>
             <div class="select-dropdown" style="width: 40%; margin-left: 257px; top: -46px;">
-              <select id="aircon_id" name="aircon_id">
+              <select id="aircon_id_update" name="aircon_id_update">
               </select>
             </div>
           </div>

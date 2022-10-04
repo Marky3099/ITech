@@ -4,21 +4,6 @@
     <div class="d-flex justify-content-left">
         <a href="<?= base_url('service-reports/upload') ?>" class="btn">Upload File</a>
    </div>
-<!--     <?php
-     if(isset($_SESSION['msg'])){
-        echo $_SESSION['msg'];
-      }
-     ?> -->
-     <?php 
-        // Display Response
-        if(session()->has('message')){
-        ?>
-           <div class="alert <?= session()->getFlashdata('alert-class') ?>">
-              <?= session()->getFlashdata('message') ?>
-           </div>
-        <?php
-        }
-        ?>
   <div class="mt-3">
      <table class="table table-bordered" client_id="client-list" id="table1">
        <thead>
@@ -90,56 +75,19 @@
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript">
-   $('.del').click(function(e){
-    e.preventDefault();
-    const href = $(this).attr('href');
-    Swal.fire({
-          title: 'Are you sure?',
-          text: "You won't be able to revert this!",
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            document.location.href = href;
-            
-          }
-        })
-
- });
-   <?php if(session()->getFlashdata('msg')) {?>
-      // alert('Delete');
-      Swal.fire({
-             icon: 'success',
-             title: 'Deleted!',
-             text: 'Record has been deleted.',
-             type: 'success'
-            })
-   <?php }?>
-   <?php if(session()->getFlashdata('add')) {?>
-      // alert('Delete');
-      Swal.fire({
-             icon: 'success',
-             title: 'File Added!',
-             text: 'New File is added Successfully',
-             type: 'success'
-            })
-   <?php }?>
-   <?php if(session()->getFlashdata('update')) {?>
-      // alert('Delete');
-      Swal.fire({
-             icon: 'success',
-             title: 'File Updated!',
-             text: 'File details Updated Successfully',
-             type: 'success'
-            })
-   <?php }?>
-$(document).ready( function () {
-    $('#table1').DataTable({
-    pageLength : 5,
-    lengthMenu: [[5, 10, 15,20], [5, 10, 15, 20,]]
-  });
-} );
+   var msg = ''; 
+  var del = '';
+  var add = '';
+  var update = '';
+  <?php if(session()->has('msg')){?>
+   msg = true;
+   del = 'File is Deleted Successfully';
+  <?php }elseif(session()->has('add')){?>
+   add = true;
+   del = 'New File is Added Successfully';
+  <?php }elseif(session()->has('update')){?>
+   update = true;
+   del = 'File Details are Updated Successfully';
+  <?php }?>;
 </script>
+<script type="text/javascript" src="<?= base_url('assets/js/crud.js')?>"></script>
