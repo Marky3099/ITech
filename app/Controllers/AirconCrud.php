@@ -12,8 +12,8 @@ class AirconCrud extends Controller
         }
         $Aircon = new Aircon();
         $data['device'] = $Aircon->orderBy('aircon_id', 'ASC')->findAll();
-        $data['main'] = 'aircon/aircon_view';
-        return view("dashboard/template",$data);
+        $data['main'] = 'admin/aircon/aircon_view';
+        return view("templates/template",$data);
 
     }
 
@@ -22,9 +22,9 @@ class AirconCrud extends Controller
         if($_SESSION['position'] != USER_ROLE_ADMIN){
             return $this->response->redirect(site_url('/dashboard'));
         }
-         $data['main'] = 'aircon/aircon_add';
+         $data['main'] = 'admin/aircon/aircon_add';
           $data['error'] = null;
-        return view("dashboard/template",$data);
+        return view("templates/template",$data);
     }
  
     // insert data
@@ -52,8 +52,8 @@ class AirconCrud extends Controller
         }
         $Aircon = new Aircon();
         $data['Aircon_obj'] = $Aircon->where('aircon_id', $aircon_id)->first();
-        $data['main'] = 'aircon/aircon_edit';
-        return view("dashboard/template",$data);
+        $data['main'] = 'admin/aircon/aircon_edit';
+        return view("templates/template",$data);
     }
 
     // update Client data

@@ -12,8 +12,8 @@ class ServCrud extends Controller
         }
         $Serv = new Serv();
         $data['services'] = $Serv->orderBy('serv_id', 'ASC')->findAll();
-        $data['main'] = 'serv/serv_view';
-        return view("dashboard/template",$data);
+        $data['main'] = 'admin/serv/serv_view';
+        return view("templates/template",$data);
 
     }
 
@@ -22,9 +22,9 @@ class ServCrud extends Controller
         if($_SESSION['position'] != USER_ROLE_ADMIN){
             return $this->response->redirect(site_url('/dashboard'));
         }
-         $data['main'] = 'serv/serv_add';
+         $data['main'] = 'admin/serv/serv_add';
           $data['error'] = null;
-        return view("dashboard/template",$data);
+        return view("templates/template",$data);
     }
  
     // insert data
@@ -53,8 +53,8 @@ class ServCrud extends Controller
         }
         $Serv = new Serv();
         $data['Serv_obj'] = $Serv->where('serv_id', $serv_id)->first();
-        $data['main'] = 'serv/serv_edit';
-        return view("dashboard/template",$data);
+        $data['main'] = 'admin/serv/serv_edit';
+        return view("templates/template",$data);
     }
 
     // update Service data
@@ -89,7 +89,7 @@ class ServCrud extends Controller
                 "price"=>$value['price'],
             ];
         }
-        return view('serv/servReports',$data);
+        return view('admin/serv/servReports',$data);
         
     }
     // delete Service

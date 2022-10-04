@@ -12,8 +12,8 @@ class EmpCrud extends Controller
         }
         $Emp = new Emp();
         $data['employees'] = $Emp->orderBy('emp_id', 'ASC')->findAll();
-        $data['main'] = 'emp/emp_view';
-        return view("dashboard/template",$data);
+        $data['main'] = 'admin/emp/emp_view';
+        return view("templates/template",$data);
 
     }
 
@@ -22,9 +22,9 @@ class EmpCrud extends Controller
         if($_SESSION['position'] != USER_ROLE_ADMIN){
             return $this->response->redirect(site_url('/dashboard'));
         }
-         $data['main'] = 'emp/emp_add';
+         $data['main'] = 'admin/emp/emp_add';
           $data['error'] = null;
-        return view("dashboard/template",$data);
+        return view("templates/template",$data);
     }
  
     // insert data
@@ -61,8 +61,8 @@ class EmpCrud extends Controller
         }
         $Emp = new Emp();
         $data['Emp_obj'] = $Emp->where('emp_id', $emp_id)->first();
-        $data['main'] = 'emp/emp_edit';
-        return view("dashboard/template",$data);
+        $data['main'] = 'admin/emp/emp_edit';
+        return view("templates/template",$data);
     }
 
     // update Emp data
@@ -100,7 +100,7 @@ class EmpCrud extends Controller
                 "emp_position"=>$value['emp_position'],
             ];
         }
-        return view('emp/empReports',$data);
+        return view('admin/emp/empReports',$data);
         
     }
     // delete Emp

@@ -20,8 +20,8 @@ class Dashboard extends BaseController
     public function index()
     {
       
-        $data['main'] = 'dashboard/dashboard';
-        return view('dashboard/template',$data);
+        $data['main'] = 'admin/dashboard/dashboard';
+        return view('templates/template',$data);
     }
     
     public function dashboard()
@@ -137,9 +137,6 @@ class Dashboard extends BaseController
                  "emp_array"=> $emp_arr,
              ];
      }
-           
-
-
 
         json_encode($data['event_week']);
         foreach ($data['event_week'] as $key => $value) {
@@ -267,8 +264,8 @@ class Dashboard extends BaseController
 
         // $query = $db->query('SELECT * FROM All_events WHERE start_event = curdate()');
         // $data['today'] = $query->getResult();
-        $data['main'] = 'dashboard/dashboard';
-        return view("dashboard/template",$data);
+        $data['main'] = 'admin/dashboard/dashboard';
+        return view("templates/template",$data);
     }
  
 
@@ -289,10 +286,8 @@ class Dashboard extends BaseController
                         'user_img' => $user_info['user_img'],
                         'isLoggedIn' => TRUE,
                     ];
-        $data['main'] = 'dashboard/profile';
-        // $data['success'] = 'Profile Updated!';
-
-        return view("dashboard/temp_profile",$data);
+        $data['main'] = 'admin/profile/profile';
+        return view("templates/template",$data);
     }
     public function update(){
         $User = new User();
@@ -369,7 +364,7 @@ class Dashboard extends BaseController
     }
     public function fpass(){
        
-        return view('dashboard/forgot_pass');
+        return view('admin/dashboard/forgot_pass');
     }
     public function fpass_send(){
         $User = new User();
@@ -386,7 +381,7 @@ class Dashboard extends BaseController
                             <body>
                                 <h2>Here is the link to Reset your Password.</h2>
                                 <p>Kindly click the \"Reset Password\" and fill the necessary information</p> 
-                                <h4><a href='".base_url("/forgot_password/".$to)." '>Reset Password</a></h4>
+                                <h4><a href='".base_url("/forgot-password/".$to)." '>Reset Password</a></h4>
                             </body>
                             </html>";
             $email = \Config\Services::email();
@@ -405,14 +400,14 @@ class Dashboard extends BaseController
         }else{
             session()->setFlashdata('error', 'Error! Email is not registered');
         }
-        return $this->response->redirect(site_url('/forgot_password'));
+        return $this->response->redirect(site_url('/forgot-password'));
     }
 
     public function change_pass_form($email){
         $User = new User();
         $data['user_obj'] = $User->where('email', $email)->first();
 
-        return view('dashboard/change_pass',$data);
+        return view('admin/dashboard/change_pass',$data);
     }
      public function change_pass($email){
 
@@ -432,13 +427,13 @@ class Dashboard extends BaseController
         else{
            
             session()->setFlashdata('error', 'Password didn\'t match');
-             return $this->response->redirect(site_url('/forgot_password/'.$email));
+             return $this->response->redirect(site_url('/forgot-password/'.$email));
         }
         if($User->update($id, $data)){
          session()->setFlashdata('message','Changed Password Successfully!');
         }
         
-        return $this->response->redirect(site_url('/forgot_password/'.$email));
+        return $this->response->redirect(site_url('/forgot-password/'.$email));
         
     }
     public function update_task($id){

@@ -14,8 +14,8 @@ class UsersCrud extends Controller
         }
         $User = new User();
         $data['users'] = $User->orderBy('user_id', 'ASC')->findAll();
-        $data['main'] = 'user/user_view';
-        return view("dashboard/template",$data);
+        $data['main'] = 'admin/user/user_view';
+        return view("templates/template",$data);
 
     }
 
@@ -26,9 +26,9 @@ class UsersCrud extends Controller
         }
         $Emp = new Emp();
         $data['emp'] = $Emp->orderBy('emp_id', 'ASC')->findAll();
-         $data['main'] = 'user/user_add';
+         $data['main'] = 'admin/user/user_add';
           $data['error'] = null;
-        return view("dashboard/template",$data);
+        return view("templates/template",$data);
     }
  
     // insert data
@@ -133,8 +133,8 @@ class UsersCrud extends Controller
          $Emp = new Emp();
         $data['emp'] = $Emp->orderBy('emp_id', 'ASC')->findAll();
         $data['User_obj'] = $User->where('user_id', $user_id)->first();
-        $data['main'] = 'user/user_edit';
-        return view("dashboard/template",$data);
+        $data['main'] = 'admin/user/user_edit';
+        return view("templates/template",$data);
     }
 
     // update User data
@@ -173,7 +173,7 @@ class UsersCrud extends Controller
                 "position"=>$value['position'],
             ];
         }
-        return view('user/userReports',$data);
+        return view('admin/user/userReports',$data);
         
     }
     // delete User

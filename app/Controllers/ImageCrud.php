@@ -12,15 +12,15 @@ class ImageCrud extends Controller
 		$Upload = new Upload();
 
 		$data['Upload'] = $Upload->orderBy('upload_id', 'ASC')->findAll();
-		$data['main'] = 'image/image_view';
-		return view('dashboard/template',$data);
+		$data['main'] = 'admin/upload/image_view';
+		return view('templates/template',$data);
 	}
 	public function create(){
         if($_SESSION['position'] != USER_ROLE_ADMIN){
             return $this->response->redirect(site_url('/dashboard'));
         }
-		$data['main'] = 'image/image_add';
-		return view('dashboard/template',$data);
+		$data['main'] = 'admin/upload/image_add';
+		return view('templates/template',$data);
 	}
 	public function store() {
         if($_SESSION['position'] != USER_ROLE_ADMIN){
@@ -54,8 +54,8 @@ class ImageCrud extends Controller
         }
         $Upload = new Upload();
         $data['Upload_obj'] = $Upload->where('upload_id', $upload_id)->first();
-        $data['main'] = 'image/image_edit';
-        return view("dashboard/template",$data);
+        $data['main'] = 'admin/upload/image_edit';
+        return view("templates/template",$data);
     }
     public function update($upload_id){
         if($_SESSION['position'] != USER_ROLE_ADMIN){

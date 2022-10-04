@@ -129,11 +129,11 @@ $routes->get('service-reports/delete/(:num)', 'ImageCrud::delete/$1',['filter' =
 
 $routes->get('/profile/(:num)', 'Dashboard::profile/$1',['filter' => 'authGuard']);
 $routes->post('profile/update', 'Dashboard::update',['filter' => 'authGuard']);
-$routes->get('/forgot_password', 'Dashboard::fpass');
+$routes->get('/forgot-password', 'Dashboard::fpass');
 
-$routes->get('/forgot_password/sent', 'Dashboard::fpass_send');
-$routes->get('/forgot_password/(:any)', 'Dashboard::change_pass_form/$1');
-$routes->post('/reset_password/(:any)', 'Dashboard::change_pass/$1');
+$routes->get('/forgot-password/sent', 'Dashboard::fpass_send');
+$routes->get('/forgot-password/(:any)', 'Dashboard::change_pass_form/$1');
+$routes->post('/reset-password/(:any)', 'Dashboard::change_pass/$1');
 $routes->get('/logout', 'Dashboard::logout',['filter' => 'authGuard']);
 
 $routes->get('/dashboard/task/update/(:num)', 'Dashboard::update_task/$1',['filter' => 'authGuard']);

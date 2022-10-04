@@ -76,8 +76,8 @@ class AppointmentCrud extends Controller
             ];
         }
 
-        $data['main'] = 'appointment/appointment_view';
-        return view("dashboard/template",$data);
+        $data['main'] = 'client/appointment/appointment_view';
+        return view("templates/template",$data);
 
     }
 
@@ -134,8 +134,8 @@ class AppointmentCrud extends Controller
         }
 
         
-        $data['main'] = 'appointment/appointment_add';
-        return view("dashboard/template",$data);
+        $data['main'] = 'client/appointment/appointment_add';
+        return view("templates/template",$data);
     }
     public function store() {
         
@@ -230,8 +230,8 @@ class AppointmentCrud extends Controller
             
         }
 
-        $data['main'] = 'appointment/appointment_edit';
-        return view("dashboard/template",$data);
+        $data['main'] = 'client/appointment/appointment_edit';
+        return view("templates/template",$data);
     }
     public function update(){
         

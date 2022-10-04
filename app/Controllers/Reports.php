@@ -74,8 +74,8 @@ class Reports extends BaseController
 
          }
 
-		$datas['main'] = 'dashboard/accomplishedReports';
-        return view('dashboard/template',$datas);
+		$datas['main'] = 'admin/reports/accomplishedReports';
+        return view('templates/template',$datas);
 	}
 	public function getAccomplished(){
         if($_SESSION['position'] != USER_ROLE_ADMIN){
@@ -138,8 +138,8 @@ class Reports extends BaseController
 
 
         }
-        $datas['main'] = 'dashboard/accomplishedReports';
-        return view('dashboard/template',$datas);
+        $datas['main'] = 'admin/reports/accomplishedReports';
+        return view('templates/template',$datas);
 	}
    public function printAccomplished($strt,$end){
     if($_SESSION['position'] != USER_ROLE_ADMIN){
@@ -194,7 +194,7 @@ class Reports extends BaseController
 
       
         
-      return view('dashboard/accomplishedPrint',$datas);
+      return view('admin/reports/accomplishedPrint',$datas);
      
    }
    public function showException(){
@@ -256,8 +256,8 @@ class Reports extends BaseController
 
          }
 
-        $datas['main'] = 'dashboard/exceptionReports';
-        return view('dashboard/template',$datas);
+        $datas['main'] = 'admin/reports/exceptionReports';
+        return view('templates/template',$datas);
     }
 
    public function getException(){
@@ -320,8 +320,8 @@ class Reports extends BaseController
 
 
         }
-        $datas['main'] = 'dashboard/exceptionReports';
-        return view('dashboard/template',$datas);
+        $datas['main'] = 'admin/reports/exceptionReports';
+        return view('templates/template',$datas);
     }
    public function printException($strt,$end){
     if($_SESSION['position'] != USER_ROLE_ADMIN){
@@ -375,7 +375,7 @@ class Reports extends BaseController
 
       
         
-      return view('dashboard/exceptionPrint',$datas);
+      return view('admin/reports/exceptionPrint',$datas);
      
    }
 }

@@ -14,8 +14,8 @@ class ClientCrud extends Controller
         }
         $Client = new Client();
         $data['clients'] = $Client->orderBy('client_id', 'ASC')->findAll();
-        $data['main'] = 'client/client_view';
-        return view("dashboard/template",$data);
+        $data['main'] = 'admin/client/client_view';
+        return view("templates/template",$data);
 
     }
     public function userClient(){
@@ -24,8 +24,8 @@ class ClientCrud extends Controller
         }
         $User = new User_bdo();
         $data['user'] = $User->orderBy('bdo_id', 'ASC')->findAll();
-        $data['main'] = 'client/user_client';
-        return view("dashboard/template",$data);
+        $data['main'] = 'admin/client/user_client';
+        return view("templates/template",$data);
     }
     public function updateStatus($id,$status){
 
@@ -81,9 +81,8 @@ class ClientCrud extends Controller
         if($_SESSION['position'] != USER_ROLE_ADMIN){
             return $this->response->redirect(site_url('/dashboard'));
         }
-         $data['main'] = 'client/client_add';
-          $data['error'] = '';
-        return view("dashboard/template",$data);
+         $data['main'] = 'admin/client/client_add';
+        return view("templates/template",$data);
     }
  
     // insert data
@@ -98,15 +97,15 @@ class ClientCrud extends Controller
         if ($cBranch) {
             $session->setFlashdata('branchError', 'value');
             // return $this->response->redirect(site_url('/client/create/view'));
-            $data['main'] = 'client/client_add';
+            $data['main'] = 'admin/client/client_add';
             $data['error'] = '';
-            return view("dashboard/template",$data);
+            return view("templates/template",$data);
         }else if ($cEmail){
             $session->setFlashdata('emailExist', 'value');
             // return $this->response->redirect(site_url('/client/create/view'));
-            $data['main'] = 'client/client_add';
+            $data['main'] = 'admin/client/client_add';
             $data['error'] = '';
-            return view("dashboard/template",$data);
+            return view("templates/template",$data);
         }
         $set = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $code = substr(str_shuffle($set), 0, 12);
@@ -161,8 +160,8 @@ class ClientCrud extends Controller
         }
         $Client = new Client();
         $data['Client_obj'] = $Client->where('client_id', $client_id)->first();
-        $data['main'] = 'client/client_edit';
-        return view("dashboard/template",$data);
+        $data['main'] = 'admin/client/client_edit';
+        return view("templates/template",$data);
     }
 
     // update Client data
@@ -201,7 +200,7 @@ class ClientCrud extends Controller
                 "client_contact"=>$value['client_contact'],
             ];
         }
-        return view('client/clientReports',$data);
+        return view('admin/client/clientReports',$data);
         
     }
  

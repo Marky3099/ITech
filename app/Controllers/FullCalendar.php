@@ -129,8 +129,8 @@ class FullCalendar extends BaseController
          }
          // dd($datas['event']);
 
-        $datas['main'] = 'dashboard/calendar';
-        return view("dashboard/temp_calendar",$datas);
+        $datas['main'] = 'admin/calendar/calendar';
+        return view("templates/template",$datas);
     }
     public function index1()
     {
@@ -248,8 +248,8 @@ class FullCalendar extends BaseController
        
          // dd($datas['event']);
 
-        $datas['main'] = 'dashboard/emp_calendar';
-        return view("dashboard/temp_calendar",$datas);
+        $datas['main'] = 'employee/calendar/emp_calendar';
+        return view("templates/template",$datas);
     }
    
     public function event(){
@@ -306,8 +306,8 @@ class FullCalendar extends BaseController
                  "status"=> $value['STATUS'],
              ];
             }
-         $datas['main'] = 'dashboard/events';
-        return view("dashboard/temp_calendar",$datas);
+         $datas['main'] = 'admin/calendar/events';
+        return view("templates/template",$datas);
 
     }
 
@@ -371,8 +371,8 @@ class FullCalendar extends BaseController
 
 
         }
-        $datas['main'] = 'dashboard/events';
-        return view('dashboard/template',$datas);
+        $datas['main'] = 'admin/calendar/events';
+        return view('templates/template',$datas);
     }
     public function printpdf($strt,$end){
         if($_SESSION['position'] != USER_ROLE_ADMIN){
@@ -427,7 +427,7 @@ class FullCalendar extends BaseController
 
       
         
-      return view('dashboard/eventPrint',$datas);
+      return view('admin/calendar/eventPrint',$datas);
      
    }
 
@@ -684,8 +684,8 @@ class FullCalendar extends BaseController
                  "status"=> $value['STATUS'],
              ];
      }
-         $datas['main'] = 'dashboard/today';
-        return view("dashboard/temp_calendar",$datas);
+         $datas['main'] = 'admin/calendar/today';
+        return view("templates/template",$datas);
     }
     public function printDaily(){
         if($_SESSION['position'] != USER_ROLE_ADMIN){
@@ -748,7 +748,7 @@ class FullCalendar extends BaseController
              ];
      }
         
-        return view("dashboard/dailyPrint",$datas);
+        return view("admin/calendar/dailyPrint",$datas);
     }
        public function weekly(){
         if($_SESSION['position'] != USER_ROLE_ADMIN){
@@ -806,8 +806,8 @@ class FullCalendar extends BaseController
                  "status"=> $value['STATUS'],
              ];
      }
-         $datas['main'] = 'dashboard/week';
-        return view("dashboard/temp_calendar",$datas);
+         $datas['main'] = 'admin/calendar/week';
+        return view("templates/template",$datas);
     }
      public function printWeekly(){
         if($_SESSION['position'] != USER_ROLE_ADMIN){
@@ -866,7 +866,7 @@ class FullCalendar extends BaseController
              ];
      }
         
-        return view("dashboard/weeklyPrint",$datas);
+        return view("admin/calendar/weeklyPrint",$datas);
     }
      public function monthly(){
         if($_SESSION['position'] != USER_ROLE_ADMIN){
@@ -924,8 +924,8 @@ class FullCalendar extends BaseController
                  "status"=> $value['STATUS'],
              ];
      }
-         $datas['main'] = 'dashboard/month';
-        return view("dashboard/temp_calendar",$datas);
+         $datas['main'] = 'admin/calendar/month';
+        return view("templates/template",$datas);
     }
      public function printMonthly(){
         if($_SESSION['position'] != USER_ROLE_ADMIN){
@@ -984,7 +984,7 @@ class FullCalendar extends BaseController
              ];
      }
          
-        return view("dashboard/monthlyPrint",$datas);
+        return view("admin/calendar/monthlyPrint",$datas);
     }
 }
 ?>

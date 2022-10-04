@@ -75,8 +75,8 @@ class CalllogsCrud extends Controller{
             ];
         }
         
-        $data['main'] = 'calllogs/call_view';
-        return view("dashboard/template",$data);
+        $data['main'] = 'admin/calllogs/call_view';
+        return view("templates/template",$data);
     }
     public function getfilter(){
         if($_SESSION['position'] != USER_ROLE_ADMIN){
@@ -132,8 +132,8 @@ class CalllogsCrud extends Controller{
 
 
         }
-        $data['main'] = 'calllogs/call_view';
-        return view('dashboard/template',$data);
+        $data['main'] = 'admin/calllogs/call_view';
+        return view('templates/template',$data);
     }
     public function printpdf($strt,$end){
         if($_SESSION['position'] != USER_ROLE_ADMIN){
@@ -187,7 +187,7 @@ class CalllogsCrud extends Controller{
 
       
         
-      return view('calllogs/callPrint',$data);
+      return view('admin/calllogs/callPrint',$data);
      
    }
     // add Call log form
@@ -244,9 +244,8 @@ class CalllogsCrud extends Controller{
              $data['brand2'][]=$device_brand;
         }
 
-         $data['main'] = 'calllogs/call_add';
-          $data['error'] = null;
-        return view("dashboard/template",$data);
+         $data['main'] = 'admin/calllogs/call_add';
+        return view("templates/template",$data);
     }
 
     // insert data
@@ -346,8 +345,8 @@ class CalllogsCrud extends Controller{
             
         }
 
-        $data['main'] = 'calllogs/call_edit';
-        return view("dashboard/template",$data);
+        $data['main'] = 'admin/calllogs/call_edit';
+        return view("templates/template",$data);
     }
 
     // update Call log data
