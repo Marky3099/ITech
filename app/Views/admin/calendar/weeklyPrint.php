@@ -35,14 +35,45 @@ class MYPDF extends TCPDF {
     public function Header() {
         // Logo
         $image_file = K_PATH_IMAGES.'imgicon.jpg';
+        $monday = strtotime('last monday', strtotime('tomorrow'));
+        $sunday = strtotime('+6 days', $monday);
         $this->Image($image_file, 60, 10, 30, 30, 'JPG', '', 'T', false, 300, '', false, false, 0, false, false, false);
         // Position at 15 mm from bottom
         $this->SetY(15);
-         $this->SetX(100);
+         // $this->SetX(100);
         // Set font
         $this->SetFont('helvetica', 'B', 12);
         // Title
-        $this->Cell(0, 0, 'Maylaflor Air-Conditioning and Refrigeration Services, Inc.', 0, false, 'L', 0, '', 0, false, 'T', 'B');
+        $this->Cell(0, 0, 'Maylaflor Air-Conditioning and Refrigeration Services, Inc.', 0, false, 'C', 0, '', 0, false, 'T', 'B');
+        //width //height //txt'' //border //ln //align'' //fill //link //stretch //ignore_min_height'' //calign //valign
+
+        //subheader Address
+        $this->SetY(25);
+        $this->SetFont('helvetica', '', 11);
+        $this->Cell(0, 0, ' A. Dominguez  St., Malibay,  Pasay City, 1300 2958', 0, false, 'C', 0, '', 0, false, 'T', 'B');
+        // Address cont..
+        $this->SetY(30);
+        $this->SetFont('helvetica', '', 11);
+        $this->Cell(0, 0, 'Telefax #:  8851-1005 / 8425-9958 /  8697-4066  / 8806-4790 ', 0, false, 'C', 0, '', 0, false, 'T', 'B');
+        // Address cont..
+        $this->SetY(35);
+        $this->SetFont('helvetica', '', 11);
+        $this->Cell(0, 0, 'Email Add:  maylaflorairconditioningref27@gmail.com', 0, false, 'C', 0, '', 0, false, 'T', 'B');
+
+        //Title 
+        $this->SetY(45);
+        $this->SetFont('helvetica', 'B', 11);
+        $html = 'Weekly Scheduled Tasks - '.date('F j', $monday) .  ' to '  . date('F j Y', $sunday);
+        $this->Cell(0, 0,$html , 0, false, 'C', 0, '', 0, false, 'T', 'B'); 
+
+        //Date Printed
+         // $this->SetXY(17,62);
+        $this->SetY(65);
+        $this->SetFont('helvetica','', 10);
+        // Setting Date ( I have set the date here )
+        $tDate=date('F d, Y');
+        $this->Cell(0, 0, 'Date Printed: '.$tDate, 0, false, 'L', 0, '', 0, false, 'T', 'M');               
+                            
     }
 
     // Page footer
@@ -51,12 +82,7 @@ class MYPDF extends TCPDF {
         $this->SetFont('helvetica','', 10);
         $userp= $_SESSION['username'];
         $this->Cell(0, 10, 'Prepared By: '.$userp, 0, false, 'L', 0, '', 0, false, 'T', 'M');
-    	//date
-    	 $this->SetXY(17,62);
-        $this->SetFont('helvetica','', 10);
-        // Setting Date ( I have set the date here )
-        $tDate=date('F d, Y');
-        $this->Cell(0, 10, 'Date Printed: '.$tDate, 0, false, 'L', 0, '', 0, false, 'T', 'M');
+    	
         // Page
         $this->SetY(1);
          $this->SetX(280);
@@ -88,7 +114,8 @@ $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
 // set margins
-$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+// $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+$pdf->SetMargins(15, 77, 10, 10);
 $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
@@ -108,38 +135,26 @@ if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
 
 
 // set font
-$pdf->SetFont('times', '', 11);
+// $pdf->SetFont('times', '', 11);
 
 // add a page
 $pdf->AddPage('L');
-
-// set some text to print
-$txt = <<<EOD
-A. Dominguez  St., Malibay,  Pasay City, 1300 2958 
-                              Telefax #:  8851-1005 / 8425-9958 /  8697-4066  / 8806-4790 
-                              Email Add:  maylaflorairconditioningref27@gmail.com
-EOD;
-$pdf->SetXY(40, 23);
-// print a block of text using Write()
-$pdf->Write(0, $txt, '', 0, 'C', true, 0, false, false, 0);
 
 $monday = strtotime('last monday', strtotime('tomorrow'));
 
 $sunday = strtotime('+6 days', $monday);
 
-
-$html = '<span style="text-align: center;"><b>Weekly Scheduled Tasks - '.date('F j', $monday) .  ' to '  . date('j Y', $sunday).'</b><br></span><br><br><br><br>';
-$pdf->SetXY(25, 45);
+$pdf->SetXY(15, 70);
 $pdf->SetFont('helvetica', '', 11);
 if($week){
-$html .= '<table cellspacing="0" cellpadding="15" border="1" id="table1">
+$html = '<table cellspacing="0" cellpadding="10" border="1">
 				       <thead>
 				          <tr style = "background-color: #A8D08D; text-align: center; font-size:11px;">
 				             <th>Date</th>
                              <th>Time</th>
                              <th>Branch Area</th>
                              <th>Branch Name</th>
-                             <th>Service/Task</th> 
+                             <th>Service/<br>Task</th> 
                              <th>Service Type</th> 
                              <th>Device Brand/Type</th> 
                              <th>Aircon Type</th> 
@@ -204,8 +219,8 @@ $pdf->writeHTML($html, true, 0, true, true);
 
 //Close and output PDF document
 
-$pdf->Output('Weekly_Tasks_Report_'.date('F j', $monday) .  ' to '  . date('j Y', $sunday).'.pdf', 'D');
-
+$pdf->Output('Weekly_Tasks_Report_'.date('F j', $monday) .  ' to '  . date('j Y', $sunday).'.pdf', 'I');
+ exit();
 //============================================================+
 // END OF FILE
 //============================================================+

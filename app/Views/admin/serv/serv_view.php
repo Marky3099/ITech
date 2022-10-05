@@ -2,7 +2,7 @@
        <div class="crud-text"><h1>Services</h1></div>
     <div class="d-flex">
         <a href="<?= base_url('serv/create/view') ?>" class="btn">Add Service</a>
-        <a href="<?= base_url('serv/print') ?>" class="btn">Download</a>
+        <a href="<?= base_url('serv/print') ?>" target="_blank" class="btn">Print</a>
    </div>
     <!--  -->
   <div class="mt-3">

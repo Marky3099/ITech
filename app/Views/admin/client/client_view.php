@@ -3,7 +3,7 @@
 
     <div class="d-flex justify-content-left">
         <a href="<?= base_url('client/create/view') ?>" class="btn">Add Client</a>
-        <a href="<?= base_url('client/print') ?>" class="btn">Download</a>
+        <a href="<?= base_url('client/print') ?>" target="_blank" class="btn">Print</a>
    </div>
    
   <div class="mt-3">

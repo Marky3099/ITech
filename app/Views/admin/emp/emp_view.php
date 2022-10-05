@@ -2,7 +2,7 @@
       <div class="crud-text"><h1>Employee</h1></div>
     <div class="d-flex justify-content-left">
         <a href="<?= base_url('emp/create/view') ?>" class="btn">Add Employee</a>
-        <a href="<?= base_url('emp/print') ?>" class="btn">Download</a>
+        <a href="<?= base_url('emp/print') ?>" target="_blank" class="btn">Print</a>
    </div>
   <div class="mt-3">
      <table class="table table-bordered" emp_id="users-list" id="table1">

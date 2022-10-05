@@ -25,7 +25,7 @@
                     </div>
                     <div class="form-group">
                         <?php if(isset($_GET['start_date']) && isset($_GET['to_date'])): ?>
-                            <a href="<?= base_url('/calllogs/filtered/print/'.$_GET['start_date']."/".$_GET['to_date'])?>" target="_blank" class="btn btn-success" id="dl">Download</a>
+                            <a href="<?= base_url('/calllogs/filtered/print/'.$_GET['start_date']."/".$_GET['to_date'])?>" target="_blank" class="btn btn-success" id="dl">Print</a>
                         <?php endif; ?>
                     </div>
                 </div>

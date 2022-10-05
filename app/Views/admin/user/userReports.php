@@ -35,14 +35,45 @@ class MYPDF extends TCPDF {
     public function Header() {
         // Logo
         $image_file = K_PATH_IMAGES.'imgicon.jpg';
+        $monday = strtotime('last monday', strtotime('tomorrow'));
+        $sunday = strtotime('+6 days', $monday);
         $this->Image($image_file, 60, 10, 30, 30, 'JPG', '', 'T', false, 300, '', false, false, 0, false, false, false);
         // Position at 15 mm from bottom
         $this->SetY(15);
-         $this->SetX(100);
+         // $this->SetX(100);
         // Set font
         $this->SetFont('helvetica', 'B', 12);
         // Title
-        $this->Cell(0, 0, 'Maylaflor AirConditioning and Refrigeration Services, Inc.', 0, false, 'L', 0, '', 0, false, 'T', 'B');
+        $this->Cell(0, 0, 'Maylaflor Air-Conditioning and Refrigeration Services, Inc.', 0, false, 'C', 0, '', 0, false, 'T', 'B');
+        //width //height //txt'' //border //ln //align'' //fill //link //stretch //ignore_min_height'' //calign //valign
+
+        //subheader Address
+        $this->SetY(25);
+        $this->SetFont('helvetica', '', 11);
+        $this->Cell(0, 0, ' A. Dominguez  St., Malibay,  Pasay City, 1300 2958', 0, false, 'C', 0, '', 0, false, 'T', 'B');
+        // Address cont..
+        $this->SetY(30);
+        $this->SetFont('helvetica', '', 11);
+        $this->Cell(0, 0, 'Telefax #:  8851-1005 / 8425-9958 /  8697-4066  / 8806-4790 ', 0, false, 'C', 0, '', 0, false, 'T', 'B');
+        // Address cont..
+        $this->SetY(35);
+        $this->SetFont('helvetica', '', 11);
+        $this->Cell(0, 0, 'Email Add:  maylaflorairconditioningref27@gmail.com', 0, false, 'C', 0, '', 0, false, 'T', 'B');
+
+        //Title 
+        $this->SetY(45);
+        $this->SetFont('helvetica', 'B', 11);
+        $html = 'User List';
+        $this->Cell(0, 0,$html , 0, false, 'C', 0, '', 0, false, 'T', 'B'); 
+
+        //Date Printed
+         // $this->SetXY(17,62);
+        $this->SetY(65);
+        $this->SetFont('helvetica','', 10);
+        // Setting Date ( I have set the date here )
+        $tDate=date('F d, Y');
+        $this->Cell(0, 0, 'Date Printed: '.$tDate, 0, false, 'L', 0, '', 0, false, 'T', 'M');               
+                            
     }
 
     // Page footer
@@ -51,12 +82,7 @@ class MYPDF extends TCPDF {
         $this->SetFont('helvetica','', 10);
         $userp= $_SESSION['username'];
         $this->Cell(0, 10, 'Prepared By: '.$userp, 0, false, 'L', 0, '', 0, false, 'T', 'M');
-    	//date
-    	 $this->SetXY(17,55);
-        $this->SetFont('helvetica','', 10);
-        // Setting Date ( I have set the date here )
-        $tDate=date('F d, Y');
-        $this->Cell(0, 10, 'Date Printed: '.$tDate, 0, false, 'L', 0, '', 0, false, 'T', 'M');
+        
         // Page
         $this->SetY(1);
          $this->SetX(280);
@@ -72,7 +98,7 @@ $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8',
 
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
-$pdf->SetAuthor('Maylaflor AirConditioning and Refrigeration Services, Inc.');
+$pdf->SetAuthor('Maylaflor Air-Conditioning and Refrigeration Services, Inc.');
 $pdf->SetTitle('User List');
 $pdf->SetSubject('User List');
 
@@ -88,7 +114,8 @@ $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
 // set margins
-$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+// $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+$pdf->SetMargins(15, 77, 10, 10);
 $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
@@ -108,64 +135,51 @@ if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
 
 
 // set font
-$pdf->SetFont('times', '', 11);
+// $pdf->SetFont('times', '', 11);
 
 // add a page
 $pdf->AddPage('L');
 
-// set some text to print
-$txt = <<<EOD
-2958 A. Dominguez St., Malibay, Pasay City, 1300
-                              Telefax #:  700-22352 / 0908-8919850 / 0923-0826305  
-                              Email Add:  maylaflorairconditioningref27@gmail.com
-EOD;
-$pdf->SetXY(40, 23);
-// print a block of text using Write()
-$pdf->Write(0, $txt, '', 0, 'C', true, 0, false, false, 0);
-
-
-
-
-$html = '<span style="text-align: center;"><b>User List</b></span><br><br><br><br>';
-$pdf->SetXY(25, 45);
+$pdf->SetXY(15, 70);
 $pdf->SetFont('helvetica', '', 11);
-$html .= '<table cellspacing="0" cellpadding="10" border="1" id="table1">
-				       <thead>
-				          <tr style = "background-color: #A8D08D; text-align: center; font-size:10px; white-space:no-wrap;">
-				             <th>User Name</th>
+if($user_data){
+$html = '<table cellspacing="0" cellpadding="10" border="1" id="table1">
+               <thead>
+                  <tr style = "background-color: #A8D08D; text-align: center; font-size:10px; white-space:no-wrap;">
+                     <th>User Name</th>
                              <th>Email</th>
                              <th>Address</th>
                              <th>Contact</th>
                              <th>Role</th>
                              
-				          </tr>
-				       </thead>
-				       <tbody>';
-     if($user_data)
-        // dd($all_events);
+                  </tr>
+               </thead>
+               <tbody>';
      foreach($user_data as $u){
-				   
-				   $html .='     <tr style="font-size:9px; text-align: center;">
-				             
+           
+           $html .='     <tr style="font-size:9px; text-align: center;">
+                     
                              <td>'.$u->name.'</td>
                              <td>'.$u->email.'</td>
                              <td>'.$u->address.'</td>
                              <td>'.$u->contact.'</td>
                              <td>'.$u->position.'</td></tr>';
-				         
-				        }
+                 
+                }
 
-				        
+                        
 $html .='</tbody>
-		</table>';
+        </table>';
+    }else{
+        $html .='<h1 style="text-align:center;">No Data Available!</h1>';
+    }
 
 $pdf->writeHTML($html, true, 0, true, true);
 // ---------------------------------------------------------
 
 //Close and output PDF document
-
-$pdf->Output('Services.pdf', 'D');
-
+$pdf->Output('User_List.pdf', 'I');
+ exit();
 //============================================================+
 // END OF FILE
 //============================================================+

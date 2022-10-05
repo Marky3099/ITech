@@ -38,11 +38,45 @@ class MYPDF extends TCPDF {
         $this->Image($image_file, 60, 10, 30, 30, 'JPG', '', 'T', false, 300, '', false, false, 0, false, false, false);
         // Position at 15 mm from bottom
         $this->SetY(15);
-         $this->SetX(100);
+         // $this->SetX(100);
         // Set font
         $this->SetFont('helvetica', 'B', 12);
         // Title
-        $this->Cell(0, 0, 'Maylaflor AirConditioning and Refrigeration Services, Inc.', 0, false, 'L', 0, '', 0, false, 'T', 'B');
+        $this->Cell(0, 0, 'Maylaflor Air-Conditioning and Refrigeration Services, Inc.', 0, false, 'C', 0, '', 0, false, 'T', 'B');
+        //width //height //txt'' //border //ln //align'' //fill //link //stretch //ignore_min_height'' //calign //valign
+
+        //subheader Address
+        $this->SetY(25);
+        $this->SetFont('helvetica', '', 11);
+        $this->Cell(0, 0, ' A. Dominguez  St., Malibay,  Pasay City, 1300 2958', 0, false, 'C', 0, '', 0, false, 'T', 'B');
+        // Address cont..
+        $this->SetY(30);
+        $this->SetFont('helvetica', '', 11);
+        $this->Cell(0, 0, 'Telefax #:  8851-1005 / 8425-9958 /  8697-4066  / 8806-4790 ', 0, false, 'C', 0, '', 0, false, 'T', 'B');
+        // Address cont..
+        $this->SetY(35);
+        $this->SetFont('helvetica', '', 11);
+        $this->Cell(0, 0, 'Email Add:  maylaflorairconditioningref27@gmail.com', 0, false, 'C', 0, '', 0, false, 'T', 'B');
+
+        //Title 
+        $this->SetY(45);
+        $this->SetFont('helvetica', 'B', 11);
+        $html = 'Detailed Exception Report';
+        $this->Cell(0, 0,$html , 0, false, 'C', 0, '', 0, false, 'T', 'B'); 
+
+        $this->SetY(50);
+        $this->SetFont('helvetica', '', 11);
+        $html = 'From '. date('F j, Y',strtotime($this->startDate)).' to '. date('F j, Y',strtotime($this->endDate));
+        $this->Cell(0, 0,$html , 0, false, 'C', 0, '', 0, false, 'T', 'B'); 
+
+        //Date Printed
+         // $this->SetXY(17,62);
+        $this->SetY(65);
+        $this->SetFont('helvetica','', 10);
+        // Setting Date ( I have set the date here )
+        $tDate=date('F d, Y');
+        $this->Cell(0, 0, 'Date Printed: '.$tDate, 0, false, 'L', 0, '', 0, false, 'T', 'M');               
+                            
     }
 
     // Page footer
@@ -51,12 +85,7 @@ class MYPDF extends TCPDF {
         $this->SetFont('helvetica','', 10);
         $userp= $_SESSION['username'];
         $this->Cell(0, 10, 'Prepared By: '.$userp, 0, false, 'L', 0, '', 0, false, 'T', 'M');
-    	//date
-    	 $this->SetXY(17,62);
-        $this->SetFont('helvetica','', 10);
-        // Setting Date ( I have set the date here )
-        $tDate=date('F d, Y');
-        $this->Cell(0, 10, 'Date Printed: '.$tDate, 0, false, 'L', 0, '', 0, false, 'T', 'M');
+        
         // Page
         $this->SetY(1);
          $this->SetX(280);
@@ -72,7 +101,7 @@ $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8',
 
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
-$pdf->SetAuthor('Maylaflor AirConditioning and Refrigeration Services, Inc.');
+$pdf->SetAuthor('Maylaflor Air-Conditioning and Refrigeration Services, Inc.');
 $pdf->SetTitle('Detailed Exception Report');
 $pdf->SetSubject('Detailed Exception Report');
 
@@ -88,7 +117,8 @@ $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
 // set margins
-$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+// $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+$pdf->SetMargins(15, 77, 10, 10);
 $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
@@ -108,53 +138,44 @@ if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
 
 
 // set font
-$pdf->SetFont('times', '', 11);
+// $pdf->SetFont('times', '', 11);
 
+$pdf->startDate = $date[0];
+$pdf->endDate = $date[1];
 // add a page
 $pdf->AddPage('L');
 
-// set some text to print
-$txt = <<<EOD
-2958 A. Dominguez St., Malibay, Pasay City, 1300
-                              Telefax #:  700-22352 / 0908-8919850 / 0923-0826305  
-                              Email Add:  maylaflorairconditioningref27@gmail.com
-EOD;
-$pdf->SetXY(40, 23);
-// print a block of text using Write()
-$pdf->Write(0, $txt, '', 0, 'C', true, 0, false, false, 0);
-
-
-
-
-$html = '<span style="text-align: center;"><b>Detailed Exception Report</b><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From '. date('F j, Y',strtotime($date[0])).' to '. date('F j, Y',strtotime($date[1])). '</span><br><br><br><br>';
-$pdf->SetXY(25, 45);
+$pdf->SetXY(15, 70);
 $pdf->SetFont('helvetica', '', 11);
+
 if($event){
-$html .= '<table cellspacing="0" cellpadding="10" border="1" id="table1">
-				       <thead>
-				          <tr style = "background-color: #A8D08D; text-align: center; font-size:10px; white-space:no-wrap;">
-				             <th>Date</th>
+$html = '<table cellspacing="0" cellpadding="10" border="1" id="table1">
+               <thead>
+                  <tr style = "background-color: #A8D08D; text-align: center; font-size:11px;">
+                     <th>Date</th>
+                             <th>Time</th>
                              <th>Branch Area</th>
                              <th>Branch Name</th>
                              <th>Service/<br>Task</th> 
-                             <th>Service<br>Type</th> 
-                             <th>Device Brand/Type</th> 
+                             <th>Service Type</th>
+                             <th>Device Brand/<br>Type</th> 
                              <th>Aircon Type</th> 
                              <th>FCU No.</th>
                              <th>Qty</th> 
                              <th>Assigned Person</th>
-                             <th>Service/<br>Task Price</th>
-                             <th>Total Service/<br>Task Price</th>
                              <th>Status</th>
-				          </tr>
-				       </thead>
-				       <tbody>';
+                  </tr>
+               </thead>
+               <tbody>';
      
         // dd($all_events);
      foreach($event as $dat){
-				   
-				   $html .='     <tr style="font-size:9px; text-align: center;">
-				             <td>'.date('m-d-Y',strtotime($dat->start_event)).'</td>
+           
+           $html .='     <tr style="font-size:9px; text-align: center;">
+                     <td>'.date('m-d-Y',strtotime($dat->start_event)).'</td>
+                             <td>';
+                             if($dat->time == "00:00:00"){$html .='N/A'; } 
+                             else{$html .=$dat->time;} $html .='</td>
                              <td>'.$dat->area.'</td>
                              <td>'.$dat->client_branch.'</td>
                              <td>'.$dat->serv_name.'</td>
@@ -183,16 +204,14 @@ $html .= '<table cellspacing="0" cellpadding="10" border="1" id="table1">
                          $count+=1;
                     }
                     $html .='</td>';
-				     $html .='<td>'.$dat->price.'</td>
-                              <td>'.$dat->price*$dat->quantity.'</td>
-                            <td style="color:#6C86B4;">'.$dat->status.'</td>
-				          </tr>';
-				         
-				        }
+             $html .='<td style="color:#4F6FA6;">'.$dat->status.'</td>
+                  </tr>';
+                 
+                }
 
-				        
+                        
 $html .='</tbody>
-		</table>';
+        </table>';
     }else{
         $html .='<h1 style="text-align:center;">No Data Available!</h1>';
     }
@@ -201,9 +220,8 @@ $pdf->writeHTML($html, true, 0, true, true);
 // ---------------------------------------------------------
 
 //Close and output PDF document
-
-$pdf->Output('Exception_Report_'.$date[0].'_to_'.$date[1].'.pdf', 'D');
-
+$pdf->Output('Exception_Report_'.$date[0].'_to_'.$date[1].'.pdf', 'I');
+ exit();
 //============================================================+
 // END OF FILE
 //============================================================+

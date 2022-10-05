@@ -110,10 +110,11 @@ class ServCrud extends Controller
             return $this->response->redirect(site_url('/dashboard'));
         }
         $Serv = new Serv();
-        $data['serv'] = $Serv->orderBy('serv_id', 'ASC')->findAll();
+        $data['serv'] = $Serv->orderBy('serv_name', 'ASC')->findAll();
         foreach ($data['serv'] as $key => $value) {
             $data['service'][]=(object)[
                 "serv_name"=>$value['serv_name'],
+                "serv_type"=>$value['serv_type'],
                 "serv_description"=>$value['serv_description'],
                 "price"=>$value['price'],
             ];

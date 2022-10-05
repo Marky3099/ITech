@@ -5,7 +5,7 @@
     <div class="d-flex justify-content-left" style="margin-left:20px;">
         <a href="<?= base_url('/calendar');?>" class="btn">Calendar</a>
         <a href="<?= base_url('/calendar/events');?>" class="btn">Scheduled Tasks</a>
-        <a href="<?= base_url('/calendar/events/monthly/print');?>" class="btn">Download</a>
+        <a href="<?= base_url('/calendar/events/monthly/print');?>" target="_blank" class="btn">Print</a>
    </div>
     
  </div>
