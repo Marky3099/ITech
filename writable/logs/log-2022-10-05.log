@@ -336,3 +336,31 @@ CRITICAL - 2022-10-05 03:53:22 --> Undefined variable: html
 #7 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #8 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
 #9 {main}
+CRITICAL - 2022-10-05 03:58:16 --> fopen(): remote host file access not supported, file://User_List.pdf
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'fopen(): remote...', 'C:\\xampp\\htdocs...', 1842, Array)
+#1 C:\xampp\htdocs\tsms\app\Libraries\tcpdf\include\tcpdf_static.php(1842): fopen('file://User_Lis...', 'wb')
+#2 C:\xampp\htdocs\tsms\app\Libraries\tcpdf\tcpdf.php(7749): TCPDF_STATIC::fopenLocal('file://User_Lis...', 'wb')
+#3 C:\xampp\htdocs\tsms\app\Views\admin\user\userReports.php(181): TCPDF->Output('User_List.pdf', 'F')
+#4 C:\xampp\htdocs\tsms\system\View\View.php(214): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#6 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('admin/user/user...', Array, true)
+#7 C:\xampp\htdocs\tsms\app\Controllers\UsersCrud.php(176): view('admin/user/user...', Array)
+#8 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\UsersCrud->printUser()
+#9 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsersCrud))
+#10 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#12 {main}
+CRITICAL - 2022-10-05 04:01:01 --> fopen(): remote host file access not supported, file://User_List.pdf
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'fopen(): remote...', 'C:\\xampp\\htdocs...', 1842, Array)
+#1 C:\xampp\htdocs\tsms\app\Libraries\tcpdf\include\tcpdf_static.php(1842): fopen('file://User_Lis...', 'wb')
+#2 C:\xampp\htdocs\tsms\app\Libraries\tcpdf\tcpdf.php(7749): TCPDF_STATIC::fopenLocal('file://User_Lis...', 'wb')
+#3 C:\xampp\htdocs\tsms\app\Views\admin\user\userReports.php(182): TCPDF->Output('User_List.pdf', 'F')
+#4 C:\xampp\htdocs\tsms\system\View\View.php(214): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#6 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('admin/user/user...', Array, true)
+#7 C:\xampp\htdocs\tsms\app\Controllers\UsersCrud.php(176): view('admin/user/user...', Array)
+#8 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\UsersCrud->printUser()
+#9 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsersCrud))
+#10 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#12 {main}

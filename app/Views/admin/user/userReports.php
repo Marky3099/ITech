@@ -143,7 +143,7 @@ $pdf->AddPage('L');
 $pdf->SetXY(15, 70);
 $pdf->SetFont('helvetica', '', 11);
 if($user_data){
-$html = '<table cellspacing="0" cellpadding="10" border="1" id="table1">
+$html .= '<table cellspacing="0" cellpadding="10" border="1" id="table1">
                <thead>
                   <tr style = "background-color: #A8D08D; text-align: center; font-size:10px; white-space:no-wrap;">
                      <th>User Name</th>

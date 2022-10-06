@@ -162,6 +162,8 @@ $html = '<table cellspacing="0" cellpadding="10" border="1" id="table1">
                              <th>Aircon Type</th> 
                              <th>FCU No.</th>
                              <th>Qty</th> 
+                             <th>Service/<br>Task Price</th>
+                             <th>Total Service/<br>Task Price</th>
                              <th>Assigned Person</th>
                              <th>Status</th>
                   </tr>
@@ -203,11 +205,13 @@ $html = '<table cellspacing="0" cellpadding="10" border="1" id="table1">
                         }
                          $count+=1;
                     }
-                    $html .='</td>';
-             $html .='<td style="color:#4F6FA6;">'.$dat->status.'</td>
-                  </tr>';
-                 
-                }
+                     $html .='</td>';
+                     $html .='<td>'.$dat->price.'</td>
+                              <td>'.$dat->price*$dat->quantity.'</td>
+                            <td style="color:#509550;">'.$dat->status.'</td>
+                          </tr>';
+
+                        }
 
                         
 $html .='</tbody>
