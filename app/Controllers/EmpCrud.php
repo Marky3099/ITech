@@ -22,11 +22,11 @@ class EmpCrud extends Controller
         if($_SESSION['position'] != USER_ROLE_ADMIN){
             return $this->response->redirect(site_url('/dashboard'));
         }
-         $data['main'] = 'admin/emp/emp_add';
-          $data['error'] = null;
+        $data['main'] = 'admin/emp/emp_add';
+        $data['error'] = null;
         return view("templates/template",$data);
     }
- 
+    
     // insert data
     public function store() {
         if($_SESSION['position'] != USER_ROLE_ADMIN){

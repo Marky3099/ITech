@@ -14,6 +14,6 @@ class Event extends Model
     protected $returnType     = 'array';
   
 
-    protected $allowedFields = ['title','start_event','time','end_event','client_id','serv_id','aircon_id','quantity','status','repeatable'];
+    protected $allowedFields = ['title','start_event','time','client_id','serv_id','status','repeatable'];
 
 }

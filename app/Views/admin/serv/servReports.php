@@ -73,7 +73,7 @@ class MYPDF extends TCPDF {
         // Setting Date ( I have set the date here )
         $tDate=date('F d, Y');
         $this->Cell(0, 0, 'Date Printed: '.$tDate, 0, false, 'L', 0, '', 0, false, 'T', 'M');               
-                            
+        
     }
 
     // Page footer
@@ -85,7 +85,7 @@ class MYPDF extends TCPDF {
         
         // Page
         $this->SetY(1);
-         $this->SetX(280);
+        $this->SetX(280);
         // Set font
         $this->SetFont('helvetica', 'I', 8);
         // Page number
@@ -143,43 +143,43 @@ $pdf->AddPage('L');
 $pdf->SetXY(15, 70);
 $pdf->SetFont('helvetica', '', 11);
 if($service){
-$html = '<table cellspacing="0" cellpadding="10" border="1" id="table1">
-               <thead>
-                  <tr style = "background-color: #A8D08D; text-align: center; font-size:10px; white-space:no-wrap;">
-                            <th>Service Name</th>
-                            <th>Service Type</th>
-                             <th>Description</th>
-                             <th>Price</th>
-                             
-                  </tr>
-               </thead>
-               <tbody>';
-     
+    $html = '<table cellspacing="0" cellpadding="10" border="1" id="table1">
+    <thead>
+    <tr style = "background-color: #A8D08D; text-align: center; font-size:10px; white-space:no-wrap;">
+    <th>Service Name</th>
+    <th>Service Type</th>
+    <th>Description</th>
+    <th>Price</th>
+    
+    </tr>
+    </thead>
+    <tbody>';
+    
         // dd($all_events);
-     foreach($service as $ser){
-           
-           $html .='     <tr style="font-size:9px; text-align: center;">
-                     
-                             <td>'.$ser->serv_name.'</td>
-                             <td>'.$ser->serv_type.'</td>
-                             <td>'.$ser->serv_description.'</td>
-                             <td>'.$ser->price.'</td></tr>';
-                 
-                }
+    foreach($service as $ser){
+     
+     $html .='     <tr style="font-size:9px; text-align: center;">
+     
+     <td>'.$ser->serv_name.'</td>
+     <td>'.$ser->serv_type.'</td>
+     <td>'.$ser->serv_description.'</td>
+     <td>'.$ser->price.'</td></tr>';
+     
+ }
 
-                        
-$html .='</tbody>
-        </table>';
-    }else{
-        $html .='<h1 style="text-align:center;">No Data Available!</h1>';
-    }
+ 
+ $html .='</tbody>
+ </table>';
+}else{
+    $html .='<h1 style="text-align:center;">No Data Available!</h1>';
+}
 
 $pdf->writeHTML($html, true, 0, true, true);
 // ---------------------------------------------------------
 
 //Close and output PDF document
 $pdf->Output('Services.pdf', 'I');
- exit();
+exit();
 //============================================================+
 // END OF FILE
 //============================================================+

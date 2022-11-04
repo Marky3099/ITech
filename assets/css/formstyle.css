@@ -125,18 +125,20 @@ body {
   padding: 4px 10px 3px;
 }
 
-.form-box .user-box input.pname, .form-box .user-box input.paddress, .form-box .user-box input.ppassword{
+.form-box .user-box input.pname,  .form-box .user-box input.paddress, .form-box .user-box input.ppassword{
     width: 40%;
     left: 0px;
 }
 
-.form-box .user-box input.pemail, .form-box .user-box input.pcontact, .form-box .user-box input.pcpassword{
+.form-box .user-box input.pemail, .form-box .user-box input.plname, .form-box .user-box input.pcontact, .form-box .user-box input.pcpassword{
   width: 41%;
   position: absolute;
   left: 270px;
   top: 0px;
 }
-
+.form-box .user-box input.bdo_email{
+  width: 89.2%;
+}
 
 
 .form-box .user-box .icon-box{
@@ -178,6 +180,15 @@ body {
   top: -12.5px;
   margin-left: 350px;
   border: none;
+}
+
+.form-box .btn-light{
+  margin-top: 80px;
+  float: left;
+  margin-left: -100px;
+  background-color: white;
+  color: #344F21;
+  z-index: 1;
 }
 
 .form-box a.back-btn{

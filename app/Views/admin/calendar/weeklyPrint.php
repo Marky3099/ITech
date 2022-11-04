@@ -73,7 +73,7 @@ class MYPDF extends TCPDF {
         // Setting Date ( I have set the date here )
         $tDate=date('F d, Y');
         $this->Cell(0, 0, 'Date Printed: '.$tDate, 0, false, 'L', 0, '', 0, false, 'T', 'M');               
-                            
+        
     }
 
     // Page footer
@@ -82,10 +82,10 @@ class MYPDF extends TCPDF {
         $this->SetFont('helvetica','', 10);
         $userp= $_SESSION['username'];
         $this->Cell(0, 10, 'Prepared By: '.$userp, 0, false, 'L', 0, '', 0, false, 'T', 'M');
-    	
+        
         // Page
         $this->SetY(1);
-         $this->SetX(280);
+        $this->SetX(280);
         // Set font
         $this->SetFont('helvetica', 'I', 8);
         // Page number
@@ -147,80 +147,108 @@ $sunday = strtotime('+6 days', $monday);
 $pdf->SetXY(15, 70);
 $pdf->SetFont('helvetica', '', 11);
 if($week){
-$html = '<table cellspacing="0" cellpadding="10" border="1">
-				       <thead>
-				          <tr style = "background-color: #A8D08D; text-align: center; font-size:11px;">
-				             <th>Date</th>
-                             <th>Time</th>
-                             <th>Branch Area</th>
-                             <th>Branch Name</th>
-                             <th>Service/<br>Task</th> 
-                             <th>Service Type</th> 
-                             <th>Device Brand/Type</th> 
-                             <th>Aircon Type</th> 
-                             <th>FCU No.</th>
-                             <th>Qty</th> 
-                             <th>Assigned Person</th>
-                             <th>Status</th>
-				          </tr>
-				       </thead>
-				       <tbody>';
-     
+    $html = '<table cellspacing="0" cellpadding="10" border="1">
+    <thead>
+    <tr style = "background-color: #A8D08D; text-align: center; font-size:11px;">
+    <th>Date</th>
+    <th>Time</th>
+    <th>Branch Area</th>
+    <th>Branch Name</th>
+    <th>Service/<br>Task</th> 
+    <th>Service Type</th> 
+    <th>Device Brand/Type</th> 
+    <th>Aircon Type</th> 
+    <th>FCU No.</th>
+    <th>Qty</th> 
+    <th>Assigned Person</th>
+    <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>';
+    
         // dd($all_events);
-     foreach($week as $w){
-				   
-				   $html .='     <tr style="font-size:9px; text-align: center;">
-				             <td>'.date('m-d-Y',strtotime($w->start_event)).'</td>
-                             <td>';
-                             if($w->time == "00:00:00"){$html .='N/A'; } 
-                             else{$html .=$w->time;} $html .='</td>
-                             <td>'.$w->area.'</td>
-                             <td>'.$w->client_branch.'</td>
-                             <td>'.$w->serv_name.'</td>
-                             <td>'.$w->serv_type.'</td>
-                             <td>'.$w->device_brand.'</td>
-                             <td>'.$w->aircon_type.'</td><td>';
-                    $data1 = explode(',',$w->fcu_array);
-                    $count1 = 0;
-                
-                    foreach($data1 as $fc){
-                     if($count1 < (count($data1) - 1) ){ 
-                       $html .=' '. $fc.'<br>';
-                        }
-                         $count1+=1;
+    foreach($week as $w){
+     
+     $html .='     <tr style="font-size:9px; text-align: center;">
+     <td>'.date('m-d-Y',strtotime($w->start_event)).'</td>
+     <td>';
+     if($w->time == "00:00:00"){$html .='N/A'; } 
+     else{$html .=$w->time;} $html .='</td>
+     <td>'.$w->area.'</td>
+     <td>'.$w->client_branch.'</td>
+     <td>'.$w->serv_name.'</td>
+     <td>'.$w->serv_type.'</td>
+     <td>';
+     $data= explode(',',$w->device_array);
+                  $count = 0;
+                  
+                  foreach($data as $device){
+                    if($count < (count($data) - 1) ){
+                         $html .=' '. $device.'<br>';
                     }
-                    $html .='</td>
-                             <td>'.$w->quantity.'</td><td>';
+                    $count+=1;
+                 }
+             $html .='</td>
+              <td>';
+              $data= explode(',',$w->aircon_array);
+               $count = 0;
+               
+               foreach($data as $aircon){
+                  if($count < (count($data) - 1) ){
+                    $html .=' '. $aircon.'<br>';
+                 }
+                 $count+=1;
+              }
+           $html .='</td><td>';
+     $data1 = explode(',',$w->fcu_array);
+     $count1 = 0;
+     
+     foreach($data1 as $fc){
+       if($count1 < (count($data1) - 1) ){ 
+         $html .=' '. $fc.'<br>';
+     }
+     $count1+=1;
+ }
+ $html .='</td>
+ <td>';$data = explode(',',$w->quantity_array);
+         $count = 0;
 
-                    $data = explode(',',$w->emp_array);
-                    $count = 0;
-                
-                    foreach($data as $emp){
-                     if($count < (count($data) - 1) ){ 
-                       $html .=' '. $emp.'<br>';
-                        }
-                         $count+=1;
-                    }
-                    $html .='</td>';
-				     $html .='<td style="color:#4F6FA6;">'.$w->status.'</td>
-				          </tr>';
-				         
-				        }
+foreach($data as $quantity){
+            if($count < (count($data) - 1) ){
+              $html .=' '. $quantity.'<br>';
+            }
+            $count+=1;
+        }
+     $html .='</td><td>';
 
-				        
+ $data = explode(',',$w->emp_array);
+ $count = 0;
+ 
+ foreach($data as $emp){
+   if($count < (count($data) - 1) ){ 
+     $html .=' '. $emp.'<br>';
+ }
+ $count+=1;
+}
+$html .='</td>';
+$html .='<td style="color:#4F6FA6;">'.$w->status.'</td>
+</tr>';
+
+}
+
+
 $html .='</tbody>
-		</table>';
-    }else{
-        $html .='<h1 style="text-align:center;">No Data Available!</h1>';
-    }
+</table>';
+}else{
+    $html .='<h1 style="text-align:center;">No Data Available!</h1>';
+}
 
 $pdf->writeHTML($html, true, 0, true, true);
 // ---------------------------------------------------------
 
 //Close and output PDF document
-
 $pdf->Output('Weekly_Tasks_Report_'.date('F j', $monday) .  ' to '  . date('j Y', $sunday).'.pdf', 'I');
- exit();
+exit();
 //============================================================+
 // END OF FILE
 //============================================================+

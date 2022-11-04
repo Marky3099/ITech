@@ -27,7 +27,7 @@ body {
 .register-box .header img{
   position: relative;
   left: 70px;
-  height: 100px;
+  height: 90px;
   width: 390px;
 }
 
@@ -76,7 +76,7 @@ body {
 }
 
 .register-box .user-box input.lname, .register-box .user-box input.contact{
-  margin-left: 57.5px;
+  /*margin-left: 57.5px;*/
 }
 
 .register-box .user-box input.cname, .register-box .user-box input.address, .register-box .user-box input.unqcode, .register-box .user-box input.password, .register-box .user-box input.cpassword{
@@ -105,7 +105,7 @@ body {
     background-color: #344F21;
     color: #fff;
     margin-top: 5px;
-    left: 275px;
+    left: 255px;
 }
 
 
@@ -170,7 +170,7 @@ input:-webkit-autofill{
 
 .register-box a.back-btn{
   position: relative;
-  top: -40px;
+  top: -60px;
   left: 10px;
   font-size: 15px;
   border: none;

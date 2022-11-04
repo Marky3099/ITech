@@ -1,9 +1,9 @@
 
-	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/print.css')?>">
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
-	
+<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/print.css')?>">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
 
-	<div class="body-content">
+
+<div class="body-content">
 	<!-- <div class="header-img">
 		<img src="<?= base_url('assets/image/imgicon.png');?>">
 		<h2>MAYLAFLOR AIRCONDITIONING & REF. SVCS INC.</h2>
@@ -46,84 +46,84 @@
 									<div class="form-group">
 										<?php if(isset($_GET['start_date']) && isset($_GET['to_date'])): ?>
 										<a href="<?= base_url('/reports/exception/filtered/print/'.$_GET['start_date']."/".$_GET['to_date'])?>" target="_blank" class="btn btn-success" id="print">Print</a>
-										<?php endif; ?>
-									</div>
+									<?php endif; ?>
 								</div>
 							</div>
+						</div>
 						
-						</form>
-					</div>	
-				</div>
-				
+					</form>
+				</div>	
+			</div>
+			
 
 			<div class="card mt-4 card2">
 				<div class="card-body">
 					<?php if($event):?>
-					<table class="table table-bordered" id="table1">
-				       <thead>
-				          <tr>
-				             <th>Date</th>
-				             <th>Branch Area</th>
-				             <th>Branch Name</th>
-				             <th>Service/Task</th> 
-				             <th>Service Type</th> 
-				             <th>Device Brand/Type</th> 
-				             <th>Aircon Type</th>
-				             <th>FCU No.</th>
-				             <th>Quantity</th> 
-				             <th>Assigned Person</th>
-				             <th>Status</th>
-				          </tr>
-				       </thead>
-				       <tbody>
-				       	  
-				          <?php if(isset($event)): ?>
-				          	
-				          <?php foreach($event as $dat):  ?>
-				          <tr>
-				             <td><?php echo date('m-d-Y',strtotime($dat->start_event)); ?></td>
-				             <td><?php echo $dat->area; ?></td>
-				             <td><?php echo $dat->client_branch; ?></td>
-				             <td><?php echo $dat->serv_name; ?></td>
-				             <td><?php echo $dat->serv_type; ?></td>
-				             <td><?php echo $dat->device_brand; ?></td>
-				             <td><?php echo $dat->aircon_type; ?></td>
-				             <td>
-               <?php $data1 = explode(',',$dat->fcu_array);
-                     $count1 = 0;
-                ?>
-                  <?php foreach($data1 as $fc):  ?>
-                     <?php if($count1 < (count($data1) - 1) ):  ?>
-                      <?php echo $fc; $count1+=1; ?> <br>
-                      <?php endif;  ?>
-                  <?php endforeach; ?>
-             </td> 
-				             <td><?php echo $dat->quantity; ?></td>
-				              <td>
-				               <?php $data = explode(',',$dat->emp_array);
-				                     $count = 0;
-				                ?>
-				                  <?php foreach($data as $emp):  ?>
-				                     <?php if($count < (count($data) - 1) ):  ?>
-				                     * <?php echo $emp; $count+=1; ?> <br>
-				                      <?php endif;  ?>
-				                  <?php endforeach; ?>
-				             </td> 
-				             <td><?php echo $dat->status; ?></td>
-				          </tr>
-				          <?php endforeach; ?>
-				         <?php endif; ?>
-				        
-				       </tbody>
-				     </table>
-				 <?php else:?>
-				 	<h1>No Pending Tasks Yet!</h1>
-				 <?php endif;?>
+						<table class="table table-bordered" id="table1">
+							<thead>
+								<tr>
+									<th>Date</th>
+									<th>Branch Area</th>
+									<th>Branch Name</th>
+									<th>Service/Task</th> 
+									<th>Service Type</th> 
+									<th>Device Brand/Type</th> 
+									<th>Aircon Type</th>
+									<th>FCU No.</th>
+									<th>Quantity</th> 
+									<th>Assigned Person</th>
+									<th>Status</th>
+								</tr>
+							</thead>
+							<tbody>
+								
+								<?php if(isset($event)): ?>
+									
+									<?php foreach($event as $dat):  ?>
+										<tr>
+											<td><?php echo date('m-d-Y',strtotime($dat->start_event)); ?></td>
+											<td><?php echo $dat->area; ?></td>
+											<td><?php echo $dat->client_branch; ?></td>
+											<td><?php echo $dat->serv_name; ?></td>
+											<td><?php echo $dat->serv_type; ?></td>
+											<td><?php echo $dat->device_brand; ?></td>
+											<td><?php echo $dat->aircon_type; ?></td>
+											<td>
+												<?php $data1 = explode(',',$dat->fcu_array);
+												$count1 = 0;
+												?>
+												<?php foreach($data1 as $fc):  ?>
+													<?php if($count1 < (count($data1) - 1) ):  ?>
+														<?php echo $fc; $count1+=1; ?> <br>
+													<?php endif;  ?>
+												<?php endforeach; ?>
+											</td> 
+											<td><?php echo $dat->quantity; ?></td>
+											<td>
+												<?php $data = explode(',',$dat->emp_array);
+												$count = 0;
+												?>
+												<?php foreach($data as $emp):  ?>
+													<?php if($count < (count($data) - 1) ):  ?>
+														* <?php echo $emp; $count+=1; ?> <br>
+													<?php endif;  ?>
+												<?php endforeach; ?>
+											</td> 
+											<td><?php echo $dat->status; ?></td>
+										</tr>
+									<?php endforeach; ?>
+								<?php endif; ?>
+								
+							</tbody>
+						</table>
+					<?php else:?>
+						<h1>No Pending Tasks Yet!</h1>
+					<?php endif;?>
 				</div>
-			</div>
 			</div>
 		</div>
 	</div>
+</div>
 </div>
 </div>
 
@@ -133,10 +133,10 @@
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
 
 <script type="text/javascript">
-$(document).ready( function () {
-    $('#table1').DataTable({
-    pageLength : 5,
-    lengthMenu: [[5, 10, 15,20], [5, 10, 15, 20,]]
-  });
-} );
+	$(document).ready( function () {
+		$('#table1').DataTable({
+			pageLength : 5,
+			lengthMenu: [[5, 10, 15,20], [5, 10, 15, 20,]]
+		});
+	} );
 </script>

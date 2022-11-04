@@ -1,20 +1,20 @@
-
-    <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/select2.css');?>">
-  
 <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/main.min.css')?>">
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 
 
-  <div class="body-content">
-    <div class="col-sm-3">
-      <h2 id="calendar-text"><b>Calendar</b></h2>
+<div class="body-content">
+  <div class="col-sm-3">
+    <h2 id="calendar-text"><b>Calendar</b></h2>
     <div class="tsk">
-        <a href="<?= base_url('calendar/events') ?>" class="btn" >Tasks</a><br>
-   </div>
+      <a href="<?= base_url('calendar/events') ?>" class="btn" >Tasks</a><br>
+    </div>
    <!-- <div class="tsk2">
         
    </div> -->
  </div>
-   <div class="legend col-lg-12">
+ <div class="legend col-md-12 col-sm-1">
   <h3 id="legend-text">Legend:</h3>
   
   <ul><b>
@@ -24,7 +24,7 @@
   </ul>
 </div>
 <div id='calendar' class="col-lg-12 col-md-10" style="width:100%;"></div>
- <div id='datepicker'></div>
+<div id='datepicker'></div>
 </div>
 </div>
 <!-- insert -->
@@ -40,107 +40,114 @@
       </div>
       <div class="modal-body" id="adata">
 
-            <input type="hidden" name="start_event" id="start_event" value="">
-          <div class="form-group">
-            <input class="form-control" type="hidden" name="title" id="title" placeholder="Title">
-          </div>
-          <div class="form-group">
-            <h5>Time</h5>
+        <input type="hidden" name="start_event" id="start_event" value="">
+        <div class="form-group">
+          <input class="form-control" type="hidden" name="title" id="title" placeholder="Title">
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="time">Time</label><br>
             <input type="time" name="time" id="time" value="00:00:00">
           </div>
-          <div class="form-group">
-            <h5>Repeat</h5>
+          <div class="form-group col-md-6">
+            <label for="repeatable">Repeat</label><br>
             <select id="repeatable" name = "repeatable">
               <option value="None">None</option>
               <option value="Weekly">Weekly</option>
               <option value="Monthly">Monthly</option>
             </select>
           </div>
-          <div class="form-group">
-            
-            <h3>Client Details:</h3>
-            <h5 id="area1">Branch Area</h5>
-            <h5 id="branch1">Branch Name</h5>
-            <!-- Branch Area -->
+        </div>
+        <h3>Client Details:</h3>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="area">Branch Area</label><br>
             <select id="area" name="area" class="form-control">
               <?php foreach($area as $cl):  ?>
-                  <option value=<?php echo $cl['area']; ?>><?php echo $cl['area'];?></option>
+                <option value=<?php echo $cl['area']; ?>><?php echo $cl['area'];?></option>
               <?php endforeach; ?>
             </select>
           </div>
-          <div class="form-group">
-            <!-- Branch Name -->
+          <div class="form-group col-md-6">
+            <label for="client_id">Branch Name</label><br>
             <select id="client_id" name="client_id" class="form-control" required>
 
             </select>
           </div>
-          <div class="form-group">
-            
-            <h5>Service</h5>
-              <select id="serv_id" name="serv_id" class="form-control" required>
-                <?php foreach($servName as $s):  ?>
-                  <optgroup label="<?= $s['serv_name']; ?>">
-                    <?php foreach($servType as $st):  ?>
-                      <?php if($st['serv_name'] == $s['serv_name']):?>
-                        <option value=<?= $st['serv_id'];?>><?= $st['serv_type'];?></option>
-                      <?php endif;?>
-                    <?php endforeach; ?>
-                </optgroup>
+        </div>
+        <div class="form-group">
+          
+          <label for="serv_id">Service</label><br>
+          <select id="serv_id" name="serv_id" class="form-control" required>
+            <?php foreach($servName as $s):  ?>
+              <optgroup label="<?= $s['serv_name']; ?>">
+                <?php foreach($servType as $st):  ?>
+                  <?php if($st['serv_name'] == $s['serv_name']):?>
+                    <option value=<?= $st['serv_id'];?>><?= $st['serv_type'];?></option>
+                  <?php endif;?>
                 <?php endforeach; ?>
-              </select>
-          </div>
-          <div class="form-group">
-           
-            <h3>Aircon Details:</h3>
-            <h5 id="dbrand">Device Brand</h5>
-            <h5 id="atype">Aircon Type</h5>
-            <h5 id= "fcu">FCU No.</h5>
-            <h5 id="qty">Qty</h5>
-            <!-- Device Brand -->
-            <select id="device_brand" name="device_brand" class="form-control" required>
+              </optgroup>
+            <?php endforeach; ?>
+          </select>
+        </div>
+        <h3>Aircon Details:</h3>
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            
+            <label for="dbrand">Device Brand</label>
+            <select id="device_brand" name="device_brand[]" class="form-control " data-id="0"required>
+              <option value="">Select Brand</option>
               <?php foreach($device_brand as $d_b):  ?>
-                  <option value=<?php echo $d_b['device_brand']; ?>><?php echo $d_b['device_brand'];?></option>
-              <?php endforeach; ?>
-            </select>
-          </div>
-          <div class="form-group">
-            <!-- Aircon Type -->
-            <select id="aircon_id" name="aircon_id" class="form-control" required>
-
-            </select>
-          </div>
-          <div class="form-group">
-            <!-- FCU -->
-            <select id="fcuno" name="fcuno[]" class="form-control" multiple="multiple" required>
-               <?php foreach($fcu_no as $f):  ?>
-                  <option value="<?php echo $f['fcuno']; ?>"><p id="s2option"><?php echo $f['fcu'];?></p></option>
-              <?php endforeach; ?>
-            </select>
-          </div>
-          <div class="form-group">
-            <!-- Quantity -->
-            <input type="number" name="quantity" id="quantity" min="1" value="1" required>
-          </div>
-          
-         <div class="form-group">
-          
-            <h5>Employee</h5>
-            <select id="emp_id" name="emp_id[]" class="form-control" multiple="multiple" style="width: 400px;" required>
-              <?php foreach($emp as $em):  ?>
-                  <option value=<?php echo $em['emp_id']; ?>><?php echo $em['emp_name'];?></option>
+                <option value=<?php echo $d_b['device_brand']; ?>><?php echo $d_b['device_brand'];?></option>
               <?php endforeach; ?>
             </select>
           </div> 
+          <div class="form-group col-md-3">
+            
+            <label for="aircont">Aircon Type</label>
+
+            <select id="aircon_id_0" name="aircon_id[]" class="form-control aircon" required>
+              <option value="">Select Type</option>
+            </select>
+          </div> 
+          <div class="form-group col-md-3">
+            
+            <label for="fcunos">Fcuno</label>
+            <select id="fcuno" name="fcuno0[]" class="selectpicker" data-width="100%" multiple data-selected-text-format="count > 3">
+              <?php foreach($fcu_no as $f):  ?>
+                <option value="<?php echo $f['fcuno']; ?>"><p id="s2option"><?php echo $f['fcu'];?></p></option>
+              <?php endforeach; ?>
+            </select>
+          </div> 
+          <div class="form-group col-md-2">
+            
+            <label for="fcunos">Quantity</label>
+            <input type="number" class="form-control" name="quantity[]" id="quantity" min="1" value="1" required>
+          </div> 
+          <div class="form-group col-md-1"><br>
+            <span id="add_aut" class="btn btn-primary"><i class="fa-solid fa-plus"></i></span>
+          </div>
+        </div>
+        <div id="auth-rows"></div>
+        <div class="form-group">
+          
+          <label for="emp_id">Employee</label><br>
+          <select id="emp_id" name="emp_id[]" class="form-control selectpicker" multiple data-selected-text-format="count > 8" required>
+            <?php foreach($emp as $em):  ?>
+              <option value=<?php echo $em['emp_id']; ?>><?php echo $em['emp_name'];?></option>
+            <?php endforeach; ?>
+          </select>
+        </div> 
 
 
-       </div>
+      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary">Save changes</button>
       </div>
-     </form>
-    </div>
+    </form>
   </div>
+</div>
 </div>
 <!-- update -->
 <div class="modal" id="mymodal2" tabindex="-1" role="dialog">
@@ -155,101 +162,70 @@
         </button>
       </div>
       <form action="<?= base_url('/calendar/update');?>" method="POST"> 
-      <div class="modal-body" id="adata">
-             <input type="hidden" name="id" id="id" value="">
-          <div class="form-group">
-             <h5>Reschedule</h5>
-            <input type="date" name="start_event_update" id="start_event_update" >
-          </div>
-          <div class="form-group">
-            
-            <!-- <h5>Title</h5> -->
-            <input class="form-control" type="hidden" name="title_update" id="title_update" placeholder="Title">
-          </div>
-          <div class="form-group">
-            <h5>Time</h5>
+        <div class="modal-body" id="adata">
+          <input type="hidden" name="id" id="id" value="">
+          <!-- <h5>Title</h5> -->
+          <input class="form-control" type="hidden" name="title_update" id="title_update" placeholder="Title">
+          
+          <div class="form-row">
+            <div class="form-group col-md-6">
+             <label for="start_event_update">Reschedule</label><br>
+             <input type="date" name="start_event_update" id="start_event_update" >
+           </div>
+           <div class="form-group col-md-6">
+            <label for="time_update">Time</label><br>
             <input type="time" name="time_update" id="time_update">
           </div>
-           <div class="form-group">
-            
-            <!-- ----------------------------------------------------- -->
-          <h3>Client Details: </h3>
-           <h5 id="area1">Branch Area</h5>
-            <h5 id="branch1">Branch Name</h5>
-            <select id="area_update" name="area_update" class="form-control" >
+        </div>
+        <h3>Client Details:</h3>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="area_update">Branch Area</label><br>
+            <select id="area_update" name="area_update" class="form-control">
               
             </select>
           </div>
+          <div class="form-group col-md-6">
+            <label for="client_id_update">Branch Name</label><br>
+            <select id="client_id_update" name="client_id_update" class="form-control">
 
-          <div class="form-group">
-           
-            <select class="form-control" id="client_id_update" name="client_id_update">
-          
             </select>
           </div>
-          <!-- ----------------------------------------------------- -->
-          <div class="form-group">
-            
-            <h5>Service</h5>
-            <select class="form-control" id="serv_id_update" name="serv_id_update">
-                <?php foreach($servName as $s):  ?>
-                  <optgroup label="<?= $s['serv_name']; ?>">
-                    <?php foreach($servType as $st):  ?>
-                      <?php if($st['serv_name'] == $s['serv_name']):?>
-                        <option value=<?= $st['serv_id'];?>><?= $st['serv_type'];?></option>
-                      <?php endif;?>
-                    <?php endforeach; ?>
-                </optgroup>
+        </div>
+        
+        <div class="form-group">
+          
+          <label for="serv_id_update">Service</label><br>
+          <select class="form-control" id="serv_id_update" name="serv_id_update">
+            <?php foreach($servName as $s):  ?>
+              <optgroup label="<?= $s['serv_name']; ?>">
+                <?php foreach($servType as $st):  ?>
+                  <?php if($st['serv_name'] == $s['serv_name']):?>
+                    <option value=<?= $st['serv_id'];?>><?= $st['serv_type'];?></option>
+                  <?php endif;?>
                 <?php endforeach; ?>
-              </select>
-          </div>
-           <div class="form-group">
-            
-            <h3>Aircon Details:</h3>
-           <h5 id="dbrand">Device Brand</h5>
-            <h5 id="atype">Aircon Type</h5>
-            <h5 id= "fcu">FCU No.</h5>
-            <h5 id="qty">Qty</h5>
-            <select id="device_brand_update" name="device_brand_update" class="form-control">
-               <?php foreach($device_brand as $d_b):  ?>
-                  <option value="<?php echo $d_b['device_brand']; ?>"><?php echo $d_b['device_brand'];?></option>
-              <?php endforeach; ?>
-            </select>
-          </div>
-
-          <div class="form-group">
-           
-            <select class="form-control" id="aircon_id_update" name="aircon_id_update"  required>
+              </optgroup>
+            <?php endforeach; ?>
+          </select>
+        </div> 
+        <!-- =================================================== -->
+        <div id="auth-rows-edit"></div>
+        <div class="form-group">
           
-            </select>
-          </div>
-          <div class="form-group">
-            <!-- FCU -->
-            <select id="fcuno_update" name="fcuno_update[]" class="form-control" multiple="multiple">
-              
-            </select>
-          </div>
-          <div class="form-group">
-            
-            <input type="number" name="quantity_update" id="quantity_update" min="1" >
-          </div>
-         
-          <div class="form-group">
-            
-            <h5>Employee</h5>
-            <select class="form-control" multiple="multiple" id="emp_id_update" name="emp_id_update[]" style="width:400px;">
-
-            </select> 
-          </div>
-       </div>
+          <label for="emp_id_update">Employee</label><br>
+          <select id="emp_id_update" name="emp_id_update[]" class="form-control selectpicker" multiple data-selected-text-format="count > 8">
+            <!--  -->
+          </select>
+        </div> 
+      </div>
       <div class="modal-footer">
         <div class="form-group">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          
 
-        <button type="submit" name="update_sched" class="btn btn-success">Save changes</button>
-      </div>
-     </form>
+          <button type="submit" name="update_sched" class="btn btn-success">Save changes</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
@@ -260,35 +236,116 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.js"></script>
 
 
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
 
 <!-- Time Picker -->
 <script src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>  
 <script src = "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>  
 <!-- <script src = "https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>   -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/js/bootstrap-select.min.js"></script>
 <script src = "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
 <!--  -->
 
 <!-- <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"></script> -->
 <script src="<?=base_url("assets/js/main.min.js")?>"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 
 <script type="text/javascript">
 // Calendar Variables--------------------
 
-  var event = <?php echo json_encode($event); ?>;
-  var areas = <?php echo json_encode($area); ?>;
-  var c_area = <?php echo json_encode($client_area2); ?> ;
-  var brand = <?php echo json_encode($device_brand); ?>;
-  var dev_brand = <?php echo json_encode($brand2); ?> ;
-  var emp_all = <?php echo json_encode($emp); ?>;
-  var fcu_all = <?php echo json_encode($fcu_no); ?>;
-// 
+var event = <?php echo json_encode($event); ?>;
 
-  var areas1 = <?php echo json_encode($client_area); ?> ;
-  var devbrand = <?php echo json_encode($brand); ?> ;
-</script>
-<script type="text/javascript" src="<?=base_url('assets/js/calendar.js')?>"></script>
+var areas = <?php echo json_encode($area); ?>;
+var c_area = <?php echo json_encode($client_area2); ?> ;
 
-</html>
+var emp_all = <?php echo json_encode($emp); ?>;
+
+var areas1 = <?php echo json_encode($client_area); ?> ;
+var airconD = <?php echo json_encode($client_area); ?> ;
+
+var count = 1;
+
+  // console.log(event);
+  $("#add_aut").click(function(e){
+    var html3 = `<div class="form-row" id="row">
+    <div class="form-group col-md-3">
+    
+    <label for="dbrand">Device Brand</label>
+    <select id="device_brand" name="device_brand[]" class="form-control " data-id="`+count+`"required>
+    <option value="0">Select Brand</option>
+    <?php foreach($device_brand as $d_b):  ?>
+      <option value=<?php echo $d_b['device_brand']; ?>><?php echo $d_b['device_brand'];?></option>
+    <?php endforeach; ?>
+    </select>
+    </div> 
+    <div class="form-group col-md-3">
+    
+    <label for="aircont">Aircon Type</label>
+    <select id="aircon_id_`+count+`" name="aircon_id[]" class="form-control aircon" required>
+    <option value="0">Select Type</option>
+    </select>
+    </div> 
+    <div class="form-group col-md-3">
+    
+    <label for="fcunos">Fcuno</label>
+    <select id="fcuno" name="fcuno`+count+`[]" class="selectpicker" data-width="100%" multiple data-selected-text-format="count > 2">
+    <?php foreach($fcu_no as $f):  ?>
+      <option value="<?php echo $f['fcuno']; ?>"><p id="s2option"><?php echo $f['fcu'];?></p></option>
+    <?php endforeach; ?>
+    </select>
+    </div> 
+    <div class="form-group col-md-2">
+    
+    <label for="fcunos">Quantity</label>
+    <input type="number" class="form-control" name="quantity[]" id="quantity" min="1" value="1" required>
+    </div> 
+    <div class="form-group col-md-1"><br>
+    <span id="auth-del" class="btn"><i class="fas fa-minus"></i></span>
+    </div>
+    </div>`;
+
+
+
+    
+    count++;
+    $('#auth-rows').append(html3);
+    
+    $('#mymodal .selectpicker').selectpicker();
+
+  });
+
+
+
+  $('#auth-rows').on('click', '#auth-del', function(E){
+
+    $(this).parents('#row').remove();
+
+  });
+
+  $(document).on('change', '#device_brand', function(){
+    var category_id = $(this).val();
+    var aircon = $(this).data('id');
+    $.ajax({
+      url: 'http://localhost/tsms/aircon/brand/'+category_id,
+      method:"GET",
+      success:function(data)
+      {
+        var res = JSON.parse(data);
+        console.log(res.options);
+        var html = '';
+        html += res.options;
+        $('#aircon_id_'+aircon).html(html);
+
+      },
+      error:function(e){
+        console.log(e);
+      }
+    })
+  });
+
+  $('#mymodal .selectpicker').selectpicker();
+      </script>
+      <script type="text/javascript" src="<?=base_url('assets/js/calendar.js')?>"></script>
+
+      </html>

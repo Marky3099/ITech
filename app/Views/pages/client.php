@@ -4,33 +4,33 @@
 <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/type.css')?>">
 
 
-  <div class="left-half"></div>
-  <div class="right-half">
-    	<div class="container">
-			<div class="header">
-			    <a href="<?= base_url('#home')?>" class="texthp"><img src="<?= base_url('assets/image/iicon.png')?>"></a>
-			</div>
-			<div class="box-content">
-					<h2>Hi, User!</h2>
-					<p><i class="fas fa-chevron-circle-down"></i>&nbsp;Please click or tap type of account.</i></p>
-
-						<div class="btn-layer">
-							<a href="<?=base_url('/bdo-login')?>" class="btn btn-success"><div class="icon-box"><i class="fas fa-users"></i></div>Partner Company</a></br>
-							<a href="#" class="btn btn-success"><div class="icon-box"><i class="fas fa-user-alt"></i></div>Non-Partner Company</a>
-						</div>
-					</br>
-					</br>
-					</br>
-					<p class="para1"> By using this service, you understood and agree to Maylaflor’s Tasks and Schedule Monitoring System <i>Terms of Use and Privacy Statement.</i></p>
-					<a href="<?= base_url('/user-type');?>" class="btn btn-success" 
-						style="position: absolute;
-									 bottom: 5;
-									 left: 10;
-									 font-size: 15px;
-									 font-weight: bold;
-									 background-color: #344F21;
-									 color: #fff;">Back</a>
-			</div>
+<div class="left-half"></div>
+<div class="right-half">
+	<div class="container">
+		<div class="header">
+			<a href="<?= base_url('#home')?>" class="texthp"><img src="<?= base_url('assets/image/iicon.png')?>"></a>
 		</div>
-                        
-  </div>
+		<div class="box-content">
+			<h2>Hi, User!</h2>
+			<p><i class="fas fa-chevron-circle-down"></i>&nbsp;Please click or tap type of account.</i></p>
+
+			<div class="btn-layer">
+				<a href="<?=base_url('/bdo-login')?>" class="btn btn-success"><div class="icon-box"><i class="fas fa-users"></i></div>Partner Company</a></br>
+				<a href="#" class="btn btn-success"><div class="icon-box"><i class="fas fa-user-alt"></i></div>Non-Partner Company</a>
+			</div>
+		</br>
+	</br>
+</br>
+<p class="para1"> By using this service, you understood and agree to Maylaflor’s Tasks and Schedule Monitoring System <i>Terms of Use and Privacy Statement.</i></p>
+<a href="<?= base_url('/user-type');?>" class="btn btn-success" 
+	style="position: absolute;
+	bottom: 5;
+	left: 10;
+	font-size: 15px;
+	font-weight: bold;
+	background-color: #344F21;
+	color: #fff;">Back</a>
+</div>
+</div>
+
+</div>

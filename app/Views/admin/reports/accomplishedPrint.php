@@ -76,7 +76,7 @@ class MYPDF extends TCPDF {
         // Setting Date ( I have set the date here )
         $tDate=date('F d, Y');
         $this->Cell(0, 0, 'Date Printed: '.$tDate, 0, false, 'L', 0, '', 0, false, 'T', 'M');               
-                            
+        
     }
 
     // Page footer
@@ -88,7 +88,7 @@ class MYPDF extends TCPDF {
         
         // Page
         $this->SetY(1);
-         $this->SetX(280);
+        $this->SetX(280);
         // Set font
         $this->SetFont('helvetica', 'I', 8);
         // Page number
@@ -149,83 +149,83 @@ $pdf->SetXY(15, 70);
 $pdf->SetFont('helvetica', '', 11);
 
 if($event){
-$html = '<table cellspacing="0" cellpadding="10" border="1" id="table1">
-               <thead>
-                  <tr style = "background-color: #A8D08D; text-align: center; font-size:11px;">
-                     <th>Date</th>
-                             <th>Time</th>
-                             <th>Branch Area</th>
-                             <th>Branch Name</th>
-                             <th>Service/<br>Task</th> 
-                             <th>Service Type</th>
-                             <th>Device Brand/<br>Type</th> 
-                             <th>Aircon Type</th> 
-                             <th>FCU No.</th>
-                             <th>Qty</th> 
-                             <th>Service/<br>Task Price</th>
-                             <th>Total Service/<br>Task Price</th>
-                             <th>Assigned Person</th>
-                             <th>Status</th>
-                  </tr>
-               </thead>
-               <tbody>';
-     
+    $html = '<table cellspacing="0" cellpadding="10" border="1" id="table1">
+    <thead>
+    <tr style = "background-color: #A8D08D; text-align: center; font-size:11px;">
+    <th>Date</th>
+    <th>Time</th>
+    <th>Branch Area</th>
+    <th>Branch Name</th>
+    <th>Service/<br>Task</th> 
+    <th>Service Type</th>
+    <th>Device Brand/<br>Type</th> 
+    <th>Aircon Type</th> 
+    <th>FCU No.</th>
+    <th>Qty</th> 
+    <th>Service/<br>Task Price</th>
+    <th>Total Service/<br>Task Price</th>
+    <th>Assigned Person</th>
+    <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>';
+    
         // dd($all_events);
-     foreach($event as $dat){
-           
-           $html .='     <tr style="font-size:9px; text-align: center;">
-                     <td>'.date('m-d-Y',strtotime($dat->start_event)).'</td>
-                             <td>';
-                             if($dat->time == "00:00:00"){$html .='N/A'; } 
-                             else{$html .=$dat->time;} $html .='</td>
-                             <td>'.$dat->area.'</td>
-                             <td>'.$dat->client_branch.'</td>
-                             <td>'.$dat->serv_name.'</td>
-                             <td>'.$dat->serv_type.'</td>
-                             <td>'.$dat->device_brand.'</td>
-                             <td>'.$dat->aircon_type.'</td><td>';
-                    $data1 = explode(',',$dat->fcu_array);
-                    $count1 = 0;
-                
-                    foreach($data1 as $fc){
-                     if($count1 < (count($data1) - 1) ){ 
-                       $html .=' '. $fc.'<br>';
-                        }
-                         $count1+=1;
-                    }
-                    $html .='</td>
-                             <td>'.$dat->quantity.'</td><td>';
+    foreach($event as $dat){
+     
+     $html .='     <tr style="font-size:9px; text-align: center;">
+     <td>'.date('m-d-Y',strtotime($dat->start_event)).'</td>
+     <td>';
+     if($dat->time == "00:00:00"){$html .='N/A'; } 
+     else{$html .=$dat->time;} $html .='</td>
+     <td>'.$dat->area.'</td>
+     <td>'.$dat->client_branch.'</td>
+     <td>'.$dat->serv_name.'</td>
+     <td>'.$dat->serv_type.'</td>
+     <td>'.$dat->device_brand.'</td>
+     <td>'.$dat->aircon_type.'</td><td>';
+     $data1 = explode(',',$dat->fcu_array);
+     $count1 = 0;
+     
+     foreach($data1 as $fc){
+       if($count1 < (count($data1) - 1) ){ 
+         $html .=' '. $fc.'<br>';
+     }
+     $count1+=1;
+ }
+ $html .='</td>
+ <td>'.$dat->quantity.'</td><td>';
 
-                    $data = explode(',',$dat->emp_array);
-                    $count = 0;
-                
-                    foreach($data as $emp){
-                     if($count < (count($data) - 1) ){ 
-                       $html .=' '. $emp.'<br>';
-                        }
-                         $count+=1;
-                    }
-                     $html .='</td>';
-                     $html .='<td>'.$dat->price.'</td>
-                              <td>'.$dat->price*$dat->quantity.'</td>
-                            <td style="color:#509550;">'.$dat->status.'</td>
-                          </tr>';
+ $data = explode(',',$dat->emp_array);
+ $count = 0;
+ 
+ foreach($data as $emp){
+   if($count < (count($data) - 1) ){ 
+     $html .=' '. $emp.'<br>';
+ }
+ $count+=1;
+}
+$html .='</td>';
+$html .='<td>'.$dat->price.'</td>
+<td>'.$dat->price*$dat->quantity.'</td>
+<td style="color:#509550;">'.$dat->status.'</td>
+</tr>';
 
-                        }
+}
 
-                        
+
 $html .='</tbody>
-        </table>';
-    }else{
-        $html .='<h1 style="text-align:center;">No Data Available!</h1>';
-    }
+</table>';
+}else{
+    $html .='<h1 style="text-align:center;">No Data Available!</h1>';
+}
 
 $pdf->writeHTML($html, true, 0, true, true);
 // ---------------------------------------------------------
 
 //Close and output PDF document
 $pdf->Output('Accomplished_Report_'.$date[0].'_to_'.$date[1].'.pdf', 'I');
- exit();
+exit();
 //============================================================+
 // END OF FILE
 //============================================================+

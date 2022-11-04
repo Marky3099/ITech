@@ -1,5 +1,5 @@
 <?php echo view('templates/dash_header');?>		
-    <div >
+<div >
     <?= view($main);?>
 </div>
 <?php echo view('templates/dash_footer');?>

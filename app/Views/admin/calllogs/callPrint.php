@@ -76,7 +76,7 @@ class MYPDF extends TCPDF {
         // Setting Date ( I have set the date here )
         $tDate=date('F d, Y');
         $this->Cell(0, 0, 'Date Printed: '.$tDate, 0, false, 'L', 0, '', 0, false, 'T', 'M');               
-                            
+        
     }
 
     // Page footer
@@ -88,7 +88,7 @@ class MYPDF extends TCPDF {
         
         // Page
         $this->SetY(1);
-         $this->SetX(280);
+        $this->SetX(280);
         // Set font
         $this->SetFont('helvetica', 'I', 8);
         // Page number
@@ -149,63 +149,63 @@ $pdf->SetXY(15, 70);
 $pdf->SetFont('helvetica', '', 11);
 
 if($view_calllogs){
-$html = '<table cellspacing="0" cellpadding="15" border="1" id="table1">
-               <thead>
-                  <tr style = "background-color: #A8D08D; text-align: center; font-size:11px;">
-                     <th>Date</th>
-                             <th>Branch Area</th>
-                             <th>Branch Name</th>
-                             <th>Caller</th> 
-                             <th>Particulars</th> 
-                             <th>Device Brand</th> 
-                             <th>Aircon Type</th>
-                             <th>FCU No.</th>
-                             <th>Qty</th> 
-                             <th>Status</th>
-                  </tr>
-               </thead>
-               <tbody>';
-     
+    $html = '<table cellspacing="0" cellpadding="15" border="1" id="table1">
+    <thead>
+    <tr style = "background-color: #A8D08D; text-align: center; font-size:11px;">
+    <th>Date</th>
+    <th>Branch Area</th>
+    <th>Branch Name</th>
+    <th>Caller</th> 
+    <th>Particulars</th> 
+    <th>Device Brand</th> 
+    <th>Aircon Type</th>
+    <th>FCU No.</th>
+    <th>Qty</th> 
+    <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>';
+    
         // dd($all_events);
-     foreach($view_calllogs as $call_log){
-           
-           $html .=' <tr style="font-size:9px; text-align: center;">
-                     <td>'.date('m-d-Y',strtotime($call_log->date)).'</td>
-                             <td>'.$call_log->area.'</td>
-                             <td>'.$call_log->client_branch.'</td>
-                             <td>'.$call_log->caller.'</td>
-                             <td>'.$call_log->particulars.'</td>
-                             <td>'.$call_log->device_brand.'</td>
-                             <td>'.$call_log->aircon_type.'</td><td>';
-                    $data1 = explode(',',$call_log->fcu_arr);
-                    $count1 = 0;
-                
-                    foreach($data1 as $fc){
-                     if($count1 < (count($data1) - 1) ){ 
-                       $html .=' '. $fc.'<br>';
-                        }
-                         $count1+=1;
-                    }
-                    $html .='</td>
-                             <td>'.$call_log->qty.'</td>
-                             <td style="color:#4F6FA6;">'.$call_log->status.'</td>
-                  </tr>';
-                 
-                }
+    foreach($view_calllogs as $call_log){
+     
+     $html .=' <tr style="font-size:9px; text-align: center;">
+     <td>'.date('m-d-Y',strtotime($call_log->date)).'</td>
+     <td>'.$call_log->area.'</td>
+     <td>'.$call_log->client_branch.'</td>
+     <td>'.$call_log->caller.'</td>
+     <td>'.$call_log->particulars.'</td>
+     <td>'.$call_log->device_brand.'</td>
+     <td>'.$call_log->aircon_type.'</td><td>';
+     $data1 = explode(',',$call_log->fcu_arr);
+     $count1 = 0;
+     
+     foreach($data1 as $fc){
+       if($count1 < (count($data1) - 1) ){ 
+         $html .=' '. $fc.'<br>';
+     }
+     $count1+=1;
+ }
+ $html .='</td>
+ <td>'.$call_log->qty.'</td>
+ <td style="color:#4F6FA6;">'.$call_log->status.'</td>
+ </tr>';
+ 
+}
 
-                        
+
 $html .='</tbody>
-        </table>';
-    }else{
-        $html .='<h1 style="text-align:center;">No Data Available!</h1>';
-    }
+</table>';
+}else{
+    $html .='<h1 style="text-align:center;">No Data Available!</h1>';
+}
 
 $pdf->writeHTML($html, true, 0, true, true);
 // ---------------------------------------------------------
 
 //Close and output PDF document
 $pdf->Output('Call_Logs_Reports_FROM_'.$date[0].'_to_'.$date[1].'.pdf', 'I');
- exit();
+exit();
 //============================================================+
 // END OF FILE
 //============================================================+

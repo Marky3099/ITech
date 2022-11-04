@@ -73,7 +73,7 @@ class MYPDF extends TCPDF {
         // Setting Date ( I have set the date here )
         $tDate=date('F d, Y');
         $this->Cell(0, 0, 'Date Printed: '.$tDate, 0, false, 'L', 0, '', 0, false, 'T', 'M');               
-                            
+        
     }
 
     // Page footer
@@ -85,7 +85,7 @@ class MYPDF extends TCPDF {
         
         // Page
         $this->SetY(1);
-         $this->SetX(280);
+        $this->SetX(280);
         // Set font
         $this->SetFont('helvetica', 'I', 8);
         // Page number
@@ -143,47 +143,47 @@ $pdf->AddPage('L');
 $pdf->SetXY(15, 70);
 $pdf->SetFont('helvetica', '', 11);
 if($employee){
-$html = '<table cellspacing="0" cellpadding="10" border="1" id="table1">
-               <thead>
-                  <tr style = "background-color: #A8D08D; text-align: center; font-size:10px; white-space:no-wrap;">
-                     <th>Employee Name</th>
-                             <th>Email</th>
-                             <th>Address</th>
-                             <th>Contact</th>
-                             <th>Position</th>
-                             
-                  </tr>
-               </thead>
-               <tbody>';
-   
+    $html = '<table cellspacing="0" cellpadding="10" border="1" id="table1">
+    <thead>
+    <tr style = "background-color: #A8D08D; text-align: center; font-size:10px; white-space:no-wrap;">
+    <th>Employee Name</th>
+    <th>Email</th>
+    <th>Address</th>
+    <th>Contact</th>
+    <th>Position</th>
+    
+    </tr>
+    </thead>
+    <tbody>';
+    
         // dd($all_events);
-     foreach($employee as $em){
-           
-           $html .='     <tr style="font-size:9px; text-align: center;">
-                     
-                             <td>'.$em->emp_name.'</td>
-                             <td>'.$em->emp_email.'</td>
-                             <td>'.$em->emp_address.'</td>
-                             <td>'.$em->emp_contact.'</td>
-                             <td>'.$em->emp_position.'</td>
+    foreach($employee as $em){
+     
+     $html .='     <tr style="font-size:9px; text-align: center;">
+     
+     <td>'.$em->emp_name.'</td>
+     <td>'.$em->emp_email.'</td>
+     <td>'.$em->emp_address.'</td>
+     <td>'.$em->emp_contact.'</td>
+     <td>'.$em->emp_position.'</td>
 
-                             </tr>';
-                 
-                }
+     </tr>';
+     
+ }
 
-                        
-$html .='</tbody>
-        </table>';
-    }else{
-        $html .='<h1 style="text-align:center;">No Data Available!</h1>';
-    }
+ 
+ $html .='</tbody>
+ </table>';
+}else{
+    $html .='<h1 style="text-align:center;">No Data Available!</h1>';
+}
 
 $pdf->writeHTML($html, true, 0, true, true);
 // ---------------------------------------------------------
 
 //Close and output PDF document
 $pdf->Output('Employee_List.pdf', 'I');
- exit();
+exit();
 //============================================================+
 // END OF FILE
 //============================================================+
