@@ -10,8 +10,8 @@ use App\Models\Serv;
 use App\Libraries\Pdf;
 use App\Models\Event_emp_views;
 use App\Models\Aircon;
-use App\Models\Event_fcu_views;
-
+use App\Models\Event_fcu;
+use App\Models\Event_aircon_views;
 
 class Reports extends BaseController
 {   
@@ -20,11 +20,11 @@ class Reports extends BaseController
             return $this->response->redirect(site_url('/dashboard'));
         }
         $event = new All_events();
-        // $emp = new Emp();
         $client = new Client();
         $serv = new Serv();
         $event_emp = new Event_emp_views();
-        $event_fcu = new Event_fcu_views();
+        $event_aircon = new Event_aircon_views();
+        $event_fcu = new Event_fcu();
         $aircon = new Aircon();
         
         $datas['event'] = array();
@@ -32,6 +32,7 @@ class Reports extends BaseController
         // $datas['emp'] = $emp->orderBy('emp_id', 'ASC')->findAll();
         $datas['serv'] = $serv->orderBy('serv_id', 'ASC')->findAll();
         $datas['aircon'] = $aircon->orderBy('aircon_id', 'ASC')->findAll();
+        $datas['event_aircon'] = $event_aircon->orderBy('id', 'ASC')->findAll();
 
         $datas['all_events'] = $event->orderBy('start_event', 'ASC')->where('status = "Done"')->findAll();
         // dd($data[0]['title']);
@@ -45,12 +46,24 @@ class Reports extends BaseController
                  $emp_arr .= $datas['event_emp'][$key]['emp_name'].",";
              }
          }
-         $fcu_arr = "";
-         foreach ($datas['event_fcu'] as $key => $value_fcus) {
-            if ( $value['id'] == $value_fcus['id']) {
-             $fcu_arr .= $datas['event_fcu'][$key]['fcu'].",";
-         }
-     }
+       $fcu_arr = "";
+       $aircon_arr = "";
+       $device_arr = "";
+       $quantity_arr = "";
+       // dd($datas['event_fcu']);
+       foreach ($datas['event_fcu'] as $key => $value_fcu) {
+            if ( $value['id'] == $value_fcu['id']) {
+               $fcu_arr .= $datas['event_fcu'][$key]['fcuno'].",";
+           }
+        } 
+        foreach ($datas['event_aircon'] as $key => $value_aircon) {
+            if ( $value['id'] == $value_aircon['id']) {
+               $aircon_arr .= $datas['event_aircon'][$key]['aircon_type'].",";
+               $device_arr .= $datas['event_aircon'][$key]['device_brand'].",";
+               $quantity_arr .= $datas['event_aircon'][$key]['quantity'].",";
+               
+           }
+        }    
 
      $datas['event'][]= (object)[
         "id"=> $value['id'],
@@ -58,13 +71,13 @@ class Reports extends BaseController
         "start_event"=> $value['start_event'],
         "time"=> $value['TIME'],
         "serv_id"=> $value['serv_id'],
-        "aircon_id"=> $value['aircon_id'],
+        //"aircon_id"=> $value['aircon_id'],
         "client_id"=>$value['client_id'],
         "serv_name"=>$value['serv_name'],
         "serv_type"=>$value['serv_type'],
-        "device_brand"=>$value['device_brand'],
-        "aircon_type"=>$value['aircon_type'],
-        "quantity"=>$value['quantity'],
+        "aircon_array"=>$aircon_arr,
+        "device_array"=> $device_arr,
+        "quantity_array"=> $quantity_arr,
         "area"=> $value['area'],
         "emp_array"=> $emp_arr,
         "fcu_array"=> $fcu_arr,
@@ -83,16 +96,24 @@ public function getAccomplished(){
         return $this->response->redirect(site_url('/dashboard'));
     }
     $event = new All_events();
-        // $emp = new Emp();
-    $client = new Client();
-    $serv = new Serv();
-    $event_emp = new Event_emp_views();
-    $event_fcu = new Event_fcu_views();
-    $aircon = new Aircon();
-    
-    $datas['event'] = array();
-    $datas['event_emp'] = $event_emp->orderBy('id', 'ASC')->findAll();
-    $datas['event_fcu'] = $event_fcu->orderBy('id', 'ASC')->findAll();
+        $client = new Client();
+        $serv = new Serv();
+        $event_emp = new Event_emp_views();
+        $event_aircon = new Event_aircon_views();
+        $event_fcu = new Event_fcu();
+        $aircon = new Aircon();
+        
+        $datas['event'] = array();
+        $datas['client'] = $client->orderBy('client_id', 'ASC')->findAll();
+        // $datas['emp'] = $emp->orderBy('emp_id', 'ASC')->findAll();
+        $datas['serv'] = $serv->orderBy('serv_id', 'ASC')->findAll();
+        $datas['aircon'] = $aircon->orderBy('aircon_id', 'ASC')->findAll();
+        $datas['event_aircon'] = $event_aircon->orderBy('id', 'ASC')->findAll();
+        $datas['event_emp'] = $event_emp->orderBy('id', 'ASC')->findAll();
+        $datas['event_fcu'] = $event_fcu->orderBy('id', 'ASC')->findAll();
+        $datas['all_events'] = $event->orderBy('start_event', 'ASC')->where('status = "Done"')->findAll();
+        // dd($data[0]['title']);
+        
     
     if(isset($_GET['start_date']) && isset($_GET['to_date']))
     {
@@ -108,34 +129,45 @@ public function getAccomplished(){
              $emp_arr .= $datas['event_emp'][$key]['emp_name'].",";
          }
      }
-     $fcu_arr = "";
-     foreach ($datas['event_fcu'] as $key => $value_fcus) {
-        if ( $value['id'] == $value_fcus['id']) {
-         $fcu_arr .= $datas['event_fcu'][$key]['fcu'].",";
-     }
- }
- 
+       $fcu_arr = "";
+       $aircon_arr = "";
+       $device_arr = "";
+       $quantity_arr = "";
+       // dd($datas['event_fcu']);
+       foreach ($datas['event_fcu'] as $key => $value_fcu) {
+            if ( $value['id'] == $value_fcu['id']) {
+               $fcu_arr .= $datas['event_fcu'][$key]['fcuno'].",";
+           }
+        } 
+        foreach ($datas['event_aircon'] as $key => $value_aircon) {
+            if ( $value['id'] == $value_aircon['id']) {
+               $aircon_arr .= $datas['event_aircon'][$key]['aircon_type'].",";
+               $device_arr .= $datas['event_aircon'][$key]['device_brand'].",";
+               $quantity_arr .= $datas['event_aircon'][$key]['quantity'].",";
+               
+           }
+        }    
 
  $datas['event'][]= (object)[
-    "id"=> $value['id'],
-    "title"=> $value['title'],
-    "start_event"=> $value['start_event'],
-    "time"=> $value['TIME'],
-    "serv_id"=> $value['serv_id'],
-    "aircon_id"=> $value['aircon_id'],
-    "client_id"=>$value['client_id'],
-    "area"=> $value['area'],
-    "status"=> $value['STATUS'],
-    "serv_name"=> $value['serv_name'],
-    "serv_type"=>$value['serv_type'],
-    "device_brand"=> $value['device_brand'],
-    "aircon_type"=> $value['aircon_type'],
-    "quantity"=>$value['quantity'],
-    "client_branch"=> $value['client_branch'],
-    "emp_array"=> $emp_arr,
-    "fcu_array"=> $fcu_arr,
-    "price"=> $value['price'],
-];
+        "id"=> $value['id'],
+        "title"=>$value['title'],
+        "start_event"=> $value['start_event'],
+        "time"=> $value['TIME'],
+        "serv_id"=> $value['serv_id'],
+        //"aircon_id"=> $value['aircon_id'],
+        "client_id"=>$value['client_id'],
+        "serv_name"=>$value['serv_name'],
+        "serv_type"=>$value['serv_type'],
+        "aircon_array"=>$aircon_arr,
+        "device_array"=> $device_arr,
+        "quantity_array"=> $quantity_arr,
+        "area"=> $value['area'],
+        "emp_array"=> $emp_arr,
+        "fcu_array"=> $fcu_arr,
+        "client_branch"=> $value['client_branch'],
+        "price"=> $value['price'],
+        "status"=> $value['STATUS'],
+    ];
 }
 
 
@@ -150,11 +182,13 @@ public function printAccomplished($strt,$end){
     $session = session();
     $event = new All_events();
     $event_emp = new Event_emp_views();
-    $event_fcu = new Event_fcu_views();
+    $event_aircon = new Event_aircon_views();
+    $event_fcu = new Event_fcu();
     $datas['date'] = [$strt,$end];
     $datas['event'] = array();
     $datas['event_emp'] = $event_emp->orderBy('id', 'ASC')->findAll();
     $datas['event_fcu'] = $event_fcu->orderBy('id', 'ASC')->findAll();
+    $datas['event_aircon'] = $event_aircon->orderBy('id', 'ASC')->findAll();
 
     $datas['all_events'] = $event->where('start_event BETWEEN "'. date('Y-m-d', strtotime($strt)). '" and "'. date('Y-m-d', strtotime($end)).'"and status = "Done"')->findAll();
 
@@ -166,28 +200,40 @@ public function printAccomplished($strt,$end){
          }
      }
      $fcu_arr = "";
-     foreach ($datas['event_fcu'] as $key => $value_fcus) {
-        if ( $value['id'] == $value_fcus['id']) {
-         $fcu_arr .= $datas['event_fcu'][$key]['fcu'].",";
-     }
- }
- 
-
+       $aircon_arr = "";
+       $device_arr = "";
+       $quantity_arr = "";
+       $arr_quantity =[];
+       // dd($datas['event_fcu']);
+       foreach ($datas['event_fcu'] as $key => $value_fcu) {
+            if ( $value['id'] == $value_fcu['id']) {
+               $fcu_arr .= $datas['event_fcu'][$key]['fcuno'].",";
+           }
+        } 
+        foreach ($datas['event_aircon'] as $key => $value_aircon) {
+            if ( $value['id'] == $value_aircon['id']) {
+               $aircon_arr .= $datas['event_aircon'][$key]['aircon_type'].",";
+               $device_arr .= $datas['event_aircon'][$key]['device_brand'].",";
+               $quantity_arr .= $datas['event_aircon'][$key]['quantity'].",";
+               $arr_quantity[] = $quantity_arr;
+           }
+        }    
  $datas['event'][]= (object)[
     "id"=> $value['id'],
     "title"=> $value['title'],
     "start_event"=> $value['start_event'],
     "time"=> $value['TIME'],
     "serv_id"=> $value['serv_id'],
-    "aircon_id"=> $value['aircon_id'],
+    // "aircon_id"=> $value['aircon_id'],
     "client_id"=>$value['client_id'],
     "area"=> $value['area'],
     "status"=> $value['STATUS'],
     "serv_name"=> $value['serv_name'],
     "serv_type"=>$value['serv_type'],
-    "device_brand"=> $value['device_brand'],
-    "aircon_type"=> $value['aircon_type'],
-    "quantity"=>$value['quantity'],
+    "aircon_array"=>$aircon_arr,
+    "device_array"=> $device_arr,
+    "quantity_array"=> $quantity_arr,
+    "total_quantity"=> array_sum($arr_quantity),
     "client_branch"=> $value['client_branch'],
     "emp_array"=> $emp_arr,
     "fcu_array"=> $fcu_arr,
@@ -209,7 +255,8 @@ public function showException(){
     $client = new Client();
     $serv = new Serv();
     $event_emp = new Event_emp_views();
-    $event_fcu = new Event_fcu_views();
+    $event_fcu = new Event_fcu();
+    $event_aircon = new Event_aircon_views();
     $aircon = new Aircon();
     
     $datas['event'] = array();
@@ -217,11 +264,13 @@ public function showException(){
         // $datas['emp'] = $emp->orderBy('emp_id', 'ASC')->findAll();
     $datas['serv'] = $serv->orderBy('serv_id', 'ASC')->findAll();
     $datas['aircon'] = $aircon->orderBy('aircon_id', 'ASC')->findAll();
+    $datas['event_emp'] = $event_emp->orderBy('id', 'ASC')->findAll();
+    $datas['event_fcu'] = $event_fcu->orderBy('id', 'ASC')->findAll();
+    $datas['event_aircon'] = $event_aircon->orderBy('id', 'ASC')->findAll();
 
     $datas['all_events'] = $event->orderBy('start_event', 'ASC')->where('status = "Pending"')->findAll();
         // dd($data[0]['title']);
-    $datas['event_emp'] = $event_emp->orderBy('id', 'ASC')->findAll();
-    $datas['event_fcu'] = $event_fcu->orderBy('id', 'ASC')->findAll();
+
     foreach($datas['all_events'] as $key => $value) {
 
         $emp_arr = "";
@@ -231,32 +280,44 @@ public function showException(){
          }
      }
      $fcu_arr = "";
-     foreach ($datas['event_fcu'] as $key => $value_fcus) {
-        if ( $value['id'] == $value_fcus['id']) {
-         $fcu_arr .= $datas['event_fcu'][$key]['fcu'].",";
-     }
- }
+       $aircon_arr = "";
+       $device_arr = "";
+       $quantity_arr = "";
+       // dd($datas['event_fcu']);
+       foreach ($datas['event_fcu'] as $key => $value_fcu) {
+            if ( $value['id'] == $value_fcu['id']) {
+               $fcu_arr .= $datas['event_fcu'][$key]['fcuno'].",";
+           }
+        } 
+        foreach ($datas['event_aircon'] as $key => $value_aircon) {
+            if ( $value['id'] == $value_aircon['id']) {
+               $aircon_arr .= $datas['event_aircon'][$key]['aircon_type'].",";
+               $device_arr .= $datas['event_aircon'][$key]['device_brand'].",";
+               $quantity_arr .= $datas['event_aircon'][$key]['quantity'].",";
+               
+           }
+        }    
 
- $datas['event'][]= (object)[
-    "id"=> $value['id'],
-    "title"=>$value['title'],
-    "start_event"=> $value['start_event'],
-    "time"=> $value['TIME'],
-    "serv_id"=> $value['serv_id'],
-    "aircon_id"=> $value['aircon_id'],
-    "client_id"=>$value['client_id'],
-    "serv_name"=>$value['serv_name'],
-    "serv_type"=>$value['serv_type'],
-    "device_brand"=>$value['device_brand'],
-    "aircon_type"=>$value['aircon_type'],
-    "quantity"=>$value['quantity'],
-    "area"=> $value['area'],
-    "emp_array"=> $emp_arr,
-    "fcu_array"=> $fcu_arr,
-    "client_branch"=> $value['client_branch'],
-    "price"=> $value['price'],
-    "status"=> $value['STATUS'],
-];
+  $datas['event'][]= (object)[
+        "id"=> $value['id'],
+        "title"=>$value['title'],
+        "start_event"=> $value['start_event'],
+        "time"=> $value['TIME'],
+        "serv_id"=> $value['serv_id'],
+        //"aircon_id"=> $value['aircon_id'],
+        "client_id"=>$value['client_id'],
+        "serv_name"=>$value['serv_name'],
+        "serv_type"=>$value['serv_type'],
+        "aircon_array"=>$aircon_arr,
+        "device_array"=> $device_arr,
+        "quantity_array"=> $quantity_arr,
+        "area"=> $value['area'],
+        "emp_array"=> $emp_arr,
+        "fcu_array"=> $fcu_arr,
+        "client_branch"=> $value['client_branch'],
+        "price"=> $value['price'],
+        "status"=> $value['STATUS'],
+    ];
 
 }
 
@@ -273,13 +334,14 @@ public function getException(){
     $client = new Client();
     $serv = new Serv();
     $event_emp = new Event_emp_views();
-    $event_fcu = new Event_fcu_views();
+    $event_fcu = new Event_fcu();
+    $event_aircon = new Event_aircon_views();
     $aircon = new Aircon();
     
     $datas['event'] = array();
     $datas['event_emp'] = $event_emp->orderBy('id', 'ASC')->findAll();
     $datas['event_fcu'] = $event_fcu->orderBy('id', 'ASC')->findAll();
-    
+     $datas['event_aircon'] = $event_aircon->orderBy('id', 'ASC')->findAll();
     if(isset($_GET['start_date']) && isset($_GET['to_date']))
     {
         $start_date = $_GET['start_date'];
@@ -295,31 +357,43 @@ public function getException(){
              }
          }
 
-         $fcu_arr = "";
-         foreach ($datas['event_fcu'] as $key => $value_fcus) {
-            if ( $value['id'] == $value_fcus['id']) {
-             $fcu_arr .= $datas['event_fcu'][$key]['fcu'].",";
-         }
-     }
+       $fcu_arr = "";
+       $aircon_arr = "";
+       $device_arr = "";
+       $quantity_arr = "";
+       // dd($datas['event_fcu']);
+       foreach ($datas['event_fcu'] as $key => $value_fcu) {
+            if ( $value['id'] == $value_fcu['id']) {
+               $fcu_arr .= $datas['event_fcu'][$key]['fcuno'].",";
+           }
+        } 
+        foreach ($datas['event_aircon'] as $key => $value_aircon) {
+            if ( $value['id'] == $value_aircon['id']) {
+               $aircon_arr .= $datas['event_aircon'][$key]['aircon_type'].",";
+               $device_arr .= $datas['event_aircon'][$key]['device_brand'].",";
+               $quantity_arr .= $datas['event_aircon'][$key]['quantity'].",";
+               
+           }
+        }    
      $datas['event'][]= (object)[
         "id"=> $value['id'],
-        "title"=> $value['title'],
+        "title"=>$value['title'],
         "start_event"=> $value['start_event'],
         "time"=> $value['TIME'],
         "serv_id"=> $value['serv_id'],
-        "aircon_id"=> $value['aircon_id'],
+        //"aircon_id"=> $value['aircon_id'],
         "client_id"=>$value['client_id'],
-        "area"=> $value['area'],
-        "status"=> $value['STATUS'],
-        "serv_name"=> $value['serv_name'],
+        "serv_name"=>$value['serv_name'],
         "serv_type"=>$value['serv_type'],
-        "device_brand"=> $value['device_brand'],
-        "aircon_type"=> $value['aircon_type'],
-        "quantity"=>$value['quantity'],
-        "client_branch"=> $value['client_branch'],
+        "aircon_array"=>$aircon_arr,
+        "device_array"=> $device_arr,
+        "quantity_array"=> $quantity_arr,
+        "area"=> $value['area'],
         "emp_array"=> $emp_arr,
         "fcu_array"=> $fcu_arr,
+        "client_branch"=> $value['client_branch'],
         "price"=> $value['price'],
+        "status"=> $value['STATUS'],
     ];
 }
 
@@ -335,11 +409,13 @@ public function printException($strt,$end){
     $session = session();
     $event = new All_events();
     $event_emp = new Event_emp_views();
-    $event_fcu = new Event_fcu_views();
+    $event_fcu = new Event_fcu();
+    $event_aircon = new Event_aircon_views();
     $datas['date'] = [$strt,$end];
     $datas['event'] = array();
     $datas['event_emp'] = $event_emp->orderBy('id', 'ASC')->findAll();
     $datas['event_fcu'] = $event_fcu->orderBy('id', 'ASC')->findAll();
+    $datas['event_aircon'] = $event_aircon->orderBy('id', 'ASC')->findAll();
     $datas['all_events'] = $event->where('start_event BETWEEN "'. date('Y-m-d', strtotime($strt)). '" and "'. date('Y-m-d', strtotime($end)).'"and status = "Pending"')->findAll();
 
     foreach ($datas['all_events'] as $key => $value) {
@@ -351,11 +427,24 @@ public function printException($strt,$end){
      }
 
      $fcu_arr = "";
-     foreach ($datas['event_fcu'] as $key => $value_fcus) {
-        if ( $value['id'] == $value_fcus['id']) {
-         $fcu_arr .= $datas['event_fcu'][$key]['fcu'].",";
-     }
- }
+       $aircon_arr = "";
+       $device_arr = "";
+       $quantity_arr = "";
+       // $arr_quantity =[];
+       // dd($datas['event_fcu']);
+       foreach ($datas['event_fcu'] as $key => $value_fcu) {
+            if ( $value['id'] == $value_fcu['id']) {
+               $fcu_arr .= $datas['event_fcu'][$key]['fcuno'].",";
+           }
+        } 
+        foreach ($datas['event_aircon'] as $key => $value_aircon) {
+            if ( $value['id'] == $value_aircon['id']) {
+               $aircon_arr .= $datas['event_aircon'][$key]['aircon_type'].",";
+               $device_arr .= $datas['event_aircon'][$key]['device_brand'].",";
+               $quantity_arr .= $datas['event_aircon'][$key]['quantity'].",";
+               // $arr_quantity[] = $quantity_arr;
+           }
+        }    
 
  $datas['event'][]= (object)[
     "id"=> $value['id'],
@@ -363,15 +452,16 @@ public function printException($strt,$end){
     "start_event"=> $value['start_event'],
     "time"=> $value['TIME'],
     "serv_id"=> $value['serv_id'],
-    "aircon_id"=> $value['aircon_id'],
+    // "aircon_id"=> $value['aircon_id'],
     "client_id"=>$value['client_id'],
     "area"=> $value['area'],
     "status"=> $value['STATUS'],
     "serv_name"=> $value['serv_name'],
     "serv_type"=>$value['serv_type'],
-    "device_brand"=> $value['device_brand'],
-    "aircon_type"=> $value['aircon_type'],
-    "quantity"=>$value['quantity'],
+    "aircon_array"=>$aircon_arr,
+    "device_array"=> $device_arr,
+    "quantity_array"=> $quantity_arr,
+    // "total_quantity"=> array_sum($arr_quantity),
     "client_branch"=> $value['client_branch'],
     "emp_array"=> $emp_arr,
     "fcu_array"=> $fcu_arr,

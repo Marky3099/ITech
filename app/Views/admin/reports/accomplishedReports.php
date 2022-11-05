@@ -86,8 +86,26 @@
 											<td><?php echo $dat->client_branch; ?></td>
 											<td><?php echo $dat->serv_name; ?></td>
 											<td><?php echo $dat->serv_type; ?></td>
-											<td><?php echo $dat->device_brand; ?></td>
-											<td><?php echo $dat->aircon_type; ?></td>
+											<td>
+								                  <?php $data= explode(',',$dat->device_array);
+								                  $count = 0;
+								                  ?>
+								                  <?php foreach($data as $device):  ?>
+								                     <?php if($count < (count($data) - 1) ):  ?>
+								                       <?php echo $device; $count+=1; ?> <br>
+								                    <?php endif;  ?>
+								                 <?php endforeach; ?>
+								              </td>
+								              <td>
+								               <?php $data= explode(',',$dat->aircon_array);
+								               $count = 0;
+								               ?>
+								               <?php foreach($data as $aircon):  ?>
+								                  <?php if($count < (count($data) - 1) ):  ?>
+								                    <?php echo $aircon; $count+=1; ?> <br>
+								                 <?php endif;  ?>
+								              <?php endforeach; ?>
+								           </td>
 											<td>
 												<?php $data1 = explode(',',$dat->fcu_array);
 												$count1 = 0;
@@ -98,7 +116,16 @@
 													<?php endif;  ?>
 												<?php endforeach; ?>
 											</td> 
-											<td><?php echo $dat->quantity; ?></td>
+											<td>
+										         <?php $data = explode(',',$dat->quantity_array);
+										         $count = 0;
+										         ?>
+										         <?php foreach($data as $quantity):  ?>
+										            <?php if($count < (count($data) - 1) ):  ?>
+										              <?php echo $quantity; $count+=1; ?> <br>
+										           <?php endif;  ?>
+										        <?php endforeach; ?>
+										     </td> 
 											<td>
 												<?php $data = explode(',',$dat->emp_array);
 												$count = 0;

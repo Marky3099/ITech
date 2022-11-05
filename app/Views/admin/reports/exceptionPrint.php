@@ -180,8 +180,28 @@ if($event){
      <td>'.$dat->client_branch.'</td>
      <td>'.$dat->serv_name.'</td>
      <td>'.$dat->serv_type.'</td>
-     <td>'.$dat->device_brand.'</td>
-     <td>'.$dat->aircon_type.'</td><td>';
+      <td>';
+     $data= explode(',',$dat->device_array);
+                  $count = 0;
+                  
+                  foreach($data as $device){
+                    if($count < (count($data) - 1) ){
+                         $html .=' '. $device.'<br>';
+                    }
+                    $count+=1;
+                 }
+             $html .='</td>
+              <td>';
+              $data= explode(',',$dat->aircon_array);
+               $count = 0;
+               
+               foreach($data as $aircon){
+                  if($count < (count($data) - 1) ){
+                    $html .=' '. $aircon.'<br>';
+                 }
+                 $count+=1;
+              }
+           $html .='</td><td>';
      $data1 = explode(',',$dat->fcu_array);
      $count1 = 0;
      
@@ -192,7 +212,17 @@ if($event){
      $count1+=1;
  }
  $html .='</td>
- <td>'.$dat->quantity.'</td><td>';
+<td>';
+         $data = explode(',',$dat->quantity_array);
+         $count = 0;
+
+foreach($data as $quantity){
+            if($count < (count($data) - 1) ){
+              $html .=' '. $quantity.'<br>';
+            }
+            $count+=1;
+        }
+     $html .='</td><td>';
 
  $data = explode(',',$dat->emp_array);
  $count = 0;
