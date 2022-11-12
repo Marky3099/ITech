@@ -380,10 +380,10 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-uppercase mb-1">
                                                 Daily: <?= date('F j, Y');?></div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Number of task:&nbsp;<a href="#" data-toggle="modal" data-target="#todayModal" style="color: #4b6043 ;"><?= json_encode($today_event);?></a></div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Number of task:&nbsp;<a href="#" data-toggle="modal" data-target="#todayModal" style="color: #344f21 ;"><?= json_encode($today_event);?></a></div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-calendar fa-2x text-gray-300" style="color: #4b6043;"></i>
+                                            <i class="fas fa-calendar fa-2x text-gray-300" style="color: #344f21;"></i>
                                         </div>
                                     </div>
                                 </div>

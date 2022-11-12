@@ -152,8 +152,11 @@ class FullCalendar extends BaseController
         $events = new Event();
         $event_emp_views = new Event_emp_views();
 
+
+        
         $datas['events'] = $events->orderBy('id', 'ASC')->findAll();
         $datas['event'] = array();
+        $datas['branch'] = array();
         $datas['client'] = $client->orderBy('client_id', 'ASC')->findAll();
         $datas['area'] = $client->select('area')->groupBy('area')->findAll();
         $datas['emp'] = $emp->orderBy('emp_id', 'ASC')->findAll();
@@ -208,11 +211,11 @@ class FullCalendar extends BaseController
             
              $datas['brand2'][]=$device_brand;
         }
-        $datas['all_events'] = $event_emp_views->where('emp_id', $_SESSION['emp_id'])->findAll();
+       
 
+       $datas['all_events'] = $event_emp_views->where('emp_id', $_SESSION['emp_id'])->findAll();
         // $datas['all_events'] = $event->where('STATUS', 'Done')->findAll();
         // dd($data[0]['title']);
-        
          foreach ($datas['all_events'] as $key => $value) {
             $emp_arr = "";
             foreach ($datas['event_emp'] as $key => $value_emps) {
@@ -237,7 +240,6 @@ class FullCalendar extends BaseController
                  "aircon_id"=> $value['aircon_id'],
                  "client_id"=> $value['client_id'],
                  "serv_name"=> $value['serv_name'],
-                 "serv_type"=> $value['serv_type'],
                  "device_brand"=> $value['device_brand'],
                  "aircon_type"=> $value['aircon_type'],
                  "quantity"=> $value['quantity'],

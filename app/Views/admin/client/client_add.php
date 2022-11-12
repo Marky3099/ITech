@@ -3,11 +3,7 @@
   <div class="add-form">
     <form method="post" id="add_client" name="add_client" 
     action="<?= base_url('client/add') ?>">
-    <?php if($error) {?>
-                  <div class='alert alert-danger mt-2' align="center">
-                    <?= $error ?>
-                  </div>
-              <?php }?>
+   
     
     <div class="form-box">
         <h3>Add Client</h3><br>
