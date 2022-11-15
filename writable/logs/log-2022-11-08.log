@@ -1,0 +1,15 @@
+CRITICAL - 2022-11-08 00:51:45 --> Undefined variable: dis
+#0 C:\xampp\htdocs\tsms\app\Views\admin\calendar\events.php(107): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 107, Array)
+#1 C:\xampp\htdocs\tsms\system\View\View.php(214): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('admin/calendar/...', Array, true)
+#4 C:\xampp\htdocs\tsms\app\Views\templates\template.php(3): view('admin/calendar/...')
+#5 C:\xampp\htdocs\tsms\system\View\View.php(214): include('C:\\xampp\\htdocs...')
+#6 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#7 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('templates/templ...', Array, true)
+#8 C:\xampp\htdocs\tsms\app\Controllers\FullCalendar.php(417): view('templates/templ...', Array)
+#9 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\FullCalendar->event()
+#10 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FullCalendar))
+#11 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#13 {main}

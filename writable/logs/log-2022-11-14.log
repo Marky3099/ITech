@@ -1,0 +1,28 @@
+CRITICAL - 2022-11-14 04:27:27 --> Undefined index: fcuno0
+#0 C:\xampp\htdocs\tsms\app\Controllers\FullCalendar.php(777): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 777, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\FullCalendar->update()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FullCalendar))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-11-14 04:28:16 --> Undefined index: fcuno_update_0
+#0 C:\xampp\htdocs\tsms\app\Controllers\FullCalendar.php(777): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 777, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\FullCalendar->update()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FullCalendar))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-11-14 04:29:58 --> Undefined index: fcuno_update_8
+#0 C:\xampp\htdocs\tsms\app\Controllers\FullCalendar.php(777): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 777, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\FullCalendar->update()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FullCalendar))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-11-14 04:30:26 --> Undefined index: fcuno8
+#0 C:\xampp\htdocs\tsms\app\Controllers\FullCalendar.php(777): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 777, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\FullCalendar->update()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FullCalendar))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}

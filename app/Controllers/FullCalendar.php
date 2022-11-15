@@ -10,9 +10,7 @@ use App\Models\Event_emp_views;
 use App\Models\Aircon;
 use App\Models\Event_fcu;
 use App\Models\Fcu_no;
-use App\Models\Event_aircon_views;
-use App\Models\Event_aircon;
-
+use App\Models\Event_fcu_views;
 use App\Models\Event;
 class FullCalendar extends BaseController
 {
@@ -27,10 +25,23 @@ class FullCalendar extends BaseController
                 return $this->response->redirect(site_url('/appointment'));
             }
         }
+
+    $db = \Config\Database::connect();
+          $query   = $db->query('SELECT DISTINCT aircon_id,id,device_brand,aircon_type,quantity
+            FROM event_fcu_views');
+          $datas['distinct'] = $query->getResult();
+
+    $db1 = \Config\Database::connect();
+          $query   = $db1->query('SELECT DISTINCT id
+            FROM event_fcu_views');
+          $datas['distinct_event'] = $query->getResult();
+          // dd($datas['distinct'] );
+    
+
+
         $event = new All_events();
         $emp = new Emp();
-        $event_fcu = new Event_fcu();
-        $event_aircon = new Event_aircon();
+        $event_fcu = new Event_fcu_views();
         $fcu_no = new Fcu_no();
         $event_emp = new Event_emp();
         $client = new Client();
@@ -52,7 +63,6 @@ class FullCalendar extends BaseController
         $datas['servType'] = $serv->orderBy('serv_name','ASC')->findAll();
         $datas['aircon'] = $aircon->orderBy('aircon_id', 'ASC')->findAll();
         $datas['device_brand'] = $aircon->select('device_brand')->groupBy('device_brand')->findAll();
-        $datas['event_aircon'] = $event_aircon->orderBy('id','ASC')->findAll();
         // dd($datas['event_aircon']);
         foreach($datas['area'] as $k => $val) {
             
@@ -78,19 +88,35 @@ class FullCalendar extends BaseController
         // $datas['all_events'] = $event->where('STATUS', 'Done')->findAll();
         // dd($data[0]['title']);
     foreach ($datas['all_events'] as $key => $value) {
-        $emp_arr = "";
+    $emp_arr = "";
+    $fcu_arr =array();
+
         foreach ($datas['event_emp'] as $key => $value_emps) {
             if ( $value['id'] == $value_emps['id']) {
              $emp_arr .= $datas['event_emp'][$key]['emp_id'].",";
          }
      }
-            // $fcu_arr = "";
-            // foreach ($datas['event_fcu'] as $key => $value_fcus) {
-            //     if ( $value['id'] == $value_fcus['id']) {
-            //        $fcu_arr .= $datas['event_fcu'][$key]['fcuno'].",";
-            //     }
-            // }
+        
 
+       // dd($datas['event_fcu']);
+       foreach ($datas['event_fcu'] as $key => $value_fcu) {
+             if ($value['id'] == $value_fcu['id']) {
+                 array_push($fcu_arr , (object)[
+            'id' => (int)$value_fcu['id'],
+            'aircon_id' => (int)$value_fcu['aircon_id'],
+            'fcuno' =>(int)$value_fcu['fcuno'],
+            'quantity' =>(int)$value_fcu['quantity'],
+            'device_brand' =>$value_fcu['device_brand'],
+            'aircon_type' =>$value_fcu['aircon_type'],
+            'fcu' =>$value_fcu['fcu'],
+        ]);
+               
+           }   
+           
+        } 
+        
+
+        
      $datas['event'][]= (object)[
         "id"=> $value['id'],
         "title"=> $value['title'],
@@ -107,14 +133,16 @@ class FullCalendar extends BaseController
         "area"=> $value['area'],
         "client_branch"=> $value['client_branch'],
         "emp_array"=> $emp_arr,
-                 // "fcu_array"=> $fcu_arr,
+        "fcu_array"=> $fcu_arr,
         "color" => $value['serv_color'],
     ];
 
     
+    
 
 }
-         // dd($datas['event']);
+         // dd($datas['event_aircon']);
+
 
 $datas['main'] = 'admin/calendar/calendar';
 return view("templates/template",$datas);
@@ -182,7 +210,7 @@ public function Aircon_add($id){
         }
         // dd($_POST);
     $event_fcu = new Event_fcu();
-    $event_aircon = new Event_aircon();
+
     $fcu_no = new Fcu_no();
     $aircon = new Aircon();
 
@@ -336,9 +364,19 @@ public function event(){
     $client = new Client();
     $serv = new Serv();
     $event_emp = new Event_emp_views();
-    $event_fcu = new Event_fcu();
-    $event_aircon = new Event_aircon_views();
+    $event_fcu = new Event_fcu_views();
     $aircon = new Aircon();
+
+    $db = \Config\Database::connect();
+          $query   = $db->query('SELECT DISTINCT aircon_id,id
+            FROM event_fcu_views');
+          $datas['distinct'] = $query->getResult();
+
+    $db1 = \Config\Database::connect();
+          $query   = $db1->query('SELECT DISTINCT id
+            FROM event_fcu_views');
+          $datas['distinct_event'] = $query->getResult();
+          // dd($datas['distinct'] );
 
     $datas['event'] = array();
     $datas['client'] = $client->orderBy('client_id', 'ASC')->findAll();
@@ -346,8 +384,6 @@ public function event(){
     $datas['serv'] = $serv->orderBy('serv_id', 'ASC')->findAll();
     $datas['event_emp'] = $event_emp->orderBy('id', 'ASC')->findAll();
     $datas['event_fcu'] = $event_fcu->orderBy('id', 'ASC')->findAll();
-    $datas['event_aircon'] = $event_aircon->orderBy('id', 'ASC')->findAll();
-    // dd($datas['event_aircon']);
     $datas['aircon'] = $aircon->orderBy('aircon_id', 'ASC')->findAll();
     $datas['all_events'] = $event->orderBy('start_event', 'ASC')->findAll();
         // dd($datas['groupby_fcu']);
@@ -359,24 +395,24 @@ public function event(){
                $emp_arr .= $datas['event_emp'][$key]['emp_name'].",";
            }
        }
-       $fcu_arr = "";
-       $aircon_arr = "";
-       $device_arr = "";
-       $quantity_arr = "";
+       $fcu_arr = array();
+
        // dd($datas['event_fcu']);
        foreach ($datas['event_fcu'] as $key => $value_fcu) {
-            if ( $value['id'] == $value_fcu['id']) {
-               $fcu_arr .= $datas['event_fcu'][$key]['fcuno'].",";
-           }
-        } 
-        foreach ($datas['event_aircon'] as $key => $value_aircon) {
-            if ( $value['id'] == $value_aircon['id']) {
-               $aircon_arr .= $datas['event_aircon'][$key]['aircon_type'].",";
-               $device_arr .= $datas['event_aircon'][$key]['device_brand'].",";
-               $quantity_arr .= $datas['event_aircon'][$key]['quantity'].",";
+             if ($value['id'] == $value_fcu['id']) {
+                 array_push($fcu_arr , (object)[
+            'id' => (int)$value_fcu['id'],
+            'aircon_id' => (int)$value_fcu['aircon_id'],
+            'fcuno' =>(int)$value_fcu['fcuno'],
+            'quantity' =>(int)$value_fcu['quantity'],
+            'device_brand' =>$value_fcu['device_brand'],
+            'aircon_type' =>$value_fcu['aircon_type'],
+            'fcu' =>$value_fcu['fcu'],
+        ]);
                
-           }
-        }    
+           }   
+           
+        } 
  $datas['event'][]= (object)[
   "id"=> $value['id'],
   "title"=>$value['title'],
@@ -384,12 +420,12 @@ public function event(){
   "time"=> $value['TIME'],
   "serv_id"=> $value['serv_id'],
   "client_id"=>$value['client_id'],
-  "aircon_array"=>$aircon_arr,
+  // "aircon_array"=>$aircon_arr,
   "serv_name"=>$value['serv_name'],
   "serv_type"=>$value['serv_type'],
-  "device_array"=> $device_arr,
+  // "device_array"=> $device_arr,
                   // "aircon_type"=> $value['aircon_type'],
-  "quantity_array"=> $quantity_arr,
+  // "quantity_array"=> $quantity_arr,
   "area"=> $value['area'],
   "emp_array"=> $emp_arr,
   "fcu_array"=> $fcu_arr,
@@ -412,22 +448,24 @@ public function getfilter(){
     $client = new Client();
     $serv = new Serv();
     $event_emp = new Event_emp_views();
-    $event_fcu = new Event_fcu();
-    $aircon = new Aircon();
-    $event_aircon = new Event_aircon_views();
+    $event_fcu = new Event_fcu_views();
+    // $aircon = new Aircon();
+
+    $db = \Config\Database::connect();
+          $query   = $db->query('SELECT DISTINCT aircon_id,id
+            FROM event_fcu_views');
+          $datas['distinct'] = $query->getResult();
 
     
     $datas['event'] = array();
     $datas['event_emp'] = $event_emp->orderBy('id', 'ASC')->findAll();
     $datas['event_fcu'] = $event_fcu->orderBy('id', 'ASC')->findAll();
-    $datas['event_aircon'] = $event_aircon->orderBy('id', 'ASC')->findAll();
     if(isset($_GET['start_date']) && isset($_GET['to_date']))
     {
         $start_date = $_GET['start_date'];
         $to_date = $_GET['to_date'];
 
         $datas['all_events'] = $event->where('start_event BETWEEN "'. date('Y-m-d', strtotime($start_date)). '" and "'. date('Y-m-d', strtotime($to_date)).'"')->findAll();
-
         foreach ($datas['all_events'] as $key => $value) {
             $emp_arr = "";
             foreach ($datas['event_emp'] as $key => $value_emps) {
@@ -435,45 +473,43 @@ public function getfilter(){
                  $emp_arr .= $datas['event_emp'][$key]['emp_name'].",";
              }
          }
-         $fcu_arr = "";
-       $aircon_arr = "";
-       $device_arr = "";
-       $quantity_arr = "";
+         $fcu_arr = array();
        // dd($datas['event_fcu']);
        foreach ($datas['event_fcu'] as $key => $value_fcu) {
-            if ( $value['id'] == $value_fcu['id']) {
-               $fcu_arr .= $datas['event_fcu'][$key]['fcuno'].",";
-           }
-        } 
-        foreach ($datas['event_aircon'] as $key => $value_aircon) {
-            if ( $value['id'] == $value_aircon['id']) {
-               $aircon_arr .= $datas['event_aircon'][$key]['aircon_type'].",";
-               $device_arr .= $datas['event_aircon'][$key]['device_brand'].",";
-               $quantity_arr .= $datas['event_aircon'][$key]['quantity'].",";
-               
-           }
-        }    
+        if ($value['id'] == $value_fcu['id']) {
+             array_push($fcu_arr , (object)[
+        'aircon_id' => (int)$value_fcu['aircon_id'],
+        'fcuno' =>(int)$value_fcu['fcuno'],
+        'quantity' =>(int)$value_fcu['quantity'],
+        'device_brand' =>$value_fcu['device_brand'],
+        'aircon_type' =>$value_fcu['aircon_type'],
+        'fcu' =>$value_fcu['fcu'],
+    ]);
+           
+          
+       }
+    }     
      
 
-     $datas['event'][]= (object)[
-  "id"=> $value['id'],
-  "title"=>$value['title'],
-  "start_event"=> $value['start_event'],
-  "time"=> $value['TIME'],
-  "serv_id"=> $value['serv_id'],
-  "client_id"=>$value['client_id'],
-  "aircon_array"=>$aircon_arr,
-  "serv_name"=>$value['serv_name'],
-  "serv_type"=>$value['serv_type'],
-  "device_array"=> $device_arr,
-                  // "aircon_type"=> $value['aircon_type'],
-  "quantity_array"=> $quantity_arr,
-  "area"=> $value['area'],
-  "emp_array"=> $emp_arr,
-  "fcu_array"=> $fcu_arr,
-  "client_branch"=> $value['client_branch'],
-  "status"=> $value['STATUS'],
-];
+    $datas['event'][]= (object)[
+        "id"=> $value['id'],
+        "title"=>$value['title'],
+        "start_event"=> $value['start_event'],
+        "time"=> $value['TIME'],
+        "serv_id"=> $value['serv_id'],
+        "client_id"=>$value['client_id'],
+        // "aircon_array"=>$aircon_arr,
+        "serv_name"=>$value['serv_name'],
+        "serv_type"=>$value['serv_type'],
+        // "device_array"=> $device_arr,
+                        // "aircon_type"=> $value['aircon_type'],
+        // "quantity_array"=> $quantity_arr,
+        "area"=> $value['area'],
+        "emp_array"=> $emp_arr,
+        "fcu_array"=> $fcu_arr,
+        "client_branch"=> $value['client_branch'],
+        "status"=> $value['STATUS'],
+      ];
 }
 
 
@@ -489,13 +525,11 @@ public function printpdf($strt,$end){
     $event = new All_events();
     $event_emp = new Event_emp_views();
     $event_fcu = new Event_fcu();
-    $event_aircon = new Event_aircon_views();
 
     $datas['date'] = [$strt,$end];
     $datas['event'] = array();
     $datas['event_emp'] = $event_emp->orderBy('id', 'ASC')->findAll();
     $datas['event_fcu'] = $event_fcu->orderBy('id', 'ASC')->findAll();
-    $datas['event_aircon'] = $event_aircon->orderBy('id', 'ASC')->findAll();
 
     $datas['all_events'] = $event->where('start_event BETWEEN "'. date('Y-m-d', strtotime($strt)). '" and "'. date('Y-m-d', strtotime($end)).'"')->findAll();
 
@@ -557,11 +591,10 @@ public function insert(){
     if($_SESSION['position'] != USER_ROLE_ADMIN){
         return $this->response->redirect(site_url('/dashboard'));
     }
-
+dd($_POST);
     $Event = new Event();
     $Event_emp = new Event_emp();
     $event_fcu = new Event_fcu();
-    $event_aircon = new Event_aircon();
     $Client = new Client();
         // $event_fcu = new Event_fcu();
     $fcu_no = new Fcu_no();
@@ -590,7 +623,7 @@ public function insert(){
             foreach (getWeekly(date("Y",strtotime($_POST['start_event']))) as $getw) {
                 array_push($weeklyEvent, $getw->format("Y-m-d"));
             }
-                // dd($_POST);
+               
 
             for ($i=0; $i < count($weeklyEvent); $i++) { 
                 $_POST['start_event'] = $weeklyEvent[$i];
@@ -607,24 +640,17 @@ public function insert(){
                 }
 
                 foreach ($_POST['aircon_id'] as $index => $aircon) {
-                    $event_aircon->insert([
-                        'id'=> (int) $success,
-                        'aircon_id'=> (int)$aircon,
-                        'quantity'=> (int)$_POST['quantity'][$index],
-                    ]);
+        foreach ($_POST['fcuno'.$index] as $key => $floor_num) {
+           $event_fcu->insert([
+            'id'=> (int) $success,
+            'aircon_id'=> (int)$aircon,
+            'quantity'=> (int)$_POST['quantity'][$index],
+            'fcuno'=>$floor_num
+        ]);
+           
+       }
 
-                    foreach ($_POST['fcuno'.$index] as $key => $floor_num) {
-                            // dd((int)$aircon);
-                       $event_fcu->insert([
-                        'id'=> (int) $success,
-                        // 'aircon_id'=> (int)$aircon,
-                        // 'quantity'=> (int)$_POST['quantity'][$index],
-                        'fcuno'=>$floor_num
-                    ]);
-                       
-                   }
-
-               }
+   }
            }
                 // dd($i);
        } else if($_POST['repeatable'] == "Monthly"){
@@ -653,24 +679,17 @@ public function insert(){
                 ]);
             }
             foreach ($_POST['aircon_id'] as $index => $aircon) {
-                $event_aircon->insert([
-                        'id'=> (int) $success,
-                        'aircon_id'=> (int)$aircon,
-                        'quantity'=> (int)$_POST['quantity'][$index],
-                    ]);
-
                 foreach ($_POST['fcuno'.$index] as $key => $floor_num) {
-                            // dd((int)$aircon);
-                   $event_fcu->insert([
-                    'id'=> (int) $success,
-                    // 'aircon_id'=> (int)$aircon,
-                    // 'quantity'=> (int)$_POST['quantity'][$index],
-                    'fcuno'=>$floor_num
-                ]);
-                   
-               }
+           $event_fcu->insert([
+            'id'=> (int) $success,
+            'aircon_id'=> (int)$aircon,
+            'quantity'=> (int)$_POST['quantity'][$index],
+            'fcuno'=>$floor_num
+        ]);
+           
+       }
 
-           }
+   }
        }
 
    }
@@ -687,17 +706,11 @@ public function insert(){
     }
     // dd($_POST);
     foreach ($_POST['aircon_id'] as $index => $aircon) {
-        $event_aircon->insert([
-                        'id'=> (int) $success,
-                        'aircon_id'=> (int)$aircon,
-                        'quantity'=> (int)$_POST['quantity'][$index],
-                    ]);
         foreach ($_POST['fcuno'.$index] as $key => $floor_num) {
-                        // dd((int)$aircon);
            $event_fcu->insert([
             'id'=> (int) $success,
-            // 'aircon_id'=> (int)$aircon,
-            // 'quantity'=> (int)$_POST['quantity'][$index],
+            'aircon_id'=> (int)$aircon,
+            'quantity'=> (int)$_POST['quantity'][$index],
             'fcuno'=>$floor_num
         ]);
            
@@ -722,6 +735,7 @@ public function update(){
         return $this->response->redirect(site_url('/dashboard'));
     }
         // dd($this->request->getVar('emp_id_update'));
+    dd($_POST);
 
     $Event = new Event();
     $Client = new Client();
@@ -758,15 +772,20 @@ public function update(){
         }
     }
 
-        // $Event_fcu->where('id', $event_id)->delete();
-        // if (isset($_POST['fcuno_update'])) {
-        //     foreach($_POST['fcuno_update'] as $key => $value) {
-        //     $Event_fcu->insert([
-        //         'fcuno'=>(int)$value,
-        //         'id' => $event_id
-        //     ]);
-        //      }
-        // }
+        $Event_fcu->where('id', $event_id)->delete();
+        foreach ($_POST['aircon_id'] as $index => $aircon) {
+        foreach ($_POST['fcuno'.$aircon] as $key => $floor_num) {
+           $event_fcu->insert([
+            'id'=> (int) $event_id,
+            'aircon_id'=> (int)$aircon,
+            'quantity'=> (int)$_POST['quantity'][$index],
+            'fcuno'=>$floor_num
+        ]);
+
+           
+       }
+
+   }
     
     
     
@@ -815,9 +834,8 @@ public function daily(){
     $event_emp = new Event_emp_views();
     $event_fcu = new Event_fcu();
     $aircon = new Aircon();
-    $event_aircon = new Event_aircon_views();
 
-    $datas['event_aircon'] = $event_aircon->orderBy('id', 'ASC')->findAll();
+
     $datas['day'] = array();
     $datas['client'] = $client->orderBy('client_id', 'ASC')->findAll();
         // $datas['emp'] = $emp->orderBy('emp_id', 'ASC')->findAll();
@@ -891,9 +909,8 @@ public function printDaily(){
     $event_emp = new Event_emp_views();
     $event_fcu = new Event_fcu();
     $aircon = new Aircon();
-    $event_aircon = new Event_aircon_views();
 
-    $datas['event_aircon'] = $event_aircon->orderBy('id', 'ASC')->findAll();
+
     $datas['day'] = array();
     $datas['client'] = $client->orderBy('client_id', 'ASC')->findAll();
         // $datas['emp'] = $emp->orderBy('emp_id', 'ASC')->findAll();
@@ -960,7 +977,6 @@ public function weekly(){
     $serv = new Serv();
     $event_emp = new Event_emp_views();
     $event_fcu = new Event_fcu();
-    $event_aircon = new Event_aircon_views();
     $aircon = new Aircon();
     $monday = date('Y-m-d', strtotime('monday this week'));
     $sunday = date('Y-m-d', strtotime('sunday this week'));
@@ -971,7 +987,6 @@ public function weekly(){
     $datas['serv'] = $serv->orderBy('serv_id', 'ASC')->findAll();
     $datas['event_emp'] = $event_emp->orderBy('id', 'ASC')->findAll();
     $datas['event_fcu'] = $event_fcu->orderBy('id', 'ASC')->findAll();
-    $datas['event_aircon'] = $event_aircon->orderBy('id', 'ASC')->findAll();
     $datas['aircon'] = $aircon->orderBy('aircon_id', 'ASC')->findAll();
     $datas['weekly'] = $event->where('start_event BETWEEN "'. date('Y-m-d', strtotime($monday)). '" and "'. date('Y-m-d', strtotime($sunday)).'"ORDER BY start_event ASC')->findAll();
         // dd($data[0]['title']);
@@ -1033,7 +1048,6 @@ public function printWeekly(){
     $serv = new Serv();
     $event_emp = new Event_emp_views();
     $event_fcu = new Event_fcu();
-    $event_aircon = new Event_aircon_views();
     $aircon = new Aircon();
     $monday = date('Y-m-d', strtotime('monday this week'));
     $sunday = date('Y-m-d', strtotime('sunday this week'));
@@ -1044,7 +1058,6 @@ public function printWeekly(){
     $datas['serv'] = $serv->orderBy('serv_id', 'ASC')->findAll();
     $datas['event_emp'] = $event_emp->orderBy('id', 'ASC')->findAll();
     $datas['event_fcu'] = $event_fcu->orderBy('id', 'ASC')->findAll();
-    $datas['event_aircon'] = $event_aircon->orderBy('id', 'ASC')->findAll();
     $datas['aircon'] = $aircon->orderBy('aircon_id', 'ASC')->findAll();
     $datas['weekly'] = $event->where('start_event BETWEEN "'. date('Y-m-d', strtotime($monday)). '" and "'. date('Y-m-d', strtotime($sunday)).'"ORDER BY start_event ASC')->findAll();
         // dd($data[0]['title']);
@@ -1105,7 +1118,6 @@ public function monthly(){
     $serv = new Serv();
     $event_emp = new Event_emp_views();
     $event_fcu = new Event_fcu();
-    $event_aircon = new Event_aircon_views();
     $aircon = new Aircon();
     $monday = date('Y-m-d', strtotime('monday this week'));
     $sunday = date('Y-m-d', strtotime('sunday this week'));
@@ -1116,7 +1128,6 @@ public function monthly(){
     $datas['serv'] = $serv->orderBy('serv_id', 'ASC')->findAll();
     $datas['event_emp'] = $event_emp->orderBy('id', 'ASC')->findAll();
     $datas['event_fcu'] = $event_fcu->orderBy('id', 'ASC')->findAll();
-    $datas['event_aircon'] = $event_aircon->orderBy('id', 'ASC')->findAll();
     $datas['aircon'] = $aircon->orderBy('aircon_id', 'ASC')->findAll();
     $datas['monthly'] = $event->where('MONTH(start_event) = MONTH(CURRENT_DATE()) ORDER BY start_event ASC')->findAll();
         // dd($data[0]['title']);
@@ -1177,7 +1188,6 @@ public function printMonthly(){
     $serv = new Serv();
     $event_emp = new Event_emp_views();
     $event_fcu = new Event_fcu();
-    $event_aircon = new Event_aircon_views();
     $aircon = new Aircon();
     $monday = date('Y-m-d', strtotime('monday this week'));
     $sunday = date('Y-m-d', strtotime('sunday this week'));
@@ -1188,7 +1198,6 @@ public function printMonthly(){
     $datas['serv'] = $serv->orderBy('serv_id', 'ASC')->findAll();
     $datas['event_emp'] = $event_emp->orderBy('id', 'ASC')->findAll();
     $datas['event_fcu'] = $event_fcu->orderBy('id', 'ASC')->findAll();
-    $datas['event_aircon'] = $event_aircon->orderBy('id', 'ASC')->findAll();
     $datas['aircon'] = $aircon->orderBy('aircon_id', 'ASC')->findAll();
     $datas['monthly'] = $event->where('MONTH(start_event) = MONTH(CURRENT_DATE()) ORDER BY start_event ASC')->findAll();
         // dd($data[0]['title']);

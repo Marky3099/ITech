@@ -34,11 +34,10 @@
      // var a = document.getElementById('aircon_id_update');
      // var q = document.getElementById('quantity_update');
     var r = document.getElementById('start_event_update');
-    //console.log(info);
+   
 
-
-
-
+    
+      console.log(info.event.id);
 
       // select cliend and branch
       var s1 = document.getElementById('area_update');
@@ -92,22 +91,104 @@
       
      //  var int_index_area1 = 0;
      //  var count1 = 0;
-
-     //  brand.map((one_by_one_area)=>{
-     //    console.log(one_by_one_area);
-     //     var opt_one = document.createElement('option');
-     //      opt_one.value = one_by_one_area.device_brand;
-     //      opt_one.innerHTML = one_by_one_area.device_brand;
-     //      s3.appendChild(opt_one);
-
-     //      if (one_by_one_area.device_brand == info.event.extendedProps.device_brand ) {
-     //        s3.value = one_by_one_area.device_brand;
-     //        int_index_area1 = count1;
-     //      }
-     //      count1 +=1;
-     //  });
-
+     $('#auth-rows-edit').html('');
+  
+     distinctEvent.forEach((disEvent, index)=>{
       
+          var concut = '';
+          console.log(disEvent,distinct);
+        distinct.forEach((dis, index)=>{
+    if ( info.event.id == dis.id &&  dis.id == disEvent.id) {
+        console.log(info.event.id +'='+ dis.id &&  dis.id +'='+  disEvent.id);
+         concut = `<div class="form-row" id="row">
+    <div class="form-group col-md-3">
+    <label for="dbrand">Device Brand</label>
+    <select id="device_brand_update" name="device_brand[]" class="form-control " data-id="`+dis.aircon_id+`"required>`;
+      
+      deviceBrand.forEach((dbrand, index)=>{
+        if (dis.aircon_id != dbrand.aircon_id) {
+          concut = concut + `<option value="`+dbrand.device_brand+`">`+dbrand.device_brand+`</option>`;
+        }else{
+          concut = concut + `<option value="`+dbrand.device_brand+`" selected>`+dbrand.device_brand+`</option>`;
+        }
+         
+      });
+        
+    concut = concut + ` </select>
+    </div> 
+    <div class="form-group col-md-3">
+    
+    <label for="aircont">Aircon Type</label>
+    <select id="aircon_update_id_`+dis.aircon_id+`" name="aircon_id[]" class="form-control aircon" required>
+    <option value="`+dis.aircon_id+`">`+dis.aircon_type+`</option>
+    </select>
+    </div>
+    <div class="form-group col-md-3">
+    
+    <label for="fcunos">Fcuno</label>
+
+    
+
+    <select id="fcuno_update_`+dis.aircon_id+`" name="fcuno`+dis.aircon_id+`[]" class="selectpicker" data-width="100%" multiple data-selected-text-format="count > 2">
+    <option value="1">FCU 1</option>
+    <option value="2">FCU 2</option>
+    <option value="3">FCU 3</option>
+    <option value="4">FCU 4</option>
+    <option value="5">FCU 5</option>
+    <option value="6">FCU 6</option>
+    <option value="7">FCU 7</option>
+    <option value="8">FCU 8</option>
+    <option value="9">FCU 9</option>
+    <option value="10">FCU 10</option>
+    </select>
+    </div> 
+
+    <div class="form-group col-md-2">
+    
+    <label for="fcunos">Quantity</label>
+    <input type="number" class="form-control" name="quantity[]" id="quantity_update" min="1" value="`+dis.quantity+`" required>
+    </div> 
+    <div class="form-group col-md-1"><br>
+    <span id="auth-del" class="btn"><i class="fas fa-minus"></i></span>
+    </div>
+    </div>`;
+    $('#auth-rows-edit').append(concut);
+    }
+    
+          info.event.extendedProps.fcu_array.forEach((fcuData, index)=>{
+          if (disEvent.id == dis.id) {
+            if (dis.id == fcuData.id && dis.aircon_id == fcuData.aircon_id) {
+              
+
+
+                for(let i=1;i<=10;i++){
+                    if (fcuData.fcuno == i) {
+                       
+                       $("#fcuno_update_"+dis.aircon_id +" option[value='" + fcuData.fcuno + "']").prop("selected", true);
+                      
+                    }
+                    
+                
+    
+                
+              } 
+            }
+
+
+          }
+        });
+          
+         
+          
+
+
+      $('#mymodal2 .selectpicker').selectpicker();
+          
+        });
+          
+
+
+      });
      // dev_brand.forEach((ones, index_here1)=>{
 
      //    if (int_index_area1 == index_here1) {
@@ -171,56 +252,54 @@
       $("#emp_id_update").selectpicker("refresh");
 
       // ---------------------------------------------------
-      var html3 = `<div class="form-row" id="row">
-    <div class="form-group col-md-3">
+    //   var html3 = `<div class="form-row" id="row">
+    // <div class="form-group col-md-3">
     
-    <label for="dbrand">Device Brand</label>
-    <select id="device_brand" name="device_brand[]" class="form-control " data-id="`+count+`"required>
-    <option value="0">Select Brand</option>
-    <?php foreach($device_brand as $d_b):  ?>
-      <option value=<?php echo $d_b['device_brand']; ?>><?php echo $d_b['device_brand'];?></option>
-    <?php endforeach; ?>
-    </select>
-    </div> 
-    <div class="form-group col-md-3">
+    // <label for="dbrand">Device Brand</label>
+    // <select id="device_brand" name="device_brand[]" class="form-control " data-id="`+count+`"required>
+    // <option value="0">Select Brand</option>
+    // <?php foreach($device_brand as $d_b):  ?>
+    //   <option value=<?php echo $d_b['device_brand']; ?>><?php echo $d_b['device_brand'];?></option>
+    // <?php endforeach; ?>
+    // </select>
+    // </div> 
+    // <div class="form-group col-md-3">
     
-    <label for="aircont">Aircon Type</label>
-    <select id="aircon_id_`+count+`" name="aircon_id[]" class="form-control aircon" required>
-    <option value="0">Select Type</option>
-    </select>
-    </div> 
-    <div class="form-group col-md-3">
+    // <label for="aircont">Aircon Type</label>
+    // <select id="aircon_id_`+count+`" name="aircon_id[]" class="form-control aircon" required>
+    // <option value="0">Select Type</option>
+    // </select>
+    // </div> 
+    // <div class="form-group col-md-3">
     
-    <label for="fcunos">Fcuno</label>
-    <select id="fcuno" name="fcuno`+count+`[]" class="selectpicker" data-width="100%" multiple data-selected-text-format="count > 2">
-    <?php foreach($fcu_no as $f):  ?>
-      <option value="<?php echo $f['fcuno']; ?>"><p id="s2option"><?php echo $f['fcu'];?></p></option>
-    <?php endforeach; ?>
-    </select>
-    </div> 
-    <div class="form-group col-md-2">
+    // <label for="fcunos">Fcuno</label>
+    // <select id="fcuno" name="fcuno`+count+`[]" class="selectpicker" data-width="100%" multiple data-selected-text-format="count > 2">
+    // <?php foreach($fcu_no as $f):  ?>
+    //   <option value="<?php echo $f['fcuno']; ?>"><p id="s2option"><?php echo $f['fcu'];?></p></option>
+    // <?php endforeach; ?>
+    // </select>
+    // </div> 
+    // <div class="form-group col-md-2">
     
-    <label for="fcunos">Quantity</label>
-    <input type="number" class="form-control" name="quantity[]" id="quantity" min="1" value="1" required>
-    </div> 
-    <div class="form-group col-md-1"><br>
-    <span id="auth-del" class="btn"><i class="fas fa-minus"></i></span>
-    </div>
-    </div>`;
+    // <label for="fcunos">Quantity</label>
+    // <input type="number" class="form-control" name="quantity[]" id="quantity" min="1" value="1" required>
+    // </div> 
+    // <div class="form-group col-md-1"><br>
+    // <span id="auth-del" class="btn"><i class="fas fa-minus"></i></span>
+    // </div>
+    // </div>`;
 
 
 
     
-    count++;
-    $('#auth-rows-edit').append(html3);
+    // count++;s
+    // $('#auth-rows-edit').append(html3);
     
-    $('#mymodal2 .selectpicker').selectpicker();
-
+    
       // ---------------------------------------------------
      myModal.show();
 
-    // alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
-    // alert('View: ' + info.view.type);
+   
     },
   });
 
@@ -275,4 +354,10 @@
         // $("#area").append('<option value='+'>My option</option>');
     });
 
-   
+    
+
+
+    $("#mymodal2").on('hidden.bs.modal', function(e){
+      alert('here');
+      document.getElementById("auth-rows-edit").innerHTML = '';
+  });

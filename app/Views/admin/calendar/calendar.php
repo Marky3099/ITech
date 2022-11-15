@@ -150,7 +150,7 @@
 </div>
 </div>
 <!-- update -->
-<div class="modal" id="mymodal2" tabindex="-1" role="dialog">
+<div class="modal fade" id="mymodal2" tabindex="-1" role="dialog">
   <div class="modal-dialog" id="dialog2" role="document">
     <div class="modal-content">
      
@@ -263,6 +263,10 @@ var emp_all = <?php echo json_encode($emp); ?>;
 
 var areas1 = <?php echo json_encode($client_area); ?> ;
 var airconD = <?php echo json_encode($client_area); ?> ;
+var distinct = <?php echo json_encode($distinct); ?> ;
+var distinctEvent = <?php echo json_encode($distinct_event); ?> ;
+var deviceBrand = <?php echo json_encode($device_brand); ?> ;
+
 
 var count = 1;
 
@@ -326,6 +330,7 @@ var count = 1;
   $(document).on('change', '#device_brand', function(){
     var category_id = $(this).val();
     var aircon = $(this).data('id');
+    alert(category_id);
     $.ajax({
       url: 'http://localhost/tsms/aircon/brand/'+category_id,
       method:"GET",
@@ -336,6 +341,27 @@ var count = 1;
         var html = '';
         html += res.options;
         $('#aircon_id_'+aircon).html(html);
+
+      },
+      error:function(e){
+        console.log(e);
+      }
+    })
+  });
+  $(document).on('change', '#device_brand_update', function(){
+    var category_id = $(this).val();
+    var aircon = $(this).data('id');
+    alert(aircon+' '+category_id);
+    $.ajax({
+      url: 'http://localhost/tsms/aircon/brand/'+category_id,
+      method:"GET",
+      success:function(data)
+      {
+        var res = JSON.parse(data);
+        
+        var html = '';
+        html += res.options;
+        $('#aircon_update_id_'+aircon).html(html);
 
       },
       error:function(e){
