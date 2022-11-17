@@ -330,7 +330,7 @@ var count = 1;
   $(document).on('change', '#device_brand', function(){
     var category_id = $(this).val();
     var aircon = $(this).data('id');
-    alert(category_id);
+  
     $.ajax({
       url: 'http://localhost/tsms/aircon/brand/'+category_id,
       method:"GET",

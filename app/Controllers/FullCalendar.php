@@ -365,10 +365,10 @@ public function event(){
     $serv = new Serv();
     $event_emp = new Event_emp_views();
     $event_fcu = new Event_fcu_views();
-    $aircon = new Aircon();
+    // $aircon = new Aircon();
 
     $db = \Config\Database::connect();
-          $query   = $db->query('SELECT DISTINCT aircon_id,id
+          $query   = $db->query('SELECT DISTINCT aircon_id,id,device_brand,aircon_type,quantity
             FROM event_fcu_views');
           $datas['distinct'] = $query->getResult();
 
@@ -383,8 +383,8 @@ public function event(){
         // $datas['emp'] = $emp->orderBy('emp_id', 'ASC')->findAll();
     $datas['serv'] = $serv->orderBy('serv_id', 'ASC')->findAll();
     $datas['event_emp'] = $event_emp->orderBy('id', 'ASC')->findAll();
-    $datas['event_fcu'] = $event_fcu->orderBy('id', 'ASC')->findAll();
-    $datas['aircon'] = $aircon->orderBy('aircon_id', 'ASC')->findAll();
+    $datas['event_fcu'] = $event_fcu->orderBy('id', 'ASC')->orderBy('fcuno', 'ASC')->findAll();
+    // $datas['aircon'] = $aircon->orderBy('aircon_id', 'ASC')->findAll();
     $datas['all_events'] = $event->orderBy('start_event', 'ASC')->findAll();
         // dd($datas['groupby_fcu']);
     foreach ($datas['all_events'] as $key => $value) {
@@ -452,14 +452,21 @@ public function getfilter(){
     // $aircon = new Aircon();
 
     $db = \Config\Database::connect();
-          $query   = $db->query('SELECT DISTINCT aircon_id,id
+          $query   = $db->query('SELECT DISTINCT aircon_id,id,device_brand,aircon_type,quantity
             FROM event_fcu_views');
           $datas['distinct'] = $query->getResult();
+
+    $db1 = \Config\Database::connect();
+          $query   = $db1->query('SELECT DISTINCT id
+            FROM event_fcu_views');
+          $datas['distinct_event'] = $query->getResult();
+          // dd($datas['distinct'] );
 
     
     $datas['event'] = array();
     $datas['event_emp'] = $event_emp->orderBy('id', 'ASC')->findAll();
-    $datas['event_fcu'] = $event_fcu->orderBy('id', 'ASC')->findAll();
+    $datas['event_fcu'] = $event_fcu->orderBy('id', 'ASC')->orderBy('fcuno', 'ASC')->findAll();
+
     if(isset($_GET['start_date']) && isset($_GET['to_date']))
     {
         $start_date = $_GET['start_date'];
@@ -474,21 +481,23 @@ public function getfilter(){
              }
          }
          $fcu_arr = array();
-       // dd($datas['event_fcu']);
-       foreach ($datas['event_fcu'] as $key => $value_fcu) {
-        if ($value['id'] == $value_fcu['id']) {
-             array_push($fcu_arr , (object)[
-        'aircon_id' => (int)$value_fcu['aircon_id'],
-        'fcuno' =>(int)$value_fcu['fcuno'],
-        'quantity' =>(int)$value_fcu['quantity'],
-        'device_brand' =>$value_fcu['device_brand'],
-        'aircon_type' =>$value_fcu['aircon_type'],
-        'fcu' =>$value_fcu['fcu'],
-    ]);
-           
-          
-       }
-    }     
+
+         // dd($datas['event_fcu']);
+         foreach ($datas['event_fcu'] as $key => $value_fcu) {
+               if ($value['id'] == $value_fcu['id']) {
+                   array_push($fcu_arr , (object)[
+              'id' => (int)$value_fcu['id'],
+              'aircon_id' => (int)$value_fcu['aircon_id'],
+              'fcuno' =>(int)$value_fcu['fcuno'],
+              'quantity' =>(int)$value_fcu['quantity'],
+              'device_brand' =>$value_fcu['device_brand'],
+              'aircon_type' =>$value_fcu['aircon_type'],
+              'fcu' =>$value_fcu['fcu'],
+          ]);
+                 
+             }   
+             
+          }      
      
 
     $datas['event'][]= (object)[
@@ -524,12 +533,23 @@ public function printpdf($strt,$end){
     $session = session();
     $event = new All_events();
     $event_emp = new Event_emp_views();
-    $event_fcu = new Event_fcu();
+    $event_fcu = new Event_fcu_views();
+
+    $db = \Config\Database::connect();
+          $query   = $db->query('SELECT DISTINCT aircon_id,id,device_brand,aircon_type,quantity
+            FROM event_fcu_views');
+          $datas['distinct'] = $query->getResult();
+
+    $db1 = \Config\Database::connect();
+          $query   = $db1->query('SELECT DISTINCT id
+            FROM event_fcu_views');
+          $datas['distinct_event'] = $query->getResult();
+          // dd($datas['distinct'] );
 
     $datas['date'] = [$strt,$end];
     $datas['event'] = array();
     $datas['event_emp'] = $event_emp->orderBy('id', 'ASC')->findAll();
-    $datas['event_fcu'] = $event_fcu->orderBy('id', 'ASC')->findAll();
+    $datas['event_fcu'] = $event_fcu->orderBy('id', 'ASC')->orderBy('fcuno', 'ASC')->findAll();
 
     $datas['all_events'] = $event->where('start_event BETWEEN "'. date('Y-m-d', strtotime($strt)). '" and "'. date('Y-m-d', strtotime($end)).'"')->findAll();
 
@@ -540,46 +560,46 @@ public function printpdf($strt,$end){
              $emp_arr .= $datas['event_emp'][$key]['emp_name'].",";
          }
      }
-     $fcu_arr = "";
-       $aircon_arr = "";
-       $device_arr = "";
-       $quantity_arr = "";
+     $fcu_arr = array();
+
        // dd($datas['event_fcu']);
        foreach ($datas['event_fcu'] as $key => $value_fcu) {
-            if ( $value['id'] == $value_fcu['id']) {
-               $fcu_arr .= $datas['event_fcu'][$key]['fcuno'].",";
-           }
-        } 
-        foreach ($datas['event_aircon'] as $key => $value_aircon) {
-            if ( $value['id'] == $value_aircon['id']) {
-               $aircon_arr .= $datas['event_aircon'][$key]['aircon_type'].",";
-               $device_arr .= $datas['event_aircon'][$key]['device_brand'].",";
-               $quantity_arr .= $datas['event_aircon'][$key]['quantity'].",";
+             if ($value['id'] == $value_fcu['id']) {
+                 array_push($fcu_arr , (object)[
+            'id' => (int)$value_fcu['id'],
+            'aircon_id' => (int)$value_fcu['aircon_id'],
+            'fcuno' =>(int)$value_fcu['fcuno'],
+            'quantity' =>(int)$value_fcu['quantity'],
+            'device_brand' =>$value_fcu['device_brand'],
+            'aircon_type' =>$value_fcu['aircon_type'],
+            'fcu' =>$value_fcu['fcu'],
+        ]);
                
-           }
+           }   
+           
         }    
  
 
- $datas['event'][]= (object)[
-  "id"=> $value['id'],
-  "title"=>$value['title'],
-  "start_event"=> $value['start_event'],
-  "time"=> $value['TIME'],
-  "serv_id"=> $value['serv_id'],
-  "client_id"=>$value['client_id'],
-  "aircon_array"=>$aircon_arr,
-  "serv_name"=>$value['serv_name'],
-  "serv_type"=>$value['serv_type'],
-  "device_array"=> $device_arr,
-                  // "aircon_type"=> $value['aircon_type'],
-  "quantity_array"=> $quantity_arr,
-  "area"=> $value['area'],
-  "emp_array"=> $emp_arr,
-  "fcu_array"=> $fcu_arr,
-  "client_branch"=> $value['client_branch'],
-  "status"=> $value['STATUS'],
-];
-}
+        $datas['event'][]= (object)[
+            "id"=> $value['id'],
+            "title"=>$value['title'],
+            "start_event"=> $value['start_event'],
+            "time"=> $value['TIME'],
+            "serv_id"=> $value['serv_id'],
+            "client_id"=>$value['client_id'],
+            // "aircon_array"=>$aircon_arr,
+            "serv_name"=>$value['serv_name'],
+            "serv_type"=>$value['serv_type'],
+            // "device_array"=> $device_arr,
+                            // "aircon_type"=> $value['aircon_type'],
+            // "quantity_array"=> $quantity_arr,
+            "area"=> $value['area'],
+            "emp_array"=> $emp_arr,
+            "fcu_array"=> $fcu_arr,
+            "client_branch"=> $value['client_branch'],
+            "status"=> $value['STATUS'],
+          ];
+          }
 
 
 
@@ -591,7 +611,7 @@ public function insert(){
     if($_SESSION['position'] != USER_ROLE_ADMIN){
         return $this->response->redirect(site_url('/dashboard'));
     }
-dd($_POST);
+// dd($_POST);
     $Event = new Event();
     $Event_emp = new Event_emp();
     $event_fcu = new Event_fcu();
@@ -735,7 +755,7 @@ public function update(){
         return $this->response->redirect(site_url('/dashboard'));
     }
         // dd($this->request->getVar('emp_id_update'));
-    dd($_POST);
+    // dd($_POST);
 
     $Event = new Event();
     $Client = new Client();
@@ -775,7 +795,7 @@ public function update(){
         $Event_fcu->where('id', $event_id)->delete();
         foreach ($_POST['aircon_id'] as $index => $aircon) {
         foreach ($_POST['fcuno'.$aircon] as $key => $floor_num) {
-           $event_fcu->insert([
+           $Event_fcu->insert([
             'id'=> (int) $event_id,
             'aircon_id'=> (int)$aircon,
             'quantity'=> (int)$_POST['quantity'][$index],

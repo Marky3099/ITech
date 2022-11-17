@@ -149,7 +149,7 @@
     <input type="number" class="form-control" name="quantity[]" id="quantity_update" min="1" value="`+dis.quantity+`" required>
     </div> 
     <div class="form-group col-md-1"><br>
-    <span id="auth-del" class="btn"><i class="fas fa-minus"></i></span>
+    <span id="auth-del-edit" class="btn"><i class="fas fa-minus"></i></span>
     </div>
     </div>`;
     $('#auth-rows-edit').append(concut);
@@ -179,7 +179,11 @@
         });
           
          
-          
+          $('#auth-rows-edit').on('click', '#auth-del-edit', function(E){
+
+            $(this).parents('#row').remove();
+
+          });
 
 
       $('#mymodal2 .selectpicker').selectpicker();

@@ -43,7 +43,7 @@
 </div>
 <div class="col-sm-12 mt-3 bg-light" style=" padding:10px; ">
    <?php if($event): ?>
-      <table class="table table-bordered" id="table1">
+      <table class="table table-bordered table-hover" id="table1">
         <thead>
            <tr>
               <th>Date</th>
@@ -80,27 +80,30 @@
                <td>
                   
                   <?php $current =''; ?>
-                  <?php foreach($dat->fcu_array as $data):  ?>
 
+                  <?php foreach($distinct as $data):  ?>
+                     <?php if($dat->id ==  $data->id): ?>
                       <?php if($current !=  $data->device_brand):  ?>
                         <?php echo  $data->device_brand;  ?> <hr>
                         <?php $current =$data->device_brand; ?>
                      <?php endif;  ?>
+                     <?php endif;  ?>
                  <?php endforeach; ?>
+
               </td>
               <td>
                   <?php $current_aircon_type =''; ?>
-                  <?php foreach($dat->fcu_array as $data):  ?>
-
+                  <?php foreach($distinct as $data):  ?>
+                     <?php if($dat->id ==  $data->id): ?>
                       <?php if($current_aircon_type !=  $data->aircon_type):  ?>
-                        <?php echo  '*'.$data->aircon_type;  ?> <hr>
+                        <?php echo $data->aircon_type;  ?> <hr>
                         <?php $current_aircon_type =$data->aircon_type; ?>
+                     <?php endif;  ?>
                      <?php endif;  ?>
                  <?php endforeach; ?>
            </td>
            <td>
-                   
-                 
+
                      <?php foreach($distinct_event as $dis_event):  ?>  
                         
                         <!--  -->
@@ -114,7 +117,7 @@
                               <?php if( (int) $dis->id == $fcu_data->id):  ?>
                                  <?php if( (int) $dis->aircon_id == $fcu_data->aircon_id):  ?>
 
-                                 <?php   $concut.= $fcu_data->fcu.',' ?>
+                                 <?php   $concut.= $fcu_data->fcu.' ' ?>
 
                               <?php endif;  ?> 
                               <?php endif;  ?> 
@@ -131,12 +134,14 @@
 
         </td> 
         <td>
-        <?php $current =''; ?>
-                  <?php foreach($dat->fcu_array as $data):  ?>
 
+        <?php $current =''; ?>
+                  <?php foreach($distinct as $data):  ?>
+                     <?php if($dat->id ==  $data->id): ?>
                       <?php if($current !=  $data->device_brand):  ?>
                         <?php echo  $data->quantity;  ?> <hr>
                         <?php $current =$data->device_brand; ?>
+                     <?php endif;  ?>
                      <?php endif;  ?>
                  <?php endforeach; ?>
      </td> 
