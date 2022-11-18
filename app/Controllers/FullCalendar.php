@@ -228,7 +228,9 @@ public function Aircon_add($id){
            
        }
 
+
    }
+
 
    return $this->response->redirect(site_url('/calendar'));
 }
@@ -286,6 +288,7 @@ public function index1()
 
         // dd($datas['client_area2']);
 
+
 foreach($datas['device_brand'] as $k => $val) {
     
     $device_brand = [];
@@ -307,6 +310,8 @@ $datas['brand2'][]=$device_brand;
 }
 $datas['all_events'] = $event_emp_views->where('emp_id', $_SESSION['emp_id'])->findAll();
 
+
+       $datas['all_events'] = $event_emp_views->where('emp_id', $_SESSION['emp_id'])->findAll();
         // $datas['all_events'] = $event->where('STATUS', 'Done')->findAll();
         // dd($data[0]['title']);
 
@@ -329,6 +334,7 @@ $datas['event'][]= (object)[
     "title"=> $value['title'],
     "start"=> $value['start_event'],
                  // "repeatable"=> $value['repeatable'],
+
     "time"=>$value['time'],
     "serv_id"=> $value['serv_id'],
     "aircon_id"=> $value['aircon_id'],
@@ -348,6 +354,7 @@ $datas['event'][]= (object)[
 
 
 }
+
 
          // dd($datas['event']);
 

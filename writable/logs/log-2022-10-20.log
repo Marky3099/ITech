@@ -1,3 +1,4 @@
+
 CRITICAL - 2022-10-20 02:23:00 --> Undefined property: stdClass::$device_brand
 #0 C:\xampp\htdocs\tsms\app\Views\admin\calendar\events.php(88): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined prope...', 'C:\\xampp\\htdocs...', 88, Array)
 #1 C:\xampp\htdocs\tsms\system\View\View.php(214): include('C:\\xampp\\htdocs...')
@@ -38,10 +39,12 @@ CRITICAL - 2022-10-20 04:19:55 --> Undefined index: id
 CRITICAL - 2022-10-20 04:20:33 --> Undefined index: id
 #0 C:\xampp\htdocs\tsms\app\Controllers\FullCalendar.php(376): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 376, Array)
 #1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\FullCalendar->event()
+
 #2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FullCalendar))
 #3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
 #5 {main}
+
 CRITICAL - 2022-10-20 04:36:31 --> array_unique() expects parameter 1 to be array, string given
 #0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'array_unique() ...', 'C:\\xampp\\htdocs...', 89, Array)
 #1 C:\xampp\htdocs\tsms\app\Views\admin\calendar\events.php(89): array_unique('Mitsubishi,Mits...')
@@ -69,10 +72,12 @@ CRITICAL - 2022-10-20 04:37:24 --> array_unique() expects parameter 1 to be arra
 CRITICAL - 2022-10-20 04:38:04 --> Array to string conversion
 #0 C:\xampp\htdocs\tsms\app\Controllers\FullCalendar.php(369): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Array to string...', 'C:\\xampp\\htdocs...', 369, Array)
 #1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\FullCalendar->event()
+
 #2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FullCalendar))
 #3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
 #5 {main}
+
 CRITICAL - 2022-10-20 04:38:59 --> syntax error, unexpected '$device_arr' (T_VARIABLE)
 #0 C:\xampp\htdocs\tsms\system\Autoloader\Autoloader.php(241): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\xampp\\htdocs...')
 #1 C:\xampp\htdocs\tsms\system\Autoloader\Autoloader.php(219): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers...')
@@ -86,10 +91,12 @@ CRITICAL - 2022-10-20 04:38:59 --> syntax error, unexpected '$device_arr' (T_VAR
 CRITICAL - 2022-10-20 04:39:07 --> Array to string conversion
 #0 C:\xampp\htdocs\tsms\app\Controllers\FullCalendar.php(370): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Array to string...', 'C:\\xampp\\htdocs...', 370, Array)
 #1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\FullCalendar->event()
+
 #2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FullCalendar))
 #3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
 #5 {main}
+
 CRITICAL - 2022-10-20 04:45:45 --> Array to string conversion
 #0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(8, 'Array to string...', 'C:\\xampp\\htdocs...', 92, Array)
 #1 C:\xampp\htdocs\tsms\app\Views\admin\calendar\events.php(92): implode(' ', Array)
@@ -269,3 +276,4 @@ CRITICAL - 2022-10-20 21:20:54 --> Cannot add or update a child row: a foreign k
 #10 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #11 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
 #12 {main}
+
