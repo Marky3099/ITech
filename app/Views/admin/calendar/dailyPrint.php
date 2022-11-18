@@ -175,47 +175,60 @@ if($day){
      <td>'.$d->serv_name.'</td>
      <td>'.$d->serv_type.'</td>
      <td>';
-     $data= explode(',',$d->device_array);
-                  $count = 0;
-                  
-                  foreach($data as $device){
-                    if($count < (count($data) - 1) ){
-                         $html .=' '. $device.'<br>';
+     $current ='';
+
+                   foreach($distinct as $data){
+                    if($d->id ==  $data->id){
+                        if($current !=  $data->device_brand){
+                            $html .=  '*'.$data->device_brand. '<br><br>';
+                             $current =$data->device_brand; 
+                        }   
                     }
-                    $count+=1;
-                 }
+                   }
              $html .='</td>
               <td>';
-              $data= explode(',',$d->aircon_array);
-               $count = 0;
-               
-               foreach($data as $aircon){
-                  if($count < (count($data) - 1) ){
-                    $html .=' '. $aircon.'<br>';
-                 }
-                 $count+=1;
+              $current_aircon_type ='';
+
+              foreach($distinct as $data){
+               if($d->id ==  $data->id){
+                   if($current_aircon_type !=  $data->aircon_type){
+                       $html .=  '*'.$data->aircon_type. '<br><br>';
+                        $current_aircon_type =$data->aircon_type; 
+                   }   
+               }
               }
            $html .='</td><td>';
-     $data1 = explode(',',$d->fcu_array);
-     $count1 = 0;
-     
-     foreach($data1 as $fc){
-       if($count1 < (count($data1) - 1) ){ 
-         $html .=' '. $fc.'<br>';
-     }
-     $count1+=1;
- }
+           foreach($distinct_event as $dis_event) {
+
+            foreach($distinct as $dis){
+                $current_fcu =0; $concut = '';
+               foreach($d->fcu_array as $fcu_data){
+                if( (int) $dis_event->id == $dis->id)
+
+                  if( (int) $dis->id == $fcu_data->id){
+                    if( (int) $dis->aircon_id == $fcu_data->aircon_id){
+                     $concut.= $fcu_data->fcu.'<br>';
+                    }
+
+                  }
+               }
+                if( $concut != ''){
+                    $html .= '*'.$concut.'<br>'; 
+                }
+            }
+           }
  $html .='</td>
  <td>';
-         $data = explode(',',$d->quantity_array);
-         $count = 0;
+ $current ='';
 
-foreach($data as $quantity){
-            if($count < (count($data) - 1) ){
-              $html .=' '. $quantity.'<br>';
-            }
-            $count+=1;
-        }
+ foreach($distinct as $data){
+  if($d->id ==  $data->id){
+      if($current !=  $data->device_brand){
+          $html .=  '*'.$data->quantity. '<br><br>';
+           $current =$data->device_brand; 
+      }   
+  }
+ }
      $html .='</td><td>';
 
  $data = explode(',',$d->emp_array);

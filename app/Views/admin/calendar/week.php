@@ -18,7 +18,6 @@
       <table class="table table-bordered" id="table1">
         <thead>
            <tr>
-              <th>Event Title</th>
               <th>Date</th>
               <th>Time</th>
               <th>Area</th>
@@ -38,13 +37,6 @@
            
            <?php foreach($week as $w):  ?>
               <tr>
-                 <td>
-                  <?php if($w->title == NULL): ?>
-                     <?php echo "N/A"; ?>
-                  <?php else:?>
-                     <?php echo $w->title; ?>
-                  <?php endif;?>
-               </td>
                <td><?php echo date('m-d-Y',strtotime($w->start_event)); ?></td>
                <td>
                   <?php if($w->time == "00:00:00"): ?>
@@ -58,43 +50,68 @@
                <td><?php echo $w->serv_name; ?></td>
                <td><?php echo $w->serv_type; ?></td>
                <td>
-                  <?php $data= explode(',',$w->device_array);
-                  $count = 0;
-                  ?>
-                  <?php foreach($data as $device):  ?>
-                     <?php if($count < (count($data) - 1) ):  ?>
-                       <?php echo $device; $count+=1; ?> <br>
-                    <?php endif;  ?>
-                 <?php endforeach; ?>
+                  
+               <?php $current =''; ?>
+
+               <?php foreach($distinct as $data):  ?>
+                  <?php if($w->id ==  $data->id): ?>
+                  <?php if($current !=  $data->device_brand):  ?>
+                     <?php echo  $data->device_brand;  ?> <hr>
+                     <?php $current =$data->device_brand; ?>
+                  <?php endif;  ?>
+                  <?php endif;  ?>
+               <?php endforeach; ?>
               </td>
               <td>
-               <?php $data= explode(',',$w->aircon_array);
-               $count = 0;
-               ?>
-               <?php foreach($data as $aircon):  ?>
-                  <?php if($count < (count($data) - 1) ):  ?>
-                    <?php echo $aircon; $count+=1; ?> <br>
-                 <?php endif;  ?>
-              <?php endforeach; ?>
+              <?php $current_aircon_type =''; ?>
+                  <?php foreach($distinct as $data):  ?>
+                     <?php if($w->id ==  $data->id): ?>
+                      <?php if($current_aircon_type !=  $data->aircon_type):  ?>
+                        <?php echo $data->aircon_type;  ?> <hr>
+                        <?php $current_aircon_type =$data->aircon_type; ?>
+                     <?php endif;  ?>
+                     <?php endif;  ?>
+                 <?php endforeach; ?>
            </td>
                <td>
-                  <?php $data1 = explode(',',$w->fcu_array);
-                  $count1 = 0;
-                  ?>
-                  <?php foreach($data1 as $fc):  ?>
-                     <?php if($count1 < (count($data1) - 1) ):  ?>
-                       <?php echo $fc; $count1+=1; ?> <br>
-                    <?php endif;  ?>
+               <?php foreach($distinct_event as $dis_event):  ?>  
+                        
+                        <!--  -->
+                        <?php foreach($distinct as $dis):  ?>
+                           <?php $current_fcu =0; $concut = ''; ?> 
+                           <?php foreach($w->fcu_array as $fcu_data):  ?> 
+                         
+
+                           <?php if( (int) $dis_event->id == $dis->id):  ?>
+
+                              <?php if( (int) $dis->id == $fcu_data->id):  ?>
+                                 <?php if( (int) $dis->aircon_id == $fcu_data->aircon_id):  ?>
+
+                                 <?php   $concut.= $fcu_data->fcu.' ' ?>
+
+                              <?php endif;  ?> 
+                              <?php endif;  ?> 
+                           <?php endif;  ?>
+
+                        <?php endforeach; ?>
+                        <?php if( $concut != ''):  ?>
+                        <?php echo  $concut;  ?> <hr> 
+                         <?php endif;  ?>    
+                       <?php endforeach; ?>
+                        <!--  -->
+                        
                  <?php endforeach; ?>
+
               </td> 
               <td>
-                  <?php $data = explode(',',$w->quantity_array);
-                  $count = 0;
-                  ?>
-                  <?php foreach($data as $quantity):  ?>
-                     <?php if($count < (count($data) - 1) ):  ?>
-                       <?php echo $quantity; $count+=1; ?> <br>
-                    <?php endif;  ?>
+              <?php $current =''; ?>
+                  <?php foreach($distinct as $data):  ?>
+                     <?php if($w->id ==  $data->id): ?>
+                      <?php if($current !=  $data->device_brand):  ?>
+                        <?php echo  $data->quantity;  ?> <hr>
+                        <?php $current =$data->device_brand; ?>
+                     <?php endif;  ?>
+                     <?php endif;  ?>
                  <?php endforeach; ?>
               </td> 
               <td>
