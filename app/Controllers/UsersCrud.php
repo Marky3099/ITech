@@ -26,11 +26,11 @@ class UsersCrud extends Controller
         }
         $Emp = new Emp();
         $data['emp'] = $Emp->orderBy('emp_id', 'ASC')->findAll();
-         $data['main'] = 'admin/user/user_add';
-          $data['error'] = null;
+        $data['main'] = 'admin/user/user_add';
+        $data['error'] = null;
         return view("templates/template",$data);
     }
- 
+    
     // insert data
     public function store() {
         if($_SESSION['position'] != USER_ROLE_ADMIN){
@@ -60,7 +60,7 @@ class UsersCrud extends Controller
             // 'code' => $code,
             'active' => false,
             'password' => password_hash($password, PASSWORD_DEFAULT)
-           
+            
         ];
         // dd($user_create);
         $id = $User->insert($user_create);
@@ -70,17 +70,17 @@ class UsersCrud extends Controller
 
         $subject = "TSMS - Your Account";
         $message = "<html>
-                        <head>
-                            <title>Credentials for your Account</title>
-                        </head>
-                        <body>
-                            <h2>You can now login to our system TSMS.</h2>
-                            <p>Your Account:</p>
-                            <h3>Email: <b>".$to."</h3>
-                            <h3>Password: <b>".$password."</h3>
-                            <a href=".base_url('/user-type').">Login Now</a>
-                        </body>
-                    </html>";
+        <head>
+        <title>Credentials for your Account</title>
+        </head>
+        <body>
+        <h2>You can now login to our system TSMS.</h2>
+        <p>Your Account:</p>
+        <h3>Email: <b>".$to."</h3>
+        <h3>Password: <b>".$password."</h3>
+        <a href=".base_url('/user-type').">Login Now</a>
+        </body>
+        </html>";
         $email = \Config\Services::email();
         $email->setTo($to);
         $email->setFrom('Maylaflor@gmail.com','Maylaflor TSMS');
@@ -106,10 +106,10 @@ class UsersCrud extends Controller
     //         //update user active status
     //         $data['active'] = true;
     //         $User->update($id, $data);
-            
+    
     //     }
     //     else{
-           
+    
     //        $data['success']= 'Cannot activate account. Code didnt match';
     //        if($User_obj['position'] == "Admin"){
     //             return view('pages/admin_login',$data);
@@ -130,7 +130,7 @@ class UsersCrud extends Controller
             return $this->response->redirect(site_url('/dashboard'));
         }
         $User = new User();
-         $Emp = new Emp();
+        $Emp = new Emp();
         $data['emp'] = $Emp->orderBy('emp_id', 'ASC')->findAll();
         $data['User_obj'] = $User->where('user_id', $user_id)->first();
         $data['main'] = 'admin/user/user_edit';

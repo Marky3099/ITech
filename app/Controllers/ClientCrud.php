@@ -47,15 +47,15 @@ class ClientCrud extends Controller
 
             $subject = "TSMS - Account Activation";
             $message = "<html>
-                            <head>
-                                <title>Your Account has been Activated</title>
-                            </head>
-                            <body>
-                                <h2>You can now login to our system TSMS.</h2>
-                                <p>You can access by using your email: ".$to." with your password</p>
-                                <h4><a href='".base_url("/bdo-login")." '>Login Now</a></h4>
-                            </body>
-                            </html>";
+            <head>
+            <title>Your Account has been Activated</title>
+            </head>
+            <body>
+            <h2>You can now login to our system TSMS.</h2>
+            <p>You can access by using your email: ".$to." with your password</p>
+            <h4><a href='".base_url("/bdo-login")." '>Login Now</a></h4>
+            </body>
+            </html>";
             $email = \Config\Services::email();
             $email->setTo($to);
             $email->setFrom('Maylaflor@gmail.com','Maylaflor TSMS');
@@ -81,10 +81,10 @@ class ClientCrud extends Controller
         if($_SESSION['position'] != USER_ROLE_ADMIN){
             return $this->response->redirect(site_url('/dashboard'));
         }
-         $data['main'] = 'admin/client/client_add';
+        $data['main'] = 'admin/client/client_add';
         return view("templates/template",$data);
     }
- 
+    
     // insert data
     public function store() {
         if($_SESSION['position'] != USER_ROLE_ADMIN){
@@ -125,16 +125,16 @@ class ClientCrud extends Controller
 
         $subject = "TSMS - Verification";
         $message = "<html>
-                        <head>
-                            <title>Verification Code</title>
-                        </head>
-                        <body>
-                            <h2>Welcome to TSMS!</h2>
-                            <p>You need to use the code below to register to our system.</p>
-                            <h4>Code: <b>".$code."</b></h4>
-                            <h4><a href='".base_url("/bdo-register")."'>Register my Account</a></h4>
-                        </body>
-                        </html>";
+        <head>
+        <title>Verification Code</title>
+        </head>
+        <body>
+        <h2>Welcome to TSMS!</h2>
+        <p>You need to use the code below to register to our system.</p>
+        <h4>Code: <b>".$code."</b></h4>
+        <h4><a href='".base_url("/bdo-register")."'>Register my Account</a></h4>
+        </body>
+        </html>";
         $email = \Config\Services::email();
         $email->setTo($to);
         $email->setFrom('Maylaflor@gmail.com','Maylaflor TSMS');
@@ -203,7 +203,7 @@ class ClientCrud extends Controller
         return view('admin/client/clientReports',$data);
         
     }
- 
+    
     // delete Client
     public function delete($client_id = null){
         if($_SESSION['position'] != USER_ROLE_ADMIN){

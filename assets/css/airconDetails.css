@@ -1,0 +1,10 @@
+*{
+	padding: 10px 10px 10px 10px;
+}
+.form-group #quantity{
+	width: 70px;
+}
+.form-group #fcuno{
+	margin-top: -35px;
+	width: 400px;
+}

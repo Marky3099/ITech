@@ -3,6 +3,7 @@
 namespace App\Controllers;
 use App\Libraries\Hash;
 use App\Models\User;
+use App\Models\User_bdo;
 use App\Models\Emp;
 use App\Models\Client;
 use App\Models\All_events;
@@ -19,15 +20,17 @@ class Dashboard extends BaseController
     }
     public function index()
     {
-      
+        if($_SESSION['position'] == USER_ROLE_CLIENT){
+            return $this->response->redirect(site_url('/profile-bdo/'.$_SESSION['user_id']));
+        }
         $data['main'] = 'admin/dashboard/dashboard';
         return view('templates/template',$data);
     }
     
     public function dashboard()
     {
-        if($_SESSION['position'] == !USER_ROLE_ADMIN || $_SESSION['position'] == !USER_ROLE_EMPLOYEE){
-            return $this->response->redirect(site_url('/profile/'.$_SESSION['user_id']));
+        if($_SESSION['position'] == USER_ROLE_CLIENT){
+            return $this->response->redirect(site_url('/profile-bdo/'.$_SESSION['user_id']));
         }
         
         $allevent = new All_events();
@@ -43,434 +46,471 @@ class Dashboard extends BaseController
         
         $data['events'] = $event->where('status','Pending')->where('start_event', date('Y-m-d'))->findAll();
 
-        
-       // 
         $data['event'] = array();
         $data['week1'] = array();
         $data['month'] = array();
         $data['completed'] = array();
         $data['notdone'] = array();
         $data['client'] = $client->orderBy('client_id', 'ASC')->findAll();
-      
+        
         $data['serv'] = $serv->orderBy('serv_id', 'ASC')->findAll();
         $data['event_emp'] = $event_emp->orderBy('id', 'ASC')->findAll();
         $data['today'] = $allevent->where('start_event', date('Y-m-d'))->findAll();
-       
+        
 
         foreach ($data['today'] as $key => $value) {
-        $emp_arr = "";
+            $emp_arr = "";
             foreach ($data['event_emp'] as $key => $value_emps) {
                 if ( $value['id'] == $value_emps['id']) {
-                   $emp_arr .= $data['event_emp'][$key]['emp_name'].",";
-                }
-            }
+                 $emp_arr .= $data['event_emp'][$key]['emp_name'].",";
+             }
+         }
 
-            $data['event'][]= (object)[
-                  "id"=> $value['id'],
-                 "title"=>$value['title'],
-                 "start_event"=> $value['start_event'],
-                 "time"=> $value['TIME'],
-                 "serv_id"=> $value['serv_id'],
-                 "client_id"=>$value['client_id'],
-                  "serv_name"=>$value['serv_name'],
-                  "serv_type"=>$value['serv_type'],
-                  "area"=> $value['area'],
-                   "emp_array"=> $emp_arr,
-                 "client_branch"=> $value['client_branch'],
-                 "status"=> $value['STATUS'],
-             ];
+         $data['event'][]= (object)[
+          "id"=> $value['id'],
+          "title"=>$value['title'],
+          "start_event"=> $value['start_event'],
+          "time"=> $value['TIME'],
+          "serv_id"=> $value['serv_id'],
+          "client_id"=>$value['client_id'],
+          "serv_name"=>$value['serv_name'],
+          "serv_type"=>$value['serv_type'],
+          "area"=> $value['area'],
+          "emp_array"=> $emp_arr,
+          "client_branch"=> $value['client_branch'],
+          "status"=> $value['STATUS'],
+      ];
+  }
+
+// chart data for total of tasks every month
+  $db = \Config\Database::connect();
+  $query   = $db->query('SELECT start_event,COUNT(start_event) as count
+    FROM All_events
+    GROUP BY YEAR(start_event), MONTH(start_event) ASC'
+);
+  $data['data'] = $query->getResult();
+  $data['label'][] ="";
+  $data['linedata'][]="";
+  $data['linedata'][]="";
+  $data['taskDate']=[];
+  $data['serviceData']=[];
+  $data['servLabelColor']=[];
+
+  json_encode($data['data']);
+  foreach ($data['data'] as $key => $value) {
+
+   $data['taskDate'][] = "['".date("M",strtotime($value->start_event))."', ".$value->count."],";
+}
+
+     //chart data for services 
+$servQuery   = $db->query('SELECT DISTINCT serv_name, serv_color, Count(serv_id) as count
+    FROM All_events GROUP BY serv_id'
+);
+
+$data['servData'] = $servQuery->getResult();
+json_encode($data['servData']);
+      // dd($data['servData']);
+foreach ($data['servData'] as $key => $value) {
+        // ['Work',     11]
+   $data['serviceData'][] = "['".$value->serv_name."', ".$value->count."],";
+   $data['servLabelColor'][]= $value->serv_color;
+
+}
+
+//count today's tasks
+$query = $db->query('SELECT COUNT(start_event) as count FROM All_events WHERE start_event = curdate()');
+$data['event_today'] = $query->getResult();
+json_encode($data['event_today']);
+foreach ($data['event_today'] as $key => $value) {
+    $data['today_event']= (int)$value->count;
+}
+
+//count weekly tasks
+$query = $db->query('SELECT COUNT(start_event) as count FROM All_events WHERE WEEK(start_event,1) = WEEK(CURRENT_DATE(),1)');
+
+$data['event_week'] = $query->getResult();
+$monday = date('Y-m-d', strtotime('monday this week'));
+$sunday = date('Y-m-d', strtotime('sunday this week'));
+
+$data['weekly'] = $allevent->where('start_event BETWEEN "'. date('Y-m-d', strtotime($monday)). '" and "'. date('Y-m-d', strtotime($sunday)).'"ORDER BY start_event ASC')->findAll();
+
+
+foreach ($data['weekly'] as $key => $value) {
+    $emp_arr = "";
+    foreach ($data['event_emp'] as $key => $value_emps) {
+        if ( $value['id'] == $value_emps['id']) {
+         $emp_arr .= $data['event_emp'][$key]['emp_name'].",";
      }
+ }
 
-       // 
-        $db = \Config\Database::connect();
-        $query   = $db->query('SELECT start_event,COUNT(start_event) as count
-                FROM All_events
-                GROUP BY YEAR(start_event), MONTH(start_event) ASC'
-        );
-        $data['data'] = $query->getResult();
-        $data['label'][] ="";
-        $data['linedata'][]="";
-        json_encode($data['data']);
-        foreach ($data['data'] as $key => $value) {
-             
-                 $data['label'][]= date("M",strtotime($value->start_event));
-                  $data['linedata'][]= (int)$value->count;
-            }
-        
-        
-        //count today's tasks
-        $query = $db->query('SELECT COUNT(start_event) as count FROM All_events WHERE start_event = curdate()');
-        $data['event_today'] = $query->getResult();
-        json_encode($data['event_today']);
-        foreach ($data['event_today'] as $key => $value) {
-            $data['today_event']= (int)$value->count;
-        }
-        //count weekly tasks
+ $data['week1'][]= (object)[
+    "id"=> $value['id'],
+    "title"=> $value['title'],
+    "start_event"=> $value['start_event'],
+    "time"=> $value['TIME'],
+    "serv_id"=> $value['serv_id'],
+    "client_id"=>$value['client_id'],
+    "area"=> $value['area'],
+    "status"=> $value['STATUS'],
+    "serv_name"=> $value['serv_name'],
+    "serv_type"=>$value['serv_type'],
+    "client_branch"=> $value['client_branch'],
+    "emp_array"=> $emp_arr,
+];
+}
 
-        $query = $db->query('SELECT COUNT(start_event) as count FROM All_events WHERE WEEK(start_event,1) = WEEK(CURRENT_DATE(),1)');
-
-        $data['event_week'] = $query->getResult();
-        $monday = date('Y-m-d', strtotime('monday this week'));
-        $sunday = date('Y-m-d', strtotime('sunday this week'));
-
-        $data['weekly'] = $allevent->where('start_event BETWEEN "'. date('Y-m-d', strtotime($monday)). '" and "'. date('Y-m-d', strtotime($sunday)).'"ORDER BY start_event ASC')->findAll();
-       
-
-         foreach ($data['weekly'] as $key => $value) {
-        $emp_arr = "";
-            foreach ($data['event_emp'] as $key => $value_emps) {
-                if ( $value['id'] == $value_emps['id']) {
-                   $emp_arr .= $data['event_emp'][$key]['emp_name'].",";
-                }
-            }
-
-            $data['week1'][]= (object)[
-                "id"=> $value['id'],
-                 "title"=> $value['title'],
-                 "start_event"=> $value['start_event'],
-                 "time"=> $value['TIME'],
-                 "serv_id"=> $value['serv_id'],
-                 "client_id"=>$value['client_id'],
-                  "area"=> $value['area'],
-                  "status"=> $value['STATUS'],
-                 "serv_name"=> $value['serv_name'],
-                 "serv_type"=>$value['serv_type'],
-                 "client_branch"=> $value['client_branch'],
-                 "emp_array"=> $emp_arr,
-             ];
-     }
-
-        json_encode($data['event_week']);
-        foreach ($data['event_week'] as $key => $value) {
-            $data['weekly_event']= (int)$value->count;
-        }
+json_encode($data['event_week']);
+foreach ($data['event_week'] as $key => $value) {
+    $data['weekly_event']= (int)$value->count;
+}
         // Total
-        $query = $db->query('SELECT COUNT(start_event) as count FROM All_events');
-        $data['total_event'] = $query->getResult();
-        json_encode($data['total_event']);
-        foreach ($data['total_event'] as $key => $value) {
-            $data['event_total']= (int)$value->count;
-        }
-        //
-
-
+$query = $db->query('SELECT COUNT(start_event) as count FROM All_events');
+$data['total_event'] = $query->getResult();
+json_encode($data['total_event']);
+foreach ($data['total_event'] as $key => $value) {
+    $data['event_total']= (int)$value->count;
+}
         //count monthly tasks
-        $query = $db->query('SELECT COUNT(start_event) as count FROM All_events WHERE MONTH(start_event) = MONTH(CURRENT_DATE())');
-        $data['event_month'] = $query->getResult();
+$query = $db->query('SELECT COUNT(start_event) as count FROM All_events WHERE MONTH(start_event) = MONTH(CURRENT_DATE())');
+$data['event_month'] = $query->getResult();
 
-         $data['monthly'] = $allevent->where('MONTH(start_event) = MONTH(CURRENT_DATE()) ORDER BY start_event ASC')->findAll();
-        
-        
-         foreach ($data['monthly'] as $key => $value) {
-        $emp_arr = "";
-            foreach ($data['event_emp'] as $key => $value_emps) {
-                if ( $value['id'] == $value_emps['id']) {
-                   $emp_arr .= $data['event_emp'][$key]['emp_name'].",";
-                }
-            }
+$data['monthly'] = $allevent->where('MONTH(start_event) = MONTH(CURRENT_DATE()) ORDER BY start_event ASC')->findAll();
 
-            $data['month'][]= (object)[
-                "id"=> $value['id'],
-                 "title"=> $value['title'],
-                 "start_event"=> $value['start_event'],
-                 "time"=> $value['TIME'],
-                 "serv_id"=> $value['serv_id'],
-                 "client_id"=>$value['client_id'],
-                  "area"=> $value['area'],
-                  "status"=> $value['STATUS'],
-                 "serv_name"=> $value['serv_name'],
-                 "serv_type"=>$value['serv_type'],
-                 "client_branch"=> $value['client_branch'],
-                 "emp_array"=> $emp_arr,
-             ];
+
+foreach ($data['monthly'] as $key => $value) {
+    $emp_arr = "";
+    foreach ($data['event_emp'] as $key => $value_emps) {
+        if ( $value['id'] == $value_emps['id']) {
+         $emp_arr .= $data['event_emp'][$key]['emp_name'].",";
      }
-           
+ }
 
-        json_encode($data['event_month']);
-        foreach ($data['event_month'] as $key => $value) {
-            $data['monthly_event']= (int)$value->count;
-        }
+ $data['month'][]= (object)[
+    "id"=> $value['id'],
+    "title"=> $value['title'],
+    "start_event"=> $value['start_event'],
+    "time"=> $value['TIME'],
+    "serv_id"=> $value['serv_id'],
+    "client_id"=>$value['client_id'],
+    "area"=> $value['area'],
+    "status"=> $value['STATUS'],
+    "serv_name"=> $value['serv_name'],
+    "serv_type"=>$value['serv_type'],
+    "client_branch"=> $value['client_branch'],
+    "emp_array"=> $emp_arr,
+];
+}
+
+
+json_encode($data['event_month']);
+foreach ($data['event_month'] as $key => $value) {
+    $data['monthly_event']= (int)$value->count;
+}
         // Completed task
-          $query = $db->query('SELECT COUNT(start_event) as count FROM All_events WHERE status = "Done"');
-        $data['event_complete'] = $query->getResult();
+$query = $db->query('SELECT COUNT(start_event) as count FROM All_events WHERE status = "Done"');
+$data['event_complete'] = $query->getResult();
 
-         $data['complete'] = $allevent->where('status = "Done" ORDER BY start_event ASC')->findAll();
-        
-        
-         foreach ($data['complete'] as $key => $value) {
-        $emp_arr = "";
-            foreach ($data['event_emp'] as $key => $value_emps) {
-                if ( $value['id'] == $value_emps['id']) {
-                   $emp_arr .= $data['event_emp'][$key]['emp_name'].",";
-                }
-            }
+$data['complete'] = $allevent->where('status = "Done" ORDER BY start_event ASC')->findAll();
 
-            $data['completed'][]= (object)[
-                "id"=> $value['id'],
-                 "title"=> $value['title'],
-                 "start_event"=> $value['start_event'],
-                 "time"=> $value['TIME'],
-                 "serv_id"=> $value['serv_id'],
-                 "client_id"=>$value['client_id'],
-                  "area"=> $value['area'],
-                  "status"=> $value['STATUS'],
-                 "serv_name"=> $value['serv_name'],
-                 "serv_type"=>$value['serv_type'],
-                 "client_branch"=> $value['client_branch'],
-                 "emp_array"=> $emp_arr,
-             ];
+
+foreach ($data['complete'] as $key => $value) {
+    $emp_arr = "";
+    foreach ($data['event_emp'] as $key => $value_emps) {
+        if ( $value['id'] == $value_emps['id']) {
+         $emp_arr .= $data['event_emp'][$key]['emp_name'].",";
      }
-           
+ }
 
-        json_encode($data['event_complete']);
-        foreach ($data['event_complete'] as $key => $value) {
-            $data['complete_event']= (int)$value->count;
-        }
-        if($data['event_total'] > 0){
-            $data['percent'] = round(($data['complete_event']/$data['event_total'])*100);
-        }
-       
+ $data['completed'][]= (object)[
+    "id"=> $value['id'],
+    "title"=> $value['title'],
+    "start_event"=> $value['start_event'],
+    "time"=> $value['TIME'],
+    "serv_id"=> $value['serv_id'],
+    "client_id"=>$value['client_id'],
+    "area"=> $value['area'],
+    "status"=> $value['STATUS'],
+    "serv_name"=> $value['serv_name'],
+    "serv_type"=>$value['serv_type'],
+    "client_branch"=> $value['client_branch'],
+    "emp_array"=> $emp_arr,
+];
+}
+
+
+json_encode($data['event_complete']);
+foreach ($data['event_complete'] as $key => $value) {
+    $data['complete_event']= (int)$value->count;
+}
+if($data['event_total'] > 0){
+    $data['percent'] = round(($data['complete_event']/$data['event_total'])*100);
+}
+
         // Pending task
-          $query = $db->query('SELECT COUNT(start_event) as count FROM All_events WHERE status = "Pending"');
-        $data['event_pending'] = $query->getResult();
+$query = $db->query('SELECT COUNT(start_event) as count FROM All_events WHERE status = "Pending"');
+$data['event_pending'] = $query->getResult();
 
-         $data['pending'] = $allevent->where('status = "Pending" ORDER BY start_event ASC')->findAll();
-        
-        
-         foreach ($data['pending'] as $key => $value) {
-        $emp_arr = "";
-            foreach ($data['event_emp'] as $key => $value_emps) {
-                if ( $value['id'] == $value_emps['id']) {
-                   $emp_arr .= $data['event_emp'][$key]['emp_name'].",";
-                }
-            }
+$data['pending'] = $allevent->where('status = "Pending" ORDER BY start_event ASC')->findAll();
 
-            $data['notdone'][]= (object)[
-                "id"=> $value['id'],
-                 "title"=> $value['title'],
-                 "start_event"=> $value['start_event'],
-                 "time"=> $value['TIME'],
-                 "serv_id"=> $value['serv_id'],
-                 "client_id"=>$value['client_id'],
-                  "area"=> $value['area'],
-                  "status"=> $value['STATUS'],
-                 "serv_name"=> $value['serv_name'],
-                 "serv_type"=>$value['serv_type'],
-                 "client_branch"=> $value['client_branch'],
-                 "emp_array"=> $emp_arr,
-             ];
+
+foreach ($data['pending'] as $key => $value) {
+    $emp_arr = "";
+    foreach ($data['event_emp'] as $key => $value_emps) {
+        if ( $value['id'] == $value_emps['id']) {
+         $emp_arr .= $data['event_emp'][$key]['emp_name'].",";
      }
-           
+ }
 
-        json_encode($data['event_pending']);
-        foreach ($data['event_pending'] as $key => $value) {
-            $data['pending_event']= (int)$value->count;
-        }
+ $data['notdone'][]= (object)[
+    "id"=> $value['id'],
+    "title"=> $value['title'],
+    "start_event"=> $value['start_event'],
+    "time"=> $value['TIME'],
+    "serv_id"=> $value['serv_id'],
+    "client_id"=>$value['client_id'],
+    "area"=> $value['area'],
+    "status"=> $value['STATUS'],
+    "serv_name"=> $value['serv_name'],
+    "serv_type"=>$value['serv_type'],
+    "client_branch"=> $value['client_branch'],
+    "emp_array"=> $emp_arr,
+];
+}
+
+
+json_encode($data['event_pending']);
+foreach ($data['event_pending'] as $key => $value) {
+    $data['pending_event']= (int)$value->count;
+}
 
         // $query = $db->query('SELECT * FROM All_events WHERE start_event = curdate()');
         // $data['today'] = $query->getResult();
-        $data['main'] = 'admin/dashboard/dashboard';
-        return view("templates/template",$data);
-    }
- 
+$data['main'] = 'admin/dashboard/dashboard';
+return view("templates/template",$data);
+}
 
-    public function profile($user_id)
-    {
-        $User = new User();
-        $session = session();
-        $user_info = $User->where('user_id', $user_id)->first();
-      
-         $data['user_data'] = [
 
-                        'user_id' => $user_info['user_id'],
-                        'username' => $user_info['name'],
-                        'email' => $user_info['email'],
-                        'address' => $user_info['address'],
-                        'contact' => $user_info['contact'],
-                        'password' => $user_info['password'],
-                        'user_img' => $user_info['user_img'],
-                        'isLoggedIn' => TRUE,
-                    ];
-        $data['main'] = 'admin/profile/profile';
-        return view("templates/template",$data);
-    }
-    public function update(){
-        $User = new User();
-        $user_id = $this->request->getVar('user_id');
-        $user_obj = $User->find($user_id);
-        $imageName= null;
-        $old_img_name = $user_obj['user_img'];
-        if($old_img_name == NULL){
-             $file = $this->request->getFile('user_img');
-             if ($file->isValid() && !$file->hasMoved()) {
-                $imageName = $file->getRandomName();
-                $file->move('uploads/',$imageName);
-             }
-        }else{
-            $file = $this->request->getFile('user_img');
-             if ($file->isValid() && !$file->hasMoved()) {
-                
-                if (file_exists("uploads/".$old_img_name)) {
-                    unlink("uploads/".$old_img_name);
-                }
-                $imageName = $file->getRandomName();
-                $file->move('uploads/',$imageName);
-            }
-            else{
-                $imageName = $old_img_name;
-            }
-        }
-        
-        $session = session();
-       if($this->request->getVar('password') == NULL){
-            $data = [
-                'name' => $this->request->getVar('name'),
-                'email'  => $this->request->getVar('email'),
-                'address' => $this->request->getVar('address'),
-                'contact'  => $this->request->getVar('contact'),
-                'user_img' => $imageName,
-            ];
-        }else{
-            if($this->request->getVar('password') == $this->request->getVar('c_password')){
-                $data = [
-                    'name' => $this->request->getVar('name'),
-                    'email'  => $this->request->getVar('email'),
-                    'address' => $this->request->getVar('address'),
-                    'contact'  => $this->request->getVar('contact'),
-                    'password'  =>password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
-                    'user_img' => $imageName,
-                ];
-            }else{
-                 session()->setFlashdata('error', 'Password didn\'t match, Please try again');
-                 return $this->response->redirect(site_url('/profile/'.$user_id));
-            }
-        }
-        $User->update($user_id, $data);
-        if($User->update($user_id,$data)){
-            session()->setFlashdata('message', 'Updated Successfully!');
-        }
-        $user_info = $User->where('user_id', $user_id)->first();
-
-        $getdata = [
-                        'user_id' => $user_info['user_id'],
-                        'username' => $user_info['name'],
-                        'email' => $user_info['email'],
-                        'address' => $user_info['address'],
-                        'contact' => $user_info['contact'],
-                        'user_img' => $user_info['user_img'],
-                        
-                        
-                        'isLoggedIn' => TRUE,
-                    ];
-                        
-                    $session->set($getdata);
-
-        return $this->response->redirect(site_url('/profile/'.$user_id));
-    }
-    public function fpass(){
-       
-        return view('admin/dashboard/forgot_pass');
-    }
-    public function fpass_send(){
-        $User = new User();
-         $to = $this->request->getVar('email');
-        $user_info= $User->where('email',$to)->findAll();
-
-        if($user_info){
-
-            $subject = "TSMS - Reset Password";
-            $message = "<html>
-                            <head>
-                                <title>Reset Password</title>
-                            </head>
-                            <body>
-                                <h2>Here is the link to Reset your Password.</h2>
-                                <p>Kindly click the \"Reset Password\" and fill the necessary information</p> 
-                                <h4><a href='".base_url("/forgot-password/".$to)." '>Reset Password</a></h4>
-                            </body>
-                            </html>";
-            $email = \Config\Services::email();
-            $email->setTo($to);
-            $email->setFrom('Maylaflorairconditioningref27@gmail.com','Maylaflor TSMS');
-            $email->setSubject($subject);
-            $email->setMessage($message);
-
-            if ($email->send()) {
-                echo "Success";
-            }else{
-                $data = $email->printDebugger(['headers']);
-                print_r($data);
-            }
-            session()->setFlashdata('message', 'Email Sent');
-        }else{
-            session()->setFlashdata('error', 'Error! Email is not registered');
-        }
-        return $this->response->redirect(site_url('/forgot-password'));
-    }
-
-    public function change_pass_form($email){
-        $User = new User();
-        $data['user_obj'] = $User->where('email', $email)->first();
-
-        return view('admin/dashboard/change_pass',$data);
-    }
-     public function change_pass($email){
-
-        $User = new User();
-        $data['user_obj'] = $User->where('email', $email)->first();
-        $User_obj = $User->where('email', $email)->first();
-        $pass = $this->request->getVar('password');
-        $c_pass =  $this->request->getVar('c_password');
-        $id = $User_obj['user_id'];
-        if($this->request->getVar('password') == $this->request->getVar('c_password')){
-            
-            //update user active status
-            $data['password'] = password_hash($this->request->getVar('password'), PASSWORD_DEFAULT);
-            
-            
-        }
-        else{
-           
-            session()->setFlashdata('error', 'Password didn\'t match');
-             return $this->response->redirect(site_url('/forgot-password/'.$email));
-        }
-        if($User->update($id, $data)){
-         session()->setFlashdata('message','Changed Password Successfully!');
-        }
-        
-        return $this->response->redirect(site_url('/forgot-password/'.$email));
-        
-    }
-    public function update_task($id){
-        $Event = new Event();
+public function profile($user_id)
+{
+    $User = new User();
+    $session = session();
+    $user_info = $User->where('user_id', $user_id)->first();
     
-        $session = session();
-        $data = [
-            'status' => "Done",
-        ];
-        $Event->update((int)$id, $data);
-        $session = session();
-        $session->setFlashdata('done', 'value');
-        return $this->response->redirect(site_url('/dashboard/'));
-    }
-    public function pending_task($id){
-        $Event = new Event();
+    $data['user_data'] = [
+
+        'user_id' => $user_info['user_id'],
+        'username' => $user_info['name'],
+        'email' => $user_info['email'],
+        'address' => $user_info['address'],
+        'contact' => $user_info['contact'],
+        'password' => $user_info['password'],
+        'user_img' => $user_info['user_img'],
+        'isLoggedIn' => TRUE,
+    ];
+    $data['main'] = 'admin/profile/profile';
+    return view("templates/template",$data);
+}
+public function profileBdo($bdo_id)
+{
+    $User = new User_bdo();
+    $session = session();
+    $user_info = $User->where('bdo_id', $bdo_id)->first();
     
-        $session = session();
+    $data['user_data'] = [
+
+        'bdo_id' => $user_info['bdo_id'],
+        'bdo_fname' => $user_info['bdo_fname'],
+        'bdo_lname' => $user_info['bdo_lname'],
+        'bdo_email' => $user_info['bdo_email'],
+        'bdo_address' => $user_info['bdo_address'],
+        'bdo_contact' => $user_info['bdo_contact'],
+        'bdo_password' => $user_info['bdo_password'],
+        'user_img' => $user_info['user_img'],
+        'isLoggedIn' => TRUE,
+    ];
+    $data['main'] = 'client/profile/profile';
+    return view("templates/template",$data);
+}
+public function update(){
+    $User = new User();
+    $user_id = $this->request->getVar('user_id');
+    $user_obj = $User->find($user_id);
+    $imageName= null;
+    $old_img_name = $user_obj['user_img'];
+    if($old_img_name == NULL){
+       $file = $this->request->getFile('user_img');
+       if ($file->isValid() && !$file->hasMoved()) {
+        $imageName = $file->getRandomName();
+        $file->move('uploads/',$imageName);
+    }
+}else{
+    $file = $this->request->getFile('user_img');
+    if ($file->isValid() && !$file->hasMoved()) {
+
+        if (file_exists("uploads/".$old_img_name)) {
+            unlink("uploads/".$old_img_name);
+        }
+        $imageName = $file->getRandomName();
+        $file->move('uploads/',$imageName);
+    }
+    else{
+        $imageName = $old_img_name;
+    }
+}
+
+$session = session();
+if($this->request->getVar('password') == NULL){
+    $data = [
+        'name' => $this->request->getVar('name'),
+        'email'  => $this->request->getVar('email'),
+        'address' => $this->request->getVar('address'),
+        'contact'  => $this->request->getVar('contact'),
+        'user_img' => $imageName,
+    ];
+}else{
+    if($this->request->getVar('password') == $this->request->getVar('c_password')){
         $data = [
-            'status' => "Pending",
+            'name' => $this->request->getVar('name'),
+            'email'  => $this->request->getVar('email'),
+            'address' => $this->request->getVar('address'),
+            'contact'  => $this->request->getVar('contact'),
+            'password'  =>password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
+            'user_img' => $imageName,
         ];
-        $Event->update((int)$id, $data);
-        $session = session();
-        $session->setFlashdata('pending', 'value');
-        return $this->response->redirect(site_url('/dashboard/'));
+    }else{
+       session()->setFlashdata('error', 'Password didn\'t match, Please try again');
+       return $this->response->redirect(site_url('/profile/'.$user_id));
+   }
+}
+$User->update($user_id, $data);
+if($User->update($user_id,$data)){
+    session()->setFlashdata('message', 'Updated Successfully!');
+}
+$user_info = $User->where('user_id', $user_id)->first();
+
+$getdata = [
+    'user_id' => $user_info['user_id'],
+    'username' => $user_info['name'],
+    'email' => $user_info['email'],
+    'address' => $user_info['address'],
+    'contact' => $user_info['contact'],
+    'user_img' => $user_info['user_img'],
+    
+    
+    'isLoggedIn' => TRUE,
+];
+
+$session->set($getdata);
+
+return $this->response->redirect(site_url('/profile/'.$user_id));
+}
+public function updateBdo(){
+    $User = new User_bdo();
+    $bdo_id = $this->request->getVar('bdo_id');
+    $user_obj = $User->find($bdo_id);
+    $imageName= null;
+    $old_img_name = $user_obj['user_img'];
+    if($old_img_name == NULL){
+       $file = $this->request->getFile('user_img');
+       if ($file->isValid() && !$file->hasMoved()) {
+        $imageName = $file->getRandomName();
+        $file->move('uploads/',$imageName);
     }
+}else{
+    $file = $this->request->getFile('user_img');
+    if ($file->isValid() && !$file->hasMoved()) {
+
+        if (file_exists("uploads/".$old_img_name)) {
+            unlink("uploads/".$old_img_name);
+        }
+        $imageName = $file->getRandomName();
+        $file->move('uploads/',$imageName);
+    }
+    else{
+        $imageName = $old_img_name;
+    }
+}
+
+$session = session();
+if($this->request->getVar('bdo_password') == NULL){
+    $data = [
+        'bdo_fname' => $this->request->getVar('bdo_fname'),
+        'bdo_lname' => $this->request->getVar('bdo_lname'),
+        'bdo_email'  => $this->request->getVar('bdo_email'),
+        'bdo_address' => $this->request->getVar('bdo_address'),
+        'bdo_contact'  => $this->request->getVar('bdo_contact'),
+        'user_img' => $imageName,
+    ];
+}else{
+    if($this->request->getVar('bdo_password') == $this->request->getVar('c_password')){
+        $data = [
+            'bdo_fname' => $this->request->getVar('bdo_fname'),
+            'bdo_lname' => $this->request->getVar('bdo_lname'),
+            'bdo_email'  => $this->request->getVar('bdo_email'),
+            'bdo_address' => $this->request->getVar('bdo_address'),
+            'bdo_contact'  => $this->request->getVar('bdo_contact'),
+            'bdo_password'  =>password_hash($this->request->getVar('bdo_password'), PASSWORD_DEFAULT),
+            'user_img' => $imageName,
+        ];
+    }else{
+       session()->setFlashdata('error', 'Password didn\'t match, Please try again');
+       return $this->response->redirect(site_url('/profile-bdo/'.$bdo_id));
+   }
+}
+$User->update($bdo_id, $data);
+if($User->update($bdo_id,$data)){
+    session()->setFlashdata('message', 'Updated Successfully!');
+}
+$user_info = $User->where('bdo_id', $bdo_id)->first();
+// dd($user_info);
+$getdata = [
+    'bdo_id' => $user_info['bdo_id'],
+    'bdo_fname' => $user_info['bdo_fname'],
+    'bdo_lname' => $user_info['bdo_lname'],
+    'bdo_email'  => $user_info['bdo_email'],
+    'bdo_address' => $user_info['bdo_address'],
+    'bdo_contact'  => $user_info['bdo_contact'],
+    'user_img' => $user_info['user_img'],
+    
+    
+    'isLoggedIn' => TRUE,
+];
+
+$session->set($getdata);
+
+return $this->response->redirect(site_url('/profile-bdo/'.$bdo_id));
+}
+
+public function update_task($id){
+    $Event = new Event();
+    
+    $session = session();
+    $data = [
+        'status' => "Done",
+    ];
+    $Event->update((int)$id, $data);
+    $session = session();
+    $session->setFlashdata('done', 'value');
+    return $this->response->redirect(site_url('/dashboard/'));
+}
+public function pending_task($id){
+    $Event = new Event();
+    
+    $session = session();
+    $data = [
+        'status' => "Pending",
+    ];
+    $Event->update((int)$id, $data);
+    $session = session();
+    $session->setFlashdata('pending', 'value');
+    return $this->response->redirect(site_url('/dashboard/'));
+}
 
 
-    public function logout()
-    {
-        session()->destroy();
-        return $this->response->redirect(site_url('/'));
-    }
+public function logout()
+{
+    session()->destroy();
+    return $this->response->redirect(site_url('/'));
+}
 }
 ?>

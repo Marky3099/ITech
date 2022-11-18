@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Task and Scheduling Management System</title>
@@ -46,6 +47,13 @@
                     <span class="links_name">Call Logs</span>
                 </a>
                 <span class="tooltip">Call Logs</span>
+            </li>
+            <li>
+                <a href="<?=base_url('/admin-appointment')?>">
+                    <i class="fas fa-folder"></i>
+                    <span class="links_name">Appointment</span>
+                </a>
+                <span class="tooltip">Appointment</span>
             </li>
             <h4>Reports</h4><hr>
             <li class="ar">
@@ -159,6 +167,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
 </script>
 <script type="text/javascript" src="<?=base_url('assets/js/dash_header.js')?>"></script>
+
 
 
 

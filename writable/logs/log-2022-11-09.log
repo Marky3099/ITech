@@ -1,0 +1,80 @@
+ERROR - 2022-11-09 03:05:00 --> MySQL server has gone away
+CRITICAL - 2022-11-09 03:05:00 --> MySQL server has gone away
+#0 C:\xampp\htdocs\tsms\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT 1\nFROM `...', 0)
+#1 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT 1\nFROM `...')
+#2 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT 1\nFROM `...')
+#3 C:\xampp\htdocs\tsms\system\Database\BaseBuilder.php(1443): CodeIgniter\Database\BaseConnection->query('SELECT 1\nFROM `...', Array, false)
+#4 C:\xampp\htdocs\tsms\system\Validation\Rules.php(116): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\tsms\system\Validation\Validation.php(277): CodeIgniter\Validation\Rules->is_not_unique('admin@gmail.com', 'email', Array, NULL)
+#6 C:\xampp\htdocs\tsms\system\Validation\Validation.php(151): CodeIgniter\Validation\Validation->processRules('email', 'email', 'admin@gmail.com', Array, Array)
+#7 C:\xampp\htdocs\tsms\system\Controller.php(160): CodeIgniter\Validation\Validation->run()
+#8 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(67): CodeIgniter\Controller->validate(Array)
+#9 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->check()
+#10 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#11 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#13 {main}
+ERROR - 2022-11-09 03:05:14 --> MySQL server has gone away
+CRITICAL - 2022-11-09 03:05:14 --> MySQL server has gone away
+#0 C:\xampp\htdocs\tsms\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT 1\nFROM `...', 0)
+#1 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT 1\nFROM `...')
+#2 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT 1\nFROM `...')
+#3 C:\xampp\htdocs\tsms\system\Database\BaseBuilder.php(1443): CodeIgniter\Database\BaseConnection->query('SELECT 1\nFROM `...', Array, false)
+#4 C:\xampp\htdocs\tsms\system\Validation\Rules.php(116): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\tsms\system\Validation\Validation.php(277): CodeIgniter\Validation\Rules->is_not_unique('admin@gmail.com', 'email', Array, NULL)
+#6 C:\xampp\htdocs\tsms\system\Validation\Validation.php(151): CodeIgniter\Validation\Validation->processRules('email', 'email', 'admin@gmail.com', Array, Array)
+#7 C:\xampp\htdocs\tsms\system\Controller.php(160): CodeIgniter\Validation\Validation->run()
+#8 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(67): CodeIgniter\Controller->validate(Array)
+#9 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->check()
+#10 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#11 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#13 {main}
+ERROR - 2022-11-09 03:05:40 --> MySQL server has gone away
+CRITICAL - 2022-11-09 03:05:40 --> MySQL server has gone away
+#0 C:\xampp\htdocs\tsms\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT 1\nFROM `...', 0)
+#1 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT 1\nFROM `...')
+#2 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT 1\nFROM `...')
+#3 C:\xampp\htdocs\tsms\system\Database\BaseBuilder.php(1443): CodeIgniter\Database\BaseConnection->query('SELECT 1\nFROM `...', Array, false)
+#4 C:\xampp\htdocs\tsms\system\Validation\Rules.php(116): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\tsms\system\Validation\Validation.php(277): CodeIgniter\Validation\Rules->is_not_unique('admin@gmail.com', 'email', Array, NULL)
+#6 C:\xampp\htdocs\tsms\system\Validation\Validation.php(151): CodeIgniter\Validation\Validation->processRules('email', 'email', 'admin@gmail.com', Array, Array)
+#7 C:\xampp\htdocs\tsms\system\Controller.php(160): CodeIgniter\Validation\Validation->run()
+#8 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(67): CodeIgniter\Controller->validate(Array)
+#9 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->check()
+#10 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#11 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#13 {main}
+ERROR - 2022-11-09 03:05:57 --> MySQL server has gone away
+CRITICAL - 2022-11-09 03:05:57 --> MySQL server has gone away
+#0 C:\xampp\htdocs\tsms\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT 1\nFROM `...', 0)
+#1 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT 1\nFROM `...')
+#2 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT 1\nFROM `...')
+#3 C:\xampp\htdocs\tsms\system\Database\BaseBuilder.php(1443): CodeIgniter\Database\BaseConnection->query('SELECT 1\nFROM `...', Array, false)
+#4 C:\xampp\htdocs\tsms\system\Validation\Rules.php(116): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\tsms\system\Validation\Validation.php(277): CodeIgniter\Validation\Rules->is_not_unique('matope5804@host...', 'email', Array, NULL)
+#6 C:\xampp\htdocs\tsms\system\Validation\Validation.php(151): CodeIgniter\Validation\Validation->processRules('email', 'email', 'matope5804@host...', Array, Array)
+#7 C:\xampp\htdocs\tsms\system\Controller.php(160): CodeIgniter\Validation\Validation->run()
+#8 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(67): CodeIgniter\Controller->validate(Array)
+#9 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->check()
+#10 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#11 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#13 {main}
+ERROR - 2022-11-09 03:06:19 --> MySQL server has gone away
+CRITICAL - 2022-11-09 03:06:19 --> MySQL server has gone away
+#0 C:\xampp\htdocs\tsms\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT 1\nFROM `...', 0)
+#1 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT 1\nFROM `...')
+#2 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT 1\nFROM `...')
+#3 C:\xampp\htdocs\tsms\system\Database\BaseBuilder.php(1443): CodeIgniter\Database\BaseConnection->query('SELECT 1\nFROM `...', Array, false)
+#4 C:\xampp\htdocs\tsms\system\Validation\Rules.php(116): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\tsms\system\Validation\Validation.php(277): CodeIgniter\Validation\Rules->is_not_unique('admin@gmail.com', 'email', Array, NULL)
+#6 C:\xampp\htdocs\tsms\system\Validation\Validation.php(151): CodeIgniter\Validation\Validation->processRules('email', 'email', 'admin@gmail.com', Array, Array)
+#7 C:\xampp\htdocs\tsms\system\Controller.php(160): CodeIgniter\Validation\Validation->run()
+#8 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(67): CodeIgniter\Controller->validate(Array)
+#9 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->check()
+#10 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#11 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#13 {main}

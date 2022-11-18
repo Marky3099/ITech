@@ -23,11 +23,11 @@ class ServCrud extends Controller
         if($_SESSION['position'] != USER_ROLE_ADMIN){
             return $this->response->redirect(site_url('/dashboard'));
         }
-         $data['main'] = 'admin/serv/serv_add';
-          $data['error'] = null;
+        $data['main'] = 'admin/serv/serv_add';
+        $data['error'] = null;
         return view("templates/template",$data);
     }
- 
+    
     // insert data
     public function store() {
         if($_SESSION['position'] != USER_ROLE_ADMIN){
@@ -39,19 +39,19 @@ class ServCrud extends Controller
         foreach($service as $serv){
             if($ServName == $serv['serv_name']){
                 $serv_create = [
-                'serv_name' => $ServName,
-                'serv_type' => $this->request->getVar('serv_type'),
-                'serv_description' => $this->request->getVar('serv_description'),
-                'price' => $this->request->getVar('price'),
-                'serv_color' => $serv['serv_color'],
+                    'serv_name' => $ServName,
+                    'serv_type' => $this->request->getVar('serv_type'),
+                    'serv_description' => $this->request->getVar('serv_description'),
+                    'price' => $this->request->getVar('price'),
+                    'serv_color' => $serv['serv_color'],
                 ];
             }else{
                 $serv_create = [
-                'serv_name' => $ServName,
-                'serv_type' => $this->request->getVar('serv_type'),
-                'serv_description' => $this->request->getVar('serv_description'),
-                'price' => $this->request->getVar('price'),
-                'serv_color' => $this->request->getVar('serv_color'),
+                    'serv_name' => $ServName,
+                    'serv_type' => $this->request->getVar('serv_type'),
+                    'serv_description' => $this->request->getVar('serv_description'),
+                    'price' => $this->request->getVar('price'),
+                    'serv_color' => $this->request->getVar('serv_color'),
                 ];
             }
         }
@@ -84,19 +84,19 @@ class ServCrud extends Controller
         foreach($service as $serv){
             if($ServName == $serv['serv_name']){
                 $data = [
-                'serv_name' => $ServName,
-                'serv_type' => $this->request->getVar('serv_type'),
-                'serv_description' => $this->request->getVar('serv_description'),
-                'price' => $this->request->getVar('price'),
-                'serv_color' => $serv['serv_color'],
+                    'serv_name' => $ServName,
+                    'serv_type' => $this->request->getVar('serv_type'),
+                    'serv_description' => $this->request->getVar('serv_description'),
+                    'price' => $this->request->getVar('price'),
+                    'serv_color' => $serv['serv_color'],
                 ];
             }else{
                 $data = [
-                'serv_name' => $ServName,
-                'serv_type' => $this->request->getVar('serv_type'),
-                'serv_description' => $this->request->getVar('serv_description'),
-                'price' => $this->request->getVar('price'),
-                'serv_color' => $this->request->getVar('serv_color'),
+                    'serv_name' => $ServName,
+                    'serv_type' => $this->request->getVar('serv_type'),
+                    'serv_description' => $this->request->getVar('serv_description'),
+                    'price' => $this->request->getVar('price'),
+                    'serv_color' => $this->request->getVar('serv_color'),
                 ];
             }
         }

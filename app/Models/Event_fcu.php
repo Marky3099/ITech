@@ -8,6 +8,6 @@ class Event_fcu extends Model
 {
     protected $table      = 'event_fcu';
     protected $returnType     = 'array';
-    protected $allowedFields = ['id','fcuno'];
+    protected $allowedFields = ['id','fcuno','aircon_id','quantity'];
 
 }

@@ -43,8 +43,14 @@ $routes->get('/non-bdo-register', 'Pages::nonBdoRegister');
 
 $routes->get('/user-type','Pages::userType');
 $routes->get('/client-type','Pages::clientType');
+$routes->get('/forgot-password', 'Pages::fpass');
+$routes->get('/forgot-password/sent', 'Pages::fpass_send');
+$routes->get('/forgot-password/(:any)', 'Pages::change_pass_form/$1');
+$routes->get('/forgot-password-client/(:any)', 'Pages::change_pass_form_client/$1');
+$routes->post('/reset-password/(:any)', 'Pages::change_pass/$1');
 
 $routes->get('/appointment', 'AppointmentCrud::index',['filter' => 'authGuard']);
+$routes->get('/admin-appointment', 'AppointmentCrud::adminAppointment',['filter' => 'authGuard']);
 $routes->get('/appointment/create', 'AppointmentCrud::create',['filter' => 'authGuard']);
 $routes->post('/appointment/add', 'AppointmentCrud::store',['filter' => 'authGuard']);
 $routes->get('/appointment/(:num)', 'AppointmentCrud::singleAppt/$1',['filter' => 'authGuard']);
@@ -102,9 +108,12 @@ $routes->post('aircon/add', 'AirconCrud::store',['filter' => 'authGuard']);
 $routes->get('aircon/(:num)', 'AirconCrud::singleAircon/$1',['filter' => 'authGuard']);
 $routes->post('aircon/update', 'AirconCrud::update',['filter' => 'authGuard']);
 $routes->get('aircon/delete/(:num)', 'AirconCrud::delete/$1',['filter' => 'authGuard']);
+$routes->get('aircon/brand/(:any)', 'AirconCrud::show_aircon/$1',['filter' => 'authGuard']);
 
 $routes->get('/dashboard', 'Dashboard::dashboard',['filter' => 'authGuard']);
 $routes->get('/calendar', 'FullCalendar::index',['filter' => 'authGuard']);
+$routes->get('/calendar/add-aircon/(:num)', 'FullCalendar::addAircon/$1',['filter' => 'authGuard']);
+$routes->post('/calendar/add-aircon/add/(:num)', 'FullCalendar::Aircon_add/$1',['filter' => 'authGuard']);
 $routes->get('/calendar/emp', 'FullCalendar::index1',['filter' => 'authGuard']);
 $routes->get('/calendar/events/today', 'FullCalendar::daily',['filter' => 'authGuard']);
 $routes->get('/calendar/events/today/print', 'FullCalendar::printDaily',['filter' => 'authGuard']);
@@ -119,6 +128,7 @@ $routes->post('/calendar/insert', 'FullCalendar::insert',['filter' => 'authGuard
 $routes->get('/calendar/load', 'FullCalendar::load',['filter' => 'authGuard']);
 $routes->post('/calendar/update', 'FullCalendar::update',['filter' => 'authGuard']);
 $routes->get('/calendar/delete/(:num)', 'FullCalendar::delete/$1',['filter' => 'authGuard']);
+$routes->get('calendar/count/(:any)', 'FullCalendar::countAircon/$1',['filter' => 'authGuard']);
 
 $routes->get('/service-reports', 'ImageCrud::index',['filter' => 'authGuard']);
 $routes->get('service-reports/upload', 'ImageCrud::create',['filter' => 'authGuard']);
@@ -129,11 +139,13 @@ $routes->get('service-reports/delete/(:num)', 'ImageCrud::delete/$1',['filter' =
 
 $routes->get('/profile/(:num)', 'Dashboard::profile/$1',['filter' => 'authGuard']);
 $routes->post('profile/update', 'Dashboard::update',['filter' => 'authGuard']);
-$routes->get('/forgot-password', 'Dashboard::fpass');
 
-$routes->get('/forgot-password/sent', 'Dashboard::fpass_send');
-$routes->get('/forgot-password/(:any)', 'Dashboard::change_pass_form/$1');
-$routes->post('/reset-password/(:any)', 'Dashboard::change_pass/$1');
+
+$routes->get('/profile-bdo/(:num)', 'Dashboard::profileBdo/$1',['filter' => 'authGuard']);
+$routes->post('profile-bdo/update', 'Dashboard::updateBdo',['filter' => 'authGuard']);
+$routes->get('/forgot-password-bdo', 'Dashboard::fpass');
+
+
 $routes->get('/logout', 'Dashboard::logout',['filter' => 'authGuard']);
 
 $routes->get('/dashboard/task/update/(:num)', 'Dashboard::update_task/$1',['filter' => 'authGuard']);

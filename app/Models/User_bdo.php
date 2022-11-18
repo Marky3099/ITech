@@ -14,6 +14,6 @@ class User_bdo extends Model
     protected $returnType     = 'array';
   
 
-    protected $allowedFields = ['bdo_fname','bdo_lname','bdo_email','bdo_contact','bdo_company','bdo_address','bdo_unique_code','bdo_password','client_id','status'];
+    protected $allowedFields = ['bdo_fname','bdo_lname','bdo_email','bdo_contact','bdo_company','bdo_address','bdo_unique_code','bdo_password','client_id','status','user_img'];
 
 }

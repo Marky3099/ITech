@@ -22,11 +22,11 @@ class AirconCrud extends Controller
         if($_SESSION['position'] != USER_ROLE_ADMIN){
             return $this->response->redirect(site_url('/dashboard'));
         }
-         $data['main'] = 'admin/aircon/aircon_add';
-          $data['error'] = null;
+        $data['main'] = 'admin/aircon/aircon_add';
+        $data['error'] = null;
         return view("templates/template",$data);
     }
- 
+    
     // insert data
     public function store() {
         if($_SESSION['position'] != USER_ROLE_ADMIN){
@@ -74,7 +74,7 @@ class AirconCrud extends Controller
         $session->setFlashdata('update', 'value');
         return $this->response->redirect(site_url('/aircon'));
     }
- 
+    
     // delete Client
     public function delete($aircon_id = null){
         if($_SESSION['position'] != USER_ROLE_ADMIN){
@@ -85,5 +85,21 @@ class AirconCrud extends Controller
         $session = session();
         $session->setFlashdata('msg', 'value');
         return $this->response->redirect(site_url('/aircon'));
-    }    
+    }
+
+    public function show_aircon($Brand){
+        $output = '';
+        if($_SESSION['position'] != USER_ROLE_ADMIN){
+            return $this->response->redirect(site_url('/dashboard'));
+        }
+
+        $Aircon = new Aircon();
+        $data = $Aircon->where('device_brand', $Brand)->orderBy('aircon_type', 'ASC')->findAll();
+        
+        foreach($data as $row)
+        {
+          $output .= '<option value="'.$row["aircon_id"].'">'.$row["aircon_type"].'</option>';
+      }
+      return json_encode(['options'=> $output]);
+  }  
 }
