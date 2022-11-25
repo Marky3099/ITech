@@ -1,3 +1,129 @@
+
+
+<div id="mymodal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document" id="dialog">
+    <div class="modal-content">
+     <form action="<?= base_url('/calendar/insert');?>" method="POST"> 
+      <div class="modal-header">
+        <h4 class="modal-title">Add Schedule</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="adata">
+
+        <input type="hidden" name="start_event" id="start_event" value="">
+        <div class="form-group">
+          <input class="form-control" type="hidden" name="title" id="title" placeholder="Title">
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="time">Time</label><br>
+            <input type="time" name="time" id="time" value="00:00:00">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="repeatable">Repeat</label><br>
+            <select id="repeatable" name = "repeatable">
+              <option value="None">None</option>
+              <option value="Weekly">Weekly</option>
+              <option value="Monthly">Monthly</option>
+            </select>
+          </div>
+        </div>
+        <h3>Client Details:</h3>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="area">Branch Area</label><br>
+            <select id="area" name="area" class="form-control">
+              <?php foreach($area as $cl):  ?>
+                <option value=<?php echo $cl['area']; ?>><?php echo $cl['area'];?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="client_id">Branch Name</label><br>
+            <select id="client_id" name="client_id" class="form-control" required>
+
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          
+          <label for="serv_id">Service</label><br>
+          <select id="serv_id" name="serv_id" class="form-control" required>
+            <?php foreach($servName as $s):  ?>
+              <optgroup label="<?= $s['serv_name']; ?>">
+                <?php foreach($servType as $st):  ?>
+                  <?php if($st['serv_name'] == $s['serv_name']):?>
+                    <option value=<?= $st['serv_id'];?>><?= $st['serv_type'];?></option>
+                  <?php endif;?>
+                <?php endforeach; ?>
+              </optgroup>
+            <?php endforeach; ?>
+          </select>
+        </div>
+        <h3>Aircon Details:</h3>
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            
+            <label for="dbrand">Device Brand</label>
+            <select id="device_brand" name="device_brand[]" class="form-control " data-id="0"required>
+              <option value="">Select Brand</option>
+              <?php foreach($device_brand as $d_b):  ?>
+                <option value=<?php echo $d_b['device_brand']; ?>><?php echo $d_b['device_brand'];?></option>
+              <?php endforeach; ?>
+            </select>
+          </div> 
+          <div class="form-group col-md-3">
+            
+            <label for="aircont">Aircon Type</label>
+
+            <select id="aircon_id_0" name="aircon_id[]" class="form-control aircon" required>
+              <option value="">Select Type</option>
+            </select>
+          </div> 
+          <div class="form-group col-md-3">
+            
+            <label for="fcunos">Fcuno</label>
+            <select id="fcuno" name="fcuno0[]" class="selectpicker" data-width="100%" multiple data-selected-text-format="count > 3">
+              <?php foreach($fcu_no as $f):  ?>
+                <option value="<?php echo $f['fcuno']; ?>"><p id="s2option"><?php echo $f['fcu'];?></p></option>
+              <?php endforeach; ?>
+            </select>
+          </div> 
+          <div class="form-group col-md-2">
+            
+            <label for="fcunos">Quantity</label>
+            <input type="number" class="form-control" name="quantity[]" id="quantity" min="1" value="1" required>
+          </div> 
+          <div class="form-group col-md-1"><br>
+            <span id="add_aut" class="btn btn-primary"><i class="fa-solid fa-plus"></i></span>
+          </div>
+        </div>
+        <div id="auth-rows"></div>
+        <div class="form-group">
+          
+          <label for="emp_id">Employee</label><br>
+          <select id="emp_id" name="emp_id[]" class="form-control selectpicker" multiple data-selected-text-format="count > 8" required>
+            <?php foreach($emp as $em):  ?>
+              <option value=<?php echo $em['emp_id']; ?>><?php echo $em['emp_name'];?></option>
+            <?php endforeach; ?>
+          </select>
+        </div> 
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+    </form>
+  </div>
+</div>
+</div>
+
+
+
 <div class="body-content">
    <div class="crud-text"> <h1>Appointment</h1></div>
 
@@ -45,8 +171,7 @@
            <td><?php echo $appt->qty; ?></td>
            <td><?php echo $appt->appt_status; ?></td>
            <td>
-             <a href="<?php echo base_url('/appointment/'.$appt->appt_id);?>" class="btn btn-primary btn-sm">Edit</a>
-             <a href="<?php echo base_url('/appointment/delete/'.$appt->appt_id);?>"class="btn btn-danger btn-sm del">Delete</a>
+             <a href="#" id="<?php echo $appt->appt_id; ?>" class="btn btn-primary btn-sm set_btn">Set</a>
           </td>
        </tr>
     <?php endforeach; ?>
@@ -77,5 +202,21 @@
       update = true;
       del = 'Appointment Details are Updated Successfully';
       <?php }?>;
+
+   $(document).on('click','.set_btn',function(e){
+      var apptId = e.target.id;
+      
+      $.ajax({
+         method:"POST",
+         url:"http://localhost/tsms/appointment/set-Appointment",
+         data: {
+            'appt_id': apptId
+         },
+         success: function(response){
+            console.log(response);
+         }
+      });
+   });
+
    </script>
    <script type="text/javascript" src="<?= base_url('assets/js/crud.js')?>"></script>

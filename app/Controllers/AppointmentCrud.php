@@ -7,6 +7,7 @@ use App\Models\Client;
 use App\Models\Aircon;
 use App\Models\Fcu_no;
 use App\Models\Serv;
+use App\Models\Emp;
 use App\Models\Appt_fcu;
 use App\Models\Appt_fcu_views;
 
@@ -89,6 +90,7 @@ public function adminAppointment(){
         $Aircon = new Aircon();
         $fcu_no = new Fcu_no();
         $Serv = new Serv();
+        $Emp = new Emp();
         $Appoint = new view_appointment();
         // $Apptfcu = new Appt_fcu();
         $Appt_fcu_views = new Appt_fcu_views();
@@ -101,6 +103,9 @@ public function adminAppointment(){
         $data['area'] = $Client->select('area')->groupBy('area')->findAll();
         $data['aircon'] = $Aircon->orderBy('aircon_id', 'ASC')->findAll();
         $data['serv'] = $Serv->orderBy('serv_id', 'ASC')->findAll();
+        $data['servName'] = $Serv->select('serv_name, serv_color, serv_type')->groupBy('serv_name')->findAll();
+        $data['servType'] = $Serv->orderBy('serv_name','ASC')->findAll();
+        $data['emp'] = $Emp->orderBy('emp_id', 'ASC')->findAll();
         $data['device_brand'] = $Aircon->select('device_brand')->groupBy('device_brand')->findAll();
 
         foreach($data['area'] as $k => $val) {
@@ -346,5 +351,13 @@ public function delete($appt_id = null){
     $Appoint = new Appointment();
     $data['Appoint'] = $Appoint->where('appt_id', $appt_id)->delete($appt_id);
     return $this->response->redirect(site_url('/appointment'));
+}
+
+public function setAppt(){
+    $Appoint = new Appointment();
+    // $Appoint_view = new view_appointment();
+    $appt_id = $this->request->getPost('appt_id');
+    $data['appt']=$Appoint->find($appt_id);
+    return $this->response->setJSON($data);
 }
 }

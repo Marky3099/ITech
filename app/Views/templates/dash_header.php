@@ -149,7 +149,7 @@
         <div class="text">Tasks and Schedule Monitoring System
             <div class="drop-content">
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Hi, Admin</a>
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Hi, <?php echo $_SESSION['username']?></a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="<?= base_url('/profile/'.$_SESSION['user_id'] )?>">Account Settings</a></li>
                         <li><a class="dropdown-item" href="<?= base_url('/logout')?>">Sign out</a></li>

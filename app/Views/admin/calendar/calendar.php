@@ -208,8 +208,19 @@
             <?php endforeach; ?>
           </select>
         </div> 
+
+         <h3>Aircon Details:</h3>
+
         <!-- =================================================== -->
         <div id="auth-rows-edit"></div>
+
+
+        <div class="form-row" >
+          <div class="form-group col-md-12" align="center" style="background-color:lightgreen;">
+            <span id="add_aut_update" class="btn btn-primary"><i class="fa-solid fa-plus"></i></span>
+          </div> 
+        </div>
+
         <div class="form-group">
           
           <label for="emp_id_update">Employee</label><br>
@@ -266,9 +277,13 @@ var airconD = <?php echo json_encode($client_area); ?> ;
 var distinct = <?php echo json_encode($distinct); ?> ;
 var distinctEvent = <?php echo json_encode($distinct_event); ?> ;
 var deviceBrand = <?php echo json_encode($device_brand); ?> ;
+ 
+ console.log(distinct);
+  console.log(deviceBrand);
 
 
 var count = 1;
+var count_update = 1;
 
   // console.log(event);
   $("#add_aut").click(function(e){
@@ -319,9 +334,72 @@ var count = 1;
 
   });
 
+// ------------------------------------
+
+   $("#add_aut_update").click(function(e){
+    var html3 = `<div class="form-row" id="row" style="background-color:lightgreen;">
+    <div class="form-group col-md-3">
+    
+    <label for="dbrand">Device Brand</label>
+    <select id="device_brand_update" name="device_brand[]" class="form-control " data-id="`+count_update+`"required>
+    <option value="0">Select Brand</option>
+    <?php foreach($device_brand as $d_b):  ?>
+      <option value=<?php echo $d_b['device_brand']; ?>><?php echo $d_b['device_brand'];?></option>
+    <?php endforeach; ?>
+    </select>
+    </div> 
+    <div class="form-group col-md-3">
+    
+    <label for="aircont">Aircon Type</label>
+    <select id="aircon_update_id_`+count_update+`" name="aircon_update_id[]" class="form-control aircon" data-id="`+count_update+`" required>
+    <option value="0">Select Type</option>
+    </select>
+    </div> 
+
+    <div class="form-group col-md-3">
+    
+    <label for="fcunos">Fcuno</label>
+    <select id="fcuno_update_`+count_update+`"  class="selectpicker" data-width="100%" multiple data-selected-text-format="count > 2">
+    <option value="1">FCU 1</option>
+    <option value="2">FCU 2</option>
+    <option value="3">FCU 3</option>
+    <option value="4">FCU 4</option>
+    <option value="5">FCU 5</option>
+    <option value="6">FCU 6</option>
+    <option value="7">FCU 7</option>
+    <option value="8">FCU 8</option>
+    <option value="9">FCU 9</option>
+    <option value="10">FCU 10</option>
+    </select>
+    </div>
+
+    <div class="form-group col-md-2">
+    
+    <label for="fcunos">Quantity</label>
+    <input type="number" class="form-control" name="quantity[]" id="quantity" min="1" value="1" required>
+    </div> 
+    <div class="form-group col-md-1"><br>
+    <span id="auth-del-edit" class="btn"><i class="fas fa-minus"></i></span>
+    </div>
+    </div>`;
+
+
+
+    count_update++;
+    $('#auth-rows-edit').append(html3);
+    
+    $('#mymodal2 .selectpicker').selectpicker();
+
+  });
+
 
 
   $('#auth-rows').on('click', '#auth-del', function(E){
+
+    $(this).parents('#row').remove();
+
+  });
+  $('#auth-rows-edit').on('click', '#auth-del-edit', function(E){
 
     $(this).parents('#row').remove();
 
@@ -348,6 +426,7 @@ var count = 1;
       }
     })
   });
+
   $(document).on('change', '#device_brand_update', function(){
     var category_id = $(this).val();
     var aircon = $(this).data('id');
@@ -368,6 +447,15 @@ var count = 1;
         console.log(e);
       }
     })
+  });
+
+  $(document).on('change','.aircon', function(){
+    var aircon_id = $(this).val();
+    var count_aircon = $(this).data('id');
+    // document.getElementById('fcuno_update_'+aircon).id = 'fcuno_update_';
+    $('#fcuno_update_'+count_aircon).attr('name','fcuno_update_'+aircon_id+'[]');
+    alert(aircon_id);
+   
   });
 
   $('#mymodal .selectpicker').selectpicker();

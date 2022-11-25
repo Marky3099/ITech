@@ -792,8 +792,9 @@ public function update(){
     }
 
         $Event_fcu->where('id', $event_id)->delete();
-        foreach ($_POST['aircon_id'] as $index => $aircon) {
-        foreach ($_POST['fcuno'.$aircon] as $key => $floor_num) {
+
+        foreach ($_POST['aircon_update_id'] as $index => $aircon) {
+        foreach ($_POST['fcuno_update_'.$aircon] as $key => $floor_num) {
            $Event_fcu->insert([
             'id'=> (int) $event_id,
             'aircon_id'=> (int)$aircon,
@@ -805,7 +806,7 @@ public function update(){
        }
 
    }
-    
+   
     
     
     return $this->response->redirect(site_url('/calendar'));
