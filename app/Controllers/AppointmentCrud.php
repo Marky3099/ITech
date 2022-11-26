@@ -22,11 +22,13 @@ class AppointmentCrud extends Controller
         $Appoint = new view_appointment();
         // $Apptfcu = new Appt_fcu();
         $Appt_fcu_views = new Appt_fcu_views();
+        $session = session();
+        $session_id = $_SESSION['user_id'];
 
         $data['view_appoint'] =[];
         $data['fcu_no'] = $fcu_no->orderBy('fcuno', 'ASC')->findAll();
         $data['fcu_appt'] = $Appt_fcu_views->orderBy('appt_id', 'ASC')->findAll();
-        $data['appoint'] = $Appoint->orderBy('appt_id', 'ASC')->findAll();
+        $data['appoint'] = $Appoint->where('bdo_id',$session_id)->findAll();
         $data['client'] = $Client->orderBy('client_id', 'ASC')->findAll();
         $data['area'] = $Client->select('area')->groupBy('area')->findAll();
         $data['aircon'] = $Aircon->orderBy('aircon_id', 'ASC')->findAll();
@@ -168,6 +170,8 @@ public function create(){
     $data['area'] = $Client->select('area')->groupBy('area')->findAll();
     $data['aircon'] = $Aircon->orderBy('aircon_id', 'ASC')->findAll();
     $data['serv'] = $Serv->orderBy('serv_id', 'ASC')->findAll();
+    $data['servName'] = $Serv->select('serv_name, serv_color, serv_type')->groupBy('serv_name')->findAll();
+    $data['servType'] = $Serv->orderBy('serv_name','ASC')->findAll();
     $data['device_brand'] = $Aircon->select('device_brand')->groupBy('device_brand')->findAll();
     foreach($data['area'] as $k => $val) {
         
@@ -221,9 +225,10 @@ public function store() {
     $Aircon = new Aircon();
     $fcu_no = new Fcu_no();
     $Serv = new Serv();
-
+    // dd($this->request->getVar('bdo_id'));
     $appoint_create = [
         'appt_date' => $this->request->getVar('appt_date'),
+        'bdo_id' => $this->request->getVar('bdo_id'),
         'appt_time' => $this->request->getVar('appt_time'),
         'area' => $this->request->getVar('area'),
         'serv_id' => $this->request->getVar('serv_id'),
@@ -246,7 +251,7 @@ public function store() {
     return $this->response->redirect(site_url('/appointment'));
 
 }
-public function singleAppt($appt_id = null){
+public function singleAppt($appt_id){
     
     $Appoint = new Appointment();
     $Appoint_view = new view_appointment();
@@ -259,6 +264,8 @@ public function singleAppt($appt_id = null){
 
     $data['fcu_no'] = $fcu_no->orderBy('fcuno', 'ASC')->findAll();
     $data['serv'] = $Serv->orderBy('serv_id', 'ASC')->findAll();
+    $data['servName'] = $Serv->select('serv_name, serv_color, serv_type')->groupBy('serv_name')->findAll();
+    $data['servType'] = $Serv->orderBy('serv_name','ASC')->findAll();
     $data['appt_fcu'] = $Appt_fcu->orderBy('appt_id', 'ASC')->findAll();
     $data['aircon'] = $Aircon->orderBy('aircon_id', 'ASC')->findAll();
     $data['device_brand'] = $Aircon->select('device_brand')->groupBy('device_brand')->findAll();
