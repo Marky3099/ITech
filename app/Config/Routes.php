@@ -51,6 +51,7 @@ $routes->post('/reset-password/(:any)', 'Pages::change_pass/$1');
 
 $routes->get('/appointment', 'AppointmentCrud::index',['filter' => 'authGuard']);
 $routes->get('/admin-appointment', 'AppointmentCrud::adminAppointment',['filter' => 'authGuard']);
+$routes->post('/appointment/set-Appointment', 'AppointmentCrud::setAppt',['filter' => 'authGuard']);
 $routes->get('/appointment/create', 'AppointmentCrud::create',['filter' => 'authGuard']);
 $routes->post('/appointment/add', 'AppointmentCrud::store',['filter' => 'authGuard']);
 $routes->get('/appointment/(:num)', 'AppointmentCrud::singleAppt/$1',['filter' => 'authGuard']);

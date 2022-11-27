@@ -35,9 +35,15 @@
         <label>Service</label>
         <select id="serv_id" name="serv_id" class="form-control" required>
 
-          <?php foreach($serv as $ser):  ?>
-            <option value="<?php echo $ser['serv_id']; ?>"<?php if($ser['serv_id'] == $view_appoint['serv_id']) echo 'selected="selected"';?>><?php echo $ser['serv_name'];?></option>
-          <?php endforeach; ?>
+          <?php foreach($servName as $s):  ?>
+              <optgroup label="<?= $s['serv_name']; ?>">
+                <?php foreach($servType as $st):  ?>
+                  <?php if($st['serv_name'] == $s['serv_name']):?>
+                    <option value=<?= $st['serv_id'];?>><?= $st['serv_type'];?></option>
+                  <?php endif;?>
+                <?php endforeach; ?>
+              </optgroup>
+            <?php endforeach; ?>
         </select>
       </div>
       <div class="form-group">
@@ -87,7 +93,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/js/bootstrap-select.min.js"></script>
 <script type="text/javascript">
 
-  $('#fcuno_update').select2();
+  // $('#fcuno_update').select2();
   var areas = <?php echo json_encode($client_area); ?> ;
   var client_current_area = <?php echo json_encode($appt); ?> ;
       //     $.each(areas[0], function(key, v) {

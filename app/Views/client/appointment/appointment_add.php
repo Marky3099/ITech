@@ -7,6 +7,7 @@
       
       <h1>Add Appointment</h1>
       <div class="form-content">
+        <input type="hidden" name="bdo_id" value="<?=$_SESSION['user_id']?>">
         <div class="form-group">
           <label id="label1">Date</label>
           <input type="date" name="appt_date" class="form-control" required>
@@ -34,8 +35,14 @@
           <label>Service</label>
           <select id="serv_id" name="serv_id" class="form-control" required>
 
-            <?php foreach($serv as $ser):  ?>
-              <option value=<?php echo $ser['serv_id']; ?>><?php echo $ser['serv_name'];?></option>
+            <?php foreach($servName as $s):  ?>
+              <optgroup label="<?= $s['serv_name']; ?>">
+                <?php foreach($servType as $st):  ?>
+                  <?php if($st['serv_name'] == $s['serv_name']):?>
+                    <option value=<?= $st['serv_id'];?>><?= $st['serv_type'];?></option>
+                  <?php endif;?>
+                <?php endforeach; ?>
+              </optgroup>
             <?php endforeach; ?>
           </select>
         </div>

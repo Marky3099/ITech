@@ -92,24 +92,24 @@
      //  var int_index_area1 = 0;
      //  var count1 = 0;
      $('#auth-rows-edit').html('');
-  
+    console.log(distinctEvent);
      distinctEvent.forEach((disEvent, index)=>{
       
           var concut = '';
-          console.log(disEvent,distinct);
+          // console.log(disEvent,distinct);
         distinct.forEach((dis, index)=>{
     if ( info.event.id == dis.id &&  dis.id == disEvent.id) {
-        console.log(info.event.id +'='+ dis.id &&  dis.id +'='+  disEvent.id);
-         concut = `<div class="form-row" id="row">
+        // console.log(info.event.id +'='+ dis.id +' '+  dis.id +'='+  disEvent.id);
+         concut = `<div class="form-row" id="row" style="background-color:lightblue;">
     <div class="form-group col-md-3">
     <label for="dbrand">Device Brand</label>
     <select id="device_brand_update" name="device_brand[]" class="form-control " data-id="`+dis.aircon_id+`"required>`;
       
       deviceBrand.forEach((dbrand, index)=>{
-        if (dis.aircon_id != dbrand.aircon_id) {
-          concut = concut + `<option value="`+dbrand.device_brand+`">`+dbrand.device_brand+`</option>`;
-        }else{
+        if (dis.device_brand == dbrand.device_brand) {
           concut = concut + `<option value="`+dbrand.device_brand+`" selected>`+dbrand.device_brand+`</option>`;
+        }else{
+          concut = concut + `<option value="`+dbrand.device_brand+`">`+dbrand.device_brand+`</option>`;
         }
          
       });
@@ -119,7 +119,7 @@
     <div class="form-group col-md-3">
     
     <label for="aircont">Aircon Type</label>
-    <select id="aircon_update_id_`+dis.aircon_id+`" name="aircon_id[]" class="form-control aircon" required>
+    <select id="aircon_update_id_`+dis.aircon_id+`" name="aircon_update_id[]" class="form-control aircon" data-id="`+dis.aircon_id+`" required>
     <option value="`+dis.aircon_id+`">`+dis.aircon_type+`</option>
     </select>
     </div>
@@ -129,7 +129,7 @@
 
     
 
-    <select id="fcuno_update_`+dis.aircon_id+`" name="fcuno`+dis.aircon_id+`[]" class="selectpicker" data-width="100%" multiple data-selected-text-format="count > 2">
+    <select id="fcuno_update_`+dis.aircon_id+`" name="fcuno_update_`+dis.aircon_id+`[]" class="selectpicker" data-width="100%" multiple data-selected-text-format="count > 2">
     <option value="1">FCU 1</option>
     <option value="2">FCU 2</option>
     <option value="3">FCU 3</option>

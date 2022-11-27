@@ -293,7 +293,8 @@ public function registerBdo(){
 
     $client = $Client->orderBy('client_id', 'ASC')->findAll();
     $code = $Client->where('code', $this->request->getVar('code'))->first();
-    $uniqueCode = $userBdo->orderBy('bdo_unique_code',$this->request->getVar('code'))->findAll();
+    $uniqueCode = $userBdo->where('bdo_unique_code',$this->request->getVar('code'))->findAll();
+    // dd($uniqueCode);
     if($code){
         if(!$uniqueCode>0){
             if($this->request->getVar('password') == $this->request->getVar('c_password')){
@@ -338,6 +339,7 @@ public function fpass_send(){
     // $Bdo_obj = $User_bdo->where('bdo_email', $to)->first();
     $user_info= $User->where('email',$to)->findAll();
     $bdo_info= $User_bdo->where('bdo_email',$to)->findAll();
+    // dd($bdo_info);
     if($user_info){
 
         $subject = "TSMS - Reset Password";
@@ -418,6 +420,7 @@ public function change_pass($email){
     $data['user_obj'] = $User->where('email', $email)->first();
     $User_obj = $User->where('email', $email)->first();
     $Bdo_obj = $User_bdo->where('bdo_email', $email)->first();
+    // dd($Bdo_obj);
     if($User_obj){
         $pass = $this->request->getVar('password');
         $c_pass =  $this->request->getVar('c_password');
@@ -458,8 +461,11 @@ public function change_pass($email){
        }
    }
     
-
-   return $this->response->redirect(site_url('/forgot-password-client/'.$email));
+   if($User_obj){
+   return $this->response->redirect(site_url('/forgot-password/'.$email));
+   }else if($Bdo_obj){
+    return $this->response->redirect(site_url('/forgot-password-client/'.$email));
+    }
 
 }
 }

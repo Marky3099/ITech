@@ -14,6 +14,6 @@ class Appointment extends Model
     protected $returnType     = 'array';
   
 
-    protected $allowedFields = ['appt_date','appt_time','client_id','serv_id','aircon_id','fcuno','qty','appt_status'];
+    protected $allowedFields = ['appt_date','bdo_id','appt_time','client_id','serv_id','aircon_id','fcuno','qty','appt_status'];
 
 }
