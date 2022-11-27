@@ -113,8 +113,6 @@ $routes->get('aircon/brand/(:any)', 'AirconCrud::show_aircon/$1',['filter' => 'a
 
 $routes->get('/dashboard', 'Dashboard::dashboard',['filter' => 'authGuard']);
 $routes->get('/calendar', 'FullCalendar::index',['filter' => 'authGuard']);
-$routes->get('/calendar/add-aircon/(:num)', 'FullCalendar::addAircon/$1',['filter' => 'authGuard']);
-$routes->post('/calendar/add-aircon/add/(:num)', 'FullCalendar::Aircon_add/$1',['filter' => 'authGuard']);
 $routes->get('/calendar/emp', 'FullCalendar::index1',['filter' => 'authGuard']);
 $routes->get('/calendar/events/today', 'FullCalendar::daily',['filter' => 'authGuard']);
 $routes->get('/calendar/events/today/print', 'FullCalendar::printDaily',['filter' => 'authGuard']);

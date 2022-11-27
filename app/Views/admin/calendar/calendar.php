@@ -430,7 +430,7 @@ var count_update = 1;
   $(document).on('change', '#device_brand_update', function(){
     var category_id = $(this).val();
     var aircon = $(this).data('id');
-    alert(aircon+' '+category_id);
+    
     $.ajax({
       url: 'http://localhost/tsms/aircon/brand/'+category_id,
       method:"GET",
@@ -454,7 +454,7 @@ var count_update = 1;
     var count_aircon = $(this).data('id');
     // document.getElementById('fcuno_update_'+aircon).id = 'fcuno_update_';
     $('#fcuno_update_'+count_aircon).attr('name','fcuno_update_'+aircon_id+'[]');
-    alert(aircon_id);
+    
    
   });
 

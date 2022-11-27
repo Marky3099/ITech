@@ -145,7 +145,7 @@
         </ul>
     </div>
     <div class="sidebar-header">
-        <div class="text">Tasks and Schedule Monitoring System
+        <div class="text1">Tasks and Schedule Monitoring System
             <div class="drop-content">
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Hi, <?php echo $_SESSION['username']?></a>

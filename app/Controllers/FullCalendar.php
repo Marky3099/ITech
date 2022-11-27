@@ -147,93 +147,6 @@ class FullCalendar extends BaseController
 $datas['main'] = 'admin/calendar/calendar';
 return view("templates/template",$datas);
 }
-public function addAircon($id)
-{
-    if($_SESSION['position'] != USER_ROLE_ADMIN){
-            if($_SESSION['position'] == USER_ROLE_ADMIN){
-                return $this->response->redirect(site_url('/calendar/emp'));
-            }
-            else{
-                return $this->response->redirect(site_url('/appointment'));
-            }
-        }
-    $event_fcu = new Event_fcu();
-    $fcu_no = new Fcu_no();
-    $aircon = new Aircon();
-    $datas['id'] = $id;
-    $datas['aircon'] = $aircon->orderBy('aircon_id', 'ASC')->findAll();
-    $datas['device_brand'] = $aircon->select('device_brand')->groupBy('device_brand')->findAll();
-    $datas['fcu_no'] = $fcu_no->orderBy('fcuno', 'ASC')->findAll();
-    $datas['event_fcu'] = $event_fcu->orderBy('id', 'ASC')->findAll();
-    foreach($datas['device_brand'] as $k => $val) {
-        
-        $device_brand = [];
-
-        foreach($datas['aircon'] as $key => $value) {
-            if($val['device_brand'] == $value['device_brand']){
-              array_push($device_brand , (object)[
-                'aircon_id' => (int)$value['aircon_id'],
-                'aircon_type' =>$value['aircon_type']
-            ]);
-          }
-
-      }
-      $datas['brand'][]= (object)[
-        $val['device_brand'] => $device_brand
-    ];
-    
-    $datas['brand2'][]=$device_brand;
-}
-
-$fcu_arr = "";
-foreach ($datas['event_fcu'] as $key => $value_fcus) {
-    if ( $value['id'] == $value_fcus['id']) {
-     $fcu_arr .= $datas['event_fcu'][$key]['fcuno'].",";
- }
-}
-$datas['event'][]= (object)[
-   "device_brand"=> $value['device_brand'],
-   "aircon_type"=> $value['aircon_type'],
-   "fcu_array"=> $fcu_arr,
-                 // "quantity"=> $value['quantity']
-];
-return view("admin/calendar/airconDetails",$datas);
-}
-public function Aircon_add($id){
-    if($_SESSION['position'] != USER_ROLE_ADMIN){
-            if($_SESSION['position'] == USER_ROLE_ADMIN){
-                return $this->response->redirect(site_url('/calendar/emp'));
-            }
-            else{
-                return $this->response->redirect(site_url('/appointment'));
-            }
-        }
-        // dd($_POST);
-    $event_fcu = new Event_fcu();
-
-    $fcu_no = new Fcu_no();
-    $aircon = new Aircon();
-
-    foreach ($_POST['aircon_id'] as $index => $aircon) {
-        
-
-        foreach ($_POST['fcuno'.$index] as $key => $floor_num) {
-                // dd((int)$aircon);
-           $event_fcu->insert([
-            'id'=> $id,
-            'aircon_id'=> (int)$aircon,
-            'quantity'=> (int)$_POST['quantity'][$index],
-            'fcuno'=>$floor_num
-        ]);
-           
-       }
-
-
-   }
-
-
-   return $this->response->redirect(site_url('/calendar'));
-}
 public function index1()
 {
 
@@ -267,7 +180,11 @@ public function index1()
         $serv = new Serv();
         $aircon = new Aircon();
         $events = new Event();
-        
+        $event_emp_views = new Event_emp_views();
+        $session = session();
+        $emp_id = $_SESSION['emp_id'];
+        // dd($emp_id);
+
         $datas['events'] = $events->orderBy('id', 'ASC')->findAll();
         $datas['event'] = array();
         $datas['branch'] = array();
@@ -302,10 +219,7 @@ public function index1()
         ];
         $datas['client_area2'][]=$area;
     }
-
-    $datas['all_events'] = $event->orderBy('id', 'ASC')->findAll();
-        // $datas['all_events'] = $event->where('STATUS', 'Done')->findAll();
-        // dd($data[0]['title']);
+$datas['all_events'] = $event_emp_views->where('emp_id', $emp_id)->findAll();
     foreach ($datas['all_events'] as $key => $value) {
     $emp_arr = "";
     $fcu_arr =array();
@@ -317,7 +231,6 @@ public function index1()
      }
         
 
-       // dd($datas['event_fcu']);
        foreach ($datas['event_fcu'] as $key => $value_fcu) {
              if ($value['id'] == $value_fcu['id']) {
                  array_push($fcu_arr , (object)[
@@ -340,15 +253,10 @@ public function index1()
         "id"=> $value['id'],
         "title"=> $value['title'],
         "start"=> $value['start_event'],
-                 // "repeatable"=> $value['repeatable'],
-        "time"=>$value['TIME'],
+        "time"=>$value['time'],
         "serv_id"=> $value['serv_id'],
-                 // "aircon_id"=> $value['aircon_id'],
         "client_id"=> $value['client_id'],
         "serv_name"=> $value['serv_name'],
-                 // "device_brand"=> $value['device_brand'],
-                 // "aircon_type"=> $value['aircon_type'],
-                 // "quantity"=> $value['quantity'],
         "area"=> $value['area'],
         "client_branch"=> $value['client_branch'],
         "emp_array"=> $emp_arr,
