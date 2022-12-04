@@ -47,6 +47,7 @@
         <thead>
            <tr>
               <th>Date</th>
+              <th>Task Code</th>
               <th>Time</th>
               <th>Area</th>
               <th>Client Branch</th>
@@ -66,6 +67,7 @@
            <?php foreach($event as $dat):  ?>
               <tr>
                <td><?php echo date('m-d-Y',strtotime($dat->start_event)); ?></td>
+               <td><?php echo $dat->event_code; ?></td>
                <td>
                   <?php if($dat->time == "00:00:00"): ?>
                      <?php echo "N/A"; ?>

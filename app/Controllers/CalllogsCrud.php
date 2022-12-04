@@ -7,6 +7,8 @@ use App\Models\Aircon;
 use App\Models\Calllogs_views;
 use App\Models\Fcu_no;
 use App\Models\Call_fcu;
+use App\Models\Emp;
+use App\Models\Serv;
 use App\Models\Call_fcu_views;
 
 class CalllogsCrud extends Controller{
@@ -61,6 +63,7 @@ class CalllogsCrud extends Controller{
      $data['view_calllogs'][]= (object)[
         "cl_id"=> $value['cl_id'],
         "date"=> $value['date'],
+        "log_code"=> $value['log_code'],
         "client_id"=> $value['client_id'],
         "area"=> $value['area'],
         "client_branch"=> $value['client_branch'],
@@ -198,10 +201,16 @@ public function create(){
     $Client = new Client();
     $Aircon = new Aircon();
     $fcu_no = new Fcu_no();
+    $emp = new Emp();
+    $serv = new Serv();
 
     $data['fcu_no'] = $fcu_no->orderBy('fcuno', 'ASC')->findAll();
     $data['client'] = $Client->orderBy('client_id', 'ASC')->findAll();
     $data['area'] = $Client->select('area')->groupBy('area')->findAll();
+    $data['emp'] = $emp->orderBy('emp_id', 'ASC')->findAll();
+    $data['serv'] = $serv->orderBy('serv_id', 'ASC')->findAll();
+    $data['servName'] = $serv->select('serv_name, serv_color, serv_type')->groupBy('serv_name')->findAll();
+        $data['servType'] = $serv->orderBy('serv_name','ASC')->findAll();
     $data['aircon'] = $Aircon->orderBy('aircon_id', 'ASC')->findAll();
     $data['device_brand'] = $Aircon->select('device_brand')->groupBy('device_brand')->findAll();
     foreach($data['area'] as $k => $val) {
@@ -258,9 +267,10 @@ public function store() {
     $Aircon = new Aircon();
     $Call_fcu = new Call_fcu();
     $fcu_no = new Fcu_no();
-
+    // dd($_POST);
+    $start_date = explode('/',$_POST['date']);
     $calllog_create = [
-        'date' => $this->request->getVar('date'),
+        'date' => $start_date[2].'-'.$start_date[0].'-'.$start_date[1],
         'area' => $this->request->getVar('area'),
         'client_id' => $this->request->getVar('client_id'),
         'caller' => $this->request->getVar('caller'),

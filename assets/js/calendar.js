@@ -8,13 +8,22 @@
   var calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: 'dayGridMonth',
     handleWindowResize: false,
-    selectable: true,   
+    selectable: true,
+    selectAllow: function (select) {
+                    return JudgeWeekDay(select.start, [1,2,3,4,5]);
+                },
+    dayRender: function (date, cell) {
+                    if (!JudgeWeekDay(date, [1,2,3,4,5])) {
+                        cell.css("background-color", "rgb(204, 204, 204)");
+                    }
+                },
     // editable: true,
     headerToolbar: {
       left: 'prev,next',
       center: 'title',
       right: 'today',
     },
+     
     events: event,
     dateClick: function(info) {
     // alert('Date: ' + info.dateStr);
@@ -28,6 +37,8 @@
      var tt = document.getElementById('start_event');
      // var i = document.getElementById('time');
      var ad = document.getElementById('id');
+     var ecode = document.getElementById('event_code');
+     var lcode = document.getElementById('log_code');
      var t = document.getElementById('title_update');
      var ti = document.getElementById('time_update');
      var s = document.getElementById('serv_id_update');
@@ -37,7 +48,8 @@
    
 
     
-      console.log(info.event.id);
+      console.log(ecode);
+      console.log(lcode);
 
       // select cliend and branch
       var s1 = document.getElementById('area_update');
@@ -215,6 +227,8 @@
       // s4.value = info.event.extendedProps.aircon_id;
       tt.value = info.event.start_event;
       ad.value = info.event.id;
+      ecode.value = info.event.extendedProps.event_code;
+      lcode.value = info.event.extendedProps.log_code;
       r.value = new Date(info.event.start).toLocaleDateString("fr-CA");
       t.value = info.event.title;
       ti.value = info.event.extendedProps.time;
@@ -365,3 +379,16 @@
       alert('here');
       document.getElementById("auth-rows-edit").innerHTML = '';
   });
+
+
+ function JudgeWeekDay(strDate, working_days)
+        {
+            var strDateTime = strDate.toString().substring(0, 3);
+            var allow = false;
+            for (var i = 0; i < working_days.length; i++) {
+                if (working_days[i].substring(0, 5) == strDateTime) {
+                    allow = true;
+                }
+            }
+            return allow
+        }

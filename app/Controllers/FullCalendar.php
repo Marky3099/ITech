@@ -12,6 +12,9 @@ use App\Models\Event_fcu;
 use App\Models\Fcu_no;
 use App\Models\Event_fcu_views;
 use App\Models\Event;
+use App\Models\Call_logs;
+use App\Models\Call_fcu;
+
 class FullCalendar extends BaseController
 {
     
@@ -120,6 +123,8 @@ class FullCalendar extends BaseController
      $datas['event'][]= (object)[
         "id"=> $value['id'],
         "title"=> $value['title'],
+        "event_code"=> $value['event_code'],
+        "log_code"=> $value['log_code'],
         "start"=> $value['start_event'],
                  // "repeatable"=> $value['repeatable'],
         "time"=>$value['TIME'],
@@ -136,12 +141,11 @@ class FullCalendar extends BaseController
         "fcu_array"=> $fcu_arr,
         "color" => $value['serv_color'],
     ];
-
+// dd($datas['event']);
     
     
 
 }
-         // dd($datas['event_aircon']);
 
 
 $datas['main'] = 'admin/calendar/calendar';
@@ -251,6 +255,7 @@ $datas['all_events'] = $event_emp_views->where('emp_id', $emp_id)->findAll();
         
      $datas['event'][]= (object)[
         "id"=> $value['id'],
+        "event_code"=> $value['event_code'],
         "title"=> $value['title'],
         "start"=> $value['start_event'],
         "time"=>$value['time'],
@@ -337,6 +342,7 @@ public function event(){
  $datas['event'][]= (object)[
   "id"=> $value['id'],
   "title"=>$value['title'],
+  "event_code"=> $value['event_code'],
   "start_event"=> $value['start_event'],
   "time"=> $value['TIME'],
   "serv_id"=> $value['serv_id'],
@@ -419,6 +425,7 @@ public function getfilter(){
     $datas['event'][]= (object)[
         "id"=> $value['id'],
         "title"=>$value['title'],
+        "event_code"=> $value['event_code'],
         "start_event"=> $value['start_event'],
         "time"=> $value['TIME'],
         "serv_id"=> $value['serv_id'],
@@ -538,6 +545,8 @@ public function insert(){
     
     $weeklyEvent = [];
     $monthlyEvent = [];
+    $set = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $code = substr(str_shuffle($set), 0, 6);
     // dd($_POST);
     if(isset($_POST["title"]))
     {
@@ -557,14 +566,18 @@ public function insert(){
                 array_push($weeklyEvent, $getw->format("Y-m-d"));
             }
                
-
+            // REPEAT WEEKLY ------------------------------------------------------------------------------------------
             for ($i=0; $i < count($weeklyEvent); $i++) { 
                 $_POST['start_event'] = $weeklyEvent[$i];
 
                 $_POST["title"] = date("g:ia",strtotime($_POST["time"]))." ".$client_branch['client_branch'];
                 
                 $success = $Event->insert($_POST);
+                if($success){
+                    $event_code = ['event_code' => 'task-'.$code.'-'.(int)$success];
 
+                    $Event->update((int)$success,$event_code);
+                }
                 foreach($_POST['emp_id'] as $key => $value) {
                     $Event_emp->insert([
                         'emp_id'=> (int) $value,
@@ -600,11 +613,16 @@ public function insert(){
         foreach (getMonthly(date("Y",strtotime($_POST['start_event']))) as $getm) {
             array_push($monthlyEvent, $getm->format("Y-m-d"));
         }
-
+        // REPEAT MONTHLY ------------------------------------------------------------------------------------------
         for ($i=0; $i < count($monthlyEvent); $i++) { 
             $_POST['start_event'] = $monthlyEvent[$i];
             $_POST["title"] = date("g:ia",strtotime($_POST["time"]))." ".$client_branch['client_branch'];
             $success = $Event->insert($_POST);
+            if($success){
+                $event_code = ['event_code' => 'task-'.$code.'-'.(int)$success];
+
+                $Event->update((int)$success,$event_code);
+            }
             foreach($_POST['emp_id'] as $key => $value) {
                 $Event_emp->insert([
                     'emp_id'=> (int) $value,
@@ -628,9 +646,18 @@ public function insert(){
    }
 
    else{
+    // NO REPEAT ------------------------------------------------------------------------------------------
     $_POST["title"] = date("g:ia",strtotime($_POST["time"]))." ".$client_branch['client_branch'];
+    // $_POST["cl_id"]= 0;
+    // dd($_POST);
     $success = $Event->insert($_POST);
     
+    if($success){
+        $event_code = ['event_code' => 'task-'.$code.'-'.(int)$success];
+
+        $Event->update((int)$success,$event_code);
+    }
+
     foreach($_POST['emp_id'] as $key => $value) {
         $Event_emp->insert([
             'emp_id'=> (int) $value,
@@ -662,6 +689,113 @@ return $this->response->redirect(site_url('/calendar'));
 
 return json_encode(["error"=>"error"],412);
 }
+
+
+// insert to Calendar from call logs
+public function insertCal(){
+    if($_SESSION['position'] != USER_ROLE_ADMIN){
+        return $this->response->redirect(site_url('/dashboard'));
+    }
+    // dd($_POST);
+    $Event = new Event();
+    $Event_emp = new Event_emp();
+    $event_fcu = new Event_fcu();
+    $Client = new Client();
+        // $event_fcu = new Event_fcu();
+    $fcu_no = new Fcu_no();
+    $aircon = new Aircon();
+    $Call_logs = new Call_logs();
+    $Call_fcu = new Call_fcu();
+    
+    $client_name = $_POST["client_id_modal"];
+    $client_branch = $Client->where('client_id',$client_name)->first();
+    
+    $weeklyEvent = [];
+    $monthlyEvent = [];
+    $set = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $code = substr(str_shuffle($set), 0, 6);
+    // dd($_POST);
+    if(isset($_POST["title"]))
+    {
+        
+        
+    $start_date = explode('/',$_POST['date']);
+
+    // Call_logs
+    // $start_date = explode('/',$_POST['date']);
+    $codeC = substr(str_shuffle($set), 0, 4);
+    $calllog_create = [
+        'date' => $start_date[2].'-'.$start_date[0].'-'.$start_date[1],
+        'area' => $this->request->getVar('area'),
+        'client_id' => $this->request->getVar('client_id_modal'),
+        'caller' => $this->request->getVar('caller'),
+        'particulars' => $this->request->getVar('particulars'),
+        'device_brand' => $this->request->getVar('device_brand'),
+        'aircon_id' => $this->request->getVar('aircon_id_modal'),
+        'qty' => $this->request->getVar('quantity'),
+        // 'status' => $this->request->getVar('status')
+    ];
+    
+    $successC = $Call_logs->insert($calllog_create);
+    $log_code = ['log_code' => 'log-'.$codeC.'-'.(int)$successC];
+    if($successC){
+        
+
+        $Call_logs->update((int)$successC,$log_code);
+    }
+// 
+
+
+    $success = $Event->insert([
+        'title' => date("g:ia",strtotime($_POST["time"]))." ".$client_branch['client_branch'],
+        'log_code' => $log_code,
+        'start_event' => $start_date[2].'-'.$start_date[0].'-'.$start_date[1],
+        'time' => $_POST['time'],
+        'client_id' => $_POST['client_id_modal'],
+        'serv_id' => $_POST['serv_id'],
+
+    ]);
+    
+    if($success){
+        $event_code = ['event_code' => 'task-'.$code.'-'.(int)$success];
+
+        $Event->update((int)$success,$event_code);
+    }
+
+    foreach($_POST['emp_id'] as $key => $value) {
+        $Event_emp->insert([
+            'emp_id'=> (int) $value,
+            'id' => (int) $success
+        ]);
+    }
+    // dd($_POST);
+   
+        foreach ($_POST['fcuno'] as $key => $floor_num) {
+            $Call_fcu->insert([
+                'fcuno'=>(int) $floor_num,
+                'cl_id' => (int) $successC
+            ]);
+           $event_fcu->insert([
+            'id'=> (int) $success,
+            'aircon_id'=> (int) $_POST['aircon_id_modal'],
+            'quantity'=> (int)$_POST['quantity'],
+            'fcuno'=>$floor_num
+        ]);
+           
+      
+
+   }
+
+            // $eId = (int)$success;
+
+        // return $this->response->redirect(site_url('/calendar/add-aircon/'.$eId));
+return $this->response->redirect(site_url('/calendar'));
+
+}
+
+return json_encode(["error"=>"error"],412);
+}
+
 
 public function update(){
     if($_SESSION['position'] != USER_ROLE_ADMIN){

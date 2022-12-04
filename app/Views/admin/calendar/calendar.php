@@ -41,6 +41,7 @@
       <div class="modal-body" id="adata">
 
         <input type="hidden" name="start_event" id="start_event" value="">
+        <input type="hidden" name="cl_id" id="cl_id" value="">
         <div class="form-group">
           <input class="form-control" type="hidden" name="title" id="title" placeholder="Title">
         </div>
@@ -155,18 +156,33 @@
     <div class="modal-content">
      
       <div class="modal-header">
-        <h3 class="modal-title">Edit Schedule</h3>
+
+        <h3 class="modal-title">Edit Schedule </h3>
+        
+          
+       
         
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+
       <form action="<?= base_url('/calendar/update');?>" method="POST"> 
         <div class="modal-body" id="adata">
           <input type="hidden" name="id" id="id" value="">
+
           <!-- <h5>Title</h5> -->
           <input class="form-control" type="hidden" name="title_update" id="title_update" placeholder="Title">
-          
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="event_code">Event Code: </label>
+              <input type="text" name="event_code" id="event_code" value="" disabled>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="log_code">Call Log Code: </label>
+              <input type="text" name="log_code" id="log_code" value="" disabled>
+            </div>
+          </div>
           <div class="form-row">
             <div class="form-group col-md-6">
              <label for="start_event_update">Reschedule</label><br>

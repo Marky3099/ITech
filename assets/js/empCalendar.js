@@ -28,6 +28,7 @@
      var tt = document.getElementById('start_event');
      // var i = document.getElementById('time');
      var ad = document.getElementById('id');
+     var ecode = document.getElementById('event_code');
      var t = document.getElementById('title_update');
      var ti = document.getElementById('time_update');
      var s = document.getElementById('serv_id_update');
@@ -37,7 +38,7 @@
    
 
     
-      console.log(info.event.id);
+      console.log(ecode);
 
       // select cliend and branch
       var s1 = document.getElementById('area_update');
@@ -215,6 +216,7 @@
       // s4.value = info.event.extendedProps.aircon_id;
       tt.value = info.event.start_event;
       ad.value = info.event.id;
+      ecode.value = info.event.extendedProps.event_code;
       r.value = new Date(info.event.start).toLocaleDateString("fr-CA");
       t.value = info.event.title;
       ti.value = info.event.extendedProps.time;

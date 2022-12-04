@@ -10,6 +10,7 @@ use App\Models\All_events;
 use App\Models\Event;
 use App\Models\Serv;
 use App\Models\Event_emp_views;
+use App\Models\Call_logs;
 
 
 
@@ -483,24 +484,48 @@ return $this->response->redirect(site_url('/profile-bdo/'.$bdo_id));
 
 public function update_task($id){
     $Event = new Event();
+    $Call_logs = new Call_logs();
     
+    $event_info = $Event->where('id', $id)->first();
+    // dd($event_info);
+
     $session = session();
     $data = [
         'status' => "Done",
     ];
     $Event->update((int)$id, $data);
+    if ($event_info['log_code'] != "") {
+        $codeLog=explode("-",$event_info['log_code']);
+        $cl_id = $codeLog[2];
+
+        $data_log = [
+            'status' => "Done",
+        ];
+        $Call_logs->update((int)$cl_id, $data_log);
+    }
     $session = session();
     $session->setFlashdata('done', 'value');
     return $this->response->redirect(site_url('/dashboard/'));
 }
 public function pending_task($id){
     $Event = new Event();
+    $Call_logs = new Call_logs();
     
+    $event_info = $Event->where('id', $id)->first();
     $session = session();
     $data = [
         'status' => "Pending",
     ];
     $Event->update((int)$id, $data);
+    if ($event_info['log_code'] != "") {
+        $codeLog=explode("-",$event_info['log_code']);
+        $cl_id = $codeLog[2];
+
+        $data_log = [
+            'status' => "Pending",
+        ];
+        $Call_logs->update((int)$cl_id, $data_log);
+    }
     $session = session();
     $session->setFlashdata('pending', 'value');
     return $this->response->redirect(site_url('/dashboard/'));

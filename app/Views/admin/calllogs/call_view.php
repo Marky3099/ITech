@@ -39,6 +39,7 @@
          <thead>
           <tr>
            <th>DATE</th>
+           <th>Log Code</th>
            <th>BRANCH AREA</th>
            <th>BRANCH NAME</th>
            <th>CALLER</th>
@@ -57,6 +58,7 @@
       <?php foreach($view_calllogs as $call_log):  ?>
           <tr>
            <td><?php echo $call_log->date; ?></td>
+           <td><?php echo $call_log->log_code; ?></td>
            <td><?php echo $call_log->area; ?></td>
            <td><?php echo $call_log->client_branch; ?></td>
            <td><?php echo $call_log->caller; ?></td>

@@ -164,7 +164,8 @@
           <input type="hidden" name="id" id="id" value="">
           <!-- <h5>Title</h5> -->
           <input class="form-control" type="hidden" name="title_update" id="title_update" placeholder="Title">
-          
+          <label for="event_code">Event Code: </label>
+          <input type="text" name="event_code" id="event_code" value="" disabled>
           <div class="form-row">
             <div class="form-group col-md-6">
              <label for="start_event_update">Date</label><br>

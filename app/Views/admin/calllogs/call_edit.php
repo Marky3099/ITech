@@ -67,13 +67,7 @@
             <?php endforeach; ?>
           <?php endforeach; ?>
         </select>
-        <label>Status</label>
-        <div class="select-dropdown" style="width: 40%; margin-left: 257px; top: -36px;" value="<?php echo $cl_obj['status']; ?>">
-          <select name="status">
-            <option value="Pending">Pending</option>
-            <option value="Done">Done</option>
-          </select>
-        </div>
+    
       </div>
 
       <div class="container1">
