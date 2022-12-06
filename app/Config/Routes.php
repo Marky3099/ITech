@@ -99,6 +99,7 @@ $routes->get('/calllogs/filtered/print/(:any)/(:any)', 'CalllogsCrud::printpdf/$
 $routes->get('calllogs/create/view', 'CalllogsCrud::create',['filter' => 'authGuard']);
 $routes->post('/calllogs/add', 'CalllogsCrud::store',['filter' => 'authGuard']);
 $routes->post('/calllogs/add-to-calendar', 'FullCalendar::insertCal',['filter' => 'authGuard']);
+$routes->post('/admin-appointment/add-to-calendar', 'FullCalendar::insertAppt',['filter' => 'authGuard']);
 $routes->get('calllogs/(:num)', 'CalllogsCrud::singleCL/$1',['filter' => 'authGuard']);
 $routes->post('calllogs/update', 'CalllogsCrud::update',['filter' => 'authGuard']);
 $routes->get('calllogs/delete/(:num)', 'CalllogsCrud::delete/$1',['filter' => 'authGuard']);

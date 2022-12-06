@@ -362,9 +362,19 @@ public function delete($appt_id = null){
 
 public function setAppt(){
     $Appoint = new Appointment();
+    $Appt_fcu = new Appt_fcu();
+    $Client = new Client();
+    $Serv = new Serv();
+    $Aircon = new Aircon();
+    // $Fcu_no = new Fcu_no();
     // $Appoint_view = new view_appointment();
     $appt_id = $this->request->getPost('appt_id');
     $data['appt']=$Appoint->find($appt_id);
+    $data['fcu']=$Appt_fcu->where('appt_id',$appt_id)->findAll();
+    $data['client']=$Client->orderBy('client_id','asc')->findAll();
+    $data['serv']=$Serv->orderBy('serv_id','asc')->findAll();
+    $data['aircon']=$Aircon->orderBy('aircon_id','asc')->findAll();
+    // $data['fcu_no']=$Aircon->orderBy('aircon_id','asc')->findAll();
     return $this->response->setJSON($data);
 }
 }

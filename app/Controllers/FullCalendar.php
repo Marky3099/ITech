@@ -343,6 +343,7 @@ public function event(){
   "id"=> $value['id'],
   "title"=>$value['title'],
   "event_code"=> $value['event_code'],
+  "log_code"=> $value['log_code'],
   "start_event"=> $value['start_event'],
   "time"=> $value['TIME'],
   "serv_id"=> $value['serv_id'],
@@ -796,6 +797,70 @@ return $this->response->redirect(site_url('/calendar'));
 return json_encode(["error"=>"error"],412);
 }
 
+
+public function insertAppt(){
+    if($_SESSION['position'] != USER_ROLE_ADMIN){
+        return $this->response->redirect(site_url('/dashboard'));
+    }
+    $fcu_data = implode(",",$_POST['fcu']);
+    // dd($fcu_data );
+    $fcu_array= explode(",",$fcu_data);
+    $Event = new Event();
+    $Event_emp = new Event_emp();
+    $event_fcu = new Event_fcu();
+    $Client = new Client();
+        // $event_fcu = new Event_fcu();
+    $fcu_no = new Fcu_no();
+    $aircon = new Aircon();
+    $Call_logs = new Call_logs();
+    $Call_fcu = new Call_fcu();
+    
+    $client_name = $_POST["client_id_modal"];
+    $client_branch = $Client->where('client_id',$client_name)->first();
+    
+    $set = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $code = substr(str_shuffle($set), 0, 6);
+
+    if(isset($_POST["title"]))
+    {
+        
+        $success = $Event->insert([
+            'title' => date("g:ia",strtotime($_POST["time"]))." ".$client_branch['client_branch'],
+            // 'log_code' => $log_code,
+            'start_event' => $_POST['date'],
+            'time' => $_POST['time'],
+            'client_id' => $_POST['client_id_modal'],
+            'serv_id' => $_POST['serv_id_modal'],
+
+        ]);
+        
+        if($success){
+            $event_code = ['event_code' => 'task-'.$code.'-'.(int)$success];
+
+            $Event->update((int)$success,$event_code);
+        }
+
+        foreach($_POST['emp_id'] as $key => $value) {
+            $Event_emp->insert([
+                'emp_id'=> (int) $value,
+                'id' => (int) $success
+            ]);
+        }
+
+       
+        foreach ( $fcu_array as $key => $floor_num) {
+            $event_fcu->insert([
+                'id'=> (int) $success,
+                'aircon_id'=> (int) $_POST['aircon_id_modal'],
+                'quantity'=> (int)$_POST['quantity'],
+                'fcuno'=>$floor_num
+            ]);
+       }
+    }
+
+
+    return $this->response->redirect(site_url('/calendar'));
+}
 
 public function update(){
     if($_SESSION['position'] != USER_ROLE_ADMIN){

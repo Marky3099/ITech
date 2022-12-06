@@ -48,6 +48,7 @@
            <tr>
               <th>Date</th>
               <th>Task Code</th>
+              <th>Log Code</th>
               <th>Time</th>
               <th>Area</th>
               <th>Client Branch</th>
@@ -68,6 +69,11 @@
               <tr>
                <td><?php echo date('m-d-Y',strtotime($dat->start_event)); ?></td>
                <td><?php echo $dat->event_code; ?></td>
+               <?php if($dat->log_code != ""):?>
+                  <td><?php echo $dat->log_code; ?></td>
+               <?php else: ?>
+                  <td>N/A</td>
+               <?php endif;?>
                <td>
                   <?php if($dat->time == "00:00:00"): ?>
                      <?php echo "N/A"; ?>

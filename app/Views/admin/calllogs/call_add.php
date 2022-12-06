@@ -25,7 +25,7 @@
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="time">Date</label><br>
-            <input type="text" name="date" id="calDate">
+            <input type="text" name="date" id="calDate" required>
           </div>
           <div class="form-group col-md-6">
             <label for="time">Time</label><br>
@@ -64,7 +64,7 @@
           <div class="form-group col-md-3">
             
             <label for="dbrand">Device Brand</label>
-            <input id="calBrand" name="device_brand[]" class="form-control" >
+            <input id="calBrand" name="device_brand" class="form-control" >
           </div> 
           <div class="form-group col-md-3">
             
@@ -213,19 +213,6 @@
           e.preventDefault();
           var form = $('#add_create').serializeArray();
           console.log(form);
-          // $.ajax({
-          //  type: "POST",
-          //  url: "/tsms/calllogs/add",
-          //    data: form, // serializes form input
-          //  });
-          // console.log(document.getElementById("date").value);
-          // console.log(document.getElementById("area").value);
-          // console.log(document.getElementById("client_id").value);
-          // console.log(document.getElementById("device_brand").value);
-          // console.log(document.getElementById("aircon_id").value);
-          // console.log(document.getElementById("qty").value);console.log(document.getElementById("fcuno").options);
-
-          // alert(document.getElementById("log_code").value);
           document.getElementById("calDate").value = document.getElementById("date").value;
           document.getElementById("callerC").value = document.getElementById("caller").value;
           document.getElementById("particularsC").value = document.getElementById("particulars").value;
