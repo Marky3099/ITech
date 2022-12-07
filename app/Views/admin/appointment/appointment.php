@@ -12,9 +12,10 @@
         </button>
       </div>
       <div class="modal-body" id="adata">
-        <!-- <input type="hidden" name="caller" id="callerC" value="">
-        <input type="hidden" name="particulars" id="particularsC" value=""> -->
-        <!-- <input type="hidden" name="start_event" id="start_event" value=""> -->
+        <input type="hidden" name="appt_id" id="appt_id">
+        <input type="hidden" name="user_id" id="user_id">
+        <input type="hidden" name="appt_code" id="appt_code">
+        
         <div class="form-group">
           <input class="form-control" type="hidden" name="title" id="title" placeholder="Title">
         </div>
@@ -106,6 +107,7 @@
      <thead>
         <tr>
            <th>Date</th>
+           <th>Appt Code</th>
            <th>Time</th>
            <th>Branch Area</th>
            <th>Branch Name</th>
@@ -121,8 +123,9 @@
      </thead>
      <tbody>
       <?php foreach($view_appoint as $appt):  ?>
-        <tr>
+        <tr name="user_id" id="user_id" value="<?php echo $appt->user_id;?>">
            <td><?php echo $appt->appt_date; ?></td>
+           <td><?php echo $appt->appt_code; ?></td>
            <td><?php echo $appt->appt_time; ?></td>
            <td><?php echo $appt->area; ?></td>
            <td><?php echo $appt->client_branch; ?></td>
@@ -141,7 +144,14 @@
            <td><?php echo $appt->qty; ?></td>
            <td><?php echo $appt->appt_status; ?></td>
            <td>
+            <?php if($appt->set_status ==0):?>
              <a href="#" id="<?php echo $appt->appt_id; ?>" class="btn btn-primary btn-sm set_btn">Set</a>
+             <a href="#" id="<?php echo $appt->appt_id; ?>" data-id="<?php echo $appt->user_id;?>" class="btn btn-danger btn-sm dec_btn">Reject</a>
+           <?php elseif($appt->set_status ==1):?>
+            <h6 style="color:green;"><b>Already Set</h6>
+          <?php else:?>
+            <h6 style="color:red;"><b>REJECTED</h6>
+          <?php endif;?>
           </td>
        </tr>
     <?php endforeach; ?>
@@ -186,11 +196,14 @@
             'appt_id': apptId
          },
          success: function(response){
+            var user_id = response.appt.user_id;
             var fcuLength = response.fcu.length;
             var clientLength = response.client.length;
             var servLength = response.serv.length;
             var airconLength = response.aircon.length;
 
+            var appt_id = response.appt.appt_id;
+            var appt_code = response.appt.appt_code;
             var date = response.appt.appt_date;
             var time = response.appt.appt_time;
             var client = response.appt.client_id;
@@ -255,12 +268,52 @@
              }; 
              document.getElementById("calFcu").value =fcuName;
              // console.log(document.getElementById("calFcu").value);
-             console.log(fcuName);
+             document.getElementById("appt_id").value = appt_id;
+             document.getElementById("appt_code").value = appt_code;
+             document.getElementById("user_id").value = user_id;
+             // console.log(document.getElementById("user_id").value);
             myModal.show();
          }
 
       });
    });
+
+   $(document).on('click','.dec_btn',function(e){
+    var apptId = e.target.id;
+    var userId = $(this).data("id");
+
+    // console.log(userId);
+    Swal.fire({
+        title: 'Are you sure you want to Reject?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          location.reload();
+          $.ajax({
+             method:"POST",
+             url:"http://localhost/tsms/appointment/reject",
+             data: {
+                'appt_id': apptId,
+                'user_id': userId
+
+             },
+             success: function(response){
+             }
+          })
+
+
+          
+        }
+      })
+      
+      // console.log(apptId);
+      
+    })
 
    </script>
    <script type="text/javascript" src="<?= base_url('assets/js/crud.js')?>"></script>

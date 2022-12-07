@@ -54,9 +54,11 @@ $routes->get('/admin-appointment', 'AppointmentCrud::adminAppointment',['filter'
 $routes->post('/appointment/set-Appointment', 'AppointmentCrud::setAppt',['filter' => 'authGuard']);
 $routes->get('/appointment/create', 'AppointmentCrud::create',['filter' => 'authGuard']);
 $routes->post('/appointment/add', 'AppointmentCrud::store',['filter' => 'authGuard']);
+$routes->post('/admin-appointment/add-to-calendar', 'FullCalendar::insertAppt',['filter' => 'authGuard']);
 $routes->get('/appointment/(:num)', 'AppointmentCrud::singleAppt/$1',['filter' => 'authGuard']);
 $routes->post('/appointment/update', 'AppointmentCrud::update',['filter' => 'authGuard']);
 $routes->get('appointment/delete/(:num)', 'AppointmentCrud::delete/$1',['filter' => 'authGuard']);
+$routes->post('/appointment/reject', 'AppointmentCrud::rejectAppt',['filter' => 'authGuard']);
 
 $routes->get('/serv', 'ServCrud::index',['filter' => 'authGuard']);
 $routes->get('serv/create/view', 'ServCrud::create',['filter' => 'authGuard']);
@@ -96,10 +98,12 @@ $routes->get('user/delete/(:num)', 'UsersCrud::delete/$1',['filter' => 'authGuar
 $routes->get('/calllogs', 'CalllogsCrud::index',['filter' => 'authGuard']);
 $routes->get('/calllogs/filtered', 'CalllogsCrud::getfilter',['filter' => 'authGuard']);
 $routes->get('/calllogs/filtered/print/(:any)/(:any)', 'CalllogsCrud::printpdf/$1/$2',['filter' => 'authGuard']);
+$routes->post('/calllogs/set-Calllogs', 'CalllogsCrud::setLog',['filter' => 'authGuard']);
+
 $routes->get('calllogs/create/view', 'CalllogsCrud::create',['filter' => 'authGuard']);
 $routes->post('/calllogs/add', 'CalllogsCrud::store',['filter' => 'authGuard']);
 $routes->post('/calllogs/add-to-calendar', 'FullCalendar::insertCal',['filter' => 'authGuard']);
-$routes->post('/admin-appointment/add-to-calendar', 'FullCalendar::insertAppt',['filter' => 'authGuard']);
+$routes->post('/calllogs/set-to-calendar', 'FullCalendar::setCal',['filter' => 'authGuard']);
 $routes->get('calllogs/(:num)', 'CalllogsCrud::singleCL/$1',['filter' => 'authGuard']);
 $routes->post('calllogs/update', 'CalllogsCrud::update',['filter' => 'authGuard']);
 $routes->get('calllogs/delete/(:num)', 'CalllogsCrud::delete/$1',['filter' => 'authGuard']);

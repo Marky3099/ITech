@@ -10,6 +10,7 @@ use App\Models\Serv;
 use App\Models\Emp;
 use App\Models\Appt_fcu;
 use App\Models\Appt_fcu_views;
+use App\Models\User_bdo;
 
 class AppointmentCrud extends Controller
 {
@@ -64,6 +65,8 @@ class AppointmentCrud extends Controller
      }    
      $data['view_appoint'][]= (object)[
         "appt_id"=> $value['appt_id'],
+        "user_id"=> $value['user_id'],
+        "appt_code"=> $value['appt_code'],
         "appt_date"=> $value['appt_date'],
         "appt_time"=> $value['appt_time'],
         "client_id"=> $value['client_id'],
@@ -75,6 +78,7 @@ class AppointmentCrud extends Controller
         "device_brand"=> $value['device_brand'],
         "qty"=> $value['qty'],
         "appt_status"=> $value['appt_status'],
+        "set_status"=> $value['set_status'],
         "fcu_arr"=> $fcu_arr,
     ];
 }
@@ -139,6 +143,8 @@ public function adminAppointment(){
      }    
      $data['view_appoint'][]= (object)[
         "appt_id"=> $value['appt_id'],
+        "user_id"=> $value['user_id'],
+        "appt_code"=> $value['appt_code'],
         "appt_date"=> $value['appt_date'],
         "appt_time"=> $value['appt_time'],
         "client_id"=> $value['client_id'],
@@ -150,10 +156,12 @@ public function adminAppointment(){
         "device_brand"=> $value['device_brand'],
         "qty"=> $value['qty'],
         "appt_status"=> $value['appt_status'],
+        "set_status"=> $value['set_status'],
         "fcu_arr"=> $fcu_arr,
     ];
 }
 
+// dd($data['view_appoint']);
 $data['main'] = 'admin/appointment/appointment';
 return view("templates/template",$data);
 
@@ -225,6 +233,12 @@ public function store() {
     $Aircon = new Aircon();
     $fcu_no = new Fcu_no();
     $Serv = new Serv();
+    $session = session();
+    $user_id =$_SESSION['user_id'];
+    // dd($user_id);
+    $set = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $code = substr(str_shuffle($set), 0, 5);
+
     // dd($this->request->getVar('bdo_id'));
     $appoint_create = [
         'appt_date' => $this->request->getVar('appt_date'),
@@ -236,10 +250,16 @@ public function store() {
         'device_brand' => $this->request->getVar('device_brand'),
         'aircon_id' => $this->request->getVar('aircon_id'),
         'qty' => $this->request->getVar('qty'),
-        'status' => $this->request->getVar('status')
+        'status' => $this->request->getVar('status'),
+        'user_id' => $user_id,
     ];
     
     $success = $Appoint->insert($appoint_create);
+
+    if($success){
+            $appt_code = ['appt_code' => 'appt-'.$code.'-'.(int)$success];
+            $Appoint->update((int)$success,$appt_code);
+        }
     foreach($this->request->getVar('fcuno') as $key => $value) {
         $Appt_fcu->insert([
             'fcuno'=>(int) $value,
@@ -375,6 +395,51 @@ public function setAppt(){
     $data['serv']=$Serv->orderBy('serv_id','asc')->findAll();
     $data['aircon']=$Aircon->orderBy('aircon_id','asc')->findAll();
     // $data['fcu_no']=$Aircon->orderBy('aircon_id','asc')->findAll();
+    return $this->response->setJSON($data);
+}
+
+public function rejectAppt(){
+    $Appoint = new Appointment();
+    $Bdo = new User_bdo();
+    $appt_id = $this->request->getPost('appt_id');
+    $user_id = $this->request->getPost('user_id');
+    $data['appt']=$Appoint->find($appt_id);
+    $data['user_data'] = $Bdo->where('bdo_id',$user_id)->first();
+    $user_email =  $data['user_data']['bdo_email'];
+    $user =  $data['user_data']['bdo_lname'];
+    $appt_code = $data['appt']['appt_code'];
+    $update_set = ['set_status' => 2, 'appt_status' => 'Rejected'];
+    $Appoint->update((int)$appt_id,$update_set);
+
+    $data['rejected'] = 'The Appointment has been [REJECTED!]';
+
+
+    $to = $user_email;
+
+        $subject = "TSMS - Appointment Rejected";
+        $message = "<html>
+        <head>
+        <title>Appointment ".$appt_code."</title>
+        </head>
+        <body>
+        <h6>Dear, Mr/Ms. ".$user."</h6>
+        <p>Your Appointment ".$appt_code." has been REJECTED.</p>
+        </body>
+        </html>";
+        $email = \Config\Services::email();
+        $email->setTo($to);
+        $email->setFrom('Maylaflor@gmail.com','Maylaflor TSMS');
+        $email->setSubject($subject);
+        $email->setMessage($message);
+
+        if ($email->send()) {
+            echo "Success";
+        }else{
+            $data = $email->printDebugger(['headers']);
+            print_r($data);
+        }
+
+
     return $this->response->setJSON($data);
 }
 }

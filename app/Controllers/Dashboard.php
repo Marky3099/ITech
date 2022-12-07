@@ -11,7 +11,7 @@ use App\Models\Event;
 use App\Models\Serv;
 use App\Models\Event_emp_views;
 use App\Models\Call_logs;
-
+use App\Models\Appointment;
 
 
 class Dashboard extends BaseController
@@ -70,6 +70,9 @@ class Dashboard extends BaseController
          $data['event'][]= (object)[
           "id"=> $value['id'],
           "title"=>$value['title'],
+          "event_code"=>$value['event_code'],
+          "log_code"=>$value['log_code'],
+          "appt_code"=>$value['appt_code'],
           "start_event"=> $value['start_event'],
           "time"=> $value['TIME'],
           "serv_id"=> $value['serv_id'],
@@ -147,6 +150,9 @@ foreach ($data['weekly'] as $key => $value) {
  $data['week1'][]= (object)[
     "id"=> $value['id'],
     "title"=> $value['title'],
+    "event_code"=>$value['event_code'],
+    "log_code"=>$value['log_code'],
+    "appt_code"=>$value['appt_code'],
     "start_event"=> $value['start_event'],
     "time"=> $value['TIME'],
     "serv_id"=> $value['serv_id'],
@@ -189,6 +195,9 @@ foreach ($data['monthly'] as $key => $value) {
  $data['month'][]= (object)[
     "id"=> $value['id'],
     "title"=> $value['title'],
+    "event_code"=>$value['event_code'],
+    "log_code"=>$value['log_code'],
+    "appt_code"=>$value['appt_code'],
     "start_event"=> $value['start_event'],
     "time"=> $value['TIME'],
     "serv_id"=> $value['serv_id'],
@@ -225,6 +234,9 @@ foreach ($data['complete'] as $key => $value) {
  $data['completed'][]= (object)[
     "id"=> $value['id'],
     "title"=> $value['title'],
+    "event_code"=>$value['event_code'],
+    "log_code"=>$value['log_code'],
+    "appt_code"=>$value['appt_code'],
     "start_event"=> $value['start_event'],
     "time"=> $value['TIME'],
     "serv_id"=> $value['serv_id'],
@@ -261,10 +273,13 @@ foreach ($data['pending'] as $key => $value) {
          $emp_arr .= $data['event_emp'][$key]['emp_name'].",";
      }
  }
-
+ // dd($data['pending']);
  $data['notdone'][]= (object)[
     "id"=> $value['id'],
     "title"=> $value['title'],
+    "event_code"=>$value['event_code'],
+    "log_code"=>$value['log_code'],
+    "appt_code"=>$value['appt_code'],
     "start_event"=> $value['start_event'],
     "time"=> $value['TIME'],
     "serv_id"=> $value['serv_id'],
@@ -485,6 +500,7 @@ return $this->response->redirect(site_url('/profile-bdo/'.$bdo_id));
 public function update_task($id){
     $Event = new Event();
     $Call_logs = new Call_logs();
+    $Appt = new Appointment();
     
     $event_info = $Event->where('id', $id)->first();
     // dd($event_info);
@@ -502,6 +518,15 @@ public function update_task($id){
             'status' => "Done",
         ];
         $Call_logs->update((int)$cl_id, $data_log);
+    }
+    if ($event_info['appt_code'] != "") {
+        // dd("tru");
+        $codeAppt=explode("-",$event_info['appt_code']);
+        $appt_id = $codeAppt[2];
+        $data_appt = [
+            'appt_status' => "Done",
+        ];
+        $Appt->update((int)$appt_id, $data_appt);
     }
     $session = session();
     $session->setFlashdata('done', 'value');

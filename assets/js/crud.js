@@ -43,7 +43,11 @@ $('.del').click(function(e){
    }
 $(document).ready( function () {
     $('#table1').DataTable({
-    pageLength : 5,
-    lengthMenu: [[5, 10, 15,20], [5, 10, 15, 20,]]
-  });
-} );
+        pageLength : 5,
+        lengthMenu: [[5, 10, 15,20], [5, 10, 15, 20,]]
+      });
+    $('#event-table').DataTable({
+        pageLength : 5,
+        lengthMenu: [[5, 10, 15,20], [5, 10, 15, 20,]]
+      });
+});

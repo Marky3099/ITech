@@ -114,7 +114,7 @@
           <div class="form-group col-md-3">
             
             <label for="fcunos">Fcuno</label>
-            <select id="fcuno" name="fcuno0[]" class="selectpicker" data-width="100%" multiple data-selected-text-format="count > 3">
+            <select id="fcuno" name="fcuno0[]" class="selectpicker" data-width="100%" multiple data-selected-text-format="count > 3" required>
               <?php foreach($fcu_no as $f):  ?>
                 <option value="<?php echo $f['fcuno']; ?>"><p id="s2option"><?php echo $f['fcu'];?></p></option>
               <?php endforeach; ?>
@@ -174,13 +174,17 @@
           <!-- <h5>Title</h5> -->
           <input class="form-control" type="hidden" name="title_update" id="title_update" placeholder="Title">
           <div class="form-row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
               <label for="event_code">Event Code: </label>
               <input type="text" name="event_code" id="event_code" value="" disabled>
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
               <label for="log_code">Call Log Code: </label>
               <input type="text" name="log_code" id="log_code" value="" disabled>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="appt_code">Appt Code: </label>
+              <input type="text" name="appt_code" id="appt_code" value="" disabled>
             </div>
           </div>
           <div class="form-row">

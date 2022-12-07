@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use App\Models\All_events;
+use App\Models\Appointment;
 use App\Models\Emp;
 use App\Models\Client;
 use App\Models\Serv;
@@ -14,6 +15,7 @@ use App\Models\Event_fcu_views;
 use App\Models\Event;
 use App\Models\Call_logs;
 use App\Models\Call_fcu;
+use App\Models\User_bdo;
 
 class FullCalendar extends BaseController
 {
@@ -88,6 +90,7 @@ class FullCalendar extends BaseController
     }
 
     $datas['all_events'] = $event->orderBy('id', 'ASC')->findAll();
+    // dd($datas['all_events'] );
         // $datas['all_events'] = $event->where('STATUS', 'Done')->findAll();
         // dd($data[0]['title']);
     foreach ($datas['all_events'] as $key => $value) {
@@ -125,6 +128,7 @@ class FullCalendar extends BaseController
         "title"=> $value['title'],
         "event_code"=> $value['event_code'],
         "log_code"=> $value['log_code'],
+        "appt_code"=> $value['appt_code'],
         "start"=> $value['start_event'],
                  // "repeatable"=> $value['repeatable'],
         "time"=>$value['TIME'],
@@ -344,6 +348,7 @@ public function event(){
   "title"=>$value['title'],
   "event_code"=> $value['event_code'],
   "log_code"=> $value['log_code'],
+  "appt_code"=> $value['appt_code'],
   "start_event"=> $value['start_event'],
   "time"=> $value['TIME'],
   "serv_id"=> $value['serv_id'],
@@ -427,6 +432,8 @@ public function getfilter(){
         "id"=> $value['id'],
         "title"=>$value['title'],
         "event_code"=> $value['event_code'],
+        "log_code"=> $value['log_code'],
+        "appt_code"=> $value['appt_code'],
         "start_event"=> $value['start_event'],
         "time"=> $value['TIME'],
         "serv_id"=> $value['serv_id'],
@@ -759,8 +766,10 @@ public function insertCal(){
     
     if($success){
         $event_code = ['event_code' => 'task-'.$code.'-'.(int)$success];
-
         $Event->update((int)$success,$event_code);
+
+        $update_set = ['set_status' => 1];
+        $Call_logs->update((int)$successC,$update_set);
     }
 
     foreach($_POST['emp_id'] as $key => $value) {
@@ -798,12 +807,14 @@ return json_encode(["error"=>"error"],412);
 }
 
 
-public function insertAppt(){
+//set call logs to calendar
+
+public function setCal(){
     if($_SESSION['position'] != USER_ROLE_ADMIN){
         return $this->response->redirect(site_url('/dashboard'));
     }
+    // dd($_POST);
     $fcu_data = implode(",",$_POST['fcu']);
-    // dd($fcu_data );
     $fcu_array= explode(",",$fcu_data);
     $Event = new Event();
     $Event_emp = new Event_emp();
@@ -818,6 +829,94 @@ public function insertAppt(){
     $client_name = $_POST["client_id_modal"];
     $client_branch = $Client->where('client_id',$client_name)->first();
     
+    $weeklyEvent = [];
+    $monthlyEvent = [];
+    $set = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $code = substr(str_shuffle($set), 0, 6);
+    // dd($_POST);
+    if(isset($_POST["title"]))
+    {
+        
+    // $start_date = explode('/',$_POST['date']);
+
+    $success = $Event->insert([
+        'title' => date("g:ia",strtotime($_POST["time"]))." ".$client_branch['client_branch'],
+        'log_code' => $_POST['log_code'],
+        'start_event' => $_POST['date'],
+        'time' => $_POST['time'],
+        'client_id' => $_POST['client_id_modal'],
+        'serv_id' => $_POST['serv_id'],
+
+    ]);
+    
+    if($success){
+        $event_code = ['event_code' => 'task-'.$code.'-'.(int)$success];
+        $Event->update((int)$success,$event_code);
+
+        $update_set = ['set_status' => 1];
+        $Call_logs->update((int)$_POST['cl_id'],$update_set);
+    }
+
+    foreach($_POST['emp_id'] as $key => $value) {
+        $Event_emp->insert([
+            'emp_id'=> (int) $value,
+            'id' => (int) $success
+        ]);
+    }
+    // dd($_POST);
+   
+        foreach ($fcu_array as $key => $floor_num) {
+    
+           $event_fcu->insert([
+            'id'=> (int) $success,
+            'aircon_id'=> (int) $_POST['aircon_id_modal'],
+            'quantity'=> (int)$_POST['quantity'],
+            'fcuno'=>$floor_num
+        ]);
+           
+      
+
+   }
+
+            // $eId = (int)$success;
+
+        // return $this->response->redirect(site_url('/calendar/add-aircon/'.$eId));
+return $this->response->redirect(site_url('/calendar'));
+
+}
+
+return json_encode(["error"=>"error"],412);
+}
+
+
+//set appointment to calendar
+public function insertAppt(){
+    if($_SESSION['position'] != USER_ROLE_ADMIN){
+        return $this->response->redirect(site_url('/dashboard'));
+    }
+    // dd($_POST);
+    $fcu_data = implode(",",$_POST['fcu']);
+    // dd($fcu_data );
+    $fcu_array= explode(",",$fcu_data);
+    $Event = new Event();
+    $User_bdo = new User_bdo();
+    $Event_emp = new Event_emp();
+    $event_fcu = new Event_fcu();
+    $Client = new Client();
+        // $event_fcu = new Event_fcu();
+    $fcu_no = new Fcu_no();
+    $aircon = new Aircon();
+    $Call_logs = new Call_logs();
+    $Call_fcu = new Call_fcu();
+    $Appoint = new Appointment();
+    $user_id = $_POST["user_id"];
+    $client_name = $_POST["client_id_modal"];
+    $client_branch = $Client->where('client_id',$client_name)->first();
+    $user_data = $User_bdo->where('bdo_id',$user_id)->first();
+    // dd();
+
+    $user_email = $user_data['bdo_email'];
+    $user = $user_data['bdo_lname'];
     $set = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $code = substr(str_shuffle($set), 0, 6);
 
@@ -828,6 +927,7 @@ public function insertAppt(){
             'title' => date("g:ia",strtotime($_POST["time"]))." ".$client_branch['client_branch'],
             // 'log_code' => $log_code,
             'start_event' => $_POST['date'],
+            'appt_code' => $_POST['appt_code'],
             'time' => $_POST['time'],
             'client_id' => $_POST['client_id_modal'],
             'serv_id' => $_POST['serv_id_modal'],
@@ -836,8 +936,10 @@ public function insertAppt(){
         
         if($success){
             $event_code = ['event_code' => 'task-'.$code.'-'.(int)$success];
-
             $Event->update((int)$success,$event_code);
+
+            $update_set = ['set_status' => 1];
+            $Appoint->update((int)$_POST['appt_id'],$update_set);
         }
 
         foreach($_POST['emp_id'] as $key => $value) {
@@ -856,6 +958,34 @@ public function insertAppt(){
                 'fcuno'=>$floor_num
             ]);
        }
+
+
+
+        $to = $user_email;
+
+        $subject = "TSMS - Appointment Scheduled";
+        $message = "<html>
+        <head>
+        <title>Appointment ".$_POST['appt_code']."</title>
+        </head>
+        <body>
+        <h6>Dear, Mr/Ms. ".$user."</h6>
+        <p>Your Appointment ".$_POST['appt_code']." has been scheduled on ". $_POST['date'] .", please make sure you are available on the said date. Thank You and have a great day!</p>
+        </body>
+        </html>";
+        $email = \Config\Services::email();
+        $email->setTo($to);
+        $email->setFrom('Maylaflor@gmail.com','Maylaflor TSMS');
+        $email->setSubject($subject);
+        $email->setMessage($message);
+
+        if ($email->send()) {
+            echo "Success";
+        }else{
+            $data = $email->printDebugger(['headers']);
+            print_r($data);
+        }
+
     }
 
 

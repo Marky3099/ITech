@@ -32,7 +32,7 @@
 
                         <div class="container">
                           <div class="modal fade" id="todayModal" role="dialog">
-                            <div class="modal-dialog" style="max-width: 800px;">
+                            <div class="modal-dialog" style="max-width: 1000px;">
                               <div class="modal-content">
 
                                 <div class="modal-header">
@@ -44,7 +44,9 @@
                                     <table class="table table-bordered">
                                       <thead>
                                         <tr>
-                                          <th>Title</th>
+                                          <th>Task Code</th>
+                                          <th>Log Code</th>
+                                          <th>Appt Code</th>
                                           <th>Branch</th>
                                           <th>Service</th>
                                           <th>Service Type</th>
@@ -59,7 +61,17 @@
                                         
                                         <?php foreach($event as $tday):  ?>
                                           <tr>
-                                            <td><?php echo $tday->title; ?></td>
+                                            <td><?php echo $tday->event_code; ?></td>
+                                            <?php if($tday->log_code != ""):?>
+                                              <td><?php echo $tday->log_code; ?></td>
+                                            <?php else:?>
+                                              <td>N/A</td>
+                                            <?php endif;?>
+                                            <?php if($tday->appt_code != ""):?>
+                                              <td><?php echo $tday->appt_code; ?></td>
+                                            <?php else:?>
+                                              <td>N/A</td>
+                                            <?php endif;?>
                                             <td><?php echo $tday->client_branch; ?></td>
                                             <td><?php echo $tday->serv_name; ?></td>
                                             <td><?php echo $tday->serv_type; ?></td>
@@ -108,7 +120,7 @@
                     <!-- Modal for displaying Week's event -->
                     <div class="container">
                       <div class="modal fade" id="weekModal" role="dialog">
-                        <div class="modal-dialog" style="max-width: 800px;">
+                        <div class="modal-dialog" style="max-width: 1000px;">
                           <div class="modal-content">
 
                             <div class="modal-header">
@@ -121,8 +133,10 @@
                                 <table class="table table-bordered">
                                   <thead>
                                     <tr>
-                                      <th>Title</th>
                                       <th>Date</th>
+                                      <th>Task Code</th>
+                                      <th>Log Code</th>
+                                      <th>Appt Code</th>
                                       <th>Branch</th>
                                       <th>Service</th>
                                       <th>Service Type</th>
@@ -135,8 +149,18 @@
                                     
                                     <?php foreach($week1 as $week):  ?>
                                       <tr>
-                                        <td><?php echo $week->title; ?></td>
                                         <td><?php echo date('m-d-Y',strtotime($week->start_event)); ?></td>
+                                        <td><?php echo $week->event_code; ?></td>
+                                        <?php if($week->log_code != ""):?>
+                                          <td><?php echo $week->log_code; ?></td>
+                                        <?php else:?>
+                                          <td>N/A</td>
+                                        <?php endif;?>
+                                        <?php if($week->appt_code != ""):?>
+                                          <td><?php echo $week->appt_code; ?></td>
+                                        <?php else:?>
+                                          <td>N/A</td>
+                                        <?php endif;?>
                                         <td><?php echo $week->client_branch; ?></td>
                                         <td><?php echo $week->serv_name; ?></td>
                                         <td><?php echo $week->serv_type; ?></td>
@@ -175,7 +199,7 @@
                 <!-- Modal for displaying Month's event -->
                 <div class="container">
                   <div class="modal fade" id="monthModal" role="dialog">
-                    <div class="modal-dialog" style="max-width: 800px;">
+                    <div class="modal-dialog" style="max-width: 1000px;">
                       <div class="modal-content">
 
                         <div class="modal-header">
@@ -188,8 +212,10 @@
                           <table class="table table-bordered">
                             <thead>
                               <tr>
-                                <th>Title</th>
                                 <th>Date</th>
+                                <th>Task Code</th>
+                                <th>Log Code</th>
+                                <th>Appt Code</th>
                                 <th>Branch</th>
                                 <th>Service</th>
                                 <th>Service Type</th>
@@ -202,8 +228,18 @@
                              
                               <?php foreach($month as $m):  ?>
                                 <tr>
-                                  <td><?php echo $m->title; ?></td>
                                   <td><?php echo date('m-d-Y',strtotime($m->start_event)); ?></td>
+                                  <td><?php echo $m->event_code; ?></td>
+                                  <?php if($m->log_code != ""):?>
+                                    <td><?php echo $m->log_code; ?></td>
+                                  <?php else:?>
+                                    <td>N/A</td>
+                                  <?php endif;?>
+                                  <?php if($m->appt_code != ""):?>
+                                    <td><?php echo $m->appt_code; ?></td>
+                                  <?php else:?>
+                                    <td>N/A</td>
+                                  <?php endif;?>
                                   <td><?php echo $m->client_branch; ?></td>
                                   <td><?php echo $m->serv_name; ?></td>
                                   <td><?php echo $m->serv_type; ?></td>
@@ -241,7 +277,7 @@
             <!-- Modal for displaying Completed event -->
             <div class="container">
               <div class="modal fade" id="completeModal" role="dialog">
-                <div class="modal-dialog" style="max-width: 800px;">
+                <div class="modal-dialog" style="max-width: 1000px;">
                   <div class="modal-content">
 
                     <div class="modal-header">
@@ -254,8 +290,10 @@
                       <table class="table table-bordered">
                         <thead>
                           <tr>
-                            <th>Title</th>
                             <th>Date</th>
+                            <th>Task Code</th>
+                            <th>Log Code</th>
+                            <th>Appt Code</th>
                             <th>Branch</th>
                             <th>Service</th>
                             <th>Service Type</th>
@@ -268,8 +306,18 @@
                          
                           <?php foreach($completed as $cm):  ?>
                             <tr>
-                              <td><?php echo $cm->title; ?></td>
                               <td><?php echo date('m-d-Y',strtotime($cm->start_event)); ?></td>
+                              <td><?php echo $cm->event_code; ?></td>
+                              <?php if($cm->log_code != ""):?>
+                                <td><?php echo $cm->log_code; ?></td>
+                              <?php else:?>
+                                <td>N/A</td>
+                              <?php endif;?>
+                              <?php if($cm->appt_code != ""):?>
+                                <td><?php echo $cm->appt_code; ?></td>
+                              <?php else:?>
+                                <td>N/A</td>
+                              <?php endif;?>
                               <td><?php echo $cm->client_branch; ?></td>
                               <td><?php echo $cm->serv_name; ?></td>
                               <td><?php echo $cm->serv_type; ?></td>
@@ -306,7 +354,7 @@
       <!-- Modal for displaying Pending event -->
       <div class="container">
         <div class="modal fade" id="pendingModal" role="dialog">
-          <div class="modal-dialog" style="max-width: 800px;">
+          <div class="modal-dialog" style="max-width: 1000px;">
             <div class="modal-content">
 
               <div class="modal-header">
@@ -319,8 +367,10 @@
                 <table class="table table-bordered">
                   <thead>
                     <tr>
-                      <th>Title</th>
                       <th>Date</th>
+                      <th>Task Code</th>
+                      <th>Log Code</th>
+                      <th>Appt Code</th>
                       <th>Branch</th>
                       <th>Service</th>
                       <th>Service Type</th>
@@ -333,8 +383,18 @@
                    
                     <?php foreach($notdone as $nd):  ?>
                       <tr>
-                        <td><?php echo $nd->title; ?></td>
                         <td><?php echo date('m-d-Y',strtotime($nd->start_event)); ?></td>
+                        <td><?php echo $nd->event_code; ?></td>
+                        <?php if($nd->log_code != ""):?>
+                          <td><?php echo $nd->log_code; ?></td>
+                        <?php else:?>
+                          <td>N/A</td>
+                        <?php endif;?>
+                        <?php if($nd->appt_code != ""):?>
+                          <td><?php echo $nd->appt_code; ?></td>
+                        <?php else:?>
+                          <td>N/A</td>
+                        <?php endif;?>
                         <td><?php echo $nd->client_branch; ?></td>
                         <td><?php echo $nd->serv_name; ?></td>
                         <td><?php echo $nd->serv_type; ?></td>

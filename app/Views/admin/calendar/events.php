@@ -41,14 +41,15 @@
    </form>
 </div>   
 </div>
-<div class="col-sm-12 mt-3 bg-light" style=" padding:10px; ">
+<div class="col-sm-12 mt-3 bg-light" style=" padding:10px;">
    <?php if($event): ?>
-      <table class="table table-bordered table-hover" id="table1">
+      <table class="table table-bordered table-hover" id="event-table">
         <thead>
            <tr>
               <th>Date</th>
               <th>Task Code</th>
               <th>Log Code</th>
+              <th>Appt Code</th>
               <th>Time</th>
               <th>Area</th>
               <th>Client Branch</th>
@@ -71,6 +72,11 @@
                <td><?php echo $dat->event_code; ?></td>
                <?php if($dat->log_code != ""):?>
                   <td><?php echo $dat->log_code; ?></td>
+               <?php else: ?>
+                  <td>N/A</td>
+               <?php endif;?>
+               <?php if($dat->appt_code != ""):?>
+                  <td><?php echo $dat->appt_code; ?></td>
                <?php else: ?>
                   <td>N/A</td>
                <?php endif;?>

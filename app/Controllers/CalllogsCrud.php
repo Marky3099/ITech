@@ -23,6 +23,8 @@ class CalllogsCrud extends Controller{
         $Aircon = new Aircon();
         $fcu_no = new Fcu_no();
         $Call_fcu = new Call_fcu_views();
+        $Emp = new Emp();
+        $serv = new Serv();
 
         $data['view_calllogs'] = [];
         $data['client'] = $Client->orderBy('client_id', 'ASC')->findAll();
@@ -30,6 +32,10 @@ class CalllogsCrud extends Controller{
         $data['call_logs'] = $Call_logs->orderBy('cl_id', 'ASC')->findAll();
         $data['fcu_no'] = $fcu_no->orderBy('fcuno', 'ASC')->findAll();
         $data['call_fcu'] = $Call_fcu->orderBy('cl_id', 'ASC')->findAll();
+        $data['emp'] = $Emp->orderBy('emp_id', 'ASC')->findAll();
+        $data['serv'] = $serv->orderBy('serv_id', 'ASC')->findAll();
+        $data['servName'] = $serv->select('serv_name, serv_color, serv_type')->groupBy('serv_name')->findAll();
+        $data['servType'] = $serv->orderBy('serv_name','ASC')->findAll();
         $data['aircon'] = $Aircon->orderBy('aircon_id', 'ASC')->findAll();
         $data['device_brand'] = $Aircon->select('device_brand')->groupBy('device_brand')->findAll();
 
@@ -74,6 +80,7 @@ class CalllogsCrud extends Controller{
         "particulars"=> $value['particulars'],
         "qty"=> $value['qty'],
         "status"=> $value['status'],
+        "set_status"=> $value['set_status'],
         "fcu_arr"=> $fcu_arr,
     ];
 }
@@ -411,6 +418,24 @@ public function delete($cl_id = null){
     $session->setFlashdata('msg', 'value');
     return $this->response->redirect(site_url('/calllogs'));
 }
+public function setLog(){
+    $Call_logs = new Call_logs();
+    $Call_fcu = new Call_fcu();
+    $Client = new Client();
+    $Serv = new Serv();
+    $Aircon = new Aircon();
+    // $Fcu_no = new Fcu_no();
+    // $Appoint_view = new view_appointment();
+    $cl_id = $this->request->getPost('cl_id');
+    $data['cl_data']=$Call_logs->find($cl_id);
+    $data['fcu']=$Call_fcu->where('cl_id',$cl_id)->findAll();
+    $data['client']=$Client->orderBy('client_id','asc')->findAll();
+    $data['serv']=$Serv->orderBy('serv_id','asc')->findAll();
+    $data['aircon']=$Aircon->orderBy('aircon_id','asc')->findAll();
+    // $data['fcu_no']=$Aircon->orderBy('aircon_id','asc')->findAll();
+    return $this->response->setJSON($data);
+}
+
 }
 
 

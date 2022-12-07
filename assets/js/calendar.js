@@ -39,6 +39,7 @@
      var ad = document.getElementById('id');
      var ecode = document.getElementById('event_code');
      var lcode = document.getElementById('log_code');
+     var acode = document.getElementById('appt_code');
      var t = document.getElementById('title_update');
      var ti = document.getElementById('time_update');
      var s = document.getElementById('serv_id_update');
@@ -48,8 +49,9 @@
    
 
     
-      console.log(ecode);
-      console.log(lcode);
+      // console.log(ecode);
+      // console.log(lcode);
+    console.log(acode);
 
       // select cliend and branch
       var s1 = document.getElementById('area_update');
@@ -228,6 +230,8 @@
       tt.value = info.event.start_event;
       ad.value = info.event.id;
       ecode.value = info.event.extendedProps.event_code;
+      acode.value = info.event.extendedProps.appt_code;
+      console.log(info.event.extendedProps.appt_code);
       lcode.value = info.event.extendedProps.log_code;
       r.value = new Date(info.event.start).toLocaleDateString("fr-CA");
       t.value = info.event.title;

@@ -10,6 +10,7 @@
      <thead>
         <tr>
            <th>Date</th>
+           <th>Appt Code</th>
            <th>Time</th>
            <th>Branch Area</th>
            <th>Branch Name</th>
@@ -27,6 +28,7 @@
       <?php foreach($view_appoint as $appt):  ?>
         <tr>
            <td><?php echo $appt->appt_date; ?></td>
+           <td><?php echo $appt->appt_code; ?></td>
            <td><?php echo $appt->appt_time; ?></td>
            <td><?php echo $appt->area; ?></td>
            <td><?php echo $appt->client_branch; ?></td>
@@ -45,8 +47,14 @@
            <td><?php echo $appt->qty; ?></td>
            <td><?php echo $appt->appt_status; ?></td>
            <td>
+            <?php if($appt->set_status ==0):?>
              <a href="<?php echo base_url('/appointment/'.$appt->appt_id);?>" class="btn btn-primary btn-sm">Edit</a>
              <a href="<?php echo base_url('/appointment/delete/'.$appt->appt_id);?>"class="btn btn-danger btn-sm del">Delete</a>
+          <?php elseif($appt->set_status ==1):?>
+            <h6 style="color:green;"><b>Scheduled</h6>
+          <?php else:?>
+            <h6 style="color:red;"><b>Rejected</h6>
+          <?php endif;?>
           </td>
        </tr>
     <?php endforeach; ?>
