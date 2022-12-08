@@ -202,6 +202,7 @@
        <a href="<?php echo base_url('/calllogs/delete/'.$call_log->cl_id);?>" class="btn btn-danger btn-sm del">Delete</a>
     <?php else:?>
         <h6>Scheduled</h6>
+        <a href="#" id="<?= $call_log->log_code?>" class="btn btn-secondary btn-sm cancel">Cancel</a>
     <?php endif;?>
    </td>
    
@@ -304,6 +305,38 @@ $('#mymodal .selectpicker').selectpicker();
               }
         });
       });
+
+      //cancel
+      $(document).on('click','.cancel', function(e){
+        var logCode = e.target.id;
+
+
+        Swal.fire({
+          title: 'Cancel the schedule of this Log??',
+          // showDenyButton: true,
+          showCancelButton: true,
+          confirmButtonText: 'Yes',
+          // denyButtonText: `Don't Cancel`,
+        }).then((result) => {
+          /* Read more about isConfirmed, isDenied below */
+          if (result.isConfirmed) {
+            // Swal.fire('Saved!', '', 'success')
+            // alert(logCode);
+            $.ajax({
+             method:"POST",
+             url:"http://localhost/tsms/calllogs/cancel",
+             data: {
+                'log_code': logCode
+             },
+              success: function(response){
+                console.log(response);
+
+              }
+            });
+            location.reload();
+          }
+        })
+      })
 
  </script>
  <script type="text/javascript" src="<?= base_url('assets/js/crud.js')?>"></script>

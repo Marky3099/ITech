@@ -10,6 +10,7 @@ use App\Models\Call_fcu;
 use App\Models\Emp;
 use App\Models\Serv;
 use App\Models\Call_fcu_views;
+use App\Models\Event;
 
 class CalllogsCrud extends Controller{
 
@@ -433,6 +434,24 @@ public function setLog(){
     $data['serv']=$Serv->orderBy('serv_id','asc')->findAll();
     $data['aircon']=$Aircon->orderBy('aircon_id','asc')->findAll();
     // $data['fcu_no']=$Aircon->orderBy('aircon_id','asc')->findAll();
+    return $this->response->setJSON($data);
+}
+
+public function cancel(){
+    $Call_logs = new Call_logs();
+    $Event = new Event();
+    $log_code = $this->request->getPost('log_code');
+
+    $cl_data = $Call_logs->where('log_code',$log_code)->first();
+    $event_data= $Event->where('log_code',$log_code)->first();
+    $event_id = $event_data['id'];
+    $success = $Event->where('id', $event_id)->delete($event_id);
+
+    if($success){
+        $update_status = ['set_status' => 0];
+        $Call_logs->update($cl_data['cl_id'],$update_status);
+    }
+    // $data['HEllo'] = $event_id;
     return $this->response->setJSON($data);
 }
 

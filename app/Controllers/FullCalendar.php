@@ -1061,7 +1061,30 @@ public function delete($id){
         return $this->response->redirect(site_url('/dashboard'));
     }
     $Event = new Event();
-    $Event->where('id', $id)->delete($id);
+    $Appoint = new Appointment();
+    $Call_logs = new Call_logs();
+    $event_data = $Event->where('id', $id)->first();
+    $appt_code = $event_data['appt_code'];
+    $log_code = $event_data['log_code'];
+    $appt_data = $Appoint->where('appt_code',$appt_code)->first();
+    $cl_data = $Call_logs->where('log_code',$log_code)->first();
+    
+    
+    if($appt_code){
+        $update_status = ['set_status' => 0];
+        $Appoint->update($appt_data['appt_id'],$update_status);
+        // dd();
+    }
+    if($log_code){
+        $update_status = ['set_status' => 0];
+        $Call_logs->update($cl_data['cl_id'],$update_status);
+        // dd($cl_data);
+    }
+    $success = $Event->where('id', $id)->delete($id);
+    // if ($success) {
+    //     // code...
+    // }
+
     $session = session();
     $session->setFlashdata('msg', 'value');
     return $this->response->redirect(site_url('/calendar/events'));

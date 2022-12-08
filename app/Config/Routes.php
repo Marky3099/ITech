@@ -106,6 +106,7 @@ $routes->post('/calllogs/add-to-calendar', 'FullCalendar::insertCal',['filter' =
 $routes->post('/calllogs/set-to-calendar', 'FullCalendar::setCal',['filter' => 'authGuard']);
 $routes->get('calllogs/(:num)', 'CalllogsCrud::singleCL/$1',['filter' => 'authGuard']);
 $routes->post('calllogs/update', 'CalllogsCrud::update',['filter' => 'authGuard']);
+$routes->post('/calllogs/cancel', 'CalllogsCrud::cancel',['filter' => 'authGuard']);
 $routes->get('calllogs/delete/(:num)', 'CalllogsCrud::delete/$1',['filter' => 'authGuard']);
 
 $routes->get('/aircon', 'AirconCrud::index',['filter' => 'authGuard']);
