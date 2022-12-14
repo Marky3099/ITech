@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
 <div class="body-content">
   <div class="edit-form">
     <form method="post" id="update_appoint" name="update_appoint" 
@@ -9,7 +10,8 @@
 
       <div class="form-group">
         <label id="label1">Date</label>
-        <input type="date" name="appt_date" class="form-control" value="<?php echo $appt['appt_date']; ?>">
+        <!-- <input type="date" name="appt_date" class="form-control" value="<?php echo $appt['appt_date']; ?>"> -->
+        <input type="text" name="appt_date" id="appt_date" class="form-control datepicker datee" placeholder="mm-dd-yyyy" value="<?php echo $new_date; ?>" autocomplete="off" required>
       </div>
       <div class="form-group">
         <label id="label1">Time</label>
@@ -90,6 +92,7 @@
 </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/js/bootstrap-select.min.js"></script>
 <script type="text/javascript">
 
@@ -197,6 +200,19 @@
   //         }
 
   //     });
-
-  
+                      //dd-mm
+  var disableDates = ["1-1","1-2","25-2","9-4","14-4","16-4","1-5","9-5","12-6","29-8","21-8","31-10","1-11","2-11","30-11","8-12","24-12","25-12","30-12","31-12"];
+      
+    $('.datepicker').datepicker({
+        format: 'mm/dd/yyyy',
+        beforeShowDay: function(date){
+            dmy = date.getDate() + "-" + (date.getMonth() + 1);
+            if(disableDates.indexOf(dmy) != -1 || date.getDay() == 0 || date.getDay() == 6){
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+    });
 </script>

@@ -553,9 +553,10 @@ public function insert(){
     
     $weeklyEvent = [];
     $monthlyEvent = [];
+    $disableDates = ["01-01","01-02","25-02","09-04","14-04","16-04","01-05","09-05","12-06","29-08","21-08","31-10","01-11","02-11","30-11","08-12","24-12","25-12","30-12","31-12"];
     $set = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $code = substr(str_shuffle($set), 0, 6);
-    // dd($_POST);
+    // dd($disableDates);
     if(isset($_POST["title"]))
     {
         
@@ -575,36 +576,51 @@ public function insert(){
             }
                
             // REPEAT WEEKLY ------------------------------------------------------------------------------------------
+            
+            
             for ($i=0; $i < count($weeklyEvent); $i++) { 
-                $_POST['start_event'] = $weeklyEvent[$i];
-
-                $_POST["title"] = date("g:ia",strtotime($_POST["time"]))." ".$client_branch['client_branch'];
-                
-                $success = $Event->insert($_POST);
-                if($success){
-                    $event_code = ['event_code' => 'task-'.$code.'-'.(int)$success];
-
-                    $Event->update((int)$success,$event_code);
+                $formatWeekly = explode("-",$weeklyEvent[$i]);
+                $currDate = $formatWeekly[2]."-".$formatWeekly[1];
+                $counter = 0;
+                for ($a=0; $a < count($disableDates); $a++) { 
+                    if ($currDate == $disableDates[$a]) {
+                        $counter = 1;
+                    }
+                    
                 }
-                foreach($_POST['emp_id'] as $key => $value) {
-                    $Event_emp->insert([
-                        'emp_id'=> (int) $value,
-                        'id' => (int) $success
-                    ]);
+                    // dd($counter);
+                if($counter == 0){
+                    $_POST['start_event'] = $weeklyEvent[$i];
+
+                    $_POST["title"] = date("g:ia",strtotime($_POST["time"]))." ".$client_branch['client_branch'];
+                        
+                    $success = $Event->insert($_POST);
+                    if($success){
+                        $event_code = ['event_code' => 'task-'.$code.'-'.(int)$success];
+
+                        $Event->update((int)$success,$event_code);
+                    }
+                    foreach($_POST['emp_id'] as $key => $value) {
+                        $Event_emp->insert([
+                            'emp_id'=> (int) $value,
+                            'id' => (int) $success
+                        ]);
+                    }
+
+                    foreach ($_POST['aircon_id'] as $index => $aircon) {
+                        foreach ($_POST['fcuno'.$index] as $key => $floor_num) {
+                            $event_fcu->insert([
+                            'id'=> (int) $success,
+                            'aircon_id'=> (int)$aircon,
+                            'quantity'=> (int)$_POST['quantity'][$index],
+                            'fcuno'=>$floor_num
+                        ]);
+                               
+                        }
+
+                    }
                 }
-
-                foreach ($_POST['aircon_id'] as $index => $aircon) {
-        foreach ($_POST['fcuno'.$index] as $key => $floor_num) {
-           $event_fcu->insert([
-            'id'=> (int) $success,
-            'aircon_id'=> (int)$aircon,
-            'quantity'=> (int)$_POST['quantity'][$index],
-            'fcuno'=>$floor_num
-        ]);
-           
-       }
-
-   }
+                    
            }
                 // dd($i);
        } else if($_POST['repeatable'] == "Monthly"){
@@ -623,32 +639,46 @@ public function insert(){
         }
         // REPEAT MONTHLY ------------------------------------------------------------------------------------------
         for ($i=0; $i < count($monthlyEvent); $i++) { 
-            $_POST['start_event'] = $monthlyEvent[$i];
-            $_POST["title"] = date("g:ia",strtotime($_POST["time"]))." ".$client_branch['client_branch'];
-            $success = $Event->insert($_POST);
-            if($success){
-                $event_code = ['event_code' => 'task-'.$code.'-'.(int)$success];
-
-                $Event->update((int)$success,$event_code);
+            $formatMonthly = explode("-",$monthlyEvent[$i]);
+            $currDate = $formatMonthly[2]."-".$formatMonthly[1];
+            $counter = 0;
+            $date1 = strtotime($monthlyEvent[$i]);
+            $date2 = date("l", $date1);
+            $date3 = strtolower($date2);
+            for ($a=0; $a < count($disableDates); $a++) { 
+                if (($currDate == $disableDates[$a]) || ($date3 == "saturday" )|| ($date3 == "sunday")) {
+                    $counter = 1;
+                }
+                    
             }
-            foreach($_POST['emp_id'] as $key => $value) {
-                $Event_emp->insert([
-                    'emp_id'=> (int) $value,
-                    'id' => (int) $success
-                ]);
-            }
-            foreach ($_POST['aircon_id'] as $index => $aircon) {
-                foreach ($_POST['fcuno'.$index] as $key => $floor_num) {
-           $event_fcu->insert([
-            'id'=> (int) $success,
-            'aircon_id'=> (int)$aircon,
-            'quantity'=> (int)$_POST['quantity'][$index],
-            'fcuno'=>$floor_num
-        ]);
-           
-       }
+            if($counter == 0){
+                $_POST['start_event'] = $monthlyEvent[$i];
+                $_POST["title"] = date("g:ia",strtotime($_POST["time"]))." ".$client_branch['client_branch'];
+                $success = $Event->insert($_POST);
+                if($success){
+                    $event_code = ['event_code' => 'task-'.$code.'-'.(int)$success];
 
-   }
+                    $Event->update((int)$success,$event_code);
+                }
+                foreach($_POST['emp_id'] as $key => $value) {
+                    $Event_emp->insert([
+                        'emp_id'=> (int) $value,
+                        'id' => (int) $success
+                    ]);
+                }
+                foreach ($_POST['aircon_id'] as $index => $aircon) {
+                    foreach ($_POST['fcuno'.$index] as $key => $floor_num) {
+                       $event_fcu->insert([
+                        'id'=> (int) $success,
+                        'aircon_id'=> (int)$aircon,
+                        'quantity'=> (int)$_POST['quantity'][$index],
+                        'fcuno'=>$floor_num
+                    ]);
+                       
+                   }
+
+               }
+           }
        }
 
    }
@@ -997,7 +1027,7 @@ public function update(){
         return $this->response->redirect(site_url('/dashboard'));
     }
         // dd($this->request->getVar('emp_id_update'));
-    // dd($_POST);
+    dd($_POST);
 
     $Event = new Event();
     $Client = new Client();
@@ -1169,6 +1199,7 @@ public function daily(){
  $datas['day'][]= (object)[
   "id"=> $value['id'],
   "title"=>$value['title'],
+  "event_code"=>$value['event_code'],
   "start_event"=> $value['start_event'],
   "time"=> $value['TIME'],
   "serv_id"=> $value['serv_id'],
@@ -1254,6 +1285,7 @@ public function printDaily(){
  $datas['day'][]= (object)[
   "id"=> $value['id'],
   "title"=>$value['title'],
+  "event_code"=>$value['event_code'],
   "start_event"=> $value['start_event'],
   "time"=> $value['TIME'],
   "serv_id"=> $value['serv_id'],
@@ -1335,6 +1367,7 @@ public function weekly(){
  $datas['week'][]= (object)[
   "id"=> $value['id'],
   "title"=>$value['title'],
+  "event_code"=>$value['event_code'],
   "start_event"=> $value['start_event'],
   "time"=> $value['TIME'],
   "serv_id"=> $value['serv_id'],
@@ -1417,6 +1450,7 @@ public function printWeekly(){
  $datas['week'][]= (object)[
   "id"=> $value['id'],
   "title"=>$value['title'],
+  "event_code"=>$value['event_code'],
   "start_event"=> $value['start_event'],
   "time"=> $value['TIME'],
   "serv_id"=> $value['serv_id'],
@@ -1467,7 +1501,7 @@ public function monthly(){
     $datas['event_emp'] = $event_emp->orderBy('id', 'ASC')->findAll();
     $datas['event_fcu'] = $event_fcu->orderBy('id', 'ASC')->orderBy('fcuno', 'ASC')->findAll();
     // $datas['aircon'] = $aircon->orderBy('aircon_id', 'ASC')->findAll();
-    $datas['monthly'] = $event->where('MONTH(start_event) = MONTH(CURRENT_DATE()) ORDER BY start_event ASC')->findAll();
+    $datas['monthly'] = $event->where('MONTH(start_event) = MONTH(CURRENT_DATE()) && YEAR(start_event) = YEAR(CURRENT_DATE()) ORDER BY start_event ASC')->findAll();
         // dd($data[0]['title']);
     foreach ($datas['monthly'] as $key => $value) {
 
@@ -1499,6 +1533,7 @@ public function monthly(){
    "id"=> $value['id'],
   "title"=>$value['title'],
   "start_event"=> $value['start_event'],
+  "event_code"=>$value['event_code'],
   "time"=> $value['TIME'],
   "serv_id"=> $value['serv_id'],
   "client_id"=>$value['client_id'],
@@ -1548,7 +1583,7 @@ public function printMonthly(){
     $datas['event_emp'] = $event_emp->orderBy('id', 'ASC')->findAll();
     $datas['event_fcu'] = $event_fcu->orderBy('id', 'ASC')->orderBy('fcuno', 'ASC')->findAll();
     // $datas['aircon'] = $aircon->orderBy('aircon_id', 'ASC')->findAll();
-    $datas['monthly'] = $event->where('MONTH(start_event) = MONTH(CURRENT_DATE()) ORDER BY start_event ASC')->findAll();
+    $datas['monthly'] = $event->where('MONTH(start_event) = MONTH(CURRENT_DATE()) && YEAR(start_event) = YEAR(CURRENT_DATE()) ORDER BY start_event ASC')->findAll();
         // dd($data[0]['title']);
     foreach ($datas['monthly'] as $key => $value) {
 
@@ -1579,6 +1614,7 @@ public function printMonthly(){
  $datas['month'][]= (object)[
    "id"=> $value['id'],
   "title"=>$value['title'],
+  "event_code"=>$value['event_code'],
   "start_event"=> $value['start_event'],
   "time"=> $value['TIME'],
   "serv_id"=> $value['serv_id'],
@@ -1598,5 +1634,25 @@ public function printMonthly(){
 
 return view("admin/calendar/monthlyPrint",$datas);
 }
+
+// public function view(){
+//     $Event = new Event();
+//     $Fcu = new Event_fcu_views();
+//     $Client = new Client();
+//     $Serv = new Serv();
+//     $id = $this->request->getPost('id');
+//     $data['event_data'] = $Event->where('id',$id)->first();
+//     $data['fcu_data'] = $Fcu->where('id',$id)->findAll();
+//     $data['client_data'] = $Client->orderBy('client_id','ASC')->findAll();
+//     $data['serv_data'] = $Serv->orderBy('serv_id','ASC')->findAll();
+
+//     $db = \Config\Database::connect();
+//           $query   = $db->query('SELECT DISTINCT aircon_id,id,device_brand,aircon_type,quantity
+//             FROM event_fcu_views where id = '.$id);
+//           $data['distinct'] = $query->getResult();
+
+//     return $this->response->setJSON($data);
+
+// }
 }
 ?>

@@ -63,6 +63,7 @@
 							<thead>
 								<tr>
 									<th>Date</th>
+									<th>Task Code</th>
 									<th>Branch Area</th>
 									<th>Branch Name</th>
 									<th>Service/Task</th> 
@@ -82,6 +83,7 @@
 									<?php foreach($event as $dat):  ?>
 										<tr>
 											<td><?php echo date('m-d-Y',strtotime($dat->start_event)); ?></td>
+											<td><?php echo $dat->event_code; ?></td>
 											<td><?php echo $dat->area; ?></td>
 											<td><?php echo $dat->client_branch; ?></td>
 											<td><?php echo $dat->serv_name; ?></td>

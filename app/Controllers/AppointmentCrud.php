@@ -227,6 +227,7 @@ return view("templates/template",$data);
 }
 public function store() {
     
+    
     $Appoint = new Appointment();
     $Appt_fcu = new Appt_fcu();
     $Client = new Client();
@@ -236,12 +237,13 @@ public function store() {
     $session = session();
     $user_id =$_SESSION['user_id'];
     // dd($user_id);
+    $start_date = explode('/',$this->request->getVar('appt_date'));
     $set = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $code = substr(str_shuffle($set), 0, 5);
 
     // dd($this->request->getVar('bdo_id'));
     $appoint_create = [
-        'appt_date' => $this->request->getVar('appt_date'),
+        'appt_date' =>$start_date[2].'-'.$start_date[0].'-'.$start_date[1],
         'bdo_id' => $this->request->getVar('bdo_id'),
         'appt_time' => $this->request->getVar('appt_time'),
         'area' => $this->request->getVar('area'),
@@ -250,10 +252,10 @@ public function store() {
         'device_brand' => $this->request->getVar('device_brand'),
         'aircon_id' => $this->request->getVar('aircon_id'),
         'qty' => $this->request->getVar('qty'),
-        'status' => $this->request->getVar('status'),
+        // 'status' => $this->request->getVar('status'),
         'user_id' => $user_id,
     ];
-    
+    // dd($appoint_create);
     $success = $Appoint->insert($appoint_create);
 
     if($success){
@@ -294,7 +296,9 @@ public function singleAppt($appt_id){
     $data['client'] = $Client->orderBy('client_id', 'ASC')->findAll();
     $data['view_appoint'] = $Appoint_view->where('appt_id', $appt_id)->first();
     $data['fcu_views'] = $Appt_fcu_views->where('appt_id', $appt_id)->findAll();
-    
+    $data['date_format'] = explode('-',$data['appt']['appt_date']);
+    $data['new_date'] = $data['date_format'][1].'-'.$data['date_format'][2].'-'.$data['date_format'][0];
+    // dd($data['new_date']);
     foreach($data['area'] as $k => $val) {
         
         $area = [];

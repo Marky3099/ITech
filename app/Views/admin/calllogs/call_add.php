@@ -172,7 +172,7 @@
           </div>
 
           <div class="container1">
-            <button type="button" id="sub" class="btn btn-success" data-toggle="modal" data-target="#schedModal">Submit</button>
+            <button type="submit" id="sub" class="btn btn-success">Submit</button>
             <a href='<?= base_url('/calllogs');?>' class="back-btn">Back</a>
           </div> 
         </div>
@@ -208,6 +208,11 @@
         // $('#fcuno').select2();
         $('#fcuno .selectpicker').selectpicker();
         $('#calFcu .selectpicker').selectpicker();
+        var schedModal = new bootstrap.Modal(document.getElementById('schedModal'));
+        $("#add_create").submit(function(e){
+          e.preventDefault();
+          schedModal.show();
+        })
 
         $("#submit1").click(function(e) {
           e.preventDefault();
@@ -257,7 +262,7 @@
             }
          $("#calFcu").selectpicker("refresh");
           var myModal = new bootstrap.Modal(document.getElementById('mymodal'));
-          var schedModal = new bootstrap.Modal(document.getElementById('schedModal'));
+          
           myModal.show();
           
           // $.ajax({
@@ -333,12 +338,12 @@ $("#area").change(function(){
         // $("#area").append('<option value='+'>My option</option>');
       });
 
-    var disableDates = ["9-11-2022", "14-11-2022", "15-11-2022","27-12-2022"];
+    var disableDates = ["1-1","1-2","25-2","9-4","14-4","16-4","1-5","9-5","12-6","29-8","21-8","31-10","1-11","2-11","30-11","8-12","24-12","25-12","30-12","31-12"];
       
     $('.datepicker').datepicker({
         format: 'mm/dd/yyyy',
         beforeShowDay: function(date){
-            dmy = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
+            dmy = date.getDate() + "-" + (date.getMonth() + 1);
             if(disableDates.indexOf(dmy) != -1 || date.getDay() == 0 || date.getDay() == 6){
                 return false;
             }

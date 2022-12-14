@@ -147,6 +147,7 @@ if($month){
     <thead>
     <tr style = "background-color: #A8D08D; text-align: center; font-size:11px;">
     <th>Date</th>
+    <th>Task Code</th>
     <th>Time</th>
     <th>Branch Area</th>
     <th>Branch Name</th>
@@ -167,6 +168,7 @@ if($month){
      
      $html .='     <tr style="font-size:9px; text-align: center;">
      <td>'.date('m-d-Y',strtotime($m->start_event)).'</td>
+     <td>'.$m->event_code.'</td>
      <td>';
      if($m->time == "00:00:00"){$html .='N/A'; } 
      else{$html .=$m->time;} $html .='</td>

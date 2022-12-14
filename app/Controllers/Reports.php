@@ -71,6 +71,7 @@ class Reports extends BaseController
      $datas['event'][]= (object)[
         "id"=> $value['id'],
         "title"=>$value['title'],
+        "event_code"=>$value['event_code'],
         "start_event"=> $value['start_event'],
         "time"=> $value['TIME'],
         "serv_id"=> $value['serv_id'],
@@ -158,6 +159,7 @@ public function getAccomplished(){
  $datas['event'][]= (object)[
         "id"=> $value['id'],
         "title"=>$value['title'],
+        "event_code"=>$value['event_code'],
         "start_event"=> $value['start_event'],
         "time"=> $value['TIME'],
         "serv_id"=> $value['serv_id'],
@@ -239,6 +241,7 @@ public function printAccomplished($strt,$end){
  $datas['event'][]= (object)[
     "id"=> $value['id'],
     "title"=> $value['title'],
+    "event_code"=>$value['event_code'],
     "start_event"=> $value['start_event'],
     "time"=> $value['TIME'],
     "serv_id"=> $value['serv_id'],
@@ -320,6 +323,7 @@ public function showException(){
   $datas['event'][]= (object)[
         "id"=> $value['id'],
         "title"=>$value['title'],
+        "event_code"=>$value['event_code'],
         "start_event"=> $value['start_event'],
         "time"=> $value['TIME'],
         "serv_id"=> $value['serv_id'],
@@ -398,6 +402,7 @@ public function getException(){
      $datas['event'][]= (object)[
         "id"=> $value['id'],
         "title"=>$value['title'],
+        "event_code"=>$value['event_code'],
         "start_event"=> $value['start_event'],
         "time"=> $value['TIME'],
         "serv_id"=> $value['serv_id'],
@@ -473,6 +478,7 @@ public function printException($strt,$end){
  $datas['event'][]= (object)[
     "id"=> $value['id'],
     "title"=> $value['title'],
+    "event_code"=>$value['event_code'],
     "start_event"=> $value['start_event'],
     "time"=> $value['TIME'],
     "serv_id"=> $value['serv_id'],

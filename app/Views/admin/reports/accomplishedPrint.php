@@ -153,6 +153,7 @@ if($event){
     <thead>
     <tr style = "background-color: #A8D08D; text-align: center; font-size:11px;">
     <th>Date</th>
+    <th>Task Code</th>
     <th>Time</th>
     <th>Branch Area</th>
     <th>Branch Name</th>
@@ -175,6 +176,7 @@ if($event){
      $total = 0;
      $html .='     <tr style="font-size:9px; text-align: center;">
      <td>'.date('m-d-Y',strtotime($dat->start_event)).'</td>
+     <td>'.$dat->event_code.'</td>
      <td>';
      if($dat->time == "00:00:00"){$html .='N/A'; } 
      else{$html .=$dat->time;} $html .='</td>

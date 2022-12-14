@@ -147,6 +147,7 @@ if($day){
     <thead>
     <tr style = "background-color: #A8D08D; text-align: center; font-size:11px;">
     <th>Date</th>
+    <th>Task Code</th>
     <th>Time</th>
     <th>Branch Area</th>
     <th>Branch Name</th>
@@ -167,6 +168,7 @@ if($day){
      
      $html .='     <tr style="font-size:9px; text-align: center;">
      <td>'.date('m-d-Y',strtotime($d->start_event)).'</td>
+     <td>'.$d->event_code.'</td>
      <td>';
      if($d->time == "00:00:00"){$html .='N/A'; } 
      else{$html .=$d->time;} $html .='</td>

@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="<?= base_url('assets/css/formstyle.css')?>">
 <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/select2.css');?>">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
 <div class="body-content" style="height: 100%;">
   <div class="edit-form">
     <form method="post" id="update_user" name="update_user" 
@@ -12,7 +13,7 @@
       <div class="user-box">
         <label>Branch Area</label>
         <label class="tdate">Date</label><br>
-        <input type="date" name="date" class="datee" value="<?php echo $cl_obj['date']; ?>">
+        <input type="text" name="date" id="date" class="form-control datepicker datee" placeholder="mm-dd-yyyy" value="<?php echo $new_date; ?>" autocomplete="off" required>
         <div class="select-dropdown" style="width: 40%;">
           <select id="area_update" name="area_update">
             <?php foreach($area as $a):  ?>
@@ -81,6 +82,7 @@
 </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script type="text/javascript">
 
@@ -161,33 +163,21 @@
         // $("#area").append('<option value='+'>My option</option>');
       });
 
-  // ----------------------------------------
-  // document.getElementById('fcuno_update').innerHTML='';
+  var disableDates = ["1-1","1-2","25-2","9-4","14-4","16-4","1-5","9-5","12-6","29-8","21-8","31-10","1-11","2-11","30-11","8-12","24-12","25-12","30-12","31-12"];
+      
+    $('.datepicker').datepicker({
+        format: 'mm/dd/yyyy',
+        beforeShowDay: function(date){
+            dmy = date.getDate() + "-" + (date.getMonth() + 1);
+            if(disableDates.indexOf(dmy) != -1 || date.getDay() == 0 || date.getDay() == 6){
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+    });
 
-  //     var arr1 = info.event.extendedProps.fcu_array.split(',');
-
-  //     var fcu_all = <?php echo json_encode($fcu_no); ?>;
-  //     fcu_all.map((all_fcu)=>{
-  //       let a = 0;
-  //        while(arr1) {
-  //            if(parseInt(arr1[a]) == all_fcu.fcuno){
-  //             $("#fcuno_update").append(`
-  //                 <option value="`+ all_fcu.fcuno+`" selected>`+all_fcu.fcu+`</option>`
-  //               );
-  //             break;
-  //            }
-
-  //            if (fcu_all.length == a) {
-  //             $("#fcuno_update").append(`
-  //                 <option value="`+ all_fcu.fcuno+`">`+all_fcu.fcu+`</option>`
-  //               );
-  //             break;
-  //            }
-  
-  //           a++;
-  //         }
-
-  //     });
 
   
 </script>

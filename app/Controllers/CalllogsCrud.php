@@ -324,7 +324,9 @@ public function singleCL($cl_id = null){
     $data['client'] = $Client->orderBy('client_id', 'ASC')->findAll();
     $data['cl_views'] = $Call_logs_view->where('cl_id', $cl_id)->first();
     $data['fcu_views'] = $Call_fcu->where('cl_id', $cl_id)->findAll();
-    
+    $data['date_format'] = explode('-',$data['cl_obj']['date']);
+    $data['new_date'] = $data['date_format'][1].'-'.$data['date_format'][2].'-'.$data['date_format'][0];
+    // dd($data['new_date'] );
     foreach($data['area'] as $k => $val) {
         
         $area = [];
@@ -372,6 +374,7 @@ public function update(){
     if($_SESSION['position'] != USER_ROLE_ADMIN){
         return $this->response->redirect(site_url('/dashboard'));
     }
+    
     $Call_logs = new Call_logs();
     
     $Call_fcu = new Call_fcu();
@@ -379,11 +382,11 @@ public function update(){
     $Aircon = new Aircon();
 
     $cl_id = $this->request->getVar('cl_id');
-
+    $start_date = explode('/',$_POST['date']);
         // $data['aircon'] = $Aircon->orderBy('aircon_id', 'ASC')->findAll();
         // $data['device_brand'] = $Aircon->select('device_brand')->groupBy('device_brand')->findAll();
     $data = [
-        'date' => $this->request->getVar('date'),
+        'date' => $start_date[2].'-'.$start_date[0].'-'.$start_date[1],
         'area' => $this->request->getVar('area'),
         'aircon_id' => (int)($this->request->getVar('aircon_id_update')),
         'client_id'  => (int)($this->request->getVar('client_id_update')),
@@ -391,8 +394,9 @@ public function update(){
         'particulars' => $this->request->getVar('particulars'),
         'device_brand' => $this->request->getVar('device_brand'),
         'qty' => $this->request->getVar('qty'),
-        'status' => $this->request->getVar('status')
+        // 'status' => $this->request->getVar('status')
     ];
+    // dd($data);
     $Call_logs->update($cl_id, $data);
     $Call_fcu->where('cl_id', $cl_id)->delete();
     if (isset($_POST['fcuno_update'])) {

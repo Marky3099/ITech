@@ -14,8 +14,8 @@
       <table class="table table-bordered" id="table1">
         <thead>
            <tr>
-              <th>Event Title</th>
               <th>Date</th>
+              <th>Task Code</th>
               <th>Time</th>
               <th>Area</th>
               <th>Client Branch</th>
@@ -34,14 +34,8 @@
            
            <?php foreach($day as $d):  ?>
               <tr>
-                 <td>
-                  <?php if($d->title == NULL): ?>
-                     <?php echo "N/A"; ?>
-                  <?php else:?>
-                     <?php echo $d->title; ?>
-                  <?php endif;?>
-               </td>
                <td><?php echo date('m-d-Y',strtotime($d->start_event)); ?></td>
+               <td><?php echo $d->event_code; ?></td>
                <td>
                   <?php if($d->time == "00:00:00"): ?>
                      <?php echo "N/A"; ?>

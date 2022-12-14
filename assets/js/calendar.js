@@ -4,19 +4,21 @@
 
   var calendarEl = document.getElementById('calendar');
   var count = 0;
+  var disableDates = ["01-01","01-02","25-02","09-04","14-04","16-04","01-05","09-05","12-06","29-08","21-08","31-10","01-11","02-11","30-11","08-12","24-12","25-12","30-12","31-12"];
 
   var calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: 'dayGridMonth',
     handleWindowResize: false,
     selectable: true,
-    selectAllow: function (select) {
-                    return JudgeWeekDay(select.start, [1,2,3,4,5]);
-                },
-    dayRender: function (date, cell) {
-                    if (!JudgeWeekDay(date, [1,2,3,4,5])) {
-                        cell.css("background-color", "rgb(204, 204, 204)");
-                    }
-                },
+    weekends: false,
+    // selectAllow: function (select) {
+    //                 return JudgeWeekDay(select.start, [1,2,3,4,5]);
+    //             },
+    // dayRender: function (date, cell) {
+    //                 if (!JudgeWeekDay(date, [1,2,3,4,5])) {
+    //                     cell.css("background-color", "rgb(204, 204, 204)");
+    //                 }
+    //             },
     // editable: true,
     headerToolbar: {
       left: 'prev,next',
@@ -30,7 +32,20 @@
      var myModal = new bootstrap.Modal(document.getElementById('mymodal'));
      var ad = document.getElementById('start_event');
      ad.value = info.dateStr;
-     myModal.show();
+     var dateFormat = info.dateStr.split("-");
+     var dateDisable = dateFormat[2]+"-"+dateFormat[1];
+     var counter = 0;
+     // console.log(dateDisable);
+     // console.log(info);
+     for (var i = 0; i < disableDates.length; i++) {
+       if(dateDisable == disableDates[i]){
+          counter=1;
+       }
+     }
+     // console.log(counter);
+    if(counter == 0){
+      myModal.show();
+    }
     },
     eventClick: function(info) {
      var myModal = new bootstrap.Modal(document.getElementById('mymodal2'));
@@ -46,12 +61,11 @@
      // var a = document.getElementById('aircon_id_update');
      // var q = document.getElementById('quantity_update');
     var r = document.getElementById('start_event_update');
-   
-
+    var dt = document.getElementById('date');
     
       // console.log(ecode);
       // console.log(lcode);
-    console.log(acode);
+    // console.log(acode);
 
       // select cliend and branch
       var s1 = document.getElementById('area_update');
@@ -236,7 +250,6 @@
       r.value = new Date(info.event.start).toLocaleDateString("fr-CA");
       t.value = info.event.title;
       ti.value = info.event.extendedProps.time;
-     
       s.value = info.event.extendedProps.serv_id;
       // a.value = info.event.extendedProps.aircon_id;
       // q.value = info.event.extendedProps.quantity;
@@ -383,16 +396,3 @@
       alert('here');
       document.getElementById("auth-rows-edit").innerHTML = '';
   });
-
-
- function JudgeWeekDay(strDate, working_days)
-        {
-            var strDateTime = strDate.toString().substring(0, 3);
-            var allow = false;
-            for (var i = 0; i < working_days.length; i++) {
-                if (working_days[i].substring(0, 5) == strDateTime) {
-                    allow = true;
-                }
-            }
-            return allow
-        }

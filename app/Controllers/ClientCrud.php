@@ -123,16 +123,28 @@ class ClientCrud extends Controller
 
         $to = $this->request->getVar('client_email');
 
-        $subject = "TSMS - Verification";
+        $subject = "MARSI: Appointment System - Complete Account Registration";
         $message = "<html>
         <head>
         <title>Verification Code</title>
         </head>
         <body>
-        <h2>Welcome to TSMS!</h2>
-        <p>You need to use the code below to register to our system.</p>
-        <h4>Code: <b>".$code."</b></h4>
-        <h4><a href='".base_url("/bdo-register")."'>Register my Account</a></h4>
+        <h2>Welcome to MARSI: Appointment System!</h2>
+        <br>
+        <p>Please enter this confirmation code in the window where you started creating your account</p>
+        <br>
+        <h3>".$code."</h3>
+        <br>
+        <p>or click this link to continue your account registration</p>
+        <br>
+        <h4><a href='".base_url("/bdo-register")."'>Register Account</a></h4>
+        <br>
+        <p>Thank You!</p>
+        <br>
+        <br>
+        <p>Regards,</p>
+        <p>Management</p>
+        <p>Maylaflor Air-Conditioning and Refrigeration Service, Inc.</p>
         </body>
         </html>";
         $email = \Config\Services::email();

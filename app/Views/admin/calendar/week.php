@@ -19,6 +19,7 @@
         <thead>
            <tr>
               <th>Date</th>
+              <th>Task Code</th>
               <th>Time</th>
               <th>Area</th>
               <th>Client Branch</th>
@@ -38,6 +39,7 @@
            <?php foreach($week as $w):  ?>
               <tr>
                <td><?php echo date('m-d-Y',strtotime($w->start_event)); ?></td>
+               <td><?php echo $w->event_code; ?></td>
                <td>
                   <?php if($w->time == "00:00:00"): ?>
                      <?php echo "N/A"; ?>

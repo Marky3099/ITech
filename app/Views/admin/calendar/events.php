@@ -1,3 +1,88 @@
+
+<!-- <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTitle"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+           <div class="col-md-6">
+              <h6>Date:</h6>
+              <hr>
+              <h6>Time:</h6>
+              <hr>
+              <h6>Task Code:</h6>
+              <hr>
+              <h6>Log Code:</h6>
+              <hr>
+              <h6>Appt Code:</h6>
+              <hr>
+              <h6>Area:</h6>
+              <hr>
+              <h6>Client Branch:</h6>
+              <hr>
+              <h6>Service Name:</h6>
+              <hr>
+              <h6>Service Type:</h6>
+              <hr>
+              <h6>Device Brand:</h6>
+              <hr>
+              <h6>Aircon Type:</h6>
+              <hr>
+              <h6>FCU #:</h6>
+              <hr>
+              <h6>Quantity:</h6>
+              <hr>
+              <h6>Employee:</h6>
+              <hr>
+              <h6>Status:</h6>
+           </div>
+           <div class="col-md-6">
+              <h6 id="modal_start_event"></h6>
+              <hr>
+              <h6 id="modal_time"></h6>
+              <hr>
+              <h6 id="modal_event_code"></h6>
+              <hr>
+              <h6 id="modal_log_code"></h6>
+              <hr>
+              <h6 id="modal_appt_code"></h6>
+              <hr>
+              <h6 id="modal_area"></h6>
+              <hr>
+              <h6 id="modal_branch"></h6>
+              <hr>
+              <h6 id="modal_serv_name"></h6>
+              <hr>
+              <h6 id="modal_serv_type"></h6>
+              <hr>
+              <h6 id="modal_dev_brand"></h6>
+              <hr>
+              <h6 id="modal_aircon_type"></h6>
+              <hr>
+              <h6 id="modal_fcu"></h6>
+              <hr>
+              <h6 id="modal_qty"></h6>
+              <hr>
+              <h6 id="modal_emp"></h6>
+              <hr>
+              <h6 id="modal_status"></h6>
+           </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
 <div class="body-content">
    <div class="event-header">
       
@@ -181,6 +266,7 @@
 </td>
 <?php endif;?>
 <td>
+ <!-- <a href="#" id="<?=$dat->id?>" class="btn btn-info btn-sm view">View</a> -->
  <a href="<?= base_url('/calendar/delete/'.$dat->id);?>" class="btn btn-danger btn-sm del">Delete</a>
 </td>
 </tr>
@@ -207,5 +293,118 @@
       msg = true;
       del = 'Aircon is Deleted Successfully';
       <?php }?>;
+
+   // $(document).on('click','.view',function(e){
+   //    // console.log(e.target.id);
+   //    var id = e.target.id;
+   //    var options = { year: 'numeric', month: 'long', day: 'numeric' };
+
+   //    var myModal = new bootstrap.Modal(document.getElementById('viewModal'));
+   //    $.ajax({
+   //       method: 'Post',
+   //       url: 'http://localhost/tsms/calendar/events/view',
+   //       data:{
+   //          'id': id
+   //       },
+   //       success: function(response){
+   //          var date = new Date(response.event_data.start_event);
+   //          var startEvent = date.toLocaleDateString("en-US",(options));
+   //          var eventCode = response.event_data.event_code;
+   //          var logCode = response.event_data.log_code;
+   //          var apptCode = response.event_data.appt_code;
+   //          var clientId = response.event_data.client_id;
+   //          var clientData = response.client_data;
+   //          var area;
+   //          var branch;
+   //          var servId = response.event_data.serv_id;
+   //          var servData = response.serv_data;
+   //          var servName;
+   //          var servType;
+   //          var time = response.event_data.time.split(":");
+   //          var formatTime;
+   //          var dBrandArr = new Array();
+   //          var airconTypeArr = new Array();
+   //          var devBrand;
+   //          var airconType;
+   //          var fcuArr = response.distinct;
+   //          var fcuNoArr = new Array();
+   //          var fcuData = response.fcu_data;
+   //          var fcuNo;
+   //          var qty;
+   //          // var date = 
+
+   //          $('#modalTitle').html("["+eventCode+"] Schedule");
+   //          $('#modal_start_event').html(startEvent);
+   //          $('#modal_event_code').html(eventCode);
+   //          if(logCode == ''){
+   //             $('#modal_log_code').html("N/A");
+   //          }else{
+   //             $('#modal_log_code').html(logCode);
+   //          }
+            
+   //          if(apptCode == ''){
+   //             $('#modal_appt_code').html("N/A");
+   //          }else{
+   //              $('#modal_appt_code').html(apptCode);
+   //          }
+            
+   //          if(time[0] == '00'){
+   //             formatTime = 'N/A';
+   //          }else if (time[0]>=12){
+   //              var hour = time[0] - 12;
+   //              var amPm = "PM";
+   //              formatTime = hour + ":" + time[1] + " " + amPm;
+   //          } else {
+   //              var hour = time[0]; 
+   //              var amPm = "AM";
+   //              formatTime = hour + ":" + time[1] + " " + amPm;
+   //          }
+            
+   //           $('#modal_time').html(formatTime);
+
+   //           for (var a = 0; a < clientData.length; a++) {
+   //              if(clientId == clientData[a].client_id){
+   //                area = clientData[a].area;
+   //                branch = clientData[a].client_branch;
+   //              }
+   //           }
+   //           // console.log(area + " "+branch);
+   //           $('#modal_area').html(area);
+   //           $('#modal_branch').html(branch);
+
+   //           for (var b = 0; b < servData.length; b++) {
+   //              if(servId == servData[b].serv_id){
+   //                servName = servData[b].serv_name;
+   //                servType = servData[b].serv_type;
+   //              }
+   //           }
+   //           $('#modal_serv_name').html(servName);
+   //           $('#modal_serv_type').html(servType);
+   //          for (var i = 0; i < fcuArr.length; i++) {
+   //            dBrandArr.push(response.distinct[i].device_brand);
+   //            airconTypeArr.push(response.distinct[i].aircon_type);
+   //          }
+            
+   //          devBrand = dBrandArr.toString();
+   //          airconType = airconTypeArr.toString();
+   //          $('#modal_dev_brand').html(devBrand);
+   //          $('#modal_aircon_type').html(airconType);
+   //          // console.log(devBrand +" "+ airconType);
+
+   //          for (var i = 0; i < fcuData.length; i++) {
+   //            if(id == fcuData[i].id){
+   //             // console.log("true");
+   //             fcuNoArr.push(response.fcu_data[i].fcu);
+   //            }
+              
+   //          }
+   //          fcuNo = fcuNoArr.toString();
+   //          $('#modal_fcu').html(fcuNo);
+   //          // console.log(fcuNo);
+   //          console.log(response);
+   //          myModal.show();
+   //       }
+   //    })
+   // })
    </script>
    <script type="text/javascript" src="<?= base_url('assets/js/crud.js')?>"></script>
