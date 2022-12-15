@@ -28,24 +28,58 @@
      
     events: event,
     dateClick: function(info) {
+      var myModal = new bootstrap.Modal(document.getElementById('mymodal'));
+           var ad = document.getElementById('start_event');
+           ad.value = info.dateStr;
+           var dateFormat = info.dateStr.split("-");
+           var dateDisable = dateFormat[2]+"-"+dateFormat[1];
+           var counter = 0;
+           // console.log(dateDisable);
+           // console.log(info);
+           for (var i = 0; i < disableDates.length; i++) {
+             if(dateDisable == disableDates[i]){
+                counter=1;
+             }
+           }
+           // console.log(counter);
+          if(counter == 0){
+            myModal.show();
+          }
+      // console.log();
+          var em = document.getElementById('emp_id');
+
+      $.ajax({
+           type: "POST",
+           url: "http://localhost/tsms/calendar/checkEmp",
+             data: {
+                'start_event' : info.dateStr
+             } ,// serializes form input
+             success: function(data){
+               // window.location.href = '/tsms/calllogs'; 
+              console.log(data);
+              // $("#emp_id").appe
+
+              // var count = 0;
+              em.innerHTML="";
+              data.available_emp.map((emp)=>{
+                 var opt_one = document.createElement('option');
+                  opt_one.value = emp.emp_id;
+                  opt_one.innerHTML = emp.emp_name;
+                  em.appendChild(opt_one);
+                  // if (emp.area == info.event.extendedProps.area ) {
+                  //   s1.value = emp.area;
+                  //   int_index_area = count;
+                  // }
+                  
+              });
+              $('#mymodal .selectpicker').selectpicker("refresh");
+
+             }
+           });
+
     // alert('Date: ' + info.dateStr);
-     var myModal = new bootstrap.Modal(document.getElementById('mymodal'));
-     var ad = document.getElementById('start_event');
-     ad.value = info.dateStr;
-     var dateFormat = info.dateStr.split("-");
-     var dateDisable = dateFormat[2]+"-"+dateFormat[1];
-     var counter = 0;
-     // console.log(dateDisable);
-     // console.log(info);
-     for (var i = 0; i < disableDates.length; i++) {
-       if(dateDisable == disableDates[i]){
-          counter=1;
-       }
-     }
-     // console.log(counter);
-    if(counter == 0){
-      myModal.show();
-    }
+     
+
     },
     eventClick: function(info) {
      var myModal = new bootstrap.Modal(document.getElementById('mymodal2'));
@@ -64,7 +98,7 @@
     var dt = document.getElementById('date');
     
       // console.log(ecode);
-      // console.log(lcode);
+      
     // console.log(acode);
 
       // select cliend and branch
@@ -241,19 +275,41 @@
          
      //  });
       // s4.value = info.event.extendedProps.aircon_id;
+
+     var date = new Date(info.event.start),mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+    day = ("0" + date.getDate()).slice(-2);
+      var dateFormat = [ mnth,day, date.getFullYear()].join("/");
+
       tt.value = info.event.start_event;
       ad.value = info.event.id;
       ecode.value = info.event.extendedProps.event_code;
       acode.value = info.event.extendedProps.appt_code;
-      console.log(info.event.extendedProps.appt_code);
+      // console.log(info.event.extendedProps.appt_code);
       lcode.value = info.event.extendedProps.log_code;
-      r.value = new Date(info.event.start).toLocaleDateString("fr-CA");
+      // r.value = new Date(info.event.start).toLocaleDateString("fr-CA");
+      r.value = dateFormat;
       t.value = info.event.title;
       ti.value = info.event.extendedProps.time;
       s.value = info.event.extendedProps.serv_id;
       // a.value = info.event.extendedProps.aircon_id;
       // q.value = info.event.extendedProps.quantity;
-
+      $("#frmdate").datepicker('update', dateFormat);
+     
+      var disableDates = ["01-01","01-02","25-02","09-04","14-04","16-04","01-05","09-05","12-06","29-08","21-08","31-10","01-11","02-11","30-11","08-12","24-12","25-12","30-12","31-12"];
+      $('.datepicker').datepicker({
+            format: 'mm/dd/yyyy',
+            beforeShowDay: function(date){
+                dmy = date.getDate() + "-" + (date.getMonth() + 1);
+                if(disableDates.indexOf(dmy) != -1 || date.getDay() == 0 || date.getDay() == 6){
+                    return false;
+                }
+                else{
+                    return true;
+                }
+            }
+        });
+// console.log("here"+ dateFormat);
+      // console.log("here"+date.getMonth());
 
 // ---------------------------------------------------------------------
        document.getElementById('emp_id_update').innerHTML='';

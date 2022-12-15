@@ -2,6 +2,7 @@
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
 
 
 <div class="body-content">
@@ -134,9 +135,7 @@
           
           <label for="emp_id">Employee</label><br>
           <select id="emp_id" name="emp_id[]" class="form-control selectpicker" multiple data-selected-text-format="count > 8" required>
-            <?php foreach($emp as $em):  ?>
-              <option value=<?php echo $em['emp_id']; ?>><?php echo $em['emp_name'];?></option>
-            <?php endforeach; ?>
+            
           </select>
         </div> 
 
@@ -190,7 +189,8 @@
           <div class="form-row">
             <div class="form-group col-md-6">
              <label for="start_event_update">Reschedule</label><br>
-             <input type="date" name="start_event_update" id="start_event_update" >
+             <input type="text" name="start_event_update" id="start_event_update" class="form-control datepicker datee" placeholder="mm-dd-yyyy" autocomplete="off" required>
+             <!-- <input type="text" name="date" id="date" > -->
            </div>
            <div class="form-group col-md-6">
             <label for="time_update">Time</label><br>
@@ -273,6 +273,7 @@
 <script src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>  
 <script src = "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>  
 <!-- <script src = "https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>   -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/js/bootstrap-select.min.js"></script>
 <script src = "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
 <!--  -->
@@ -479,6 +480,8 @@ var count_update = 1;
   });
 
   $('#mymodal .selectpicker').selectpicker();
+
+  
       </script>
       <script type="text/javascript" src="<?=base_url('assets/js/calendar.js')?>"></script>
 
