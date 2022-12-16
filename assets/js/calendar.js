@@ -82,6 +82,7 @@
 
     },
     eventClick: function(info) {
+
      var myModal = new bootstrap.Modal(document.getElementById('mymodal2'));
      var tt = document.getElementById('start_event');
      // var i = document.getElementById('time');
@@ -279,6 +280,7 @@
      var date = new Date(info.event.start),mnth = ("0" + (date.getMonth() + 1)).slice(-2),
     day = ("0" + date.getDate()).slice(-2);
       var dateFormat = [ mnth,day, date.getFullYear()].join("/");
+      $("#start_event_update").datepicker('update', dateFormat);
 
       tt.value = info.event.start_event;
       ad.value = info.event.id;
@@ -298,7 +300,7 @@
       var disableDates = ["01-01","01-02","25-02","09-04","14-04","16-04","01-05","09-05","12-06","29-08","21-08","31-10","01-11","02-11","30-11","08-12","24-12","25-12","30-12","31-12"];
       $('.datepicker').datepicker({
             format: 'mm/dd/yyyy',
-            beforeShowDay: function(date){
+            beforeShowDay: function(date = dateFormat){
                 dmy = date.getDate() + "-" + (date.getMonth() + 1);
                 if(disableDates.indexOf(dmy) != -1 || date.getDay() == 0 || date.getDay() == 6){
                     return false;
