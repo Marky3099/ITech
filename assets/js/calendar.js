@@ -280,7 +280,7 @@
      var date = new Date(info.event.start),mnth = ("0" + (date.getMonth() + 1)).slice(-2),
     day = ("0" + date.getDate()).slice(-2);
       var dateFormat = [ mnth,day, date.getFullYear()].join("/");
-      $("#start_event_update").datepicker('update', dateFormat);
+
 
       tt.value = info.event.start_event;
       ad.value = info.event.id;
@@ -310,6 +310,7 @@
                 }
             }
         });
+      $(".datepicker").datepicker('update', dateFormat);
 // console.log("here"+ dateFormat);
       // console.log("here"+date.getMonth());
 

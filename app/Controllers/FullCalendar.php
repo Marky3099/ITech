@@ -1027,7 +1027,7 @@ public function update(){
         return $this->response->redirect(site_url('/dashboard'));
     }
         // dd($this->request->getVar('emp_id_update'));
-    dd($_POST);
+    // dd($_POST);
 
     $Event = new Event();
     $Client = new Client();
@@ -1037,9 +1037,10 @@ public function update(){
     $client_name = $this->request->getVar('client_id_update');
 
     $client_branch = $Client->where('client_id',$client_name)->first();
-    
+    $start_date = explode('/',$this->request->getVar('start_event_update'));
+
     $event_update = [
-        'start_event' => $this->request->getVar('start_event_update'),
+        'start_event' => $start_date[2].'-'.$start_date[0].'-'.$start_date[1],
         'title' => date("g:ia",strtotime($this->request->getVar('time_update')))." ".$client_branch['client_branch'],
         'time' => $this->request->getVar('time_update'),
             // 'aircon_id' => (int)($this->request->getVar('aircon_id_update')),
