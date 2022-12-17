@@ -1,42 +1,41 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
+<link rel="stylesheet" href="<?= base_url('assets/css/formstyle.css')?>">
 <div class="body-content">
   <div class="edit-form">
     <form method="post" id="update_appoint" name="update_appoint" 
     action="<?=base_url("/appointment/update")?>">
     <input type="hidden" name="appt_id" id="id" value="<?php echo $appt['appt_id']; ?>">
-    <h1>Edit Appointment</h1>
-    <div class="form-content">
+    
+    <div class="form-box">
+      <h3>Edit Appointment</h3>
 
-      <div class="form-group">
+      <div class="user-box">
         <label id="label1">Date</label>
-        <!-- <input type="date" name="appt_date" class="form-control" value="<?php echo $appt['appt_date']; ?>"> -->
-        <input type="text" name="appt_date" id="appt_date" class="form-control datepicker datee" placeholder="mm-dd-yyyy" value="<?php echo $new_date; ?>" autocomplete="off" required>
-      </div>
-      <div class="form-group">
-        <label id="label1">Time</label>
-        <input type="time" name="appt_time" class="form-control" value="<?php echo $appt['appt_time']; ?>">
-      </div>
+        <label class="ttime">Time</label>
+        <input type="text" name="appt_date" id="appt_date" class="datepicker dateee" placeholder="mm-dd-yyyy" value="<?php echo $new_date; ?>" autocomplete="off" required>
+        <input type="time" name="appt_time" class="timee" value="<?php echo $appt['appt_time']; ?>">
+      </div><br><br>
 
-      <div class="form-group">
+      <div class="user-box">
         <label>Branch Area</label>
-        <select id="area_update" name="area_update" class="form-control" >
+        <label class="bname">Branch Name</label>
+        <div class="select-dropdown" style="width: 41%;">
+          <select id="area_update" name="area_update">
           <?php foreach($area as $a):  ?>
             <option value="<?php echo $a['area'];?>"<?php if($a['area'] == $view_appoint['area']) echo 'selected="selected"';?>><?php echo $a['area'];?></option>
           <?php endforeach; ?>
-        </select>
+          </select>
+        </div>
+        <div class="select-dropdown" id="cid">
+            <select id="client_id_update" name="client_id_update"></select>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label>Branch Name</label>
-        <select class="form-control" id="client_id_update" name="client_id_update">
-          
-        </select>
-      </div>
-      <div class="form-group">
+      <div class="user-box">
         <label>Service</label>
-        <select id="serv_id" name="serv_id" class="form-control" required>
-
+        <div class="select-dropdown" style="width: 90%;">
+          <select id="serv_id" name="serv_id" required>
           <?php foreach($servName as $s):  ?>
               <optgroup label="<?= $s['serv_name']; ?>">
                 <?php foreach($servType as $st):  ?>
@@ -47,45 +46,43 @@
               </optgroup>
             <?php endforeach; ?>
         </select>
+        </div>
       </div>
-      <div class="form-group">
+
+      <div class="user-box" style="margin-bottom: -30px">
         <label>Device Brand</label>
-        <select id="device_brand_update" name="device_brand_update" class="form-control">
-         <?php foreach($device_brand as $d_b):  ?>
-          <option value="<?php echo $d_b['device_brand']; ?>"<?php if($d_b['device_brand']==$view_appoint['device_brand'])echo 'selected="selected"';?>><?php echo $d_b['device_brand'];?></option>
-        <?php endforeach; ?>
-      </select>
-    </div>
+        <label class="bname">Aircon Type</label>
+        <div class="select-dropdown" style="width: 40%;">
+        <select id="device_brand_update" name="device_brand_update">
+          <?php foreach($device_brand as $d_b):  ?>
+            <option value="<?php echo $d_b['device_brand']; ?>"<?php if($d_b['device_brand']==$view_appoint['device_brand'])echo 'selected="selected"';?>><?php echo $d_b['device_brand'];?></option>
+          <?php endforeach; ?>
+        </select>
+        </div>
+        <div class="select-dropdown" style="width: 40%;" id="cid">
+          <select id="aircon_id_update" name="aircon_id_update"  required></select>
+        </div>
+      </div>
 
-    <div class="form-group">
-      <label>Aircon Type</label>
-      <select class="form-control" id="aircon_id_update" name="aircon_id_update"  required>
-        
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label>Quantity</label>
-      <input type="number" name="qty" class="form-control" value="<?php echo $appt['qty']; ?>">
-    </div>
-
-    <div class="form-group">
-      <label>FCU Number</label>
-      <select id="fcuno_update" name="fcuno_update[]" class="form-control selectpicker" multiple="multiple" required>
+      <div class="user-box">
+        <input class="number" type="number" name="qty" placeholder="Quantity" value="<?php echo $appt['qty']; ?>">
+        <label class="fcunum">FCU Number</label>
+        <select id="fcuno_update" name="fcuno_update[]" class="selectpicker" multiple="multiple" required>
         <?php foreach($fcu_no as $f):  ?>
           <?php foreach($fcu_views as $fv):  ?>
             <option value="<?php echo $f['fcuno'];?>"<?php if($f['fcuno']==$fv['fcuno'])echo 'selected';?>><p id="s2option"><?php echo $f['fcu'];?></p></option>
           <?php endforeach; ?>
         <?php endforeach; ?>
       </select>
+      </div><br>
+
+      <div class="container1">
+        <button type="submit" class="btn btn-success">Submit</button>
+        <a href="<?= base_url('/appointment');?>" class="back-btn">Back</a>
+      </div>
+
     </div>
 
-    <div class="form-group">
-      <button type="submit" class="btn btn-success">Update</button>
-    </div>
-    <div class="form-group">
-      <a href="<?= base_url('/appointment');?>" class="btn btn-secondary back">Back</a>
-    </div>
   </div>
 </form>
 </div>

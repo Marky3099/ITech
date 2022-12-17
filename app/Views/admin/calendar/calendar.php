@@ -1,4 +1,5 @@
 <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/main.min.css')?>">
+<link rel="stylesheet" href="<?= base_url('assets/css/style.css')?>">
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
@@ -6,24 +7,23 @@
 
 
 <div class="body-content">
-  <div class="col-sm-3">
-    <h2 id="calendar-text"><b>Calendar</b></h2>
+  <div class="col-sm-8">
+    <div class="crud-text"><h3>Calendar</h3></div>
     <div class="tsk">
       <a href="<?= base_url('calendar/events') ?>" class="btn" >Tasks</a><br>
     </div>
-   <!-- <div class="tsk2">
-        
-   </div> -->
- </div>
- <div class="legend col-md-12 col-sm-1">
-  <h3 id="legend-text">Legend:</h3>
-  
-  <ul><b>
-    <?php foreach ($servName as $s): ?>
-      <li style="background-color:<?=$s['serv_color'];?>;"><?=$s['serv_name'];?></li>
-    <?php endforeach ?>
-  </ul>
-</div>
+    <div class="card legend-box">
+    <div class="card-header">Legend</div>
+    <div class="card-body">
+      <ul class="legend-list">
+        <?php foreach ($servName as $s): ?>
+          <li ><i class="fas fa-circle" style="color: <?=$s['serv_color'];?>"></i><?=$s['serv_name'];?></li>
+        <?php endforeach ?>
+      </ul>
+    </div>
+    </div>
+  </div><br> 
+ 
 <div id='calendar' class="col-lg-12 col-md-10" style="width:100%;"></div>
 <div id='datepicker'></div>
 </div>

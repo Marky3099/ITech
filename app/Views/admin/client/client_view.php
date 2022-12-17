@@ -1,5 +1,6 @@
+<link rel="stylesheet" href="<?= base_url('assets/css/formstyle.css')?>">
 <div class="body-content">
-   <div class="crud-text"> <h1>Client</h1></div>
+   <div class="crud-text"> <h3>Client</h3></div>
 
    <div class="d-flex justify-content-left">
     <a href="<?= base_url('client/create/view') ?>" class="btn">Add Client</a>

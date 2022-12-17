@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+<link rel="stylesheet" href="<?= base_url('assets/css/formstyle.css')?>">
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
 <div class="body-content">
   <div class="add-form"> 
@@ -6,37 +7,35 @@
       
       <!--  -->
       
-      <h1>Add Appointment</h1>
-      <div class="form-content">
-        
-        <div class="form-group">
+      
+      <div class="form-box">
+        <h3>Add Appointment</h3>
+        <div class="user-box">
           <label id="label1">Date</label>
-          <!-- <input type="date" name="appt_date" class="form-control" required> -->
-          <input type="text" name="appt_date" id="appt_date" class="form-control datepicker datee" placeholder="mm-dd-yyyy" autocomplete="off" required>
-        </div>
-        <div class="form-group">
-          <label >Time</label>
-          <input type="time" name="appt_time" class="form-control" value="00:00:00" required>
-        </div>
-        <div class="form-group">
+          <label class="ttime">Time</label>
+          <input type="text" name="appt_date" id="appt_date" class="datepicker dateee" placeholder="mm-dd-yyyy" autocomplete="off" required>
+          <input type="time" name="appt_time" class="timee" value="00:00:00" required>
+        </div><br><br>
+
+        <div class="user-box">
           <label>Branch Area</label>
-          <select id="area" name="area" class="form-control">
-            <?php foreach($area as $cl):  ?>
-              <option value=<?php echo $cl['area']; ?>><?php echo $cl['area'];?></option>
-            <?php endforeach; ?>
-          </select>
+          <label class="bname">Branch Name</label>
+          <div class="select-dropdown" style="width: 41%;">
+            <select id="area" name="area">
+              <?php foreach($area as $cl):  ?>
+                <option value=<?php echo $cl['area']; ?>><?php echo $cl['area'];?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+          <div class="select-dropdown" id="cid">
+             <select id="client_id" name="client_id"> </select>
+          </div>
         </div>
 
-        <div class="form-group">
-          <label>Branch Name</label>
-          <select id="client_id" name="client_id" class="form-control" >
-
-          </select>
-        </div>
-        <div class="form-group">
+        <div class="user-box">
           <label>Service</label>
-          <select id="serv_id" name="serv_id" class="form-control" required>
-
+          <div class="select-dropdown" style="width: 90%;">
+            <select id="serv_id" name="serv_id" required>
             <?php foreach($servName as $s):  ?>
               <optgroup label="<?= $s['serv_name']; ?>">
                 <?php foreach($servType as $st):  ?>
@@ -46,45 +45,42 @@
                 <?php endforeach; ?>
               </optgroup>
             <?php endforeach; ?>
-          </select>
+            </select>
+          </div>
         </div>
-        <div class="form-group">
+
+        <div class="user-box" style="margin-bottom: -30px">
           <label>Device Brand</label>
-          <select id="device_brand" name="device_brand" class="form-control">
+          <label class="bname">Aircon Type</label>
+          <div class="select-dropdown" style="width: 40%;">
+            <select id="device_brand" name="device_brand">
             <?php foreach($device_brand as $d_b):  ?>
               <option value=<?php echo $d_b['device_brand']; ?>><?php echo $d_b['device_brand'];?></option>
             <?php endforeach; ?>
           </select>
+          </div>
+           <div class="select-dropdown" style="width: 40%;" id="cid">
+            <select id="aircon_id" name="aircon_id">
+            </select>
+          </div>
         </div>
 
-        <div class="form-group">
-          <label>Aircon Type</label>
-          <select id="aircon_id" name="aircon_id" class="form-control">
-
+        <div class="user-box">
+          <input class="number" type="number" name="qty" placeholder="Quantity" min="1" required></input>
+          <label class="fcunum">FCU Number</label>
+          <select id="fcuno" name="fcuno[]" class="selectpicker" multiple data-selected-text-format="count > 3" required>
+            <?php foreach($fcu_no as $f):  ?>
+              <option value="<?php echo $f['fcuno']; ?>"><p id="s2option"><?php echo $f['fcu'];?></p></option>
+            <?php endforeach; ?>
           </select>
+        </div><br>
+
+        <div class="container1">
+          <button type="submit" class="btn btn-success">Submit</button>
+          <a href="<?= base_url('/appointment');?>" class="back-btn">Back</a>
         </div>
 
-        <div class="form-group">
-          <label>Quantity</label>
-          <input type="number" name="qty" class="form-control" min="1" required>
-        </div>
-
-        <div class="form-group">
-          <label>FCU Number</label>
-          <select id="fcuno" name="fcuno[]" class="form-control selectpicker" multiple="multiple">
-           <?php foreach($fcu_no as $f):  ?>
-            <option value="<?php echo $f['fcuno']; ?>"><p id="s2option"><?php echo $f['fcu'];?></p></option>
-          <?php endforeach; ?>
-        </select>
       </div>
-      
-      <div class="form-group">
-        <button type="submit" class="btn btn-success">Submit</button>
-      </div>
-      <div class="form-group">
-        <a href="<?= base_url('/appointment');?>" class="btn btn-secondary back">Back</a>
-      </div>
-    </div>
   </form>
 </div>
 </div>

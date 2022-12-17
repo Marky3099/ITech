@@ -1,5 +1,6 @@
+<link rel="stylesheet" href="<?= base_url('assets/css/style.css')?>">
 <div class="body-content">
- <div class="crud-text"> <h1>Service Report Uploads</h1></div>
+ <div class="crud-text"> <h3>Service Report Uploads</h3></div>
 
  <div class="d-flex justify-content-left">
   <a href="<?= base_url('service-reports/upload') ?>" class="btn">Upload File</a>

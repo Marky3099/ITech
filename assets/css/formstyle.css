@@ -41,9 +41,10 @@ body {
 
 .form-box{
   position: absolute;
+  margin-top: 20px;
   top: 60%;
   left: 50%;
-  height: 90%;
+  height: auto;
   width: 570px;
   padding: 20px;
   background-color: #fff;
@@ -120,6 +121,48 @@ body {
   left: 200px;
   top: 23px;
 }
+
+.form-box .user-box input.dateee{
+  width: 41%;
+  position: absolute;
+  left: -40px;
+  top: 23px;
+}
+
+.form-box .user-box input.timee{
+  width: 41%;
+  position: absolute;
+  left: 225px;
+  top: 23px;
+  border-radius: 5px;
+}
+
+.form-box .user-box input.timee{
+  width: 41%;
+  position: absolute;
+  left: 225px;
+  top: 23px;
+  border-radius: 5px;
+}
+
+.form-box .user-box input.number{
+  width: 41%;
+  position: absolute;
+  left: 225px;
+  top: 57px;
+  border-radius: 5px;
+}
+
+
+.form-box .user-box #cid{
+  width: 41%;
+  position: absolute;
+  left: 265px;
+  top: 28px;
+  border-radius: 5px;
+}
+
+
 
 .form-box .user-box input.upimg, #user_img{
   padding: 4px 10px 3px;
@@ -236,6 +279,19 @@ body {
   margin-left: 142px;
 }
 
+.form-box label.ttime{
+  margin-top: 5px;
+  margin-left: 225px;
+}
+
+.form-box label.bname{
+  margin-left: 165px;
+}
+
+.form-box label.fcunum{
+  margin-top: -100px;
+}
+
 .form-box label{
   margin-left: 16px;
   margin-top: 5px;
@@ -257,12 +313,16 @@ body {
   border: 5px solid #344F21;
 }
 
+.form-box select #fcuno{
+  top: -100px;
+}
+
 
 .form-box .select-dropdown, .select-dropdown * {
   margin-left: 15px;
   padding: 0;
   position: relative;
-  width: 87%;
+  width: 90%;
   box-sizing: border-box;
   margin-bottom: 2px;
 }

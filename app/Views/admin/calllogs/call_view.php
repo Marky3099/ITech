@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="<?= base_url('assets/css/formstyle.css')?>">
+<link rel="stylesheet" href="<?= base_url('assets/css/style.css')?>">
 <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/select2.css')?>">
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
  
@@ -110,7 +111,7 @@
 
 
 <div class="body-content">
-    <div class="crud-text"><h1>Daily Call Logs</h1></div>
+    <div class="crud-text"><h3>Daily Call Logs</h3></div>
     <div class="d-flex">
         <a href="<?= base_url('calllogs/create/view') ?>" class="btn">Add Log</a>
     </div>

@@ -22,7 +22,7 @@
 
   <!-- Page Heading -->
   <div class="d-sm-flex align-items-center justify-content-between mb-4" style="margin-top: 10px;">
-    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+    <h3 class="hfont">Dashboard</h3>
                         <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                           class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
                         </div>
@@ -440,10 +440,10 @@
           <div class="col mr-2">
             <div class="text-xs font-weight-bold text-uppercase mb-1">
               Daily: <?= date('F j, Y');?></div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">Number of task:&nbsp;<a href="#" data-toggle="modal" data-target="#todayModal" style="color: #4b6043 ;"><?= json_encode($today_event);?></a></div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">Number of task:&nbsp;<a href="#" data-toggle="modal" data-target="#todayModal" id="iconbox"><?= json_encode($today_event);?></a></div>
             </div>
             <div class="col-auto">
-              <i class="fas fa-calendar fa-2x text-gray-300" style="color: #4b6043;"></i>
+              <i class="fas fa-calendar fa-2x text-gray-300" id="iconbox"></i>
             </div>
           </div>
         </div>
@@ -462,10 +462,10 @@
 
                 $sunday = strtotime('+6 days', $monday);
                 echo date('F j', $monday) . " - " . date('F j, Y', $sunday);?></div>
-                <div class="h5 mb-0 font-weight-bold text-gray-800">Number of task: <a href="#" data-toggle="modal" data-target="#weekModal" style="color: #4b6043;"><?= json_encode($weekly_event);?></a></div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">Number of task: <a href="#" data-toggle="modal" data-target="#weekModal" id="iconbox"><?= json_encode($weekly_event);?></a></div>
               </div>
               <div class="col-auto">
-                <i class="fas fa-calendar fa-2x text-gray-300" style="color: #4b6043;"></i>
+                <i class="fas fa-calendar fa-2x text-gray-300" id="iconbox"></i>
               </div>
             </div>
           </div>
@@ -480,10 +480,10 @@
               <div class="col mr-2">
                 <div class="text-xs font-weight-bold text-uppercase mb-1">
                  Monthly: <?= date('F Y');?></div>
-                 <div class="h5 mb-0 font-weight-bold text-gray-800">Number of task:&nbsp;<a href="#" data-toggle="modal" data-target="#monthModal" style="color: #4b6043;"><?= json_encode($monthly_event);?></a></div>
+                 <div class="h5 mb-0 font-weight-bold text-gray-800">Number of task:&nbsp;<a href="#" data-toggle="modal" data-target="#monthModal" id="iconbox"><?= json_encode($monthly_event);?></a></div>
                </div>
                <div class="col-auto">
-                <i class="fas fa-calendar fa-2x text-gray-300" style="color: #4b6043;"></i>
+                <i class="fas fa-calendar fa-2x text-gray-300" id="iconbox"></i>
               </div>
             </div>
           </div>
@@ -502,7 +502,7 @@
               </div>
               <div class="row no-gutters align-items-center">
                 <div class="col-auto">
-                  <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" ><a href="#" data-toggle="modal" data-target="#completeModal" style="color: #4b6043;">
+                  <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" ><a href="#" data-toggle="modal" data-target="#completeModal" id="iconbox">
 
                     <?php if(json_encode($event_total) > 0):?>
                       <?= json_encode($percent);?>%
@@ -522,7 +522,7 @@
               </div>
             </div>
             <div class="col-auto">
-              <i class="fas fa-clipboard-list fa-2x text-gray-300" style="color: #4b6043;"></i>
+              <i class="fas fa-clipboard-list fa-2x text-gray-300" id="iconbox"></i>
             </div>
           </div>
         </div>
@@ -537,10 +537,10 @@
             <div class="col mr-2">
               <div class="text-xs font-weight-bold text-uppercase mb-1">
               Pending Requests</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">Number of task:&nbsp;<a href="#" data-toggle="modal" data-target="#pendingModal" style="color: #4b6043;"><?= json_encode($pending_event);?></a></div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">Number of task:&nbsp;<a href="#" data-toggle="modal" data-target="#pendingModal" id="iconbox"><?= json_encode($pending_event);?></a></div>
             </div>
             <div class="col-auto">
-              <i class="fas fa-comments fa-2x text-gray-300" style="color: #4b6043;"></i>
+              <i class="fas fa-comments fa-2x text-gray-300" id="iconbox"></i>
             </div>
           </div>
         </div>

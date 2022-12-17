@@ -31,7 +31,8 @@
 	visibility: none;
 }
 #table1 th{
-	background-color: #A8D08D;
-	/*color: #fff;*/
+	background-color: #344F21;
+	color: #fff;
+	font-weight: normal;
 }
 

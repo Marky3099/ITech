@@ -1,4 +1,4 @@
-
+<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/dashstyle.css')?>">
 <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/print.css')?>">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
 
@@ -23,7 +23,7 @@
 					<div class="card-header">
 						<h3>Detailed Preventive Maintenance Service Report (Accomplished Tasks)</h3>
 					</div>				
-					<div class="card-body">
+					<div class="card-body py-2">
 						<form action="<?= base_url('/reports/accomplished/filtered');?>" method="GET">
 							
 							<div class="row">
@@ -171,7 +171,7 @@
 							</tbody>
 						</table>
 					<?php else:?>
-						<h1>No Completed Tasks Yet!</h1>
+						<h5>No completed tasks yet.</h5>
 					<?php endif;?>
 				</div>
 			</div>

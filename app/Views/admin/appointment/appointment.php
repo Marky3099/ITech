@@ -96,7 +96,7 @@
 
 
 <div class="body-content">
-   <div class="crud-text"> <h1>Appointment</h1></div>
+   <div class="crud-text"> <h3>Appointment</h3></div>
 
   <!-- <div class="d-flex justify-content-left">
     <a href="<?=base_url("/appointment/create")?>" class="btn">Add Appointment</a>

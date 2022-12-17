@@ -1,5 +1,6 @@
+<link rel="stylesheet" href="<?= base_url('assets/css/formstyle.css')?>">
 <div class="body-content">
-   <div class="crud-text"><h1>Employee</h1></div>
+   <div class="crud-text"><h3>Employee</h3></div>
    <div class="d-flex justify-content-left">
     <a href="<?= base_url('emp/create/view') ?>" class="btn">Add Employee</a>
     <a href="<?= base_url('emp/print') ?>" target="_blank" class="btn">Print</a>

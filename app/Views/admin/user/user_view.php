@@ -1,5 +1,6 @@
+<link rel="stylesheet" href="<?= base_url('assets/css/formstyle.css')?>">
 <div class="body-content">
-  <div class="crud-text"><h1>Users</h1></div>
+  <div class="crud-text"><h3>Users</h3></div>
   <div class="d-flex justify-content-left">
     <a href="<?= base_url('user/create/view') ?>" class="btn">Add User</a>
     <a href="<?= base_url('user/print') ?>" target="_blank" class="btn">Print</a>

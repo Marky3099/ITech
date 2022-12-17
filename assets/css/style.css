@@ -228,11 +228,18 @@ body{
 .body-content .crud-text{
     margin-left: -50px;
 }
-.body-content .crud-text h1 {
-    font-size: 50px;
+
+.body-content .tsk{
+    margin-left: 20px;
+}
+
+.body-content .crud-text h3{
+    margin-top: 10px;
+    margin-bottom: 10px;
     font-weight: bold;
     color: #344F21;
 }
+
  .d-flex{
      margin-left: -50px;
  }

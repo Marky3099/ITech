@@ -23,7 +23,7 @@
 					<div class="card-header">
 						<h3>Detailed Exception Report (Pending Tasks)</h3>
 					</div>				
-					<div class="card-body">
+					<div class="card-body py-2">
 						<form action="<?= base_url('/reports/exception/filtered');?>" method="GET">
 							
 							<div class="row">
@@ -169,7 +169,7 @@
 							</tbody>
 						</table>
 					<?php else:?>
-						<h1>No Pending Tasks Yet!</h1>
+						<h5>No pending tasks yet.</h5>
 					<?php endif;?>
 				</div>
 			</div>

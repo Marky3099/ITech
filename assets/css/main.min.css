@@ -5,38 +5,54 @@
 	font-size: 30px;
 	color: #344F21;
 	font-family: Arial, sans-serif;
-
 }
 
-#legend-text{
-	float: left;
-	margin-left: 12rem;
-	font-size: 20px;
-	font-weight: bold;
-	color: #344F21;
-}
-.body-content .legend{
-	z-index: -1;
-	display: inline-block;
-	margin: -50px 0 10px -70px;
-	justify-content: center;
-
-}
-.body-content .legend ul {
-  list-style-type:none; 
- /* margin: -150px 0 20px 100px;*/
-  font-size: 20px;
+.legend-box{
+	display: flex;
+    flex-wrap: nowrap;
+    width: 267px;
+    left: 115%;
+    margin-top: -70px;
+    height: 130px;
+    overflow-y: auto; 
+    overflow-x: hidden;
+    font-size: 12px;
 }
 
-.body-content .legend ul li {
-	width: auto; 
-	margin-left: 5px; 
-	padding: 5px; 
-	white-space: nowrap; 
-	text-align: center; 
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: whitesmoke;
+}
+
+::-webkit-scrollbar-thumb {
+  background: whitesmoke;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #344F21;
+}
+
+.legend-box .card-body{
+	border: none;
+	width: 267px;
+	padding: .5rem;
+}
+
+.legend-box .card-body ul{
+	list-style-type: none;
+}
+
+.legend-box .card-body ul li i{
+	margin-right: 10px;
+}
+
+.legend-box .card-header{
+	background-color: #344F21;
 	color: #fff;
-	margin-top: -10px;
-  float: left;
+	padding: .5rem;
 }
 
 .tsk .btn{
