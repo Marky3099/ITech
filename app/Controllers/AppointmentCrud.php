@@ -16,6 +16,7 @@ class AppointmentCrud extends Controller
 {
 
     public function index(){
+        // dd("hello");
         $Client = new Client();
         $Aircon = new Aircon();
         $fcu_no = new Fcu_no();
@@ -29,7 +30,7 @@ class AppointmentCrud extends Controller
         $data['view_appoint'] =[];
         $data['fcu_no'] = $fcu_no->orderBy('fcuno', 'ASC')->findAll();
         $data['fcu_appt'] = $Appt_fcu_views->orderBy('appt_id', 'ASC')->findAll();
-        $data['appoint'] = $Appoint->where('bdo_id',$session_id)->findAll();
+        $data['appoint'] = $Appoint->where('user_id',$session_id)->findAll();
         $data['client'] = $Client->orderBy('client_id', 'ASC')->findAll();
         $data['area'] = $Client->select('area')->groupBy('area')->findAll();
         $data['aircon'] = $Aircon->orderBy('aircon_id', 'ASC')->findAll();
@@ -244,7 +245,7 @@ public function store() {
     // dd($this->request->getVar('bdo_id'));
     $appoint_create = [
         'appt_date' =>$start_date[2].'-'.$start_date[0].'-'.$start_date[1],
-        'bdo_id' => $this->request->getVar('bdo_id'),
+        // 'bdo_id' => $this->request->getVar('bdo_id'),
         'appt_time' => $this->request->getVar('appt_time'),
         'area' => $this->request->getVar('area'),
         'serv_id' => $this->request->getVar('serv_id'),
@@ -349,11 +350,10 @@ public function update(){
     $Aircon = new Aircon();
 
     $appt_id = $this->request->getVar('appt_id');
+    $start_date = explode('/',$this->request->getVar('appt_date'));
 
-        // $data['aircon'] = $Aircon->orderBy('aircon_id', 'ASC')->findAll();
-        // $data['device_brand'] = $Aircon->select('device_brand')->groupBy('device_brand')->findAll();
     $data = [
-        'appt_date' => $this->request->getVar('appt_date'),
+        'appt_date' => $start_date[2].'-'.$start_date[0].'-'.$start_date[1],
         'appt_time' => $this->request->getVar('appt_time'),
         'area' => $this->request->getVar('area'),
         'serv_id'=> $this->request->getVar('serv_id'),

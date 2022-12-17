@@ -242,7 +242,7 @@ public function checkClient()
         $user = new User_bdo();
         $email = $this->request->getPost('email');
         $password = $this->request->getPost('password');
-
+        // dd($user_info['bdo_id']);
         $user_info = $user->where('bdo_email', $email)->first();
             // dd($user_info);
             // if($user_info['position'] === "Admin"){

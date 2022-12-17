@@ -8,7 +8,7 @@
       
       <h1>Add Appointment</h1>
       <div class="form-content">
-        <input type="hidden" name="bdo_id" value="<?=$_SESSION['user_id']?>">
+        
         <div class="form-group">
           <label id="label1">Date</label>
           <!-- <input type="date" name="appt_date" class="form-control" required> -->

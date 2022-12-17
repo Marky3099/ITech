@@ -968,7 +968,7 @@ public function insertAppt(){
             $event_code = ['event_code' => 'task-'.$code.'-'.(int)$success];
             $Event->update((int)$success,$event_code);
 
-            $update_set = ['set_status' => 1];
+            $update_set = ['set_status' => 1, 'appt_status' => 'Approved'];
             $Appoint->update((int)$_POST['appt_id'],$update_set);
         }
 
@@ -1099,12 +1099,12 @@ public function delete($id){
     $log_code = $event_data['log_code'];
     $appt_data = $Appoint->where('appt_code',$appt_code)->first();
     $cl_data = $Call_logs->where('log_code',$log_code)->first();
-    
+    // dd($appt_data);
     
     if($appt_code){
-        $update_status = ['set_status' => 0];
+        $update_status = ['set_status' => 0, 'appt_status' => 'pending'];
         $Appoint->update($appt_data['appt_id'],$update_status);
-        // dd();
+        // dd($appt_data);
     }
     if($log_code){
         $update_status = ['set_status' => 0];
