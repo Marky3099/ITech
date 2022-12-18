@@ -94,18 +94,22 @@ class ClientCrud extends Controller
         $session = session();
         $cBranch = $Client->where('client_branch', $this->request->getVar('client_branch'))->first();
         $cEmail = $Client->where('client_email', $this->request->getVar('client_email'))->first();
+// dd($cEmail['client_email']);
         if ($cBranch) {
             $session->setFlashdata('branchError', 'value');
             // return $this->response->redirect(site_url('/client/create/view'));
             $data['main'] = 'admin/client/client_add';
             $data['error'] = '';
             return view("templates/template",$data);
-        }else if ($cEmail){
-            $session->setFlashdata('emailExist', 'value');
-            // return $this->response->redirect(site_url('/client/create/view'));
-            $data['main'] = 'admin/client/client_add';
-            $data['error'] = '';
-            return view("templates/template",$data);
+        }else if($cEmail){ 
+            if ($cEmail['client_email'] != ""){
+            
+                $session->setFlashdata('emailExist', 'value');
+                // return $this->response->redirect(site_url('/client/create/view'));
+                $data['main'] = 'admin/client/client_add';
+                $data['error'] = '';
+                return view("templates/template",$data);
+            }
         }
         $set = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $code = substr(str_shuffle($set), 0, 12);

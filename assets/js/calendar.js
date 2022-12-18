@@ -10,7 +10,7 @@
     initialView: 'dayGridMonth',
     handleWindowResize: false,
     selectable: true,
-    weekends: false,
+    // weekends: false,
     // selectAllow: function (select) {
     //                 return JudgeWeekDay(select.start, [1,2,3,4,5]);
     //             },
