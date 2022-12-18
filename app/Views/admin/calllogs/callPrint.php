@@ -153,6 +153,7 @@ if($view_calllogs){
     <thead>
     <tr style = "background-color: #A8D08D; text-align: center; font-size:11px;">
     <th>Date</th>
+    <th>Log Code</th>
     <th>Branch Area</th>
     <th>Branch Name</th>
     <th>Caller</th> 
@@ -171,6 +172,7 @@ if($view_calllogs){
      
      $html .=' <tr style="font-size:9px; text-align: center;">
      <td>'.date('m-d-Y',strtotime($call_log->date)).'</td>
+     <td>'.$call_log->log_code.'</td>
      <td>'.$call_log->area.'</td>
      <td>'.$call_log->client_branch.'</td>
      <td>'.$call_log->caller.'</td>
