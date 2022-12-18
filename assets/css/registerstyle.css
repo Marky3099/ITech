@@ -13,9 +13,10 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  height: 95%;
+  margin: 30px 0 50px;
+  height: 98%;
   width: 570px;
-  padding: 20px;
+  padding: 30px;
   background-color: #fff;
   opacity: 0.8;
   transform: translate(-50%, -50%);
@@ -46,6 +47,7 @@ body {
 
 .register-box p{
   margin: 0px;
+  margin-right: 10px;
   font-size: 13px;
   color: #344F21;
 }
@@ -64,7 +66,7 @@ body {
   cursor: pointer;
 }
 
-.register-box .user-box input {
+.register-box .user-box input{
   padding: 0.45rem;
   font-size: 16px;
   color: #344F21;
@@ -80,7 +82,7 @@ body {
 }
 
 .register-box .user-box input.cname, .register-box .user-box input.address, .register-box .user-box input.unqcode, .register-box .user-box input.password, .register-box .user-box input.cpassword{
-  width: 90%;
+  width: 88%;
 }
 
 .register-box .user-box .icon-box{
@@ -170,7 +172,7 @@ input:-webkit-autofill{
 
 .register-box a.back-btn{
   position: relative;
-  top: -60px;
+  top: -40px;
   left: 10px;
   font-size: 15px;
   border: none;
@@ -189,22 +191,24 @@ input:-webkit-autofill{
               0 0 25px #344F21,
 }
 .register-box .err-msg{
-  background-color: red;
   margin-top: -1rem;
   margin-bottom: -1rem;
 }
 .register-box .err-msg h4{
   font-size: 1rem;
-  color: #fff;
+  background-color: white;
+  color: red;
+  font-style: italic;
 }
 .register-box .suc-msg{
-  background-color: green;
+  background-color: white;
   margin-top: -1rem;
   margin-bottom: -1rem;
 }
 .register-box .suc-msg h4{
   font-size: 1rem;
-  color: #fff;
+  color: green;
+  font-style: italic;
 }
 #togglePassword{
   z-index: 10;

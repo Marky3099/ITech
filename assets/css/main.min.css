@@ -9,14 +9,19 @@
 
 .legend-box{
 	display: flex;
-    flex-wrap: nowrap;
-    width: 267px;
-    left: 115%;
-    margin-top: -70px;
-    height: 130px;
-    overflow-y: auto; 
-    overflow-x: hidden;
-    font-size: 12px;
+  flex-wrap: nowrap;
+  width: 267px;
+  left: 115%;
+  margin-top: -70px;
+  height: 130px;
+  overflow-y: auto; 
+  overflow-x: hidden;
+  font-size: 12px;
+}
+
+#cal1{
+	left: 75%;
+	margin-top: -40px;
 }
 
 ::-webkit-scrollbar {
@@ -192,6 +197,7 @@ tbody{
 .modal-title{
 	font-size: 20px;
 	font-weight: bold;
+	color: #344f21;
 }
 #mymodal2 #dialog2{
   max-width: 700px;

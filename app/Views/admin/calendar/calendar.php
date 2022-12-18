@@ -1,5 +1,6 @@
 <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/main.min.css')?>">
 <link rel="stylesheet" href="<?= base_url('assets/css/style.css')?>">
+
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
@@ -60,7 +61,7 @@
             </select>
           </div>
         </div>
-        <h3>Client Details:</h3>
+        <div class="crud-text"><h4>Client Details:</h4></div>
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="area">Branch Area</label><br>

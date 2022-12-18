@@ -229,6 +229,7 @@ body{
     margin-left: -50px;
 }
 
+
 .body-content .tsk{
     margin-left: 20px;
 }
@@ -238,6 +239,10 @@ body{
     margin-bottom: 10px;
     font-weight: bold;
     color: #344F21;
+}
+
+.body-content .crud-text h3.headerfont{
+    margin-left: 70px;
 }
 
  .d-flex{

@@ -1,5 +1,6 @@
+<link rel="stylesheet" href="<?= base_url('assets/css/style.css')?>">
 <div class="body-content">
-	<div class="crud-text"> <h1>Schedule Appointment</h1></div>
+	<div class="crud-text"> <h3>Schedule Appointment</h3></div>
 
   <div class="d-flex justify-content-left">
     <a href="<?=base_url("/appointment/create")?>" class="btn">Add Appointment</a>
@@ -49,7 +50,7 @@
            <td>
             <?php if($appt->set_status ==0):?>
              <a href="<?php echo base_url('/appointment/'.$appt->appt_id);?>" class="btn btn-primary btn-sm">Edit</a>
-             <a href="<?php echo base_url('/appointment/delete/'.$appt->appt_id);?>"class="btn btn-danger btn-sm del">Delete</a>
+             <a href="<?php echo base_url('/appointment/delete/'.$appt->appt_id);?>"class="btn btn-danger btn-sm del">Cancel</a>
           <?php elseif($appt->set_status ==1):?>
             <h6 style="color:green;"><b>Scheduled</h6>
           <?php else:?>

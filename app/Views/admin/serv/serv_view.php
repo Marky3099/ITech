@@ -1,5 +1,6 @@
+<link rel="stylesheet" href="<?= base_url('assets/css/style.css')?>">
 <div class="body-content">
-  <div class="crud-text"><h1>Services</h1></div>
+  <div class="crud-text"><h3>Services</h3></div>
   <div class="d-flex">
     <a href="<?= base_url('serv/create/view') ?>" class="btn">Add Service</a>
     <a href="<?= base_url('serv/print') ?>" target="_blank" class="btn">Print</a>

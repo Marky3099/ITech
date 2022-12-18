@@ -3,7 +3,7 @@
  <form method="post" id="update_user" name="update_user" action="<?= base_url('/serv/update') ?>">
   <input type="hidden" name="serv_id" id="id" value="<?php echo $Serv_obj['serv_id']; ?>">
   
-  <div class="form-box" style="height: 65%; top: 50%;">
+  <div class="mb-5 form-box">
     <h3>Edit Service</h3><br>
     <div class="user-box">
      <div class="icon-box"><i class="fas fa-wrench"></i></div>

@@ -5,22 +5,20 @@
 
 
 <div class="body-content">
-  <div class="col-sm-3">
-    <h2 id="calendar-text"><b>Calendar</b></h2>
-    
-   <!-- <div class="tsk2">
-        
-   </div> -->
+  <div class="col-sm-8">
+    <div class="crud-text"><h3>Calendar</h3></div>
  </div>
- <div class="legend col-md-12 col-sm-1">
-  <h3 id="legend-text">Legend:</h3>
-  
-  <ul><b>
-    <?php foreach ($servName as $s): ?>
-      <li style="background-color:<?=$s['serv_color'];?>;"><?=$s['serv_name'];?></li>
-    <?php endforeach ?>
-  </ul>
-</div>
+<div class="card legend-box" id="cal1">
+    <div class="card-header">Legend</div>
+    <div class="card-body">
+      <ul class="legend-list">
+        <?php foreach ($servName as $s): ?>
+          <li ><i class="fas fa-circle" style="color: <?=$s['serv_color'];?>"></i><?=$s['serv_name'];?></li>
+        <?php endforeach ?>
+      </ul>
+    </div>
+    </div>
+
 <div id='calendar' class="col-lg-12 col-md-10" style="width:100%;"></div>
 <div id='datepicker'></div>
 </div>

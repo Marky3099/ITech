@@ -29,3 +29,7 @@ h3.hfont{
 	color: #344F21;
 	font-weight: bold;
 }
+
+table thead{
+	background-color: #344F21;;
+}

@@ -1,4 +1,4 @@
-
+<link rel="stylesheet" href="<?= base_url('assets/css/style.css')?>">
 <!-- <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -86,7 +86,7 @@
 <div class="body-content">
    <div class="event-header">
       
-     <h1><b>Scheduled Tasks</b></h1>
+     <div class="crud-text"><h3 class="headerfont">Scheduled Tasks</h3></div>
 
      <div class="tsk">
         <a href="<?= base_url('/calendar') ?>" class="btn" >Calendar</a>

@@ -1,10 +1,11 @@
+<link rel="stylesheet" href="<?= base_url('assets/css/style.css')?>">
 <div class="body-content">
    <div class="event-header">
-     <h1 id="mod"><b>Weekly Scheduled Tasks - <?php 
+     <h3 id="mod" class="mt-2 headerfont"><b>Weekly Scheduled Tasks - <?php 
      $monday = strtotime('last monday', strtotime('tomorrow'));
 
      $sunday = strtotime('+6 days', $monday);
-     echo date('M j', $monday) . " to " . date('M j, Y', $sunday);?></b></h1>
+     echo date('M j', $monday) . " to " . date('M j, Y', $sunday);?></b></h3>
      
      <div class="d-flex justify-content-left" style="margin-left:20px;">
        <a href="<?= base_url('/calendar');?>" class="btn">Calendar</a>

@@ -33,6 +33,7 @@
        </div>
      <?php endif;?>
      <h2 class="text-center">Reset Password</h2>
+
      
      <div class="panel-body">
       

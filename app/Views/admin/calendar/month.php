@@ -1,6 +1,7 @@
+<link rel="stylesheet" href="<?= base_url('assets/css/style.css')?>">
 <div class="body-content">
    <div class="event-header">
-     <h1 id="mod"><b>Monthly Scheduled Tasks - <?= date('F Y');?></b></h1>
+     <h3 id="mod" class="mt-2 headerfont"><b>Monthly Scheduled Tasks - <?= date('F Y');?></b></h3>
      
      <div class="d-flex justify-content-left" style="margin-left:20px;">
        <a href="<?= base_url('/calendar');?>" class="btn">Calendar</a>
