@@ -98,6 +98,8 @@ public function getfilter(){
     $Aircon = new Aircon();
     $fcu_no = new Fcu_no();
     $Call_fcu = new Call_fcu_views();
+    $Emp = new Emp();
+    $serv = new Serv();
 
     $data['view_calllogs'] = [];
     $data['client'] = $Client->orderBy('client_id', 'ASC')->findAll();
@@ -105,8 +107,14 @@ public function getfilter(){
     $data['call_logs'] = $Call_logs->orderBy('cl_id', 'ASC')->findAll();
     $data['fcu_no'] = $fcu_no->orderBy('fcuno', 'ASC')->findAll();
     $data['call_fcu'] = $Call_fcu->orderBy('cl_id', 'ASC')->findAll();
+    $data['emp'] = $Emp->orderBy('emp_id', 'ASC')->findAll();
+    $data['serv'] = $serv->orderBy('serv_id', 'ASC')->findAll();
+    $data['servName'] = $serv->select('serv_name, serv_color, serv_type')->groupBy('serv_name')->findAll();
+    $data['servType'] = $serv->orderBy('serv_name','ASC')->findAll();
     $data['aircon'] = $Aircon->orderBy('aircon_id', 'ASC')->findAll();
     $data['device_brand'] = $Aircon->select('device_brand')->groupBy('device_brand')->findAll();
+
+
     $date = new \DateTime();
     $date->setTimezone(new \DateTimeZone('+0800'));
     
@@ -127,6 +135,7 @@ public function getfilter(){
          $data['view_calllogs'][]= (object)[
             "cl_id"=> $value['cl_id'],
             "date"=> $value['date'],
+            "log_code"=> $value['log_code'],
             "client_id"=> $value['client_id'],
             "area"=> $value['area'],
             "client_branch"=> $value['client_branch'],
@@ -137,6 +146,7 @@ public function getfilter(){
             "particulars"=> $value['particulars'],
             "qty"=> $value['qty'],
             "status"=> $value['status'],
+            "set_status"=> $value['set_status'],
             "fcu_arr"=> $fcu_arr,
         ];
     }
@@ -181,6 +191,7 @@ public function printpdf($strt,$end){
      }    
      $data['view_calllogs'][]= (object)[
         "cl_id"=> $value['cl_id'],
+        "log_code"=> $value['log_code'],
         "date"=> $value['date'],
         "client_id"=> $value['client_id'],
         "area"=> $value['area'],

@@ -1,5 +1,5 @@
-CRITICAL - 2022-12-18 03:25:32 --> Undefined variable $servName
-#0 C:\xampp\htdocs\tsms\app\Views\admin\calllogs\call_view.php(53): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined varia...', 'C:\\xampp\\htdocs...', 53)
+CRITICAL - 2022-12-18 03:28:24 --> Undefined variable: servName
+#0 C:\xampp\htdocs\tsms\app\Views\admin\calllogs\call_view.php(53): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 53, Array)
 #1 C:\xampp\htdocs\tsms\system\View\View.php(214): include('C:\\xampp\\htdocs...')
 #2 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
 #3 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('admin/calllogs/...', Array, true)
@@ -13,8 +13,8 @@ CRITICAL - 2022-12-18 03:25:32 --> Undefined variable $servName
 #11 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #12 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
 #13 {main}
-CRITICAL - 2022-12-18 03:28:32 --> Undefined variable $servName
-#0 C:\xampp\htdocs\tsms\app\Views\admin\calllogs\call_view.php(53): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined varia...', 'C:\\xampp\\htdocs...', 53)
+CRITICAL - 2022-12-18 03:35:30 --> Undefined variable: servName
+#0 C:\xampp\htdocs\tsms\app\Views\admin\calllogs\call_view.php(53): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 53, Array)
 #1 C:\xampp\htdocs\tsms\system\View\View.php(214): include('C:\\xampp\\htdocs...')
 #2 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
 #3 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('admin/calllogs/...', Array, true)
@@ -28,3 +28,76 @@ CRITICAL - 2022-12-18 03:28:32 --> Undefined variable $servName
 #11 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #12 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
 #13 {main}
+CRITICAL - 2022-12-18 03:36:11 --> Undefined variable: serv
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(107): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 107, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->getfilter()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-12-18 03:36:25 --> Undefined variable: emp
+#0 C:\xampp\htdocs\tsms\app\Views\admin\calllogs\call_view.php(94): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 94, Array)
+#1 C:\xampp\htdocs\tsms\system\View\View.php(214): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('admin/calllogs/...', Array, true)
+#4 C:\xampp\htdocs\tsms\app\Views\templates\template.php(3): view('admin/calllogs/...')
+#5 C:\xampp\htdocs\tsms\system\View\View.php(214): include('C:\\xampp\\htdocs...')
+#6 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#7 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('templates/templ...', Array, true)
+#8 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(150): view('templates/templ...', Array)
+#9 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->getfilter()
+#10 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#11 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#13 {main}
+CRITICAL - 2022-12-18 03:36:48 --> syntax error, unexpected '$data' (T_VARIABLE), expecting function (T_FUNCTION) or const (T_CONST)
+#0 C:\xampp\htdocs\tsms\system\Autoloader\Autoloader.php(241): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\xampp\\htdocs...')
+#1 C:\xampp\htdocs\tsms\system\Autoloader\Autoloader.php(219): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers...')
+#2 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers...')
+#3 [internal function]: spl_autoload_call('App\\Controllers...')
+#4 C:\xampp\htdocs\tsms\system\CodeIgniter.php(789): class_exists('\\App\\Controller...', true)
+#5 C:\xampp\htdocs\tsms\system\CodeIgniter.php(397): CodeIgniter\CodeIgniter->startController()
+#6 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2022-12-18 03:38:09 --> Undefined property: stdClass::$log_code
+#0 C:\xampp\htdocs\tsms\app\Views\admin\calllogs\call_view.php(173): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined prope...', 'C:\\xampp\\htdocs...', 173, Array)
+#1 C:\xampp\htdocs\tsms\system\View\View.php(214): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('admin/calllogs/...', Array, true)
+#4 C:\xampp\htdocs\tsms\app\Views\templates\template.php(3): view('admin/calllogs/...')
+#5 C:\xampp\htdocs\tsms\system\View\View.php(214): include('C:\\xampp\\htdocs...')
+#6 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#7 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('templates/templ...', Array, true)
+#8 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(155): view('templates/templ...', Array)
+#9 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->getfilter()
+#10 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#11 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#13 {main}
+CRITICAL - 2022-12-18 03:38:25 --> Undefined property: stdClass::$set_status
+#0 C:\xampp\htdocs\tsms\app\Views\admin\calllogs\call_view.php(195): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined prope...', 'C:\\xampp\\htdocs...', 195, Array)
+#1 C:\xampp\htdocs\tsms\system\View\View.php(214): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('admin/calllogs/...', Array, true)
+#4 C:\xampp\htdocs\tsms\app\Views\templates\template.php(3): view('admin/calllogs/...')
+#5 C:\xampp\htdocs\tsms\system\View\View.php(214): include('C:\\xampp\\htdocs...')
+#6 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#7 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('templates/templ...', Array, true)
+#8 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(156): view('templates/templ...', Array)
+#9 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->getfilter()
+#10 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#11 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#13 {main}
+CRITICAL - 2022-12-18 03:40:43 --> Undefined property: stdClass::$log_code
+#0 C:\xampp\htdocs\tsms\app\Views\admin\calllogs\callPrint.php(175): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined prope...', 'C:\\xampp\\htdocs...', 175, Array)
+#1 C:\xampp\htdocs\tsms\system\View\View.php(214): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('admin/calllogs/...', Array, true)
+#4 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(211): view('admin/calllogs/...', Array)
+#5 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->printpdf('2022-12-01', '2022-12-31')
+#6 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#7 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
