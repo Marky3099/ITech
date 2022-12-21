@@ -202,6 +202,7 @@
       
     $('.datepicker').datepicker({
         format: 'mm/dd/yyyy',
+        startDate: new Date(),
         beforeShowDay: function(date){
             dmy = date.getDate() + "-" + (date.getMonth() + 1);
             if(disableDates.indexOf(dmy) != -1 || date.getDay() == 0 || date.getDay() == 6){

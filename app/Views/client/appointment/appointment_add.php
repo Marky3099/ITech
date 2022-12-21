@@ -149,6 +149,7 @@ var disableDates = ["1-1","1-2","25-2","9-4","14-4","16-4","1-5","9-5","12-6","2
       
     $('.datepicker').datepicker({
         format: 'mm/dd/yyyy',
+        startDate: new Date(),
         beforeShowDay: function(date){
             dmy = date.getDate() + "-" + (date.getMonth() + 1);
             if(disableDates.indexOf(dmy) != -1 || date.getDay() == 0 || date.getDay() == 6){

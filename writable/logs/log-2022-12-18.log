@@ -101,3 +101,10 @@ CRITICAL - 2022-12-18 03:40:43 --> Undefined property: stdClass::$log_code
 #7 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #8 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
 #9 {main}
+CRITICAL - 2022-12-18 04:18:50 --> Undefined variable: data
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(470): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 470, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->cancel()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}

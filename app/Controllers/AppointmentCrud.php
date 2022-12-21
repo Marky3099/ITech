@@ -105,7 +105,7 @@ public function adminAppointment(){
         $data['view_appoint'] =[];
         $data['fcu_no'] = $fcu_no->orderBy('fcuno', 'ASC')->findAll();
         $data['fcu_appt'] = $Appt_fcu_views->orderBy('appt_id', 'ASC')->findAll();
-        $data['appoint'] = $Appoint->orderBy('appt_id', 'ASC')->findAll();
+        $data['appoint'] = $Appoint->orderBy('appt_id', 'DESC')->findAll();
         $data['client'] = $Client->orderBy('client_id', 'ASC')->findAll();
         $data['area'] = $Client->select('area')->groupBy('area')->findAll();
         $data['aircon'] = $Aircon->orderBy('aircon_id', 'ASC')->findAll();

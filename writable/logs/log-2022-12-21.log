@@ -1,0 +1,14 @@
+CRITICAL - 2022-12-21 00:44:47 --> Undefined variable: to
+#0 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(386): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 386, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->fpass_send_client()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-12-21 00:45:07 --> Undefined variable: bdo_info
+#0 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(390): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 390, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->fpass_send_client()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}

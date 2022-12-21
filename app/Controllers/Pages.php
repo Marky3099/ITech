@@ -292,30 +292,38 @@ public function registerBdo(){
     $Client = new Client();
 
     $client = $Client->orderBy('client_id', 'ASC')->findAll();
+    $pattern = '/^(?=.*[!@#$%^&*-])(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z]).{8,20}$/';
+    // dd(preg_match($pattern, $this->request->getVar('password'))." ".$this->request->getVar('password'));
     $code = $Client->where('code', $this->request->getVar('code'))->first();
     $uniqueCode = $userBdo->where('bdo_unique_code',$this->request->getVar('code'))->findAll();
     // dd($uniqueCode);
     if($code){
         if(!$uniqueCode>0){
-            if($this->request->getVar('password') == $this->request->getVar('c_password')){
-                $userBdo_create = [
-                    'bdo_fname' => $this->request->getVar('fname'),
-                    'bdo_lname' => $this->request->getVar('lname'),
-                    'bdo_email'  => $this->request->getVar('email'),
-                    'bdo_address' => $this->request->getVar('address'),
-                    'bdo_contact'  => $this->request->getVar('contact'),
-                    'bdo_company' => $this->request->getVar('company'),
-                    'bdo_unique_code' => $this->request->getVar('code'),
-                    'bdo_password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
-                    'client_id' => $code['client_id'],
-                    
-                ];
+            if(preg_match($pattern, $this->request->getVar('password')))
+            {
+                if($this->request->getVar('password') == $this->request->getVar('c_password')){
+                    $userBdo_create = [
+                        'bdo_fname' => $this->request->getVar('fname'),
+                        'bdo_lname' => $this->request->getVar('lname'),
+                        'bdo_email'  => $this->request->getVar('email'),
+                        'bdo_address' => $this->request->getVar('address'),
+                        'bdo_contact'  => $this->request->getVar('contact'),
+                        'bdo_company' => $this->request->getVar('company'),
+                        'bdo_unique_code' => $this->request->getVar('code'),
+                        'bdo_password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
+                        'client_id' => $code['client_id'],
+                        
+                    ];
+                }else{
+                    $data['error'] = 'Password didn\'t match, Please try again';
+                    return view("pages/bdo_register",$data);
+                }
+                if($userBdo->insert($userBdo_create)){
+                    $data['success'] = 'Sign up successful. Please wait for your account to be activated.';
+                    return view("pages/bdo_register",$data);
+                }
             }else{
-                $data['error'] = 'Password didn\'t match, Please try again';
-                return view("pages/bdo_register",$data);
-            }
-            if($userBdo->insert($userBdo_create)){
-                $data['success'] = 'Sign up successful. Please wait for your account to be activated.';
+                $data['error_pass'] = 'Password must have atleast 1 Uppercase, 1 lowercase, 1 number and 1 special character';
                 return view("pages/bdo_register",$data);
             }
         }else{
@@ -332,13 +340,17 @@ public function fpass(){
 
     return view('pages/forgot_pass');
 }
+public function fpass_client(){
+
+    return view('pages/forgot_pass_client');
+}
 public function fpass_send(){
     $User = new User();
-    $User_bdo = new User_bdo();
+    // $User_bdo = new User_bdo();
     $to = $this->request->getVar('email');
     // $Bdo_obj = $User_bdo->where('bdo_email', $to)->first();
     $user_info= $User->where('email',$to)->findAll();
-    $bdo_info= $User_bdo->where('bdo_email',$to)->findAll();
+    // $bdo_info= $User_bdo->where('bdo_email',$to)->findAll();
     // dd($bdo_info);
     if($user_info){
 
@@ -366,7 +378,16 @@ public function fpass_send(){
             print_r($data);
         }
         session()->setFlashdata('message', 'Email Sent');
-    }else if($bdo_info){
+    }
+    return $this->response->redirect(site_url('/forgot-password'));
+}
+public function fpass_send_client(){
+    $User_bdo = new User_bdo();
+    $to = $this->request->getVar('email');
+    $bdo_info= $User_bdo->where('bdo_email',$to)->findAll();
+
+
+    if($bdo_info){
 
         $subject = "TSMS - Reset Password";
         $message = "<html>
@@ -395,7 +416,7 @@ public function fpass_send(){
     }else{
         session()->setFlashdata('error', 'Error! Email is not registered');
     }
-    return $this->response->redirect(site_url('/forgot-password'));
+    return $this->response->redirect(site_url('/forgot-password-client'));
 }
 
 public function change_pass_form($email){
@@ -420,23 +441,30 @@ public function change_pass($email){
     $data['user_obj'] = $User->where('email', $email)->first();
     $User_obj = $User->where('email', $email)->first();
     $Bdo_obj = $User_bdo->where('bdo_email', $email)->first();
+    $pattern = '/^(?=.*[!@#$%^&*-])(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z]).{8,20}$/';
     // dd($Bdo_obj);
     if($User_obj){
         $pass = $this->request->getVar('password');
         $c_pass =  $this->request->getVar('c_password');
         $id = $User_obj['user_id'];
-        if($this->request->getVar('password') == $this->request->getVar('c_password')){
+        
+        if(preg_match($pattern, $this->request->getVar('password'))){
+            if($this->request->getVar('password') == $this->request->getVar('c_password')){
 
                 //update user active status
             $data['password'] = password_hash($this->request->getVar('password'), PASSWORD_DEFAULT);
-            
-            
-        }
-        else{
 
-            session()->setFlashdata('error', 'Password didn\'t match');
+            }
+            else{
+
+                session()->setFlashdata('error', 'Password didn\'t match');
+                return $this->response->redirect(site_url('/forgot-password/'.$email));
+            }
+        }else{
+            session()->setFlashdata('error', 'Password must have atleast 1 Uppercase, 1 lowercase, 1 number and 1 special character');
             return $this->response->redirect(site_url('/forgot-password/'.$email));
         }
+        
         if($User->update($id, $data)){
            session()->setFlashdata('message','Changed Password Successfully!');
        }
@@ -444,18 +472,22 @@ public function change_pass($email){
         $pass = $this->request->getVar('password');
         $c_pass =  $this->request->getVar('c_password');
         $id = $Bdo_obj['bdo_id'];
-        if($this->request->getVar('password') == $this->request->getVar('c_password')){
+        if(preg_match($pattern, $this->request->getVar('password'))){
+            if($this->request->getVar('password') == $this->request->getVar('c_password')){
 
                 //update user active status
             $data['bdo_password'] = password_hash($this->request->getVar('password'), PASSWORD_DEFAULT);
-            
-            
-        }
-        else{
+            }
+            else{
 
-            session()->setFlashdata('error', 'Password didn\'t match');
+                session()->setFlashdata('error', 'Password didn\'t match');
+                return $this->response->redirect(site_url('/forgot-password-client/'.$email));
+            }
+        }else{
+            session()->setFlashdata('error', 'Password must have atleast 1 Uppercase, 1 lowercase, 1 number and 1 special character');
             return $this->response->redirect(site_url('/forgot-password-client/'.$email));
         }
+        
         if($User_bdo->update($id, $data)){
            session()->setFlashdata('message','Changed Password Successfully!');
        }

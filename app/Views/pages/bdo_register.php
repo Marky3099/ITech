@@ -53,6 +53,12 @@
   <div class="user-box">
     <div class="icon-box"><i class="fas fa-key"></i></div>
     <input class="password" type="password" name="password" id="password" placeholder="Enter your Password" value="<?php if(isset($_POST['password'])) { echo $_POST['password']; }?>"><i class="far fa-eye fa-eye-slash" id="togglePassword"></i>
+    <?php 
+      if(!empty($error_pass)){ ?>
+        <div class="pass-err-msg">
+         <center><h4><?php echo $error_pass;?></h4></center>
+       </div>
+     <?php }?>
   </div>
   
   <div class="user-box">

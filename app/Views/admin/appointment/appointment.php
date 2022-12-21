@@ -103,7 +103,7 @@
  </div> -->
  <div class="mt-3">
    <?php if($view_appoint):?>
-    <table class="table table-bordered" id="table1">
+    <table class="table table-bordered" id="appt-table">
      <thead>
         <tr>
            <th>Date</th>

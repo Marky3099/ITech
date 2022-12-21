@@ -36,7 +36,7 @@
        <p>Enter Your Email Address</p>
        <div class="panel-body">
         
-        <form id="register-form" role="form" autocomplete="off" class="form" method="get" action="<?=base_url('/forgot-password/sent');?>">
+        <form id="register-form" role="form" autocomplete="off" class="form" method="get" action="<?=base_url('/forgot-password-client/sent');?>">
           
           <div class="form-group">
             <div class="input-group">
@@ -49,7 +49,7 @@
           </div>
 
           <div class="container1">
-            <a href="<?= base_url('/user-type');?>" class="back-btn">Back</a>
+            <a href="<?= base_url('/client-type');?>" class="back-btn">Back</a>
           </div>
           
           <input type="hidden" class="hide" name="token" id="token" value=""> 

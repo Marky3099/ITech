@@ -46,7 +46,7 @@
   value="<?php if(isset($_POST['password'])) { echo $_POST['password']; }?>"><i class="far fa-eye fa-eye-slash" id="togglePassword" style="margin-left: -45px; color: #344F21; cursor: pointer;"></i>
 </div>
 <div class="fpass" >
-  <a href="<?=base_url('/forgot-password');?>">Forgot Password?</a>
+  <a href="<?=base_url('/forgot-password-client');?>">Forgot Password?</a>
 </div>
 <?php if($validation1->getError('password')) {?>
   <span style="margin-left: 80px; color: #FF6969;">

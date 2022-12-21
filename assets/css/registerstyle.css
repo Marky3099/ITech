@@ -200,6 +200,16 @@ input:-webkit-autofill{
   color: red;
   font-style: italic;
 }
+/*.register-box .pass-err-msg{
+  margin-top: -1rem;
+  margin-bottom: -1rem;
+}*/
+.register-box .pass-err-msg h4{
+  font-size: 0.75rem;
+  background-color: white;
+  color: red;
+/*  font-style: italic;*/
+}
 .register-box .suc-msg{
   background-color: white;
   margin-top: -1rem;

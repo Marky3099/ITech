@@ -46,6 +46,8 @@ $routes->get('/client-type','Pages::clientType');
 $routes->get('/forgot-password', 'Pages::fpass');
 $routes->get('/forgot-password/sent', 'Pages::fpass_send');
 $routes->get('/forgot-password/(:any)', 'Pages::change_pass_form/$1');
+$routes->get('/forgot-password-client', 'Pages::fpass_client');
+$routes->get('/forgot-password-client/sent', 'Pages::fpass_send_client');
 $routes->get('/forgot-password-client/(:any)', 'Pages::change_pass_form_client/$1');
 $routes->post('/reset-password/(:any)', 'Pages::change_pass/$1');
 
