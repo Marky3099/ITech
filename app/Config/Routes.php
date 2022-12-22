@@ -40,6 +40,7 @@ $routes->get('/non-bdo-login', 'Pages::nonBdoLogin');
 $routes->get('/bdo-register', 'Pages::bdoRegister');
 $routes->post('/bdo-register/add', 'Pages::registerBdo');
 $routes->get('/non-bdo-register', 'Pages::nonBdoRegister');
+$routes->post('/non-bdo-register/add', 'Pages::registerNonBdo');
 
 $routes->get('/user-type','Pages::userType');
 $routes->get('/client-type','Pages::clientType');

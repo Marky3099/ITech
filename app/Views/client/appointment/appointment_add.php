@@ -28,7 +28,9 @@
             </select>
           </div>
           <div class="select-dropdown" id="cid">
-             <select id="client_id" name="client_id"> </select>
+             <select id="client_id" name="client_id">
+              <option value=<?php echo $client_name['client_id']; ?>><?php echo $client_name['client_branch'];?></option>
+            </select>
           </div>
         </div>
 
@@ -97,26 +99,6 @@
         // $('#fcuno').select2();
         $('#fcuno .selectpicker').selectpicker();
 // ---------------------------------
-var areas = <?php echo json_encode($client_area); ?> 
-$.each(areas[0], function(key, v) {
-          // alert(value.client_id+" "+value.client_branch);
-           // console.log(v);
-           $.each(v, function(key, value) {
-            $("#client_id").append('<option value='+value.client_id+'>'+value.client_branch+'</option>');
-          });
-         });        
-$("#area").change(function(){
-  $("#client_id").empty();
-  var current_value = document.getElementById("area").selectedIndex;
-  $.each(areas[current_value], function(key, v) {
-            // alert(value.client_id+" "+value.client_branch);
-            console.log(v);
-            $.each(v, function(key, value) {
-              $("#client_id").append('<option value='+value.client_id+'>'+value.client_branch+'</option>')
-            });
-          });
-        // $("#area").append('<option value='+'>My option</option>');
-      });
 
   // ------------------------------------------------
   var devbrand = <?php echo json_encode($brand); ?> ;

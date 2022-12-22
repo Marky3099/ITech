@@ -94,7 +94,6 @@ class ClientCrud extends Controller
         $session = session();
         $cBranch = $Client->where('client_branch', $this->request->getVar('client_branch'))->first();
         $cEmail = $Client->where('client_email', $this->request->getVar('client_email'))->first();
-// dd($cEmail['client_email']);
         if ($cBranch) {
             $session->setFlashdata('branchError', 'value');
             // return $this->response->redirect(site_url('/client/create/view'));

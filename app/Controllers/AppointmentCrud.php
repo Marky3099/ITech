@@ -173,34 +173,37 @@ public function create(){
     $Aircon = new Aircon();
     $fcu_no = new Fcu_no();
     $Serv = new Serv();
-
+    $session = session();
+    $client_id = $_SESSION['client_id'];
     $data['fcu_no'] = $fcu_no->orderBy('fcuno', 'ASC')->findAll();
     $data['client'] = $Client->orderBy('client_id', 'ASC')->findAll();
-    $data['area'] = $Client->select('area')->groupBy('area')->findAll();
+    $data['area'] = $Client->select('area')->where('client_id', $client_id)->groupBy('area')->findAll();
+    $data['client_name'] = $Client->where('client_id', $client_id)->first();
+    // dd($data['client_name']);
     $data['aircon'] = $Aircon->orderBy('aircon_id', 'ASC')->findAll();
     $data['serv'] = $Serv->orderBy('serv_id', 'ASC')->findAll();
     $data['servName'] = $Serv->select('serv_name, serv_color, serv_type')->groupBy('serv_name')->findAll();
     $data['servType'] = $Serv->orderBy('serv_name','ASC')->findAll();
     $data['device_brand'] = $Aircon->select('device_brand')->groupBy('device_brand')->findAll();
-    foreach($data['area'] as $k => $val) {
+//     foreach($data['area'] as $k => $val) {
         
-        $area = [];
+//         $area = [];
 
-        foreach($data['client'] as $key => $value) {
-            if($val['area'] == $value['area']){
-              array_push($area , (object)[
-                'client_id' => (int)$value['client_id'],
-                'client_branch' =>$value['client_branch']
-            ]);
-          }
+//         foreach($data['client'] as $key => $value) {
+//             if($val['area'] == $value['area']){
+//               array_push($area , (object)[
+//                 'client_id' => (int)$value['client_id'],
+//                 'client_branch' =>$value['client_branch']
+//             ]);
+//           }
 
-      }
+//       }
 
-      $data['client_area'][]= (object)[
-        $val['area'] => $area
-    ];
-    $data['client_area2'][]=$area;
-}
+//       $data['client_area'][]= (object)[
+//         $val['area'] => $area
+//     ];
+//     $data['client_area2'][]=$area;
+// }
 
 foreach($data['device_brand'] as $k => $val) {
     

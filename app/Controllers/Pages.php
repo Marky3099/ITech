@@ -246,47 +246,136 @@ public function checkClient()
         $user_info = $user->where('bdo_email', $email)->first();
             // dd($user_info);
             // if($user_info['position'] === "Admin"){
-        if ($user_info['position'] === "Client") {
-            if($user_info['status'] === "Approved"){
-                $pass = $user_info['bdo_password'];
+        if($user_info['bdo_unique_code'] != ""){
+            if ($user_info['position'] === "Client") {
+                if($user_info['status'] === "Approved"){
+                    $pass = $user_info['bdo_password'];
 
-                $check_password = password_verify($password,$pass);
-                
-                if ($check_password) {
-                    $getdata = [
-                        'user_id' => $user_info['bdo_id'],
-                        'username' => $user_info['bdo_fname'],
-                        'bdo_fname' => $user_info['bdo_fname'],
-                        'bdo_lname' => $user_info['bdo_lname'],
-                        'bdo_email' => $user_info['bdo_email'],
-                        'bdo_address' => $user_info['bdo_address'],
-                        'bdo_contact' => $user_info['bdo_contact'],
-                        'position' => $user_info['position'],
-                        'user_img' => $user_info['user_img'],
-                        'bdo_password' => $user_info['bdo_password'],
-                        'isLoggedIn' => TRUE,
-                    ];
+                    $check_password = password_verify($password,$pass);
                     
+                    if ($check_password) {
+                        $getdata = [
+                            'user_id' => $user_info['bdo_id'],
+                            'client_id' => $user_info['client_id'],
+                            'username' => $user_info['bdo_fname'],
+                            'bdo_fname' => $user_info['bdo_fname'],
+                            'bdo_lname' => $user_info['bdo_lname'],
+                            'bdo_email' => $user_info['bdo_email'],
+                            'bdo_address' => $user_info['bdo_address'],
+                            'bdo_contact' => $user_info['bdo_contact'],
+                            'position' => $user_info['position'],
+                            'user_img' => $user_info['user_img'],
+                            'bdo_password' => $user_info['bdo_password'],
+                            'isLoggedIn' => TRUE,
+                        ];
+                        
+                    }else{
+                                  // $data['main'] = 'pages/admin_login';
+                      $data['errorMessage'] = "Wrong Password";
+                      return view('pages/bdo_login',$data);   
+                  }
+                  $session->set($getdata);
+                  return redirect()->to('appointment');
                 }else{
-                              // $data['main'] = 'pages/admin_login';
-                  $data['errorMessage'] = "Wrong Password";
-                  return view('pages/bdo_login',$data);   
-              }
-              $session->set($getdata);
-              return redirect()->to('appointment');
-          }else{
-            
-             $data['errorAcc'] = "This account is not approved yet";
-             return view('pages/bdo_login',$data);  
-         }
-     }else{
-                          // $data['main'] = 'pages/admin_login';
-      $data['errorAcc'] = "Account is not registered as Client";
-      return view('pages/bdo_login',$data);   
-  }
-}
-}
 
+                   $data['errorAcc'] = "This account is not approved yet";
+                   return view('pages/bdo_login',$data);  
+                }
+            }else{
+                              // $data['main'] = 'pages/admin_login';
+              $data['errorAcc'] = "Account is not registered as Client";
+              return view('pages/bdo_login',$data);   
+            }
+        }else{
+            $data['errorAcc'] = "Account is not registered as Partnered";
+            return view('pages/bdo_login',$data);  
+        }
+            
+}
+}
+public function checkClientNonBdo()
+{
+    helper(['form']);
+    
+    $validation =  \Config\Services::validation();
+    $session = session();
+        // login Validation
+    $validation = $this->validate([
+        'email'    => [
+            'rules'=>'required|valid_email|is_not_unique[users_bdo.bdo_email]',
+            'errors'=>[
+                'required'=>'Email is Required',
+                'valid_email'=>'Enter a valid Email',
+                'is_not_unique'=>'Email does not exist'
+            ]
+        ],
+        'password' => [
+            'rules'=>'required|min_length[3]',
+            'errors'=>[
+                'required'=>'Password is Required',
+                'min_length'=>'Password must have at least 3 characters'
+            ]
+        ]
+    ]);
+    if (!$validation) {
+        
+        return view('pages/bdo_login',['validation1' => $this->validator]);
+        
+    }else {
+        $user = new User_bdo();
+        $email = $this->request->getPost('email');
+        $password = $this->request->getPost('password');
+        // dd($user_info['bdo_id']);
+        $user_info = $user->where('bdo_email', $email)->first();
+            // dd($user_info);
+            // if($user_info['position'] === "Admin"){
+        if($user_info['bdo_unique_code'] == ""){
+            if ($user_info['position'] === "Client") {
+                if($user_info['status'] === "Approved"){
+                    $pass = $user_info['bdo_password'];
+
+                    $check_password = password_verify($password,$pass);
+                    
+                    if ($check_password) {
+                        $getdata = [
+                            'user_id' => $user_info['bdo_id'],
+                            'client_id' => $user_info['client_id'],
+                            'username' => $user_info['bdo_fname'],
+                            'bdo_fname' => $user_info['bdo_fname'],
+                            'bdo_lname' => $user_info['bdo_lname'],
+                            'bdo_email' => $user_info['bdo_email'],
+                            'bdo_address' => $user_info['bdo_address'],
+                            'bdo_contact' => $user_info['bdo_contact'],
+                            'position' => $user_info['position'],
+                            'user_img' => $user_info['user_img'],
+                            'bdo_password' => $user_info['bdo_password'],
+                            'isLoggedIn' => TRUE,
+                        ];
+                        
+                    }else{
+                                  // $data['main'] = 'pages/admin_login';
+                      $data['errorMessage'] = "Wrong Password";
+                      return view('pages/nonbdo_login',$data);   
+                  }
+                  $session->set($getdata);
+                  return redirect()->to('appointment');
+                }else{
+
+                   $data['errorAcc'] = "This account is not approved yet";
+                   return view('pages/nonbdo_login',$data);  
+                }
+            }else{
+                              // $data['main'] = 'pages/admin_login';
+              $data['errorAcc'] = "Account is not registered as Client";
+              return view('pages/nonbdo_login',$data);   
+            }
+        }else{
+            $data['errorAcc'] = "Account is not registered as Non-Partnered";
+            return view('pages/nonbdo_login',$data);  
+        }
+            
+}
+}
 public function registerBdo(){
     $userBdo = new User_bdo();
     $Client = new Client();
@@ -335,6 +424,57 @@ public function registerBdo(){
         return view("pages/bdo_register",$data);
     }
     
+}
+public function registerNonBdo(){
+    $userBdo = new User_bdo();
+    $Client = new Client();
+    $pattern = '/^(?=.*[!@#$%^&*-])(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z]).{8,20}$/';
+    if(preg_match($pattern, $this->request->getVar('password'))){
+        if($this->request->getVar('password') == $this->request->getVar('c_password')){
+            $userBdo_create = [
+                'bdo_fname' => $this->request->getVar('fname'),
+                'bdo_lname' => $this->request->getVar('lname'),
+                'bdo_email'  => $this->request->getVar('email'),
+                'bdo_address' => $this->request->getVar('address'),
+                'bdo_contact'  => $this->request->getVar('contact'),
+                'bdo_company' => $this->request->getVar('company'),
+                // 'bdo_unique_code' => $this->request->getVar('code'),
+                'bdo_password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
+                // 'client_id' => $code['client_id'],
+
+            ];
+        }else{
+            $data['error'] = 'Password didn\'t match, Please try again';
+            return view("pages/bdo_register",$data);
+        }
+        $success = $userBdo->insert($userBdo_create);
+        if($success){
+
+            $areaUpper = strtoupper('other');
+            $branchUpper = strtoupper($this->request->getVar('company'));
+            $client_create = [
+                'area' => $areaUpper,
+                'client_branch' => $branchUpper,
+                'client_address' => $this->request->getVar('address'),
+                'client_email'  => $this->request->getVar('email'),
+                'client_contact'  => $this->request->getVar('contact'),
+                // 'code'  => $code,
+            ];
+            $success1 = $Client->insert($client_create);
+            if($success1){
+                $update_data = ['client_id' => (int)$success1];
+                $userBdo->update((int)$success,$update_data);
+                $data['success'] = 'Sign up successful. Please wait for your account to be activated.';
+                
+            }else{
+                $data['error'] = 'There is a problem, Please Try again later.';
+            }
+            return view("pages/nonbdo_register",$data);
+        }
+    }else{
+        $data['error_pass'] = 'Password must have atleast 1 Uppercase, 1 lowercase, 1 number and 1 special character';
+        return view("pages/nonbdo_register",$data);
+    }
 }
 public function fpass(){
 

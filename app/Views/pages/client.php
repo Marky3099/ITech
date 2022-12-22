@@ -16,7 +16,7 @@
 
 			<div class="btn-layer">
 				<a href="<?=base_url('/bdo-login')?>" class="btn btn-success"><div class="icon-box"><i class="fas fa-users"></i></div>Partner Company</a></br>
-				<a href="#" class="btn btn-success"><div class="icon-box"><i class="fas fa-user-alt"></i></div>Non-Partner Company</a>
+				<a href="<?=base_url('/non-bdo-login')?>" class="btn btn-success"><div class="icon-box"><i class="fas fa-user-alt"></i></div>Non-Partner Company</a>
 			</div>
 		</br>
 	</br>
