@@ -89,7 +89,7 @@ class FullCalendar extends BaseController
         $datas['client_area2'][]=$area;
     }
 
-    $datas['all_events'] = $event->orderBy('id', 'ASC')->findAll();
+    $datas['all_events'] = $event->orderBy('time', 'ASC')->findAll();
     // dd($datas['all_events'] );
         // $datas['all_events'] = $event->where('STATUS', 'Done')->findAll();
         // dd($data[0]['title']);
@@ -309,14 +309,39 @@ public function event(){
           // dd($datas['distinct'] );
 
     $datas['event'] = array();
+    $datas['cId'] ="";
+    $datas['cbranch']="";
     $datas['client'] = $client->orderBy('client_id', 'ASC')->findAll();
         // $datas['emp'] = $emp->orderBy('emp_id', 'ASC')->findAll();
     $datas['serv'] = $serv->orderBy('serv_id', 'ASC')->findAll();
+    $datas['servName'] = $serv->select('serv_name, serv_color, serv_type')->groupBy('serv_name')->findAll();
+    $datas['servType'] = $serv->orderBy('serv_name','ASC')->findAll();
+    $datas['area'] = $client->select('area')->groupBy('area')->findAll();
     $datas['event_emp'] = $event_emp->orderBy('id', 'ASC')->findAll();
     $datas['event_fcu'] = $event_fcu->orderBy('id', 'ASC')->orderBy('fcuno', 'ASC')->findAll();
     // $datas['aircon'] = $aircon->orderBy('aircon_id', 'ASC')->findAll();
     $datas['all_events'] = $event->orderBy('start_event', 'ASC')->findAll();
         // dd($datas['groupby_fcu']);
+    foreach($datas['area'] as $k => $val) {
+
+            $area = [];
+
+            foreach($datas['client'] as $key => $value) {
+                if($val['area'] == $value['area']){
+                  array_push($area , (object)[
+                    'client_id' => (int)$value['client_id'],
+                    'client_branch' =>$value['client_branch']
+                ]);
+              }
+
+          }
+
+          $datas['client_area'][]= (object)[
+            $val['area'] => $area
+        ];
+        $datas['client_area2'][]=$area;
+    }
+
     foreach ($datas['all_events'] as $key => $value) {
 
         $emp_arr = "";
@@ -373,6 +398,7 @@ public function getfilter(){
     if($_SESSION['position'] != USER_ROLE_ADMIN){
         return $this->response->redirect(site_url('/dashboard'));
     }
+    
     $event = new All_events();
         // $emp = new Emp();
     $client = new Client();
@@ -393,16 +419,64 @@ public function getfilter(){
           // dd($datas['distinct'] );
 
     
+    $datas['cId'] ="";
+    $datas['cbranch'] ="";
     $datas['event'] = array();
     $datas['event_emp'] = $event_emp->orderBy('id', 'ASC')->findAll();
     $datas['event_fcu'] = $event_fcu->orderBy('id', 'ASC')->orderBy('fcuno', 'ASC')->findAll();
+    $datas['servName'] = $serv->select('serv_name, serv_color, serv_type')->groupBy('serv_name')->findAll();
+    $datas['servType'] = $serv->orderBy('serv_name','ASC')->findAll();
+    $datas['client'] = $client->orderBy('client_id', 'ASC')->findAll();
+    $datas['area'] = $client->select('area, client_id')->groupBy('area')->findAll();
+    // dd($_GET." = ".$datas['area']['client_id']);
+    // dd($datas['area'] );
+    // dd($datas['area']);
+    foreach($datas['area'] as $k => $val) {
+
+            $area = [];
+
+            foreach($datas['client'] as $key => $value) {
+                if($val['area'] == $value['area']){
+                  array_push($area , (object)[
+                    'client_id' => (int)$value['client_id'],
+                    'client_branch' =>$value['client_branch'],
+                    "area" =>$value['area']
+                ]);
+              }
+
+          }
+
+          $datas['client_area'][]= (object)[
+            $val['area'] => $area
+        ];
+        // $datas['client_area2'][]=$area;
+    }
 
     if(isset($_GET['start_date']) && isset($_GET['to_date']))
     {
         $start_date = $_GET['start_date'];
         $to_date = $_GET['to_date'];
+        if(isset($_GET['serv']) && !isset($_GET['client_id'])){
+            $serv_id = $_GET['serv'];
+            // $client_id = $_GET['client_id'];
 
-        $datas['all_events'] = $event->where('start_event BETWEEN "'. date('Y-m-d', strtotime($start_date)). '" and "'. date('Y-m-d', strtotime($to_date)).'"')->findAll();
+            $datas['all_events'] = $event->where('start_event BETWEEN "'. date('Y-m-d', strtotime($start_date)). '" and "'. date('Y-m-d', strtotime($to_date)).'" AND serv_id = "'.$serv_id.'"')->findAll();
+        }elseif(isset($_GET['client_id']) && !isset($_GET['serv'])){
+            $client_id = $_GET['client_id'];
+            $datas['cId'] = $_GET['client_id'];
+            $datas['cbranch'] = $client->where('client_id', $client_id)->first();
+            $datas['all_events'] = $event->where('start_event BETWEEN "'. date('Y-m-d', strtotime($start_date)). '" and "'. date('Y-m-d', strtotime($to_date)).'" AND client_id = "'.$client_id.'"')->findAll();
+            
+        }elseif(isset($_GET['serv']) && isset($_GET['client_id'])){
+            $serv_id = $_GET['serv'];
+            $client_id = $_GET['client_id'];
+            $datas['cId'] = $_GET['client_id'];
+            $datas['cbranch'] = $client->where('client_id', $client_id)->first();
+            $datas['all_events'] = $event->where('start_event BETWEEN "'. date('Y-m-d', strtotime($start_date)). '" and "'. date('Y-m-d', strtotime($to_date)).'" AND client_id = "'.$client_id.'" AND serv_id = "'.$serv_id.'"')->findAll();
+            
+        }else{
+            $datas['all_events'] = $event->where('start_event BETWEEN "'. date('Y-m-d', strtotime($start_date)). '" and "'. date('Y-m-d', strtotime($to_date)).'"')->findAll();
+        }
         foreach ($datas['all_events'] as $key => $value) {
             $emp_arr = "";
             foreach ($datas['event_emp'] as $key => $value_emps) {
@@ -426,7 +500,7 @@ public function getfilter(){
              }   
 
          }      
-
+         
 
          $datas['event'][]= (object)[
             "id"=> $value['id'],
@@ -448,13 +522,13 @@ public function getfilter(){
             "status"=> $value['STATUS'],
         ];
     }
-
+// dd($datas['cId']);
 
 }
 $datas['main'] = 'admin/calendar/events';
 return view('templates/template',$datas);
 }
-public function printpdf($strt,$end){
+public function printpdf($strt,$end,$serv,$client_id){
     if($_SESSION['position'] != USER_ROLE_ADMIN){
         return $this->response->redirect(site_url('/dashboard'));
     }
@@ -478,8 +552,20 @@ public function printpdf($strt,$end){
     $datas['event'] = array();
     $datas['event_emp'] = $event_emp->orderBy('id', 'ASC')->findAll();
     $datas['event_fcu'] = $event_fcu->orderBy('id', 'ASC')->orderBy('fcuno', 'ASC')->findAll();
-
-    $datas['all_events'] = $event->where('start_event BETWEEN "'. date('Y-m-d', strtotime($strt)). '" and "'. date('Y-m-d', strtotime($end)).'"')->findAll();
+    if($client_id != '""' && $serv !='""'){
+        $datas['all_events'] = $event->where('start_event BETWEEN "'. date('Y-m-d', strtotime($strt)). '" and "'. date('Y-m-d', strtotime($end)).'" AND client_id = "'.$client_id.'" AND serv_id = "'.$serv.'"')->findAll();
+        // dd($datas['all_events']);
+    }elseif($serv !='""'){
+        $datas['all_events'] = $event->where('start_event BETWEEN "'. date('Y-m-d', strtotime($strt)). '" and "'. date('Y-m-d', strtotime($end)).'" AND serv_id = "'.$serv.'"')->findAll();
+        // dd($datas['all_events']);
+    }elseif($client_id !='""'){
+        $datas['all_events'] = $event->where('start_event BETWEEN "'. date('Y-m-d', strtotime($strt)). '" and "'. date('Y-m-d', strtotime($end)).'" AND client_id = "'.$client_id.'"')->findAll();
+        // dd($datas['all_events']);
+    }else{
+        $datas['all_events'] = $event->where('start_event BETWEEN "'. date('Y-m-d', strtotime($strt)). '" and "'. date('Y-m-d', strtotime($end)).'" order By start_event')->findAll();
+    }
+    
+    
 
     foreach ($datas['all_events'] as $key => $value) {
         $emp_arr = "";
@@ -1100,16 +1186,19 @@ public function delete($id){
     $appt_data = $Appoint->where('appt_code',$appt_code)->first();
     $cl_data = $Call_logs->where('log_code',$log_code)->first();
     // dd($appt_data);
-    
-    if($appt_code){
-        $update_status = ['set_status' => 0, 'appt_status' => 'pending'];
-        $Appoint->update($appt_data['appt_id'],$update_status);
-        // dd($appt_data);
+    if($appt_data){
+        if($appt_code){
+            $update_status = ['set_status' => 0, 'appt_status' => 'pending'];
+            $Appoint->update($appt_data['appt_id'],$update_status);
+                // dd($appt_data);
+        }
     }
-    if($log_code){
-        $update_status = ['set_status' => 0];
-        $Call_logs->update($cl_data['cl_id'],$update_status);
-        // dd($cl_data);
+    if($cl_data){
+        if($log_code){
+            $update_status = ['set_status' => 0];
+            $Call_logs->update($cl_data['cl_id'],$update_status);
+            // dd($cl_data);
+        }
     }
     $success = $Event->where('id', $id)->delete($id);
     // if ($success) {
@@ -1201,15 +1290,14 @@ public function daily(){
           "id"=> $value['id'],
           "title"=>$value['title'],
           "event_code"=>$value['event_code'],
+          "log_code"=> $value['log_code'],
+          "appt_code"=> $value['appt_code'],
           "start_event"=> $value['start_event'],
           "time"=> $value['TIME'],
           "serv_id"=> $value['serv_id'],
           "client_id"=>$value['client_id'],
-//   "aircon_array"=>$aircon_arr,
           "serv_name"=>$value['serv_name'],
           "serv_type"=>$value['serv_type'],
-//   "device_array"=> $device_arr,
-//   "quantity_array"=> $quantity_arr,
           "area"=> $value['area'],
           "emp_array"=> $emp_arr,
           "fcu_array"=> $fcu_arr,
@@ -1369,15 +1457,14 @@ public function weekly(){
       "id"=> $value['id'],
       "title"=>$value['title'],
       "event_code"=>$value['event_code'],
+      "log_code"=> $value['log_code'],
+      "appt_code"=> $value['appt_code'],
       "start_event"=> $value['start_event'],
       "time"=> $value['TIME'],
       "serv_id"=> $value['serv_id'],
       "client_id"=>$value['client_id'],
-//   "aircon_array"=>$aircon_arr,
       "serv_name"=>$value['serv_name'],
       "serv_type"=>$value['serv_type'],
-//   "device_array"=> $device_arr,
-//   "quantity_array"=> $quantity_arr,
       "area"=> $value['area'],
       "emp_array"=> $emp_arr,
       "fcu_array"=> $fcu_arr,
@@ -1534,15 +1621,14 @@ public function monthly(){
          "id"=> $value['id'],
          "title"=>$value['title'],
          "start_event"=> $value['start_event'],
+         "log_code"=> $value['log_code'],
+         "appt_code"=> $value['appt_code'],
          "event_code"=>$value['event_code'],
          "time"=> $value['TIME'],
          "serv_id"=> $value['serv_id'],
          "client_id"=>$value['client_id'],
-//   "aircon_array"=>$aircon_arr,
          "serv_name"=>$value['serv_name'],
          "serv_type"=>$value['serv_type'],
-//   "device_array"=> $device_arr,
-//   "quantity_array"=> $quantity_arr,
          "area"=> $value['area'],
          "emp_array"=> $emp_arr,
          "fcu_array"=> $fcu_arr,
@@ -1636,25 +1722,27 @@ public function printMonthly(){
  return view("admin/calendar/monthlyPrint",$datas);
 }
 
-// public function view(){
-//     $Event = new Event();
-//     $Fcu = new Event_fcu_views();
-//     $Client = new Client();
-//     $Serv = new Serv();
-//     $id = $this->request->getPost('id');
-//     $data['event_data'] = $Event->where('id',$id)->first();
-//     $data['fcu_data'] = $Fcu->where('id',$id)->findAll();
-//     $data['client_data'] = $Client->orderBy('client_id','ASC')->findAll();
-//     $data['serv_data'] = $Serv->orderBy('serv_id','ASC')->findAll();
+public function view(){
+    $Event = new Event();
+    $Fcu = new Event_fcu_views();
+    $Client = new Client();
+    $Emp = new Event_emp_views();
+    $Serv = new Serv();
+    $id = $this->request->getPost('id');
+    $data['event_data'] = $Event->where('id',$id)->first();
+    $data['fcu_data'] = $Fcu->where('id',$id)->findAll();
+    $data['client_data'] = $Client->orderBy('client_id','ASC')->findAll();
+    $data['serv_data'] = $Serv->orderBy('serv_id','ASC')->findAll();
+    $data['emp_data'] = $Emp->where('id',$id)->findAll();
 
-//     $db = \Config\Database::connect();
-//           $query   = $db->query('SELECT DISTINCT aircon_id,id,device_brand,aircon_type,quantity
-//             FROM event_fcu_views where id = '.$id);
-//           $data['distinct'] = $query->getResult();
+    $db = \Config\Database::connect();
+          $query   = $db->query('SELECT DISTINCT aircon_id,id,device_brand,aircon_type,quantity
+            FROM event_fcu_views where id = '.$id);
+          $data['distinct'] = $query->getResult();
 
-//     return $this->response->setJSON($data);
+    return $this->response->setJSON($data);
 
-// }
+}
 
 public function checkEmp(){
     $Emp = new Emp();

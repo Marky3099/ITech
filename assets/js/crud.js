@@ -48,6 +48,7 @@ $(document).ready( function () {
       });
     $('#event-table').DataTable({
         pageLength : 5,
+        ordering: false,
         lengthMenu: [[5, 10, 15,20], [5, 10, 15, 20,]]
       });
     $('#appt-table').DataTable({

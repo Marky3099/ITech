@@ -131,9 +131,9 @@ $routes->get('/calendar/events/weekly/print', 'FullCalendar::printWeekly',['filt
 $routes->get('/calendar/events/monthly', 'FullCalendar::monthly',['filter' => 'authGuard']);
 $routes->get('/calendar/events/monthly/print', 'FullCalendar::printMonthly',['filter' => 'authGuard']);
 $routes->get('/calendar/events', 'FullCalendar::event',['filter' => 'authGuard']);
-// $routes->post('/calendar/events/view', 'FullCalendar::view',['filter' => 'authGuard']);
+$routes->post('/calendar/events/view', 'FullCalendar::view',['filter' => 'authGuard']);
 $routes->get('/calendar/events/filtered', 'FullCalendar::getfilter',['filter' => 'authGuard']);
-$routes->get('/calendar/events/filtered/print/(:any)/(:any)', 'FullCalendar::printpdf/$1/$2',['filter' => 'authGuard']);
+$routes->get('/calendar/events/filtered/print/(:any)/(:any)/(:any)/(:any)', 'FullCalendar::printpdf/$1/$2/$3/$4',['filter' => 'authGuard']);
 $routes->post('/calendar/insert', 'FullCalendar::insert',['filter' => 'authGuard']);
 $routes->get('/calendar/load', 'FullCalendar::load',['filter' => 'authGuard']);
 $routes->post('/calendar/update', 'FullCalendar::update',['filter' => 'authGuard']);
