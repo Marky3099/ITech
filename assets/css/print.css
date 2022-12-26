@@ -8,21 +8,21 @@
 }
 .card1, .card2{
 	background-color: #fff;
+	width: 73rem;
 }
 .card1 .card-header{
 	height: 60px;
-
+/*	width: 100%;*/
 }
 .card1 .card-header h3{
 	font-weight: bold;
 }
 #sub{
 	float: left;
-	margin-top: 22px;
+/*	margin-top: 22px;*/
 }
 #print{
-	margin-top: 7px;
-	margin-left: 20px;
+	margin-left: -12px;
 }
 
 .header-img,
@@ -36,3 +36,12 @@
 	font-weight: normal;
 }
 
+.body-content .filter .advance-filter{
+    top:1.5rem;
+    left: -5px;
+}
+.body-content .filter{
+    background-color: #FFFF;
+/*    margin-top: 10px;*/
+    width: 100%;
+}

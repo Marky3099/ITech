@@ -165,7 +165,7 @@ $routes->get('/reports/accomplished/filtered', 'Reports::getAccomplished',['filt
 $routes->get('/reports/accomplished/filtered/print/(:any)/(:any)', 'Reports::printAccomplished/$1/$2',['filter' => 'authGuard']);
 $routes->get('/reports/exception', 'Reports::showException',['filter' => 'authGuard']);
 $routes->get('/reports/exception/filtered', 'Reports::getException',['filter' => 'authGuard']);
-$routes->get('/reports/exception/filtered/print/(:any)/(:any)', 'Reports::printException/$1/$2',['filter' => 'authGuard']);
+$routes->get('/reports/exception/filtered/print/(:any)/(:any)/(:any)/(:any)', 'Reports::printException/$1/$2/$3/$4',['filter' => 'authGuard']);
 
 
 /*
