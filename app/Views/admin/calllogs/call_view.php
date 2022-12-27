@@ -193,34 +193,94 @@
         <a href="<?= base_url('calllogs/create/view') ?>" class="btn">Add Log</a>
     </div>
     <div class="event-header">
-        <div class="card-body filter">
-            <form action="<?= base_url("/calllogs/filtered"); ?>" method="GET">           
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Start Date:</label><br>
-                            <input type="date" name="start_date" class="form-control" value="<?php if(isset($_GET['start_date'])){echo $_GET['start_date'];} ?>">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>To Date:</label><br>
-                            <input type="date" name="to_date" class="form-control" value="<?php if(isset($_GET['to_date'])){echo $_GET['to_date'];} ?>">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-success" id="gen">Generate</button>
-                        </div>
-                        <div class="form-group">
-                            <?php if(isset($_GET['start_date']) && isset($_GET['to_date'])): ?>
-                            <a href="<?= base_url('/calllogs/filtered/print/'.$_GET['start_date']."/".$_GET['to_date'])?>" target="_blank" class="btn btn-success" id="dl">Print</a>
-                        <?php endif; ?>
-                    </div>
-                </div>
-            </div>         
-        </form>
-    </div>   
+
+      <div class="card-body filter">
+      <form action="<?= base_url('/calllogs/filtered');?>" method="GET">
+         <div class="row">
+            <div class="col-lg-2">
+               <div class="form-group">
+                  <label>Start Date:</label><br>
+                  <input type="date" name="start_date" class="form-control" value="<?php if(isset($_GET['start_date'])){echo $_GET['start_date'];} ?>" required>
+               </div>
+            </div>
+            <div class="col-lg-2">
+               <div class="form-group">
+                  <label>To Date:</label><br>
+                  <input type="date" name="to_date" class="form-control" value="<?php if(isset($_GET['to_date'])){echo $_GET['to_date'];} ?>" required>
+               </div>
+            </div>
+            
+            
+               <div class="col-lg-2 advance-filter">
+                     <select name="caller_filter" class="form-control">
+                        <option selected disabled value="">Caller</option>
+                        <?php foreach($caller as $call):  ?>
+                          <?php if(isset($_GET['caller_filter'])):?>
+                            <?php if($_GET['caller_filter'] == $call['caller']):?>
+                              <option value="<?php echo $call['caller'];?>" selected><?php echo $call['caller'];?></option>
+                            <?php else:?>
+                              <option value="<?php echo $call['caller'];?>"><?php echo $call['caller'];?></option>
+                            <?php endif;?>
+                          <?php else:?>
+                            <option value="<?php echo $call['caller'];?>"><?php echo $call['caller'];?></option>
+                          <?php endif;?>
+                        <?php endforeach; ?>
+                     </select>
+                  </div>
+                  <div class="col-lg-2 advance-filter">
+                     <select name="clientArea" id="area" class="form-control">
+                        <option selected disabled value="">Client Area</option>
+                        <?php foreach($area as $cl):  ?>
+                           <?php if(isset($_GET['client_id'])):?>
+                              <?php if($cbranch['area'] == $cl['area']):?>
+                                 <option value=<?php echo $cl['area']; ?> selected><?php echo $cl['area'];?></option>
+                              <?php else:?>
+                                 <option value=<?php echo $cl['area']; ?>><?php echo $cl['area'];?></option>
+                              <?php endif;?>
+                              <?php else:?>
+                                 <option value=<?php echo $cl['area']; ?>><?php echo $cl['area'];?></option>
+                           <?php endif;?>
+                           
+                        <?php endforeach; ?>
+                     </select>
+                  </div>
+                  <div class="col-lg-2 advance-filter">
+                     <select name="client_id" id="client_id" class="form-control">
+                        <option selected disabled value="">Branch Name</option>
+                     </select>
+                  </div>
+            
+            <div class="col-lg-1">
+               <div class="form-group">
+                  <button type="submit" class="btn btn-success" id="sub">Generate</button>
+                  <a href="<?= base_url('calllogs') ?>" type="button" class="btn btn-secondary">Reset</a>
+               </div>
+            </div>
+         
+            <div class="col-lg-1">
+               <div class="form-group">
+                  <!-- <button type="button" class="btn btn-info" id="sub1">Advance</button> -->
+                  <?php if(isset($_GET['start_date']) && isset($_GET['to_date']) && !isset($_GET['caller_filter']) && !isset($_GET['client_id'])): ?>
+                     <?php $caller_filter = '""'?>
+                     <?php $client_id = '""'?>
+                     <a href="<?= base_url('/calllogs/filtered/print/'.$_GET['start_date']."/".$_GET['to_date']."/".$caller_filter."/".$client_id)?>" target="_blank" class="btn btn-info" id="print">Print</a>
+                  <?php elseif(isset($_GET['start_date']) && isset($_GET['to_date']) && isset($_GET['caller_filter']) && isset($_GET['client_id'])):?>
+                     <a href="<?= base_url('/calllogs/filtered/print/'.$_GET['start_date']."/".$_GET['to_date']."/".$_GET['caller_filter']."/".$_GET['client_id'])?>" target="_blank" class="btn btn-info" id="print">Print</a>
+                  <?php elseif(isset($_GET['start_date']) && isset($_GET['to_date']) && isset($_GET['caller_filter']) && !isset($_GET['client_id'])):?>
+                     <?php $client_id = '""'?>
+                     <a href="<?= base_url('/calllogs/filtered/print/'.$_GET['start_date']."/".$_GET['to_date']."/".$_GET['caller_filter']."/".$client_id)?>" target="_blank" class="btn btn-info" id="print">Print</a>
+                  <?php elseif(isset($_GET['start_date']) && isset($_GET['to_date']) && !isset($_GET['caller_filter']) && isset($_GET['client_id'])):?>
+                     <?php $caller_filter = '""'?>
+                     <a href="<?= base_url('/calllogs/filtered/print/'.$_GET['start_date']."/".$_GET['to_date']."/".$caller_filter."/".$_GET['client_id'])?>" target="_blank" class="btn btn-info" id="print">Print</a>   
+                 
+                     
+                  <?php endif; ?>
+               </div>
+            </div>
+          </div>
+   </form>
+</div>   
+
 </div>
 <div class="mt-3">
     <?php if($view_calllogs):?>
@@ -450,5 +510,10 @@ $('#mymodal .selectpicker').selectpicker();
       })
    })
 
+var areas = <?php echo json_encode($client_area); ?> ;
+var cId = <?php echo json_encode($cId); ?>;
+var cBranch = <?php echo json_encode($cbranch); ?>;
+
  </script>
+ <script type="text/javascript" src="<?= base_url('assets/js/filter.js')?>"></script>
  <script type="text/javascript" src="<?= base_url('assets/js/crud.js')?>"></script>

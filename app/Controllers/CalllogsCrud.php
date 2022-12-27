@@ -28,9 +28,13 @@ class CalllogsCrud extends Controller{
         $serv = new Serv();
 
         $data['view_calllogs'] = [];
+        $data['cId'] ="";
+        $data['cbranch']="";
         $data['client'] = $Client->orderBy('client_id', 'ASC')->findAll();
         $data['area'] = $Client->select('area')->groupBy('area')->findAll();
         $data['call_logs'] = $Call_logs->orderBy('cl_id', 'ASC')->findAll();
+        $data['caller'] = $Call_logs->select('caller')->groupBy('caller', 'asc')->findAll();
+        // dd($data['caller']);
         $data['fcu_no'] = $fcu_no->orderBy('fcuno', 'ASC')->findAll();
         $data['call_fcu'] = $Call_fcu->orderBy('cl_id', 'ASC')->findAll();
         $data['emp'] = $Emp->orderBy('emp_id', 'ASC')->findAll();
@@ -102,9 +106,12 @@ public function getfilter(){
     $serv = new Serv();
 
     $data['view_calllogs'] = [];
+    $data['cId'] ="";
+    $data['cbranch'] ="";
     $data['client'] = $Client->orderBy('client_id', 'ASC')->findAll();
     $data['area'] = $Client->select('area')->groupBy('area')->findAll();
     $data['call_logs'] = $Call_logs->orderBy('cl_id', 'ASC')->findAll();
+    $data['caller'] = $Call_logs->select('caller')->groupBy('caller', 'asc')->findAll();
     $data['fcu_no'] = $fcu_no->orderBy('fcuno', 'ASC')->findAll();
     $data['call_fcu'] = $Call_fcu->orderBy('cl_id', 'ASC')->findAll();
     $data['emp'] = $Emp->orderBy('emp_id', 'ASC')->findAll();
@@ -117,13 +124,53 @@ public function getfilter(){
 
     $date = new \DateTime();
     $date->setTimezone(new \DateTimeZone('+0800'));
+
+    foreach($data['area'] as $k => $val) {
+
+            $area = [];
+
+            foreach($data['client'] as $key => $value) {
+                if($val['area'] == $value['area']){
+                  array_push($area , (object)[
+                    'client_id' => (int)$value['client_id'],
+                    'client_branch' =>$value['client_branch'],
+                    "area" =>$value['area']
+                ]);
+              }
+
+          }
+
+          $data['client_area'][]= (object)[
+            $val['area'] => $area
+        ];
+        // $datas['client_area2'][]=$area;
+    }
     
     if(isset($_GET['start_date']) && isset($_GET['to_date']))
     {
         $start_date = $_GET['start_date'];
         $to_date = $_GET['to_date'];
 
-        $data['calllogs_data'] = $Call_logs->where('date BETWEEN "'. date('Y-m-d', strtotime($start_date)). '" and "'. date('Y-m-d', strtotime($to_date)).'"')->findAll();
+        if(isset($_GET['caller_filter']) && !isset($_GET['client_id'])){
+            $caller_filter = $_GET['caller_filter'];
+            // $client_id = $_GET['client_id'];
+            $data['calllogs_data'] = $Call_logs->where('date BETWEEN "'. date('Y-m-d', strtotime($start_date)). '" and "'. date('Y-m-d', strtotime($to_date)).'" AND caller = "'.$caller_filter.'"')->findAll();
+            // dd($data['calllogs_data']);
+        }elseif(isset($_GET['client_id']) && !isset($_GET['caller_filter'])){
+            $client_id = $_GET['client_id'];
+            $data['cId'] = $_GET['client_id'];
+            $data['cbranch'] = $Client->where('client_id', $client_id)->first();
+            $data['calllogs_data'] = $Call_logs->where('date BETWEEN "'. date('Y-m-d', strtotime($start_date)). '" and "'. date('Y-m-d', strtotime($to_date)).'" AND client_id = "'.$client_id.'"')->findAll();
+            
+        }elseif(isset($_GET['caller_filter']) && isset($_GET['client_id'])){
+            $caller_filter = $_GET['caller_filter'];
+            $client_id = $_GET['client_id'];
+            $data['cId'] = $_GET['client_id'];
+            $data['cbranch'] = $Client->where('client_id', $client_id)->first();
+            $data['calllogs_data'] = $Call_logs->where('date BETWEEN "'. date('Y-m-d', strtotime($start_date)). '" and "'. date('Y-m-d', strtotime($to_date)).'" AND client_id = "'.$client_id.'" AND caller = "'.$caller_filter.'"')->findAll();
+        }else{
+            $data['calllogs_data'] = $Call_logs->where('date BETWEEN "'. date('Y-m-d', strtotime($start_date)). '" and "'. date('Y-m-d', strtotime($to_date)).'"')->findAll();
+        }
 
         foreach ($data['calllogs_data'] as $key => $value) {
             $fcu_arr = "";
@@ -156,7 +203,7 @@ public function getfilter(){
 $data['main'] = 'admin/calllogs/call_view';
 return view('templates/template',$data);
 }
-public function printpdf($strt,$end){
+public function printpdf($strt,$end,$call,$client_id){
     if($_SESSION['position'] != USER_ROLE_ADMIN){
         return $this->response->redirect(site_url('/dashboard'));
     }
@@ -179,8 +226,18 @@ public function printpdf($strt,$end){
     $data['aircon'] = $Aircon->orderBy('aircon_id', 'ASC')->findAll();
     $data['device_brand'] = $Aircon->select('device_brand')->groupBy('device_brand')->findAll();
 
-
-    $data['calllogs_data'] = $Call_logs->where('date BETWEEN "'. date('Y-m-d', strtotime($strt)). '" and "'. date('Y-m-d', strtotime($end)).'"')->findAll();
+    if($client_id != '""' && $call !='""'){
+        $data['calllogs_data'] = $Call_logs->where('date BETWEEN "'. date('Y-m-d', strtotime($strt)). '" and "'. date('Y-m-d', strtotime($end)).'" AND client_id = "'.$client_id.'" AND caller = "'.$call.'"')->findAll();
+        // dd($datas['all_events']);
+    }elseif($call !='""'){
+        $data['calllogs_data'] = $Call_logs->where('date BETWEEN "'. date('Y-m-d', strtotime($strt)). '" and "'. date('Y-m-d', strtotime($end)).'" AND caller = "'.$call.'"')->findAll();
+        // dd($datas['all_events']);
+    }elseif($client_id !='""'){
+        $data['calllogs_data'] = $Call_logs->where('date BETWEEN "'. date('Y-m-d', strtotime($strt)). '" and "'. date('Y-m-d', strtotime($end)).'" AND client_id = "'.$client_id.'"')->findAll();
+        // dd($datas['all_events']);
+    }else{
+        $data['calllogs_data'] = $Call_logs->where('date BETWEEN "'. date('Y-m-d', strtotime($strt)). '" and "'. date('Y-m-d', strtotime($end)).'"')->findAll();
+    }
 
     foreach ($data['calllogs_data'] as $key => $value) {
         $fcu_arr = "";

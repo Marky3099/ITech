@@ -199,7 +199,7 @@ if($view_calllogs){
 $html .='</tbody>
 </table>';
 }else{
-    $html .='<h1 style="text-align:center;">No Data Available!</h1>';
+    $html ='<h1 style="text-align:center;">No Data Available!</h1>';
 }
 
 $pdf->writeHTML($html, true, 0, true, true);
