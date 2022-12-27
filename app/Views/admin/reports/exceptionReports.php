@@ -1,4 +1,5 @@
 <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/print.css')?>">
+<link rel="stylesheet" href="<?= base_url('assets/css/formstyle.css')?>">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
 
 <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

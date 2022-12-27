@@ -62,6 +62,7 @@ $routes->get('/appointment/(:num)', 'AppointmentCrud::singleAppt/$1',['filter' =
 $routes->post('/appointment/update', 'AppointmentCrud::update',['filter' => 'authGuard']);
 $routes->get('appointment/delete/(:num)', 'AppointmentCrud::delete/$1',['filter' => 'authGuard']);
 $routes->post('/appointment/reject', 'AppointmentCrud::rejectAppt',['filter' => 'authGuard']);
+$routes->post('/appointment/view', 'AppointmentCrud::view',['filter' => 'authGuard']);
 
 $routes->get('/serv', 'ServCrud::index',['filter' => 'authGuard']);
 $routes->get('serv/create/view', 'ServCrud::create',['filter' => 'authGuard']);
@@ -111,6 +112,7 @@ $routes->get('calllogs/(:num)', 'CalllogsCrud::singleCL/$1',['filter' => 'authGu
 $routes->post('calllogs/update', 'CalllogsCrud::update',['filter' => 'authGuard']);
 $routes->post('/calllogs/cancel', 'CalllogsCrud::cancel',['filter' => 'authGuard']);
 $routes->get('calllogs/delete/(:num)', 'CalllogsCrud::delete/$1',['filter' => 'authGuard']);
+$routes->post('/calllogs/view', 'CalllogsCrud::view',['filter' => 'authGuard']);
 
 $routes->get('/aircon', 'AirconCrud::index',['filter' => 'authGuard']);
 $routes->get('/aircon/create/view', 'AirconCrud::create',['filter' => 'authGuard']);

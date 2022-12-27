@@ -470,6 +470,22 @@ public function cancel(){
     return $this->response->setJSON($data);
 }
 
+public function view(){
+    $Call_logs = new Calllogs_views();
+    $Fcu = new Call_fcu_views();
+    $Client = new Client();
+    // $Emp = new Event_emp_views();
+    $Serv = new Serv();
+    $id = $this->request->getPost('cl_id');
+    $data['cl_data'] = $Call_logs->where('cl_id',$id)->first();
+    $data['fcu_data'] = $Fcu->where('cl_id',$id)->findAll();
+    $data['client_data'] = $Client->orderBy('client_id','ASC')->findAll();
+    // $data['serv_data'] = $Serv->orderBy('serv_id','ASC')->findAll();
+
+    return $this->response->setJSON($data);
+
+}
+
 }
 
 

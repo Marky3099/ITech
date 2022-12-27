@@ -5,6 +5,83 @@
  
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 
+
+
+<div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTitle"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+           <div class="col-md-6">
+            
+               <table class="table-hover" style="width:100%">
+                  <tr>
+                    <th>Date:</th>
+                    <td id="modal_start_event"></td>
+                  </tr>
+                  <tr>
+                    <th>Log Code:</th>
+                    <td id="modal_log_code"></td>
+                  </tr>
+                  <tr>
+                    <th>Area:</th>
+                    <td id="modal_area"></td>
+                  </tr>
+                  <tr>
+                    <th>Client Branch:</th>
+                    <td id="modal_branch"></td>
+                  </tr>
+                  <tr>
+                    <th>Caller:</th>
+                    <td id="modal_caller"></td>
+                  </tr>
+                  <tr>
+                    <th>Particulars:</th>
+                    <td id="modal_particulars"></td>
+                  </tr>
+              </table>
+            </div>
+           <div class="col-md-6">
+            <table class="table-hover" style="width:100%">
+                  <tr>
+                    <th>Device Brand:</th>
+                    <td id="modal_dev_brand"></td>
+                  </tr>
+                  <tr>
+                    <th>Aircon Type:</th>
+                    <td id="modal_aircon_type"></td>
+                  </tr>
+                  <tr>
+                    <th>FCU #:</th>
+                    <td id="modal_fcu"></td>
+                  </tr>
+                  <tr>
+                    <th>Quantity:</th>
+                    <td id="modal_qty"></td>
+                  </tr>
+                  <tr>
+                    <th>Status:</th>
+                    <td id="modal_status"></td>
+                  </tr>
+                  
+              </table>
+           </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <div id="mymodal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog" role="document" id="dialog">
     <div class="modal-content">
@@ -30,7 +107,7 @@
             <input type="text" name="date" id="calDate" required>
           </div>
           <div class="form-group col-md-6">
-            <label for="time">Time</label><br>
+            <label for="time">Time<span style="color:red; font-size: 20px;">*</span></label><br>
             <input type="time" name="time" id="time" value="00:00:00">
           </div>
         </div>
@@ -147,21 +224,12 @@
 </div>
 <div class="mt-3">
     <?php if($view_calllogs):?>
-       <table class="table table-bordered" serv_id="users-list" id="table1" style="font-size: 11px;">
+       <table class="table table-bordered" serv_id="users-list" id="table1" style="font-size: 1.2rem;">
          <thead>
           <tr>
            <th>DATE</th>
            <th>Log Code</th>
-           <th>BRANCH AREA</th>
-           <th>BRANCH NAME</th>
-           <th>CALLER</th>
-           <th>PARTICULARS</th>
-           <th>DEVICE BRAND</th>
-           <th>AIRCON TYPE</th>
-           <th>FCU No.</th>
-           <th>QTY</th>
            <th>STATUS</th>
-           <th>SCHEDULE</th>
            <th>ACTION</th>
        </tr>
    </thead>
@@ -171,44 +239,22 @@
           <tr>
            <td><?php echo $call_log->date; ?></td>
            <td><?php echo $call_log->log_code; ?></td>
-           <td><?php echo $call_log->area; ?></td>
-           <td><?php echo $call_log->client_branch; ?></td>
-           <td><?php echo $call_log->caller; ?></td>
-           <td><?php echo $call_log->particulars; ?></td>
-           <td><?php echo $call_log->device_brand; ?></td>
-           <td><?php echo $call_log->aircon_type; ?></td>
-           <td>
-             <?php $data1 = explode(',',$call_log->fcu_arr);
-             $count1 = 0;
-             ?>
-             <?php foreach($data1 as $fc):  ?>
-               <?php if($count1 < (count($data1) - 1) ):  ?>
-                  <?php echo $fc; $count1+=1; ?> <br>
-              <?php endif;  ?>
-          <?php endforeach; ?>
-      </td> 
-      <td><?php echo $call_log->qty; ?></td>
       
-      <td><?php echo $call_log->status; ?></td>
-      <td>
-       <a href="#" class="btn btn-primary btn-sm">View</a>
-       <?php if($call_log->set_status != 1):?>
-         <a href="#" id="<?php echo $call_log->cl_id; ?>" class="btn btn-warning btn-sm set_btn">Set</a>
-       <?php endif;?>
-
-   </td>
-   <td>
-    <?php if($call_log->set_status != 1):?>
-       <a href="<?php echo base_url('/calllogs/'.$call_log->cl_id);?>" class="btn btn-primary btn-sm">Edit</a>
-       <a href="<?php echo base_url('/calllogs/delete/'.$call_log->cl_id);?>" class="btn btn-danger btn-sm del">Delete</a>
-    <?php else:?>
-        <h6>Scheduled</h6>
-        <a href="#" id="<?= $call_log->log_code?>" class="btn btn-secondary btn-sm cancel">Cancel</a>
-    <?php endif;?>
-   </td>
-   
-</tr>
-<?php endforeach; ?>
+          <td><?php echo $call_log->status; ?></td>
+         <td>
+          <?php if($call_log->set_status != 1):?>
+             <a href="#" id="<?php echo $call_log->cl_id; ?>" class="btn btn-warning btn-sm set_btn">Set</a>
+             <a href="<?php echo base_url('/calllogs/'.$call_log->cl_id);?>" class="btn btn-primary btn-sm">Edit</a>
+             <a href="#" id="<?php echo $call_log->cl_id;?>" class="btn btn-info btn-sm view">View</a>
+             <a href="<?php echo base_url('/calllogs/delete/'.$call_log->cl_id);?>" class="btn btn-danger btn-sm del">Delete</a>
+          <?php else:?>
+              <h6>Scheduled</h6>
+              <a href="#" id="<?php echo $call_log->cl_id;?>" class="btn btn-info btn-sm view">View</a>
+              <a href="#" id="<?= $call_log->log_code?>" class="btn btn-secondary btn-sm cancel">Cancel</a>
+          <?php endif;?>
+          </td>
+          </tr>
+      <?php endforeach; ?>
 
 </tbody>
 </table>
@@ -338,6 +384,71 @@ $('#mymodal .selectpicker').selectpicker();
           }
         })
       })
+
+      $(document).on('click','.view',function(e){
+      // console.log(e.target.id);
+      var id = e.target.id;
+      // console.log(id);
+      var options = { year: 'numeric', month: 'long', day: 'numeric' };
+
+      var myModal = new bootstrap.Modal(document.getElementById('viewModal'));
+      $.ajax({
+         method: 'Post',
+         url: 'http://localhost/tsms/calllogs/view',
+         data:{
+            'cl_id': id
+         },
+         success: function(response){
+          console.log(response);
+            var date = new Date(response.cl_data.date);
+            var startEvent = date.toLocaleDateString("en-US",(options));
+            var apptCode = response.cl_data.log_code;
+            var clientId = response.cl_data.client_id;
+            var clientData = response.client_data;
+            var area;
+            var branch;
+            var devBrand = response.cl_data.device_brand;
+            var airconType = response.cl_data.aircon_type;
+            var caller = response.cl_data.caller;
+            var particulars = response.cl_data.particulars;
+            var fcuNoArr = new Array();
+            var fcuData = response.fcu_data;
+            var fcuNo;
+            var qty = response.cl_data.qty;
+            var statusData = response.cl_data.status;
+
+            $('#modalTitle').html("["+apptCode+"] Schedule");
+            $('#modal_start_event').html(startEvent);
+            $('#modal_log_code').html(apptCode);
+            $('#modal_caller').html(caller);
+            $('#modal_particulars').html(particulars);
+
+             for (var a = 0; a < clientData.length; a++) {
+                if(clientId == clientData[a].client_id){
+                  area = clientData[a].area;
+                  branch = clientData[a].client_branch;
+                }
+             }
+             $('#modal_area').html(area);
+             $('#modal_branch').html(branch);
+
+            $('#modal_dev_brand').html(devBrand);
+            $('#modal_aircon_type').html(airconType);
+
+            for (var i = 0; i < fcuData.length; i++) {
+              if(id == fcuData[i].cl_id){
+               fcuNoArr.push(response.fcu_data[i].fcu);
+              }
+            }
+            fcuNo = fcuNoArr.toString();
+            $('#modal_fcu').html(fcuNo);
+            $('#modal_qty').html(qty);
+            $('#modal_status').html(statusData);
+            console.log(response);
+            myModal.show();
+         }
+      })
+   })
 
  </script>
  <script type="text/javascript" src="<?= base_url('assets/js/crud.js')?>"></script>

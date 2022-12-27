@@ -449,4 +449,20 @@ public function rejectAppt(){
 
     return $this->response->setJSON($data);
 }
+
+public function view(){
+    $Appoint = new view_appointment();
+    $Fcu = new Appt_fcu_views();
+    $Client = new Client();
+    // $Emp = new Event_emp_views();
+    $Serv = new Serv();
+    $id = $this->request->getPost('appt_id');
+    $data['appt_data'] = $Appoint->where('appt_id',$id)->first();
+    $data['fcu_data'] = $Fcu->where('appt_id',$id)->findAll();
+    $data['client_data'] = $Client->orderBy('client_id','ASC')->findAll();
+    $data['serv_data'] = $Serv->orderBy('serv_id','ASC')->findAll();
+
+    return $this->response->setJSON($data);
+
+}
 }
