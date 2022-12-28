@@ -208,7 +208,9 @@
            <td><?php echo $appt->appt_status; ?></td>
            <td>
             <?php if($appt->set_status ==0):?>
-             <a href="#" id="<?php echo $appt->appt_id; ?>" class="btn btn-primary btn-sm set_btn">Set</a>
+              <?php if($appt->appt_date >= $now): ?>
+                <a href="#" id="<?php echo $appt->appt_id; ?>" class="btn btn-primary btn-sm set_btn">Set</a>
+              <?php endif;?>
              <a href="#" id="<?php echo $appt->appt_id;?>" class="btn btn-info btn-sm view">View</a>
              <a href="#" id="<?php echo $appt->appt_id; ?>" data-id="<?php echo $appt->user_id;?>" class="btn btn-danger btn-sm dec_btn">Reject</a>
            <?php elseif($appt->set_status ==1):?>

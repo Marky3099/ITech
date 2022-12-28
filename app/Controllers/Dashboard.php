@@ -12,7 +12,11 @@ use App\Models\Serv;
 use App\Models\Event_emp_views;
 use App\Models\Call_logs;
 use App\Models\Appointment;
-
+use App\Models\view_appointment;
+use App\Models\Event_fcu_views;
+use App\Models\Fcu_no;
+use App\Models\Event_emp;
+use App\Models\Aircon;
 
 class Dashboard extends BaseController
 {   
@@ -303,6 +307,149 @@ foreach ($data['event_pending'] as $key => $value) {
         // $data['today'] = $query->getResult();
 $data['main'] = 'admin/dashboard/dashboard';
 return view("templates/template",$data);
+}
+
+
+public function clientDashboard(){
+    if($_SESSION['position'] == USER_ROLE_ADMIN){
+        return $this->response->redirect(site_url('/calendar'));
+    }
+    else if($_SESSION['position'] == USER_ROLE_EMPLOYEE){
+        return $this->response->redirect(site_url('/appointment'));
+    }
+    $Appoint = new view_appointment();
+    $event = new All_events();
+    $emp = new Emp();
+    $event_fcu = new Event_fcu_views();
+    $fcu_no = new Fcu_no();
+    $event_emp = new Event_emp();
+    $client = new Client();
+    $serv = new Serv();
+    $aircon = new Aircon();
+    $events = new Event();
+    $event_emp_views = new Event_emp_views();
+    $session = session();
+    $id = $_SESSION['user_id'];
+    $data['appoint'] = $Appoint->where('user_id', $id)->findAll();
+    $data['pending'] = $Appoint->where('appt_status', 'Pending')->where('user_id', $id)->findAll();
+    $data['approve'] = $Appoint->where('appt_status', 'Approved')->where('user_id', $id)->findAll();
+    $data['complete'] = $Appoint->where('appt_status', 'Done')->where('user_id', $id)->findAll();
+    $data['reject'] = $Appoint->where('appt_status', 'Rejected')->where('user_id', $id)->findAll();
+    $data['count_total'] = count($data['appoint']);
+    $data['count_pending'] = count($data['pending']);
+    $data['count_approve'] = count($data['approve']);
+    $data['count_complete'] = count($data['complete']);
+    $data['count_reject'] = count($data['reject']);
+    $data['percent'] = round(($data['count_complete']/$data['count_total'])*100);
+    $data['events'] = $events->orderBy('id', 'ASC')->findAll();
+    $data['event'] = array();
+    $data['branch'] = array();
+    $data['client'] = $client->orderBy('client_id', 'ASC')->findAll();
+    $data['area'] = $client->select('area')->groupBy('area')->findAll();
+    $data['emp'] = $emp->orderBy('emp_id', 'ASC')->findAll();
+    $data['fcu_no'] = $fcu_no->orderBy('fcuno', 'ASC')->findAll();
+    $data['event_fcu'] = $event_fcu->orderBy('id', 'ASC')->findAll();
+    $data['event_emp'] = $event_emp->orderBy('id', 'ASC')->findAll();
+    $data['serv'] = $serv->orderBy('serv_id', 'ASC')->findAll();
+    $data['servName'] = $serv->select('serv_name, serv_color, serv_type')->groupBy('serv_name')->findAll();
+    $data['servType'] = $serv->orderBy('serv_name','ASC')->findAll();
+    $data['aircon'] = $aircon->orderBy('aircon_id', 'ASC')->findAll();
+    $data['device_brand'] = $aircon->select('device_brand')->groupBy('device_brand')->findAll();
+ 
+    $db = \Config\Database::connect();
+        $query   = $db->query('SELECT DISTINCT aircon_id,id,device_brand,aircon_type,quantity
+            FROM event_fcu_views');
+        $data['distinct'] = $query->getResult();
+
+        $db1 = \Config\Database::connect();
+        $query   = $db1->query('SELECT DISTINCT id
+            FROM event_fcu_views');
+        $data['distinct_event'] = $query->getResult();
+        
+    $set = $Appoint->where('user_id', $id)->where('set_status',1)->findAll();
+    // dd($set[0]['appt_code']);
+    $appt_code = array();
+    
+    for ($i=0; $i < count($set); $i++) { 
+        array_push($appt_code,$set[$i]['appt_code']);
+    }
+// dd($appt_code);
+    foreach($data['area'] as $k => $val) {
+
+        $area = [];
+
+        foreach($data['client'] as $key => $value) {
+            if($val['area'] == $value['area']){
+              array_push($area , (object)[
+                'client_id' => (int)$value['client_id'],
+                'client_branch' =>$value['client_branch']
+            ]);
+          }
+
+      }
+
+      $data['client_area'][]= (object)[
+        $val['area'] => $area
+    ];
+    $data['client_area2'][]=$area;
+}
+$data['all_events'] = array();
+for ($a=0; $a < count($appt_code); $a++) { 
+    $data['all_events'] = $event->where('appt_code', $appt_code)->findAll();
+}
+// dd($data['all_events']);
+foreach ($data['all_events'] as $key => $value) {
+    $emp_arr = "";
+    $fcu_arr =array();
+
+    foreach ($data['event_emp'] as $key => $value_emps) {
+        if ( $value['id'] == $value_emps['id']) {
+           $emp_arr .= $data['event_emp'][$key]['emp_id'].",";
+       }
+   }
+
+
+   foreach ($data['event_fcu'] as $key => $value_fcu) {
+       if ($value['id'] == $value_fcu['id']) {
+           array_push($fcu_arr , (object)[
+            'id' => (int)$value_fcu['id'],
+            'aircon_id' => (int)$value_fcu['aircon_id'],
+            'fcuno' =>(int)$value_fcu['fcuno'],
+            'quantity' =>(int)$value_fcu['quantity'],
+            'device_brand' =>$value_fcu['device_brand'],
+            'aircon_type' =>$value_fcu['aircon_type'],
+            'fcu' =>$value_fcu['fcu'],
+        ]);
+
+       }   
+
+   } 
+
+
+
+   $data['event'][]= (object)[
+    "id"=> $value['id'],
+    "event_code"=> $value['event_code'],
+    "title"=> $value['title'],
+    "start"=> $value['start_event'],
+    "time"=>$value['TIME'],
+    "serv_id"=> $value['serv_id'],
+    "client_id"=> $value['client_id'],
+    "serv_name"=> $value['serv_name'],
+    "area"=> $value['area'],
+    "client_branch"=> $value['client_branch'],
+    "emp_array"=> $emp_arr,
+    "fcu_array"=> $fcu_arr,
+    "color" => $value['serv_color'],
+];
+
+
+
+
+}
+
+    $data['main'] = 'client/dashboard/dashboard';
+    return view("templates/template",$data);
 }
 
 

@@ -30,6 +30,7 @@ class CalllogsCrud extends Controller{
         $data['view_calllogs'] = [];
         $data['cId'] ="";
         $data['cbranch']="";
+        $data['now'] = date('Y-m-d');
         $data['client'] = $Client->orderBy('client_id', 'ASC')->findAll();
         $data['area'] = $Client->select('area')->groupBy('area')->findAll();
         $data['call_logs'] = $Call_logs->orderBy('cl_id', 'ASC')->findAll();

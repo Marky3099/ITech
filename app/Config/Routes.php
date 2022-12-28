@@ -123,6 +123,7 @@ $routes->get('aircon/delete/(:num)', 'AirconCrud::delete/$1',['filter' => 'authG
 $routes->get('aircon/brand/(:any)', 'AirconCrud::show_aircon/$1',['filter' => 'authGuard']);
 
 $routes->get('/dashboard', 'Dashboard::dashboard',['filter' => 'authGuard']);
+$routes->get('/client-dashboard', 'Dashboard::clientDashboard',['filter' => 'authGuard']);
 $routes->get('/calendar', 'FullCalendar::index',['filter' => 'authGuard']);
 $routes->post('/calendar/checkEmp', 'FullCalendar::checkEmp',['filter' => 'authGuard']);
 $routes->get('/calendar/emp', 'FullCalendar::index1',['filter' => 'authGuard']);

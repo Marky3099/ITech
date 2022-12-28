@@ -103,6 +103,7 @@ public function adminAppointment(){
         $Appt_fcu_views = new Appt_fcu_views();
 
         $data['view_appoint'] =[];
+        $data['now'] = date('Y-m-d');
         $data['fcu_no'] = $fcu_no->orderBy('fcuno', 'ASC')->findAll();
         $data['fcu_appt'] = $Appt_fcu_views->orderBy('appt_id', 'ASC')->findAll();
         $data['appoint'] = $Appoint->orderBy('appt_id', 'DESC')->findAll();

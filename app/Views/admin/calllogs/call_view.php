@@ -303,7 +303,9 @@
           <td><?php echo $call_log->status; ?></td>
          <td>
           <?php if($call_log->set_status != 1):?>
-             <a href="#" id="<?php echo $call_log->cl_id; ?>" class="btn btn-warning btn-sm set_btn">Set</a>
+            <?php if($call_log->date >= $now):?>
+              <a href="#" id="<?php echo $call_log->cl_id; ?>" class="btn btn-warning btn-sm set_btn">Set</a>
+            <?php endif;?>
              <a href="<?php echo base_url('/calllogs/'.$call_log->cl_id);?>" class="btn btn-primary btn-sm">Edit</a>
              <a href="#" id="<?php echo $call_log->cl_id;?>" class="btn btn-info btn-sm view">View</a>
              <a href="<?php echo base_url('/calllogs/delete/'.$call_log->cl_id);?>" class="btn btn-danger btn-sm del">Delete</a>

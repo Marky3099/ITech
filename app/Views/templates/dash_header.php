@@ -133,6 +133,13 @@
             </li>
         <?php else:?>
             <li>
+                <a href="<?=base_url("/client-dashboard")?>">
+                    <i class="fa-regular fa-rectangle-list"></i>
+                    <span class="links_name">Dashboard</span>
+                </a>
+                <span class="tooltip">Dashboard</span>
+            </li>
+            <li>
                 <a href="<?=base_url("/appointment")?>">
                     <i class="fa-regular fa-rectangle-list"></i>
                     <span class="links_name">Appointment</span>
