@@ -1073,7 +1073,20 @@ public function insertAppt(){
 
 
         $to = $user_email;
-
+        $formatDate = date('M d, Y', strtotime($_POST['date']));
+        $time = explode(":",$_POST['time']);
+        $formatTime;
+        if($time[0] == '00'){
+            $formatTime = 'Any time of the day';
+        }elseif ($time[0]>=12){
+            $hour = $time[0] - 12;
+            $amPm = "PM";
+            $formatTime= $hour . ":" . $time[1] . " " . $amPm;
+        }else{
+            $hour = $time[0];
+            $amPm = "AM";
+            $formatTime = $hour . ":" . $time[1] . " " . $amPm;
+        }
         $subject = "TSMS - Appointment Scheduled";
         $message = "<html>
         <head>
@@ -1081,7 +1094,12 @@ public function insertAppt(){
         </head>
         <body>
         <h6>Dear, Mr/Ms. ".$user."</h6>
-        <p>Your Appointment ".$_POST['appt_code']." has been scheduled on ". $_POST['date'] .", please make sure you are available on the said date. Thank You and have a great day!</p>
+        <p>Thank you for scheduling an appointment in MARSI: Appointment System!</p><br>
+        <p>We are glad to say that your appointment has been approved and scheduled on <b>". $formatDate ."</b> at <b>".$formatTime."</b> please make sure of availablity on the said date and time.</p><br>
+        <p>Thank you!</p><br><br>
+        <p>Regards.</p>
+        <p>Management</p>
+        <p>Maylaflor Air-Conditioning and Refrigeration Service, Inc.</p>
         </body>
         </html>";
         $email = \Config\Services::email();
