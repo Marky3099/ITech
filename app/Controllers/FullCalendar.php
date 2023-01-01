@@ -16,6 +16,7 @@ use App\Models\Event;
 use App\Models\Call_logs;
 use App\Models\Call_fcu;
 use App\Models\User_bdo;
+use App\Models\Restrict_date;
 
 class FullCalendar extends BaseController
 {
@@ -45,6 +46,7 @@ class FullCalendar extends BaseController
 
 
         $event = new All_events();
+        $resDate = new Restrict_date();
         $emp = new Emp();
         $event_fcu = new Event_fcu_views();
         $fcu_no = new Fcu_no();
@@ -55,6 +57,8 @@ class FullCalendar extends BaseController
         $events = new Event();
         
         $datas['events'] = $events->orderBy('id', 'ASC')->findAll();
+        $datas['date'] = $resDate->select('date')->findAll();
+        // dd($datas['date'] );
         $datas['event'] = array();
         $datas['branch'] = array();
         $datas['client'] = $client->orderBy('client_id', 'ASC')->findAll();
@@ -1788,6 +1792,89 @@ public function checkEmp(){
 
     }
     return $this->response->setJSON($data);
+}
+
+public function restrict_date(){
+    $date = new Restrict_date();
+    $datas['dates'] = $date->orderBy('date_id','Asc')->findAll();
+    // dd($datas['dates']);
+    $datas['main'] = 'admin/calendar/date';
+    return view("templates/template",$datas);
+}
+public function restrict_form(){
+    $datas['err']="";
+    // dd(strlen($datas['err']));
+    $datas['main'] = 'admin/calendar/date_add';
+    return view("templates/template",$datas);
+}
+public function restrict_add(){
+    $date = new Restrict_date();
+    $datePost = $this->request->getPost('date');
+    $datas['dates'] = $date->where('date',$datePost)->first();
+    // dd($datas['dates']);
+    if($_POST){
+        if($datas['dates'] == null){
+           $add_restrict =[
+            'date' => $datePost,
+            'description' => $this->request->getPost('desc')
+            ];
+
+            $date->insert($add_restrict); 
+        }else{
+            $datas['err'] = 'This Date is Already Restricted';
+            $datas['main'] = 'admin/calendar/date_add';
+            return view("templates/template",$datas);
+        }
+    }
+    return $this->response->redirect(site_url('calendar/dates'));
+}
+public function restrict_form_edit($date_id){
+    $date = new Restrict_date();
+    $datas['dates'] = $date->where('date_id',$date_id)->first();
+    $datas['dateVal'] = $datas['dates']['date'];
+    $datas['desc'] = $datas['dates']['description'];
+    $datas['date_id'] = $date_id;
+    // dd($datas['date_id']);
+    $datas['err']="";
+    // dd(strlen($datas['err']));
+    $datas['main'] = 'admin/calendar/date_edit';
+    return view("templates/template",$datas);
+}
+public function restrict_edit($date_id){
+    $date = new Restrict_date();
+    $datePost = $this->request->getPost('date');
+    $session = session();
+    $datas['dates_info'] = $date->where('date',$datePost)->first();
+    $datas['dates'] = $date->where('date',$datePost)->where('date_id', !$date_id)->first();
+    //10-1
+    //null
+    // dd($datas['dates'] );
+    // dd($datas['dates_info'] );
+    
+        if($datas['dates'] == null){
+            if($datas['dates_info'] == null){
+                $edit_restrict =[
+                    'date' => $datePost,
+                    'description' => $this->request->getPost('desc')
+                ];
+
+                $date->update((int)($date_id),$edit_restrict);
+            }else{
+                $session->setFlashdata('err','This Date is Already Restricted');
+                return $this->response->redirect(site_url('calendar/dates-edit-form/'.$date_id));
+            }
+            
+        }else{
+            $session->setFlashdata('err','This Date is Already Restricted');
+            return $this->response->redirect(site_url('calendar/dates-edit-form/'.$date_id));
+        }
+
+    return $this->response->redirect(site_url('calendar/dates'));
+}
+public function restrict_delete($date_id){
+    $date = new Restrict_date();
+    $delete = $date->where('date_id',$date_id)->delete();
+    return $this->response->redirect(site_url('calendar/dates'));
 }
 }
 ?>

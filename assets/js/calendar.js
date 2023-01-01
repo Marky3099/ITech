@@ -4,7 +4,7 @@
 
   var calendarEl = document.getElementById('calendar');
   var count = 0;
-  var disableDates = ["01-01","01-02","25-02","09-04","14-04","16-04","01-05","09-05","12-06","29-08","21-08","31-10","01-11","02-11","30-11","08-12","24-12","25-12","30-12","31-12"];
+  // var disableDates = ["01-01","01-02","25-02","09-04","14-04","16-04","01-05","09-05","12-06","29-08","21-08","31-10","01-11","02-11","30-11","08-12","24-12","25-12","30-12","31-12"];
   var today = new Date().toISOString().slice(0,10);
   var calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: 'dayGridMonth',
@@ -35,13 +35,22 @@
       var myModal = new bootstrap.Modal(document.getElementById('mymodal'));
            var ad = document.getElementById('start_event');
            ad.value = info.dateStr;
+           var formatDate;
+           var disable=[];
+           
+           for (var i = 0; i < disableDates.length; i++) {
+             var splitDate = disableDates[i].date.split("-");
+             var formatDate = splitDate[2]+"-"+splitDate[1];
+             disable.push(formatDate);
+           }
            var dateFormat = info.dateStr.split("-");
            var dateDisable = dateFormat[2]+"-"+dateFormat[1];
+           // console.log(dateDisable);
            var counter = 0;
            // console.log(dateDisable);
            // console.log(info);
-           for (var i = 0; i < disableDates.length; i++) {
-             if(dateDisable == disableDates[i]){
+           for (var i = 0; i < disable.length; i++) {
+             if(dateDisable == disable[i]){
                 counter=1;
              }
            }
@@ -60,7 +69,7 @@
              } ,// serializes form input
              success: function(data){
                // window.location.href = '/tsms/calllogs'; 
-              console.log(data);
+              // console.log(data);
               // $("#emp_id").appe
 
               // var count = 0;
@@ -159,7 +168,7 @@
      //  var int_index_area1 = 0;
      //  var count1 = 0;
      $('#auth-rows-edit').html('');
-    console.log(distinctEvent);
+    // console.log(distinctEvent);
      distinctEvent.forEach((disEvent, index)=>{
       
           var concut = '';
@@ -301,12 +310,22 @@
       // q.value = info.event.extendedProps.quantity;
       $("#frmdate").datepicker('update', dateFormat);
      
-      var disableDates = ["01-01","01-02","25-02","09-04","14-04","16-04","01-05","09-05","12-06","29-08","21-08","31-10","01-11","02-11","30-11","08-12","24-12","25-12","30-12","31-12"];
+      // var disableDates = ["01-01","01-02","25-02","09-04","14-04","16-04","01-05","09-05","12-06","29-08","21-08","31-10","01-11","02-11","30-11","08-12","24-12","25-12","30-12","31-12"];
+      var formatDate;
+      var disable=[];
+           
+      for (var i = 0; i < disableDates.length; i++) {
+        var splitDate = disableDates[i].date.split("-");
+        var formatDate = splitDate[2]+"-"+splitDate[1];
+        disable.push(formatDate);
+      }
+
       $('.datepicker').datepicker({
             format: 'mm/dd/yyyy',
             beforeShowDay: function(date = dateFormat){
                 dmy = date.getDate() + "-" + (date.getMonth() + 1);
-                if(disableDates.indexOf(dmy) != -1 || date.getDay() == 0 || date.getDay() == 6){
+                // console.log(disable);
+                if(disable.indexOf(dmy) != -1 || date.getDay() == 0 || date.getDay() == 6){
                     return false;
                 }
                 else{

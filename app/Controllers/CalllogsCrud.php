@@ -11,6 +11,7 @@ use App\Models\Emp;
 use App\Models\Serv;
 use App\Models\Call_fcu_views;
 use App\Models\Event;
+use App\Models\Restrict_date;
 
 class CalllogsCrud extends Controller{
 
@@ -278,6 +279,7 @@ public function create(){
     $Client = new Client();
     $Aircon = new Aircon();
     $fcu_no = new Fcu_no();
+    $resDate = new Restrict_date();
     $emp = new Emp();
     $serv = new Serv();
 
@@ -290,6 +292,8 @@ public function create(){
         $data['servType'] = $serv->orderBy('serv_name','ASC')->findAll();
     $data['aircon'] = $Aircon->orderBy('aircon_id', 'ASC')->findAll();
     $data['device_brand'] = $Aircon->select('device_brand')->groupBy('device_brand')->findAll();
+    $data['date'] = $resDate->select('date')->findAll();
+    // dd($data['date']);
     foreach($data['area'] as $k => $val) {
         
         $area = [];

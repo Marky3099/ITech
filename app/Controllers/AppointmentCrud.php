@@ -11,6 +11,7 @@ use App\Models\Emp;
 use App\Models\Appt_fcu;
 use App\Models\Appt_fcu_views;
 use App\Models\User_bdo;
+use App\Models\Restrict_date;
 
 class AppointmentCrud extends Controller
 {
@@ -173,10 +174,12 @@ public function create(){
     $Client = new Client();
     $Aircon = new Aircon();
     $fcu_no = new Fcu_no();
+    $resDate = new Restrict_date;
     $Serv = new Serv();
     $session = session();
     $client_id = $_SESSION['client_id'];
     $data['fcu_no'] = $fcu_no->orderBy('fcuno', 'ASC')->findAll();
+    $data['date'] = $resDate->select('date')->findAll();
     $data['client'] = $Client->orderBy('client_id', 'ASC')->findAll();
     $data['area'] = $Client->select('area')->where('client_id', $client_id)->groupBy('area')->findAll();
     $data['client_name'] = $Client->where('client_id', $client_id)->first();

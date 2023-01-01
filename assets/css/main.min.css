@@ -14,11 +14,12 @@
   left: 115%;
   margin-top: -70px;
   height: 130px;
-  overflow-y: auto; 
-  overflow-x: hidden;
   font-size: 12px;
 }
-
+.legend-box .card-body{
+  overflow-y: auto; 
+  overflow-x: hidden;
+}
 #cal1{
 	left: 75%;
 	margin-top: -40px;

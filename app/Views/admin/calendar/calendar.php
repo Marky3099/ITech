@@ -10,9 +10,13 @@
 <div class="body-content">
   <div class="col-sm-8">
     <div class="crud-text"><h3>Calendar</h3></div>
-    <div class="tsk">
-      <a href="<?= base_url('calendar/events') ?>" class="btn" >Tasks</a><br>
-    </div>
+    
+      <div class="tsk">
+        <a href="<?= base_url('calendar/events') ?>" class="btn" >Tasks</a>
+        <a href="<?= base_url('/calendar/dates') ?>" class="btn" style="margin-left: 0.2rem;">Date</a><br>
+      </div>
+      
+    
     <div class="card legend-box">
     <div class="card-header">Legend</div>
     <div class="card-body">
@@ -288,6 +292,7 @@
 // Calendar Variables--------------------
 
 var event = <?php echo json_encode($event); ?>;
+var disableDates = <?php echo json_encode($date); ?>;
 
 var areas = <?php echo json_encode($area); ?>;
 var c_area = <?php echo json_encode($client_area2); ?> ;
@@ -300,10 +305,6 @@ var distinct = <?php echo json_encode($distinct); ?> ;
 var distinctEvent = <?php echo json_encode($distinct_event); ?> ;
 var deviceBrand = <?php echo json_encode($device_brand); ?> ;
  
- console.log(distinct);
-  console.log(deviceBrand);
-
-
 var count = 1;
 var count_update = 1;
 

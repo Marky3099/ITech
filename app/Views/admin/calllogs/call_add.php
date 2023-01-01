@@ -335,25 +335,8 @@ $("#area").change(function(){
             $("#aircon_id").append('<option value='+value.aircon_id+'>'+value.aircon_type+'</option>')
           });
         });
-        // $("#area").append('<option value='+'>My option</option>');
       });
-
-    var disableDates = ["1-1","1-2","25-2","9-4","14-4","16-4","1-5","9-5","12-6","29-8","21-8","31-10","1-11","2-11","30-11","8-12","24-12","25-12","30-12","31-12"];
-      
-    $('.datepicker').datepicker({
-        format: 'mm/dd/yyyy',
-        startDate: new Date(),
-        beforeShowDay: function(date){
-            dmy = date.getDate() + "-" + (date.getMonth() + 1);
-            if(disableDates.indexOf(dmy) != -1 || date.getDay() == 0 || date.getDay() == 6){
-                return false;
-            }
-            else{
-                return true;
-            }
-        }
-    });
-
+      var disableDates = <?php echo json_encode($date);?>;
     </script>
-
+<script type="text/javascript" src="<?= base_url('assets/js/resDate.js') ?>"></script>
     

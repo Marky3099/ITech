@@ -14,6 +14,6 @@ class Restrict_date extends Model
     protected $returnType     = 'array';
   
 
-    protected $allowedFields = ['date'];
+    protected $allowedFields = ['date','description'];
 
 }
