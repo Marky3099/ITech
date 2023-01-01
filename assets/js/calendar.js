@@ -316,7 +316,7 @@
            
       for (var i = 0; i < disableDates.length; i++) {
         var splitDate = disableDates[i].date.split("-");
-        var formatDate = splitDate[2]+"-"+splitDate[1];
+        var formatDate = parseInt(splitDate[2])+"-"+parseInt(splitDate[1]);
         disable.push(formatDate);
       }
 

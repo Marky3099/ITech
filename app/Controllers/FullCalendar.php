@@ -1844,30 +1844,20 @@ public function restrict_edit($date_id){
     $date = new Restrict_date();
     $datePost = $this->request->getPost('date');
     $session = session();
-    $datas['dates_info'] = $date->where('date',$datePost)->first();
-    $datas['dates'] = $date->where('date',$datePost)->where('date_id', !$date_id)->first();
-    //10-1
-    //null
-    // dd($datas['dates'] );
-    // dd($datas['dates_info'] );
+    // $datas['dates_info'] = $date->where('date',$datePost)->first();
+    $datas['dates'] = $date->where('date',$datePost)->where('date_id', $date_id)->first();
     
-        if($datas['dates'] == null){
-            if($datas['dates_info'] == null){
-                $edit_restrict =[
-                    'date' => $datePost,
-                    'description' => $this->request->getPost('desc')
-                ];
+    if($datas['dates'] != null){
+        $edit_restrict =[
+            'date' => $datePost,
+            'description' => $this->request->getPost('desc')
+        ];
 
-                $date->update((int)($date_id),$edit_restrict);
-            }else{
-                $session->setFlashdata('err','This Date is Already Restricted');
-                return $this->response->redirect(site_url('calendar/dates-edit-form/'.$date_id));
-            }
-            
-        }else{
-            $session->setFlashdata('err','This Date is Already Restricted');
-            return $this->response->redirect(site_url('calendar/dates-edit-form/'.$date_id));
-        }
+        $date->update((int)($date_id),$edit_restrict);
+    }else{
+        $session->setFlashdata('err','This Date is Already Restricted');
+        return $this->response->redirect(site_url('calendar/dates-edit-form/'.$date_id));
+    }
 
     return $this->response->redirect(site_url('calendar/dates'));
 }
