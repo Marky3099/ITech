@@ -1797,7 +1797,8 @@ public function checkEmp(){
 public function restrict_date(){
     $date = new Restrict_date();
     $datas['dates'] = $date->orderBy('date_id','Asc')->findAll();
-    // dd($datas['dates']);
+    $session = session();
+    $session->setFlashdata('msg', 'value');
     $datas['main'] = 'admin/calendar/date';
     return view("templates/template",$datas);
 }
@@ -1826,6 +1827,8 @@ public function restrict_add(){
             return view("templates/template",$datas);
         }
     }
+    $session = session();
+    $session->setFlashdata('add', 'value');
     return $this->response->redirect(site_url('calendar/dates'));
 }
 public function restrict_form_edit($date_id){
@@ -1858,7 +1861,8 @@ public function restrict_edit($date_id){
         $session->setFlashdata('err','This Date is Already Restricted');
         return $this->response->redirect(site_url('calendar/dates-edit-form/'.$date_id));
     }
-
+    $session = session();
+    $session->setFlashdata('update', 'value');
     return $this->response->redirect(site_url('calendar/dates'));
 }
 public function restrict_delete($date_id){
