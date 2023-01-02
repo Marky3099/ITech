@@ -1797,8 +1797,6 @@ public function checkEmp(){
 public function restrict_date(){
     $date = new Restrict_date();
     $datas['dates'] = $date->orderBy('date_id','Asc')->findAll();
-    $session = session();
-    $session->setFlashdata('msg', 'value');
     $datas['main'] = 'admin/calendar/date';
     return view("templates/template",$datas);
 }
@@ -1868,6 +1866,8 @@ public function restrict_edit($date_id){
 public function restrict_delete($date_id){
     $date = new Restrict_date();
     $delete = $date->where('date_id',$date_id)->delete();
+    $session = session();
+    $session->setFlashdata('msg', 'value');
     return $this->response->redirect(site_url('calendar/dates'));
 }
 }
