@@ -167,7 +167,7 @@
             <div class="col-lg-1">
                <div class="form-group">
                   <button type="submit" class="btn btn-success" id="sub">Generate</button>
-                  <a href="<?= base_url('calendar/events') ?>" type="button" class="btn btn-secondary">Reset</a>
+                  <a href="<?= base_url('calendar/events') ?>" type="button" class="btn mt-1 btn-secondary">Reset</a>
                </div>
             </div>
          
@@ -185,7 +185,7 @@
                      <a href="<?= base_url('/calendar/events/filtered/print/'.$_GET['start_date']."/".$_GET['to_date']."/".$_GET['serv']."/".$client_id)?>" target="_blank" class="btn btn-info" id="print">Print</a>
                   <?php elseif(isset($_GET['start_date']) && isset($_GET['to_date']) && !isset($_GET['serv']) && isset($_GET['client_id'])):?>
                      <?php $serv = '""'?>
-                     <a href="<?= base_url('/calendar/events/filtered/print/'.$_GET['start_date']."/".$_GET['to_date']."/".$serv."/".$_GET['client_id'])?>" target="_blank" class="btn btn-info" id="print">Print</a>   
+                     <a href="<?= base_url('/calendar/events/filtered/print/'.$_GET['start_date']."/".$_GET['to_date']."/".$serv."/".$_GET['client_id'])?>" target="_blank" class="btn ml-3 btn-info" id="print">Print</a>   
                  
                      
                   <?php endif; ?>
@@ -254,7 +254,7 @@
 </tbody>
 </table>
 <?php else: ?>
-   <h3 style="text-align:center;">Ooops.. No work Yet!</h3>
+   <h4 style="text-align:center;">Ooops.. No scheduled task yet!</h4>
 <?php endif; ?>
 </div>
 </div>

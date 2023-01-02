@@ -101,7 +101,7 @@
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-md-12">
-				<div class="card mt-5 card1">
+				<div class="card mt-5 mb-5 card1">
 					<div class="card-header">
 						<h3>Detailed Preventive Maintenance Service Report (Accomplished Tasks)</h3>
 					</div>				
@@ -169,7 +169,7 @@
             
                   <div class="col-lg-1">
                     <div class="form-group">
-                        <button type="submit" class="btn btn-success btn-sm" id="sub">Generate</button>
+                        <button type="submit" class="btn mb-1 btn-success btn-sm" id="sub">Generate</button>
                         <a href="<?= base_url('reports/accomplished') ?>" type="button" class="btn btn-secondary btn-sm">Reset</a>
                     </div>
                   </div>
@@ -188,7 +188,7 @@
                           <a href="<?= base_url('/reports/accomplished/filtered/print/'.$_GET['start_date']."/".$_GET['to_date']."/".$_GET['serv']."/".$client_id)?>" target="_blank" class="btn btn-info btn-sm" id="print">Print</a>
                         <?php elseif(isset($_GET['start_date']) && isset($_GET['to_date']) && !isset($_GET['serv']) && isset($_GET['client_id'])):?>
                           <?php $serv = '""'?>
-                          <a href="<?= base_url('/reports/accomplished/filtered/print/'.$_GET['start_date']."/".$_GET['to_date']."/".$serv."/".$_GET['client_id'])?>" target="_blank" class="btn btn-info btn-sm" id="print">Print</a>   
+                          <a href="<?= base_url('/reports/accomplished/filtered/print/'.$_GET['start_date']."/".$_GET['to_date']."/".$serv."/".$_GET['client_id'])?>" target="_blank" class="btn ml-1 btn-info btn-sm" id="print">Print</a>   
                       
                           
                         <?php endif; ?>

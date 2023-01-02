@@ -252,7 +252,7 @@
             
             <div class="col-lg-1">
                <div class="form-group">
-                  <button type="submit" class="btn btn-success" id="sub">Generate</button>
+                  <button type="submit" class="btn mb-1 btn-success" id="sub">Generate</button>
                   <a href="<?= base_url('calllogs') ?>" type="button" class="btn btn-secondary">Reset</a>
                </div>
             </div>
@@ -282,9 +282,9 @@
 </div>   
 
 </div>
-<div class="mt-3">
+<div class="mt-3 mr-5">
     <?php if($view_calllogs):?>
-       <table class="table table-bordered" serv_id="users-list" id="table1" style="font-size: 1.2rem;">
+       <table class="table stable-bordered" serv_id="users-list" id="table1" style="font-size: 1rem;">
          <thead>
           <tr>
            <th>DATE</th>

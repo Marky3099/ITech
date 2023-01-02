@@ -4,7 +4,7 @@
 	/*margin-left: 15px;*/
 	font-size: 30px;
 	color: #344F21;
-	font-family: Arial, sans-serif;
+	font-family: "Arial", sans-serif;
 }
 
 .legend-box{
@@ -20,6 +20,7 @@
   overflow-y: auto; 
   overflow-x: hidden;
 }
+
 #cal1{
 	left: 75%;
 	margin-top: -40px;
@@ -86,13 +87,98 @@
 	background-color: black;
 	color: white;
 }
-#/*legend ul li #installation{
-	background-color: blue;
-}*/
-.calen{
-/*	height: 490px;*/
-	/*width: 1500px;*/
+
+.form-row{
+	margin: 0px 30px;
 }
+
+
+/*Modals style*/
+.form-group input{
+	padding: 0.50rem;
+  font-size: 1rem;
+  width: 80%;
+  color: #344F21;
+  border: 1px solid black;
+  outline: none;
+  background-color: transparent;
+  border-radius: 4px;
+}
+
+#serv-form{
+		margin: 0px 30px;
+}
+
+.form-group #time, #time_update, #start_event_update{
+	width: 87%;
+}
+
+.form-group #serv_id{
+	width: 90%;
+}
+
+.form-group label .serv_id_update{
+	margin-left: 20px;
+}
+
+.form-group .select-dropdown, .select-dropdown * {
+  padding: 0;
+  position: relative;
+  width: 87%;
+  box-sizing: border-box;
+  margin-bottom: 2px;
+}
+
+.form-group .select-dropdown {
+  position: relative;
+  background-color: #E6E6E6;
+  border: 1px solid black;
+  border-radius: 4px;
+}
+
+.form-group #serv-select{
+	margin-left: 20px;
+}
+
+
+.form-group .select-dropdown select{
+  font-size: 1rem;
+  color: #344F21;
+  font-weight: normal;
+  max-width: 100%;
+  padding: 8px 24px 8px 10px;
+  border: none;
+  background-color: transparent;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  appearance: none;
+}
+
+.form-group .select-dropdown select:active, .select-dropdown select:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.form-group .select-dropdown:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  width: 0;
+  height: 0;
+  margin-top: -2px;
+  border-top: 5px solid #aaa;
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
+}
+
+
+.form-group label{
+	margin: 0px;
+  font-size: 15px;
+  color: #344F21;
+}
+
 #calendar{
 	position: inherit;
 	justify-content: center; 
@@ -203,15 +289,15 @@ tbody{
 #mymodal2 #dialog2{
   max-width: 700px;
 }
-#start_event_update{
+/*#start_event_update{
 	font-size: 12px;
 }
 #time_update{
 	font-size: 12px;
-}
-.form-group select{
+}*/
+/*.form-group select{
 	font-size: 10px;
-}
+}*/
 
 .form-group h5{
 	font-size: 12px;
@@ -220,10 +306,7 @@ tbody{
 	font-size: 14px;
 	font-weight: bold;
 }
-.form-group #repeatable{
-	width: 200px;
-	height: 30px;
-}
+
 .form-group #emp_id, #emp_id_update{
 	width: 25rem;
 }

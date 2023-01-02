@@ -100,7 +100,7 @@
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-md-12">
-				<div class="card mt-5 card1">
+				<div class="card mt-5 mb-5 card1">
 					<div class="card-header">
 						<h3>Detailed Exception Report (Pending Tasks)</h3>
 					</div>				
@@ -168,7 +168,7 @@
             
                   <div class="col-lg-1">
                     <div class="form-group">
-                        <button type="submit" class="btn btn-success btn-sm" id="sub">Generate</button>
+                        <button type="submit" class="btn mb-1 btn-success btn-sm" id="sub">Generate</button>
                         <a href="<?= base_url('reports/exception') ?>" type="button" class="btn btn-secondary btn-sm">Reset</a>
                     </div>
                   </div>
