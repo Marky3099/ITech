@@ -43,6 +43,9 @@ class Dashboard extends BaseController
         $client = new Client();
         $serv = new Serv();
         $event_emp = new Event_emp_views();
+        $appt = new Appointment();
+        $logs = new Call_logs();
+        $bdo_user = new User_bdo();
 
         date_default_timezone_set('Asia/Hong_Kong'); 
 
@@ -133,10 +136,6 @@ foreach ($data['event_today'] as $key => $value) {
     $data['today_event']= (int)$value->count;
 }
 
-//count weekly tasks
-$query = $db->query('SELECT COUNT(start_event) as count FROM All_events WHERE WEEK(start_event,1) = WEEK(CURRENT_DATE(),1)');
-
-$data['event_week'] = $query->getResult();
 $monday = date('Y-m-d', strtotime('monday this week'));
 $sunday = date('Y-m-d', strtotime('sunday this week'));
 
@@ -170,10 +169,8 @@ foreach ($data['weekly'] as $key => $value) {
 ];
 }
 
-json_encode($data['event_week']);
-foreach ($data['event_week'] as $key => $value) {
-    $data['weekly_event']= (int)$value->count;
-}
+//count weekly tasks
+$data['weekly_event']= count($data['weekly']);
         // Total
 $query = $db->query('SELECT COUNT(start_event) as count FROM All_events');
 $data['total_event'] = $query->getResult();
@@ -297,11 +294,63 @@ foreach ($data['pending'] as $key => $value) {
 ];
 }
 
-
 json_encode($data['event_pending']);
 foreach ($data['event_pending'] as $key => $value) {
     $data['pending_event']= (int)$value->count;
 }
+
+// Pending Appointment
+$data['pending_appt'] = $appt->where('appt_status = "Pending" ORDER BY appt_date ASC')->findAll();
+$data['count_appt'] = count($data['pending_appt']);
+// dd($data['count_appt']);
+
+foreach ($data['pending_appt'] as $key => $value) {
+    
+ // dd($data['pending']);
+ $data['appt_pending'][]= (object)[
+    "appt_id"=> $value['appt_id'],
+    "appt_date"=> $value['appt_date'],
+    "appt_code"=>$value['appt_code'],
+    "appt_status"=>$value['appt_status'],
+    
+];
+}
+
+// Pending Logs
+$data['pending_log'] = $logs->where('status = "Pending" ORDER BY date ASC')->findAll();
+$data['count_log'] = count($data['pending_log']);
+// dd($data['count_log']);
+
+foreach ($data['pending_log'] as $key => $value) {
+    
+ // dd($data['pending']);
+ $data['log_pending'][]= (object)[
+    "cl_id"=> $value['cl_id'],
+    "date"=> $value['date'],
+    "log_code"=>$value['log_code'],
+    "status"=>$value['status'],
+    
+];
+}
+
+// Pending users
+$data['pending_user'] = $bdo_user->where('status = "Pending" ORDER BY bdo_id ASC')->findAll();
+$data['count_user'] = count($data['pending_user']);
+// dd($data['count_log']);
+
+foreach ($data['pending_user'] as $key => $value) {
+    
+ // dd($data['pending']);
+ $data['user_pending'][]= (object)[
+    "bdo_id"=> $value['bdo_id'],
+    "bdo_fname"=> $value['bdo_fname']." ".$value['bdo_lname'],
+    "bdo_email"=>$value['bdo_email'],
+    "bdo_company"=>$value['bdo_company'],
+    "status"=>$value['status'],
+];
+}
+
+
 
         // $query = $db->query('SELECT * FROM All_events WHERE start_event = curdate()');
         // $data['today'] = $query->getResult();

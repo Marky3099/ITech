@@ -410,24 +410,171 @@
                        </td> 
                        <td><?php echo $nd->status;?></td>
                        
-                     </tr>
-                   <?php endforeach;?>
+                      </tr>
+                    <?php endforeach;?>
 
-                 </tbody>
-               </table>
-             <?php else:?>
-              <div class="Nowork">
-               <p class="noworkstatement"><i class="fa-solid text-success fa-circle-exclamation"></i>&nbsp;Hoorayyy!!.. All Tasks are Complete!</p>
-             </div>
-           <?php endif;?>
-         </div>
-         <div class="modal-footer">
-          <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+                  </tbody>
+                </table>
+               <?php else:?>
+                <div class="Nowork">
+                 <p class="noworkstatement"><i class="fa-solid text-success fa-circle-exclamation"></i>&nbsp;Hoorayyy!!.. All Tasks are Complete!</p>
+               </div>
+               <?php endif;?>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
+      <!-- Modal for displaying Pending Appointments -->
+      <div class="container">
+        <div class="modal fade" id="apptModal" role="dialog">
+          <div class="modal-dialog" style="max-width:700px;">
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <h4 class="modal-title">Pending Appointments</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                
+              </div>
+              <div class="modal-body">
+               <?php if($appt_pending):?>
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Appt Code</th>
+                      <th>Status</th>
+                      
+                    </tr>
+                  </thead>
+                  <tbody>
+                   
+                    <?php foreach($appt_pending as $p):  ?>
+                      <tr>
+                        <td><?php echo date('m-d-Y',strtotime($p->appt_date)); ?></td>
+                        <td><?php echo $p->appt_code; ?></td>
+                        <td><?php echo $p->appt_status;?></td>
+                       
+                      </tr>
+                    <?php endforeach;?>
+
+                  </tbody>
+                </table>
+               <?php else:?>
+                <div class="Nowork">
+                 <p class="noworkstatement"><i class="fa-solid text-success fa-circle-exclamation"></i>&nbsp;No Pending Appointments!</p>
+               </div>
+               <?php endif;?>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal for displaying Pending Call Logs -->
+      <div class="container">
+        <div class="modal fade" id="logModal" role="dialog">
+          <div class="modal-dialog" style="max-width:700px;">
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <h4 class="modal-title">Pending Logs</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                
+              </div>
+              <div class="modal-body">
+               <?php if($log_pending):?>
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Log Code</th>
+                      <th>Status</th>
+                      
+                    </tr>
+                  </thead>
+                  <tbody>
+                   
+                    <?php foreach($log_pending as $p):  ?>
+                      <tr>
+                        <td><?php echo date('m-d-Y',strtotime($p->date)); ?></td>
+                        <td><?php echo $p->log_code; ?></td>
+                        <td><?php echo $p->status;?></td>
+                       
+                      </tr>
+                    <?php endforeach;?>
+
+                  </tbody>
+                </table>
+               <?php else:?>
+                <div class="Nowork">
+                 <p class="noworkstatement"><i class="fa-solid text-success fa-circle-exclamation"></i>&nbsp;No Pending Appointments!</p>
+               </div>
+               <?php endif;?>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal for displaying Pending Users -->
+      <div class="container">
+        <div class="modal fade" id="userModal" role="dialog">
+          <div class="modal-dialog" style="max-width:700px;">
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <h4 class="modal-title">Pending Users</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                
+              </div>
+              <div class="modal-body">
+               <?php if($user_pending):?>
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Full Name</th>
+                      <th>Email</th>
+                      <th>Company</th>
+                      <th>Status</th>
+                      
+                    </tr>
+                  </thead>
+                  <tbody>
+                   
+                    <?php foreach($user_pending as $p):  ?>
+                      <tr>
+                        <td><?php echo $p->bdo_fname; ?></td>
+                        <td><?php echo $p->bdo_email; ?></td>
+                        <td><?php echo $p->bdo_company; ?></td>
+                        <td><?php echo $p->status;?></td>
+                       
+                      </tr>
+                    <?php endforeach;?>
+
+                  </tbody>
+                </table>
+               <?php else:?>
+                <div class="Nowork">
+                 <p class="noworkstatement"><i class="fa-solid text-success fa-circle-exclamation"></i>&nbsp;No Pending Appointments!</p>
+               </div>
+               <?php endif;?>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
 
 <!-- Content Row -->
 <div class="row">
@@ -546,11 +693,62 @@
         </div>
       </div>
     </div>
+    <!-- Pending Appointments -->
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-left-warning shadow h-100 py-2">
+        <div class="card-body1">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-uppercase mb-1">
+              Pending Appointments</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">Number of task:&nbsp;<a href="#" data-toggle="modal" data-target="#apptModal" id="iconbox"><?= json_encode($count_appt);?></a></div>
+            </div>
+            <div class="col-auto">
+            <i class="fas fa-comments fa-2x text-gray-300" id="iconbox"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Pending Call logs -->
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-left-warning shadow h-100 py-2">
+        <div class="card-body1">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-uppercase mb-1">
+              Pending Logs</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">Number of task:&nbsp;<a href="#" data-toggle="modal" data-target="#logModal" id="iconbox"><?= json_encode($count_log);?></a></div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-comments fa-2x text-gray-300" id="iconbox"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-left-warning shadow h-100 py-2">
+        <div class="card-body1">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-uppercase mb-1">
+              Pending Users</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">Total:&nbsp;<a href="#" data-toggle="modal" data-target="#userModal" id="iconbox"><?= json_encode($count_user);?></a></div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-comments fa-2x text-gray-300" id="iconbox"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
 <div class="row">
-  <div class="col-md-12" id="chart_div" style="width: 100%; height: 500px;"></div>
-  <div class="col-md-12" id="piechart_3d" style="width: 100%; height: 500px;"></div>
+  <div class="col-md-6" id="chart_div" style="width: 100%; height: 500px;"></div>
+  <div class="col-md-6" id="piechart_3d" style="width: 100%; height: 500px;"></div>
   
 </div>
 
