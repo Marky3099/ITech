@@ -721,7 +721,7 @@
               <div class="h5 mb-0 font-weight-bold text-gray-800">Number of task:&nbsp;<a href="#" data-toggle="modal" data-target="#logModal" id="iconbox"><?= json_encode($count_log);?></a></div>
             </div>
             <div class="col-auto">
-              <i class="fas fa-comments fa-2x text-gray-300" id="iconbox"></i>
+              <i class="fas fa-phone-alt fa-2x text-gray-300" id="iconbox"></i>
             </div>
           </div>
         </div>
@@ -738,7 +738,7 @@
               <div class="h5 mb-0 font-weight-bold text-gray-800">Total:&nbsp;<a href="#" data-toggle="modal" data-target="#userModal" id="iconbox"><?= json_encode($count_user);?></a></div>
             </div>
             <div class="col-auto">
-              <i class="fas fa-comments fa-2x text-gray-300" id="iconbox"></i>
+              <i class="fas fa-users fa-2x text-gray-300" id="iconbox"></i>
             </div>
           </div>
         </div>

@@ -11,8 +11,8 @@
 			<a href="<?= base_url('#home')?>" class="texthp"><img src="<?= base_url('assets/image/iicon.png')?>"></a>
 		</div>
 		<div class="box-content">
-			<h2>Hi, User!</h2>
-			<p><i class="fas fa-chevron-circle-down"></i>&nbsp;Please click or tap type of account.</i></p>
+			<h2 class="mt-2">Hi, User!</h2>
+			<p class="mt-2"><i class="fas fa-chevron-circle-down"></i>&nbsp;Please click or tap type of account.</i></p>
 
 			<div class="btn-layer">
 				<a href="<?= base_url('/admin-login')?>" class="btn btn-success"><div class="icon-box"><i class="fas fa-user-shield"></i></div>Admin</a></br>
@@ -20,10 +20,9 @@
 			</div>
 			
 			<p class="para1">Want to book an Appointment?<a href="<?= base_url('/client-type')?>" style="font-style: italic; color: limegreen;">&nbsp;Click here.</a></p>
-		</br>
-	</br>
+		
 	<p class="para1"> By using this service, you understood and agree to Maylaflor’s Tasks and Schedule Monitoring System <i>Terms of Use and Privacy Statement.</i></p>
-	<a href="<?= base_url();?>" class="back2w">Back to Website</a>
+	<a href="<?= base_url();?>" class="btn btn-success" id="back-btn">Back to Website</a>
 </div>
 </div>
 

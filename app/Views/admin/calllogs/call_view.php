@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="<?= base_url('assets/css/formstyle.css')?>">
 <link rel="stylesheet" href="<?= base_url('assets/css/style.css')?>">
+<link rel="stylesheet" href="<?= base_url('assets/css/main.min.css')?>">
 <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/select2.css')?>">
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
  
@@ -101,6 +102,7 @@
         <div class="form-group">
           <input class="form-control" type="hidden" name="title" id="title" placeholder="Title">
         </div>
+        <div class="crud-text"><h5>Client Details:</h5></div>
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="time">Date</label><br>
@@ -111,7 +113,6 @@
             <input type="time" name="time" id="time" value="00:00:00">
           </div>
         </div>
-        <h3>Client Details:</h3>
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="area">Branch Area</label><br>
@@ -125,8 +126,9 @@
         </div>
         <div class="form-group">
           
-          <label for="serv_id">Service<span style="color:red; font-size: 20px;">*</span></label><br>
-          <select name="serv_id" class="form-control" required>
+          <label class="ml-5" for="serv_id">Service<span style="color:red; font-size: 20px;">*</span></label><br>
+          <div class="select-dropdown" id="serv-select1">
+            <select name="serv_id" class="form-control" required>
             <?php foreach($servName as $s):  ?>
               <optgroup label="<?= $s['serv_name']; ?>">
                 <?php foreach($servType as $st):  ?>
@@ -137,8 +139,9 @@
               </optgroup>
             <?php endforeach; ?>
           </select>
-        </div>
-        <h3>Aircon Details:</h3>
+          </div>
+        </div><br>
+        <div class="crud-text"><h5>Aircon Details:</h5></div>
         <div class="form-row">
           <div class="form-group col-md-3">
             
@@ -166,8 +169,8 @@
         <div id="auth-rows"></div>
         <div class="form-group">
           
-          <label for="emp_id">Employee<span style="color:red; font-size: 20px;">*</span></label><br>
-          <select id="emp_id" name="emp_id[]" class="form-control selectpicker" multiple data-selected-text-format="count > 8" required>
+          <label class="ml-5" for="emp_id">Employee<span style="color:red; font-size: 20px;">*</span></label><br>
+          <select id="emp_id" name="emp_id[]" class="form-control w-75 ml-5 selectpicker border border-dark" multiple data-selected-text-format="count > 8" required>
             <?php foreach($emp as $em):  ?>
               <option value=<?php echo $em['emp_id']; ?>><?php echo $em['emp_name'];?></option>
             <?php endforeach; ?>

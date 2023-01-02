@@ -94,6 +94,11 @@
 
 
 /*Modals style*/
+.crud-text h5{
+    color: #344F21;
+    font-weight: bold;
+}
+
 .form-group input{
 	padding: 0.50rem;
   font-size: 1rem;
@@ -109,9 +114,14 @@
 		margin: 0px 30px;
 }
 
-.form-group #time, #time_update, #start_event_update{
+.form-group #time, #time_update, #start_event_update, {
 	width: 87%;
 }
+
+.form-group #client_id_modal{
+	width: 90%;
+}
+
 
 .form-group #serv_id{
 	width: 90%;
@@ -138,6 +148,11 @@
 
 .form-group #serv-select{
 	margin-left: 20px;
+}
+
+.form-group #serv-select1{
+	margin-left: 35px;
+	width: 80%;
 }
 
 
