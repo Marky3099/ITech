@@ -49,13 +49,13 @@
    var update = '';
    <?php if(session()->has('msg')){?>
       msg = true;
-      del = 'Aircon is Deleted Successfully';
+      del = 'Restricted Date is Deleted Successfully';
    <?php }elseif(session()->has('add')){?>
       add = true;
-      del = 'New Aircon is Added Successfully';
+      del = 'New Restricted Date is Added Successfully';
    <?php }elseif(session()->has('update')){?>
       update = true;
-      del = 'Aircon Details are Updated Successfully';
+      del = 'Restricted Date is Updated Successfully';
       <?php }?>;
 </script>
 <script type="text/javascript" src="<?= base_url('assets/js/crud.js')?>"></script>
