@@ -110,16 +110,29 @@
   border-radius: 4px;
 }
 
+.form-group input#time{
+	width: 87%;
+}
+
+#Calserv_id{
+	margin-left: 35px;
+	width: 84%;
+}
+
 #serv-form{
 		margin: 0px 30px;
 }
 
-.form-group #time, #time_update, #start_event_update, {
+.form-group #time, #time_update, #start_event_update{
 	width: 87%;
 }
 
 .form-group #client_id_modal{
 	width: 90%;
+}
+
+.form-group #calName{
+	width: 87%;
 }
 
 
@@ -129,6 +142,22 @@
 
 .form-group label .serv_id_update{
 	margin-left: 20px;
+}
+
+.form-group label.Calservlbl, .form-group label.emp_idlbl{
+	margin-left: 30px;
+}
+
+.form-group label.emp_idlbll{
+	margin-left: 35px;
+}
+
+.form-group label.serv_idlbl, .form-group label.serv_id_updatelbl{
+	margin-left: 5px;
+}
+
+.form-group label.serv_idlblll{
+	margin-left: 35px;
 }
 
 .form-group .select-dropdown, .select-dropdown * {
@@ -147,14 +176,14 @@
 }
 
 .form-group #serv-select{
-	margin-left: 20px;
+	margin-left: 5px;
+  width: 92%;
 }
 
 .form-group #serv-select1{
 	margin-left: 35px;
-	width: 80%;
+	width: 84%;
 }
-
 
 .form-group .select-dropdown select{
   font-size: 1rem;
@@ -324,6 +353,7 @@ tbody{
 
 .form-group #emp_id, #emp_id_update{
 	width: 25rem;
+	margin-left: 30px;
 }
 /*.form-group #quantity{
 	width: 70px;

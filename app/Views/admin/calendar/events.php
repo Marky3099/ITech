@@ -34,11 +34,11 @@
                     <td id="modal_appt_code"></td>
                   </tr>
                   <tr>
-                    <th>Area:</th>
+                    <th>Branch Area:</th>
                     <td id="modal_area"></td>
                   </tr>
                   <tr>
-                    <th>Client Branch:</th>
+                    <th>Branch Name:</th>
                     <td id="modal_branch"></td>
                   </tr>
                   <tr>
@@ -203,8 +203,8 @@
               <th>Date</th>
               <th>Time</th>
               <th>Task Code</th>
-              <th>Log Code</th>
-              <th>Appt Code</th>
+              <th>Branch Name</th>
+              <th>Service</th>
               <th>Status</th>
               <th>Action</th>
            </tr>
@@ -221,17 +221,25 @@
                      <?php echo $dat->time; ?>
                   <?php endif;?>
                </td>
-               <td><?php echo $dat->event_code; ?></td>
-               <?php if($dat->log_code != ""):?>
+               <td>
+                  <?php echo $dat->event_code; ?>
+               </td>
+               <td>
+                  <?php echo $dat->client_branch; ?>
+               </td>
+                  <!-- <?php if($dat->log_code != ""):?>
                   <td><?php echo $dat->log_code; ?></td>
                <?php else: ?>
                   <td>N/A</td>
-               <?php endif;?>
-               <?php if($dat->appt_code != ""):?>
+               <?php endif;?> -->
+               <td>
+                  <?php echo $dat->serv_type; ?>
+               </td>
+               <!-- <?php if($dat->appt_code != ""):?>
                   <td><?php echo $dat->appt_code; ?></td>
                <?php else: ?>
                   <td>N/A</td>
-               <?php endif;?>
+               <?php endif;?> -->
                
                <?php if($dat->status == 'Pending'):?>
                 <td style="color:#4F6FA6;"><b>

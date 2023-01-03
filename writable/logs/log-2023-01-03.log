@@ -1,0 +1,37 @@
+CRITICAL - 2023-01-03 22:54:06 --> Undefined variable $dat
+#0 C:\xampp\htdocs\tsms\app\Views\admin\calendar\today.php(133): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined varia...', 'C:\\xampp\\htdocs...', 133)
+#1 C:\xampp\htdocs\tsms\system\View\View.php(214): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('admin/calendar/...', Array, true)
+#4 C:\xampp\htdocs\tsms\app\Views\templates\template.php(3): view('admin/calendar/...')
+#5 C:\xampp\htdocs\tsms\system\View\View.php(214): include('C:\\xampp\\htdocs...')
+#6 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#7 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('templates/templ...', Array, true)
+#8 C:\xampp\htdocs\tsms\app\Controllers\FullCalendar.php(1326): view('templates/templ...', Array)
+#9 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\FullCalendar->daily()
+#10 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FullCalendar))
+#11 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#13 {main}
+CRITICAL - 2023-01-03 22:54:21 --> Undefined variable $dat
+#0 C:\xampp\htdocs\tsms\app\Views\admin\calendar\today.php(132): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined varia...', 'C:\\xampp\\htdocs...', 132)
+#1 C:\xampp\htdocs\tsms\system\View\View.php(214): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('admin/calendar/...', Array, true)
+#4 C:\xampp\htdocs\tsms\app\Views\templates\template.php(3): view('admin/calendar/...')
+#5 C:\xampp\htdocs\tsms\system\View\View.php(214): include('C:\\xampp\\htdocs...')
+#6 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#7 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('templates/templ...', Array, true)
+#8 C:\xampp\htdocs\tsms\app\Controllers\FullCalendar.php(1326): view('templates/templ...', Array)
+#9 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\FullCalendar->daily()
+#10 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FullCalendar))
+#11 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#13 {main}
+CRITICAL - 2023-01-03 09:12:22 --> Undefined array key 2
+#0 C:\xampp\htdocs\tsms\app\Controllers\AppointmentCrud.php(363): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array...', 'C:\\xampp\\htdocs...', 363)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\AppointmentCrud->update()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AppointmentCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}

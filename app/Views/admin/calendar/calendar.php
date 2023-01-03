@@ -89,7 +89,7 @@
           </div>
         </div>
         <div class="form-group" id="serv-form">
-          <label for="serv_id">Service</label><br>
+          <label class="serv_idlbl" for="serv_id">Service</label><br>
           <div class="select-dropdown" id="serv-select">
             <select id="serv_id" name="serv_id" class="form-control" required>
             <?php foreach($servName as $s):  ?>
@@ -146,7 +146,7 @@
         <div id="auth-rows"></div>
         <div class="form-group">
           
-          <label class="ml-5" for="emp_id">Employee</label><br>
+          <label class="emp_idlbll" for="emp_id">Employee</label><br>
           <select id="emp_id" name="emp_id[]" class="form-control w-75 ml-5 selectpicker border border-dark" multiple data-selected-text-format="count > 8" required>
           </select>
         </div> 
@@ -224,7 +224,7 @@
         </div>
         
         <div class="form-group" id="serv-form">
-          <label for="serv_id_update">Service</label><br>
+          <label class="serv_id_updatelbl" for="serv_id_update">Service</label><br>
           <div class="select-dropdown" id="serv-select">
             <select class="form-control" id="serv_id_update" name="serv_id_update">
             <?php foreach($servName as $s):  ?>

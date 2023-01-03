@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+<link rel="stylesheet" href="<?= base_url('assets/css/main.min.css')?>">
 
 <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -97,6 +98,7 @@
         <div class="form-group">
           <input class="form-control" type="hidden" name="title" id="title" placeholder="Title">
         </div>
+        <div class="crud-text"><h5>Client Details:</h5></div>
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="date">Date</label><br>
@@ -107,7 +109,6 @@
             <input type="time" name="time" id="time">
           </div>
         </div>
-        <h3>Client Details:</h3>
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="calArea">Branch Area</label><br>
@@ -121,11 +122,11 @@
         </div>
         <div class="form-group">
           
-          <label for="Calserv_id">Service</label><br>
+          <label class="Calservlbl" for="Calserv_id">Service</label><br>
           <input type="hidden" id="serv_id_modal" name="serv_id_modal">
           <input id="Calserv_id" name="Calserv_id" class="form-control">
-        </div>
-        <h3>Aircon Details:</h3>
+        </div><br>
+         <div class="crud-text"><h5>Aircon Details:</h5></div>
         <div class="form-row">
           <div class="form-group col-md-3">
             
@@ -153,8 +154,8 @@
         <div id="auth-rows"></div>
         <div class="form-group">
           
-          <label for="emp_id">Employee<span style="color:red; font-size: 20px;">*</span></label><br>
-          <select id="emp_id" name="emp_id[]" class="form-control selectpicker" multiple data-selected-text-format="count > 8" required>
+          <label class="emp_idlbl" for="emp_id">Employee<span style="color:red; font-size: 20px;">*</span></label><br>
+          <select id="emp_id" name="emp_id[]" class="form-control w-75 ml-5 selectpicker border border-dark" multiple data-selected-text-format="count > 8" required>
             <?php foreach($emp as $em):  ?>
               <option value=<?php echo $em['emp_id']; ?>><?php echo $em['emp_name'];?></option>
             <?php endforeach; ?>

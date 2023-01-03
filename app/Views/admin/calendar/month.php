@@ -36,11 +36,11 @@
                     <td id="modal_appt_code"></td>
                   </tr>
                   <tr>
-                    <th>Area:</th>
+                    <th>Branch Area:</th>
                     <td id="modal_area"></td>
                   </tr>
                   <tr>
-                    <th>Client Branch:</th>
+                    <th>Branch Name:</th>
                     <td id="modal_branch"></td>
                   </tr>
                   <tr>
@@ -110,8 +110,8 @@
                  <th>Date</th>
                  <th>Time</th>
                  <th>Task Code</th>
-                 <th>Log Code</th>
-                 <th>Appt Code</th>
+                 <th>Branch Name</th>
+                 <th>Service</th>
                  <th>Status</th>
                  <th>Action</th>
                  
@@ -130,16 +130,18 @@
                         <?php endif;?>
                      </td>
                      <td><?php echo $m->event_code; ?></td>
-                     <?php if($m->log_code != ""):?>
+                     <td><?php echo $m->client_branch ?></td>
+                     <!-- <?php if($m->log_code != ""):?>
                         <td><?php echo $m->log_code; ?></td>
                      <?php else: ?>
                         <td>N/A</td>
-                     <?php endif;?>
-                     <?php if($m->appt_code != ""):?>
+                     <?php endif;?> -->
+                     <td><?php echo $m->serv_type ?></td>
+                     <!-- <?php if($m->appt_code != ""):?>
                         <td><?php echo $m->appt_code; ?></td>
                      <?php else: ?>
                         <td>N/A</td>
-                     <?php endif;?>
+                     <?php endif;?> -->
                      <?php if($m->status == 'Pending'):?>
                         <td style="color:#4F6FA6;"><b>
                      <?php echo $m->status; ?>

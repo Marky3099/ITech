@@ -31,11 +31,11 @@
                     <td id="modal_log_code"></td>
                   </tr>
                   <tr>
-                    <th>Area:</th>
+                    <th>Branch Area:</th>
                     <td id="modal_area"></td>
                   </tr>
                   <tr>
-                    <th>Client Branch:</th>
+                    <th>Branch Name:</th>
                     <td id="modal_branch"></td>
                   </tr>
                   <tr>
@@ -126,7 +126,7 @@
         </div>
         <div class="form-group">
           
-          <label class="ml-5" for="serv_id">Service<span style="color:red; font-size: 20px;">*</span></label><br>
+          <label class="serv_idlblll" for="serv_id">Service<span style="color:red; font-size: 20px;">*</span></label><br>
           <div class="select-dropdown" id="serv-select1">
             <select name="serv_id" class="form-control" required>
             <?php foreach($servName as $s):  ?>
@@ -200,16 +200,16 @@
       <div class="card-body filter">
       <form action="<?= base_url('/calllogs/filtered');?>" method="GET">
          <div class="row">
-            <div class="col-lg-2">
+            <div class="mt-2 col-lg-2">
                <div class="form-group">
                   <label>Start Date:</label><br>
-                  <input type="date" name="start_date" class="form-control" value="<?php if(isset($_GET['start_date'])){echo $_GET['start_date'];} ?>" required>
+                  <input type="date" name="start_date" class="form-control border border-default" value="<?php if(isset($_GET['start_date'])){echo $_GET['start_date'];} ?>" required>
                </div>
             </div>
-            <div class="col-lg-2">
+            <div class="mt-2 col-lg-2">
                <div class="form-group">
                   <label>To Date:</label><br>
-                  <input type="date" name="to_date" class="form-control" value="<?php if(isset($_GET['to_date'])){echo $_GET['to_date'];} ?>" required>
+                  <input type="date" name="to_date" class="form-control border border-default" value="<?php if(isset($_GET['to_date'])){echo $_GET['to_date'];} ?>" required>
                </div>
             </div>
             
@@ -287,13 +287,13 @@
 </div>
 <div class="mt-3 mr-5">
     <?php if($view_calllogs):?>
-       <table class="table stable-bordered" serv_id="users-list" id="table1" style="font-size: 1rem;">
+       <table class="table stable-bordered table-hover" serv_id="users-list" id="table1" style="font-size: 1rem;">
          <thead>
           <tr>
-           <th>DATE</th>
+           <th>Date</th>
            <th>Log Code</th>
-           <th>STATUS</th>
-           <th>ACTION</th>
+           <th>Status</th>
+           <th>Action</th>
        </tr>
    </thead>
    <tbody>
