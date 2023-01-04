@@ -61,15 +61,14 @@
 
       <div class="user-box" style="margin-top: 5px;">
         <label>FCU Number</label>
-        <select id="fcuno_update" name="fcuno_update[]" multiple="multiple">
+          <select id="fcuno_update" name="fcuno_update[]" multiple="multiple">
           <?php foreach($fcu_no as $f):  ?>
             <?php foreach($fcu_views as $fv):  ?>
               <option value="<?php echo $f['fcuno'];?>"<?php if($f['fcuno']==$fv['fcuno'])echo 'selected';?>><p id="s2option"><?php echo $f['fcu'];?></p></option>
             <?php endforeach; ?>
           <?php endforeach; ?>
         </select>
-    
-      </div>
+      </div><br>
 
       <div class="container1">
         <button type="submit" class="btn btn-success">Update</button>

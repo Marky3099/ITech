@@ -37,11 +37,11 @@
                     <td id="modal_appt_code"></td>
                   </tr>
                   <tr>
-                    <th>Area:</th>
+                    <th>Branch Area:</th>
                     <td id="modal_area"></td>
                   </tr>
                   <tr>
-                    <th>Client Branch:</th>
+                    <th>Branch Name:</th>
                     <td id="modal_branch"></td>
                   </tr>
                   <tr>
@@ -100,7 +100,7 @@
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-md-12">
-				<div class="card mt-5 card1">
+				<div class="card mt-5 mb-5 card1">
 					<div class="card-header">
 						<h3>Detailed Exception Report (Pending Tasks)</h3>
 					</div>				
@@ -168,7 +168,7 @@
             
                   <div class="col-lg-1">
                     <div class="form-group">
-                        <button type="submit" class="btn btn-success btn-sm" id="sub">Generate</button>
+                        <button type="submit" class="btn mb-1 btn-success btn-sm" id="sub">Generate</button>
                         <a href="<?= base_url('reports/exception') ?>" type="button" class="btn btn-secondary btn-sm">Reset</a>
                     </div>
                   </div>
@@ -202,14 +202,14 @@
 			<div class="card mt-4 card2">
 				<div class="card-body">
 					<?php if($event):?>
-						<table class="table table-bordered" id="table1">
+						<table class="table table-bordered table-hover" id="table1">
 							<thead>
 								<tr>
 									<th>Date</th>
 					                <th>Time</th>
 					                <th>Task Code</th>
-					                <th>Log Code</th>
-					                <th>Appt Code</th>
+					                <th>Branch Name</th>
+					                <th>Service</th>
 					                <th>Status</th>
 					                <th>Action</th>
 								</tr>
@@ -229,16 +229,18 @@
 					                        <?php endif;?>
 					                        </td>
 											<td><?php echo $dat->event_code; ?></td>
-											<?php if($dat->log_code != ""):?>
+                                            <td><?php echo $dat->client_branch ?></td>
+											<!-- <?php if($dat->log_code != ""):?>
 						                    <td><?php echo $dat->log_code; ?></td>
 						                    <?php else: ?>
 						                       <td>N/A</td>
-						                    <?php endif;?>
-						                    <?php if($dat->appt_code != ""):?>
+						                    <?php endif;?> -->
+                                            <td><?php echo $dat->serv_type ?></td>
+						                    <!-- <?php if($dat->appt_code != ""):?>
 						                       <td><?php echo $dat->appt_code; ?></td>
 						                    <?php else: ?>
 						                       <td>N/A</td>
-						                    <?php endif;?>
+						                    <?php endif;?> -->
 											<td><?php echo $dat->status; ?></td>
 											<td><a href="#" id="<?=$dat->id?>" class="btn btn-info btn-sm view">View</a></td>
 										</tr>

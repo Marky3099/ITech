@@ -34,11 +34,11 @@
                     <td id="modal_appt_code"></td>
                   </tr>
                   <tr>
-                    <th>Area:</th>
+                    <th>Branch Area:</th>
                     <td id="modal_area"></td>
                   </tr>
                   <tr>
-                    <th>Client Branch:</th>
+                    <th>Branch Name:</th>
                     <td id="modal_branch"></td>
                   </tr>
                   <tr>
@@ -167,7 +167,7 @@
             <div class="col-lg-1">
                <div class="form-group">
                   <button type="submit" class="btn btn-success" id="sub">Generate</button>
-                  <a href="<?= base_url('calendar/events') ?>" type="button" class="btn btn-secondary">Reset</a>
+                  <a href="<?= base_url('calendar/events') ?>" type="button" class="btn mt-1 btn-secondary">Reset</a>
                </div>
             </div>
          
@@ -185,7 +185,7 @@
                      <a href="<?= base_url('/calendar/events/filtered/print/'.$_GET['start_date']."/".$_GET['to_date']."/".$_GET['serv']."/".$client_id)?>" target="_blank" class="btn btn-info" id="print">Print</a>
                   <?php elseif(isset($_GET['start_date']) && isset($_GET['to_date']) && !isset($_GET['serv']) && isset($_GET['client_id'])):?>
                      <?php $serv = '""'?>
-                     <a href="<?= base_url('/calendar/events/filtered/print/'.$_GET['start_date']."/".$_GET['to_date']."/".$serv."/".$_GET['client_id'])?>" target="_blank" class="btn btn-info" id="print">Print</a>   
+                     <a href="<?= base_url('/calendar/events/filtered/print/'.$_GET['start_date']."/".$_GET['to_date']."/".$serv."/".$_GET['client_id'])?>" target="_blank" class="btn ml-3 btn-info" id="print">Print</a>   
                  
                      
                   <?php endif; ?>
@@ -203,8 +203,8 @@
               <th>Date</th>
               <th>Time</th>
               <th>Task Code</th>
-              <th>Log Code</th>
-              <th>Appt Code</th>
+              <th>Branch Name</th>
+              <th>Service</th>
               <th>Status</th>
               <th>Action</th>
            </tr>
@@ -221,17 +221,25 @@
                      <?php echo $dat->time; ?>
                   <?php endif;?>
                </td>
-               <td><?php echo $dat->event_code; ?></td>
-               <?php if($dat->log_code != ""):?>
+               <td>
+                  <?php echo $dat->event_code; ?>
+               </td>
+               <td>
+                  <?php echo $dat->client_branch; ?>
+               </td>
+                  <!-- <?php if($dat->log_code != ""):?>
                   <td><?php echo $dat->log_code; ?></td>
                <?php else: ?>
                   <td>N/A</td>
-               <?php endif;?>
-               <?php if($dat->appt_code != ""):?>
+               <?php endif;?> -->
+               <td>
+                  <?php echo $dat->serv_type; ?>
+               </td>
+               <!-- <?php if($dat->appt_code != ""):?>
                   <td><?php echo $dat->appt_code; ?></td>
                <?php else: ?>
                   <td>N/A</td>
-               <?php endif;?>
+               <?php endif;?> -->
                
                <?php if($dat->status == 'Pending'):?>
                 <td style="color:#4F6FA6;"><b>
@@ -254,7 +262,7 @@
 </tbody>
 </table>
 <?php else: ?>
-   <h3 style="text-align:center;">Ooops.. No work Yet!</h3>
+   <h4 style="text-align:center;">Ooops.. No scheduled task yet!</h4>
 <?php endif; ?>
 </div>
 </div>

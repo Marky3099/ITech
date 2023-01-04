@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="<?= base_url('assets/css/formstyle.css')?>">
 <link rel="stylesheet" href="<?= base_url('assets/css/style.css')?>">
+<link rel="stylesheet" href="<?= base_url('assets/css/main.min.css')?>">
 <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/select2.css')?>">
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
  
@@ -30,11 +31,11 @@
                     <td id="modal_log_code"></td>
                   </tr>
                   <tr>
-                    <th>Area:</th>
+                    <th>Branch Area:</th>
                     <td id="modal_area"></td>
                   </tr>
                   <tr>
-                    <th>Client Branch:</th>
+                    <th>Branch Name:</th>
                     <td id="modal_branch"></td>
                   </tr>
                   <tr>
@@ -101,6 +102,7 @@
         <div class="form-group">
           <input class="form-control" type="hidden" name="title" id="title" placeholder="Title">
         </div>
+        <div class="crud-text"><h5>Client Details:</h5></div>
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="time">Date</label><br>
@@ -111,7 +113,6 @@
             <input type="time" name="time" id="time" value="00:00:00">
           </div>
         </div>
-        <h3>Client Details:</h3>
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="area">Branch Area</label><br>
@@ -125,8 +126,9 @@
         </div>
         <div class="form-group">
           
-          <label for="serv_id">Service<span style="color:red; font-size: 20px;">*</span></label><br>
-          <select name="serv_id" class="form-control" required>
+          <label class="serv_idlblll" for="serv_id">Service<span style="color:red; font-size: 20px;">*</span></label><br>
+          <div class="select-dropdown" id="serv-select1">
+            <select name="serv_id" class="form-control" required>
             <?php foreach($servName as $s):  ?>
               <optgroup label="<?= $s['serv_name']; ?>">
                 <?php foreach($servType as $st):  ?>
@@ -137,8 +139,9 @@
               </optgroup>
             <?php endforeach; ?>
           </select>
-        </div>
-        <h3>Aircon Details:</h3>
+          </div>
+        </div><br>
+        <div class="crud-text"><h5>Aircon Details:</h5></div>
         <div class="form-row">
           <div class="form-group col-md-3">
             
@@ -166,8 +169,8 @@
         <div id="auth-rows"></div>
         <div class="form-group">
           
-          <label for="emp_id">Employee<span style="color:red; font-size: 20px;">*</span></label><br>
-          <select id="emp_id" name="emp_id[]" class="form-control selectpicker" multiple data-selected-text-format="count > 8" required>
+          <label class="ml-5" for="emp_id">Employee<span style="color:red; font-size: 20px;">*</span></label><br>
+          <select id="emp_id" name="emp_id[]" class="form-control w-75 ml-5 selectpicker border border-dark" multiple data-selected-text-format="count > 8" required>
             <?php foreach($emp as $em):  ?>
               <option value=<?php echo $em['emp_id']; ?>><?php echo $em['emp_name'];?></option>
             <?php endforeach; ?>
@@ -197,16 +200,16 @@
       <div class="card-body filter">
       <form action="<?= base_url('/calllogs/filtered');?>" method="GET">
          <div class="row">
-            <div class="col-lg-2">
+            <div class="mt-2 col-lg-2">
                <div class="form-group">
                   <label>Start Date:</label><br>
-                  <input type="date" name="start_date" class="form-control" value="<?php if(isset($_GET['start_date'])){echo $_GET['start_date'];} ?>" required>
+                  <input type="date" name="start_date" class="form-control border border-default" value="<?php if(isset($_GET['start_date'])){echo $_GET['start_date'];} ?>" required>
                </div>
             </div>
-            <div class="col-lg-2">
+            <div class="mt-2 col-lg-2">
                <div class="form-group">
                   <label>To Date:</label><br>
-                  <input type="date" name="to_date" class="form-control" value="<?php if(isset($_GET['to_date'])){echo $_GET['to_date'];} ?>" required>
+                  <input type="date" name="to_date" class="form-control border border-default" value="<?php if(isset($_GET['to_date'])){echo $_GET['to_date'];} ?>" required>
                </div>
             </div>
             
@@ -252,7 +255,7 @@
             
             <div class="col-lg-1">
                <div class="form-group">
-                  <button type="submit" class="btn btn-success" id="sub">Generate</button>
+                  <button type="submit" class="btn mb-1 btn-success" id="sub">Generate</button>
                   <a href="<?= base_url('calllogs') ?>" type="button" class="btn btn-secondary">Reset</a>
                </div>
             </div>
@@ -282,15 +285,15 @@
 </div>   
 
 </div>
-<div class="mt-3">
+<div class="mt-3 mr-5">
     <?php if($view_calllogs):?>
-       <table class="table table-bordered" serv_id="users-list" id="table1" style="font-size: 1.2rem;">
+       <table class="table stable-bordered table-hover" serv_id="users-list" id="table1" style="font-size: 1rem;">
          <thead>
           <tr>
-           <th>DATE</th>
+           <th>Date</th>
            <th>Log Code</th>
-           <th>STATUS</th>
-           <th>ACTION</th>
+           <th>Status</th>
+           <th>Action</th>
        </tr>
    </thead>
    <tbody>

@@ -51,6 +51,8 @@
         <div class="form-group">
           <input class="form-control" type="hidden" name="title" id="title" placeholder="Title">
         </div>
+
+        <div class="crud-text"><h5>Client Details:</h5></div>
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="time">Time</label><br>
@@ -58,34 +60,38 @@
           </div>
           <div class="form-group col-md-6">
             <label for="repeatable">Repeat</label><br>
-            <select id="repeatable" name = "repeatable">
+            <div class="select-dropdown">
+              <select id="repeatable" name = "repeatable">
               <option value="None">None</option>
               <option value="Weekly">Weekly</option>
               <option value="Monthly">Monthly</option>
-            </select>
+              </select>
+            </div>
           </div>
         </div>
-        <div class="crud-text"><h4>Client Details:</h4></div>
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="area">Branch Area</label><br>
-            <select id="area" name="area" class="form-control">
-              <?php foreach($area as $cl):  ?>
-                <option value=<?php echo $cl['area']; ?>><?php echo $cl['area'];?></option>
-              <?php endforeach; ?>
-            </select>
+              <div class="select-dropdown">
+                <select id="area" name="area" class="form-control">
+                <?php foreach($area as $cl):  ?>
+                  <option value=<?php echo $cl['area']; ?>><?php echo $cl['area'];?></option>
+                <?php endforeach; ?>
+                </select>
+              </div>
           </div>
           <div class="form-group col-md-6">
             <label for="client_id">Branch Name</label><br>
-            <select id="client_id" name="client_id" class="form-control" required>
-
-            </select>
+            <div class="select-dropdown">
+              <select id="client_id" name="client_id" class="form-control" required>
+              </select>
+            </div>
           </div>
         </div>
-        <div class="form-group">
-          
-          <label for="serv_id">Service</label><br>
-          <select id="serv_id" name="serv_id" class="form-control" required>
+        <div class="form-group" id="serv-form">
+          <label class="serv_idlbl" for="serv_id">Service</label><br>
+          <div class="select-dropdown" id="serv-select">
+            <select id="serv_id" name="serv_id" class="form-control" required>
             <?php foreach($servName as $s):  ?>
               <optgroup label="<?= $s['serv_name']; ?>">
                 <?php foreach($servType as $st):  ?>
@@ -95,32 +101,34 @@
                 <?php endforeach; ?>
               </optgroup>
             <?php endforeach; ?>
-          </select>
-        </div>
-        <h3>Aircon Details:</h3>
+            </select>
+          </div>
+        </div><br>
+        <div class="crud-text"><h5>Aircon Details:</h5></div>
         <div class="form-row">
           <div class="form-group col-md-3">
-            
             <label for="dbrand">Device Brand</label>
-            <select id="device_brand" name="device_brand[]" class="form-control " data-id="0"required>
-              <option value="">Select Brand</option>
-              <?php foreach($device_brand as $d_b):  ?>
+            <div class="select-dropdown">
+                <select id="device_brand" name="device_brand[]" class="form-control " data-id="0"required>
+                <option value="">Select Brand</option>
+                <?php foreach($device_brand as $d_b):  ?>
                 <option value=<?php echo $d_b['device_brand']; ?>><?php echo $d_b['device_brand'];?></option>
-              <?php endforeach; ?>
+                <?php endforeach; ?>
             </select>
+            </div>
           </div> 
           <div class="form-group col-md-3">
-            
             <label for="aircont">Aircon Type</label>
-
-            <select id="aircon_id_0" name="aircon_id[]" class="form-control aircon" required>
+            <div class="select-dropdown">
+              <select id="aircon_id_0" name="aircon_id[]" class="form-control aircon" required>
               <option value="">Select Type</option>
             </select>
+            </div>
           </div> 
           <div class="form-group col-md-3">
             
             <label for="fcunos">Fcuno</label>
-            <select id="fcuno" name="fcuno0[]" class="selectpicker" data-width="100%" multiple data-selected-text-format="count > 3" required>
+            <select id="fcuno" name="fcuno0[]" class="selectpicker border border-dark" data-width="100%" multiple data-selected-text-format="count > 3" required>
               <?php foreach($fcu_no as $f):  ?>
                 <option value="<?php echo $f['fcuno']; ?>"><p id="s2option"><?php echo $f['fcu'];?></p></option>
               <?php endforeach; ?>
@@ -138,17 +146,16 @@
         <div id="auth-rows"></div>
         <div class="form-group">
           
-          <label for="emp_id">Employee</label><br>
-          <select id="emp_id" name="emp_id[]" class="form-control selectpicker" multiple data-selected-text-format="count > 8" required>
-            
+          <label class="emp_idlbll" for="emp_id">Employee</label><br>
+          <select id="emp_id" name="emp_id[]" class="form-control w-75 ml-5 selectpicker border border-dark" multiple data-selected-text-format="count > 8" required>
           </select>
         </div> 
 
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn py-2 btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn py-2 btn-primary">Save changes</button>
       </div>
     </form>
   </div>
@@ -162,10 +169,6 @@
       <div class="modal-header">
 
         <h3 class="modal-title">Edit Schedule </h3>
-        
-          
-       
-        
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -175,8 +178,9 @@
         <div class="modal-body" id="adata">
           <input type="hidden" name="id" id="id" value="">
 
+          <div class="crud-text"><h5>Client Details:</h5></div>
           <!-- <h5>Title</h5> -->
-          <input class="form-control" type="hidden" name="title_update" id="title_update" placeholder="Title">
+          <input type="hidden" name="title_update" id="title_update" placeholder="Title">
           <div class="form-row">
             <div class="form-group col-md-4">
               <label for="event_code">Event Code: </label>
@@ -194,7 +198,7 @@
           <div class="form-row">
             <div class="form-group col-md-6">
              <label for="start_event_update">Reschedule</label><br>
-             <input type="text" name="start_event_update" id="start_event_update" class="form-control datepicker datee" placeholder="mm-dd-yyyy" autocomplete="off" required>
+             <input type="text" name="start_event_update" id="start_event_update" class="datepicker datee" placeholder="mm-dd-yyyy" autocomplete="off" required>
              <!-- <input type="text" name="date" id="date" > -->
            </div>
            <div class="form-group col-md-6">
@@ -202,26 +206,27 @@
             <input type="time" name="time_update" id="time_update">
           </div>
         </div>
-        <h3>Client Details:</h3>
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="area_update">Branch Area</label><br>
-            <select id="area_update" name="area_update" class="form-control">
-              
+            <div class="select-dropdown">
+              <select id="area_update" name="area_update">
             </select>
+            </div>
           </div>
           <div class="form-group col-md-6">
             <label for="client_id_update">Branch Name</label><br>
-            <select id="client_id_update" name="client_id_update" class="form-control">
-
-            </select>
+            <div class="select-dropdown">
+              <select id="client_id_update" name="client_id_update" class="form-control">
+              </select>
+            </div>
           </div>
         </div>
         
-        <div class="form-group">
-          
-          <label for="serv_id_update">Service</label><br>
-          <select class="form-control" id="serv_id_update" name="serv_id_update">
+        <div class="form-group" id="serv-form">
+          <label class="serv_id_updatelbl" for="serv_id_update">Service</label><br>
+          <div class="select-dropdown" id="serv-select">
+            <select class="form-control" id="serv_id_update" name="serv_id_update">
             <?php foreach($servName as $s):  ?>
               <optgroup label="<?= $s['serv_name']; ?>">
                 <?php foreach($servType as $st):  ?>
@@ -232,34 +237,35 @@
               </optgroup>
             <?php endforeach; ?>
           </select>
-        </div> 
+          </div>
+        </div> <br>
 
-         <h3>Aircon Details:</h3>
+        <div class="crud-text"><h5>Aircon Details:</h5></div>
 
         <!-- =================================================== -->
         <div id="auth-rows-edit"></div>
 
 
         <div class="form-row" >
-          <div class="form-group col-md-12" align="center" style="background-color:lightgreen;">
+          <div class="form-group mt-2 col-md-12" align="center">
             <span id="add_aut_update" class="btn btn-primary"><i class="fa-solid fa-plus"></i></span>
           </div> 
         </div>
 
         <div class="form-group">
           
-          <label for="emp_id_update">Employee</label><br>
-          <select id="emp_id_update" name="emp_id_update[]" class="form-control selectpicker" multiple data-selected-text-format="count > 8">
+          <label class="ml-5" for="emp_id_update">Employee</label><br>
+          <select id="emp_id_update" name="emp_id_update[]" class="form-control w-75 ml-5 selectpicker border border-dark" multiple data-selected-text-format="count > 8">
             <!--  -->
           </select>
         </div> 
       </div>
       <div class="modal-footer">
         <div class="form-group">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn py-2 btn-secondary" data-dismiss="modal">Close</button>
           
 
-          <button type="submit" name="update_sched" class="btn btn-success">Save changes</button>
+          <button type="submit" name="update_sched" class="btn py-2 btn-success">Save changes</button>
         </div>
       </form>
     </div>
@@ -314,24 +320,28 @@ var count_update = 1;
     <div class="form-group col-md-3">
     
     <label for="dbrand">Device Brand</label>
-    <select id="device_brand" name="device_brand[]" class="form-control " data-id="`+count+`"required>
-    <option value="0">Select Brand</option>
-    <?php foreach($device_brand as $d_b):  ?>
+    <div class="select-dropdown">
+      <select id="device_brand" name="device_brand[]" class="form-control " data-id="`+count+`"required>
+      <option value="0">Select Brand</option>
+      <?php foreach($device_brand as $d_b):  ?>
       <option value=<?php echo $d_b['device_brand']; ?>><?php echo $d_b['device_brand'];?></option>
-    <?php endforeach; ?>
-    </select>
+      <?php endforeach; ?>
+      </select>
+    </div>
     </div> 
     <div class="form-group col-md-3">
     
     <label for="aircont">Aircon Type</label>
+    <div class="select-dropdown">
     <select id="aircon_id_`+count+`" name="aircon_id[]" class="form-control aircon" required>
     <option value="0">Select Type</option>
     </select>
+    </div>
     </div> 
     <div class="form-group col-md-3">
     
     <label for="fcunos">Fcuno</label>
-    <select id="fcuno" name="fcuno`+count+`[]" class="selectpicker" data-width="100%" multiple data-selected-text-format="count > 2">
+    <select id="fcuno" name="fcuno`+count+`[]" class="selectpicker border border-dark" data-width="100%" multiple data-selected-text-format="count > 2">
     <?php foreach($fcu_no as $f):  ?>
       <option value="<?php echo $f['fcuno']; ?>"><p id="s2option"><?php echo $f['fcu'];?></p></option>
     <?php endforeach; ?>
@@ -364,25 +374,29 @@ var count_update = 1;
     <div class="form-group col-md-3">
     
     <label for="dbrand">Device Brand</label>
+    <div class="select-dropdown">
     <select id="device_brand_update" name="device_brand[]" class="form-control " data-id="`+count_update+`"required>
     <option value="0">Select Brand</option>
     <?php foreach($device_brand as $d_b):  ?>
       <option value=<?php echo $d_b['device_brand']; ?>><?php echo $d_b['device_brand'];?></option>
     <?php endforeach; ?>
     </select>
+    </div>
     </div> 
     <div class="form-group col-md-3">
     
     <label for="aircont">Aircon Type</label>
+    <div class="select-dropdown">
     <select id="aircon_update_id_`+count_update+`" name="aircon_update_id[]" class="form-control aircon" data-id="`+count_update+`" required>
     <option value="0">Select Type</option>
     </select>
+    </div>
     </div> 
 
     <div class="form-group col-md-3">
     
     <label for="fcunos">Fcuno</label>
-    <select id="fcuno_update_`+count_update+`"  class="selectpicker" data-width="100%" multiple data-selected-text-format="count > 2">
+    <select id="fcuno_update_`+count_update+`"  class="selectpicker border border-dark" data-width="100%" multiple data-selected-text-format="count > 2">
     <option value="1">FCU 1</option>
     <option value="2">FCU 2</option>
     <option value="3">FCU 3</option>

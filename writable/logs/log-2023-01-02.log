@@ -98,8 +98,13 @@ CRITICAL - 2023-01-02 09:17:32 --> syntax error, unexpected '?>'
 #9 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #10 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
 #11 {main}
+<<<<<<< HEAD
 ERROR - 2023-01-02 09:03:03 --> Column 'status' cannot be null
 CRITICAL - 2023-01-02 09:03:03 --> Column 'status' cannot be null
+=======
+ERROR - 2023-01-02 08:59:51 --> Column 'status' cannot be null
+CRITICAL - 2023-01-02 08:59:51 --> Column 'status' cannot be null
+>>>>>>> 8f5fc50d1161bdb7fdbcb705ceb5e7979b086372
 #0 C:\xampp\htdocs\tsms\system\Database\MySQLi\Connection.php(292): mysqli->query('INSERT INTO `ca...', 0)
 #1 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ca...')
 #2 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ca...')
@@ -113,8 +118,13 @@ CRITICAL - 2023-01-02 09:03:03 --> Column 'status' cannot be null
 #10 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #11 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
 #12 {main}
+<<<<<<< HEAD
 ERROR - 2023-01-02 09:03:09 --> Column 'status' cannot be null
 CRITICAL - 2023-01-02 09:03:09 --> Column 'status' cannot be null
+=======
+ERROR - 2023-01-02 08:59:55 --> Column 'status' cannot be null
+CRITICAL - 2023-01-02 08:59:55 --> Column 'status' cannot be null
+>>>>>>> 8f5fc50d1161bdb7fdbcb705ceb5e7979b086372
 #0 C:\xampp\htdocs\tsms\system\Database\MySQLi\Connection.php(292): mysqli->query('INSERT INTO `ca...', 0)
 #1 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ca...')
 #2 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ca...')
@@ -128,6 +138,7 @@ CRITICAL - 2023-01-02 09:03:09 --> Column 'status' cannot be null
 #10 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #11 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
 #12 {main}
+<<<<<<< HEAD
 ERROR - 2023-01-02 09:11:17 --> Column 'status' cannot be null
 CRITICAL - 2023-01-02 09:11:17 --> Column 'status' cannot be null
 #0 C:\xampp\htdocs\tsms\system\Database\MySQLi\Connection.php(292): mysqli->query('INSERT INTO `ca...', 0)
@@ -250,6 +261,10 @@ CRITICAL - 2023-01-02 09:47:15 --> Column 'status' cannot be null
 #12 {main}
 ERROR - 2023-01-02 09:49:31 --> Column 'status' cannot be null
 CRITICAL - 2023-01-02 09:49:31 --> Column 'status' cannot be null
+=======
+ERROR - 2023-01-02 08:59:56 --> Column 'status' cannot be null
+CRITICAL - 2023-01-02 08:59:56 --> Column 'status' cannot be null
+>>>>>>> 8f5fc50d1161bdb7fdbcb705ceb5e7979b086372
 #0 C:\xampp\htdocs\tsms\system\Database\MySQLi\Connection.php(292): mysqli->query('INSERT INTO `ca...', 0)
 #1 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ca...')
 #2 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ca...')
@@ -263,8 +278,13 @@ CRITICAL - 2023-01-02 09:49:31 --> Column 'status' cannot be null
 #10 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #11 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
 #12 {main}
+<<<<<<< HEAD
 ERROR - 2023-01-02 09:53:42 --> Column 'status' cannot be null
 CRITICAL - 2023-01-02 09:53:42 --> Column 'status' cannot be null
+=======
+ERROR - 2023-01-02 09:00:29 --> Column 'status' cannot be null
+CRITICAL - 2023-01-02 09:00:29 --> Column 'status' cannot be null
+>>>>>>> 8f5fc50d1161bdb7fdbcb705ceb5e7979b086372
 #0 C:\xampp\htdocs\tsms\system\Database\MySQLi\Connection.php(292): mysqli->query('INSERT INTO `ca...', 0)
 #1 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ca...')
 #2 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ca...')
@@ -278,6 +298,7 @@ CRITICAL - 2023-01-02 09:53:42 --> Column 'status' cannot be null
 #10 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #11 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
 #12 {main}
+<<<<<<< HEAD
 ERROR - 2023-01-02 09:54:52 --> Column 'status' cannot be null
 CRITICAL - 2023-01-02 09:54:52 --> Column 'status' cannot be null
 #0 C:\xampp\htdocs\tsms\system\Database\MySQLi\Connection.php(292): mysqli->query('INSERT INTO `ca...', 0)
@@ -476,10 +497,16 @@ CRITICAL - 2023-01-02 21:50:13 --> Column 'status' cannot be null
 CRITICAL - 2023-01-02 21:51:20 --> Undefined index: date
 #0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(352): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 352, Array)
 #1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->store()
+=======
+CRITICAL - 2023-01-02 09:01:21 --> Undefined variable $data
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(532): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined varia...', 'C:\\xampp\\htdocs...', 532)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->cancel()
+>>>>>>> 8f5fc50d1161bdb7fdbcb705ceb5e7979b086372
 #2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
 #3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
 #5 {main}
+<<<<<<< HEAD
 ERROR - 2023-01-02 21:53:47 --> Column 'status' cannot be null
 CRITICAL - 2023-01-02 21:53:47 --> Column 'status' cannot be null
 #0 C:\xampp\htdocs\tsms\system\Database\MySQLi\Connection.php(292): mysqli->query('INSERT INTO `ca...', 0)
@@ -502,3 +529,5 @@ CRITICAL - 2023-01-02 23:47:02 --> Undefined variable: client_branch
 #3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
 #5 {main}
+=======
+>>>>>>> 8f5fc50d1161bdb7fdbcb705ceb5e7979b086372
