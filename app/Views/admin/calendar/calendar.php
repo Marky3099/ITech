@@ -54,7 +54,7 @@
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="time">Time</label><br>
-            <input type="time" name="time" id="time" value="00:00:00">
+            <input type="time" name="time" id="time" required>
           </div>
           <div class="form-group col-md-6">
             <label for="repeatable">Repeat</label><br>

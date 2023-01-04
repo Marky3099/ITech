@@ -298,25 +298,28 @@ json_encode($data['event_pending']);
 foreach ($data['event_pending'] as $key => $value) {
     $data['pending_event']= (int)$value->count;
 }
-
+$data['appt_pending'] = [];
 // Pending Appointment
 $data['pending_appt'] = $appt->where('appt_status = "Pending" ORDER BY appt_date ASC')->findAll();
 $data['count_appt'] = count($data['pending_appt']);
 // dd($data['count_appt']);
-
-foreach ($data['pending_appt'] as $key => $value) {
+if($data['pending_appt'] != 0){
+    foreach ($data['pending_appt'] as $key => $value) {
     
- // dd($data['pending']);
- $data['appt_pending'][]= (object)[
-    "appt_id"=> $value['appt_id'],
-    "appt_date"=> $value['appt_date'],
-    "appt_code"=>$value['appt_code'],
-    "appt_status"=>$value['appt_status'],
-    
-];
+     // dd($data['pending']);
+     $data['appt_pending'][]= (object)[
+        "appt_id"=> $value['appt_id'],
+        "appt_date"=> $value['appt_date'],
+        "appt_code"=>$value['appt_code'],
+        "appt_status"=>$value['appt_status'],
+        
+    ];
+    }
 }
 
+// dd($data['pending_appt']);
 // Pending Logs
+$data['log_pending'] = [];
 $data['pending_log'] = $logs->where('status = "Pending" ORDER BY date ASC')->findAll();
 $data['count_log'] = count($data['pending_log']);
 // dd($data['count_log']);
@@ -334,6 +337,7 @@ foreach ($data['pending_log'] as $key => $value) {
 }
 
 // Pending users
+$data['user_pending'] = [];
 $data['pending_user'] = $bdo_user->where('status = "Pending" ORDER BY bdo_id ASC')->findAll();
 $data['count_user'] = count($data['pending_user']);
 // dd($data['count_log']);

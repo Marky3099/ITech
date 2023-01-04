@@ -87,7 +87,7 @@
  </div>
  <div class="mt-3">
    <?php if($view_appoint):?>
-    <table class="table table-bordered" id="table1" style="font-size: 1.2rem;">
+    <table class="table table-bordered" id="appt-table" style="font-size: 1.2rem;">
      <thead>
         <tr>
            <th>Date</th>

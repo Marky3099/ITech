@@ -284,6 +284,9 @@
              data: form ,// serializes form input
              success: function(data){
                window.location.href = '/tsms/calllogs'; 
+             },
+             error: function(){
+              alert('Feature currently not Available');
              }
            });
         });

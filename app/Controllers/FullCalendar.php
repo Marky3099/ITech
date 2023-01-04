@@ -1138,13 +1138,15 @@ public function update(){
     $Event_fcu = new Event_fcu();
     $event_id = $this->request->getVar('id');
     $client_name = $this->request->getVar('client_id_update');
-
+    
     $client_branch = $Client->where('client_id',$client_name)->first();
+    $title = date("g:ia",strtotime($_POST["time_update"]))." ".$client_branch['client_branch'];
     $start_date = explode('/',$this->request->getVar('start_event_update'));
 
     $event_update = [
+
         'start_event' => $start_date[2].'-'.$start_date[0].'-'.$start_date[1],
-        'title' => date("g:ia",strtotime($this->request->getVar('time_update')))." ".$client_branch['client_branch'],
+        'title' => $title,
         'time' => $this->request->getVar('time_update'),
             // 'aircon_id' => (int)($this->request->getVar('aircon_id_update')),
         'client_id'  => (int)($this->request->getVar('client_id_update')),

@@ -31,7 +31,7 @@ class AppointmentCrud extends Controller
         $data['view_appoint'] =[];
         $data['fcu_no'] = $fcu_no->orderBy('fcuno', 'ASC')->findAll();
         $data['fcu_appt'] = $Appt_fcu_views->orderBy('appt_id', 'ASC')->findAll();
-        $data['appoint'] = $Appoint->where('user_id',$session_id)->findAll();
+        $data['appoint'] = $Appoint->where('user_id',$session_id)->orderBy('appt_id', 'DESC')->findAll();
         $data['client'] = $Client->orderBy('client_id', 'ASC')->findAll();
         $data['area'] = $Client->select('area')->groupBy('area')->findAll();
         $data['aircon'] = $Aircon->orderBy('aircon_id', 'ASC')->findAll();
@@ -235,7 +235,6 @@ return view("templates/template",$data);
 }
 public function store() {
     
-    
     $Appoint = new Appointment();
     $Appt_fcu = new Appt_fcu();
     $Client = new Client();
@@ -358,18 +357,35 @@ public function update(){
 
     $appt_id = $this->request->getVar('appt_id');
     $start_date = explode('/',$this->request->getVar('appt_date'));
-
-    $data = [
-        'appt_date' => $start_date[2].'-'.$start_date[0].'-'.$start_date[1],
-        'appt_time' => $this->request->getVar('appt_time'),
-        'area' => $this->request->getVar('area'),
-        'serv_id'=> $this->request->getVar('serv_id'),
-        'aircon_id' => (int)($this->request->getVar('aircon_id_update')),
-        'client_id'  => (int)($this->request->getVar('client_id_update')),
-        'device_brand' => $this->request->getVar('device_brand'),
-        'qty' => $this->request->getVar('qty'),
-        'status' => $this->request->getVar('status')
-    ];
+    if(count($start_date) == 1){
+        $start_date = explode('-',$this->request->getVar('appt_date'));
+        $data = [
+            'appt_date' => $start_date[2].'-'.$start_date[0].'-'.$start_date[1],
+            // 'appt_date' => $this->request->getVar('appt_date'),
+            'appt_time' => $this->request->getVar('appt_time'),
+            'area' => $this->request->getVar('area'),
+            'serv_id'=> $this->request->getVar('serv_id'),
+            'aircon_id' => (int)($this->request->getVar('aircon_id_update')),
+            'client_id'  => (int)($this->request->getVar('client_id_update')),
+            'device_brand' => $this->request->getVar('device_brand'),
+            'qty' => $this->request->getVar('qty'),
+            'status' => $this->request->getVar('status')
+        ];
+    }else{
+        $data = [
+            'appt_date' => $start_date[2].'-'.$start_date[0].'-'.$start_date[1],
+            // 'appt_date' => $this->request->getVar('appt_date'),
+            'appt_time' => $this->request->getVar('appt_time'),
+            'area' => $this->request->getVar('area'),
+            'serv_id'=> $this->request->getVar('serv_id'),
+            'aircon_id' => (int)($this->request->getVar('aircon_id_update')),
+            'client_id'  => (int)($this->request->getVar('client_id_update')),
+            'device_brand' => $this->request->getVar('device_brand'),
+            'qty' => $this->request->getVar('qty'),
+            'status' => $this->request->getVar('status')
+        ];
+    }
+    
     $Appoint->update($appt_id, $data);
     $Appt_fcu->where('appt_id', $appt_id)->delete();
     if (isset($_POST['fcuno_update'])) {
