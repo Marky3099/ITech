@@ -393,7 +393,6 @@ public function clientDashboard(){
     $data['count_approve'] = count($data['approve']);
     $data['count_complete'] = count($data['complete']);
     $data['count_reject'] = count($data['reject']);
-    $data['percent'] = round(($data['count_complete']/$data['count_total'])*100);
     $data['events'] = $events->orderBy('id', 'ASC')->findAll();
     $data['event'] = array();
     $data['branch'] = array();
@@ -408,7 +407,9 @@ public function clientDashboard(){
     $data['servType'] = $serv->orderBy('serv_name','ASC')->findAll();
     $data['aircon'] = $aircon->orderBy('aircon_id', 'ASC')->findAll();
     $data['device_brand'] = $aircon->select('device_brand')->groupBy('device_brand')->findAll();
- 
+    if($data['count_total']!=0){
+        $data['percent'] = round(($data['count_complete']/$data['count_total'])*100);
+    }
     $db = \Config\Database::connect();
         $query   = $db->query('SELECT DISTINCT aircon_id,id,device_brand,aircon_type,quantity
             FROM event_fcu_views');
