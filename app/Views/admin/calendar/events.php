@@ -214,13 +214,18 @@
           <?php foreach($event as $dat):  ?>
              <tr>
                <td><?php echo date('m-d-Y',strtotime($dat->start_event)); ?></td>
-               <td>
-                  <?php if($dat->time == "00:00:00"): ?>
-                     <?php echo "N/A"; ?>
+                  <?php $time = explode(":",$dat->time);?>
+                 <?php if($time[0] == '00'):?>
+                     <td>N/A</td>
+                  <?php elseif ($time[0]>=12):?>
+                      <?php $hour = $time[0] - 12;?>
+                      <?php $amPm = "PM";?>
+                      <td><?php echo $hour . ":" . $time[1] . " " . $amPm;?></td>
                   <?php else:?>
-                     <?php echo $dat->time; ?>
+                      <?php $hour = $time[0]; ?>
+                      <?php $amPm = "AM"; ?>
+                      <td><?php echo  ltrim($hour, '0') . ":" . $time[1] . " " . $amPm;?></td>
                   <?php endif;?>
-               </td>
                <td>
                   <?php echo $dat->event_code; ?>
                </td>
@@ -348,7 +353,7 @@
             } else {
                 var hour = time[0]; 
                 var amPm = "AM";
-                formatTime = hour + ":" + time[1] + " " + amPm;
+                formatTime = parseInt(hour) + ":" + time[1] + " " + amPm;
             }
             
              $('#modal_time').html(formatTime);

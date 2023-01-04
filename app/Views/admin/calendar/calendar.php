@@ -110,7 +110,7 @@
             <label for="dbrand">Device Brand</label>
             <div class="select-dropdown">
                 <select id="device_brand" name="device_brand[]" class="form-control " data-id="0"required>
-                <option value="">Select Brand</option>
+                  <option value="">Select Type</option>
                 <?php foreach($device_brand as $d_b):  ?>
                 <option value=<?php echo $d_b['device_brand']; ?>><?php echo $d_b['device_brand'];?></option>
                 <?php endforeach; ?>

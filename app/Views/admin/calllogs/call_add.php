@@ -277,7 +277,8 @@
         
         $("#submit2").click(function(e) {
           e.preventDefault();
-          var form = $('#add_create').serializeArray(); 
+          // var form = $('#add_create').serializeArray();
+          var form = { name: 'Hello'};
           $.ajax({
            type: "POST",
            url: "/tsms/calllogs/add",

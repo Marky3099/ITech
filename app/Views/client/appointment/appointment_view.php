@@ -101,7 +101,18 @@
       <?php foreach($view_appoint as $appt):  ?>
         <tr>
            <td><?php echo $appt->appt_date; ?></td>
-           <td><?php echo $appt->appt_time; ?></td>
+           <?php $time = explode(":",$appt->appt_time);?>
+                 <?php if($time[0] == '00'):?>
+                     <td>N/A</td>
+                  <?php elseif ($time[0]>=12):?>
+                      <?php $hour = $time[0] - 12;?>
+                      <?php $amPm = "PM";?>
+                      <td><?php echo $hour . ":" . $time[1] . " " . $amPm;?></td>
+                  <?php else:?>
+                      <?php $hour = $time[0]; ?>
+                      <?php $amPm = "AM"; ?>
+                      <td><?php echo  ltrim($hour, '0') . ":" . $time[1] . " " . $amPm;?></td>
+                  <?php endif;?>
            <td><?php echo $appt->appt_code; ?></td>
            <td><?php echo $appt->appt_status; ?></td>
            <td>
@@ -196,7 +207,7 @@
             } else {
                 var hour = time[0]; 
                 var amPm = "AM";
-                formatTime = hour + ":" + time[1] + " " + amPm;
+                formatTime = parseInt(hour) + ":" + time[1] + " " + amPm;
             }
             
             $('#modal_time').html(formatTime);

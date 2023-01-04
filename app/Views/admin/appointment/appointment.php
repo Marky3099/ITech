@@ -203,7 +203,7 @@
             <?php else:?>
                 <?php $hour = $time[0]; ?>
                 <?php $amPm = "AM"; ?>
-                <td><?php echo $hour . ":" . $time[1] . " " . $amPm;?></td>
+                <td><?php echo ltrim($hour, '0') . ":" . $time[1] . " " . $amPm;?></td>
             <?php endif;?>
            <td><?php echo $appt->appt_code; ?></td>
            <td><?php echo $appt->appt_status; ?></td>
@@ -430,7 +430,7 @@
             } else {
                 var hour = time[0]; 
                 var amPm = "AM";
-                formatTime = hour + ":" + time[1] + " " + amPm;
+                formatTime = parseInt(hour) + ":" + time[1] + " " + amPm;
             }
             
              $('#modal_time').html(formatTime);

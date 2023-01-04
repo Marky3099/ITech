@@ -343,6 +343,7 @@ public function store() {
     if($_SESSION['position'] != USER_ROLE_ADMIN){
         return $this->response->redirect(site_url('/dashboard'));
     }
+    dd($_POST);
     $Call_logs = new Call_logs();
     $Client = new Client();
     $Aircon = new Aircon();

@@ -126,13 +126,18 @@
                <?php foreach($week as $w):  ?>
                   <tr>
                      <td><?php echo date('m-d-Y',strtotime($w->start_event)); ?></td>
-                     <td>
-                        <?php if($w->time == "00:00:00"): ?>
-                           <?php echo "N/A"; ?>
-                        <?php else:?>
-                           <?php echo $w->time; ?>
-                        <?php endif;?>
-                     </td>
+                     <?php $time = explode(":",$w->time);?>
+                     <?php if($time[0] == '00'):?>
+                         <td>N/A</td>
+                      <?php elseif ($time[0]>=12):?>
+                          <?php $hour = $time[0] - 12;?>
+                          <?php $amPm = "PM";?>
+                          <td><?php echo $hour . ":" . $time[1] . " " . $amPm;?></td>
+                      <?php else:?>
+                          <?php $hour = $time[0]; ?>
+                          <?php $amPm = "AM"; ?>
+                          <td><?php echo  ltrim($hour, '0') . ":" . $time[1] . " " . $amPm;?></td>
+                      <?php endif;?>
                      <td><?php echo $w->event_code; ?></td>
                      <td><?php echo $w->client_branch ?></td>
                      <!-- <?php if($w->log_code != ""):?>
@@ -241,7 +246,7 @@
             } else {
                 var hour = time[0]; 
                 var amPm = "AM";
-                formatTime = hour + ":" + time[1] + " " + amPm;
+                formatTime = parseInt(hour) + ":" + time[1] + " " + amPm;
             }
             
              $('#modal_time').html(formatTime);
