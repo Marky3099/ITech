@@ -49,3 +49,563 @@ CRITICAL - 2023-01-04 06:15:15 --> Undefined property: stdClass::$time
 #11 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #12 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
 #13 {main}
+CRITICAL - 2023-01-04 19:17:06 --> syntax error, unexpected '$this' (T_VARIABLE)
+#0 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#1 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('admin/reports/a...', Array, true)
+#2 C:\xampp\htdocs\tsms\app\Controllers\Reports.php(340): view('admin/reports/a...', Array)
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Reports->printAccomplished('2023-01-01', '2023-01-31', '""', '""')
+#4 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Reports))
+#5 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2023-01-04 19:17:51 --> syntax error, unexpected '>'
+#0 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#1 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('admin/reports/a...', Array, true)
+#2 C:\xampp\htdocs\tsms\app\Controllers\Reports.php(340): view('admin/reports/a...', Array)
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Reports->printAccomplished('2023-01-01', '2023-01-31', '""', '""')
+#4 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Reports))
+#5 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2023-01-04 19:21:23 --> syntax error, unexpected 'echo' (T_ECHO)
+#0 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#1 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('admin/reports/a...', Array, true)
+#2 C:\xampp\htdocs\tsms\app\Controllers\Reports.php(340): view('admin/reports/a...', Array)
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Reports->printAccomplished('2023-01-01', '2023-01-31', '""', '""')
+#4 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Reports))
+#5 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2023-01-04 19:23:41 --> syntax error, unexpected '$this' (T_VARIABLE)
+#0 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#1 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('admin/reports/a...', Array, true)
+#2 C:\xampp\htdocs\tsms\app\Controllers\Reports.php(340): view('admin/reports/a...', Array)
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Reports->printAccomplished('2023-01-01', '2023-01-31', '""', '""')
+#4 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Reports))
+#5 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2023-01-04 19:23:58 --> syntax error, unexpected '$this' (T_VARIABLE)
+#0 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#1 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('admin/reports/a...', Array, true)
+#2 C:\xampp\htdocs\tsms\app\Controllers\Reports.php(340): view('admin/reports/a...', Array)
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Reports->printAccomplished('2023-01-01', '2023-01-31', '""', '""')
+#4 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Reports))
+#5 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2023-01-04 19:28:50 --> Allowed memory size of 536870912 bytes exhausted (tried to allocate 262144 bytes)
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2023-01-04 19:51:20 --> Invalid argument supplied for foreach()
+#0 C:\xampp\htdocs\tsms\app\Libraries\tcpdf\tcpdf.php(5681): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Invalid argumen...', 'C:\\xampp\\htdocs...', 5681, Array)
+#1 C:\xampp\htdocs\tsms\app\Libraries\tcpdf\tcpdf.php(5313): TCPDF->getCellBorder(287.00008333333, 185, 60, 185, 5)
+#2 C:\xampp\htdocs\tsms\app\Libraries\tcpdf\tcpdf.php(5126): TCPDF->getCellCode(60, 185, '_____', 5, 0, '', false, '', 0, true, 'T', 'M')
+#3 C:\xampp\htdocs\tsms\app\Views\admin\reports\exceptionPrint.php(99): TCPDF->Cell(60, 185, '_____', 5, 0)
+#4 C:\xampp\htdocs\tsms\app\Libraries\tcpdf\tcpdf.php(3666): MYPDF->Footer()
+#5 C:\xampp\htdocs\tsms\app\Libraries\tcpdf\tcpdf.php(3212): TCPDF->setFooter()
+#6 C:\xampp\htdocs\tsms\app\Libraries\tcpdf\tcpdf.php(3194): TCPDF->endPage()
+#7 C:\xampp\htdocs\tsms\app\Libraries\tcpdf\tcpdf.php(5038): TCPDF->AddPage('L')
+#8 C:\xampp\htdocs\tsms\app\Libraries\tcpdf\tcpdf.php(18096): TCPDF->checkPageBreak(8.819444)
+#9 C:\xampp\htdocs\tsms\app\Views\admin\reports\exceptionPrint.php(278): TCPDF->writeHTML('<table cellspac...', true, 0, true, true)
+#10 C:\xampp\htdocs\tsms\system\View\View.php(214): include('C:\\xampp\\htdocs...')
+#11 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#12 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('admin/reports/e...', Array, true)
+#13 C:\xampp\htdocs\tsms\app\Controllers\Reports.php(652): view('admin/reports/e...', Array)
+#14 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Reports->printException('2023-01-01', '2023-01-31', '""', '""')
+#15 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Reports))
+#16 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#17 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#18 {main}
+ERROR - 2023-01-04 19:57:24 --> Unknown column 'Distinct' in 'field list'
+CRITICAL - 2023-01-04 19:57:24 --> Unknown column 'Distinct' in 'field list'
+#0 C:\xampp\htdocs\tsms\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `Distinc...', 0)
+#1 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `Distinc...')
+#2 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `Distinc...')
+#3 C:\xampp\htdocs\tsms\system\Database\BaseBuilder.php(1443): CodeIgniter\Database\BaseConnection->query('SELECT `Distinc...', Array, false)
+#4 C:\xampp\htdocs\tsms\system\Model.php(183): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\tsms\system\BaseModel.php(584): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\xampp\htdocs\tsms\app\Controllers\Reports.php(594): CodeIgniter\BaseModel->findAll()
+#7 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Reports->printException('2023-01-01', '2023-01-31', '""', '""')
+#8 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Reports))
+#9 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#11 {main}
+CRITICAL - 2023-01-04 19:59:24 --> Undefined variable: data
+#0 C:\xampp\htdocs\tsms\app\Controllers\Reports.php(651): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 651, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Reports->printException('2023-01-01', '2023-01-31', '""', '""')
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Reports))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-04 20:00:37 --> array_push() expects parameter 1 to be array, string given
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'array_push() ex...', 'C:\\xampp\\htdocs...', 608, Array)
+#1 C:\xampp\htdocs\tsms\app\Controllers\Reports.php(608): array_push('BDO MANILA II')
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Reports->printException('2023-01-01', '2023-01-31', '""', '""')
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Reports))
+#4 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2023-01-04 20:02:03 --> array_unique() expects parameter 2 to be int, string given
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'array_unique() ...', 'C:\\xampp\\htdocs...', 608, Array)
+#1 C:\xampp\htdocs\tsms\app\Controllers\Reports.php(608): array_unique(Array, 'BDO MANILA II')
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Reports->printException('2023-01-01', '2023-01-31', '""', '""')
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Reports))
+#4 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2023-01-04 20:05:06 --> Undefined variable: uniq_area
+#0 C:\xampp\htdocs\tsms\app\Views\admin\reports\exceptionPrint.php(90): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 90, Array)
+#1 C:\xampp\htdocs\tsms\app\Libraries\tcpdf\tcpdf.php(3666): MYPDF->Footer()
+#2 C:\xampp\htdocs\tsms\app\Libraries\tcpdf\tcpdf.php(3212): TCPDF->setFooter()
+#3 C:\xampp\htdocs\tsms\app\Libraries\tcpdf\tcpdf.php(3194): TCPDF->endPage()
+#4 C:\xampp\htdocs\tsms\app\Libraries\tcpdf\tcpdf.php(5038): TCPDF->AddPage('L')
+#5 C:\xampp\htdocs\tsms\app\Libraries\tcpdf\tcpdf.php(18096): TCPDF->checkPageBreak(8.819444)
+#6 C:\xampp\htdocs\tsms\app\Views\admin\reports\exceptionPrint.php(283): TCPDF->writeHTML('<table cellspac...', true, 0, true, true)
+#7 C:\xampp\htdocs\tsms\system\View\View.php(214): include('C:\\xampp\\htdocs...')
+#8 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#9 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('admin/reports/e...', Array, true)
+#10 C:\xampp\htdocs\tsms\app\Controllers\Reports.php(655): view('admin/reports/e...', Array)
+#11 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Reports->printException('2023-01-01', '2023-01-31', '""', '""')
+#12 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Reports))
+#13 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#14 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#15 {main}
+CRITICAL - 2023-01-04 20:06:02 --> Undefined variable: uniq_area
+#0 C:\xampp\htdocs\tsms\app\Views\admin\reports\exceptionPrint.php(90): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 90, Array)
+#1 C:\xampp\htdocs\tsms\app\Libraries\tcpdf\tcpdf.php(3666): MYPDF->Footer()
+#2 C:\xampp\htdocs\tsms\app\Libraries\tcpdf\tcpdf.php(3212): TCPDF->setFooter()
+#3 C:\xampp\htdocs\tsms\app\Libraries\tcpdf\tcpdf.php(3194): TCPDF->endPage()
+#4 C:\xampp\htdocs\tsms\app\Libraries\tcpdf\tcpdf.php(5038): TCPDF->AddPage('L')
+#5 C:\xampp\htdocs\tsms\app\Libraries\tcpdf\tcpdf.php(18096): TCPDF->checkPageBreak(8.819444)
+#6 C:\xampp\htdocs\tsms\app\Views\admin\reports\exceptionPrint.php(283): TCPDF->writeHTML('<table cellspac...', true, 0, true, true)
+#7 C:\xampp\htdocs\tsms\system\View\View.php(214): include('C:\\xampp\\htdocs...')
+#8 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#9 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('admin/reports/e...', Array, true)
+#10 C:\xampp\htdocs\tsms\app\Controllers\Reports.php(655): view('admin/reports/e...', Array)
+#11 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Reports->printException('2023-01-01', '2023-01-31', '""', '""')
+#12 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Reports))
+#13 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#14 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#15 {main}
+CRITICAL - 2023-01-04 20:08:55 --> preg_split() expects parameter 2 to be string, array given
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'preg_split() ex...', 'C:\\xampp\\htdocs...', 1814, Array)
+#1 C:\xampp\htdocs\tsms\app\Libraries\tcpdf\include\tcpdf_static.php(1814): preg_split('//u', Array, -1, 1)
+#2 C:\xampp\htdocs\tsms\app\Libraries\tcpdf\include\tcpdf_fonts.php(2003): TCPDF_STATIC::pregSplit('//', 'u', Array, -1, 1)
+#3 C:\xampp\htdocs\tsms\app\Libraries\tcpdf\include\tcpdf_fonts.php(2027): TCPDF_FONTS::UTF8StringToArray(Array, true, Array)
+#4 C:\xampp\htdocs\tsms\app\Libraries\tcpdf\tcpdf.php(5318): TCPDF_FONTS::UTF8ToLatin1(Array, true, Array)
+#5 C:\xampp\htdocs\tsms\app\Libraries\tcpdf\tcpdf.php(5126): TCPDF->getCellCode(269.00008333333, 10, Array, 0, false, 'L', 0, '', 0, true, 'T', 'M')
+#6 C:\xampp\htdocs\tsms\app\Views\admin\reports\exceptionPrint.php(92): TCPDF->Cell(0, 10, Array, 0, false, 'L', 0, '', 0, false, 'T', 'M')
+#7 C:\xampp\htdocs\tsms\app\Libraries\tcpdf\tcpdf.php(3666): MYPDF->Footer()
+#8 C:\xampp\htdocs\tsms\app\Libraries\tcpdf\tcpdf.php(3212): TCPDF->setFooter()
+#9 C:\xampp\htdocs\tsms\app\Libraries\tcpdf\tcpdf.php(3194): TCPDF->endPage()
+#10 C:\xampp\htdocs\tsms\app\Libraries\tcpdf\tcpdf.php(5038): TCPDF->AddPage('L')
+#11 C:\xampp\htdocs\tsms\app\Libraries\tcpdf\tcpdf.php(18096): TCPDF->checkPageBreak(8.819444)
+#12 C:\xampp\htdocs\tsms\app\Views\admin\reports\exceptionPrint.php(283): TCPDF->writeHTML('<table cellspac...', true, 0, true, true)
+#13 C:\xampp\htdocs\tsms\system\View\View.php(214): include('C:\\xampp\\htdocs...')
+#14 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#15 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('admin/reports/e...', Array, true)
+#16 C:\xampp\htdocs\tsms\app\Controllers\Reports.php(655): view('admin/reports/e...', Array)
+#17 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Reports->printException('2023-01-01', '2023-01-31', '""', '""')
+#18 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Reports))
+#19 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#20 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#21 {main}
+CRITICAL - 2023-01-04 21:33:38 --> Trying to access array offset on value of type null
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(525): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', 'C:\\xampp\\htdocs...', 525, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->cancel()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-04 21:33:51 --> Trying to access array offset on value of type null
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(525): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', 'C:\\xampp\\htdocs...', 525, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->cancel()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-04 21:35:02 --> Undefined variable: log_code
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(519): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 519, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->cancel()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-04 21:36:25 --> Trying to access array offset on value of type null
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(525): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', 'C:\\xampp\\htdocs...', 525, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->cancel()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-04 21:37:43 --> Trying to access array offset on value of type null
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(525): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', 'C:\\xampp\\htdocs...', 525, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->cancel()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-04 21:38:13 --> Trying to access array offset on value of type null
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(525): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', 'C:\\xampp\\htdocs...', 525, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->cancel()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-04 21:39:55 --> Trying to access array offset on value of type null
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(525): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', 'C:\\xampp\\htdocs...', 525, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->cancel()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-04 21:39:57 --> Trying to access array offset on value of type null
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(525): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', 'C:\\xampp\\htdocs...', 525, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->cancel()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-04 21:40:12 --> Trying to access array offset on value of type null
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(525): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', 'C:\\xampp\\htdocs...', 525, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->cancel()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-04 21:40:17 --> Trying to access array offset on value of type null
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(525): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', 'C:\\xampp\\htdocs...', 525, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->cancel()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-04 21:40:20 --> Trying to access array offset on value of type null
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(525): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', 'C:\\xampp\\htdocs...', 525, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->cancel()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-04 21:43:37 --> Trying to access array offset on value of type null
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(525): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', 'C:\\xampp\\htdocs...', 525, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->cancel()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-04 21:44:43 --> Trying to access array offset on value of type null
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(525): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', 'C:\\xampp\\htdocs...', 525, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->cancel()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-04 21:45:35 --> Trying to access array offset on value of type null
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(525): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', 'C:\\xampp\\htdocs...', 525, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->cancel()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-04 21:45:46 --> Trying to access array offset on value of type null
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(525): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', 'C:\\xampp\\htdocs...', 525, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->cancel()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-04 21:46:10 --> Trying to access array offset on value of type null
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(525): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', 'C:\\xampp\\htdocs...', 525, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->cancel()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-04 21:48:22 --> Trying to access array offset on value of type null
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(525): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', 'C:\\xampp\\htdocs...', 525, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->cancel()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-04 21:50:11 --> Trying to access array offset on value of type null
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(525): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', 'C:\\xampp\\htdocs...', 525, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->cancel()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-04 21:59:27 --> Trying to access array offset on value of type null
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(525): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', 'C:\\xampp\\htdocs...', 525, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->cancel()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-04 21:59:53 --> Trying to access array offset on value of type null
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(525): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', 'C:\\xampp\\htdocs...', 525, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->cancel()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-04 22:00:00 --> Trying to access array offset on value of type null
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(525): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', 'C:\\xampp\\htdocs...', 525, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->cancel()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-04 22:00:17 --> Trying to access array offset on value of type null
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(525): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', 'C:\\xampp\\htdocs...', 525, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->cancel()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-04 22:00:48 --> Trying to access array offset on value of type null
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(525): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', 'C:\\xampp\\htdocs...', 525, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->cancel()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-04 22:01:35 --> Trying to access array offset on value of type null
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(525): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', 'C:\\xampp\\htdocs...', 525, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->cancel()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-04 22:02:27 --> Trying to access array offset on value of type null
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(525): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', 'C:\\xampp\\htdocs...', 525, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->cancel()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-04 22:02:40 --> Trying to access array offset on value of type null
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(525): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', 'C:\\xampp\\htdocs...', 525, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->cancel()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-04 22:04:12 --> Trying to access array offset on value of type null
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(525): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', 'C:\\xampp\\htdocs...', 525, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->cancel()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-04 22:07:03 --> Trying to access array offset on value of type null
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(525): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', 'C:\\xampp\\htdocs...', 525, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->cancel()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-04 22:07:17 --> Trying to access array offset on value of type null
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(525): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', 'C:\\xampp\\htdocs...', 525, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->cancel()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-04 22:07:56 --> Trying to access array offset on value of type null
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(525): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', 'C:\\xampp\\htdocs...', 525, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->cancel()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-04 22:15:19 --> Trying to access array offset on value of type null
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(525): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', 'C:\\xampp\\htdocs...', 525, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->cancel()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-04 22:15:40 --> Trying to access array offset on value of type null
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(525): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', 'C:\\xampp\\htdocs...', 525, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->cancel()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-04 22:17:20 --> Undefined variable: data
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(533): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 533, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->cancel()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-04 22:18:02 --> Undefined variable: data
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(533): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 533, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->cancel()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-04 22:18:36 --> Undefined variable: data
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(533): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 533, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->cancel()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-04 22:21:03 --> Undefined index: date
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(353): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 353, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->store()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-04 22:21:30 --> Undefined index: date
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(353): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 353, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->store()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-04 22:23:08 --> Undefined index: date
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(353): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 353, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->store()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+ERROR - 2023-01-04 22:25:01 --> Column 'status' cannot be null
+CRITICAL - 2023-01-04 22:25:01 --> Column 'status' cannot be null
+#0 C:\xampp\htdocs\tsms\system\Database\MySQLi\Connection.php(292): mysqli->query('INSERT INTO `ca...', 0)
+#1 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ca...')
+#2 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ca...')
+#3 C:\xampp\htdocs\tsms\system\Database\BaseBuilder.php(1759): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ca...', Array, false)
+#4 C:\xampp\htdocs\tsms\system\Model.php(239): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\tsms\system\BaseModel.php(738): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\tsms\system\Model.php(620): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(366): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->store()
+#9 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#10 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#12 {main}
+ERROR - 2023-01-04 22:26:30 --> Column 'status' cannot be null
+CRITICAL - 2023-01-04 22:26:30 --> Column 'status' cannot be null
+#0 C:\xampp\htdocs\tsms\system\Database\MySQLi\Connection.php(292): mysqli->query('INSERT INTO `ca...', 0)
+#1 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ca...')
+#2 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ca...')
+#3 C:\xampp\htdocs\tsms\system\Database\BaseBuilder.php(1759): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ca...', Array, false)
+#4 C:\xampp\htdocs\tsms\system\Model.php(239): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\tsms\system\BaseModel.php(738): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\tsms\system\Model.php(620): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(366): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->store()
+#9 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#10 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#12 {main}
+ERROR - 2023-01-04 22:28:03 --> Column 'status' cannot be null
+CRITICAL - 2023-01-04 22:28:03 --> Column 'status' cannot be null
+#0 C:\xampp\htdocs\tsms\system\Database\MySQLi\Connection.php(292): mysqli->query('INSERT INTO `ca...', 0)
+#1 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ca...')
+#2 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ca...')
+#3 C:\xampp\htdocs\tsms\system\Database\BaseBuilder.php(1759): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ca...', Array, false)
+#4 C:\xampp\htdocs\tsms\system\Model.php(239): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\tsms\system\BaseModel.php(738): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\tsms\system\Model.php(620): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(366): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->store()
+#9 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#10 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#12 {main}
+CRITICAL - 2023-01-04 22:28:21 --> Undefined index: date
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(353): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 353, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->store()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+ERROR - 2023-01-04 22:30:44 --> Column 'status' cannot be null
+CRITICAL - 2023-01-04 22:30:44 --> Column 'status' cannot be null
+#0 C:\xampp\htdocs\tsms\system\Database\MySQLi\Connection.php(292): mysqli->query('INSERT INTO `ca...', 0)
+#1 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ca...')
+#2 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ca...')
+#3 C:\xampp\htdocs\tsms\system\Database\BaseBuilder.php(1759): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ca...', Array, false)
+#4 C:\xampp\htdocs\tsms\system\Model.php(239): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\tsms\system\BaseModel.php(738): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\tsms\system\Model.php(620): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(366): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->store()
+#9 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#10 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#12 {main}
+ERROR - 2023-01-04 22:31:27 --> Column 'status' cannot be null
+CRITICAL - 2023-01-04 22:31:27 --> Column 'status' cannot be null
+#0 C:\xampp\htdocs\tsms\system\Database\MySQLi\Connection.php(292): mysqli->query('INSERT INTO `ca...', 0)
+#1 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ca...')
+#2 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ca...')
+#3 C:\xampp\htdocs\tsms\system\Database\BaseBuilder.php(1759): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ca...', Array, false)
+#4 C:\xampp\htdocs\tsms\system\Model.php(239): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\tsms\system\BaseModel.php(738): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\tsms\system\Model.php(620): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(366): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->store()
+#9 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#10 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#12 {main}
+ERROR - 2023-01-04 22:32:25 --> Column 'status' cannot be null
+CRITICAL - 2023-01-04 22:32:25 --> Column 'status' cannot be null
+#0 C:\xampp\htdocs\tsms\system\Database\MySQLi\Connection.php(292): mysqli->query('INSERT INTO `ca...', 0)
+#1 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ca...')
+#2 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ca...')
+#3 C:\xampp\htdocs\tsms\system\Database\BaseBuilder.php(1759): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ca...', Array, false)
+#4 C:\xampp\htdocs\tsms\system\Model.php(239): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\tsms\system\BaseModel.php(738): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\tsms\system\Model.php(620): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(366): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->store()
+#9 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#10 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#12 {main}
+CRITICAL - 2023-01-04 22:34:06 --> Undefined index: date
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(353): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 353, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->store()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-04 22:34:25 --> Undefined index: date
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(353): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 353, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->store()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-04 22:38:14 --> Undefined variable: codeC
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(367): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 367, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->store()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-04 22:39:47 --> Undefined variable: successC
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(371): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 371, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->store()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-04 23:20:52 --> Undefined variable: data
+#0 C:\xampp\htdocs\tsms\app\Controllers\CalllogsCrud.php(538): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 538, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\CalllogsCrud->cancel()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\CalllogsCrud))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}

@@ -421,7 +421,7 @@ $('#mymodal .selectpicker').selectpicker();
       //cancel
       $(document).on('click','.cancel', function(e){
         var logCode = e.target.id;
-
+        console.log(logCode);
 
         Swal.fire({
           title: 'Cancel the schedule of this Log??',
@@ -435,15 +435,16 @@ $('#mymodal .selectpicker').selectpicker();
             // Swal.fire('Saved!', '', 'success')
             // alert(logCode);
             $.ajax({
-             method:"POST",
+             type: "POST",
              url:"http://localhost/tsms/calllogs/cancel",
              data: {
                 'log_code': logCode
              },
+             dataType: 'json',
               success: function(response){
                 console.log(response);
 
-              }
+              },
             });
             location.reload();
           }

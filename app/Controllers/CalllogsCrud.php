@@ -343,12 +343,14 @@ public function store() {
     if($_SESSION['position'] != USER_ROLE_ADMIN){
         return $this->response->redirect(site_url('/dashboard'));
     }
-    dd($_POST);
+    // dd($_POST);
     $Call_logs = new Call_logs();
     $Client = new Client();
     $Aircon = new Aircon();
     $Call_fcu = new Call_fcu();
     $fcu_no = new Fcu_no();
+    $set = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $codeC = substr(str_shuffle($set), 0, 4);
     // dd($_POST);
     $start_date = explode('/',$_POST['date']);
     $calllog_create = [
@@ -360,11 +362,14 @@ public function store() {
         'device_brand' => $this->request->getVar('device_brand'),
         'aircon_id' => $this->request->getVar('aircon_id'),
         'qty' => $this->request->getVar('qty'),
-        'status' => $this->request->getVar('status')
+        // 'status' => $this->request->getVar('status')
     ];
     
     $success = $Call_logs->insert($calllog_create);
-
+    $log_code = ['log_code' => 'log-'.$codeC.'-'.(int)$success];
+        if($success){
+            $Call_logs->update((int)$success,$log_code);
+        }
     foreach($this->request->getVar('fcuno') as $key => $value) {
         $Call_fcu->insert([
             'fcuno'=>(int) $value,

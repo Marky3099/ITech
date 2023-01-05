@@ -153,19 +153,13 @@ if($event){
     <thead>
     <tr style = "background-color: #A8D08D; text-align: center; font-size:11px;">
     <th>Date</th>
-    <th>Time</th>
-    <th>Branch Area</th>
-    <th>Branch Name</th>
-    <th>Service/<br>Task</th> 
+    <th>Branch Name</th> 
     <th>Service Type</th>
     <th>Device Brand/<br>Type</th> 
     <th>Aircon Type</th> 
-    <th>FCU No.</th>
     <th>Qty</th> 
     <th>Assigned Person</th>
-    <th>Service/<br>Task Price</th>
     <th>Total Service/<br>Task Price</th>
-    <th>Status</th>
     </tr>
     </thead>
     <tbody>';
@@ -175,12 +169,7 @@ if($event){
      $total = 0;
      $html .='     <tr style="font-size:9px; text-align: center;">
      <td>'.date('m-d-Y',strtotime($dat->start_event)).'</td>
-     <td>';
-     if($dat->time == "00:00:00"){$html .='N/A'; } 
-     else{$html .=$dat->time;} $html .='</td>
-     <td>'.$dat->area.'</td>
      <td>'.$dat->client_branch.'</td>
-     <td>'.$dat->serv_name.'</td>
      <td>'.$dat->serv_type.'</td>
      <td>';
      $current ='';
@@ -206,27 +195,6 @@ if($event){
             }
            }
            $html .='</td><td>';
-           foreach($distinct_event as $dis_event) {
-
-            foreach($distinct as $dis){
-                $current_fcu =0; $concut = '';
-               foreach($dat->fcu_array as $fcu_data){
-                if( (int) $dis_event->id == $dis->id)
-
-                  if( (int) $dis->id == $fcu_data->id){
-                    if( (int) $dis->aircon_id == $fcu_data->aircon_id){
-                     $concut.= $fcu_data->fcu.'<br>';
-                    }
-
-                  }
-               }
-                if( $concut != ''){
-                    $html .= '*'.$concut.'<br>'; 
-                }
-            }
-           }
- $html .='</td>
- <td>';
  $current ='';
 
  foreach($distinct as $data){
@@ -249,8 +217,7 @@ if($event){
  }
  $count+=1;
 }
-$html .='</td>';
-$html .='<td>'.$dat->price.'</td>
+$html .='</td>
 <td>'.$dat->price*$total.'</td>
 <td style="color:#509550;">'.$dat->status.'</td>
 </tr>';
