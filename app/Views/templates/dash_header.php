@@ -4,7 +4,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Task and Scheduling Management System</title>
+    <title>Task and Schedule Management System</title>
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
@@ -152,7 +152,7 @@
         </ul>
     </div>
     <div class="sidebar-header">
-        <div class="text1">Tasks and Schedule Monitoring System
+        <div class="text1">Task and Schedule Monitoring System
             <div class="drop-content">
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Hi, <?php echo $_SESSION['username']?></a>

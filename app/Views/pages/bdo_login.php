@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>BDO Login</title>
+  <title>Partnered Company Login</title>
   <link rel="stylesheet" href="<?= base_url('assets/css/loginstyle.css')?>">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
@@ -15,7 +15,7 @@
   <div class="header">
     <a href="<?= base_url('#home')?>" class="texthp"><img src="<?= base_url('assets/image/iicon.png')?>"></a>
   </div>
-  <h3>Partnered BDO Login</h3>
+  <h3>Partnered Company Login</h3>
   <form class="login100-form validate-form" action="<?= base_url('pages/checkClient');?>" method="post">
 
     <?php 
