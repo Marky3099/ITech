@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&family=Signika:wght@500&display=swap'); 
+
 
 :root{
     --main-color:#344F21;
@@ -8,7 +10,7 @@
 }
 
 *{
-    font-family: 'Arial', sans-serif;
+    font-family: 'Monaco', monospace;
     margin:0; padding:0;
     box-sizing: border-box;
     outline: none; border:none;
@@ -64,9 +66,13 @@ section{
     display: inline-block;
     padding:.9rem 3rem;
     font-size: 1.7rem;
+    font-family: 'Signika', sans-serif;
     color:#fff;
     background: var(--main-color);
     cursor: pointer;
+    border-radius: 20px;
+    margin-left: 30px;
+    margin-right: 30px;
 }
 
 .btn:hover{
@@ -94,6 +100,7 @@ section{
     margin:0 1rem;
     font-size: 1.6rem;
     color:#fff;
+    font-family: 'Bradley Hand', cursive;
 }
 
 .header .navbar a:hover{
@@ -123,10 +130,11 @@ section{
     min-height: 100vh;
     display: flex;
     align-items: center;
-    background-image: url("../image/home-img.jpg");
+    background-image: url("../image/home-img.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    margin-bottom: 30px;
 }
 
 .home .content{
@@ -135,8 +143,12 @@ section{
 
 .home .content h3{
     font-size: 6rem;
+    font-family: 'Signika', sans-serif;
+    font-weight: bold;
     text-transform: uppercase;
     color:#263D15;
+    margin-left: 30px;
+    margin-right: 30px;
 }
 
 .home .content p{
@@ -146,6 +158,9 @@ section{
     line-height: 1;
     padding:1rem 0;
     color:#263D15;
+    text-transform: none;
+    margin-left: 30px;
+    margin-right: 30px;
 }
 
 .about .row{
@@ -153,19 +168,25 @@ section{
     align-items: center;
     background:var(--black);
     flex-wrap: wrap;
+    margin-bottom: 10px;
 }
 
 .about .row .image{
     flex:1 1 45rem;
+    margin-top: -5px;
+    margin-bottom: 10px;
 }
 
 .about .row .image img{
-    height: 415px;
+    height: 430px;
     width: 100%;
 }
 .about .row .content{
     flex:1 1 45rem;
     padding:2rem;
+    margin-top: -5px;
+    margin-bottom: -15px;
+    text-align: justify;
 }
 
 .about .row .content h3{
@@ -179,6 +200,7 @@ section{
     color:BLACK;
     padding:1rem 0;
     line-height: 1.8;
+    text-align: justify;
 }
 
 .services {
@@ -224,6 +246,8 @@ section{
   font-size: 15px;
   line-height: 1.6;
   letter-spacing: 0.03em;
+  text-transform: none;
+  text-align: justify;
 }
 .services .icon-wrapper {
   background-color: #344F21;
@@ -298,6 +322,7 @@ section{
     color:BLACK;
     padding:1rem 0;
     line-height: 1.8;
+    text-transform: none;
 }
 
 .footer{
