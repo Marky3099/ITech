@@ -106,7 +106,8 @@ public function getfilter(){
     $Call_fcu = new Call_fcu_views();
     $Emp = new Emp();
     $serv = new Serv();
-
+    
+    $data['now'] = date('Y-m-d');
     $data['view_calllogs'] = [];
     $data['cId'] ="";
     $data['cbranch'] ="";

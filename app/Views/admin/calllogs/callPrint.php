@@ -30,7 +30,12 @@ require_once(APPPATH.'libraries\tcpdf\tcpdf.php');
 
 // Extend the TCPDF class to create custom Header and Footer
 class MYPDF extends TCPDF {
+    protected $last_page_flag = false;
 
+    public function Close() {
+        $this->last_page_flag = true;
+        parent::Close();
+    }
     //Page header
     public function Header() {
         // Logo
@@ -81,11 +86,26 @@ class MYPDF extends TCPDF {
 
     // Page footer
     public function Footer() {
-        $this->SetXY(220,190);
-        $this->SetFont('helvetica','', 10);
-        $userp= $_SESSION['username'];
-        $this->Cell(0, 10, 'Prepared By: '.$userp, 0, false, 'L', 0, '', 0, false, 'T', 'M');
-        
+
+        if ($this->last_page_flag) {
+        // ... footer for the last page ...
+            $this->SetXY(22,185);
+            $this->SetFont('helvetica','', 10);
+            $this->Cell(0, 10, 'Prepared By: ', 0, false, 'L', 0, '', 0, false, 'T', 'M');
+
+            $this->SetXY(60,188);
+            $this->SetFont('helvetica','', 10); 
+            $this->Cell(0, 10, 'Rosario A. Arcinue', 0, false, 'L', 0, '', 0, false, 'T', 'M');
+
+            $this->SetXY(60,190);
+            $this->SetFont('helvetica','B', 10); 
+            $this->Cell(0, 10, '_______________', 0, false, 'L', 0, '', 0, false, 'T', 'M');
+
+            $this->SetXY(60,195);
+            $this->SetFont('helvetica','B', 10); 
+            $this->Cell(0, 10, 'Sales Department', 0, false, 'L', 0, '', 0, false, 'T', 'M');
+        }
+
         // Page
         $this->SetY(1);
         $this->SetX(280);
@@ -153,14 +173,11 @@ if($view_calllogs){
     <thead>
     <tr style = "background-color: #A8D08D; text-align: center; font-size:11px;">
     <th>Date</th>
-    <th>Log Code</th>
-    <th>Branch Area</th>
     <th>Branch Name</th>
     <th>Caller</th> 
     <th>Particulars</th> 
     <th>Device Brand</th> 
     <th>Aircon Type</th>
-    <th>FCU No.</th>
     <th>Qty</th> 
     <th>Status</th>
     </tr>
@@ -172,26 +189,14 @@ if($view_calllogs){
      
      $html .=' <tr style="font-size:9px; text-align: center;">
      <td>'.date('m-d-Y',strtotime($call_log->date)).'</td>
-     <td>'.$call_log->log_code.'</td>
-     <td>'.$call_log->area.'</td>
      <td>'.$call_log->client_branch.'</td>
      <td>'.$call_log->caller.'</td>
      <td>'.$call_log->particulars.'</td>
      <td>'.$call_log->device_brand.'</td>
-     <td>'.$call_log->aircon_type.'</td><td>';
-     $data1 = explode(',',$call_log->fcu_arr);
-     $count1 = 0;
-     
-     foreach($data1 as $fc){
-       if($count1 < (count($data1) - 1) ){ 
-         $html .=' '. $fc.'<br>';
-     }
-     $count1+=1;
- }
- $html .='</td>
- <td>'.$call_log->qty.'</td>
- <td style="color:#4F6FA6;">'.$call_log->status.'</td>
- </tr>';
+     <td>'.$call_log->aircon_type.'</td>
+     <td>'.$call_log->qty.'</td>
+     <td style="color:#4F6FA6;">'.$call_log->status.'</td>
+     </tr>';
  
 }
 

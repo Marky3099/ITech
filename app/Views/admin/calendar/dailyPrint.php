@@ -147,15 +147,10 @@ if($day){
     <thead>
     <tr style = "background-color: #A8D08D; text-align: center; font-size:11px;">
     <th>Date</th>
-    <th>Task Code</th>
-    <th>Time</th>
-    <th>Branch Area</th>
     <th>Branch Name</th>
-    <th>Service/Task</th> 
     <th>Service Type</th> 
     <th>Device Brand/Type</th> 
     <th>Aircon Type</th> 
-    <th>FCU No.</th>
     <th>Qty</th> 
     <th>Assigned Person</th>
     <th>Status</th>
@@ -168,13 +163,7 @@ if($day){
      
      $html .='     <tr style="font-size:9px; text-align: center;">
      <td>'.date('m-d-Y',strtotime($d->start_event)).'</td>
-     <td>'.$d->event_code.'</td>
-     <td>';
-     if($d->time == "00:00:00"){$html .='N/A'; } 
-     else{$html .=$d->time;} $html .='</td>
-     <td>'.$d->area.'</td>
      <td>'.$d->client_branch.'</td>
-     <td>'.$d->serv_name.'</td>
      <td>'.$d->serv_type.'</td>
      <td>';
      $current ='';
@@ -200,27 +189,7 @@ if($day){
                }
               }
            $html .='</td><td>';
-           foreach($distinct_event as $dis_event) {
-
-            foreach($distinct as $dis){
-                $current_fcu =0; $concut = '';
-               foreach($d->fcu_array as $fcu_data){
-                if( (int) $dis_event->id == $dis->id)
-
-                  if( (int) $dis->id == $fcu_data->id){
-                    if( (int) $dis->aircon_id == $fcu_data->aircon_id){
-                     $concut.= $fcu_data->fcu.'<br>';
-                    }
-
-                  }
-               }
-                if( $concut != ''){
-                    $html .= '*'.$concut.'<br>'; 
-                }
-            }
-           }
- $html .='</td>
- <td>';
+           
  $current ='';
 
  foreach($distinct as $data){

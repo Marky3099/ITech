@@ -273,6 +273,7 @@ public function printAccomplished($strt,$end,$serv,$client_id){
 
     $datas['date'] = [$strt,$end];
     $datas['event'] = array();
+    $datas['areas'] = array();
     $datas['event_emp'] = $event_emp->orderBy('id', 'ASC')->findAll();
     $datas['event_fcu'] = $event_fcu->orderBy('id', 'ASC')->orderBy('fcuno', 'ASC')->findAll();
     // $datas['event_aircon'] = $event_aircon->orderBy('id', 'ASC')->findAll();
@@ -291,6 +292,7 @@ public function printAccomplished($strt,$end,$serv,$client_id){
     }
 
     foreach ($datas['all_events'] as $key => $value) {
+        array_push($datas['areas'],$value['area']);
         $emp_arr = "";
         foreach ($datas['event_emp'] as $key => $value_emps) {
             if ( $value['id'] == $value_emps['id']) {
@@ -335,7 +337,7 @@ public function printAccomplished($strt,$end,$serv,$client_id){
 ];
 }
 
-
+$datas['uniq_area'] = array_unique($datas['areas']);
 
 return view('admin/reports/accomplishedPrint',$datas);
 

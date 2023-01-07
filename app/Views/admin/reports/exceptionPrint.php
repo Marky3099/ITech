@@ -31,6 +31,14 @@ require_once(APPPATH.'libraries\tcpdf\tcpdf.php');
 // Extend the TCPDF class to create custom Header and Footer
 class MYPDF extends TCPDF {
 
+    protected $last_page_flag = false;
+
+    public function Close() {
+        $this->last_page_flag = true;
+        parent::Close();
+    }
+
+
     //Page header
     public function Header() {
         // Logo
@@ -81,11 +89,30 @@ class MYPDF extends TCPDF {
 
     // Page footer
     public function Footer() {
-        $this->SetXY(220,190);
+        if ($this->last_page_flag) {
+        // ... footer for the last page ...
+             $this->SetXY(20,170);
+        $msg = 'This Exception Report contains a detailed report of pending services of the Maylaflor Airconditioning and Refrigeration Services, Inc. from different client branches in areas '.$this->uniq_area;
         $this->SetFont('helvetica','', 10);
-        $userp= $_SESSION['username'];
-        $this->Cell(0, 10, 'Prepared By: '.$userp, 0, false, 'L', 0, '', 0, false, 'T', 'M');
-        
+        // $this->Cell(0, 10, $msg, 0, false, 'L', 0, '', 0, false, 'T', 'M');
+        $this->MultiCell(250, 160, $msg, 0, 'C', 0, 1,'','', false, 0, true, true,0);
+
+        $this->SetXY(22,185);
+        $this->SetFont('helvetica','', 10);
+        $this->Cell(0, 10, 'Prepared By: ', 0, false, 'L', 0, '', 0, false, 'T', 'M');
+
+        $this->SetXY(60,188);
+        $this->SetFont('helvetica','', 10); 
+        $this->Cell(0, 10, 'Rosario A. Arcinue', 0, false, 'L', 0, '', 0, false, 'T', 'M');
+
+        $this->SetXY(60,190);
+        $this->SetFont('helvetica','B', 10); 
+        $this->Cell(0, 10, '_______________', 0, false, 'L', 0, '', 0, false, 'T', 'M');
+
+        $this->SetXY(60,195);
+        $this->SetFont('helvetica','B', 10); 
+        $this->Cell(0, 10, 'Sales Department', 0, false, 'L', 0, '', 0, false, 'T', 'M');
+        }
         // Page
         $this->SetY(1);
         $this->SetX(280);
@@ -123,7 +150,7 @@ $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
 // set auto page breaks
-$pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+$pdf->SetAutoPageBreak(TRUE, 45);
 
 // set image scale factor
 $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
@@ -139,7 +166,7 @@ if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
 
 // set font
 // $pdf->SetFont('times', '', 11);
-
+$pdf->uniq_area = implode(", ",$uniq_area);
 $pdf->startDate = $date[0];
 $pdf->endDate = $date[1];
 // add a page
@@ -153,16 +180,12 @@ if($event){
     <thead>
     <tr style = "background-color: #A8D08D; text-align: center; font-size:11px;">
     <th>Date</th>
-    <th>Time</th>
-    <th>Branch Area</th>
     <th>Branch Name</th>
-    <th>Service/<br>Task</th> 
     <th>Service Type</th>
     <th>Device Brand/<br>Type</th> 
     <th>Aircon Type</th> 
-    <th>FCU No.</th>
     <th>Qty</th> 
-    <th>Assigned Person</th>
+    <th>Assigned Technician</th>
     <th>Status</th>
     </tr>
     </thead>
@@ -173,12 +196,7 @@ if($event){
      
      $html .='     <tr style="font-size:9px; text-align: center;">
      <td>'.date('m-d-Y',strtotime($dat->start_event)).'</td>
-     <td>';
-     if($dat->time == "00:00:00"){$html .='N/A'; } 
-     else{$html .=$dat->time;} $html .='</td>
-     <td>'.$dat->area.'</td>
      <td>'.$dat->client_branch.'</td>
-     <td>'.$dat->serv_name.'</td>
      <td>'.$dat->serv_type.'</td>
       <td>';
       $current ='';
@@ -204,57 +222,38 @@ if($event){
             }
            }
            $html .='</td><td>';
-           foreach($distinct_event as $dis_event) {
+           
+            $current ='';
 
-            foreach($distinct as $dis){
-                $current_fcu =0; $concut = '';
-               foreach($dat->fcu_array as $fcu_data){
-                if( (int) $dis_event->id == $dis->id)
-
-                  if( (int) $dis->id == $fcu_data->id){
-                    if( (int) $dis->aircon_id == $fcu_data->aircon_id){
-                     $concut.= $fcu_data->fcu.'<br>';
-                    }
-
-                  }
-               }
-                if( $concut != ''){
-                    $html .= '*'.$concut.'<br>'; 
-                }
+            foreach($distinct as $data){
+             if($dat->id ==  $data->id){
+                 if($current !=  $data->device_brand){
+                     $html .=  '*'.$data->quantity. '<br><br>';
+                      $current =$data->device_brand; 
+                 }   
+             }
             }
-           }
- $html .='</td>
-<td>';
-$current ='';
+                 $html .='</td><td>';
 
-foreach($distinct as $data){
- if($dat->id ==  $data->id){
-     if($current !=  $data->device_brand){
-         $html .=  '*'.$data->quantity. '<br><br>';
-          $current =$data->device_brand; 
-     }   
- }
-}
-     $html .='</td><td>';
+             $data = explode(',',$dat->emp_array);
+             $count = 0;
+             
+             foreach($data as $emp){
+               if($count < (count($data) - 1) ){ 
+                 $html .='* '. $emp.'<br>';
+             }
+             $count+=1;
+            }
+            $html .='</td>';
+            $html .='<td style="color:#4F6FA6;">'.$dat->status.'</td>
+            </tr>';
 
- $data = explode(',',$dat->emp_array);
- $count = 0;
- 
- foreach($data as $emp){
-   if($count < (count($data) - 1) ){ 
-     $html .=' '. $emp.'<br>';
- }
- $count+=1;
-}
-$html .='</td>';
-$html .='<td style="color:#4F6FA6;">'.$dat->status.'</td>
-</tr>';
-
-}
+            }
 
 
-$html .='</tbody>
-</table>';
+            $html .='</tbody>
+            </table>';
+
 }else{
     $html ='<h1 style="text-align:center;">No Data Available!</h1>';
 }

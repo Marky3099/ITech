@@ -46,9 +46,6 @@ class UsersCrud extends Controller
         // Generate Random Password
         $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_?";
         $password = substr( str_shuffle( $chars ), 0, 8 );
-        // Generate Random Code
-        // $set = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        // $code = substr(str_shuffle($set), 0, 12);
         $Username = ucfirst(strtolower($this->request->getVar('name')));
         $user_create = [
             'name' => $Username,
@@ -68,17 +65,22 @@ class UsersCrud extends Controller
         
         $to = $this->request->getVar('email');
 
-        $subject = "TSMS - Your Account";
+        $subject = "MARSI: Task and Schedule Monitoring System - Account Activation";
         $message = "<html>
         <head>
-        <title>Credentials for your Account</title>
+        <title>Welcome to MARSI: Task and Schedule Monitoring System!</title>
         </head>
-        <body>
-        <h2>You can now login to our system TSMS.</h2>
-        <p>Your Account:</p>
-        <h3>Email: <b>".$to."</h3>
-        <h3>Password: <b>".$password."</h3>
-        <a href=".base_url('/user-type').">Login Now</a>
+        <body><br>
+        <p>You may now login to your account using the following.</p><br>
+        <h3><b>Email: ".$to."</h3>
+        <h3><b>Password: ".$password."</h3><br>
+        <h3><a href=".base_url('/user-type').">Login Now</a></h3>
+        <br>
+        <p>Thank you!</p>
+        <br>
+        <p>Regards,</p>
+        <p>Management</p>
+        <p>Maylaflor Air-Conditioning and Refrigeration Service, Inc.</p>
         </body>
         </html>";
         $email = \Config\Services::email();
@@ -98,32 +100,6 @@ class UsersCrud extends Controller
         
         return $this->response->redirect(site_url('/user'));
     }
-    // public function activate($id,$code){
-
-    //     $User = new User();
-    //     $User_obj = $User->where('user_id', $id)->first();
-    //     if($User_obj['code'] == $code){
-    //         //update user active status
-    //         $data['active'] = true;
-    //         $User->update($id, $data);
-    
-    //     }
-    //     else{
-    
-    //        $data['success']= 'Cannot activate account. Code didnt match';
-    //        if($User_obj['position'] == "Admin"){
-    //             return view('pages/admin_login',$data);
-    //         }else if($User_obj['position'] == "Employee"){
-    //              return view('pages/employee_login',$data);
-    //         }
-    //     }
-    //     $data['success']='Activated Successfully!';
-    //     if($User_obj['position'] == "Admin"){
-    //         return view('pages/admin_login',$data);
-    //     }else if($User_obj['position'] == "Employee"){
-    //         return view('pages/employee_login',$data);
-    //     }
-    // }
     // show single User
     public function singleUser($user_id = null){
         if($_SESSION['position'] != USER_ROLE_ADMIN){

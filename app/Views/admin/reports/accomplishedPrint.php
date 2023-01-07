@@ -31,6 +31,13 @@ require_once(APPPATH.'libraries\tcpdf\tcpdf.php');
 // Extend the TCPDF class to create custom Header and Footer
 class MYPDF extends TCPDF {
 
+
+    protected $last_page_flag = false;
+
+    public function Close() {
+        $this->last_page_flag = true;
+        parent::Close();
+    }
     //Page header
     public function Header() {
         // Logo
@@ -81,10 +88,56 @@ class MYPDF extends TCPDF {
 
     // Page footer
     public function Footer() {
-        $this->SetXY(220,190);
-        $this->SetFont('helvetica','', 10);
-        $userp= $_SESSION['username'];
-        $this->Cell(0, 10, 'Prepared By: '.$userp, 0, false, 'L', 0, '', 0, false, 'T', 'M');
+        if ($this->last_page_flag) {
+        // ... footer for the last page ...
+
+            $this->SetXY(20,170);
+            $msg = 'This Preventive Maintenance Service Report contains a detailed report of services done in different client branches of the Maylaflor Airconditioning and Refrigeration Services, Inc. from areas '.$this->uniq_area.', which accumulated a total service price of '.$this->overall.' pesos.';
+            $this->SetFont('helvetica','', 10);
+            $this->MultiCell(250, 160, $msg, 0, 'C', 0, 1,'','', false, 0, true, true,0);
+
+            $this->SetXY(22,160);
+            $this->SetFont('helvetica','B', 10);
+            $this->Cell(0, 10, 'Total Price: '.$this->overall, 0, false, 'L', 0, '', 0, false, 'T', 'M');
+
+            // $this->SetXY(22,150);
+            // $msg1 = 'This Preventive Maintenance Service Report contains a detailed report of services done in different client branches of the Maylaflor Airconditioning and Refrigeration Services, Inc. from areas Timog 1, Timog 2, Timog 3, and Timog 4, which accumulated a total service price of 20,300 pesos.';
+            // $this->SetFont('helvetica','', 10);
+            // $this->MultiCell(250, 160, $msg1, 0, 'C', 0, 1,'','', false, 0, true, true,0);
+
+
+            $this->SetXY(22,185);
+            $this->SetFont('helvetica','', 10);
+            $this->Cell(0, 10, 'Prepared By: ', 0, false, 'L', 0, '', 0, false, 'T', 'M');
+
+            $this->SetXY(50,188);
+            $this->SetFont('helvetica','', 10); 
+            $this->Cell(0, 10, 'Rosario A. Arcinue', 0, false, 'L', 0, '', 0, false, 'T', 'M');
+
+            $this->SetXY(50,190);
+            $this->SetFont('helvetica','B', 10); 
+            $this->Cell(0, 10, '_______________', 0, false, 'L', 0, '', 0, false, 'T', 'M');
+
+            $this->SetXY(50,195);
+            $this->SetFont('helvetica','B', 10); 
+            $this->Cell(0, 10, 'Sales Department', 0, false, 'L', 0, '', 0, false, 'T', 'M');
+
+            $this->SetXY(185,185);
+            $this->SetFont('helvetica','', 10);
+            $this->Cell(0, 10, 'Received and Checked by: ', 0, false, 'L', 0, '', 0, false, 'T', 'M');
+
+            $this->SetXY(235,188);
+            $this->SetFont('helvetica','', 10); 
+            $this->Cell(0, 10, 'Rosario A. Arcinue', 0, false, 'L', 0, '', 0, false, 'T', 'M');
+
+            $this->SetXY(235,190);
+            $this->SetFont('helvetica','B', 10); 
+            $this->Cell(0, 10, '_______________', 0, false, 'L', 0, '', 0, false, 'T', 'M');
+
+            $this->SetXY(235,195);
+            $this->SetFont('helvetica','B', 10); 
+            $this->Cell(0, 10, 'Sales Department', 0, false, 'L', 0, '', 0, false, 'T', 'M');
+        }
         
         // Page
         $this->SetY(1);
@@ -123,7 +176,7 @@ $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
 // set auto page breaks
-$pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+$pdf->SetAutoPageBreak(TRUE, 45);
 
 // set image scale factor
 $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
@@ -139,9 +192,10 @@ if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
 
 // set font
 // $pdf->SetFont('times', '', 11);
-
+$pdf->uniq_area = implode(", ",$uniq_area);
 $pdf->startDate = $date[0];
 $pdf->endDate = $date[1];
+$pdf->overall = 0;
 // add a page
 $pdf->AddPage('L');
 
@@ -217,6 +271,7 @@ if($event){
  }
  $count+=1;
 }
+$pdf->overall += $dat->price*$total;
 $html .='</td>
 <td>'.$dat->price*$total.'</td>
 <td style="color:#509550;">'.$dat->status.'</td>
