@@ -16,7 +16,7 @@
 
 			<div class="btn-layer">
 				<a href="<?= base_url('/admin-login')?>" class="btn btn-success"><div class="icon-box"><i class="fas fa-user-shield"></i></div>Admin</a></br>
-				<a href="<?= base_url('/employee-login')?>" class="btn btn-success"><div class="icon-box"><i class="fas fa-user-alt"></i></div>Employee</a>
+				<a href="<?= base_url('/employee-login')?>" class="btn btn-success"><div class="icon-box"><i class="fas fa-user-alt"></i></div>Technician</a>
 			</div>
 			
 			<p class="para1">Want to book an Appointment?<a href="<?= base_url('/client-type')?>" style="font-style: italic; color: limegreen;">&nbsp;Click here.</a></p>

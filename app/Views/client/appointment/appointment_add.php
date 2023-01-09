@@ -11,10 +11,12 @@
       <div class="form-box">
         <h3>Add Appointment</h3>
         <div class="user-box">
+          <input type="hidden" name="availTime" id="availTime">
+          <input type="hidden" name="unavailDate" id="unavailDate">
           <label id="label1">Date</label>
           <label class="ttime">Time</label>
           <input type="text" name="appt_date" id="appt_date" class="datepicker dateee" placeholder="mm-dd-yyyy" autocomplete="off" required>
-          <input type="time" name="appt_time" class="timee" value="00:00:00" required>
+          <input type="time" name="appt_time" class="timee" step="3600" required>
         </div><br><br>
 
         <div class="user-box">
@@ -89,6 +91,7 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/js/bootstrap-select.min.js"></script>
 <!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
 <script type="text/javascript">
@@ -128,5 +131,99 @@
 
 
 var disableDates = <?php echo json_encode($date);?>;
+var availTime = ['8:00 AM','9:00 AM','10:00 AM','11:00 AM','1:00 PM','2:00 PM','3:00 PM','4:00 PM','5:00 PM','6:00 PM'];
+
+$("#appt_date").on("change", function() {
+    var date = $(this).val();
+    console.log(date);
+     $.ajax({
+         method: 'Post',
+         url: 'http://localhost/tsms/appointment/check-date',
+         data:{
+            'date': date
+         },
+         success: function(response){
+          var availableTime =[];
+          // var result = [];
+          var time = [];
+          var timee = [];
+
+          for (var i = 0; i < response.events_data.length; i++) {
+            var resTime = response.events_data[i].TIME;
+            timee.push(response.events_data[i].TIME);
+            var formatTime = resTime.split(":");
+            var timeFormatted;
+            if(formatTime[0]>=12){
+              var hour = formatTime[0] - 12;
+              var amPm = "PM";
+              timeFormatted = hour + ":" + formatTime[1] + " " + amPm;
+            }else{
+              var hour = formatTime[0];
+              var amPm = "AM";
+              timeFormatted = parseInt(hour) + ":" + formatTime[1] + " " + amPm;
+            }
+
+            time.push(timeFormatted);
+          }
+          availableTime = availTime.concat(time);
+          const result = availableTime
+        .filter(value=>{
+              var count=0;
+              for(var i=0;i<availableTime.length;i++)
+              {
+                  if(availableTime[i]===value)
+                    count++;
+              }
+              return count===1;
+          })
+          if(result.length<10){
+
+            $("#availTime").val(timee.toString());
+            var splitDate = date.split("/");
+            var formatDate = splitDate[2]+"-"+splitDate[0]+"-"+splitDate[1];
+            var dateFormatted = new Date(formatDate).toDateString();
+            Swal.fire(
+              dateFormatted,
+              '<b>Available Time:</b> ['+result+']',
+              'question'
+            )
+
+            // alert("For "+dateFormatted+" the available time are "+result);
+          }else if(result.length==0){
+            $("#unavailDate").val('Unavailable');
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Date is fully Booked, Please Choose another date',
+            })
+            // alert("Date is fully Booked, Please Choose another date");
+          }
+         },
+         error: function(){
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!',
+          })
+         }
+       })
+
+  });
+
+  <?php if(session()->has('errorTime')){?>
+    Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: '<?=session()->getFlashdata('errorTime');?>',
+        });
+  <?php }?>
+  <?php if(session()->has('errorDate')){?>
+    Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: '<?=session()->getFlashdata('errorDate');?>',
+        });
+  <?php }?>
+
     </script>
 <script type="text/javascript" src="<?= base_url('assets/js/resDate.js') ?>"></script>

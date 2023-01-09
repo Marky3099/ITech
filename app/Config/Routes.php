@@ -63,6 +63,7 @@ $routes->post('/appointment/update', 'AppointmentCrud::update',['filter' => 'aut
 $routes->get('appointment/delete/(:num)', 'AppointmentCrud::delete/$1',['filter' => 'authGuard']);
 $routes->post('/appointment/reject', 'AppointmentCrud::rejectAppt',['filter' => 'authGuard']);
 $routes->post('/appointment/view', 'AppointmentCrud::view',['filter' => 'authGuard']);
+$routes->post('/appointment/check-date', 'AppointmentCrud::checkDate',['filter' => 'authGuard']);
 
 $routes->get('/serv', 'ServCrud::index',['filter' => 'authGuard']);
 $routes->get('serv/create/view', 'ServCrud::create',['filter' => 'authGuard']);
