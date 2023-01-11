@@ -217,13 +217,15 @@ return view("templates/template",$data);
 }
 public function store() {
     
-    
+    // dd($_POST);
     $Appoint = new Appointment();
     $Appt_fcu = new Appt_fcu();
     $Client = new Client();
     $Aircon = new Aircon();
     $fcu_no = new Fcu_no();
     $Serv = new Serv();
+    $operatingTime = ['8:00 AM','9:00 AM','10:00 AM','11:00 AM','1:00 PM','2:00 PM','3:00 PM','4:00 PM','5:00 PM','6:00 PM'];
+    // dd($operatingTime);
     $session = session();
     $user_id =$_SESSION['user_id'];
     $restrictTime = $this->request->getVar('availTime');
@@ -231,55 +233,80 @@ public function store() {
     $timeArr = explode(",", $restrictTime);
     $unavailDate = $this->request->getVar('unavailDate');
     $time = $this->request->getVar('appt_time').":00";
+
+    // $selectedTime = $this->request->getVar('appt_time');
+
+     $selectedTime = explode(":",$this->request->getVar('appt_time'));
+     $displayTime;
+     if ($selectedTime[0]>=12){
+         $hour = $selectedTime[0] - 12;
+         $amPm = "PM";
+         $displayTime = $hour . ":" . $selectedTime[1] . " " . $amPm;
+     }
+    else{
+        $hour = $selectedTime[0];
+        $amPm = "AM";
+        $displayTime = ltrim($hour, '0') . ":" . $selectedTime[1] . " " . $amPm;
+     }
+     // dd($displayTime);
+
     $start_date = explode('/',$this->request->getVar('appt_date'));
     $set = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $code = substr(str_shuffle($set), 0, 5);
     // dd($time == $timeFormatted);
-    for($i=0;$i<count($timeArr);$i++)
-    {
+    for($a=0;$a<count($operatingTime);$a++){
+        if($displayTime == $operatingTime[$a]){
+            for($i=0;$i<count($timeArr);$i++)
+            {
+                
+                if($time == $timeArr[$i]){
+                    $session = session();
+                    $session->setFlashdata('errorTime', 'Selected Time is not Available, Please choose another time');
+                    return $this->response->redirect(site_url('/appointment/create'));
+                }
+            }
         
-        if($time == $timeArr[$i]){
+        
+            if($unavailDate != "Unavailable"){
+                $appoint_create = [
+                    'appt_date' =>$start_date[2].'-'.$start_date[0].'-'.$start_date[1],
+                    // 'bdo_id' => $this->request->getVar('bdo_id'),
+                    'appt_time' => $this->request->getVar('appt_time'),
+                    'area' => $this->request->getVar('area'),
+                    'serv_id' => $this->request->getVar('serv_id'),
+                    'client_id' => $this->request->getVar('client_id'),
+                    'device_brand' => $this->request->getVar('device_brand'),
+                    'aircon_id' => $this->request->getVar('aircon_id'),
+                    'qty' => $this->request->getVar('qty'),
+                    // 'status' => $this->request->getVar('status'),
+                    'user_id' => $user_id,
+                ];
+                // dd($appoint_create);
+                $success = $Appoint->insert($appoint_create);
+            
+                if($success){
+                        $appt_code = ['appt_code' => 'appt-'.$code.'-'.(int)$success];
+                        $Appoint->update((int)$success,$appt_code);
+                    }
+                foreach($this->request->getVar('fcuno') as $key => $value) {
+                    $Appt_fcu->insert([
+                        'fcuno'=>(int) $value,
+                        'appt_id' => (int) $success
+                    ]);
+                }
+                $session = session();
+                $session->setFlashdata('add', 'value');
+                return $this->response->redirect(site_url('/appointment'));
+            }else{
+                $session = session();
+                $session->setFlashdata('errorDate', 'Date is fully Booked, Please Choose another date');
+                return $this->response->redirect(site_url('/appointment/create'));
+            }
+        }else{
             $session = session();
-            $session->setFlashdata('errorTime', 'Selected Time is not Available, Please choose another time');
+            $session->setFlashdata('errorOpTime',$displayTime. ' is outside the operating time');
             return $this->response->redirect(site_url('/appointment/create'));
         }
-    }
-
-
-    if($unavailDate != "Unavailable"){
-        $appoint_create = [
-            'appt_date' =>$start_date[2].'-'.$start_date[0].'-'.$start_date[1],
-            // 'bdo_id' => $this->request->getVar('bdo_id'),
-            'appt_time' => $this->request->getVar('appt_time'),
-            'area' => $this->request->getVar('area'),
-            'serv_id' => $this->request->getVar('serv_id'),
-            'client_id' => $this->request->getVar('client_id'),
-            'device_brand' => $this->request->getVar('device_brand'),
-            'aircon_id' => $this->request->getVar('aircon_id'),
-            'qty' => $this->request->getVar('qty'),
-            // 'status' => $this->request->getVar('status'),
-            'user_id' => $user_id,
-        ];
-        // dd($appoint_create);
-        $success = $Appoint->insert($appoint_create);
-    
-        if($success){
-                $appt_code = ['appt_code' => 'appt-'.$code.'-'.(int)$success];
-                $Appoint->update((int)$success,$appt_code);
-            }
-        foreach($this->request->getVar('fcuno') as $key => $value) {
-            $Appt_fcu->insert([
-                'fcuno'=>(int) $value,
-                'appt_id' => (int) $success
-            ]);
-        }
-        $session = session();
-        $session->setFlashdata('add', 'value');
-        return $this->response->redirect(site_url('/appointment'));
-    }else{
-        $session = session();
-        $session->setFlashdata('errorDate', 'Date is fully Booked, Please Choose another date');
-        return $this->response->redirect(site_url('/appointment/create'));
     }
 
 }

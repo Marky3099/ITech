@@ -63,8 +63,17 @@
             <div class="select-dropdown">
               <select id="repeatable" name = "repeatable">
               <option value="None">None</option>
-              <option value="Weekly">Weekly</option>
-              <option value="Monthly">Monthly</option>
+              <optgroup label="Week">
+                <option value="Weekly">Every Week</option>
+                <option value="2Week">Every 2 Weeks</option>
+                <option value="3Week">Every 3 Weeks</option>
+                <option value="4Week">Every 4 Weeks</option>
+              </optgroup>
+              <optgroup label="Month">
+                <option value="Monthly">Every Month</option>
+                <option value="2Month">Every 2 Months</option>
+                <option value="3Month">Every 3 Months</option>
+              </optgroup>
               </select>
             </div>
           </div>

@@ -4,7 +4,7 @@
 
   var calendarEl = document.getElementById('calendar');
   var count = 0;
-  // var disableDates = ["01-01","01-02","25-02","09-04","14-04","16-04","01-05","09-05","12-06","29-08","21-08","31-10","01-11","02-11","30-11","08-12","24-12","25-12","30-12","31-12"];
+  var holidays = ["01-01","01-02","25-02","09-04","14-04","16-04","01-05","09-05","12-06","29-08","21-08","31-10","01-11","02-11","30-11","08-12","24-12","25-12","30-12","31-12"];
   // var today = new Date().toISOString().slice(0,10);
   var calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: 'dayGridMonth',
@@ -43,14 +43,15 @@
              var formatDate = splitDate[2]+"-"+splitDate[1];
              disable.push(formatDate);
            }
+           var disDate =  disable.concat(holidays);
            var dateFormat = info.dateStr.split("-");
            var dateDisable = dateFormat[2]+"-"+dateFormat[1];
            // console.log(dateDisable);
            var counter = 0;
            // console.log(dateDisable);
            // console.log(info);
-           for (var i = 0; i < disable.length; i++) {
-             if(dateDisable == disable[i]){
+           for (var i = 0; i < disDate.length; i++) {
+             if(dateDisable == disDate[i]){
                 counter=1;
              }
            }

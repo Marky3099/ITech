@@ -175,13 +175,16 @@ $("#appt_date").on("change", function() {
                     count++;
               }
               return count===1;
-          })
-          if(result.length<10){
+          });
 
-            $("#availTime").val(timee.toString());
             var splitDate = date.split("/");
             var formatDate = splitDate[2]+"-"+splitDate[0]+"-"+splitDate[1];
             var dateFormatted = new Date(formatDate).toDateString();
+
+          if(result.length<10){
+
+            $("#availTime").val(timee.toString());
+            
             Swal.fire(
               dateFormatted,
               '<b>Available Time:</b> ['+result+']',
@@ -194,7 +197,7 @@ $("#appt_date").on("change", function() {
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
-              text: 'Date is fully Booked, Please Choose another date',
+              text: dateFormatted+' is fully Booked, Please Choose another date',
             })
             // alert("Date is fully Booked, Please Choose another date");
           }
@@ -224,6 +227,13 @@ $("#appt_date").on("change", function() {
           text: '<?=session()->getFlashdata('errorDate');?>',
         });
   <?php }?>
-
+  <?php if(session()->has('errorOpTime')){?>
+    Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: '<?=session()->getFlashdata('errorOpTime');?>',
+          footer: '<center>Allowed Time: ['+availTime+']',
+        });
+  <?php }?>
     </script>
 <script type="text/javascript" src="<?= base_url('assets/js/resDate.js') ?>"></script>
