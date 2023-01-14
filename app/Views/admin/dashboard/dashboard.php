@@ -11,7 +11,10 @@
   href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
   rel="stylesheet">
 
-
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
   <!-- Custom styles for this template-->
   <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/dashstyle.css')?>">
 
@@ -713,7 +716,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
 <script type="text/javascript">
 
-
   let servLabelColor = <?= json_encode($servLabelColor); ?>;
 
   google.charts.load("current", {packages:["corechart"]});
@@ -766,6 +768,24 @@
  <?php }elseif(session()->has('pending')){?>
   pending = true;
   <?php } ?>;
+
+<?php if($_SESSION['position'] == USER_ROLE_EMPLOYEE):?>
+  <?php if(session()->has('assignCount')):?>
+    var assignCount = <?=session()->getFlashdata('assignCount')?>;
+    if(assignCount > 0){
+      Swal.fire({
+        title: 'You have '+assignCount+' work to do today',
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        }
+      })
+    }
+  <?php endif;?>
+<?php endif;?>
+
 
 </script>
 <script type="text/javascript" src="<?=base_url('assets/js/dashboardjs.js')?>"></script>

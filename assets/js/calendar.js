@@ -62,17 +62,20 @@
       // console.log();
           var em = document.getElementById('emp_id');
 
-      $.ajax({
+  $(document).on('change','#time', function(){
+    var timeee = $(this).val();
+    $.ajax({
            type: "POST",
            url: "http://localhost/tsms/calendar/checkEmp",
              data: {
-                'start_event' : info.dateStr
+                'start_event' : info.dateStr,
+                'time' : timeee
              } ,// serializes form input
              success: function(data){
                // window.location.href = '/tsms/calllogs'; 
               // console.log(data);
               // $("#emp_id").appe
-
+              console.log(data.startTime);
               // var count = 0;
               em.innerHTML="";
               data.available_emp.map((emp)=>{
@@ -90,6 +93,8 @@
 
              }
            });
+
+  });
 
     // alert('Date: ' + info.dateStr);
      

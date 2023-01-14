@@ -5,7 +5,7 @@ use App\Libraries\Hash;
 use App\Models\User;
 use App\Models\Client;
 use App\Models\User_bdo;
-
+use App\Models\Event_emp_views;
 
 class Pages extends BaseController
 {
@@ -176,6 +176,8 @@ public function checkEmployee()
             $check_password = password_verify($password,$pass);
             
             if ($check_password) {
+                $event_emp = new Event_emp_views();
+
                 $getdata = [
                     'user_id' => $user_info['user_id'],
                     'username' => $user_info['name'],
@@ -189,8 +191,13 @@ public function checkEmployee()
                                 // 'active' => $user_info['active'],
                     'isLoggedIn' => TRUE,
                 ];
-                
+
                 $session->set($getdata);
+                date_default_timezone_set('Asia/Hong_Kong'); 
+                $assign = $event_emp->where('emp_id',$_SESSION['emp_id'])->where('start_event', date("Y/m/d"))->findAll();
+                $session->setFlashdata('assignCount', count($assign));
+                // $data['assignCount'] = count($data['assign']);
+
                 return redirect()->to('dashboard');
             }else{
                
@@ -462,6 +469,7 @@ public function registerNonBdo(){
             ];
             $success1 = $Client->insert($client_create);
             if($success1){
+              // 
                 $update_data = ['client_id' => (int)$success1];
                 $userBdo->update((int)$success,$update_data);
                 $data['success'] = 'Sign up successful. Please wait for your account to be activated.';

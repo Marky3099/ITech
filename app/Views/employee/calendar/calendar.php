@@ -127,7 +127,7 @@
         <div id="auth-rows"></div>
         <div class="form-group">
           
-          <label for="emp_id">Employee</label><br>
+          <label for="emp_id">Technician</label><br>
           <select id="emp_id" name="emp_id[]" class="form-control selectpicker" multiple data-selected-text-format="count > 8" required>
             <?php foreach($emp as $em):  ?>
               <option value=<?php echo $em['emp_id']; ?>><?php echo $em['emp_name'];?></option>
@@ -220,7 +220,7 @@
 
         <div class="form-group">
           
-          <label for="emp_id_update">Employee</label><br>
+          <label for="emp_id_update">Technician</label><br>
           <select id="emp_id_update" name="emp_id_update[]" class="form-control selectpicker" multiple data-selected-text-format="count > 8" disabled>
             <!--  -->
           </select>

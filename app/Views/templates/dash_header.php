@@ -4,8 +4,11 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Task and Schedule Management System</title>
-
+    <?php if($_SESSION['position'] == USER_ROLE_ADMIN || $_SESSION['position'] == USER_ROLE_EMPLOYEE):?>
+        <title>Task and Schedule Management System</title>
+    <?php else:?>
+        <title>Appointment System</title>
+    <?php endif;?>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
@@ -152,7 +155,12 @@
         </ul>
     </div>
     <div class="sidebar-header">
-        <div class="text1">Task and Schedule Monitoring System
+        <div class="text1">
+            <?php if($_SESSION['position'] == USER_ROLE_ADMIN || $_SESSION['position'] == USER_ROLE_EMPLOYEE):?>
+                    Task and Schedule Monitoring System
+            <?php else:?>
+                    Appointment System
+            <?php endif;?>
             <div class="drop-content">
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Hi, <?php echo $_SESSION['username']?></a>

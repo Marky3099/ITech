@@ -46,12 +46,11 @@ class Dashboard extends BaseController
         $appt = new Appointment();
         $logs = new Call_logs();
         $bdo_user = new User_bdo();
-
+        // $session = session();
+        
         date_default_timezone_set('Asia/Hong_Kong'); 
-
         $date = new \DateTime();
         $date->setTimezone(new \DateTimeZone('+0800'));
-        
         $data['events'] = $event->where('status','Pending')->where('start_event', date('Y-m-d'))->findAll();
 
         $data['event'] = array();

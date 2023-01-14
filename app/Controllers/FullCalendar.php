@@ -847,76 +847,6 @@ public function insert(){
                 }
 
             }
-                // dd($i);
-        }// EVERY 4 WEEKS
-        else if($_POST['repeatable'] == "4Week"){
-            function get4Week($y) {
-                return new \DatePeriod(
-                    new \DateTime("first ".date("l", strtotime($_POST['start_event']))." of $y"),
-                    \DateInterval::createFromDateString('4 weeks'.date("l", strtotime($_POST['start_event']))),
-                    new \DateTime("last day of december $y"),
-                    
-                );
-            }
-
-                // Usage:
-            foreach (get4Week(date("Y",strtotime($_POST['start_event']))) as $getw) {
-                // $newDate = date();
-                if($getw->format("Y-m-d") >= $_POST['start_event']){
-                    $date= $getw->format("Y-m-d");
-                    $newDate=date("Y-m-d", strtotime($date . "-1 week"));
-                    
-                    array_push($weeklyEvent, $newDate);
-                }
-            }
-            // dd($weeklyEvent);
-            // REPEAT EVERY 3 WEEKS ------------------------------------------------------------------------------------------
-            
-            
-            for ($i=0; $i < count($weeklyEvent); $i++) { 
-                $formatWeekly = explode("-",$weeklyEvent[$i]);
-                $currDate = $formatWeekly[2]."-".$formatWeekly[1];
-                $counter = 0;
-                for ($a=0; $a < count($disableDates); $a++) { 
-                    if ($currDate == $disableDates[$a]) {
-                        $counter = 1;
-                    }
-                    
-                }
-                    // dd($counter);
-                if($counter == 0){
-                    $_POST['start_event'] = $weeklyEvent[$i];
-
-                    $_POST["title"] = date("g:ia",strtotime($_POST["time"]))." ".$client_branch['client_branch'];
-
-                    $success = $Event->insert($_POST);
-                    if($success){
-                        $event_code = ['event_code' => 'task-'.$code.'-'.(int)$success];
-
-                        $Event->update((int)$success,$event_code);
-                    }
-                    foreach($_POST['emp_id'] as $key => $value) {
-                        $Event_emp->insert([
-                            'emp_id'=> (int) $value,
-                            'id' => (int) $success
-                        ]);
-                    }
-
-                    foreach ($_POST['aircon_id'] as $index => $aircon) {
-                        foreach ($_POST['fcuno'.$index] as $key => $floor_num) {
-                            $event_fcu->insert([
-                                'id'=> (int) $success,
-                                'aircon_id'=> (int)$aircon,
-                                'quantity'=> (int)$_POST['quantity'][$index],
-                                'fcuno'=>$floor_num
-                            ]);
-
-                        }
-
-                    }
-                }
-
-            }
                 // EVERY MONTH
         }else if($_POST['repeatable'] == "Monthly"){
             function getMonthly($y) {
@@ -2098,9 +2028,14 @@ public function checkEmp(){
     $Emp = new Emp();
     // $date = $this->request->getPost('start_event');
     $start_date = explode('-',$this->request->getVar('start_event'));
+    $time =$this->request->getVar('time');
+    $timeMinus = strtotime($time) - 60*60;
+    $startTime= date('H:i', $timeMinus);
+    $timestamp = strtotime($time) + 60*60;
+    $endTime = date('H:i', $timestamp);
     $date = $start_date[0].'/'.$start_date[1].'/'.$start_date[2];
     $db1 = \Config\Database::connect();
-     $query   = $db1->query('SELECT DISTINCT emp_name FROM event_emp_views where start_event = "'.$date.'"');
+     $query   = $db1->query('SELECT DISTINCT emp_name FROM event_emp_views where start_event = "'.$date.'" AND time BETWEEN "'.$startTime.'" AND "'.$endTime.'"');
     if ($query->getResult()) {
        
          $data['distinct'] = $query->getResult();
@@ -2124,6 +2059,7 @@ public function checkEmp(){
         $data['available_emp'] = $Emp->orderBy('emp_name','ASC')->findAll();
 
     }
+    
     return $this->response->setJSON($data);
 }
 

@@ -1,0 +1,533 @@
+CRITICAL - 2023-01-12 02:14:32 --> Undefined property: App\Controllers\Pages::$load
+#0 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(467): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined prope...', 'C:\\xampp\\htdocs...', 467, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-12 02:14:54 --> require(C:\xampp\htdocs\tsms\app\Controllers/vendor/autoload.php): failed to open stream: No such file or directory
+#0 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(466): CodeIgniter\Debug\Exceptions->errorHandler(2, 'require(C:\\xamp...', 'C:\\xampp\\htdocs...', 466, Array)
+#1 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(466): require()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#4 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2023-01-12 02:16:39 --> App\Controllers\Pages::registerNonBdo(): Failed opening required 'C:\xampp\htdocs\tsms\app\vendor/autoload.php' (include_path='C:\xampp\php\PEAR')
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2023-01-12 02:20:27 --> App\Controllers\Pages::registerNonBdo(): Failed opening required 'C:\xampp\htdocs\tsms\app\Controllers\vendor/composer\vendor/autoload.php' (include_path='C:\xampp\php\PEAR')
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2023-01-12 02:20:53 --> App\Controllers\Pages::registerNonBdo(): Failed opening required 'C:\xampp\htdocs\tsms\app\Controllers\views/vendor/composer\views/vendor/autoload.php' (include_path='C:\xampp\php\PEAR')
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2023-01-12 02:21:20 --> App\Controllers\Pages::registerNonBdo(): Failed opening required 'C:\xampp\htdocs\tsms\app\Controllers\Views/vendor/composer\Views/vendor/autoload.php' (include_path='C:\xampp\php\PEAR')
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2023-01-12 02:21:45 --> App\Controllers\Pages::registerNonBdo(): Failed opening required 'C:\xampp\htdocs\tsms\app\Controllers\Views\vendor\composer\Views\vendor\autoload.php' (include_path='C:\xampp\php\PEAR')
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2023-01-12 02:22:15 --> App\Controllers\Pages::registerNonBdo(): Failed opening required 'C:\xampp\htdocs\tsms\app\Controllers\..\Views\vendor\composer\..\Views\vendor\autoload.php' (include_path='C:\xampp\php\PEAR')
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2023-01-12 02:22:30 --> App\Controllers\Pages::registerNonBdo(): Failed opening required 'C:\xampp\htdocs\tsms\app\Controllers\...\Views\vendor\composer\...\Views\vendor\autoload.php' (include_path='C:\xampp\php\PEAR')
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2023-01-12 02:24:12 --> App\Controllers\Pages::registerNonBdo(): Failed opening required 'C:\xampp\htdocs\tsms\app\Controllersviews\vendor\autoload.php' (include_path='C:\xampp\php\PEAR')
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2023-01-12 02:25:38 --> App\Controllers\Pages::registerNonBdo(): Failed opening required 'C:\xampp\htdocs\tsms\app\Controllers..\Views\vendor\autoload.php' (include_path='C:\xampp\php\PEAR')
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2023-01-12 02:25:49 --> App\Controllers\Pages::registerNonBdo(): Failed opening required 'C:\xampp\htdocs\tsms\app\Controllers\Views\vendor\autoload.php' (include_path='C:\xampp\php\PEAR')
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2023-01-12 02:26:05 --> App\Controllers\Pages::registerNonBdo(): Failed opening required 'C:\xampp\htdocs\tsms\app\Controllers../Views\vendor\autoload.php' (include_path='C:\xampp\php\PEAR')
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2023-01-12 02:26:49 --> App\Controllers\Pages::registerNonBdo(): Failed opening required 'C:\xampp\htdocs\tsms\app\Controllers../Views/vendor/autoload.php' (include_path='C:\xampp\php\PEAR')
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2023-01-12 02:27:17 --> App\Controllers\Pages::registerNonBdo(): Failed opening required 'C:\xampp\htdocs\tsms\app\ControllersC:\xampp\htdocs\tsms\app\Views\vendor\autoload.php' (include_path='C:\xampp\php\PEAR')
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2023-01-12 02:27:36 --> App\Controllers\Pages::registerNonBdo(): Failed opening required 'C:\xampp\htdocs\tsms\app\Controllers\vendor\autoload.php' (include_path='C:\xampp\php\PEAR')
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2023-01-12 02:27:42 --> App\Controllers\Pages::registerNonBdo(): Failed opening required 'C:\xampp\htdocs\tsms\app\Controllersvendor\autoload.php' (include_path='C:\xampp\php\PEAR')
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2023-01-12 02:27:49 --> App\Controllers\Pages::registerNonBdo(): Failed opening required 'C:\xampp\htdocs\tsms\app\Controllersvendor/autoload.php' (include_path='C:\xampp\php\PEAR')
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2023-01-12 02:27:51 --> App\Controllers\Pages::registerNonBdo(): Failed opening required 'C:\xampp\htdocs\tsms\app\Controllersvendor/autoload.php' (include_path='C:\xampp\php\PEAR')
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2023-01-12 02:31:00 --> require(C:\xampp\htdocs\tsms\app\Controllers/vendor/autoload.php): failed to open stream: No such file or directory
+#0 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(466): CodeIgniter\Debug\Exceptions->errorHandler(2, 'require(C:\\xamp...', 'C:\\xampp\\htdocs...', 466, Array)
+#1 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(466): require()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#4 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2023-01-12 02:32:33 --> App\Controllers\Pages::registerNonBdo(): Failed opening required 'C:\xampp\htdocs\tsms\app\vendor/autoload.php' (include_path='C:\xampp\php\PEAR')
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2023-01-12 02:34:46 --> App\Controllers\Pages::registerNonBdo(): Failed opening required 'C:\xampp\htdocs\tsms\app\views/vendor/autoload' (include_path='C:\xampp\php\PEAR')
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2023-01-12 02:35:01 --> App\Controllers\Pages::registerNonBdo(): Failed opening required 'C:\xampp\htdocs\tsms\app\views\vendor\autoload' (include_path='C:\xampp\php\PEAR')
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2023-01-12 02:38:32 --> Class 'App\Controllers\Pusher\Pusher' not found
+#0 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2023-01-12 02:44:08 --> Class 'App\Controllers\Pusher\Pusher' not found
+#0 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2023-01-12 02:46:57 --> syntax error, unexpected '.'
+#0 C:\xampp\htdocs\tsms\system\Autoloader\Autoloader.php(241): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\xampp\\htdocs...')
+#1 C:\xampp\htdocs\tsms\system\Autoloader\Autoloader.php(219): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers...')
+#2 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers...')
+#3 [internal function]: spl_autoload_call('App\\Controllers...')
+#4 C:\xampp\htdocs\tsms\system\CodeIgniter.php(789): class_exists('\\App\\Controller...', true)
+#5 C:\xampp\htdocs\tsms\system\CodeIgniter.php(397): CodeIgniter\CodeIgniter->startController()
+#6 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2023-01-12 02:47:09 --> Class 'App\Controllers\views\Pusher\Pusher' not found
+#0 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2023-01-12 02:47:18 --> syntax error, unexpected '.'
+#0 C:\xampp\htdocs\tsms\system\Autoloader\Autoloader.php(241): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\xampp\\htdocs...')
+#1 C:\xampp\htdocs\tsms\system\Autoloader\Autoloader.php(219): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers...')
+#2 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers...')
+#3 [internal function]: spl_autoload_call('App\\Controllers...')
+#4 C:\xampp\htdocs\tsms\system\CodeIgniter.php(789): class_exists('\\App\\Controller...', true)
+#5 C:\xampp\htdocs\tsms\system\CodeIgniter.php(397): CodeIgniter\CodeIgniter->startController()
+#6 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2023-01-12 02:47:31 --> Class 'App\Controllers\Pusher' not found
+#0 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2023-01-12 02:47:38 --> Class 'App\Controllers\Pusher\Pusher' not found
+#0 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2023-01-12 02:49:46 --> Class 'App\Controllers\Pusher\Pusher' not found
+#0 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2023-01-12 02:52:19 --> Class 'App\Controllers\Pusher\Pusher' not found
+#0 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2023-01-12 02:52:41 --> Class 'App\Controllers\Pusher\Pusher' not found
+#0 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2023-01-12 02:54:12 --> Class 'App\Controllers\Pusher\Pusher' not found
+#0 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2023-01-12 02:54:20 --> Class 'App\Controllers\Pusher\Pusher' not found
+#0 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2023-01-12 02:55:03 --> Class 'App\Controllers\Pusher\Pusher' not found
+#0 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2023-01-12 02:55:16 --> Class 'App\Controllers\Pusher\Pusher' not found
+#0 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2023-01-12 02:56:19 --> Class 'App\Controllers\Pusher\Pusher' not found
+#0 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2023-01-12 03:01:27 --> Class 'App\Controllers\Pusher\Pusher' not found
+#0 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2023-01-12 03:15:09 --> Class 'App\Controllers\Pusher\Pusher' not found
+#0 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2023-01-12 03:15:18 --> Class 'App\Controllers\Pusher\Pusher' not found
+#0 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2023-01-12 03:16:24 --> Class 'App\Controllers\Pusher\Pusher' not found
+#0 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2023-01-12 03:16:27 --> Class 'App\Controllers\Pusher\Pusher' not found
+#0 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2023-01-12 03:20:08 --> Class 'App\Controllers\Pusher' not found
+#0 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2023-01-12 03:25:17 --> syntax error, unexpected 'dd781620fcbed2e0b8' (T_STRING), expecting ')'
+#0 C:\xampp\htdocs\tsms\system\Autoloader\Autoloader.php(241): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\xampp\\htdocs...')
+#1 C:\xampp\htdocs\tsms\system\Autoloader\Autoloader.php(219): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers...')
+#2 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers...')
+#3 [internal function]: spl_autoload_call('App\\Controllers...')
+#4 C:\xampp\htdocs\tsms\system\CodeIgniter.php(789): class_exists('\\App\\Controller...', true)
+#5 C:\xampp\htdocs\tsms\system\CodeIgniter.php(397): CodeIgniter\CodeIgniter->startController()
+#6 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2023-01-12 03:25:52 --> syntax error, unexpected ':', expecting ')'
+#0 C:\xampp\htdocs\tsms\system\Autoloader\Autoloader.php(241): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\xampp\\htdocs...')
+#1 C:\xampp\htdocs\tsms\system\Autoloader\Autoloader.php(219): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers...')
+#2 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers...')
+#3 [internal function]: spl_autoload_call('App\\Controllers...')
+#4 C:\xampp\htdocs\tsms\system\CodeIgniter.php(789): class_exists('\\App\\Controller...', true)
+#5 C:\xampp\htdocs\tsms\system\CodeIgniter.php(397): CodeIgniter\CodeIgniter->startController()
+#6 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2023-01-12 03:26:12 --> syntax error, unexpected '=', expecting ')'
+#0 C:\xampp\htdocs\tsms\system\Autoloader\Autoloader.php(241): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\xampp\\htdocs...')
+#1 C:\xampp\htdocs\tsms\system\Autoloader\Autoloader.php(219): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers...')
+#2 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers...')
+#3 [internal function]: spl_autoload_call('App\\Controllers...')
+#4 C:\xampp\htdocs\tsms\system\CodeIgniter.php(789): class_exists('\\App\\Controller...', true)
+#5 C:\xampp\htdocs\tsms\system\CodeIgniter.php(397): CodeIgniter\CodeIgniter->startController()
+#6 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2023-01-12 03:27:01 --> Class 'App\Controllers\Pusher\Pusher' not found
+#0 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2023-01-12 03:27:34 --> Class 'App\Controllers\Pusher\Pusher' not found
+#0 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2023-01-12 03:27:37 --> Class 'App\Controllers\Pusher\Pusher' not found
+#0 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2023-01-12 03:28:06 --> Class 'App\Controllers\Pusher\Pusher' not found
+#0 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2023-01-12 03:28:36 --> require(C:\xampp\htdocs\tsms\app\Controllers../vendor/autoload.php): failed to open stream: No such file or directory
+#0 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(465): CodeIgniter\Debug\Exceptions->errorHandler(2, 'require(C:\\xamp...', 'C:\\xampp\\htdocs...', 465, Array)
+#1 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(465): require()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#4 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2023-01-12 03:29:13 --> Class 'App\Controllers\Pusher\Pusher' not found
+#0 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2023-01-12 03:32:34 --> Class 'App\Controllers\Pusher\Pusher' not found
+#0 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2023-01-12 03:35:34 --> App\Controllers\Pages::registerNonBdo(): Failed opening required 'C:\xampp\htdocs\tsms\app\../views/vendor/autoload.php' (include_path='C:\xampp\php\PEAR')
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2023-01-12 03:35:52 --> Class 'App\Controllers\Pusher\Pusher' not found
+#0 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2023-01-12 03:37:45 --> Class 'App\Controllers\Pusher\Pusher' not found
+#0 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2023-01-12 03:42:46 --> App\Controllers\Pages::registerNonBdo(): Failed opening required 'C:\xampp\htdocs\tsms\app\/vendor/autoload.php' (include_path='C:\xampp\php\PEAR')
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2023-01-12 03:42:58 --> Class 'App\Controllers\Pusher\Pusher' not found
+#0 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2023-01-12 03:48:49 --> Class 'App\Controllers\Pusher\Pusher' not found
+#0 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2023-01-12 03:52:36 --> Class 'App\Controllers\Pusher\Pusher' not found
+#0 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2023-01-12 04:03:15 --> Class 'App\Controllers\Pusher\Pusher' not found
+#0 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2023-01-12 04:04:22 --> Class 'App\Controllers\Pusher\Pusher' not found
+#0 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2023-01-12 04:05:20 --> Class 'App\Controllers\Pusher\Pusher' not found
+#0 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2023-01-12 04:07:40 --> require(C:\xampp\htdocs\tsms\app\Controllers../vendor/autoload.php): failed to open stream: No such file or directory
+#0 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(452): CodeIgniter\Debug\Exceptions->errorHandler(2, 'require(C:\\xamp...', 'C:\\xampp\\htdocs...', 452, Array)
+#1 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(452): require()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#4 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2023-01-12 04:07:55 --> require(C:\xampp\htdocs\tsms\app\Controllers/vendor/autoload.php): failed to open stream: No such file or directory
+#0 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(452): CodeIgniter\Debug\Exceptions->errorHandler(2, 'require(C:\\xamp...', 'C:\\xampp\\htdocs...', 452, Array)
+#1 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(452): require()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#4 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2023-01-12 04:08:06 --> require(C:\xampp\htdocs\tsms\app\Controllers..\vendor\autoload.php): failed to open stream: No such file or directory
+#0 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(452): CodeIgniter\Debug\Exceptions->errorHandler(2, 'require(C:\\xamp...', 'C:\\xampp\\htdocs...', 452, Array)
+#1 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(452): require()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#4 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2023-01-12 04:08:12 --> require(C:\xampp\htdocs\tsms\app\Controllers\..\vendor\autoload.php): failed to open stream: No such file or directory
+#0 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(452): CodeIgniter\Debug\Exceptions->errorHandler(2, 'require(C:\\xamp...', 'C:\\xampp\\htdocs...', 452, Array)
+#1 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(452): require()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#4 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2023-01-12 04:10:52 --> Namespace declaration statement has to be the very first statement or after any declare call in the script
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2023-01-12 04:11:08 --> Class 'App\Controllers\Pusher\Pusher' not found
+#0 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2023-01-12 04:11:21 --> Class 'App\Controllers\Pusher\Pusher' not found
+#0 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2023-01-12 04:14:33 --> App\Controllers\Pages::registerNonBdo(): Failed opening required 'C:\xampp\htdocs\tsms\app\/vendor/autoload.php' (include_path='C:\xampp\php\PEAR')
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2023-01-12 04:15:29 --> App\Controllers\Pages::registerNonBdo(): Failed opening required 'C:\xampp\htdocs\tsms\app\vendor/autoload.php' (include_path='C:\xampp\php\PEAR')
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2023-01-12 04:17:04 --> App\Controllers\Pages::registerNonBdo(): Failed opening required 'C:\xampp\htdocs\tsms\app\..\vendor\autoload.php' (include_path='C:\xampp\php\PEAR')
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2023-01-12 04:17:30 --> App\Controllers\Pages::registerNonBdo(): Failed opening required 'C:\xampp\htdocs\tsms\app\/vendor/autoload.php' (include_path='C:\xampp\php\PEAR')
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2023-01-12 04:17:34 --> App\Controllers\Pages::registerNonBdo(): Failed opening required 'C:\xampp\htdocs\tsms\app\vendor/autoload.php' (include_path='C:\xampp\php\PEAR')
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2023-01-12 04:18:32 --> Undefined property: App\Controllers\Pages::$load
+#0 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(453): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined prope...', 'C:\\xampp\\htdocs...', 453, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-12 04:18:45 --> require(C:\xampp\htdocs\tsms\app\Controllers/vendor/autoload.php): failed to open stream: No such file or directory
+#0 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(452): CodeIgniter\Debug\Exceptions->errorHandler(2, 'require(C:\\xamp...', 'C:\\xampp\\htdocs...', 452, Array)
+#1 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(452): require()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#4 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2023-01-12 04:18:54 --> require(C:\xampp\htdocs\tsms\app\Controllers../vendor/autoload.php): failed to open stream: No such file or directory
+#0 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(452): CodeIgniter\Debug\Exceptions->errorHandler(2, 'require(C:\\xamp...', 'C:\\xampp\\htdocs...', 452, Array)
+#1 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(452): require()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#4 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2023-01-12 04:19:00 --> require(C:\xampp\htdocs\tsms\app\Controllers../views/vendor/autoload.php): failed to open stream: No such file or directory
+#0 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(452): CodeIgniter\Debug\Exceptions->errorHandler(2, 'require(C:\\xamp...', 'C:\\xampp\\htdocs...', 452, Array)
+#1 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(452): require()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#4 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2023-01-12 04:20:34 --> Class 'App\Controllers\Pusher\Pusher' not found
+#0 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2023-01-12 04:21:26 --> Class 'App\Controllers\Pusher\Pusher' not found
+#0 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+ERROR - 2023-01-12 23:04:03 --> MySQL server has gone away
+CRITICAL - 2023-01-12 23:04:03 --> MySQL server has gone away
+#0 C:\xampp\htdocs\tsms\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT DISTINCT...', 0)
+#1 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT DISTINCT...')
+#2 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT DISTINCT...')
+#3 C:\xampp\htdocs\tsms\app\Controllers\FullCalendar.php(36): CodeIgniter\Database\BaseConnection->query('SELECT DISTINCT...')
+#4 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\FullCalendar->index()
+#5 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FullCalendar))
+#6 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2023-01-12 23:33:07 --> A non well formed numeric value encountered
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(8, 'A non well form...', 'C:\\xampp\\htdocs...', 2034, Array)
+#1 C:\xampp\htdocs\tsms\app\Controllers\FullCalendar.php(2034): strtotime('+2 hour', '13:00')
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\FullCalendar->checkEmp()
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FullCalendar))
+#4 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2023-01-12 23:33:07 --> A non well formed numeric value encountered
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(8, 'A non well form...', 'C:\\xampp\\htdocs...', 2034, Array)
+#1 C:\xampp\htdocs\tsms\app\Controllers\FullCalendar.php(2034): strtotime('+2 hour', '13:00')
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\FullCalendar->checkEmp()
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FullCalendar))
+#4 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2023-01-12 23:33:33 --> A non well formed numeric value encountered
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(8, 'A non well form...', 'C:\\xampp\\htdocs...', 2034, Array)
+#1 C:\xampp\htdocs\tsms\app\Controllers\FullCalendar.php(2034): strtotime('+2 hour', '13:00')
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\FullCalendar->checkEmp()
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FullCalendar))
+#4 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2023-01-12 23:36:08 --> A non well formed numeric value encountered
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(8, 'A non well form...', 'C:\\xampp\\htdocs...', 2032, Array)
+#1 C:\xampp\htdocs\tsms\app\Controllers\FullCalendar.php(2032): strtotime('+2 hour', '13:00')
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\FullCalendar->checkEmp()
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FullCalendar))
+#4 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2023-01-12 23:36:51 --> A non well formed numeric value encountered
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(8, 'A non well form...', 'C:\\xampp\\htdocs...', 2032, Array)
+#1 C:\xampp\htdocs\tsms\app\Controllers\FullCalendar.php(2032): strtotime('+2 hour', '13:00')
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\FullCalendar->checkEmp()
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FullCalendar))
+#4 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2023-01-12 23:38:12 --> Undefined variable: endTime
+#0 C:\xampp\htdocs\tsms\app\Controllers\FullCalendar.php(2035): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 2035, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\FullCalendar->checkEmp()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FullCalendar))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-12 23:39:18 --> Undefined variable: endTime
+#0 C:\xampp\htdocs\tsms\app\Controllers\FullCalendar.php(2036): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 2036, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\FullCalendar->checkEmp()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FullCalendar))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-01-12 23:40:10 --> Undefined variable: endTime
+#0 C:\xampp\htdocs\tsms\app\Controllers\FullCalendar.php(2036): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 2036, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\FullCalendar->checkEmp()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FullCalendar))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+ERROR - 2023-01-12 23:40:51 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+CRITICAL - 2023-01-12 23:40:51 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+#0 C:\xampp\htdocs\tsms\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT DISTINCT...', 0)
+#1 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT DISTINCT...')
+#2 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT DISTINCT...')
+#3 C:\xampp\htdocs\tsms\app\Controllers\FullCalendar.php(2036): CodeIgniter\Database\BaseConnection->query('SELECT DISTINCT...')
+#4 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\FullCalendar->checkEmp()
+#5 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FullCalendar))
+#6 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#8 {main}

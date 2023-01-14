@@ -67,7 +67,6 @@
                 <option value="Weekly">Every Week</option>
                 <option value="2Week">Every 2 Weeks</option>
                 <option value="3Week">Every 3 Weeks</option>
-                <option value="4Week">Every 4 Weeks</option>
               </optgroup>
               <optgroup label="Month">
                 <option value="Monthly">Every Month</option>
@@ -155,7 +154,7 @@
         <div id="auth-rows"></div>
         <div class="form-group">
           
-          <label class="emp_idlbll" for="emp_id">Employee</label><br>
+          <label class="emp_idlbll" for="emp_id">Technician</label><br>
           <select id="emp_id" name="emp_id[]" class="form-control w-75 ml-5 selectpicker border border-dark" multiple data-selected-text-format="count > 8" required>
           </select>
         </div> 
@@ -263,7 +262,7 @@
 
         <div class="form-group">
           
-          <label class="ml-5" for="emp_id_update">Employee</label><br>
+          <label class="ml-5" for="emp_id_update">Technician</label><br>
           <select id="emp_id_update" name="emp_id_update[]" class="form-control w-75 ml-5 selectpicker border border-dark" multiple data-selected-text-format="count > 8">
             <!--  -->
           </select>
@@ -506,6 +505,9 @@ var count_update = 1;
 
   $('#mymodal .selectpicker').selectpicker();
 
+
+  
+      
   
       </script>
       <script type="text/javascript" src="<?=base_url('assets/js/calendar.js')?>"></script>

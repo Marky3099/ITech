@@ -1,0 +1,107 @@
+CRITICAL - 2023-01-13 00:38:50 --> Class 'App\Controllers\Pusher\Pusher' not found
+#0 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2023-01-13 00:39:40 --> Class 'App\Controllers\Pusher\Pusher' not found
+#0 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2023-01-13 00:43:03 --> Cannot redeclare composerRequire15fdc70672afaed3f6eb12a1bec1c6de() (previously declared in C:\xampp\htdocs\tsms\vendor\composer\autoload_real.php:50)
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2023-01-13 00:44:19 --> Cannot redeclare composerRequire15fdc70672afaed3f6eb12a1bec1c6de() (previously declared in C:\xampp\htdocs\tsms\vendor\composer\autoload_real.php:50)
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2023-01-13 00:47:45 --> App\Controllers\Pages::registerNonBdo(): Failed opening required 'C:\xampp\htdocs\tsms\app\Controllers\views/vendor/composer\views/vendor/autoload.php' (include_path='C:\xampp\php\PEAR')
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2023-01-13 00:48:11 --> App\Controllers\Pages::registerNonBdo(): Failed opening required 'C:\xampp\htdocs\tsms\app\views/vendor/composer\views/vendor/autoload.php' (include_path='C:\xampp\php\PEAR')
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2023-01-13 01:55:28 --> syntax error, unexpected 'else' (T_ELSE)
+#0 C:\xampp\htdocs\tsms\system\Autoloader\Autoloader.php(241): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\xampp\\htdocs...')
+#1 C:\xampp\htdocs\tsms\system\Autoloader\Autoloader.php(219): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers...')
+#2 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers...')
+#3 [internal function]: spl_autoload_call('App\\Controllers...')
+#4 C:\xampp\htdocs\tsms\system\CodeIgniter.php(789): class_exists('\\App\\Controller...', true)
+#5 C:\xampp\htdocs\tsms\system\CodeIgniter.php(397): CodeIgniter\CodeIgniter->startController()
+#6 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2023-01-13 02:05:19 --> require(C:\xampp\htdocs\tsms\app\/vendor/autoload.php): failed to open stream: No such file or directory
+#0 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(452): CodeIgniter\Debug\Exceptions->errorHandler(2, 'require(C:\\xamp...', 'C:\\xampp\\htdocs...', 452, Array)
+#1 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(452): require()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#4 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2023-01-13 02:05:47 --> require(C:\xampp\htdocs\tsms\app\controller/vendor/autoload.php): failed to open stream: No such file or directory
+#0 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(452): CodeIgniter\Debug\Exceptions->errorHandler(2, 'require(C:\\xamp...', 'C:\\xampp\\htdocs...', 452, Array)
+#1 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(452): require()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#4 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2023-01-13 02:06:56 --> require(C:\xampp\htdocs\tsms\app\../views/vendor/autoload.php): failed to open stream: No such file or directory
+#0 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(452): CodeIgniter\Debug\Exceptions->errorHandler(2, 'require(C:\\xamp...', 'C:\\xampp\\htdocs...', 452, Array)
+#1 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(452): require()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->registerNonBdo()
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#4 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2023-01-13 17:07:11 --> syntax error, unexpected end of file
+#0 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#1 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('admin/dashboard...', Array, true)
+#2 C:\xampp\htdocs\tsms\app\Views\templates\template.php(3): view('admin/dashboard...')
+#3 C:\xampp\htdocs\tsms\system\View\View.php(214): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#5 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('templates/templ...', Array, true)
+#6 C:\xampp\htdocs\tsms\app\Controllers\Dashboard.php(368): view('templates/templ...', Array)
+#7 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Dashboard->dashboard()
+#8 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+#9 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#11 {main}
+CRITICAL - 2023-01-13 17:07:29 --> syntax error, unexpected end of file
+#0 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#1 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('admin/dashboard...', Array, true)
+#2 C:\xampp\htdocs\tsms\app\Views\templates\template.php(3): view('admin/dashboard...')
+#3 C:\xampp\htdocs\tsms\system\View\View.php(214): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#5 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('templates/templ...', Array, true)
+#6 C:\xampp\htdocs\tsms\app\Controllers\Dashboard.php(368): view('templates/templ...', Array)
+#7 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Dashboard->dashboard()
+#8 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+#9 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#11 {main}
+CRITICAL - 2023-01-13 17:13:01 --> Undefined variable: assignCount
+#0 C:\xampp\htdocs\tsms\app\Views\admin\dashboard\dashboard.php(763): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 763, Array)
+#1 C:\xampp\htdocs\tsms\system\View\View.php(214): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('admin/dashboard...', Array, true)
+#4 C:\xampp\htdocs\tsms\app\Views\templates\template.php(3): view('admin/dashboard...')
+#5 C:\xampp\htdocs\tsms\system\View\View.php(214): include('C:\\xampp\\htdocs...')
+#6 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#7 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('templates/templ...', Array, true)
+#8 C:\xampp\htdocs\tsms\app\Controllers\Dashboard.php(367): view('templates/templ...', Array)
+#9 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Dashboard->dashboard()
+#10 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+#11 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#13 {main}
+CRITICAL - 2023-01-13 22:59:42 --> date() expects at least 1 parameter, 0 given
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'date() expects ...', 'C:\\xampp\\htdocs...', 51, Array)
+#1 C:\xampp\htdocs\tsms\app\Controllers\Dashboard.php(51): date()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Dashboard->dashboard()
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+#4 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#6 {main}
