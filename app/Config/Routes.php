@@ -134,20 +134,11 @@ $routes->post('/calendar/dates-edit/(:num)', 'FullCalendar::restrict_edit/$1',['
 $routes->get('/calendar/dates-delete/(:num)', 'FullCalendar::restrict_delete/$1',['filter' => 'authGuard']);
 $routes->post('/calendar/checkEmp', 'FullCalendar::checkEmp',['filter' => 'authGuard']);
 $routes->get('/calendar/emp', 'FullCalendar::index1',['filter' => 'authGuard']);
-$routes->get('/calendar/events/today', 'FullCalendar::daily',['filter' => 'authGuard']);
-$routes->get('/calendar/events/today/print', 'FullCalendar::printDaily',['filter' => 'authGuard']);
-$routes->get('/calendar/events/weekly', 'FullCalendar::weekly',['filter' => 'authGuard']);
-$routes->get('/calendar/events/weekly/print', 'FullCalendar::printWeekly',['filter' => 'authGuard']);
-$routes->get('/calendar/events/monthly', 'FullCalendar::monthly',['filter' => 'authGuard']);
-$routes->get('/calendar/events/monthly/print', 'FullCalendar::printMonthly',['filter' => 'authGuard']);
 $routes->get('/calendar/events', 'FullCalendar::event',['filter' => 'authGuard']);
 $routes->post('/calendar/events/view', 'FullCalendar::view',['filter' => 'authGuard']);
-$routes->get('/calendar/events/filtered', 'FullCalendar::getfilter',['filter' => 'authGuard']);
-$routes->get('/calendar/events/filtered/print/(:any)/(:any)/(:any)/(:any)', 'FullCalendar::printpdf/$1/$2/$3/$4',['filter' => 'authGuard']);
 $routes->post('/calendar/insert', 'FullCalendar::insert',['filter' => 'authGuard']);
 $routes->get('/calendar/load', 'FullCalendar::load',['filter' => 'authGuard']);
 $routes->post('/calendar/update', 'FullCalendar::update',['filter' => 'authGuard']);
-$routes->get('/calendar/delete/(:num)', 'FullCalendar::delete/$1',['filter' => 'authGuard']);
 $routes->get('calendar/count/(:any)', 'FullCalendar::countAircon/$1',['filter' => 'authGuard']);
 
 $routes->get('/service-reports', 'ImageCrud::index',['filter' => 'authGuard']);
@@ -171,11 +162,21 @@ $routes->get('/logout', 'Dashboard::logout',['filter' => 'authGuard']);
 $routes->get('/dashboard/task/update/(:num)', 'Dashboard::update_task/$1',['filter' => 'authGuard']);
 $routes->get('/dashboard/task/pending/(:num)', 'Dashboard::pending_task/$1',['filter' => 'authGuard']);
 $routes->get('/reports/accomplished', 'Reports::index',['filter' => 'authGuard']);
-$routes->get('/reports/accomplished/filtered', 'Reports::getAccomplished',['filter' => 'authGuard']);
-$routes->get('/reports/accomplished/filtered/print/(:any)/(:any)', 'Reports::printAccomplished/$1/$2',['filter' => 'authGuard']);
+$routes->get('/reports/accomplished/filtered-daily', 'Reports::dailyAccomplish',['filter' => 'authGuard']);
+$routes->get('/reports/accomplished/filtered-weekly', 'Reports::weeklyAccomplish',['filter' => 'authGuard']);
+$routes->get('/reports/accomplished/filtered-monthly', 'Reports::monthlyAccomplish',['filter' => 'authGuard']);
+$routes->get('/reports/accomplished/filtered-quarterly', 'Reports::quarterlyAccomplish',['filter' => 'authGuard']);
+$routes->get('/reports/accomplished/filtered-yearly', 'Reports::yearlyAccomplish',['filter' => 'authGuard']);
+
 $routes->get('/reports/exception', 'Reports::showException',['filter' => 'authGuard']);
-$routes->get('/reports/exception/filtered', 'Reports::getException',['filter' => 'authGuard']);
-$routes->get('/reports/exception/filtered/print/(:any)/(:any)/(:any)/(:any)', 'Reports::printException/$1/$2/$3/$4',['filter' => 'authGuard']);
+$routes->get('/reports/exception/filtered-daily', 'Reports::dailyException',['filter' => 'authGuard']);
+$routes->get('/reports/exception/filtered-weekly', 'Reports::weeklyException',['filter' => 'authGuard']);
+$routes->get('/reports/exception/filtered-monthly', 'Reports::monthlyException',['filter' => 'authGuard']);
+$routes->get('/reports/exception/filtered-quarterly', 'Reports::quarterlyException',['filter' => 'authGuard']);
+$routes->get('/reports/exception/filtered-yearly', 'Reports::yearlyException',['filter' => 'authGuard']);
+
+// $routes->get('/reports/exception/filtered', 'Reports::getException',['filter' => 'authGuard']);
+// $routes->get('/reports/exception/filtered/print/(:any)/(:any)/(:any)/(:any)', 'Reports::printException/$1/$2/$3/$4',['filter' => 'authGuard']);
 
 
 /*

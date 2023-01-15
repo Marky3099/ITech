@@ -2,6 +2,7 @@
 <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/print.css')?>">
 <link rel="stylesheet" href="<?= base_url('assets/css/formstyle.css')?>">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 
 <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -106,103 +107,59 @@
 						<h3>Detailed Preventive Maintenance Service Report (Accomplished Tasks)</h3>
 					</div>				
 			<div class="card-body filter">
-        <form action="<?= base_url('/reports/accomplished/filtered');?>" method="GET">
-         <div class="row">
-            <div class="col-lg-2">
-               <div class="form-group">
-                  <label>Start Date:</label><br>
-                  <input type="date" name="start_date" class="form-control" value="<?php if(isset($_GET['start_date'])){echo $_GET['start_date'];} ?>" required>
-               </div>
+        <div class="row">
+            <div class="col-lg-5">
+                <a class="btn btn-primary" href="<?= base_url('/reports/accomplished/filtered-daily');?>">Daily</a>
+                <a class="btn btn-primary" href="<?= base_url('/reports/accomplished/filtered-weekly');?>">Weekly</a>
+                <a class="btn btn-primary" href="<?= base_url('/reports/accomplished/filtered-monthly');?>">Monthly</a>
+                <a class="btn btn-primary" href="<?= base_url('/reports/accomplished/filtered-quarterly');?>">Quarterly</a>
+                <a class="btn btn-primary" href="<?= base_url('/reports/accomplished/filtered-yearly');?>">Yearly</a>
             </div>
-            <div class="col-lg-2">
-               <div class="form-group">
-                  <label>To Date:</label><br>
-                  <input type="date" name="to_date" class="form-control" value="<?php if(isset($_GET['to_date'])){echo $_GET['to_date'];} ?>" required>
-               </div>
-            </div>
-            
-            
-               <div class="col-lg-2 advance-filter">
-                     <select name="serv" class="form-control">
-                        <option selected disabled value="">Service</option>
-                        <?php foreach($servName as $s):  ?>
-                          <optgroup label="<?= $s['serv_name']; ?>">
-                            <?php foreach($servType as $st):  ?>
-                              <?php if($st['serv_name'] == $s['serv_name']):?>
-                                 <?php if(isset($_GET['serv'])):?>
-                                    <?php if($_GET['serv'] == $st['serv_id']):?>
-                                    <option value=<?= $st['serv_id'];?> selected><?= $st['serv_type'];?></option>
-                                    <?php else:?>
-                                       <option value=<?= $st['serv_id'];?>><?= $st['serv_type'];?></option>
-                                    <?php endif;?>
-                                 <?php else:?>
-                                    <option value=<?= $st['serv_id'];?>><?= $st['serv_type'];?></option>
-                                 <?php endif;?>
-                              <?php endif;?>
-                            <?php endforeach; ?>
-                          </optgroup>
-                        <?php endforeach; ?>
-                     </select>
-                  </div>
-                  <div class="col-lg-2 advance-filter">
-                     <select name="clientArea" id="area" class="form-control">
-                        <option selected disabled value="">Client Area</option>
-                        <?php foreach($area as $cl):  ?>
-                           <?php if(isset($_GET['client_id'])):?>
-                              <?php if($cbranch['area'] == $cl['area']):?>
-                                 <option value=<?php echo $cl['area']; ?> selected><?php echo $cl['area'];?></option>
-                              <?php else:?>
-                                 <option value=<?php echo $cl['area']; ?>><?php echo $cl['area'];?></option>
-                              <?php endif;?>
-                              <?php else:?>
-                                 <option value=<?php echo $cl['area']; ?>><?php echo $cl['area'];?></option>
-                           <?php endif;?>
-                           
-                        <?php endforeach; ?>
-                     </select>
-                  </div>
-                  <div class="col-lg-2 advance-filter">
-                     <select name="client_id" id="client_id" class="form-control">
+            <div class="col-lg-5">
+                <?php $url = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];?>
+                <?php if(strpos($url,'filtered')):?>
+                    <form method="get" action="<?= $url;?>">
+                    <select name="filter_client" id="filter_client" class="form-control selectpicker" data-live-search="true">
                         <option selected disabled value="">Branch Name</option>
+                        <?php if($client):?>
+                            <?php foreach($client as $c):?>
+                                <?php if(isset($_GET['filter_client'])):?>
+                                    <?php if($_GET['filter_client'] == $c['client_id']):?>
+                                        <option value="<?= $c['client_id']?>" selected><?= $c['client_branch']?></option>
+                                    <?php else:?>
+                                        <option value="<?= $c['client_id']?>"><?= $c['client_branch']?></option>
+                                    <?php endif;?>
+                                <?php else:?>
+                                    <option value="<?= $c['client_id']?>"><?= $c['client_branch']?></option>
+                                <?php endif;?>
+                            <?php endforeach;?>
+                        <?php endif;?>
                      </select>
-                  </div>
-            
-                  <div class="col-lg-1">
-                    <div class="form-group">
-                        <button type="submit" class="btn mb-1 btn-success btn-sm" id="sub">Generate</button>
-                        <a href="<?= base_url('reports/accomplished') ?>" type="button" class="btn btn-secondary btn-sm">Reset</a>
-                    </div>
-                  </div>
-              
-                  <div class="col-lg-1">
-                    <div class="form-group">
-                        <!-- <button type="button" class="btn btn-info" id="sub1">Advance</button> -->
-                        <?php if(isset($_GET['start_date']) && isset($_GET['to_date']) && !isset($_GET['serv']) && !isset($_GET['client_id'])): ?>
-                          <?php $serv = '""'?>
-                          <?php $client_id = '""'?>
-                          <a href="<?= base_url('/reports/accomplished/filtered/print/'.$_GET['start_date']."/".$_GET['to_date']."/".$serv."/".$client_id)?>" target="_blank" class="btn btn-info btn-sm" id="print">Print</a>
-                        <?php elseif(isset($_GET['start_date']) && isset($_GET['to_date']) && isset($_GET['serv']) && isset($_GET['client_id'])):?>
-                          <a href="<?= base_url('/reports/accomplished/filtered/print/'.$_GET['start_date']."/".$_GET['to_date']."/".$_GET['serv']."/".$_GET['client_id'])?>" target="_blank" class="btn btn-info btn-sm" id="print">Print</a>
-                        <?php elseif(isset($_GET['start_date']) && isset($_GET['to_date']) && isset($_GET['serv']) && !isset($_GET['client_id'])):?>
-                          <?php $client_id = '""'?>
-                          <a href="<?= base_url('/reports/accomplished/filtered/print/'.$_GET['start_date']."/".$_GET['to_date']."/".$_GET['serv']."/".$client_id)?>" target="_blank" class="btn btn-info btn-sm" id="print">Print</a>
-                        <?php elseif(isset($_GET['start_date']) && isset($_GET['to_date']) && !isset($_GET['serv']) && isset($_GET['client_id'])):?>
-                          <?php $serv = '""'?>
-                          <a href="<?= base_url('/reports/accomplished/filtered/print/'.$_GET['start_date']."/".$_GET['to_date']."/".$serv."/".$_GET['client_id'])?>" target="_blank" class="btn ml-1 btn-info btn-sm" id="print">Print</a>   
-                      
-                          
-                        <?php endif; ?>
-                    </div>
-                  </div>
-                </div>
-        </form>
+                     <button type="submit" class="btn btn-success">Filter</button>
+                    </form>
+                <?php endif;?>
+            </div>
+            <div class="col-lg-2">
+                <?php $url = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];?>
+                <?php if(strpos($url,'filtered')):?>
+                    <form method="get" action="<?= $url;?>" target="_blank">
+                        <input type="hidden" name="print" value="print">
+                        <?php if(isset($_GET['filter_client'])):?>
+                            <input type="hidden" name="filter_client" value="<?=$_GET['filter_client']?>">
+                        <?php endif;?>
+                        
+                        <button type="submit" class="btn btn-primary">Print</button>
+                    </form>
+                <?php endif;?>
+            </div>
+        </div>
       </div>
 		</div>
 			
 
 			<div class="card mt-4 card2">
 				<div class="card-body">
-					<?php if($event):?>
+					<?php if($task):?>
 						<table class="table table-bordered table-hover" id="table1">
 							<thead>
 								<tr>
@@ -217,9 +174,9 @@
 							</thead>
 							<tbody>
 								
-								<?php if(isset($event)): ?>
+								<?php if(isset($task)): ?>
 									
-									<?php foreach($event as $dat):  ?>
+									<?php foreach($task as $dat):  ?>
 										<tr>
 											<td><?php echo date('m-d-Y',strtotime($dat->start_event)); ?></td>
 											<?php $time = explode(":",$dat->time);?>
@@ -236,17 +193,7 @@
                                               <?php endif;?>
 											<td><?php echo $dat->event_code; ?></td>
 											<td><?php echo $dat->client_branch ?></td>
-                                            <!-- <?php if($dat->log_code != ""):?>
-						                    <td><?php echo $dat->log_code; ?></td>
-						                    <?php else: ?>
-						                       <td>N/A</td> -->
                                             <td><?php echo $dat->serv_type ?></td>
-						                    <!-- <?php endif;?>
-						                    <?php if($dat->appt_code != ""):?>
-						                       <td><?php echo $dat->appt_code; ?></td>
-						                    <?php else: ?>
-						                       <td>N/A</td>
-						                    <?php endif;?> -->
 						                    <td><?php echo $dat->status; ?></td>
 						                    <td><a href="#" id="<?=$dat->id?>" class="btn btn-info btn-sm view">View</a></td>
 										</tr>
@@ -255,7 +202,7 @@
 							</tbody>
 						</table>
 					<?php else:?>
-						<h5>No completed tasks yet.</h5>
+						<h5>No completed tasks.</h5>
 					<?php endif;?>
 				</div>
 			</div>
@@ -264,7 +211,7 @@
 </div>
 </div>
 </div>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
@@ -399,8 +346,6 @@
          }
       })
    })
-
-
 	$(document).ready( function () {
 		$('#table1').DataTable({
 			pageLength : 5,
@@ -408,8 +353,4 @@
 		});
 	} );
 
-var areas = <?php echo json_encode($client_area); ?> ;
-var cId = <?php echo json_encode($cId); ?>;
-var cBranch = <?php echo json_encode($cbranch); ?>;
 </script>
-<script type="text/javascript" src="<?= base_url('assets/js/filter.js')?>"></script>

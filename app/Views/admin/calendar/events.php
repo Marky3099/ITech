@@ -97,103 +97,7 @@
 
      <div class="tsk">
         <a href="<?= base_url('/calendar') ?>" class="btn" >Calendar</a>
-        <a href="<?= base_url('/calendar/events/today') ?>" class="btn " >Daily</a>
-        <a href="<?= base_url('/calendar/events/weekly') ?>" class="btn " >Weekly</a>
-        <a href="<?= base_url('/calendar/events/monthly') ?>" class="btn " >Monthly</a>
      </div>
-     
-     <div class="card-body filter">
-      <form action="<?= base_url('/calendar/events/filtered');?>" method="GET">
-         <div class="row">
-            <div class="col-lg-2">
-               <div class="form-group">
-                  <label>Start Date:</label><br>
-                  <input type="date" name="start_date" class="form-control" value="<?php if(isset($_GET['start_date'])){echo $_GET['start_date'];} ?>" required>
-               </div>
-            </div>
-            <div class="col-lg-2">
-               <div class="form-group">
-                  <label>To Date:</label><br>
-                  <input type="date" name="to_date" class="form-control" value="<?php if(isset($_GET['to_date'])){echo $_GET['to_date'];} ?>" required>
-               </div>
-            </div>
-            
-            
-               <div class="col-lg-2 advance-filter">
-                     <select name="serv" class="form-control">
-                        <option selected disabled value="">Service</option>
-                        <?php foreach($servName as $s):  ?>
-                          <optgroup label="<?= $s['serv_name']; ?>">
-                            <?php foreach($servType as $st):  ?>
-                              <?php if($st['serv_name'] == $s['serv_name']):?>
-                                 <?php if(isset($_GET['serv'])):?>
-                                    <?php if($_GET['serv'] == $st['serv_id']):?>
-                                    <option value=<?= $st['serv_id'];?> selected><?= $st['serv_type'];?></option>
-                                    <?php else:?>
-                                       <option value=<?= $st['serv_id'];?>><?= $st['serv_type'];?></option>
-                                    <?php endif;?>
-                                 <?php else:?>
-                                    <option value=<?= $st['serv_id'];?>><?= $st['serv_type'];?></option>
-                                 <?php endif;?>
-                              <?php endif;?>
-                            <?php endforeach; ?>
-                          </optgroup>
-                        <?php endforeach; ?>
-                     </select>
-                  </div>
-                  <div class="col-lg-2 advance-filter">
-                     <select name="clientArea" id="area" class="form-control">
-                        <option selected disabled value="">Client Area</option>
-                        <?php foreach($area as $cl):  ?>
-                           <?php if(isset($_GET['client_id'])):?>
-                              <?php if($cbranch['area'] == $cl['area']):?>
-                                 <option value=<?php echo $cl['area']; ?> selected><?php echo $cl['area'];?></option>
-                              <?php else:?>
-                                 <option value=<?php echo $cl['area']; ?>><?php echo $cl['area'];?></option>
-                              <?php endif;?>
-                              <?php else:?>
-                                 <option value=<?php echo $cl['area']; ?>><?php echo $cl['area'];?></option>
-                           <?php endif;?>
-                           
-                        <?php endforeach; ?>
-                     </select>
-                  </div>
-                  <div class="col-lg-2 advance-filter">
-                     <select name="client_id" id="client_id" class="form-control">
-                        <option selected disabled value="">Branch Name</option>
-                     </select>
-                  </div>
-            
-            <div class="col-lg-1">
-               <div class="form-group">
-                  <button type="submit" class="btn btn-success" id="sub">Generate</button>
-                  <a href="<?= base_url('calendar/events') ?>" type="button" class="btn mt-1 btn-secondary">Reset</a>
-               </div>
-            </div>
-         
-            <div class="col-lg-1">
-               <div class="form-group">
-                  <!-- <button type="button" class="btn btn-info" id="sub1">Advance</button> -->
-                  <?php if(isset($_GET['start_date']) && isset($_GET['to_date']) && !isset($_GET['serv']) && !isset($_GET['client_id'])): ?>
-                     <?php $serv = '""'?>
-                     <?php $client_id = '""'?>
-                     <a href="<?= base_url('/calendar/events/filtered/print/'.$_GET['start_date']."/".$_GET['to_date']."/".$serv."/".$client_id)?>" target="_blank" class="btn btn-info" id="print">Print</a>
-                  <?php elseif(isset($_GET['start_date']) && isset($_GET['to_date']) && isset($_GET['serv']) && isset($_GET['client_id'])):?>
-                     <a href="<?= base_url('/calendar/events/filtered/print/'.$_GET['start_date']."/".$_GET['to_date']."/".$_GET['serv']."/".$_GET['client_id'])?>" target="_blank" class="btn btn-info" id="print">Print</a>
-                  <?php elseif(isset($_GET['start_date']) && isset($_GET['to_date']) && isset($_GET['serv']) && !isset($_GET['client_id'])):?>
-                     <?php $client_id = '""'?>
-                     <a href="<?= base_url('/calendar/events/filtered/print/'.$_GET['start_date']."/".$_GET['to_date']."/".$_GET['serv']."/".$client_id)?>" target="_blank" class="btn btn-info" id="print">Print</a>
-                  <?php elseif(isset($_GET['start_date']) && isset($_GET['to_date']) && !isset($_GET['serv']) && isset($_GET['client_id'])):?>
-                     <?php $serv = '""'?>
-                     <a href="<?= base_url('/calendar/events/filtered/print/'.$_GET['start_date']."/".$_GET['to_date']."/".$serv."/".$_GET['client_id'])?>" target="_blank" class="btn ml-3 btn-info" id="print">Print</a>   
-                 
-                     
-                  <?php endif; ?>
-               </div>
-            </div>
-          </div>
-   </form>
-</div>   
 </div>
 <div class="col-sm-12 mt-3 bg-light" style=" padding:10px;">
    <?php if($event): ?>
@@ -259,7 +163,6 @@
       <?php endif;?>
       <td>
         <a href="#" id="<?=$dat->id?>" class="btn btn-info btn-sm view">View</a>
-        <a href="<?= base_url('/calendar/delete/'.$dat->id);?>" class="btn btn-danger btn-sm del">Delete</a>
      </td>
   </tr>
 <?php endforeach; ?>
@@ -411,10 +314,5 @@
          }
       })
    })
-
-var areas = <?php echo json_encode($client_area); ?> ;
-var cId = <?php echo json_encode($cId); ?>;
-var cBranch = <?php echo json_encode($cbranch); ?>;
    </script>
-   <script type="text/javascript" src="<?= base_url('assets/js/filter.js')?>"></script>
    <script type="text/javascript" src="<?= base_url('assets/js/crud.js')?>"></script>
