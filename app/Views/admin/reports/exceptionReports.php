@@ -107,17 +107,53 @@
 					<div class="card-body filter">
         <div class="row">
             <div class="col-lg-5">
-                <a class="btn btn-primary" href="<?= base_url('/reports/exception/filtered-daily');?>">Daily</a>
-                <a class="btn btn-primary" href="<?= base_url('/reports/exception/filtered-weekly');?>">Weekly</a>
-                <a class="btn btn-primary" href="<?= base_url('/reports/exception/filtered-monthly');?>">Monthly</a>
-                <a class="btn btn-primary" href="<?= base_url('/reports/exception/filtered-quarterly');?>">Quarterly</a>
-                <a class="btn btn-primary" href="<?= base_url('/reports/exception/filtered-yearly');?>">Yearly</a>
+                <select id="select-filter" class="form-control selectpicker">
+                    <option disabled selected>Filter</option>
+                    <?php $url = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];?>
+                    <?php if(strpos($url,'filtered-daily')):?>
+                        <option selected>Daily</option>
+                        <option>Weekly</option>
+                        <option>Monthly</option>
+                        <option>Quarterly</option>
+                        <option>Yearly</option>
+                    <?php elseif(strpos($url,'filtered-weekly')):?>
+                        <option>Daily</option>
+                        <option selected>Weekly</option>
+                        <option>Monthly</option>
+                        <option>Quarterly</option>
+                        <option>Yearly</option>
+                    <?php elseif(strpos($url,'filtered-monthly')):?>
+                        <option>Daily</option>
+                        <option>Weekly</option>
+                        <option selected>Monthly</option>
+                        <option>Quarterly</option>
+                        <option>Yearly</option>
+                    <?php elseif(strpos($url,'filtered-quarterly')):?>
+                        <option>Daily</option>
+                        <option>Weekly</option>
+                        <option>Monthly</option>
+                        <option selected>Quarterly</option>
+                        <option>Yearly</option>
+                    <?php elseif(strpos($url,'filtered-yearly')):?>
+                        <option>Daily</option>
+                        <option>Weekly</option>
+                        <option>Monthly</option>
+                        <option>Quarterly</option>
+                        <option selected>Yearly</option>
+                    <?php else:?>
+                        <option>Daily</option>
+                        <option>Weekly</option>
+                        <option>Monthly</option>
+                        <option>Quarterly</option>
+                        <option>Yearly</option>
+                <?php endif;?>
+                </select>
             </div>
             <div class="col-lg-5">
                 <?php $url = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];?>
                 <?php if(strpos($url,'filtered')):?>
-                    <form method="get" action="<?= $url;?>">
-                    <select name="filter_client" id="filter_client" class="form-control selectpicker" data-live-search="true">
+                    <form method="Get" id="filter-client" action="<?php base_url($url)?>">
+                    <select name="filter_client" id="filter_client" class="form-control selectpicker".<?=$url;?> data-live-search="true" data-clear-button="true" data-filter="true">
                         <option selected disabled value="">Branch Name</option>
                         <?php if($client):?>
                             <?php foreach($client as $c):?>
@@ -132,8 +168,7 @@
                                 <?php endif;?>
                             <?php endforeach;?>
                         <?php endif;?>
-                     </select>
-                     <button type="submit" class="btn btn-success">Filter</button>
+                    </select>
                     </form>
                 <?php endif;?>
             </div>
@@ -228,6 +263,28 @@
 
 <script type="text/javascript">
 
+    $("#select-filter").on('change',function()
+    {
+        var filterVal = $(this).val();
+        if(filterVal == "Daily"){
+            window.location.href = "<?= base_url('/reports/exception/filtered-daily');?>";
+        }
+        else if(filterVal == "Weekly"){
+            window.location.href = "<?= base_url('/reports/exception/filtered-weekly');?>";
+        }
+        else if(filterVal == "Monthly"){
+            window.location.href = "<?= base_url('/reports/exception/filtered-monthly');?>";
+        }
+        else if(filterVal == "Quarterly"){
+            window.location.href = "<?= base_url('/reports/exception/filtered-quarterly');?>";
+        }
+        else if(filterVal == "Yearly"){
+            window.location.href = "<?= base_url('/reports/exception/filtered-yearly');?>";
+        }
+    });
+    $("#filter_client").on('change',function(){
+        $("#filter-client").submit();
+    });
 
 	$(document).on('click','.view',function(e){
       // console.log(e.target.id);

@@ -228,6 +228,11 @@ public function weeklyAccomplish(){
     $event_fcu = new Event_fcu_views();
     $client = new Client();
 
+    date_default_timezone_set('Asia/Hong_Kong'); 
+
+    $date = new \DateTime();
+    $date->setTimezone(new \DateTimeZone('+0800'));
+
     $db = \Config\Database::connect();
     $query   = $db->query('SELECT DISTINCT aircon_id,id,device_brand,aircon_type,quantity
         FROM event_fcu_views');
@@ -326,6 +331,11 @@ public function monthlyAccomplish(){
     $event_fcu = new Event_fcu_views();
     // $aircon = new Aircon();
 
+    date_default_timezone_set('Asia/Hong_Kong'); 
+
+    $date = new \DateTime();
+    $date->setTimezone(new \DateTimeZone('+0800'));
+
     $db = \Config\Database::connect();
     $query   = $db->query('SELECT DISTINCT aircon_id,id,device_brand,aircon_type,quantity
         FROM event_fcu_views');
@@ -418,6 +428,12 @@ public function quarterlyAccomplish(){
     $event_emp = new Event_emp_views();
     $event_fcu = new Event_fcu_views();
     // $aircon = new Aircon();
+
+    date_default_timezone_set('Asia/Hong_Kong'); 
+
+    $date = new \DateTime();
+    $date->setTimezone(new \DateTimeZone('+0800'));
+
     $db = \Config\Database::connect();
     $query   = $db->query('SELECT DISTINCT aircon_id,id,device_brand,aircon_type,quantity
         FROM event_fcu_views');
@@ -526,6 +542,12 @@ public function yearlyAccomplish(){
     $event_emp = new Event_emp_views();
     $event_fcu = new Event_fcu_views();
     // $aircon = new Aircon();
+
+    date_default_timezone_set('Asia/Hong_Kong'); 
+
+    $date = new \DateTime();
+    $date->setTimezone(new \DateTimeZone('+0800'));
+
     $db = \Config\Database::connect();
     $query   = $db->query('SELECT DISTINCT aircon_id,id,device_brand,aircon_type,quantity
         FROM event_fcu_views');
@@ -825,6 +847,11 @@ public function weeklyException(){
     $event_fcu = new Event_fcu_views();
     $client = new Client();
 
+    date_default_timezone_set('Asia/Hong_Kong'); 
+
+    $date = new \DateTime();
+    $date->setTimezone(new \DateTimeZone('+0800'));
+
     $db = \Config\Database::connect();
     $query   = $db->query('SELECT DISTINCT aircon_id,id,device_brand,aircon_type,quantity
         FROM event_fcu_views');
@@ -837,13 +864,10 @@ public function weeklyException(){
 
     $monday = date('Y-m-d', strtotime('monday this week'));
     $sunday = date('Y-m-d', strtotime('sunday this week'));
-
+    // dd($monday);
     $datas['task'] = array();
     $datas['areas'] = array();
     $datas['cBranch']="";
-    // $datas['client'] = $client->orderBy('client_id', 'ASC')->findAll();
-        // $datas['emp'] = $emp->orderBy('emp_id', 'ASC')->findAll();
-    // $datas['serv'] = $serv->orderBy('serv_id', 'ASC')->findAll();
     $datas['event_emp'] = $event_emp->orderBy('id', 'ASC')->findAll();
     $datas['event_fcu'] = $event_fcu->orderBy('id', 'ASC')->orderBy('fcuno', 'ASC')->findAll();
     $datas['client'] = $client->orderBy('client_id', 'ASC')->findAll();
@@ -854,9 +878,11 @@ public function weeklyException(){
         if(count($datas['weekly'])>0){
             $datas['cBranch'] = $datas['weekly'][0]['client_branch'];
         }
+
     }else{
         $datas['weekly'] = $event->where('start_event BETWEEN "'. date('Y-m-d', strtotime($monday)). '" and "'. date('Y-m-d', strtotime($sunday)).'" AND status = "Pending" ORDER BY start_event ASC')->findAll();
     }
+    // dd($datas['weekly']);
     foreach ($datas['weekly'] as $key => $value) {
         array_push($datas['areas'],$value['area']);
         $emp_arr = "";
@@ -922,6 +948,11 @@ public function monthlyException(){
     $event_emp = new Event_emp_views();
     $event_fcu = new Event_fcu_views();
     // $aircon = new Aircon();
+
+    date_default_timezone_set('Asia/Hong_Kong'); 
+
+    $date = new \DateTime();
+    $date->setTimezone(new \DateTimeZone('+0800'));
 
     $db = \Config\Database::connect();
     $query   = $db->query('SELECT DISTINCT aircon_id,id,device_brand,aircon_type,quantity
@@ -1015,6 +1046,12 @@ public function quarterlyException(){
     $event_emp = new Event_emp_views();
     $event_fcu = new Event_fcu_views();
     // $aircon = new Aircon();
+
+    date_default_timezone_set('Asia/Hong_Kong'); 
+
+    $date = new \DateTime();
+    $date->setTimezone(new \DateTimeZone('+0800'));
+
     $db = \Config\Database::connect();
     $query   = $db->query('SELECT DISTINCT aircon_id,id,device_brand,aircon_type,quantity
         FROM event_fcu_views');
@@ -1123,6 +1160,12 @@ public function yearlyException(){
     $event_emp = new Event_emp_views();
     $event_fcu = new Event_fcu_views();
     // $aircon = new Aircon();
+
+    date_default_timezone_set('Asia/Hong_Kong'); 
+
+    $date = new \DateTime();
+    $date->setTimezone(new \DateTimeZone('+0800'));
+
     $db = \Config\Database::connect();
     $query   = $db->query('SELECT DISTINCT aircon_id,id,device_brand,aircon_type,quantity
         FROM event_fcu_views');

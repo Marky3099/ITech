@@ -1032,3 +1032,16 @@ CRITICAL - 2023-01-15 05:43:06 --> Undefined property: MYPDF::$year
 #11 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #12 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
 #13 {main}
+CRITICAL - 2023-01-15 22:54:34 --> syntax error, unexpected end of file
+#0 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#1 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('admin/reports/a...', Array, true)
+#2 C:\xampp\htdocs\tsms\app\Views\templates\template.php(3): view('admin/reports/a...')
+#3 C:\xampp\htdocs\tsms\system\View\View.php(214): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#5 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('templates/templ...', Array, true)
+#6 C:\xampp\htdocs\tsms\app\Controllers\Reports.php(314): view('templates/templ...', Array)
+#7 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Reports->weeklyAccomplish()
+#8 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Reports))
+#9 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#11 {main}
