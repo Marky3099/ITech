@@ -53,9 +53,6 @@
                                           <th>Service Type</th>
                                           <th>Employee</th>
                                           <th>Status</th>
-                                          <?php if($_SESSION['position'] == USER_ROLE_ADMIN):?>
-                                            <th>Action</th>
-                                          <?php endif;?>
                                         </tr>
                                       </thead>
                                       <tbody>
@@ -77,16 +74,6 @@
                                              <?php endforeach; ?>
                                            </td> 
                                            <td><?php echo $tday->status;?></td>
-                                           <?php if($_SESSION['position'] == USER_ROLE_ADMIN):?>
-                                            <td>
-                                             <?php if($tday->status == "Pending" ):  ?>
-                                              <a href="<?= base_url('/dashboard/task/update/'.$tday->id);?>" class="btn btn-primary btn-sm">Mark as Done</a>
-                                            <?php else:  ?>
-                                              <a href="<?= base_url('/dashboard/task/pending/'.$tday->id);?>" class="btn btn-secondary btn-sm">Mark as Pending</a>
-                                            <?php endif;  ?>
-                                            
-                                          </td>
-                                        <?php endif;?>
                                       </tr>
                                     <?php endforeach;?>
                                   </tbody>
@@ -715,6 +702,61 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
 <script type="text/javascript">
+
+  var pendingEvents = <?= json_encode($pending_events); ?>;
+  var date = new Date($.now());
+  var dateMonth = date.getMonth()+1;
+  if(dateMonth < 10){
+    dateMonth = "0"+dateMonth;
+  }
+  var dateDay = date.getDate();
+  if(dateDay < 10){
+    dateDay = "0"+dateDay;
+  }
+  var dateYear = date.getFullYear();
+  var dateHour = date.getHours();
+  if(dateHour < 10){
+    dateHour = "0"+dateHour;
+  }
+  var fullDate = dateYear+"-"+dateMonth+"-"+dateDay;
+  
+  // alert(pendingEvents[0].id);
+  setInterval(function () {
+    for (var i = 0; i < pendingEvents.length; i++) {
+      var pendingTime = pendingEvents[i].time;
+      var splitt = pendingTime.split(":");
+      // console.log(splitt[0]);
+      if(pendingEvents[i].start_event <= fullDate){
+        if(pendingEvents[i].start_event == fullDate){
+          if(splitt[0] <= dateHour){
+            $.ajax({
+             method:"POST",
+             url:"http://localhost/tsms/dashboard/auto-done",
+             data: {
+                'id': pendingEvents[i].id
+             },
+             success: function(response){
+              // console.log(response);
+             }
+            })
+          }
+        }else{
+          if(splitt[0] <= dateHour){
+            $.ajax({
+             method:"POST",
+             url:"http://localhost/tsms/dashboard/auto-done",
+             data: {
+                'id': pendingEvents[i].id
+             },
+             success: function(response){
+              // console.log(response);
+             }
+            })
+          }
+        }
+      }
+    }
+  }, 1000);
 
   let servLabelColor = <?= json_encode($servLabelColor); ?>;
 

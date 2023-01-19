@@ -324,7 +324,7 @@ public function event(){
     $datas['event_emp'] = $event_emp->orderBy('id', 'ASC')->findAll();
     $datas['event_fcu'] = $event_fcu->orderBy('id', 'ASC')->orderBy('fcuno', 'ASC')->findAll();
     // $datas['aircon'] = $aircon->orderBy('aircon_id', 'ASC')->findAll();
-    $datas['all_events'] = $event->orderBy('start_event', 'DESC')->findAll();
+    $datas['all_events'] = $event->orderBy('id', 'DESC')->findAll();
         // dd($datas['groupby_fcu']);
     foreach($datas['area'] as $k => $val) {
 

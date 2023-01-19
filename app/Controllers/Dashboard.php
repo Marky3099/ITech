@@ -51,6 +51,7 @@ class Dashboard extends BaseController
         date_default_timezone_set('Asia/Hong_Kong'); 
         $date = new \DateTime();
         $date->setTimezone(new \DateTimeZone('+0800'));
+        $data['pending_events'] = $event->where('status','Pending')->findAll();
         $data['events'] = $event->where('status','Pending')->where('start_event', date('Y-m-d'))->findAll();
 
         $data['event'] = array();
@@ -696,22 +697,19 @@ $session->set($getdata);
 
 return $this->response->redirect(site_url('/profile-bdo/'.$bdo_id));
 }
-
-public function update_task($id){
+public function autoDone(){
     $Event = new Event();
     $Call_logs = new Call_logs();
     $Appt = new Appointment();
-    
-    $event_info = $Event->where('id', $id)->first();
-    // dd($event_info);
+    $id = $this->request->getVar('id');
+    $PendingEvents = $Event->where('id',$id)->findAll();
 
-    $session = session();
     $data = [
         'status' => "Done",
     ];
     $Event->update((int)$id, $data);
-    if ($event_info['log_code'] != "") {
-        $codeLog=explode("-",$event_info['log_code']);
+    if ($PendingEvents['log_code'] != "") {
+        $codeLog=explode("-",$PendingEvents['log_code']);
         $cl_id = $codeLog[2];
 
         $data_log = [
@@ -719,41 +717,17 @@ public function update_task($id){
         ];
         $Call_logs->update((int)$cl_id, $data_log);
     }
-    if ($event_info['appt_code'] != "") {
+    if ($PendingEvents['appt_code'] != "") {
         // dd("tru");
-        $codeAppt=explode("-",$event_info['appt_code']);
+        $codeAppt=explode("-",$PendingEvents['appt_code']);
         $appt_id = $codeAppt[2];
         $data_appt = [
             'appt_status' => "Done",
         ];
         $Appt->update((int)$appt_id, $data_appt);
     }
-    $session = session();
-    $session->setFlashdata('done', 'value');
-    return $this->response->redirect(site_url('/dashboard/'));
-}
-public function pending_task($id){
-    $Event = new Event();
-    $Call_logs = new Call_logs();
-    
-    $event_info = $Event->where('id', $id)->first();
-    $session = session();
-    $data = [
-        'status' => "Pending",
-    ];
-    $Event->update((int)$id, $data);
-    if ($event_info['log_code'] != "") {
-        $codeLog=explode("-",$event_info['log_code']);
-        $cl_id = $codeLog[2];
+    return true;
 
-        $data_log = [
-            'status' => "Pending",
-        ];
-        $Call_logs->update((int)$cl_id, $data_log);
-    }
-    $session = session();
-    $session->setFlashdata('pending', 'value');
-    return $this->response->redirect(site_url('/dashboard/'));
 }
 
 

@@ -124,6 +124,7 @@ $routes->get('aircon/delete/(:num)', 'AirconCrud::delete/$1',['filter' => 'authG
 $routes->get('aircon/brand/(:any)', 'AirconCrud::show_aircon/$1',['filter' => 'authGuard']);
 
 $routes->get('/dashboard', 'Dashboard::dashboard',['filter' => 'authGuard']);
+$routes->post('/dashboard/auto-done', 'Dashboard::autoDone',['filter' => 'authGuard']);
 $routes->get('/client-dashboard', 'Dashboard::clientDashboard',['filter' => 'authGuard']);
 $routes->get('/calendar', 'FullCalendar::index',['filter' => 'authGuard']);
 $routes->get('/calendar/dates', 'FullCalendar::restrict_date',['filter' => 'authGuard']);
@@ -159,8 +160,6 @@ $routes->get('/forgot-password-bdo', 'Dashboard::fpass');
 
 $routes->get('/logout', 'Dashboard::logout',['filter' => 'authGuard']);
 
-$routes->get('/dashboard/task/update/(:num)', 'Dashboard::update_task/$1',['filter' => 'authGuard']);
-$routes->get('/dashboard/task/pending/(:num)', 'Dashboard::pending_task/$1',['filter' => 'authGuard']);
 $routes->get('/reports/accomplished', 'Reports::index',['filter' => 'authGuard']);
 $routes->get('/reports/accomplished/filtered-daily', 'Reports::dailyAccomplish',['filter' => 'authGuard']);
 $routes->get('/reports/accomplished/filtered-weekly', 'Reports::weeklyAccomplish',['filter' => 'authGuard']);
