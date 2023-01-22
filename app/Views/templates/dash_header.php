@@ -98,9 +98,9 @@
             <li class="nav-item">
                 <a href = "<?= base_url('/emp');?>" >
                     <i class = "fa-solid fa-user"></i>
-                    <span class="links_name">Employees</span>
+                    <span class="links_name">Technician</span>
                 </a>
-                <span class="tooltip">Employees</span>
+                <span class="tooltip">Technician</span>
             </li>
             <li class="nav-item">
                 <a href="<?= base_url('/serv')?>">

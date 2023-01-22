@@ -136,6 +136,7 @@ class FullCalendar extends BaseController
         "start"=> $value['start_event'],
                  // "repeatable"=> $value['repeatable'],
         "time"=>$value['TIME'],
+        "end_time"=>$value['end_time'],
         "serv_id"=> $value['serv_id'],
                  // "aircon_id"=> $value['aircon_id'],
         "client_id"=> $value['client_id'],
@@ -267,6 +268,7 @@ foreach ($datas['all_events'] as $key => $value) {
     "title"=> $value['title'],
     "start"=> $value['start_event'],
     "time"=>$value['time'],
+    "end_time"=>$value['end_time'],
     "serv_id"=> $value['serv_id'],
     "client_id"=> $value['client_id'],
     "serv_name"=> $value['serv_name'],
@@ -380,6 +382,7 @@ public function event(){
       "appt_code"=> $value['appt_code'],
       "start_event"=> $value['start_event'],
       "time"=> $value['TIME'],
+      "end_time"=>$value['end_time'],
       "serv_id"=> $value['serv_id'],
       "client_id"=>$value['client_id'],
       "serv_name"=>$value['serv_name'],
@@ -394,229 +397,6 @@ public function event(){
             // dd( $datas['event']);
 $datas['main'] = 'admin/calendar/events';
 return view("templates/template",$datas);
-
-}
-
-public function getfilter(){
-    if($_SESSION['position'] != USER_ROLE_ADMIN){
-        return $this->response->redirect(site_url('/dashboard'));
-    }
-    
-    $event = new All_events();
-        // $emp = new Emp();
-    $client = new Client();
-    $serv = new Serv();
-    $event_emp = new Event_emp_views();
-    $event_fcu = new Event_fcu_views();
-    // $aircon = new Aircon();
-
-    $db = \Config\Database::connect();
-    $query   = $db->query('SELECT DISTINCT aircon_id,id,device_brand,aircon_type,quantity
-        FROM event_fcu_views');
-    $datas['distinct'] = $query->getResult();
-
-    $db1 = \Config\Database::connect();
-    $query   = $db1->query('SELECT DISTINCT id
-        FROM event_fcu_views');
-    $datas['distinct_event'] = $query->getResult();
-          // dd($datas['distinct'] );
-
-    
-    $datas['cId'] ="";
-    $datas['cbranch'] ="";
-    $datas['event'] = array();
-    $datas['event_emp'] = $event_emp->orderBy('id', 'ASC')->findAll();
-    $datas['event_fcu'] = $event_fcu->orderBy('id', 'ASC')->orderBy('fcuno', 'ASC')->findAll();
-    $datas['servName'] = $serv->select('serv_name, serv_color, serv_type')->groupBy('serv_name')->findAll();
-    $datas['servType'] = $serv->orderBy('serv_name','ASC')->findAll();
-    $datas['client'] = $client->orderBy('client_id', 'ASC')->findAll();
-    $datas['area'] = $client->select('area, client_id')->groupBy('area')->findAll();
-    // dd($_GET." = ".$datas['area']['client_id']);
-    // dd($datas['area'] );
-    // dd($datas['area']);
-    foreach($datas['area'] as $k => $val) {
-
-            $area = [];
-
-            foreach($datas['client'] as $key => $value) {
-                if($val['area'] == $value['area']){
-                  array_push($area , (object)[
-                    'client_id' => (int)$value['client_id'],
-                    'client_branch' =>$value['client_branch'],
-                    "area" =>$value['area']
-                ]);
-              }
-
-          }
-
-          $datas['client_area'][]= (object)[
-            $val['area'] => $area
-        ];
-        // $datas['client_area2'][]=$area;
-    }
-
-    if(isset($_GET['start_date']) && isset($_GET['to_date']))
-    {
-        $start_date = $_GET['start_date'];
-        $to_date = $_GET['to_date'];
-        if(isset($_GET['serv']) && !isset($_GET['client_id'])){
-            $serv_id = $_GET['serv'];
-            // $client_id = $_GET['client_id'];
-
-            $datas['all_events'] = $event->where('start_event BETWEEN "'. date('Y-m-d', strtotime($start_date)). '" and "'. date('Y-m-d', strtotime($to_date)).'" AND serv_id = "'.$serv_id.'"')->findAll();
-        }elseif(isset($_GET['client_id']) && !isset($_GET['serv'])){
-            $client_id = $_GET['client_id'];
-            $datas['cId'] = $_GET['client_id'];
-            $datas['cbranch'] = $client->where('client_id', $client_id)->first();
-            $datas['all_events'] = $event->where('start_event BETWEEN "'. date('Y-m-d', strtotime($start_date)). '" and "'. date('Y-m-d', strtotime($to_date)).'" AND client_id = "'.$client_id.'"')->findAll();
-            
-        }elseif(isset($_GET['serv']) && isset($_GET['client_id'])){
-            $serv_id = $_GET['serv'];
-            $client_id = $_GET['client_id'];
-            $datas['cId'] = $_GET['client_id'];
-            $datas['cbranch'] = $client->where('client_id', $client_id)->first();
-            $datas['all_events'] = $event->where('start_event BETWEEN "'. date('Y-m-d', strtotime($start_date)). '" and "'. date('Y-m-d', strtotime($to_date)).'" AND client_id = "'.$client_id.'" AND serv_id = "'.$serv_id.'"')->findAll();
-            
-        }else{
-            $datas['all_events'] = $event->where('start_event BETWEEN "'. date('Y-m-d', strtotime($start_date)). '" and "'. date('Y-m-d', strtotime($to_date)).'"')->findAll();
-        }
-        foreach ($datas['all_events'] as $key => $value) {
-            $emp_arr = "";
-            foreach ($datas['event_emp'] as $key => $value_emps) {
-                if ( $value['id'] == $value_emps['id']) {
-                   $emp_arr .= $datas['event_emp'][$key]['emp_name'].",";
-               }
-           }
-           $fcu_arr = array();
-           foreach ($datas['event_fcu'] as $key => $value_fcu) {
-             if ($value['id'] == $value_fcu['id']) {
-                 array_push($fcu_arr , (object)[
-                  'id' => (int)$value_fcu['id'],
-                  'aircon_id' => (int)$value_fcu['aircon_id'],
-                  'fcuno' =>(int)$value_fcu['fcuno'],
-                  'quantity' =>(int)$value_fcu['quantity'],
-                  'device_brand' =>$value_fcu['device_brand'],
-                  'aircon_type' =>$value_fcu['aircon_type'],
-                  'fcu' =>$value_fcu['fcu'],
-              ]);
-
-             }   
-
-         }      
-         
-
-         $datas['event'][]= (object)[
-            "id"=> $value['id'],
-            "title"=>$value['title'],
-            "event_code"=> $value['event_code'],
-            "log_code"=> $value['log_code'],
-            "appt_code"=> $value['appt_code'],
-            "start_event"=> $value['start_event'],
-            "time"=> $value['TIME'],
-            "serv_id"=> $value['serv_id'],
-            "client_id"=>$value['client_id'],
-        // "aircon_array"=>$aircon_arr,
-            "serv_name"=>$value['serv_name'],
-            "serv_type"=>$value['serv_type'],
-            "area"=> $value['area'],
-            "emp_array"=> $emp_arr,
-            "fcu_array"=> $fcu_arr,
-            "client_branch"=> $value['client_branch'],
-            "status"=> $value['STATUS'],
-        ];
-    }
-// dd($datas['cId']);
-
-}
-$datas['main'] = 'admin/calendar/events';
-return view('templates/template',$datas);
-}
-public function printpdf($strt,$end,$serv,$client_id){
-    if($_SESSION['position'] != USER_ROLE_ADMIN){
-        return $this->response->redirect(site_url('/dashboard'));
-    }
-    $session = session();
-    $event = new All_events();
-    $event_emp = new Event_emp_views();
-    $event_fcu = new Event_fcu_views();
-
-    $db = \Config\Database::connect();
-    $query   = $db->query('SELECT DISTINCT aircon_id,id,device_brand,aircon_type,quantity
-        FROM event_fcu_views');
-    $datas['distinct'] = $query->getResult();
-
-    $db1 = \Config\Database::connect();
-    $query   = $db1->query('SELECT DISTINCT id
-        FROM event_fcu_views');
-    $datas['distinct_event'] = $query->getResult();
-          // dd($datas['distinct'] );
-
-    $datas['date'] = [$strt,$end];
-    $datas['event'] = array();
-    $datas['event_emp'] = $event_emp->orderBy('id', 'ASC')->findAll();
-    $datas['event_fcu'] = $event_fcu->orderBy('id', 'ASC')->orderBy('fcuno', 'ASC')->findAll();
-    if($client_id != '""' && $serv !='""'){
-        $datas['all_events'] = $event->where('start_event BETWEEN "'. date('Y-m-d', strtotime($strt)). '" and "'. date('Y-m-d', strtotime($end)).'" AND client_id = "'.$client_id.'" AND serv_id = "'.$serv.'"')->findAll();
-        // dd($datas['all_events']);
-    }elseif($serv !='""'){
-        $datas['all_events'] = $event->where('start_event BETWEEN "'. date('Y-m-d', strtotime($strt)). '" and "'. date('Y-m-d', strtotime($end)).'" AND serv_id = "'.$serv.'"')->findAll();
-        // dd($datas['all_events']);
-    }elseif($client_id !='""'){
-        $datas['all_events'] = $event->where('start_event BETWEEN "'. date('Y-m-d', strtotime($strt)). '" and "'. date('Y-m-d', strtotime($end)).'" AND client_id = "'.$client_id.'"')->findAll();
-        // dd($datas['all_events']);
-    }else{
-        $datas['all_events'] = $event->where('start_event BETWEEN "'. date('Y-m-d', strtotime($strt)). '" and "'. date('Y-m-d', strtotime($end)).'" order By start_event')->findAll();
-    }
-    
-    
-
-    foreach ($datas['all_events'] as $key => $value) {
-        $emp_arr = "";
-        foreach ($datas['event_emp'] as $key => $value_emps) {
-            if ( $value['id'] == $value_emps['id']) {
-               $emp_arr .= $datas['event_emp'][$key]['emp_name'].",";
-           }
-       }
-       $fcu_arr = array();
-
-       // dd($datas['event_fcu']);
-       foreach ($datas['event_fcu'] as $key => $value_fcu) {
-           if ($value['id'] == $value_fcu['id']) {
-               array_push($fcu_arr , (object)[
-                'id' => (int)$value_fcu['id'],
-                'aircon_id' => (int)$value_fcu['aircon_id'],
-                'fcuno' =>(int)$value_fcu['fcuno'],
-                'quantity' =>(int)$value_fcu['quantity'],
-                'device_brand' =>$value_fcu['device_brand'],
-                'aircon_type' =>$value_fcu['aircon_type'],
-                'fcu' =>$value_fcu['fcu'],
-            ]);
-
-           }   
-
-       }    
-
-
-       $datas['event'][]= (object)[
-        "id"=> $value['id'],
-        "title"=>$value['title'],
-        "start_event"=> $value['start_event'],
-        "time"=> $value['TIME'],
-        "serv_id"=> $value['serv_id'],
-        "client_id"=>$value['client_id'],
-        "serv_name"=>$value['serv_name'],
-        "serv_type"=>$value['serv_type'],
-        "area"=> $value['area'],
-        "emp_array"=> $emp_arr,
-        "fcu_array"=> $fcu_arr,
-        "client_branch"=> $value['client_branch'],
-        "status"=> $value['STATUS'],
-    ];
-}
-
-
-
-return view('admin/calendar/eventPrint',$datas);
 
 }
 
@@ -1409,6 +1189,7 @@ public function update(){
         'start_event' => $start_date[2].'-'.$start_date[0].'-'.$start_date[1],
         'title' => $title,
         'time' => $this->request->getVar('time_update'),
+        'end_time' => $this->request->getVar('end_time_update'),
             // 'aircon_id' => (int)($this->request->getVar('aircon_id_update')),
         'client_id'  => (int)($this->request->getVar('client_id_update')),
             // 'fcuno' => (int)($this->request->getVar('fcuno_update')),
@@ -1782,13 +1563,17 @@ public function checkEmp(){
     // $date = $this->request->getPost('start_event');
     $start_date = explode('-',$this->request->getVar('start_event'));
     $time =$this->request->getVar('time');
+    $end_time =$this->request->getVar('end_time');
     $timeMinus = strtotime($time) - 60*60;
     $startTime= date('H:i', $timeMinus);
-    $timestamp = strtotime($time) + 60*60;
+    $timestamp = strtotime($end_time) + 60*60;
     $endTime = date('H:i', $timestamp);
+    $data['startTime']= date('H:i', $timeMinus);
+    $data['endTime'] = date('H:i', $timestamp);
+    $data['end_time'] = $timestamp;
     $date = $start_date[0].'/'.$start_date[1].'/'.$start_date[2];
     $db1 = \Config\Database::connect();
-     $query   = $db1->query('SELECT DISTINCT emp_name FROM event_emp_views where start_event = "'.$date.'" AND time BETWEEN "'.$startTime.'" AND "'.$endTime.'"');
+     $query   = $db1->query('SELECT DISTINCT emp_name FROM event_emp_views where start_event = "'.$date.'" AND time >= "'.$startTime.'" AND end_time <= "'.$endTime.'"');
     if ($query->getResult()) {
        
          $data['distinct'] = $query->getResult();

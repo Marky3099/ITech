@@ -54,11 +54,15 @@
 
         <div class="crud-text"><h5>Client Details:</h5></div>
         <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="time">Time</label><br>
-            <input type="time" name="time" id="time" required>
+          <div class="form-group col-md-4">
+            <label for="time">Start Time</label><br>
+            <input type="time" name="time" id="time" step="3600" required>
           </div>
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-4">
+            <label for="time">End Time</label><br>
+            <input type="time" name="end_time" id="end_time" step="3600" required>
+          </div>
+          <div class="form-group col-md-4">
             <label for="repeatable">Repeat</label><br>
             <div class="select-dropdown">
               <select id="repeatable" name = "repeatable">
@@ -204,14 +208,18 @@
             </div>
           </div>
           <div class="form-row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
              <label for="start_event_update">Reschedule</label><br>
              <input type="text" name="start_event_update" id="start_event_update" class="datepicker datee" placeholder="mm-dd-yyyy" autocomplete="off" required>
              <!-- <input type="text" name="date" id="date" > -->
            </div>
-           <div class="form-group col-md-6">
-            <label for="time_update">Time</label><br>
+           <div class="form-group col-md-4">
+            <label for="time_update">Start Time</label><br>
             <input type="time" name="time_update" id="time_update">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="time_update">End Time</label><br>
+            <input type="time" name="end_time_update" id="end_time_update">
           </div>
         </div>
         <div class="form-row">

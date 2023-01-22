@@ -62,20 +62,24 @@
       // console.log();
           var em = document.getElementById('emp_id');
 
-  $(document).on('change','#time', function(){
+  $(document).on('change','#end_time', function(){
     var timeee = $(this).val();
+    var startTime = $('#time').val();
     $.ajax({
            type: "POST",
            url: "http://localhost/tsms/calendar/checkEmp",
              data: {
                 'start_event' : info.dateStr,
-                'time' : timeee
+                'time' : startTime,
+                'end_time' : timeee
              } ,// serializes form input
              success: function(data){
                // window.location.href = '/tsms/calllogs'; 
               // console.log(data);
               // $("#emp_id").appe
               console.log(data.startTime);
+              console.log(data.endTime);
+              console.log(data.end_time);
               // var count = 0;
               em.innerHTML="";
               data.available_emp.map((emp)=>{
@@ -111,6 +115,7 @@
      var acode = document.getElementById('appt_code');
      var t = document.getElementById('title_update');
      var ti = document.getElementById('time_update');
+     var eti = document.getElementById('end_time_update');
      var s = document.getElementById('serv_id_update');
      // var a = document.getElementById('aircon_id_update');
      // var q = document.getElementById('quantity_update');
@@ -275,27 +280,6 @@
 
 
       });
-     // dev_brand.forEach((ones, index_here1)=>{
-
-     //    if (int_index_area1 == index_here1) {
-
-     //      ones.forEach((value, index)=>{
-
-     //        var opt_client1 = document.createElement('option');
-     //                  opt_client1.value = value.aircon_id;
-     //                  opt_client1.innerHTML = value.aircon_type;
-     //                  s4.append(opt_client1);
-
-     //                  if (value.aircon_type == info.event.extendedProps.aircon_type ) {
-     //                    s4.value = value.aircon_id;
-     //                  }
-     //      })
-
-     //    }
-         
-     //  });
-      // s4.value = info.event.extendedProps.aircon_id;
-
      var date = new Date(info.event.start),mnth = ("0" + (date.getMonth() + 1)).slice(-2),
     day = ("0" + date.getDate()).slice(-2);
       var dateFormat = [ mnth,day, date.getFullYear()].join("/");
@@ -305,15 +289,12 @@
       ad.value = info.event.id;
       ecode.value = info.event.extendedProps.event_code;
       acode.value = info.event.extendedProps.appt_code;
-      // console.log(info.event.extendedProps.appt_code);
       lcode.value = info.event.extendedProps.log_code;
-      // r.value = new Date(info.event.start).toLocaleDateString("fr-CA");
       r.value = dateFormat;
       t.value = info.event.title;
       ti.value = info.event.extendedProps.time;
+      eti.value = info.event.extendedProps.end_time;
       s.value = info.event.extendedProps.serv_id;
-      // a.value = info.event.extendedProps.aircon_id;
-      // q.value = info.event.extendedProps.quantity;
       $("#frmdate").datepicker('update', dateFormat);
      
       // var disableDates = ["01-01","01-02","25-02","09-04","14-04","16-04","01-05","09-05","12-06","29-08","21-08","31-10","01-11","02-11","30-11","08-12","24-12","25-12","30-12","31-12"];
@@ -373,51 +354,6 @@
       // //   dropdownParent: $('#mymodal2')
       // // });
       $("#emp_id_update").selectpicker("refresh");
-
-      // ---------------------------------------------------
-    //   var html3 = `<div class="form-row" id="row">
-    // <div class="form-group col-md-3">
-    
-    // <label for="dbrand">Device Brand</label>
-    // <select id="device_brand" name="device_brand[]" class="form-control " data-id="`+count+`"required>
-    // <option value="0">Select Brand</option>
-    // <?php foreach($device_brand as $d_b):  ?>
-    //   <option value=<?php echo $d_b['device_brand']; ?>><?php echo $d_b['device_brand'];?></option>
-    // <?php endforeach; ?>
-    // </select>
-    // </div> 
-    // <div class="form-group col-md-3">
-    
-    // <label for="aircont">Aircon Type</label>
-    // <select id="aircon_id_`+count+`" name="aircon_id[]" class="form-control aircon" required>
-    // <option value="0">Select Type</option>
-    // </select>
-    // </div> 
-    // <div class="form-group col-md-3">
-    
-    // <label for="fcunos">Fcuno</label>
-    // <select id="fcuno" name="fcuno`+count+`[]" class="selectpicker" data-width="100%" multiple data-selected-text-format="count > 2">
-    // <?php foreach($fcu_no as $f):  ?>
-    //   <option value="<?php echo $f['fcuno']; ?>"><p id="s2option"><?php echo $f['fcu'];?></p></option>
-    // <?php endforeach; ?>
-    // </select>
-    // </div> 
-    // <div class="form-group col-md-2">
-    
-    // <label for="fcunos">Quantity</label>
-    // <input type="number" class="form-control" name="quantity[]" id="quantity" min="1" value="1" required>
-    // </div> 
-    // <div class="form-group col-md-1"><br>
-    // <span id="auth-del" class="btn"><i class="fas fa-minus"></i></span>
-    // </div>
-    // </div>`;
-
-
-
-    
-    // count++;s
-    // $('#auth-rows-edit').append(html3);
-    
     
       // ---------------------------------------------------
      myModal.show();
