@@ -63,7 +63,7 @@ class MYPDF extends TCPDF {
         //Title 
         $this->SetY(45);
         $this->SetFont('helvetica', 'B', 11);
-        $html = 'Employee List';
+        $html = 'Technician List';
         $this->Cell(0, 0,$html , 0, false, 'C', 0, '', 0, false, 'T', 'B'); 
 
         //Date Printed
@@ -99,8 +99,8 @@ $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8',
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('Maylaflor Air-Conditioning and Refrigeration Services, Inc.');
-$pdf->SetTitle('Employee List');
-$pdf->SetSubject('Employee List');
+$pdf->SetTitle('Technician List');
+$pdf->SetSubject('Technician List');
 
 
 // set default header data
@@ -182,7 +182,7 @@ $pdf->writeHTML($html, true, 0, true, true);
 // ---------------------------------------------------------
 
 //Close and output PDF document
-$pdf->Output('Employee_List.pdf', 'I');
+$pdf->Output('Technician_List.pdf', 'I');
 exit();
 //============================================================+
 // END OF FILE

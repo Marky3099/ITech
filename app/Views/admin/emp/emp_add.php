@@ -11,7 +11,7 @@
     <?php }?>
     
     <div class="form-box">
-      <h3>Add Employee</h3>
+      <h3>Add Technician</h3>
       <br>
       <div class="user-box">
         <div class="icon-box"><i class="fas fa-user-alt"></i></div>

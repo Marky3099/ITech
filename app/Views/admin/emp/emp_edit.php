@@ -7,7 +7,7 @@
     <input type="hidden" name="emp_id" id="id" value="<?php echo $Emp_obj['emp_id']; ?>">
     
     <div class="form-box">
-      <h3>Edit Employee Details</h3>
+      <h3>Edit Technician Details</h3>
       <br>
       <div class="user-box">
         <div class="icon-box"><i class="fas fa-user-alt"></i></div>
