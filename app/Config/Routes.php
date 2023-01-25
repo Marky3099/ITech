@@ -101,8 +101,11 @@ $routes->get('user/print', 'UsersCrud::printUser',['filter' => 'authGuard']);
 $routes->get('user/delete/(:num)', 'UsersCrud::delete/$1',['filter' => 'authGuard']);
 
 $routes->get('/calllogs', 'CalllogsCrud::index',['filter' => 'authGuard']);
-$routes->get('/calllogs/filtered', 'CalllogsCrud::getfilter',['filter' => 'authGuard']);
-$routes->get('/calllogs/filtered/print/(:any)/(:any)/(:any)/(:any)', 'CalllogsCrud::printpdf/$1/$2/$3/$4',['filter' => 'authGuard']);
+$routes->get('/calllogs/filtered-daily', 'CalllogsCrud::dailyLogs',['filter' => 'authGuard']);
+$routes->get('/calllogs/filtered-weekly', 'CalllogsCrud::weeklyLogs',['filter' => 'authGuard']);
+$routes->get('/calllogs/filtered-monthly', 'CalllogsCrud::monthlyLogs',['filter' => 'authGuard']);
+$routes->get('/calllogs/filtered-quarterly', 'CalllogsCrud::quarterlyLogs',['filter' => 'authGuard']);
+$routes->get('/calllogs/filtered-yearly', 'CalllogsCrud::yearlyLogs',['filter' => 'authGuard']);
 $routes->post('/calllogs/set-Calllogs', 'CalllogsCrud::setLog',['filter' => 'authGuard']);
 
 $routes->get('calllogs/create/view', 'CalllogsCrud::create',['filter' => 'authGuard']);

@@ -14,6 +14,7 @@
            <th>Email</th>
            <th>Address</th>
            <th>Contact</th>
+           <th>Expertise</th>
            <th>Action</th>
         </tr>
      </thead>
@@ -26,6 +27,13 @@
                  <td><?php echo $employee['emp_email']; ?></td>
                  <td><?php echo $employee['emp_address']; ?></td>
                  <td><?php echo $employee['emp_contact']; ?></td>
+                 <td>
+                    <?php foreach($expertise as $exp){
+                      if($employee['emp_id'] == $exp['emp_id']){
+                        echo $exp['serv_name']."<br>";
+                      }
+                    }?>
+                 </td>
                  <td>
                    <a href="<?php echo base_url('/emp/'.$employee['emp_id']);?>" class="btn btn-primary btn-sm">Edit</a>
                    <a href="<?php echo base_url('/emp/delete/'.$employee['emp_id']);?>" class="btn btn-danger btn-sm del">Delete</a>

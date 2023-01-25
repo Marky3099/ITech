@@ -11,19 +11,6 @@
     handleWindowResize: false,
     selectable: true,
     eventOrder: false,
-    // validRange: {
-    //   start: today
-    // },
-    // weekends: false,
-    // selectAllow: function (select) {
-    //                 return JudgeWeekDay(select.start, [1,2,3,4,5]);
-    //             },
-    // dayRender: function (date, cell) {
-    //                 if (!JudgeWeekDay(date, [1,2,3,4,5])) {
-    //                     cell.css("background-color", "rgb(204, 204, 204)");
-    //                 }
-    //             },
-    // editable: true,
     headerToolbar: {
       left: 'prev,next',
       center: 'title',

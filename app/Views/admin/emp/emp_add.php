@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="<?= base_url('assets/css/formstyle.css')?>">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 <div class="body-content">
   <div class="add-form">
     <form method="post" id="add_create" name="add_create" 
@@ -32,6 +33,15 @@
         <input type="tel" pattern="[0-9]{11}" placeholder="09XXXXXXXXX - 11 digits only" name="emp_contact">
       </div>
 
+      <div class="user-box">
+        <div class="icon-box"><i class="fas fa-user-alt"></i></div>
+        <select type="text" name="emp_expertise[]" class="selectpicker" multiple data-selected-text-format="count > 3">
+          <?php foreach($service as $serv):?>
+            <option value="<?=$serv['serv_id']?>"><?=$serv['serv_name']?></option>
+          <?php endforeach;?>
+        </select>
+      </div>
+
        <!--  <div class="user-box">
           <div class="icon-box"><i class="fas fa-user-alt"></i></div>
           <input type="text" name="emp_position" placeholder="Position">
@@ -47,6 +57,7 @@
   </div>
 </div>  
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/js/bootstrap-select.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript">

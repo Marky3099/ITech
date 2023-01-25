@@ -60,7 +60,95 @@ class Dashboard extends BaseController
         $data['completed'] = array();
         $data['notdone'] = array();
         $data['client'] = $client->orderBy('client_id', 'ASC')->findAll();
-        
+        $data['eventsToday'] = $allevent->where('start_event', date('Y-m-d'))->where('notif',0)->findAll();
+        if($data['eventsToday']){
+            for ($i=0; $i < count($data['eventsToday']); $i++) { 
+                // dd($data['eventsToday'][$i]['id']);
+                $eventId = $data['eventsToday'][$i]['id'];
+                $data['empDeploy'] = $event_emp->where('id', $eventId)->findAll();
+                for ($j=0; $j < count($data['empDeploy']); $j++) { 
+                    $empEmail = $data['empDeploy'][$j]['emp_email'];
+                    $empName = $data['empDeploy'][$j]['emp_name'];
+                    $taskCode = $data['eventsToday'][$i]['event_code'];
+                    $servName = $data['eventsToday'][$i]['serv_type'];
+                    $client = $data['eventsToday'][$i]['client_branch'];
+                    $clientAddress = $data['eventsToday'][$i]['client_address'];
+                    $eventTime = explode(":", $data['eventsToday'][$i]['TIME']);
+                    $formatEventTime;
+                    if($eventTime[0] == '00'){
+                        $formatEventTime = 'Any time of the day';
+                    }elseif ($eventTime[0]>12){
+                        $hour = $eventTime[0] - 12;
+                        $amPm = "PM";
+                        $formatEventTime= $hour . ":" . $eventTime[1] . " " . $amPm;
+                    }elseif ($eventTime[0]==12){
+                        $hour = $eventTime[0];
+                        $amPm = "PM";
+                        $formatEventTime= $hour . ":" . $eventTime[1] . " " . $amPm;
+                    }else{
+                        $hour = $eventTime[0];
+                        $amPm = "AM";
+                        $formatEventTime = $hour . ":" . $eventTime[1] . " " . $amPm;
+                    }
+
+                    $subject = "TSMS - Service Scheduled Today";
+                    $message = "<html>
+                    <head>
+                    <title>You have a work to do today!</title>
+                    </head>
+                    <body>
+                    <h6>Dear ".$empName."</h6>
+                    <p>You assigned to do a service named <b>".$servName."</b> to <b>".$client."</b> at <b>".$clientAddress."</b> at exactly <b>".$formatEventTime."</b>. Please be on time and have a safe travel.</p>
+                    </body>
+                    </html>";
+                    $email = \Config\Services::email();
+                    $email->setTo($empEmail);
+                    $email->setFrom('Maylaflor@gmail.com','Maylaflor TSMS');
+                    $email->setSubject($subject);
+                    $email->setMessage($message);
+
+                    if ($email->send()) {
+                        // echo "Success";
+                    }else{
+                        $data = $email->printDebugger(['headers']);
+                        print_r($data);
+                    }
+                }
+                if($data['eventsToday'][$i]['client_email']){
+                    $to = $data['eventsToday'][$i]['client_email'];
+                    $taskCode = $data['eventsToday'][$i]['event_code'];
+
+                    $subject = "TSMS - Service Scheduled Today";
+                    $message = "<html>
+                    <head>
+                    <title>Service ".$taskCode."</title>
+                    </head>
+                    <body>
+                    <h6>Dear Valued Customer</h6>
+                    <p>.</p>
+                    </body>
+                    </html>";
+                    $email = \Config\Services::email();
+                    $email->setTo($to);
+                    $email->setFrom('Maylaflor@gmail.com','Maylaflor TSMS');
+                    $email->setSubject($subject);
+                    $email->setMessage($message);
+
+                    if ($email->send()) {
+                        // echo "Success";
+                    }else{
+                        $data = $email->printDebugger(['headers']);
+                        print_r($data);
+                    }
+                }
+            $updateNotif = [
+                'notif' => 1,
+            ];
+            $event->update((int)$eventId, $updateNotif);
+            }
+            
+
+        }
         $data['serv'] = $serv->orderBy('serv_id', 'ASC')->findAll();
         $data['event_emp'] = $event_emp->orderBy('id', 'ASC')->findAll();
         $data['today'] = $allevent->where('start_event', date('Y-m-d'))->findAll();

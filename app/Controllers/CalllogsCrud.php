@@ -454,7 +454,7 @@ public function update(){
     if($_SESSION['position'] != USER_ROLE_ADMIN){
         return $this->response->redirect(site_url('/dashboard'));
     }
-    
+    // dd($_POST);
     $Call_logs = new Call_logs();
     
     $Call_fcu = new Call_fcu();
@@ -463,19 +463,35 @@ public function update(){
 
     $cl_id = $this->request->getVar('cl_id');
     $start_date = explode('/',$_POST['date']);
+    $start_datee = explode('-',$_POST['date']);
+    // dd($start_date);
         // $data['aircon'] = $Aircon->orderBy('aircon_id', 'ASC')->findAll();
         // $data['device_brand'] = $Aircon->select('device_brand')->groupBy('device_brand')->findAll();
-    $data = [
-        'date' => $start_date[2].'-'.$start_date[0].'-'.$start_date[1],
-        'area' => $this->request->getVar('area'),
-        'aircon_id' => (int)($this->request->getVar('aircon_id_update')),
-        'client_id'  => (int)($this->request->getVar('client_id_update')),
-        'caller' => $this->request->getVar('caller'),
-        'particulars' => $this->request->getVar('particulars'),
-        'device_brand' => $this->request->getVar('device_brand'),
-        'qty' => $this->request->getVar('qty'),
-        // 'status' => $this->request->getVar('status')
-    ];
+    if(count($start_date)>1){
+        $data = [
+            'date' => $start_date[2].'-'.$start_date[0].'-'.$start_date[1],
+            'area' => $this->request->getVar('area'),
+            'aircon_id' => (int)($this->request->getVar('aircon_id_update')),
+            'client_id'  => (int)($this->request->getVar('client_id_update')),
+            'caller' => $this->request->getVar('caller'),
+            'particulars' => $this->request->getVar('particulars'),
+            'device_brand' => $this->request->getVar('device_brand'),
+            'qty' => $this->request->getVar('qty'),
+            // 'status' => $this->request->getVar('status')
+        ];
+    }else{
+        $data = [
+            'date' => $start_datee[2].'-'.$start_datee[0].'-'.$start_datee[1],
+            'area' => $this->request->getVar('area'),
+            'aircon_id' => (int)($this->request->getVar('aircon_id_update')),
+            'client_id'  => (int)($this->request->getVar('client_id_update')),
+            'caller' => $this->request->getVar('caller'),
+            'particulars' => $this->request->getVar('particulars'),
+            'device_brand' => $this->request->getVar('device_brand'),
+            'qty' => $this->request->getVar('qty'),
+            // 'status' => $this->request->getVar('status')
+        ];
+    }
     // dd($data);
     $Call_logs->update($cl_id, $data);
     $Call_fcu->where('cl_id', $cl_id)->delete();
@@ -491,7 +507,517 @@ public function update(){
     $session->setFlashdata('update', 'value');
     return $this->response->redirect(site_url('/calllogs'));
 }
+public function dailyLogs(){
+    if($_SESSION['position'] != USER_ROLE_ADMIN){
+        return $this->response->redirect(site_url('/dashboard'));
+    }
 
+    date_default_timezone_set('Asia/Hong_Kong'); 
+
+    $date = new \DateTime();
+    $date->setTimezone(new \DateTimeZone('+0800'));
+    $Call_logs = new Calllogs_views();
+    $Client = new Client();
+    $Aircon = new Aircon();
+    $fcu_no = new Fcu_no();
+    $Call_fcu = new Call_fcu_views();
+    $Emp = new Emp();
+    $serv = new Serv();
+
+    $data['view_calllogs'] = [];
+    $data['areas'] = array();
+    $data['cBranch']="";
+    $data['now'] = date('Y-m-d');
+    $data['client'] = $Client->orderBy('client_id', 'ASC')->findAll();
+    $data['area'] = $Client->select('area')->groupBy('area')->findAll();
+    $data['caller'] = $Call_logs->select('caller')->groupBy('caller', 'asc')->findAll();
+    // dd($data['caller']);
+    $data['fcu_no'] = $fcu_no->orderBy('fcuno', 'ASC')->findAll();
+    $data['call_fcu'] = $Call_fcu->orderBy('cl_id', 'ASC')->findAll();
+    $data['emp'] = $Emp->orderBy('emp_id', 'ASC')->findAll();
+    $data['serv'] = $serv->orderBy('serv_id', 'ASC')->findAll();
+    $data['servName'] = $serv->select('serv_name, serv_color, serv_type')->groupBy('serv_name')->findAll();
+    $data['servType'] = $serv->orderBy('serv_name','ASC')->findAll();
+    $data['aircon'] = $Aircon->orderBy('aircon_id', 'ASC')->findAll();
+    $data['device_brand'] = $Aircon->select('device_brand')->groupBy('device_brand')->findAll();
+    if($this->request->getVar('filter_client')){
+        $cBranch = $this->request->getVar('filter_client');
+        // $url = $this->request->getVar('url');
+        $data['call_logs'] = $Call_logs->where('date', date('Y-m-d'))->where('client_id',$cBranch)->orderBy('date', 'ASC')->findAll();
+        if(count($data['call_logs'])>0){
+            $data['cBranch'] = $data['call_logs'][0]['client_branch'];
+        }
+    }else{
+        $data['call_logs'] = $Call_logs->where('date', date('Y-m-d'))->findAll();
+    }
+
+    foreach($data['area'] as $k => $val) {
+        
+        $area = [];
+
+        foreach($data['client'] as $key => $value) {
+            if($val['area'] == $value['area']){
+              array_push($area , (object)[
+                'client_id' => (int)$value['client_id'],
+                'client_branch' =>$value['client_branch']
+            ]);
+          }
+
+      }
+
+      $data['client_area'][]= (object)[
+        $val['area'] => $area
+    ];
+    $data['client_area2'][]=$area;
+}
+
+foreach ($data['call_logs'] as $key => $value) {
+    array_push($data['areas'],$value['area']);
+    $fcu_arr = "";
+    foreach ($data['call_fcu'] as $key => $value_fcu) {
+        if ( $value['cl_id'] == $value_fcu['cl_id']) {
+         $fcu_arr .= $data['call_fcu'][$key]['fcu'].",";
+     }
+ }    
+ $data['view_calllogs'][]= (object)[
+    "cl_id"=> $value['cl_id'],
+    "date"=> $value['date'],
+    "log_code"=> $value['log_code'],
+    "client_id"=> $value['client_id'],
+    "area"=> $value['area'],
+    "client_branch"=> $value['client_branch'],
+    "aircon_id"=> $value['aircon_id'],
+    "aircon_type"=> $value['aircon_type'],
+    "device_brand"=> $value['device_brand'],
+    "caller"=> $value['caller'],
+    "particulars"=> $value['particulars'],
+    "qty"=> $value['qty'],
+    "status"=> $value['status'],
+    "set_status"=> $value['set_status'],
+    "fcu_arr"=> $fcu_arr,
+];
+}
+if($this->request->getVar('print')){
+    $data['uniq_area'] = array_unique($data['areas']);
+    return view('admin/calllogs/logDailyPrint',$data);
+}else{
+    $data['main'] = 'admin/calllogs/call_view';
+    return view("templates/template",$data);
+}
+
+}
+public function WeeklyLogs(){
+    if($_SESSION['position'] != USER_ROLE_ADMIN){
+        return $this->response->redirect(site_url('/dashboard'));
+    }
+
+    date_default_timezone_set('Asia/Hong_Kong'); 
+
+    $date = new \DateTime();
+    $date->setTimezone(new \DateTimeZone('+0800'));
+    $Call_logs = new Calllogs_views();
+    $Client = new Client();
+    $Aircon = new Aircon();
+    $fcu_no = new Fcu_no();
+    $Call_fcu = new Call_fcu_views();
+    $Emp = new Emp();
+    $serv = new Serv();
+
+    $monday = date('Y-m-d', strtotime('monday this week'));
+    $sunday = date('Y-m-d', strtotime('sunday this week'));
+    $data['view_calllogs'] = [];
+    $data['areas'] = array();
+    $data['cBranch']="";
+    $data['now'] = date('Y-m-d');
+    $data['client'] = $Client->orderBy('client_id', 'ASC')->findAll();
+    $data['area'] = $Client->select('area')->groupBy('area')->findAll();
+    $data['caller'] = $Call_logs->select('caller')->groupBy('caller', 'asc')->findAll();
+    // dd($data['caller']);
+    $data['fcu_no'] = $fcu_no->orderBy('fcuno', 'ASC')->findAll();
+    $data['call_fcu'] = $Call_fcu->orderBy('cl_id', 'ASC')->findAll();
+    $data['emp'] = $Emp->orderBy('emp_id', 'ASC')->findAll();
+    $data['serv'] = $serv->orderBy('serv_id', 'ASC')->findAll();
+    $data['servName'] = $serv->select('serv_name, serv_color, serv_type')->groupBy('serv_name')->findAll();
+    $data['servType'] = $serv->orderBy('serv_name','ASC')->findAll();
+    $data['aircon'] = $Aircon->orderBy('aircon_id', 'ASC')->findAll();
+    $data['device_brand'] = $Aircon->select('device_brand')->groupBy('device_brand')->findAll();
+    if($this->request->getVar('filter_client')){
+        $cBranch = $this->request->getVar('filter_client');
+        // $url = $this->request->getVar('url');
+        $data['call_logs'] = $Call_logs->where('date BETWEEN "'. date('Y-m-d', strtotime($monday)). '" and "'. date('Y-m-d', strtotime($sunday)).'"')->where('client_id',$cBranch)->orderBy('date', 'ASC')->findAll();
+        if(count($data['call_logs'])>0){
+            $data['cBranch'] = $data['call_logs'][0]['client_branch'];
+        }
+    }else{
+        $data['call_logs'] = $Call_logs->where('date BETWEEN "'. date('Y-m-d', strtotime($monday)). '" and "'. date('Y-m-d', strtotime($sunday)).'"')->findAll();
+    }
+
+    foreach($data['area'] as $k => $val) {
+        
+        $area = [];
+
+        foreach($data['client'] as $key => $value) {
+            if($val['area'] == $value['area']){
+              array_push($area , (object)[
+                'client_id' => (int)$value['client_id'],
+                'client_branch' =>$value['client_branch']
+            ]);
+          }
+
+      }
+
+      $data['client_area'][]= (object)[
+        $val['area'] => $area
+    ];
+    $data['client_area2'][]=$area;
+}
+
+foreach ($data['call_logs'] as $key => $value) {
+    array_push($data['areas'],$value['area']);
+    $fcu_arr = "";
+    foreach ($data['call_fcu'] as $key => $value_fcu) {
+        if ( $value['cl_id'] == $value_fcu['cl_id']) {
+         $fcu_arr .= $data['call_fcu'][$key]['fcu'].",";
+     }
+ }    
+ $data['view_calllogs'][]= (object)[
+    "cl_id"=> $value['cl_id'],
+    "date"=> $value['date'],
+    "log_code"=> $value['log_code'],
+    "client_id"=> $value['client_id'],
+    "area"=> $value['area'],
+    "client_branch"=> $value['client_branch'],
+    "aircon_id"=> $value['aircon_id'],
+    "aircon_type"=> $value['aircon_type'],
+    "device_brand"=> $value['device_brand'],
+    "caller"=> $value['caller'],
+    "particulars"=> $value['particulars'],
+    "qty"=> $value['qty'],
+    "status"=> $value['status'],
+    "set_status"=> $value['set_status'],
+    "fcu_arr"=> $fcu_arr,
+];
+}
+if($this->request->getVar('print')){
+    $data['uniq_area'] = array_unique($data['areas']);
+    return view('admin/calllogs/logWeeklyPrint',$data);
+}else{
+    $data['main'] = 'admin/calllogs/call_view';
+    return view("templates/template",$data);
+}
+
+}
+public function monthlyLogs(){
+    if($_SESSION['position'] != USER_ROLE_ADMIN){
+        return $this->response->redirect(site_url('/dashboard'));
+    }
+
+    date_default_timezone_set('Asia/Hong_Kong'); 
+
+    $date = new \DateTime();
+    $date->setTimezone(new \DateTimeZone('+0800'));
+    $Call_logs = new Calllogs_views();
+    $Client = new Client();
+    $Aircon = new Aircon();
+    $fcu_no = new Fcu_no();
+    $Call_fcu = new Call_fcu_views();
+    $Emp = new Emp();
+    $serv = new Serv();
+
+    $data['view_calllogs'] = [];
+    $data['areas'] = array();
+    $data['cBranch']="";
+    $data['now'] = date('Y-m-d');
+    $data['client'] = $Client->orderBy('client_id', 'ASC')->findAll();
+    $data['area'] = $Client->select('area')->groupBy('area')->findAll();
+    $data['caller'] = $Call_logs->select('caller')->groupBy('caller', 'asc')->findAll();
+    // dd($data['caller']);
+    $data['fcu_no'] = $fcu_no->orderBy('fcuno', 'ASC')->findAll();
+    $data['call_fcu'] = $Call_fcu->orderBy('cl_id', 'ASC')->findAll();
+    $data['emp'] = $Emp->orderBy('emp_id', 'ASC')->findAll();
+    $data['serv'] = $serv->orderBy('serv_id', 'ASC')->findAll();
+    $data['servName'] = $serv->select('serv_name, serv_color, serv_type')->groupBy('serv_name')->findAll();
+    $data['servType'] = $serv->orderBy('serv_name','ASC')->findAll();
+    $data['aircon'] = $Aircon->orderBy('aircon_id', 'ASC')->findAll();
+    $data['device_brand'] = $Aircon->select('device_brand')->groupBy('device_brand')->findAll();
+    if($this->request->getVar('filter_client')){
+        $cBranch = $this->request->getVar('filter_client');
+        // $url = $this->request->getVar('url');
+        $data['call_logs'] = $Call_logs->where('MONTH(date) = MONTH(CURRENT_DATE()) && YEAR(date) = YEAR(CURRENT_DATE())')->where('client_id',$cBranch)->orderBy('date', 'ASC')->findAll();
+        if(count($data['call_logs'])>0){
+            $data['cBranch'] = $data['call_logs'][0]['client_branch'];
+        }
+    }else{
+        $data['call_logs'] = $Call_logs->where('MONTH(date) = MONTH(CURRENT_DATE()) && YEAR(date) = YEAR(CURRENT_DATE())')->findAll();
+    }
+
+    foreach($data['area'] as $k => $val) {
+        
+        $area = [];
+
+        foreach($data['client'] as $key => $value) {
+            if($val['area'] == $value['area']){
+              array_push($area , (object)[
+                'client_id' => (int)$value['client_id'],
+                'client_branch' =>$value['client_branch']
+            ]);
+          }
+
+      }
+
+      $data['client_area'][]= (object)[
+        $val['area'] => $area
+    ];
+    $data['client_area2'][]=$area;
+}
+
+foreach ($data['call_logs'] as $key => $value) {
+    array_push($data['areas'],$value['area']);
+    $fcu_arr = "";
+    foreach ($data['call_fcu'] as $key => $value_fcu) {
+        if ( $value['cl_id'] == $value_fcu['cl_id']) {
+         $fcu_arr .= $data['call_fcu'][$key]['fcu'].",";
+     }
+ }    
+ $data['view_calllogs'][]= (object)[
+    "cl_id"=> $value['cl_id'],
+    "date"=> $value['date'],
+    "log_code"=> $value['log_code'],
+    "client_id"=> $value['client_id'],
+    "area"=> $value['area'],
+    "client_branch"=> $value['client_branch'],
+    "aircon_id"=> $value['aircon_id'],
+    "aircon_type"=> $value['aircon_type'],
+    "device_brand"=> $value['device_brand'],
+    "caller"=> $value['caller'],
+    "particulars"=> $value['particulars'],
+    "qty"=> $value['qty'],
+    "status"=> $value['status'],
+    "set_status"=> $value['set_status'],
+    "fcu_arr"=> $fcu_arr,
+];
+}
+if($this->request->getVar('print')){
+    $data['uniq_area'] = array_unique($data['areas']);
+    return view('admin/calllogs/logMonthlyPrint',$data);
+}else{
+    $data['main'] = 'admin/calllogs/call_view';
+    return view("templates/template",$data);
+}
+
+}
+public function quarterlyLogs(){
+    if($_SESSION['position'] != USER_ROLE_ADMIN){
+        return $this->response->redirect(site_url('/dashboard'));
+    }
+
+    date_default_timezone_set('Asia/Hong_Kong'); 
+
+    $date = new \DateTime();
+    $date->setTimezone(new \DateTimeZone('+0800'));
+    $Call_logs = new Calllogs_views();
+    $Client = new Client();
+    $Aircon = new Aircon();
+    $fcu_no = new Fcu_no();
+    $Call_fcu = new Call_fcu_views();
+    $Emp = new Emp();
+    $serv = new Serv();
+
+    $month = date('n');
+    $data['quarter'] = "";
+    if($month <= 3){ 
+        $data['quarter'] = "1st";
+    }
+    else if($month <= 6){ 
+        $data['quarter'] = "2nd";
+    }
+    else if($month <= 9){ 
+        $data['quarter'] = "3rd";
+    }else{
+        $data['quarter'] = "4th";
+    };
+
+    $data['view_calllogs'] = [];
+    $data['areas'] = array();
+    $data['cBranch']="";
+    $data['now'] = date('Y-m-d');
+    $data['client'] = $Client->orderBy('client_id', 'ASC')->findAll();
+    $data['area'] = $Client->select('area')->groupBy('area')->findAll();
+    $data['caller'] = $Call_logs->select('caller')->groupBy('caller', 'asc')->findAll();
+    // dd($data['caller']);
+    $data['fcu_no'] = $fcu_no->orderBy('fcuno', 'ASC')->findAll();
+    $data['call_fcu'] = $Call_fcu->orderBy('cl_id', 'ASC')->findAll();
+    $data['emp'] = $Emp->orderBy('emp_id', 'ASC')->findAll();
+    $data['serv'] = $serv->orderBy('serv_id', 'ASC')->findAll();
+    $data['servName'] = $serv->select('serv_name, serv_color, serv_type')->groupBy('serv_name')->findAll();
+    $data['servType'] = $serv->orderBy('serv_name','ASC')->findAll();
+    $data['aircon'] = $Aircon->orderBy('aircon_id', 'ASC')->findAll();
+    $data['device_brand'] = $Aircon->select('device_brand')->groupBy('device_brand')->findAll();
+    if($this->request->getVar('filter_client')){
+        $cBranch = $this->request->getVar('filter_client');
+        // $url = $this->request->getVar('url');
+        $data['call_logs'] = $Call_logs->where('Quarter(date) = Quarter(CURDATE())')->where('client_id',$cBranch)->orderBy('date', 'ASC')->findAll();
+        if(count($data['call_logs'])>0){
+            $data['cBranch'] = $data['call_logs'][0]['client_branch'];
+        }
+    }else{
+        $data['call_logs'] = $Call_logs->where('Quarter(date) = Quarter(CURDATE())')->findAll();
+    }
+
+    foreach($data['area'] as $k => $val) {
+        
+        $area = [];
+
+        foreach($data['client'] as $key => $value) {
+            if($val['area'] == $value['area']){
+              array_push($area , (object)[
+                'client_id' => (int)$value['client_id'],
+                'client_branch' =>$value['client_branch']
+            ]);
+          }
+
+      }
+
+      $data['client_area'][]= (object)[
+        $val['area'] => $area
+    ];
+    $data['client_area2'][]=$area;
+}
+
+foreach ($data['call_logs'] as $key => $value) {
+    array_push($data['areas'],$value['area']);
+    $fcu_arr = "";
+    foreach ($data['call_fcu'] as $key => $value_fcu) {
+        if ( $value['cl_id'] == $value_fcu['cl_id']) {
+         $fcu_arr .= $data['call_fcu'][$key]['fcu'].",";
+     }
+ }    
+ $data['view_calllogs'][]= (object)[
+    "cl_id"=> $value['cl_id'],
+    "date"=> $value['date'],
+    "log_code"=> $value['log_code'],
+    "client_id"=> $value['client_id'],
+    "area"=> $value['area'],
+    "client_branch"=> $value['client_branch'],
+    "aircon_id"=> $value['aircon_id'],
+    "aircon_type"=> $value['aircon_type'],
+    "device_brand"=> $value['device_brand'],
+    "caller"=> $value['caller'],
+    "particulars"=> $value['particulars'],
+    "qty"=> $value['qty'],
+    "status"=> $value['status'],
+    "set_status"=> $value['set_status'],
+    "fcu_arr"=> $fcu_arr,
+];
+}
+if($this->request->getVar('print')){
+    $data['uniq_area'] = array_unique($data['areas']);
+    return view('admin/calllogs/logQuarterlyPrint',$data);
+}else{
+    $data['main'] = 'admin/calllogs/call_view';
+    return view("templates/template",$data);
+}
+
+}
+public function yearlyLogs(){
+    if($_SESSION['position'] != USER_ROLE_ADMIN){
+        return $this->response->redirect(site_url('/dashboard'));
+    }
+
+    date_default_timezone_set('Asia/Hong_Kong'); 
+
+    $date = new \DateTime();
+    $date->setTimezone(new \DateTimeZone('+0800'));
+    $Call_logs = new Calllogs_views();
+    $Client = new Client();
+    $Aircon = new Aircon();
+    $fcu_no = new Fcu_no();
+    $Call_fcu = new Call_fcu_views();
+    $Emp = new Emp();
+    $serv = new Serv();
+
+    $data['view_calllogs'] = [];
+    $data['areas'] = array();
+    $data['cBranch']="";
+    $data['now'] = date('Y-m-d');
+    $data['client'] = $Client->orderBy('client_id', 'ASC')->findAll();
+    $data['area'] = $Client->select('area')->groupBy('area')->findAll();
+    $data['caller'] = $Call_logs->select('caller')->groupBy('caller', 'asc')->findAll();
+    // dd($data['caller']);
+    $data['fcu_no'] = $fcu_no->orderBy('fcuno', 'ASC')->findAll();
+    $data['call_fcu'] = $Call_fcu->orderBy('cl_id', 'ASC')->findAll();
+    $data['emp'] = $Emp->orderBy('emp_id', 'ASC')->findAll();
+    $data['serv'] = $serv->orderBy('serv_id', 'ASC')->findAll();
+    $data['servName'] = $serv->select('serv_name, serv_color, serv_type')->groupBy('serv_name')->findAll();
+    $data['servType'] = $serv->orderBy('serv_name','ASC')->findAll();
+    $data['aircon'] = $Aircon->orderBy('aircon_id', 'ASC')->findAll();
+    $data['device_brand'] = $Aircon->select('device_brand')->groupBy('device_brand')->findAll();
+    if($this->request->getVar('filter_client')){
+        $cBranch = $this->request->getVar('filter_client');
+        // $url = $this->request->getVar('url');
+        $data['call_logs'] = $Call_logs->where('YEAR(date) = YEAR(CURDATE())')->where('client_id',$cBranch)->orderBy('date', 'ASC')->findAll();
+        if(count($data['call_logs'])>0){
+            $data['cBranch'] = $data['call_logs'][0]['client_branch'];
+        }
+    }else{
+        $data['call_logs'] = $Call_logs->where('YEAR(date) = YEAR(CURDATE())')->findAll();
+    }
+
+    foreach($data['area'] as $k => $val) {
+        
+        $area = [];
+
+        foreach($data['client'] as $key => $value) {
+            if($val['area'] == $value['area']){
+              array_push($area , (object)[
+                'client_id' => (int)$value['client_id'],
+                'client_branch' =>$value['client_branch']
+            ]);
+          }
+
+      }
+
+      $data['client_area'][]= (object)[
+        $val['area'] => $area
+    ];
+    $data['client_area2'][]=$area;
+}
+
+foreach ($data['call_logs'] as $key => $value) {
+    array_push($data['areas'],$value['area']);
+    $fcu_arr = "";
+    foreach ($data['call_fcu'] as $key => $value_fcu) {
+        if ( $value['cl_id'] == $value_fcu['cl_id']) {
+         $fcu_arr .= $data['call_fcu'][$key]['fcu'].",";
+     }
+ }    
+ $data['view_calllogs'][]= (object)[
+    "cl_id"=> $value['cl_id'],
+    "date"=> $value['date'],
+    "log_code"=> $value['log_code'],
+    "client_id"=> $value['client_id'],
+    "area"=> $value['area'],
+    "client_branch"=> $value['client_branch'],
+    "aircon_id"=> $value['aircon_id'],
+    "aircon_type"=> $value['aircon_type'],
+    "device_brand"=> $value['device_brand'],
+    "caller"=> $value['caller'],
+    "particulars"=> $value['particulars'],
+    "qty"=> $value['qty'],
+    "status"=> $value['status'],
+    "set_status"=> $value['set_status'],
+    "fcu_arr"=> $fcu_arr,
+];
+}
+if($this->request->getVar('print')){
+    $data['uniq_area'] = array_unique($data['areas']);
+    return view('admin/calllogs/logYearlyPrint',$data);
+}else{
+    $data['main'] = 'admin/calllogs/call_view';
+    return view("templates/template",$data);
+}
+
+}
     // delete Call log info
 public function delete($cl_id = null){
     if($_SESSION['position'] != USER_ROLE_ADMIN){

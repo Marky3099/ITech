@@ -148,7 +148,7 @@
           </div> 
           <div class="form-group col-md-2">
             
-            <label for="fcunos">Quantity</label>
+            <label for="quantity">Quantity</label>
             <input type="number" class="form-control" name="quantity[]" id="quantity" min="1" value="1" required>
           </div> 
           <div class="form-group col-md-1"><br>

@@ -198,89 +198,87 @@
     <div class="event-header">
 
       <div class="card-body filter">
-      <form action="<?= base_url('/calllogs/filtered');?>" method="GET">
          <div class="row">
-            <div class="mt-2 col-lg-2">
-               <div class="form-group">
-                  <label>Start Date:</label><br>
-                  <input type="date" name="start_date" class="form-control border border-default" value="<?php if(isset($_GET['start_date'])){echo $_GET['start_date'];} ?>" required>
-               </div>
+            <div class="col-lg-5">
+                <select id="select-filter" class="form-control selectpicker">
+                    <option disabled selected>Filter</option>
+                    <?php $url = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];?>
+                    <?php if(strpos($url,'filtered-daily')):?>
+                        <option selected>Daily</option>
+                        <option>Weekly</option>
+                        <option>Monthly</option>
+                        <option>Quarterly</option>
+                        <option>Yearly</option>
+                    <?php elseif(strpos($url,'filtered-weekly')):?>
+                        <option>Daily</option>
+                        <option selected>Weekly</option>
+                        <option>Monthly</option>
+                        <option>Quarterly</option>
+                        <option>Yearly</option>
+                    <?php elseif(strpos($url,'filtered-monthly')):?>
+                        <option>Daily</option>
+                        <option>Weekly</option>
+                        <option selected>Monthly</option>
+                        <option>Quarterly</option>
+                        <option>Yearly</option>
+                    <?php elseif(strpos($url,'filtered-quarterly')):?>
+                        <option>Daily</option>
+                        <option>Weekly</option>
+                        <option>Monthly</option>
+                        <option selected>Quarterly</option>
+                        <option>Yearly</option>
+                    <?php elseif(strpos($url,'filtered-yearly')):?>
+                        <option>Daily</option>
+                        <option>Weekly</option>
+                        <option>Monthly</option>
+                        <option>Quarterly</option>
+                        <option selected>Yearly</option>
+                    <?php else:?>
+                        <option>Daily</option>
+                        <option>Weekly</option>
+                        <option>Monthly</option>
+                        <option>Quarterly</option>
+                        <option>Yearly</option>
+                <?php endif;?>
+                </select>
             </div>
-            <div class="mt-2 col-lg-2">
-               <div class="form-group">
-                  <label>To Date:</label><br>
-                  <input type="date" name="to_date" class="form-control border border-default" value="<?php if(isset($_GET['to_date'])){echo $_GET['to_date'];} ?>" required>
-               </div>
-            </div>
-            
-            
-               <div class="col-lg-2 advance-filter">
-                     <select name="caller_filter" class="form-control">
-                        <option selected disabled value="">Caller</option>
-                        <?php foreach($caller as $call):  ?>
-                          <?php if(isset($_GET['caller_filter'])):?>
-                            <?php if($_GET['caller_filter'] == $call['caller']):?>
-                              <option value="<?php echo $call['caller'];?>" selected><?php echo $call['caller'];?></option>
-                            <?php else:?>
-                              <option value="<?php echo $call['caller'];?>"><?php echo $call['caller'];?></option>
-                            <?php endif;?>
-                          <?php else:?>
-                            <option value="<?php echo $call['caller'];?>"><?php echo $call['caller'];?></option>
-                          <?php endif;?>
-                        <?php endforeach; ?>
-                     </select>
-                  </div>
-                  <div class="col-lg-2 advance-filter">
-                     <select name="clientArea" id="area" class="form-control">
-                        <option selected disabled value="">Client Area</option>
-                        <?php foreach($area as $cl):  ?>
-                           <?php if(isset($_GET['client_id'])):?>
-                              <?php if($cbranch['area'] == $cl['area']):?>
-                                 <option value=<?php echo $cl['area']; ?> selected><?php echo $cl['area'];?></option>
-                              <?php else:?>
-                                 <option value=<?php echo $cl['area']; ?>><?php echo $cl['area'];?></option>
-                              <?php endif;?>
-                              <?php else:?>
-                                 <option value=<?php echo $cl['area']; ?>><?php echo $cl['area'];?></option>
-                           <?php endif;?>
-                           
-                        <?php endforeach; ?>
-                     </select>
-                  </div>
-                  <div class="col-lg-2 advance-filter">
-                     <select name="client_id" id="client_id" class="form-control">
+            <div class="col-lg-5">
+                <?php $url = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];?>
+                <?php if(strpos($url,'filtered')):?>
+                    <form method="Get" id="filter-client" action="<?php base_url($url)?>">
+                    <select name="filter_client" id="filter_client" class="form-control selectpicker".<?=$url;?> data-live-search="true" data-clear-button="true" data-filter="true">
                         <option selected disabled value="">Branch Name</option>
-                     </select>
-                  </div>
-            
-            <div class="col-lg-1">
-               <div class="form-group">
-                  <button type="submit" class="btn mb-1 btn-success" id="sub">Generate</button>
-                  <a href="<?= base_url('calllogs') ?>" type="button" class="btn btn-secondary">Reset</a>
-               </div>
+                        <?php if($client):?>
+                            <?php foreach($client as $c):?>
+                                <?php if(isset($_GET['filter_client'])):?>
+                                    <?php if($_GET['filter_client'] == $c['client_id']):?>
+                                        <option value="<?= $c['client_id']?>" selected><?= $c['client_branch']?></option>
+                                    <?php else:?>
+                                        <option value="<?= $c['client_id']?>"><?= $c['client_branch']?></option>
+                                    <?php endif;?>
+                                <?php else:?>
+                                    <option value="<?= $c['client_id']?>"><?= $c['client_branch']?></option>
+                                <?php endif;?>
+                            <?php endforeach;?>
+                        <?php endif;?>
+                    </select>
+                    </form>
+                <?php endif;?>
             </div>
-         
-            <div class="col-lg-1">
-               <div class="form-group">
-                  <!-- <button type="button" class="btn btn-info" id="sub1">Advance</button> -->
-                  <?php if(isset($_GET['start_date']) && isset($_GET['to_date']) && !isset($_GET['caller_filter']) && !isset($_GET['client_id'])): ?>
-                     <?php $caller_filter = '""'?>
-                     <?php $client_id = '""'?>
-                     <a href="<?= base_url('/calllogs/filtered/print/'.$_GET['start_date']."/".$_GET['to_date']."/".$caller_filter."/".$client_id)?>" target="_blank" class="btn btn-info" id="print">Print</a>
-                  <?php elseif(isset($_GET['start_date']) && isset($_GET['to_date']) && isset($_GET['caller_filter']) && isset($_GET['client_id'])):?>
-                     <a href="<?= base_url('/calllogs/filtered/print/'.$_GET['start_date']."/".$_GET['to_date']."/".$_GET['caller_filter']."/".$_GET['client_id'])?>" target="_blank" class="btn btn-info" id="print">Print</a>
-                  <?php elseif(isset($_GET['start_date']) && isset($_GET['to_date']) && isset($_GET['caller_filter']) && !isset($_GET['client_id'])):?>
-                     <?php $client_id = '""'?>
-                     <a href="<?= base_url('/calllogs/filtered/print/'.$_GET['start_date']."/".$_GET['to_date']."/".$_GET['caller_filter']."/".$client_id)?>" target="_blank" class="btn btn-info" id="print">Print</a>
-                  <?php elseif(isset($_GET['start_date']) && isset($_GET['to_date']) && !isset($_GET['caller_filter']) && isset($_GET['client_id'])):?>
-                     <?php $caller_filter = '""'?>
-                     <a href="<?= base_url('/calllogs/filtered/print/'.$_GET['start_date']."/".$_GET['to_date']."/".$caller_filter."/".$_GET['client_id'])?>" target="_blank" class="btn btn-info" id="print">Print</a>   
-                 
-                     
-                  <?php endif; ?>
-               </div>
+            <div class="col-lg-2">
+                <?php $url = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];?>
+                <?php if(strpos($url,'filtered')):?>
+                    <form method="get" action="<?= $url;?>" target="_blank">
+                        <input type="hidden" name="print" value="print">
+                        <?php if(isset($_GET['filter_client'])):?>
+                            <input type="hidden" name="filter_client" value="<?=$_GET['filter_client']?>">
+                        <?php endif;?>
+                        
+                        <button type="submit" class="btn btn-primary">Print</button>
+                    </form>
+                <?php endif;?>
             </div>
-          </div>
+        </div>
    </form>
 </div>   
 
@@ -335,6 +333,31 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/js/bootstrap-select.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript">
+
+$("#select-filter").on('change',function()
+    {
+        var filterVal = $(this).val();
+        if(filterVal == "Daily"){
+            window.location.href = "<?= base_url('/calllogs/filtered-daily');?>";
+        }
+        else if(filterVal == "Weekly"){
+            window.location.href = "<?= base_url('/calllogs/filtered-weekly');?>";
+        }
+        else if(filterVal == "Monthly"){
+            window.location.href = "<?= base_url('/calllogs/filtered-monthly');?>";
+        }
+        else if(filterVal == "Quarterly"){
+            window.location.href = "<?= base_url('/calllogs/filtered-quarterly');?>";
+        }
+        else if(filterVal == "Yearly"){
+            window.location.href = "<?= base_url('/calllogs/filtered-yearly');?>";
+        }
+    });
+    $("#filter_client").on('change',function(){
+        $("#filter-client").submit();
+    });
+
+
  var msg = ''; 
  var del = '';
  var add = '';
@@ -517,8 +540,7 @@ $('#mymodal .selectpicker').selectpicker();
    })
 
 var areas = <?php echo json_encode($client_area); ?> ;
-var cId = <?php echo json_encode($cId); ?>;
-var cBranch = <?php echo json_encode($cbranch); ?>;
+
 
  </script>
  <script type="text/javascript" src="<?= base_url('assets/js/filter.js')?>"></script>

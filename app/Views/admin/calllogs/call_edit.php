@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="<?= base_url('assets/css/formstyle.css')?>">
-<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/select2.css');?>">
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 <div class="body-content" style="height: 100%;">
   <div class="edit-form">
     <form method="post" id="update_user" name="update_user" 
@@ -61,7 +61,7 @@
 
       <div class="user-box" style="margin-top: 5px;">
         <label>FCU Number</label>
-          <select id="fcuno_update" name="fcuno_update[]" multiple="multiple">
+          <select id="fcuno_update" name="fcuno_update[]" class="selectpicker" multiple data-selected-text-format="count > 3">
           <?php foreach($fcu_no as $f):  ?>
             <?php foreach($fcu_views as $fv):  ?>
               <option value="<?php echo $f['fcuno'];?>"<?php if($f['fcuno']==$fv['fcuno'])echo 'selected';?>><p id="s2option"><?php echo $f['fcu'];?></p></option>
@@ -81,24 +81,23 @@
 </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/js/bootstrap-select.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script type="text/javascript">
 
-  $('#fcuno_update').select2();
+  $(".selectpicker option").each(function() {
+    if($(this).attr('selected')){
+      $(this).siblings('[value="'+ this.value +'"]').remove();
+    }
+  });
+  $(".selectpicker option").each(function() {
+    $(this).siblings('[value="'+ this.value +'"]').remove();
+  });
+  $(".selectpicker").html($(".selectpicker option").sort(function (a, b) {
+    return a.text == b.text ? 0 : a.text < b.text ? -1 : 1
+  }));
   var areas = <?php echo json_encode($client_area); ?> ;
   var client_current_area = <?php echo json_encode($cl_obj); ?> ;
-      //     $.each(areas[0], function(key, v) {
-      //     // alert(value.client_id+" "+value.client_branch);
-      //      // console.log(v);
-      //      $.each(v, function(key, value) {
-      //     $("#client_id").append('<option value='+value.client_id+'>'+value.client_branch+'</option>');
-      //   });
-      // });
-
-
-
-      
       $("#client_id_update").empty();
       var current_value = document.getElementById("area_update").selectedIndex;
       

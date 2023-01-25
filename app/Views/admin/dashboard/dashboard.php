@@ -702,7 +702,7 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
 <script type="text/javascript">
-
+  // var eventsToday = <?= json_encode($eventsToday); ?>;
   var pendingEvents = <?= json_encode($pending_events); ?>;
   var date = new Date($.now());
   var dateMonth = date.getMonth()+1;
@@ -719,11 +719,15 @@
     dateHour = "0"+dateHour;
   }
   var fullDate = dateYear+"-"+dateMonth+"-"+dateDay;
-  
-  // alert(pendingEvents[0].id);
+  //Automating emailing the client for today's tasks
+  // console.log(eventsToday.length);
+  // setInterval(function () {
+
+  // },1000);
+  //Automating MArking as Done Tasks
   setInterval(function () {
     for (var i = 0; i < pendingEvents.length; i++) {
-      var pendingTime = pendingEvents[i].time;
+      var pendingTime = pendingEvents[i].end_time;
       var splitt = pendingTime.split(":");
       // console.log(splitt[0]);
       if(pendingEvents[i].start_event <= fullDate){
