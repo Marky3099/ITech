@@ -296,3 +296,51 @@ CRITICAL - 2023-01-25 01:00:27 --> Undefined index: log_code
 #3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
 #5 {main}
+ERROR - 2023-01-25 11:15:54 --> Table 'tsms.users' doesn't exist in engine
+CRITICAL - 2023-01-25 11:15:54 --> Table 'tsms.users' doesn't exist in engine
+#0 C:\xampp\htdocs\tsms\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT 1\nFROM `...', 0)
+#1 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT 1\nFROM `...')
+#2 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT 1\nFROM `...')
+#3 C:\xampp\htdocs\tsms\system\Database\BaseBuilder.php(1443): CodeIgniter\Database\BaseConnection->query('SELECT 1\nFROM `...', Array, false)
+#4 C:\xampp\htdocs\tsms\system\Validation\Rules.php(116): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\tsms\system\Validation\Validation.php(277): CodeIgniter\Validation\Rules->is_not_unique('admin@gmail.com', 'email', Array, NULL)
+#6 C:\xampp\htdocs\tsms\system\Validation\Validation.php(151): CodeIgniter\Validation\Validation->processRules('email', 'email', 'admin@gmail.com', Array, Array)
+#7 C:\xampp\htdocs\tsms\system\Controller.php(160): CodeIgniter\Validation\Validation->run()
+#8 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(67): CodeIgniter\Controller->validate(Array)
+#9 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->check()
+#10 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#11 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#13 {main}
+ERROR - 2023-01-25 11:18:32 --> Table 'tsms.users' doesn't exist in engine
+CRITICAL - 2023-01-25 11:18:32 --> Table 'tsms.users' doesn't exist in engine
+#0 C:\xampp\htdocs\tsms\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT 1\nFROM `...', 0)
+#1 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT 1\nFROM `...')
+#2 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT 1\nFROM `...')
+#3 C:\xampp\htdocs\tsms\system\Database\BaseBuilder.php(1443): CodeIgniter\Database\BaseConnection->query('SELECT 1\nFROM `...', Array, false)
+#4 C:\xampp\htdocs\tsms\system\Validation\Rules.php(116): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\tsms\system\Validation\Validation.php(277): CodeIgniter\Validation\Rules->is_not_unique('admin@gmail.com', 'email', Array, NULL)
+#6 C:\xampp\htdocs\tsms\system\Validation\Validation.php(151): CodeIgniter\Validation\Validation->processRules('email', 'email', 'admin@gmail.com', Array, Array)
+#7 C:\xampp\htdocs\tsms\system\Controller.php(160): CodeIgniter\Validation\Validation->run()
+#8 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(67): CodeIgniter\Controller->validate(Array)
+#9 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->check()
+#10 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#11 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#13 {main}
+ERROR - 2023-01-25 12:42:14 --> Table 'tsms.users' doesn't exist in engine
+CRITICAL - 2023-01-25 12:42:14 --> Table 'tsms.users' doesn't exist in engine
+#0 C:\xampp\htdocs\tsms\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT 1\nFROM `...', 0)
+#1 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT 1\nFROM `...')
+#2 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT 1\nFROM `...')
+#3 C:\xampp\htdocs\tsms\system\Database\BaseBuilder.php(1443): CodeIgniter\Database\BaseConnection->query('SELECT 1\nFROM `...', Array, false)
+#4 C:\xampp\htdocs\tsms\system\Validation\Rules.php(116): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\tsms\system\Validation\Validation.php(277): CodeIgniter\Validation\Rules->is_not_unique('admin@gmail.com', 'email', Array, NULL)
+#6 C:\xampp\htdocs\tsms\system\Validation\Validation.php(151): CodeIgniter\Validation\Validation->processRules('email', 'email', 'admin@gmail.com', Array, Array)
+#7 C:\xampp\htdocs\tsms\system\Controller.php(160): CodeIgniter\Validation\Validation->run()
+#8 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(67): CodeIgniter\Controller->validate(Array)
+#9 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->check()
+#10 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#11 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#13 {main}

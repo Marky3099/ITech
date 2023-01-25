@@ -24,24 +24,27 @@ div {
   background-position: center;
   position: absolute;
   left: 0px;
-  width: 65%;
+  width: 100%;
+  height: 100%;
 }
+
 
 .right-half {
-  background-color: #e2e5dc;
+/*  background-color: #e2e5dc;*/
   position: absolute;
   right: 0px;
-  width: 35%;
+  width: 100%;
 }
 
-.right-half .container{
+.right-half .containerr{
   position: absolute;
   top: 50%;
   left: 50%;
-  background-color: #fff;
   opacity: 0.9;
+  background-color: #fff;
   transform: translate(-50%, -50%);
   box-sizing: border-box;
+  padding: 1rem;
 }
 
 .right-half .header{
@@ -52,33 +55,33 @@ div {
   height: 110px;
   width: 400px;
 }
-.container .header a.texthp{
+.containerr .header a.texthp{
   padding: 1.50rem;
   display: flex;
   align-items: center;
 }
 
-.container .box-content{
+.containerr .box-content{
   text-align: center;
   color: #344f21;
 }
 
-.container .box-content h2{
+.containerr .box-content h2{
   margin-bottom: 0px;
 }
-.container .box-content p{
+.containerr .box-content p{
   margin-top: 0px;
   font-weight: bold;
   font-size: 19px;
 }
 
 
-.container .box-content .btn-layer{
+.containerr .box-content .btn-layer{
   margin-top: 60px;
   height: 150px;
 }
 
-.container .box-content .btn-layer .icon-box{
+.containerr .box-content .btn-layer .icon-box{
     position: absolute;   
     height: 30px;
     width: 40px;
@@ -88,7 +91,7 @@ div {
     background: transparent;
 }
 
-.container .box-content .btn-layer a.btn{
+.containerr .box-content .btn-layer a.btn{
   margin-bottom: 15px;
   width: 280px;
   height: 50px;
@@ -98,7 +101,7 @@ div {
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
 }
 
-.container .box-content .btn-layer a.btn:hover{
+.containerr .box-content .btn-layer a.btn:hover{
   background-color: #566C46;
 }
 
@@ -115,12 +118,12 @@ div {
   background-color: #566C46;
 }
 
-.container .box-content p.para1{
+.containerr .box-content p.para1{
   font-size: 15px;
   font-weight: 300px;
 }
 
-.container .box-content a.back2w{
+.containerr .box-content a.back2w{
   position: absolute;
   bottom: 0;
   left: 10;
