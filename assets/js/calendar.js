@@ -49,30 +49,41 @@
       // console.log();
           var em = document.getElementById('emp_id');
 
-  $(document).on('change','#end_time', function(){
-    var timeee = $(this).val();
+  $(document).on('change','#serv_id', function(){
+    var timeee = $('#end_time').val();
     var startTime = $('#time').val();
+    var servId = $(this).val();
+    // console.log(servName);
     $.ajax({
            type: "POST",
            url: "http://localhost/tsms/calendar/checkEmp",
              data: {
                 'start_event' : info.dateStr,
                 'time' : startTime,
-                'end_time' : timeee
+                'end_time' : timeee,
+                'serv_id': servId
              } ,// serializes form input
              success: function(data){
-               // window.location.href = '/tsms/calllogs'; 
-              // console.log(data);
-              // $("#emp_id").appe
-              console.log(data.startTime);
-              console.log(data.endTime);
-              console.log(data.end_time);
-              // var count = 0;
+               // console.log(data.service);
               em.innerHTML="";
               data.available_emp.map((emp)=>{
                  var opt_one = document.createElement('option');
                   opt_one.value = emp.emp_id;
                   opt_one.innerHTML = emp.emp_name;
+                  console.log(data.expertise);
+                  data.expertise.map((exp)=>{
+                    if(emp.emp_id == exp.emp_id){
+                      
+                      // console.log( exp.emp_name);
+                      // console.log(emp.emp_name+" "+ exp.emp_name);
+                      if(emp.emp_name == exp.emp_name){
+                        opt_one.style.backgroundColor='#7BCB76';
+                      }
+                        
+                      
+                      
+                    }
+                  });
                   em.appendChild(opt_one);
                   // if (emp.area == info.event.extendedProps.area ) {
                   //   s1.value = emp.area;

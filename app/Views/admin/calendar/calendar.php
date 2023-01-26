@@ -104,6 +104,7 @@
           <label class="serv_idlbl" for="serv_id">Service</label><br>
           <div class="select-dropdown" id="serv-select">
             <select id="serv_id" name="serv_id" class="form-control" required>
+              <option selected disabled>Select Service</option>
             <?php foreach($servName as $s):  ?>
               <optgroup label="<?= $s['serv_name']; ?>">
                 <?php foreach($servType as $st):  ?>
@@ -158,7 +159,7 @@
         <div id="auth-rows"></div>
         <div class="form-group">
           
-          <label class="emp_idlbll" for="emp_id">Technician</label><br>
+          <label class="emp_idlbll" for="emp_id">Technician <i class="fa-regular fa-circle-question"><span class="infoEmp">Highlighted Technicians with expertise of the chosen task</span></i></label><br>
           <select id="emp_id" name="emp_id[]" class="form-control w-75 ml-5 selectpicker border border-dark" multiple data-selected-text-format="count > 8" required>
           </select>
         </div> 

@@ -147,6 +147,22 @@
 .form-group label.Calservlbl, .form-group label.emp_idlbl{
 	margin-left: 30px;
 }
+.fa-circle-question:hover .infoEmp {
+  visibility: visible;
+}
+.infoEmp {
+  visibility: hidden;
+  width: 200px;
+  background-color: #FFFFFF;
+  color: black;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
 
 .form-group label.emp_idlbll{
 	margin-left: 35px;

@@ -446,50 +446,33 @@ public function delete($appt_id = null){
     return $this->response->redirect(site_url('/appointment'));
 }
 
-public function setAppt(){
-    $Appoint = new Appointment();
-    $Appt_fcu = new Appt_fcu();
-    $Client = new Client();
-    $Serv = new Serv();
-    $Aircon = new Aircon();
-    // $Fcu_no = new Fcu_no();
-    // $Appoint_view = new view_appointment();
-    $appt_id = $this->request->getPost('appt_id');
-    $data['appt']=$Appoint->find($appt_id);
-    $data['fcu']=$Appt_fcu->where('appt_id',$appt_id)->findAll();
-    $data['client']=$Client->orderBy('client_id','asc')->findAll();
-    $data['serv']=$Serv->orderBy('serv_id','asc')->findAll();
-    $data['aircon']=$Aircon->orderBy('aircon_id','asc')->findAll();
-    // $data['fcu_no']=$Aircon->orderBy('aircon_id','asc')->findAll();
-    return $this->response->setJSON($data);
-}
-
 public function rejectAppt(){
     $Appoint = new Appointment();
     $Bdo = new User_bdo();
     $appt_id = $this->request->getPost('appt_id');
     $user_id = $this->request->getPost('user_id');
+    $reason = $this->request->getPost('reason');
     $data['appt']=$Appoint->find($appt_id);
     $data['user_data'] = $Bdo->where('bdo_id',$user_id)->first();
     $user_email =  $data['user_data']['bdo_email'];
     $user =  $data['user_data']['bdo_lname'];
     $appt_code = $data['appt']['appt_code'];
-    $update_set = ['set_status' => 2, 'appt_status' => 'Rejected'];
+    $update_set = ['set_status' => 2, 'appt_status' => 'Cancelled'];
     $Appoint->update((int)$appt_id,$update_set);
 
-    $data['rejected'] = 'The Appointment has been [REJECTED!]';
+    $data['rejected'] = 'The Appointment has been [CANCELLED!]';
 
 
     $to = $user_email;
 
-        $subject = "TSMS - Appointment Rejected";
+        $subject = "TSMS - Appointment Cancelled";
         $message = "<html>
         <head>
         <title>Appointment ".$appt_code."</title>
         </head>
         <body>
         <h6>Dear, Mr/Ms. ".$user."</h6>
-        <p>Your Appointment ".$appt_code." has been REJECTED.</p>
+        <p>Your Appointment ".$appt_code." has been CANCELLED due to the reason \"".$reason."\".</p>
         </body>
         </html>";
         $email = \Config\Services::email();
@@ -499,7 +482,7 @@ public function rejectAppt(){
         $email->setMessage($message);
 
         if ($email->send()) {
-            echo "Success";
+            // echo "Success";
         }else{
             $data = $email->printDebugger(['headers']);
             print_r($data);
