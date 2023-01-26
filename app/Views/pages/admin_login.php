@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 </head>
 <body>
- <div class="login-box" >
+ <div class=".col-md-6 .offset-md-3 login-box" >
       <!-- <img src=" //base_url('assets/image/logo.png')" align="center"><br><br>
         <h4>Tasks and Schedule Monitoring System</h4> -->
         <div class="header">
