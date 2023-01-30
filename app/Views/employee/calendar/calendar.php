@@ -2,6 +2,7 @@
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+<link rel="stylesheet" href="<?= base_url('assets/css/style.css')?>">
 
 
 <div class="body-content">
@@ -160,39 +161,45 @@
       <form action="<?= base_url('/calendar/update');?>" method="POST"> 
         <div class="modal-body" id="adata">
           <input type="hidden" name="id" id="id" value="">
-          <!-- <h5>Title</h5> -->
-          <input class="form-control" type="hidden" name="title_update" id="title_update" placeholder="Title">
-          <label for="event_code">Event Code: </label>
-          <input type="text" name="event_code" id="event_code" value="" disabled>
+          
+          <div class="crud-text"><h5>Client Details:</h5></div>
+          <input type="hidden" name="title_update" id="title_update" placeholder="Title">
+          
           <div class="form-row">
-            <div class="form-group col-md-6">
+          <div class="form-group col-md-4">
+              <label for="event_code">Event Code: </label>
+              <input type="text" name="event_code" id="event_code" value="" disabled>
+            </div>
+            <div class="form-group col-md-4">
              <label for="start_event_update">Date</label><br>
              <input type="date" name="start_event_update" id="start_event_update" disabled>
            </div>
-           <div class="form-group col-md-6">
+           <div class="form-group col-md-4">
             <label for="time_update">Time</label><br>
             <input type="time" name="time_update" id="time_update" disabled>
           </div>
         </div>
-        <h3>Client Details:</h3>
+
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="area_update">Branch Area</label><br>
-            <select id="area_update" name="area_update" class="form-control" disabled>
-              
+            <div class="select-dropdown">
+              <select id="area_update" name="area_update" class="form-control" disabled>
             </select>
+            </div>
           </div>
           <div class="form-group col-md-6">
             <label for="client_id_update">Branch Name</label><br>
-            <select id="client_id_update" name="client_id_update" class="form-control" disabled>
-
+            <div class="select-dropdown">
+              <select id="client_id_update" name="client_id_update" class="form-control" disabled>
             </select>
+            </div>
           </div>
         </div>
         
-        <div class="form-group">
-          
+        <div class="form-group" id="serv-form">
           <label for="serv_id_update">Service</label><br>
+          <div class="select-dropdown" id="serv-select">
           <select class="form-control" id="serv_id_update" name="serv_id_update" disabled>
             <?php foreach($servName as $s):  ?>
               <optgroup label="<?= $s['serv_name']; ?>">
@@ -205,8 +212,9 @@
             <?php endforeach; ?>
           </select>
         </div> 
+      </div><br>
 
-         <h3>Aircon Details:</h3>
+         <div class="crud-text"><h5>Aircon Details:</h5></div>
 
         <!-- =================================================== -->
         <div id="auth-rows-edit"></div>
@@ -219,16 +227,15 @@
         </div> -->
 
         <div class="form-group">
-          
-          <label for="emp_id_update">Technician</label><br>
-          <select id="emp_id_update" name="emp_id_update[]" class="form-control selectpicker" multiple data-selected-text-format="count > 8" disabled>
+          <label class="ml-5 mt-3" for="emp_id_update">Technician</label><br>
+          <select id="emp_id_update" name="emp_id_update[]" class="form-control w-75 ml-5 selectpicker border border-dark" multiple data-selected-text-format="count > 8" disabled>
             <!--  -->
           </select>
         </div> 
       </div>
       <div class="modal-footer">
         <div class="form-group">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn py-2 px2 btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </form>
     </div>

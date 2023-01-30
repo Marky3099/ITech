@@ -17,6 +17,7 @@ use App\Models\Call_logs;
 use App\Models\Call_fcu;
 use App\Models\User_bdo;
 use App\Models\Restrict_date;
+use App\Models\Emp_expertise_views;
 
 class FullCalendar extends BaseController
 {
@@ -1560,9 +1561,12 @@ public function view(){
 
 public function checkEmp(){
     $Emp = new Emp();
+    $Serv = new Serv();
+    $Expertise = new Emp_expertise_views();
     // $date = $this->request->getPost('start_event');
     $start_date = explode('-',$this->request->getVar('start_event'));
     $time =$this->request->getVar('time');
+    $servId =$this->request->getVar('serv_id');
     $end_time =$this->request->getVar('end_time');
     $timeMinus = strtotime($time) - 60*60;
     $startTime= date('H:i', $timeMinus);
@@ -1571,6 +1575,9 @@ public function checkEmp(){
     $data['startTime']= date('H:i', $timeMinus);
     $data['endTime'] = date('H:i', $timestamp);
     $data['end_time'] = $timestamp;
+    $service = $Serv->where('serv_id',$servId)->first();
+    $serviceName = $service['serv_name'];
+    $data['expertise'] = $Expertise->where('serv_name',$serviceName)->findAll();
     $date = $start_date[0].'/'.$start_date[1].'/'.$start_date[2];
     $db1 = \Config\Database::connect();
      $query   = $db1->query('SELECT DISTINCT emp_name FROM event_emp_views where start_event = "'.$date.'" AND time >= "'.$startTime.'" AND end_time <= "'.$endTime.'"');
