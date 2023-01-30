@@ -457,9 +457,9 @@ return view("templates/template",$data);
 
 
 public function clientDashboard(){
-    if($_SESSION['position'] == USER_ROLE_ADMIN){
-        return $this->response->redirect(site_url('/calendar'));
-    }
+    if($_SESSION['position'] != USER_ROLE_ADMIN || $_SESSION['position'] != USER_ROLE_SECRETARY){
+            return $this->response->redirect(site_url('/dashboard'));
+        }
     else if($_SESSION['position'] == USER_ROLE_EMPLOYEE){
         return $this->response->redirect(site_url('/appointment'));
     }
@@ -477,15 +477,16 @@ public function clientDashboard(){
     $session = session();
     $id = $_SESSION['user_id'];
     $data['appoint'] = $Appoint->where('user_id', $id)->findAll();
+    $appt_cal = $Appoint->where('user_id', $id)->where('appt_status !=','Cancelled')->findAll();
     $data['pending'] = $Appoint->where('appt_status', 'Pending')->where('user_id', $id)->findAll();
-    $data['approve'] = $Appoint->where('appt_status', 'Approved')->where('user_id', $id)->findAll();
+    // $data['approve'] = $Appoint->where('appt_status', 'Approved')->where('user_id', $id)->findAll();
     $data['complete'] = $Appoint->where('appt_status', 'Done')->where('user_id', $id)->findAll();
-    $data['reject'] = $Appoint->where('appt_status', 'Rejected')->where('user_id', $id)->findAll();
-    $data['count_total'] = count($data['appoint']);
+    // $data['reject'] = $Appoint->where('appt_status', 'Rejected')->where('user_id', $id)->findAll();
+    $data['count_total'] = count($appt_cal);
     $data['count_pending'] = count($data['pending']);
-    $data['count_approve'] = count($data['approve']);
+    // $data['count_approve'] = count($data['approve']);
     $data['count_complete'] = count($data['complete']);
-    $data['count_reject'] = count($data['reject']);
+    // $data['count_reject'] = count($data['reject']);
     $data['events'] = $events->orderBy('id', 'ASC')->findAll();
     $data['event'] = array();
     $data['branch'] = array();
@@ -513,10 +514,10 @@ public function clientDashboard(){
             FROM event_fcu_views');
         $data['distinct_event'] = $query->getResult();
         
-    $set = $Appoint->where('user_id', $id)->where('set_status',1)->findAll();
+    $set = $Appoint->where('user_id', $id)->where('appt_status !=','Cancelled')->findAll();
     // dd($set[0]['appt_code']);
     $appt_code = array();
-    
+    // dd($set);
     for ($i=0; $i < count($set); $i++) { 
         array_push($appt_code,$set[$i]['appt_code']);
     }
@@ -541,8 +542,10 @@ public function clientDashboard(){
     $data['client_area2'][]=$area;
 }
 $data['all_events'] = array();
+// dd($appt_code);
 for ($a=0; $a < count($appt_code); $a++) { 
-    $data['all_events'] = $event->where('appt_code', $appt_code)->findAll();
+    $appt_event = $event->where('appt_code', $appt_code[$a])->first();
+    array_push($data['all_events'],$appt_event);
 }
 // dd($data['all_events']);
 foreach ($data['all_events'] as $key => $value) {
@@ -802,8 +805,8 @@ public function autoDone(){
         'status' => "Done",
     ];
     $Event->update((int)$id, $data);
-    if ($PendingEvents['log_code'] != "") {
-        $codeLog=explode("-",$PendingEvents['log_code']);
+    if ($PendingEvents[0]['log_code'] != "") {
+        $codeLog=explode("-",$PendingEvents[0]['log_code']);
         $cl_id = $codeLog[2];
 
         $data_log = [
@@ -811,9 +814,9 @@ public function autoDone(){
         ];
         $Call_logs->update((int)$cl_id, $data_log);
     }
-    if ($PendingEvents['appt_code'] != "") {
+    if ($PendingEvents[0]['appt_code'] != "") {
         // dd("tru");
-        $codeAppt=explode("-",$PendingEvents['appt_code']);
+        $codeAppt=explode("-",$PendingEvents[0]['appt_code']);
         $appt_id = $codeAppt[2];
         $data_appt = [
             'appt_status' => "Done",

@@ -79,5 +79,6 @@ defined('EXIT__AUTO_MIN')      || define('EXIT__AUTO_MIN', 9); // lowest automat
 defined('EXIT__AUTO_MAX')      || define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
 defined('USER_ROLE_ADMIN')      || define('USER_ROLE_ADMIN', 'Admin'); 
+defined('USER_ROLE_SECRETARY')      || define('USER_ROLE_SECRETARY', 'Secretary'); 
 defined('USER_ROLE_EMPLOYEE')      || define('USER_ROLE_EMPLOYEE', 'Employee'); 
 defined('USER_ROLE_CLIENT')      || define('USER_ROLE_CLIENT', 'Client'); 

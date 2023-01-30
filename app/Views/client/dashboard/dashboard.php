@@ -98,69 +98,6 @@
                         </div>
                       </div>
 
-                      <!-- Modal for displaying Approved Appointments -->
-                    <div class="container">
-                          <div class="modal fade" id="approveModal" role="dialog">
-                            <div class="modal-dialog modal-lg">
-                              <div class="modal-content">
-
-                                <div class="modal-header">
-                                  <h4 class="modal-title">Approved Appointments</h4>
-                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                </div>
-                                <div class="modal-body">
-                                  <?php if($approve):?>
-                                    <table class="table table-bordered table1">
-                                      <thead>
-                                        <tr>
-                                          <th>Date</th>
-                                          <th>Time</th>
-                                          <th>Appt Code</th>
-                                          <th>Service</th>
-                                          <th>Status</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                        
-                                        <?php foreach($approve as $p):  ?>
-                                          <tr>
-                                            <td><?php echo date("M d, Y",strtotime($p['appt_date'])); ?></td>
-                                            <?php $time = explode(":",$p['appt_time']);?>
-                                             <?php if($time[0] == '00'):?>
-                                                 <td>N/A</td>
-                                              <?php elseif ($time[0]>=12):?>
-                                                  <?php $hour = $time[0] - 12;?>
-                                                  <?php $amPm = "PM";?>
-                                                  <td><?php echo $hour . ":" . $time[1] . " " . $amPm;?></td>
-                                              <?php else:?>
-                                                  <?php $hour = $time[0]; ?>
-                                                  <?php $amPm = "AM"; ?>
-                                                  <td><?php echo $hour . ":" . $time[1] . " " . $amPm;?></td>
-                                             <?php endif;?>
-                                            <td><?php echo $p['appt_code']; ?></td>
-                                            <td><?php echo $p['serv_name']; ?></td>
-                                            <td><?php echo $p['appt_status'];?></td>
-                                           
-                                        </tr>
-                                      <?php endforeach;?>
-                                    </tbody>
-                                  </table>
-                                  
-                                <?php else:?>
-                                  <div class="Nowork">
-                                    <p class="noworkstatement"><i class="fa-solid text-success fa-circle-exclamation"></i>&nbsp;No Approved Appointment Yet</p>
-                                  </div>
-                                <?php endif;?>
-                                
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>       
-
                       <!-- Modal for displaying Completed Appointments -->
                     <div class="container">
                           <div class="modal fade" id="completeModal" role="dialog">
@@ -223,69 +160,6 @@
                           </div>
                         </div>
                       </div>           
-
-                       <!-- Modal for displaying Reject Appointments -->
-                    <div class="container">
-                          <div class="modal fade" id="rejectModal" role="dialog">
-                            <div class="modal-dialog modal-lg">
-                              <div class="modal-content">
-
-                                <div class="modal-header">
-                                  <h4 class="modal-title">Rejected Appointments</h4>
-                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                </div>
-                                <div class="modal-body">
-                                  <?php if($reject):?>
-                                    <table class="table table-bordered table1">
-                                      <thead>
-                                        <tr>
-                                          <th>Date</th>
-                                          <th>Time</th>
-                                          <th>Appt Code</th>
-                                          <th>Service</th>
-                                          <th>Status</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                        
-                                        <?php foreach($reject as $p):  ?>
-                                          <tr>
-                                            <td><?php echo date("M d, Y",strtotime($p['appt_date'])); ?></td>
-                                            <?php $time = explode(":",$p['appt_time']);?>
-                                             <?php if($time[0] == '00'):?>
-                                                 <td>N/A</td>
-                                              <?php elseif ($time[0]>=12):?>
-                                                  <?php $hour = $time[0] - 12;?>
-                                                  <?php $amPm = "PM";?>
-                                                  <td><?php echo $hour . ":" . $time[1] . " " . $amPm;?></td>
-                                              <?php else:?>
-                                                  <?php $hour = $time[0]; ?>
-                                                  <?php $amPm = "AM"; ?>
-                                                  <td><?php echo $hour . ":" . $time[1] . " " . $amPm;?></td>
-                                             <?php endif;?>
-                                            <td><?php echo $p['appt_code']; ?></td>
-                                            <td><?php echo $p['serv_name']; ?></td>
-                                            <td><?php echo $p['appt_status'];?></td>
-                                           
-                                        </tr>
-                                      <?php endforeach;?>
-                                    </tbody>
-                                  </table>
-                                  
-                                <?php else:?>
-                                  <div class="Nowork">
-                                    <p class="noworkstatement"><i class="fa-solid text-success fa-circle-exclamation"></i>&nbsp;No Reject Appointment</p>
-                                  </div>
-                                <?php endif;?>
-                                
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>   
 </div>
 
 <!-- Content Row -->
@@ -308,24 +182,6 @@
         </div>
       </div>
     </div>
-
-    <!-- Weekly -->
-    <div class="col-xl-3 col-md-6 mb-4">
-      <div class="card border-left-success shadow h-100 py-2">
-        <div class="card-body1">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-uppercase mb-1">
-                Approved Appointment</div>
-                <div class="h5 mb-0 font-weight-bold text-gray-800">#: <a href="#" data-toggle="modal" data-target="#approveModal" id="iconbox"><?= json_encode($count_approve);?></a></div>
-              </div>
-              <div class="col-auto">
-                <i class="fas fa-calendar fa-2x text-gray-300" id="iconbox"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <!--Completed -->
 
@@ -360,24 +216,6 @@
             </div>
             <div class="col-auto">
               <i class="fas fa-clipboard-list fa-2x text-gray-300" id="iconbox"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Pending Requests Card Example -->
-    <div class="col-xl-3 col-md-6 mb-4">
-      <div class="card border-left-warning shadow h-100 py-2">
-        <div class="card-body1">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-uppercase mb-1">
-              Rejected</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">#:&nbsp;<a href="#" data-toggle="modal" data-target="#rejectModal" id="iconbox"><?= json_encode($count_reject);?></a></div>
-            </div>
-            <div class="col-auto">
-              <i class="fas fa-comments fa-2x text-gray-300" id="iconbox"></i>
             </div>
           </div>
         </div>

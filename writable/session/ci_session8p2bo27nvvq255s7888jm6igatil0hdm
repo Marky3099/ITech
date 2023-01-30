@@ -1,5 +1,9 @@
+<<<<<<< HEAD:writable/session/ci_sessionadtig0js8rt84f4ar95ehl2gd2e1pc70
 <<<<<<<< HEAD:writable/session/ci_sessionb23d7aa869upu0ecsnjuvt26im33m8vd
 __ci_last_regenerate|i:1675005992;user_id|s:2:"88";username|s:5:"Admin";email|s:15:"admin@gmail.com";address|s:15:"Parañaque City";contact|s:0:"";position|s:5:"Admin";user_img|s:35:"1668746133_4ed4d32d055336eb660d.jpg";password|s:60:"$2y$10$IJhOjKpdRQtg0g6dL65hwOG84iZRiJNXJCBkX8b//QHL/l5rMCPH2";isLoggedIn|b:1;_ci_previous_url|s:26:"http://localhost/tsms/serv";
 ========
 __ci_last_regenerate|i:1674718881;user_id|s:2:"88";username|s:5:"Admin";email|s:15:"admin@gmail.com";address|s:15:"Parañaque City";contact|s:0:"";position|s:5:"Admin";user_img|s:35:"1668746133_4ed4d32d055336eb660d.jpg";password|s:60:"$2y$10$IJhOjKpdRQtg0g6dL65hwOG84iZRiJNXJCBkX8b//QHL/l5rMCPH2";isLoggedIn|b:1;_ci_previous_url|s:30:"http://localhost/tsms/calendar";
 >>>>>>>> e84d3f3edd4b320aa38fcde636a2f12a4e813142:writable/session/ci_sessionadtig0js8rt84f4ar95ehl2gd2e1pc70
+=======
+__ci_last_regenerate|i:1674995836;user_id|s:2:"88";username|s:5:"Admin";email|s:15:"admin@gmail.com";address|s:15:"Parañaque City";contact|s:0:"";position|s:5:"Admin";user_img|s:35:"1668746133_4ed4d32d055336eb660d.jpg";password|s:60:"$2y$10$IJhOjKpdRQtg0g6dL65hwOG84iZRiJNXJCBkX8b//QHL/l5rMCPH2";isLoggedIn|b:1;_ci_previous_url|s:30:"http://localhost/tsms/calllogs";
+>>>>>>> 1062c53928e8fe14214450adbc70b957c3991d42:writable/session/ci_session8p2bo27nvvq255s7888jm6igatil0hdm

@@ -27,7 +27,7 @@
             <i class="fas fa-bars" id="btn"></i>
         </div>
         <ul class="nav_list">
-        <?php if($_SESSION['position'] == USER_ROLE_ADMIN || $_SESSION['position'] == USER_ROLE_EMPLOYEE):?>
+        <?php if($_SESSION['position'] == USER_ROLE_ADMIN || $_SESSION['position'] == USER_ROLE_EMPLOYEE || $_SESSION['position'] == USER_ROLE_SECRETARY):?>
             <li>
                 <a href="<?= base_url('/dashboard')?>">
                     <i class="fa fa-th" aria-hidden="true"></i>
@@ -36,7 +36,7 @@
                 <span class="tooltip">Dashboard</span>
             </li>
         <?php endif;?>
-        <?php if($_SESSION['position'] == USER_ROLE_ADMIN):?>
+        <?php if($_SESSION['position'] == USER_ROLE_ADMIN || $_SESSION['position'] == USER_ROLE_SECRETARY):?>
             <li>
                 <a href="<?= base_url('/calendar')?>">
                     <i class="fa fa-calendar" aria-hidden="true"></i>
@@ -58,6 +58,7 @@
                 </a>
                 <span class="tooltip">Appointment</span>
             </li>
+<<<<<<< HEAD
               <button class = "dropdown-btn">
                                     <i class="fa-solid fa-file-invoice"></i> <span class="links_name">&nbsp;&nbsp;&nbsp;&nbsp;Reports</span>
                                     <i class = "fa fa-caret-down down2"></i>
@@ -137,6 +138,76 @@
                                     </li>
                                 </div>
                                 
+=======
+            <h4>Reports</h4><hr>
+            <li class="ar">
+                <a href="<?= base_url('/reports/accomplished')?>">
+                    <i class="fa-solid fa-file-pdf"></i>
+                    <span class="links_name">Accomplished Reports</span>
+                </a>
+                <span class="tooltip">Accomplished</span>
+            </li>
+            <li class="nav-item">
+                <a href="<?= base_url('/reports/exception')?>">
+                    <i class="fa-solid fa-file-pdf"></i>
+                    <span class="links_name">Exception Reports</span>
+                </a>
+                <span class="tooltip">Exception</span>
+            </li>
+            <li class="nav-item">
+                <a href="<?= base_url('/service-reports')?>">
+                    <i class="fa-solid fa-file-import"></i>
+                    <span class="links_name">Upload Reports</span>
+                </a>
+                <span class="tooltip">Upload</span>
+            </li>
+            <?php if($_SESSION['position'] == USER_ROLE_ADMIN):?>
+            <h4>Manage Data</h4><hr>
+            <li class="nav-item">
+                <a href="<?= base_url('/aircon');?>">
+                    <i class="fas fa-box"></i>
+                    <span class="links_name">Aircons</span>
+                </a>
+                <span class="tooltip">Aircons</span>
+            </li>
+            <li class="nav-item">
+                <a href = "<?= base_url('/client')?>" >
+                    <i class = "fa-solid fa-user"></i>
+                    <span class="links_name">Clients</span> 
+                </a> 
+                <span class="tooltip">Clients</span>
+            </li>                      
+            <li class="nav-item">
+                <a href = "<?= base_url('/emp');?>" >
+                    <i class = "fa-solid fa-user"></i>
+                    <span class="links_name">Technician</span>
+                </a>
+                <span class="tooltip">Technician</span>
+            </li>
+            <li class="nav-item">
+                <a href="<?= base_url('/serv')?>">
+                    <i class="fa fa-server" aria-hidden="true"></i>
+                    <span class="links_name">Services</span>
+                </a>
+                <span class="tooltip">Services</span>
+            </li>
+            <h4>Manage Accounts</h4><hr>
+            <li class="nav-item">
+                <a href = "<?= base_url('/client-users');?>" >
+                    <i class = "fa-solid fa-user"></i>
+                    <span class="links_name">User Requests</span>
+                </a>
+                <span class="tooltip">User Requests</span>
+            </li>
+            <li class="nav-item">
+                <a href = "<?= base_url('/user');?>" >
+                    <i class = "fa-solid fa-user"></i>
+                    <span class="links_name">Users</span>
+                </a>
+                <span class="tooltip">Users</span>
+            </li>
+            <?php endif;?>      
+>>>>>>> 1062c53928e8fe14214450adbc70b957c3991d42
             
         <?php elseif($_SESSION['position'] == USER_ROLE_EMPLOYEE):?>
             <li>
@@ -168,7 +239,7 @@
     </div>
     <div class="sidebar-header">
         <div class="text1">
-            <?php if($_SESSION['position'] == USER_ROLE_ADMIN || $_SESSION['position'] == USER_ROLE_EMPLOYEE):?>
+            <?php if($_SESSION['position'] == USER_ROLE_ADMIN || $_SESSION['position'] == USER_ROLE_EMPLOYEE || $_SESSION['position'] == USER_ROLE_SECRETARY):?>
                     Task and Schedule Monitoring System
             <?php else:?>
                     Appointment System

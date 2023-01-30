@@ -8,16 +8,23 @@ use App\Models\Aircon;
 use App\Models\Fcu_no;
 use App\Models\Serv;
 use App\Models\Emp;
+use App\Models\Event;
+use App\Models\Event_emp;
+use App\Models\Event_fcu;
 use App\Models\Appt_fcu;
 use App\Models\Appt_fcu_views;
 use App\Models\User_bdo;
 use App\Models\Restrict_date;
 use App\Models\All_events;
+use App\Models\Emp_expertise_views;
 
 class AppointmentCrud extends Controller
 {
 
     public function index(){
+        if($_SESSION['position'] == USER_ROLE_ADMIN && $_SESSION['position'] == USER_ROLE_SECRETARY){
+            return $this->response->redirect(site_url('/dashboard'));
+        }
         // dd("hello");
         $Client = new Client();
         $Aircon = new Aircon();
@@ -81,7 +88,6 @@ class AppointmentCrud extends Controller
         "device_brand"=> $value['device_brand'],
         "qty"=> $value['qty'],
         "appt_status"=> $value['appt_status'],
-        "set_status"=> $value['set_status'],
         "fcu_arr"=> $fcu_arr,
     ];
 }
@@ -92,7 +98,7 @@ return view("templates/template",$data);
 }
 
 public function adminAppointment(){
-        if($_SESSION['position'] != USER_ROLE_ADMIN){
+        if($_SESSION['position'] != USER_ROLE_ADMIN && $_SESSION['position'] != USER_ROLE_SECRETARY){
             return $this->response->redirect(site_url('/dashboard'));
         }
         $Client = new Client();
@@ -160,7 +166,6 @@ public function adminAppointment(){
         "device_brand"=> $value['device_brand'],
         "qty"=> $value['qty'],
         "appt_status"=> $value['appt_status'],
-        "set_status"=> $value['set_status'],
         "fcu_arr"=> $fcu_arr,
     ];
 }
@@ -221,13 +226,91 @@ public function store() {
     $Appoint = new Appointment();
     $Appt_fcu = new Appt_fcu();
     $Client = new Client();
+    $Emp =  new Emp();
+    $Event = new Event();
+    $Event_emp = new Event_emp();
+    $event_fcu = new Event_fcu();
+    $Expertise = new Emp_expertise_views();
     $Aircon = new Aircon();
     $fcu_no = new Fcu_no();
     $Serv = new Serv();
     $operatingTime = ['8:00 AM','9:00 AM','10:00 AM','11:00 AM','1:00 PM','2:00 PM','3:00 PM','4:00 PM','5:00 PM','6:00 PM'];
     // dd($operatingTime);
+    $client_branch = $Client->where('client_id',$this->request->getVar('client_id'))->first();
+    $aircon_brand = $Aircon->where('aircon_id', $this->request->getVar('aircon_id'))->first();
+    $aircon_details = $Aircon->where('device_brand', $aircon_brand['device_brand'])->findAll();
+    // dd($aircon_details);
+    // dd($client_branch);
+    $start_date = explode('/',$this->request->getVar('appt_date'));
     $session = session();
     $user_id =$_SESSION['user_id'];
+    $servId =$this->request->getVar('serv_id');
+    $service = $Serv->where('serv_id',$servId)->first();
+    $serviceName = $service['serv_name'];
+    $date = $start_date[2].'-'.$start_date[0].'-'.$start_date[1];
+    // dd($date);
+    $time =$this->request->getVar('appt_time');
+    // dd($time);
+    $end_time = strtotime($time) + 60*60*2;
+    
+    $timeMinus = strtotime($time) - 60*60;
+    $startTime= date('H:i', $timeMinus);
+    // $timestamp = strtotime($end_time) + 60*60;
+    $endTime = date('H:i', $end_time);
+    // dd($endTime);
+
+    $db1 = \Config\Database::connect();
+     $query   = $db1->query('SELECT DISTINCT emp_name FROM event_emp_views where start_event = "'.$date.'" AND time >= "'.$startTime.'" AND end_time <= "'.$endTime.'"');
+    if ($query->getResult()) {
+       
+         $data['distinct'] = $query->getResult();
+
+         $sql_string = "Select * from employees where emp_name NOT IN('";
+         foreach ($data['distinct'] as $key => $value) {
+             $sql_string = $sql_string.$value->emp_name."','";
+
+         }
+
+         $final = substr($sql_string, 0, -2);
+
+    $final2 = $final.")";
+
+    $db2 = \Config\Database::connect();
+
+    $query2   = $db2->query($final2);
+
+    $available_emp = $query2->getResult();
+
+    }else{
+        $available_emp = $Emp->orderBy('emp_name','ASC')->findAll();
+
+    }
+
+    // dd($available_emp[0]['emp_id']);
+    $expertEmp = array();
+    for($a = 0; $a < count($available_emp); $a++){
+        $availEmp = $available_emp[$a]->emp_id;
+        $expert = $Expertise->where('emp_id', $availEmp)->findAll();
+        array_push($expertEmp, $expert);
+    }
+    // dd($expertEmp[0][0]['serv_name']);
+    $chosenEmp = array();
+    for($b = 0; $b < count($expertEmp); $b++){
+        for($c = 0; $c < count($expertEmp[$b]); $c++){
+            if($expertEmp[$b][$c]['serv_name'] == $serviceName){
+                array_push($chosenEmp, $expertEmp[$b][$c]);
+            }
+        }
+    }
+    
+    $selectEmp = array();
+    for($d=0; $d<2; $d++){
+        for($e = 0; $e < count($expertEmp[$d]); $e++){
+            array_push($selectEmp, $expertEmp[$d][$e]['emp_id']);
+        }
+    }
+    $selected= array_unique($selectEmp);
+    // dd($selected);
     $restrictTime = $this->request->getVar('availTime');
     // dd($restrictTime);
     $timeArr = explode(",", $restrictTime);
@@ -250,15 +333,16 @@ public function store() {
      }
      // dd($displayTime);
 
-    $start_date = explode('/',$this->request->getVar('appt_date'));
     $set = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $code = substr(str_shuffle($set), 0, 5);
     $allow = 0;
+
     for($b=0;$b<count($operatingTime);$b++){
         if($displayTime ==$operatingTime[$b]){
             $allow=1;
         }
     }
+    // dd($unavailDate);
     if($allow>0)
     {
         for($a=0;$a<count($operatingTime);$a++){
@@ -270,6 +354,15 @@ public function store() {
                     if($time == $timeArr[$i]){
                         $session = session();
                         $session->setFlashdata('errorTime', 'Selected Time is not Available, Please choose another time');
+                        $session->setFlashdata('date', $_POST['appt_date']);
+                        $session->setFlashdata('serv', $_POST['serv_id']);
+                        $session->setFlashdata('device_brand', $_POST['device_brand']);
+                        $session->setFlashdata('aircon_id', $_POST['aircon_id']);
+                        $session->setFlashdata('fcuno', $_POST['fcuno']);
+                        $session->setFlashdata('qty', $_POST['qty']);
+                        $session->setFlashdata('availTime', $restrictTime);
+                        $session->setFlashdata('unavailDate', $unavailDate);
+                        $session->setFlashdata('aircon_brand', $aircon_details);
                         return $this->response->redirect(site_url('/appointment/create'));
                     }
                 }
@@ -293,8 +386,46 @@ public function store() {
                     $success = $Appoint->insert($appoint_create);
                 
                     if($success){
+                        // dd("here");
                             $appt_code = ['appt_code' => 'appt-'.$code.'-'.(int)$success];
-                            $Appoint->update((int)$success,$appt_code);
+                            $success2 = $Appoint->update((int)$success,$appt_code);
+                            if($success2){
+                                // dd("here2");
+                                $success3=$Event->insert([
+                                    'title' => date("g:ia",strtotime($this->request->getVar('appt_time')))." ".$client_branch['client_branch'],
+                                    // 'log_code' => $log_code,
+                                    'start_event' => $start_date[2].'-'.$start_date[0].'-'.$start_date[1],
+                                    'appt_code' => $appt_code,
+                                    'time' => $this->request->getVar('appt_time'),
+                                    'end_time' => $endTime,
+                                    'client_id' => $this->request->getVar('client_id'),
+                                    'serv_id' => $this->request->getVar('serv_id'),
+
+                                ]);
+                                
+                                if($success3){
+                                    // dd("here3");
+                                    $event_code = ['event_code' => 'task-'.$code.'-'.(int)$success3];
+                                    $Event->update((int)$success3,$event_code);
+                                }
+
+                                foreach($selected as $key => $value) {
+                                    $Event_emp->insert([
+                                        'emp_id'=> (int) $value,
+                                        'id' => (int) $success3
+                                    ]);
+                                }
+
+
+                                foreach ( $_POST['fcuno'] as $key => $floor_num) {
+                                    $event_fcu->insert([
+                                        'id'=> (int) $success3,
+                                        'aircon_id'=> (int) $this->request->getVar('aircon_id'),
+                                        'quantity'=> (int)$this->request->getVar('qty'),
+                                        'fcuno'=>$floor_num
+                                    ]);
+                                }
+                            }
                         }
                     foreach($this->request->getVar('fcuno') as $key => $value) {
                         $Appt_fcu->insert([
@@ -315,6 +446,7 @@ public function store() {
     }else{
         $session = session();
         $session->setFlashdata('errorOpTime', $displayTime.' is outside operating hours');
+        $session->setFlashdata('data', $_POST);
         return $this->response->redirect(site_url('/appointment/create'));
     }
 
@@ -442,11 +574,22 @@ public function update(){
 public function delete($appt_id = null){
     
     $Appoint = new Appointment();
-    $data['Appoint'] = $Appoint->where('appt_id', $appt_id)->delete($appt_id);
+    $event = new Event();
+    
+    // $data['Appoint'] = $Appoint->where('appt_id', $appt_id)->delete($appt_id);
+    $data['Appoint'] = $Appoint->where('appt_id', $appt_id)->first();
+    $apptCode = $data['Appoint']['appt_code'];
+    // $formatCode = explode('-', $apptCode);
+    $eventAppt = $event->where('appt_code', $apptCode)->delete();
+    // dd($eventAppt);
+    if($eventAppt){
+      $update_set = ['appt_status' => 'Cancelled'];
+      $Appoint->update((int)$appt_id,$update_set);
+    }
     return $this->response->redirect(site_url('/appointment'));
 }
 
-public function rejectAppt(){
+public function cancelAppt(){
     $Appoint = new Appointment();
     $Bdo = new User_bdo();
     $appt_id = $this->request->getPost('appt_id');
@@ -457,7 +600,7 @@ public function rejectAppt(){
     $user_email =  $data['user_data']['bdo_email'];
     $user =  $data['user_data']['bdo_lname'];
     $appt_code = $data['appt']['appt_code'];
-    $update_set = ['set_status' => 2, 'appt_status' => 'Cancelled'];
+    $update_set = ['appt_status' => 'Cancelled'];
     $Appoint->update((int)$appt_id,$update_set);
 
     $data['rejected'] = 'The Appointment has been [CANCELLED!]';

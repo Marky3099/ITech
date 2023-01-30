@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ERROR - 2023-01-30 01:19:30 --> Error connecting to the database: No connection could be made because the target machine actively refused it.
 
 CRITICAL - 2023-01-30 01:19:30 --> Unable to connect to the database.
@@ -69,3 +70,17 @@ CRITICAL - 2023-01-30 01:21:06 --> Table 'tsms.appointments' doesn't exist in en
 #9 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #10 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
 #11 {main}
+=======
+CRITICAL - 2023-01-30 03:47:20 --> Cannot use object of type stdClass as array
+#0 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\AppointmentCrud->store()
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AppointmentCrud))
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2023-01-30 03:48:58 --> Cannot use object of type stdClass as array
+#0 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\AppointmentCrud->store()
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AppointmentCrud))
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+>>>>>>> 1062c53928e8fe14214450adbc70b957c3991d42

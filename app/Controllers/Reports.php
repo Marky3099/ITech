@@ -16,7 +16,7 @@ use App\Models\Event_fcu_views;
 class Reports extends BaseController
 {   
 	public function index(){
-        if($_SESSION['position'] != USER_ROLE_ADMIN){
+        if($_SESSION['position'] != USER_ROLE_ADMIN && $_SESSION['position'] != USER_ROLE_SECRETARY){
             return $this->response->redirect(site_url('/dashboard'));
         }
         $event = new All_events();
@@ -117,7 +117,7 @@ $datas['main'] = 'admin/reports/accomplishedReports';
 return view('templates/template',$datas);
 }
 public function dailyAccomplish(){
-    if($_SESSION['position'] != USER_ROLE_ADMIN){
+    if($_SESSION['position'] != USER_ROLE_ADMIN && $_SESSION['position'] != USER_ROLE_SECRETARY){
         return $this->response->redirect(site_url('/dashboard'));
     }
 
@@ -217,7 +217,7 @@ public function dailyAccomplish(){
  }
 }
 public function weeklyAccomplish(){
-    if($_SESSION['position'] != USER_ROLE_ADMIN){
+    if($_SESSION['position'] != USER_ROLE_ADMIN && $_SESSION['position'] != USER_ROLE_SECRETARY){
         return $this->response->redirect(site_url('/dashboard'));
     }
     $event = new All_events();
@@ -320,7 +320,7 @@ if($this->request->getVar('print')){
  }
 }
 public function monthlyAccomplish(){
-    if($_SESSION['position'] != USER_ROLE_ADMIN){
+    if($_SESSION['position'] != USER_ROLE_ADMIN && $_SESSION['position'] != USER_ROLE_SECRETARY){
         return $this->response->redirect(site_url('/dashboard'));
     }
     $event = new All_events();
@@ -418,7 +418,7 @@ public function monthlyAccomplish(){
  }
 }
 public function quarterlyAccomplish(){
-    if($_SESSION['position'] != USER_ROLE_ADMIN){
+    if($_SESSION['position'] != USER_ROLE_ADMIN && $_SESSION['position'] != USER_ROLE_SECRETARY){
         return $this->response->redirect(site_url('/dashboard'));
     }
     $event = new All_events();
@@ -532,7 +532,7 @@ public function quarterlyAccomplish(){
  }
 }
 public function yearlyAccomplish(){
-    if($_SESSION['position'] != USER_ROLE_ADMIN){
+    if($_SESSION['position'] != USER_ROLE_ADMIN && $_SESSION['position'] != USER_ROLE_SECRETARY){
         return $this->response->redirect(site_url('/dashboard'));
     }
     $event = new All_events();
@@ -632,7 +632,7 @@ public function yearlyAccomplish(){
  }
 }
 public function showException(){
-    if($_SESSION['position'] != USER_ROLE_ADMIN){
+    if($_SESSION['position'] != USER_ROLE_ADMIN && $_SESSION['position'] != USER_ROLE_SECRETARY){
         return $this->response->redirect(site_url('/dashboard'));
     }
     $event = new All_events();
@@ -736,7 +736,7 @@ $datas['main'] = 'admin/reports/exceptionReports';
 return view('templates/template',$datas);
 }
 public function dailyException(){
-    if($_SESSION['position'] != USER_ROLE_ADMIN){
+    if($_SESSION['position'] != USER_ROLE_ADMIN && $_SESSION['position'] != USER_ROLE_SECRETARY){
         return $this->response->redirect(site_url('/dashboard'));
     }
 
@@ -836,7 +836,7 @@ public function dailyException(){
  }
 }
 public function weeklyException(){
-    if($_SESSION['position'] != USER_ROLE_ADMIN){
+    if($_SESSION['position'] != USER_ROLE_ADMIN && $_SESSION['position'] != USER_ROLE_SECRETARY){
         return $this->response->redirect(site_url('/dashboard'));
     }
     $event = new All_events();
@@ -938,7 +938,7 @@ if($this->request->getVar('print')){
  }
 }
 public function monthlyException(){
-    if($_SESSION['position'] != USER_ROLE_ADMIN){
+    if($_SESSION['position'] != USER_ROLE_ADMIN && $_SESSION['position'] != USER_ROLE_SECRETARY){
         return $this->response->redirect(site_url('/dashboard'));
     }
     $event = new All_events();
@@ -1036,7 +1036,7 @@ public function monthlyException(){
  }
 }
 public function quarterlyException(){
-    if($_SESSION['position'] != USER_ROLE_ADMIN){
+    if($_SESSION['position'] != USER_ROLE_ADMIN && $_SESSION['position'] != USER_ROLE_SECRETARYS){
         return $this->response->redirect(site_url('/dashboard'));
     }
     $event = new All_events();
@@ -1150,7 +1150,7 @@ public function quarterlyException(){
  }
 }
 public function yearlyException(){
-    if($_SESSION['position'] != USER_ROLE_ADMIN){
+    if($_SESSION['position'] != USER_ROLE_ADMIN && $_SESSION['position'] != USER_ROLE_SECRETARY){
         return $this->response->redirect(site_url('/dashboard'));
     }
     $event = new All_events();
@@ -1250,7 +1250,7 @@ public function yearlyException(){
  }
 }
 public function getException(){
-    if($_SESSION['position'] != USER_ROLE_ADMIN){
+    if($_SESSION['position'] != USER_ROLE_ADMIN && $_SESSION['position'] != USER_ROLE_SECRETARY){
         return $this->response->redirect(site_url('/dashboard'));
     }
     $event = new All_events();
@@ -1376,7 +1376,7 @@ $datas['main'] = 'admin/reports/exceptionReports';
 return view('templates/template',$datas);
 }
 public function printException($strt,$end,$serv,$client_id){
-    if($_SESSION['position'] != USER_ROLE_ADMIN){
+    if($_SESSION['position'] != USER_ROLE_ADMIN && $_SESSION['position'] != USER_ROLE_SECRETARY){
         return $this->response->redirect(site_url('/dashboard'));
     }
     $session = session();
