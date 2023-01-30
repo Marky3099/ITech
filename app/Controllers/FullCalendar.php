@@ -24,7 +24,8 @@ class FullCalendar extends BaseController
 
     public function index()
     {
-        if($_SESSION['position'] != USER_ROLE_ADMIN){
+        // dd($_SESSION);
+        if($_SESSION['position'] != USER_ROLE_ADMIN && $_SESSION['position'] != USER_ROLE_SECRETARY){
             if($_SESSION['position'] == USER_ROLE_EMPLOYEE){
                 return $this->response->redirect(site_url('/calendar/emp'));
             }
@@ -164,7 +165,7 @@ return view("templates/template",$datas);
 public function index1()
 {
 
-    if($_SESSION['position'] == USER_ROLE_ADMIN){
+    if($_SESSION['position'] == USER_ROLE_ADMIN || $_SESSION['position'] == USER_ROLE_SECRETARY){
         return $this->response->redirect(site_url('/calendar'));
     }
     else if($_SESSION['position'] == USER_ROLE_CLIENT){
@@ -293,7 +294,7 @@ return view("templates/template",$datas);
 }
 
 public function event(){
-    if($_SESSION['position'] != USER_ROLE_ADMIN){
+    if($_SESSION['position'] != USER_ROLE_ADMIN && $_SESSION['position'] != USER_ROLE_SECRETARY){
         return $this->response->redirect(site_url('/dashboard'));
     }
     $event = new All_events();
@@ -402,7 +403,7 @@ return view("templates/template",$datas);
 }
 
 public function insert(){
-    if($_SESSION['position'] != USER_ROLE_ADMIN){
+    if($_SESSION['position'] != USER_ROLE_ADMIN && $_SESSION['position'] != USER_ROLE_SECRETARY){
         return $this->response->redirect(site_url('/dashboard'));
     }
 // dd($_POST);
@@ -858,7 +859,7 @@ return json_encode(["error"=>"error"],412);
 
 // insert to Calendar from call logs
 public function insertCal(){
-    if($_SESSION['position'] != USER_ROLE_ADMIN){
+    if($_SESSION['position'] != USER_ROLE_ADMIN && $_SESSION['position'] != USER_ROLE_SECRETARY){
         return $this->response->redirect(site_url('/dashboard'));
     }
     // dd($_POST);
@@ -967,7 +968,7 @@ public function insertCal(){
 //set call logs to calendar
 
 public function setCal(){
-    if($_SESSION['position'] != USER_ROLE_ADMIN){
+    if($_SESSION['position'] != USER_ROLE_ADMIN && $_SESSION['position'] != USER_ROLE_SECRETARY){
         return $this->response->redirect(site_url('/dashboard'));
     }
     // dd($_POST);
@@ -1048,7 +1049,7 @@ public function setCal(){
 
 //set appointment to calendar
 public function insertAppt(){
-    if($_SESSION['position'] != USER_ROLE_ADMIN){
+    if($_SESSION['position'] != USER_ROLE_ADMIN && $_SESSION['position'] != USER_ROLE_SECRETARY){
         return $this->response->redirect(site_url('/dashboard'));
     }
     // dd($_POST);
@@ -1168,7 +1169,7 @@ public function insertAppt(){
 }
 
 public function update(){
-    if($_SESSION['position'] != USER_ROLE_ADMIN){
+    if($_SESSION['position'] != USER_ROLE_ADMIN && $_SESSION['position'] != USER_ROLE_SECRETARY){
         return $this->response->redirect(site_url('/dashboard'));
     }
         // dd($this->request->getVar('emp_id_update'));
@@ -1236,7 +1237,7 @@ public function update(){
  return json_encode(["error"=>"error"],412);
 }
 public function delete($id){
-    if($_SESSION['position'] != USER_ROLE_ADMIN){
+    if($_SESSION['position'] != USER_ROLE_ADMIN && $_SESSION['position'] != USER_ROLE_SECRETARY){
         return $this->response->redirect(site_url('/dashboard'));
     }
     $Event = new Event();
@@ -1273,7 +1274,7 @@ public function delete($id){
 }
 
 public function load(){
-    if($_SESSION['position'] != USER_ROLE_ADMIN){
+    if($_SESSION['position'] != USER_ROLE_ADMIN && $_SESSION['position'] != USER_ROLE_SECRETARY){
         return $this->response->redirect(site_url('/dashboard'));
     }
     $event = new Event();
@@ -1283,258 +1284,6 @@ public function load(){
     if ($event) {
         return json_encode(["data"=>$event],200);
     }
-}
-
-public function printDaily(){
-    if($_SESSION['position'] != USER_ROLE_ADMIN){
-        return $this->response->redirect(site_url('/dashboard'));
-    }
-
-    date_default_timezone_set('Asia/Hong_Kong'); 
-
-    $date = new \DateTime();
-    $date->setTimezone(new \DateTimeZone('+0800'));
-
-    $event = new All_events();
-        // $emp = new Emp();
-    $client = new Client();
-    $serv = new Serv();
-    $event_emp = new Event_emp_views();
-    $event_fcu = new Event_fcu_views();
-    
-    $db = \Config\Database::connect();
-    $query   = $db->query('SELECT DISTINCT aircon_id,id,device_brand,aircon_type,quantity
-        FROM event_fcu_views');
-    $datas['distinct'] = $query->getResult();
-
-    $db1 = \Config\Database::connect();
-    $query   = $db1->query('SELECT DISTINCT id
-        FROM event_fcu_views');
-    $datas['distinct_event'] = $query->getResult();
-
-
-    $datas['day'] = array();
-    $datas['client'] = $client->orderBy('client_id', 'ASC')->findAll();
-        // $datas['emp'] = $emp->orderBy('emp_id', 'ASC')->findAll();
-    $datas['serv'] = $serv->orderBy('serv_id', 'ASC')->findAll();
-    $datas['event_emp'] = $event_emp->orderBy('id', 'ASC')->findAll();
-    $datas['event_fcu'] = $event_fcu->orderBy('id', 'ASC')->orderBy('fcuno', 'ASC')->findAll();
-
-    $datas['today'] = $event->where('start_event', date('Y-m-d'))->findAll();
-        // dd($data[0]['title']);
-    foreach ($datas['today'] as $key => $value) {
-
-        $emp_arr = "";
-        foreach ($datas['event_emp'] as $key => $value_emps) {
-            if ( $value['id'] == $value_emps['id']) {
-               $emp_arr .= $datas['event_emp'][$key]['emp_name'].",";
-           }
-       }
-       $fcu_arr = array();
-
-         // dd($datas['event_fcu']);
-       foreach ($datas['event_fcu'] as $key => $value_fcu) {
-         if ($value['id'] == $value_fcu['id']) {
-             array_push($fcu_arr , (object)[
-              'id' => (int)$value_fcu['id'],
-              'aircon_id' => (int)$value_fcu['aircon_id'],
-              'fcuno' =>(int)$value_fcu['fcuno'],
-              'quantity' =>(int)$value_fcu['quantity'],
-              'device_brand' =>$value_fcu['device_brand'],
-              'aircon_type' =>$value_fcu['aircon_type'],
-              'fcu' =>$value_fcu['fcu'],
-          ]);
-
-         }   
-
-     }     
-     $datas['day'][]= (object)[
-      "id"=> $value['id'],
-      "title"=>$value['title'],
-      "event_code"=>$value['event_code'],
-      "start_event"=> $value['start_event'],
-      "time"=> $value['TIME'],
-      "serv_id"=> $value['serv_id'],
-      "client_id"=>$value['client_id'],
-//   "aircon_array"=>$aircon_arr,
-      "serv_name"=>$value['serv_name'],
-      "serv_type"=>$value['serv_type'],
-//   "device_array"=> $device_arr,
-//   "quantity_array"=> $quantity_arr,
-      "area"=> $value['area'],
-      "emp_array"=> $emp_arr,
-      "fcu_array"=> $fcu_arr,
-      "client_branch"=> $value['client_branch'],
-      "status"=> $value['STATUS'],
-  ];
-}
-
-return view("admin/calendar/dailyPrint",$datas);
-}
-
-public function printWeekly(){
-    if($_SESSION['position'] != USER_ROLE_ADMIN){
-        return $this->response->redirect(site_url('/dashboard'));
-    }
-    $event = new All_events();
-        // $emp = new Emp();
-    // $client = new Client();
-    // $serv = new Serv();
-    $event_emp = new Event_emp_views();
-    $event_fcu = new Event_fcu_views();
-    // $aircon = new Aircon();
-    $db = \Config\Database::connect();
-    $query   = $db->query('SELECT DISTINCT aircon_id,id,device_brand,aircon_type,quantity
-        FROM event_fcu_views');
-    $datas['distinct'] = $query->getResult();
-
-    $db1 = \Config\Database::connect();
-    $query   = $db1->query('SELECT DISTINCT id
-        FROM event_fcu_views');
-    $datas['distinct_event'] = $query->getResult();
-
-    $monday = date('Y-m-d', strtotime('monday this week'));
-    $sunday = date('Y-m-d', strtotime('sunday this week'));
-
-    $datas['week'] = array();
-    // $datas['client'] = $client->orderBy('client_id', 'ASC')->findAll();
-        // $datas['emp'] = $emp->orderBy('emp_id', 'ASC')->findAll();
-    // $datas['serv'] = $serv->orderBy('serv_id', 'ASC')->findAll();
-    $datas['event_emp'] = $event_emp->orderBy('id', 'ASC')->findAll();
-    $datas['event_fcu'] = $event_fcu->orderBy('id', 'ASC')->orderBy('fcuno', 'ASC')->findAll();
-    // $datas['aircon'] = $aircon->orderBy('aircon_id', 'ASC')->findAll();
-    $datas['weekly'] = $event->where('start_event BETWEEN "'. date('Y-m-d', strtotime($monday)). '" and "'. date('Y-m-d', strtotime($sunday)).'"ORDER BY start_event ASC')->findAll();
-        // dd($data[0]['title']);
-    foreach ($datas['weekly'] as $key => $value) {
-
-        $emp_arr = "";
-        foreach ($datas['event_emp'] as $key => $value_emps) {
-            if ( $value['id'] == $value_emps['id']) {
-               $emp_arr .= $datas['event_emp'][$key]['emp_name'].",";
-           }
-       }
-       $fcu_arr = array();
-
-     // dd($datas['event_fcu']);
-       foreach ($datas['event_fcu'] as $key => $value_fcu) {
-         if ($value['id'] == $value_fcu['id']) {
-             array_push($fcu_arr , (object)[
-              'id' => (int)$value_fcu['id'],
-              'aircon_id' => (int)$value_fcu['aircon_id'],
-              'fcuno' =>(int)$value_fcu['fcuno'],
-              'quantity' =>(int)$value_fcu['quantity'],
-              'device_brand' =>$value_fcu['device_brand'],
-              'aircon_type' =>$value_fcu['aircon_type'],
-              'fcu' =>$value_fcu['fcu'],
-          ]);
-
-         }   
-
-     }   
-     $datas['week'][]= (object)[
-      "id"=> $value['id'],
-      "title"=>$value['title'],
-      "event_code"=>$value['event_code'],
-      "start_event"=> $value['start_event'],
-      "time"=> $value['TIME'],
-      "serv_id"=> $value['serv_id'],
-      "client_id"=>$value['client_id'],
-//   "aircon_array"=>$aircon_arr,
-      "serv_name"=>$value['serv_name'],
-      "serv_type"=>$value['serv_type'],
-//   "device_array"=> $device_arr,
-//   "quantity_array"=> $quantity_arr,
-      "area"=> $value['area'],
-      "emp_array"=> $emp_arr,
-      "fcu_array"=> $fcu_arr,
-      "client_branch"=> $value['client_branch'],
-      "status"=> $value['STATUS'],
-  ];
-}
-
-return view("admin/calendar/weeklyPrint",$datas);
-}
-public function printMonthly(){
-    if($_SESSION['position'] != USER_ROLE_ADMIN){
-        return $this->response->redirect(site_url('/dashboard'));
-    }
-    $event = new All_events();
-        // $emp = new Emp();
-    // $client = new Client();
-    // $serv = new Serv();
-    $event_emp = new Event_emp_views();
-    $event_fcu = new Event_fcu_views();
-    // $aircon = new Aircon();
-    $db = \Config\Database::connect();
-    $query   = $db->query('SELECT DISTINCT aircon_id,id,device_brand,aircon_type,quantity
-        FROM event_fcu_views');
-    $datas['distinct'] = $query->getResult();
-
-    $db1 = \Config\Database::connect();
-    $query   = $db1->query('SELECT DISTINCT id
-        FROM event_fcu_views');
-    $datas['distinct_event'] = $query->getResult();
-
-    $monday = date('Y-m-d', strtotime('monday this week'));
-    $sunday = date('Y-m-d', strtotime('sunday this week'));
-
-    $datas['month'] = array();
-    // $datas['client'] = $client->orderBy('client_id', 'ASC')->findAll();
-        // $datas['emp'] = $emp->orderBy('emp_id', 'ASC')->findAll();
-    // $datas['serv'] = $serv->orderBy('serv_id', 'ASC')->findAll();
-    $datas['event_emp'] = $event_emp->orderBy('id', 'ASC')->findAll();
-    $datas['event_fcu'] = $event_fcu->orderBy('id', 'ASC')->orderBy('fcuno', 'ASC')->findAll();
-    // $datas['aircon'] = $aircon->orderBy('aircon_id', 'ASC')->findAll();
-    $datas['monthly'] = $event->where('MONTH(start_event) = MONTH(CURRENT_DATE()) && YEAR(start_event) = YEAR(CURRENT_DATE()) ORDER BY start_event ASC')->findAll();
-        // dd($data[0]['title']);
-    foreach ($datas['monthly'] as $key => $value) {
-
-        $emp_arr = "";
-        foreach ($datas['event_emp'] as $key => $value_emps) {
-            if ( $value['id'] == $value_emps['id']) {
-               $emp_arr .= $datas['event_emp'][$key]['emp_name'].",";
-           }
-       }
-       $fcu_arr = array();
-
-     // dd($datas['event_fcu']);
-       foreach ($datas['event_fcu'] as $key => $value_fcu) {
-         if ($value['id'] == $value_fcu['id']) {
-             array_push($fcu_arr , (object)[
-              'id' => (int)$value_fcu['id'],
-              'aircon_id' => (int)$value_fcu['aircon_id'],
-              'fcuno' =>(int)$value_fcu['fcuno'],
-              'quantity' =>(int)$value_fcu['quantity'],
-              'device_brand' =>$value_fcu['device_brand'],
-              'aircon_type' =>$value_fcu['aircon_type'],
-              'fcu' =>$value_fcu['fcu'],
-          ]);
-
-         }   
-
-     }       
-     $datas['month'][]= (object)[
-         "id"=> $value['id'],
-         "title"=>$value['title'],
-         "event_code"=>$value['event_code'],
-         "start_event"=> $value['start_event'],
-         "time"=> $value['TIME'],
-         "serv_id"=> $value['serv_id'],
-         "client_id"=>$value['client_id'],
-//   "aircon_array"=>$aircon_arr,
-         "serv_name"=>$value['serv_name'],
-         "serv_type"=>$value['serv_type'],
-//   "device_array"=> $device_arr,
-//   "quantity_array"=> $quantity_arr,
-         "area"=> $value['area'],
-         "emp_array"=> $emp_arr,
-         "fcu_array"=> $fcu_arr,
-         "client_branch"=> $value['client_branch'],
-         "status"=> $value['STATUS'],
-     ];
- }
-
- return view("admin/calendar/monthlyPrint",$datas);
 }
 
 public function view(){
@@ -1609,12 +1358,18 @@ public function checkEmp(){
 }
 
 public function restrict_date(){
+    if($_SESSION['position'] != USER_ROLE_ADMIN && $_SESSION['position'] != USER_ROLE_SECRETARY){
+            return $this->response->redirect(site_url('/dashboard'));
+        }
     $date = new Restrict_date();
     $datas['dates'] = $date->orderBy('date_id','Asc')->findAll();
     $datas['main'] = 'admin/calendar/date';
     return view("templates/template",$datas);
 }
 public function restrict_form(){
+    if($_SESSION['position'] != USER_ROLE_ADMIN && $_SESSION['position'] != USER_ROLE_SECRETARY){
+            return $this->response->redirect(site_url('/dashboard'));
+        }
     $datas['err']="";
     // dd(strlen($datas['err']));
     $datas['main'] = 'admin/calendar/date_add';
@@ -1644,6 +1399,9 @@ public function restrict_add(){
     return $this->response->redirect(site_url('calendar/dates'));
 }
 public function restrict_form_edit($date_id){
+    if($_SESSION['position'] != USER_ROLE_ADMIN && $_SESSION['position'] != USER_ROLE_SECRETARY){
+            return $this->response->redirect(site_url('/dashboard'));
+        }
     $date = new Restrict_date();
     $datas['dates'] = $date->where('date_id',$date_id)->first();
     $datas['dateVal'] = $datas['dates']['date'];

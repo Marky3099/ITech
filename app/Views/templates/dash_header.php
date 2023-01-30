@@ -27,7 +27,7 @@
             <i class="fas fa-bars" id="btn"></i>
         </div>
         <ul class="nav_list">
-        <?php if($_SESSION['position'] == USER_ROLE_ADMIN || $_SESSION['position'] == USER_ROLE_EMPLOYEE):?>
+        <?php if($_SESSION['position'] == USER_ROLE_ADMIN || $_SESSION['position'] == USER_ROLE_EMPLOYEE || $_SESSION['position'] == USER_ROLE_SECRETARY):?>
             <li>
                 <a href="<?= base_url('/dashboard')?>">
                     <i class="fa fa-th" aria-hidden="true"></i>
@@ -36,7 +36,7 @@
                 <span class="tooltip">Dashboard</span>
             </li>
         <?php endif;?>
-        <?php if($_SESSION['position'] == USER_ROLE_ADMIN):?>
+        <?php if($_SESSION['position'] == USER_ROLE_ADMIN || $_SESSION['position'] == USER_ROLE_SECRETARY):?>
             <li>
                 <a href="<?= base_url('/calendar')?>">
                     <i class="fa fa-calendar" aria-hidden="true"></i>
@@ -80,6 +80,7 @@
                 </a>
                 <span class="tooltip">Upload</span>
             </li>
+            <?php if($_SESSION['position'] == USER_ROLE_ADMIN):?>
             <h4>Manage Data</h4><hr>
             <li class="nav-item">
                 <a href="<?= base_url('/aircon');?>">
@@ -124,7 +125,7 @@
                 </a>
                 <span class="tooltip">Users</span>
             </li>
-                                
+            <?php endif;?>      
             
         <?php elseif($_SESSION['position'] == USER_ROLE_EMPLOYEE):?>
             <li>
@@ -156,7 +157,7 @@
     </div>
     <div class="sidebar-header">
         <div class="text1">
-            <?php if($_SESSION['position'] == USER_ROLE_ADMIN || $_SESSION['position'] == USER_ROLE_EMPLOYEE):?>
+            <?php if($_SESSION['position'] == USER_ROLE_ADMIN || $_SESSION['position'] == USER_ROLE_EMPLOYEE || $_SESSION['position'] == USER_ROLE_SECRETARY):?>
                     Task and Schedule Monitoring System
             <?php else:?>
                     Appointment System

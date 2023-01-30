@@ -17,7 +17,7 @@ class CalllogsCrud extends Controller{
 
 	// show Call log list
     public function index(){
-        if($_SESSION['position'] != USER_ROLE_ADMIN){
+        if($_SESSION['position'] != USER_ROLE_ADMIN && $_SESSION['position'] != USER_ROLE_SECRETARY){
             return $this->response->redirect(site_url('/dashboard'));
         }
         $Call_logs = new Calllogs_views();
@@ -95,188 +95,11 @@ class CalllogsCrud extends Controller{
 $data['main'] = 'admin/calllogs/call_view';
 return view("templates/template",$data);
 }
-public function getfilter(){
-    if($_SESSION['position'] != USER_ROLE_ADMIN){
-        return $this->response->redirect(site_url('/dashboard'));
-    }
-    $Call_logs = new Calllogs_views();
-    $Client = new Client();
-    $Aircon = new Aircon();
-    $fcu_no = new Fcu_no();
-    $Call_fcu = new Call_fcu_views();
-    $Emp = new Emp();
-    $serv = new Serv();
-    
-    $data['now'] = date('Y-m-d');
-    $data['view_calllogs'] = [];
-    $data['cId'] ="";
-    $data['cbranch'] ="";
-    $data['client'] = $Client->orderBy('client_id', 'ASC')->findAll();
-    $data['area'] = $Client->select('area')->groupBy('area')->findAll();
-    $data['call_logs'] = $Call_logs->orderBy('cl_id', 'ASC')->findAll();
-    $data['caller'] = $Call_logs->select('caller')->groupBy('caller', 'asc')->findAll();
-    $data['fcu_no'] = $fcu_no->orderBy('fcuno', 'ASC')->findAll();
-    $data['call_fcu'] = $Call_fcu->orderBy('cl_id', 'ASC')->findAll();
-    $data['emp'] = $Emp->orderBy('emp_id', 'ASC')->findAll();
-    $data['serv'] = $serv->orderBy('serv_id', 'ASC')->findAll();
-    $data['servName'] = $serv->select('serv_name, serv_color, serv_type')->groupBy('serv_name')->findAll();
-    $data['servType'] = $serv->orderBy('serv_name','ASC')->findAll();
-    $data['aircon'] = $Aircon->orderBy('aircon_id', 'ASC')->findAll();
-    $data['device_brand'] = $Aircon->select('device_brand')->groupBy('device_brand')->findAll();
-
-
-    $date = new \DateTime();
-    $date->setTimezone(new \DateTimeZone('+0800'));
-
-    foreach($data['area'] as $k => $val) {
-
-            $area = [];
-
-            foreach($data['client'] as $key => $value) {
-                if($val['area'] == $value['area']){
-                  array_push($area , (object)[
-                    'client_id' => (int)$value['client_id'],
-                    'client_branch' =>$value['client_branch'],
-                    "area" =>$value['area']
-                ]);
-              }
-
-          }
-
-          $data['client_area'][]= (object)[
-            $val['area'] => $area
-        ];
-        // $datas['client_area2'][]=$area;
-    }
-    
-    if(isset($_GET['start_date']) && isset($_GET['to_date']))
-    {
-        $start_date = $_GET['start_date'];
-        $to_date = $_GET['to_date'];
-
-        if(isset($_GET['caller_filter']) && !isset($_GET['client_id'])){
-            $caller_filter = $_GET['caller_filter'];
-            // $client_id = $_GET['client_id'];
-            $data['calllogs_data'] = $Call_logs->where('date BETWEEN "'. date('Y-m-d', strtotime($start_date)). '" and "'. date('Y-m-d', strtotime($to_date)).'" AND caller = "'.$caller_filter.'"')->findAll();
-            // dd($data['calllogs_data']);
-        }elseif(isset($_GET['client_id']) && !isset($_GET['caller_filter'])){
-            $client_id = $_GET['client_id'];
-            $data['cId'] = $_GET['client_id'];
-            $data['cbranch'] = $Client->where('client_id', $client_id)->first();
-            $data['calllogs_data'] = $Call_logs->where('date BETWEEN "'. date('Y-m-d', strtotime($start_date)). '" and "'. date('Y-m-d', strtotime($to_date)).'" AND client_id = "'.$client_id.'"')->findAll();
-            
-        }elseif(isset($_GET['caller_filter']) && isset($_GET['client_id'])){
-            $caller_filter = $_GET['caller_filter'];
-            $client_id = $_GET['client_id'];
-            $data['cId'] = $_GET['client_id'];
-            $data['cbranch'] = $Client->where('client_id', $client_id)->first();
-            $data['calllogs_data'] = $Call_logs->where('date BETWEEN "'. date('Y-m-d', strtotime($start_date)). '" and "'. date('Y-m-d', strtotime($to_date)).'" AND client_id = "'.$client_id.'" AND caller = "'.$caller_filter.'"')->findAll();
-        }else{
-            $data['calllogs_data'] = $Call_logs->where('date BETWEEN "'. date('Y-m-d', strtotime($start_date)). '" and "'. date('Y-m-d', strtotime($to_date)).'"')->findAll();
-        }
-
-        foreach ($data['calllogs_data'] as $key => $value) {
-            $fcu_arr = "";
-            foreach ($data['call_fcu'] as $key => $value_fcu) {
-                if ( $value['cl_id'] == $value_fcu['cl_id']) {
-                 $fcu_arr .= $data['call_fcu'][$key]['fcu'].",";
-             }
-         }    
-         $data['view_calllogs'][]= (object)[
-            "cl_id"=> $value['cl_id'],
-            "date"=> $value['date'],
-            "log_code"=> $value['log_code'],
-            "client_id"=> $value['client_id'],
-            "area"=> $value['area'],
-            "client_branch"=> $value['client_branch'],
-            "aircon_id"=> $value['aircon_id'],
-            "aircon_type"=> $value['aircon_type'],
-            "device_brand"=> $value['device_brand'],
-            "caller"=> $value['caller'],
-            "particulars"=> $value['particulars'],
-            "qty"=> $value['qty'],
-            "status"=> $value['status'],
-            "set_status"=> $value['set_status'],
-            "fcu_arr"=> $fcu_arr,
-        ];
-    }
-
-
-}
-$data['main'] = 'admin/calllogs/call_view';
-return view('templates/template',$data);
-}
-public function printpdf($strt,$end,$call,$client_id){
-    if($_SESSION['position'] != USER_ROLE_ADMIN){
-        return $this->response->redirect(site_url('/dashboard'));
-    }
-    $session = session();
-    $Call_logs = new Calllogs_views();
-    $Client = new Client();
-    $Aircon = new Aircon();
-    $fcu_no = new Fcu_no();
-    $Call_fcu = new Call_fcu_views();
-
-    
-    $data['date'] = [$strt,$end];
-
-    $data['view_calllogs'] = [];
-    $data['client'] = $Client->orderBy('client_id', 'ASC')->findAll();
-    $data['area'] = $Client->select('area')->groupBy('area')->findAll();
-    $data['call_logs'] = $Call_logs->orderBy('cl_id', 'ASC')->findAll();
-    $data['fcu_no'] = $fcu_no->orderBy('fcuno', 'ASC')->findAll();
-    $data['call_fcu'] = $Call_fcu->orderBy('cl_id', 'ASC')->findAll();
-    $data['aircon'] = $Aircon->orderBy('aircon_id', 'ASC')->findAll();
-    $data['device_brand'] = $Aircon->select('device_brand')->groupBy('device_brand')->findAll();
-
-    if($client_id != '""' && $call !='""'){
-        $data['calllogs_data'] = $Call_logs->where('date BETWEEN "'. date('Y-m-d', strtotime($strt)). '" and "'. date('Y-m-d', strtotime($end)).'" AND client_id = "'.$client_id.'" AND caller = "'.$call.'"')->findAll();
-        // dd($datas['all_events']);
-    }elseif($call !='""'){
-        $data['calllogs_data'] = $Call_logs->where('date BETWEEN "'. date('Y-m-d', strtotime($strt)). '" and "'. date('Y-m-d', strtotime($end)).'" AND caller = "'.$call.'"')->findAll();
-        // dd($datas['all_events']);
-    }elseif($client_id !='""'){
-        $data['calllogs_data'] = $Call_logs->where('date BETWEEN "'. date('Y-m-d', strtotime($strt)). '" and "'. date('Y-m-d', strtotime($end)).'" AND client_id = "'.$client_id.'"')->findAll();
-        // dd($datas['all_events']);
-    }else{
-        $data['calllogs_data'] = $Call_logs->where('date BETWEEN "'. date('Y-m-d', strtotime($strt)). '" and "'. date('Y-m-d', strtotime($end)).'"')->findAll();
-    }
-
-    foreach ($data['calllogs_data'] as $key => $value) {
-        $fcu_arr = "";
-        foreach ($data['call_fcu'] as $key => $value_fcu) {
-            if ( $value['cl_id'] == $value_fcu['cl_id']) {
-             $fcu_arr .= $data['call_fcu'][$key]['fcu'].",";
-         }
-     }    
-     $data['view_calllogs'][]= (object)[
-        "cl_id"=> $value['cl_id'],
-        "log_code"=> $value['log_code'],
-        "date"=> $value['date'],
-        "client_id"=> $value['client_id'],
-        "area"=> $value['area'],
-        "client_branch"=> $value['client_branch'],
-        "aircon_id"=> $value['aircon_id'],
-        "aircon_type"=> $value['aircon_type'],
-        "device_brand"=> $value['device_brand'],
-        "caller"=> $value['caller'],
-        "particulars"=> $value['particulars'],
-        "qty"=> $value['qty'],
-        "status"=> $value['status'],
-        "fcu_arr"=> $fcu_arr,
-    ];
-}
-
-
-
-return view('admin/calllogs/callPrint',$data);
-
-}
     // add Call log form
 public function create(){
-    if($_SESSION['position'] != USER_ROLE_ADMIN){
-        return $this->response->redirect(site_url('/dashboard'));
-    }
+    if($_SESSION['position'] != USER_ROLE_ADMIN && $_SESSION['position'] != USER_ROLE_SECRETARY){
+            return $this->response->redirect(site_url('/dashboard'));
+        }
     $Client = new Client();
     $Aircon = new Aircon();
     $fcu_no = new Fcu_no();
@@ -341,9 +164,9 @@ return view("templates/template",$data);
 
     // insert data
 public function store() {
-    if($_SESSION['position'] != USER_ROLE_ADMIN){
-        return $this->response->redirect(site_url('/dashboard'));
-    }
+    if($_SESSION['position'] != USER_ROLE_ADMIN && $_SESSION['position'] != USER_ROLE_SECRETARY){
+            return $this->response->redirect(site_url('/dashboard'));
+        }
     // dd($_POST);
     $Call_logs = new Call_logs();
     $Client = new Client();
@@ -385,9 +208,9 @@ public function store() {
 
     // show single call logs
 public function singleCL($cl_id = null){
-    if($_SESSION['position'] != USER_ROLE_ADMIN){
-        return $this->response->redirect(site_url('/dashboard'));
-    }
+    if($_SESSION['position'] != USER_ROLE_ADMIN && $_SESSION['position'] != USER_ROLE_SECRETARY){
+            return $this->response->redirect(site_url('/dashboard'));
+        }
     $Call_logs = new Call_logs();
     $Client = new Client();
     $Aircon = new Aircon();
@@ -451,9 +274,9 @@ return view("templates/template",$data);
 
     // update Call log data
 public function update(){
-    if($_SESSION['position'] != USER_ROLE_ADMIN){
-        return $this->response->redirect(site_url('/dashboard'));
-    }
+    if($_SESSION['position'] != USER_ROLE_ADMIN && $_SESSION['position'] != USER_ROLE_SECRETARY){
+            return $this->response->redirect(site_url('/dashboard'));
+        }
     // dd($_POST);
     $Call_logs = new Call_logs();
     
@@ -508,9 +331,9 @@ public function update(){
     return $this->response->redirect(site_url('/calllogs'));
 }
 public function dailyLogs(){
-    if($_SESSION['position'] != USER_ROLE_ADMIN){
-        return $this->response->redirect(site_url('/dashboard'));
-    }
+    if($_SESSION['position'] != USER_ROLE_ADMIN && $_SESSION['position'] != USER_ROLE_SECRETARY){
+            return $this->response->redirect(site_url('/dashboard'));
+        }
 
     date_default_timezone_set('Asia/Hong_Kong'); 
 
@@ -607,9 +430,9 @@ if($this->request->getVar('print')){
 
 }
 public function WeeklyLogs(){
-    if($_SESSION['position'] != USER_ROLE_ADMIN){
-        return $this->response->redirect(site_url('/dashboard'));
-    }
+    if($_SESSION['position'] != USER_ROLE_ADMIN && $_SESSION['position'] != USER_ROLE_SECRETARY){
+            return $this->response->redirect(site_url('/dashboard'));
+        }
 
     date_default_timezone_set('Asia/Hong_Kong'); 
 
@@ -708,9 +531,9 @@ if($this->request->getVar('print')){
 
 }
 public function monthlyLogs(){
-    if($_SESSION['position'] != USER_ROLE_ADMIN){
-        return $this->response->redirect(site_url('/dashboard'));
-    }
+    if($_SESSION['position'] != USER_ROLE_ADMIN && $_SESSION['position'] != USER_ROLE_SECRETARY){
+            return $this->response->redirect(site_url('/dashboard'));
+        }
 
     date_default_timezone_set('Asia/Hong_Kong'); 
 
@@ -807,9 +630,9 @@ if($this->request->getVar('print')){
 
 }
 public function quarterlyLogs(){
-    if($_SESSION['position'] != USER_ROLE_ADMIN){
-        return $this->response->redirect(site_url('/dashboard'));
-    }
+    if($_SESSION['position'] != USER_ROLE_ADMIN && $_SESSION['position'] != USER_ROLE_SECRETARY){
+            return $this->response->redirect(site_url('/dashboard'));
+        }
 
     date_default_timezone_set('Asia/Hong_Kong'); 
 
@@ -920,9 +743,9 @@ if($this->request->getVar('print')){
 
 }
 public function yearlyLogs(){
-    if($_SESSION['position'] != USER_ROLE_ADMIN){
-        return $this->response->redirect(site_url('/dashboard'));
-    }
+    if($_SESSION['position'] != USER_ROLE_ADMIN && $_SESSION['position'] != USER_ROLE_SECRETARY){
+            return $this->response->redirect(site_url('/dashboard'));
+        }
 
     date_default_timezone_set('Asia/Hong_Kong'); 
 
@@ -1020,9 +843,9 @@ if($this->request->getVar('print')){
 }
     // delete Call log info
 public function delete($cl_id = null){
-    if($_SESSION['position'] != USER_ROLE_ADMIN){
-        return $this->response->redirect(site_url('/dashboard'));
-    }
+    if($_SESSION['position'] != USER_ROLE_ADMIN && $_SESSION['position'] != USER_ROLE_SECRETARY){
+            return $this->response->redirect(site_url('/dashboard'));
+        }
     $Call_logs = new Call_logs();
     $data['Call_logs'] = $Call_logs->where('cl_id', $cl_id)->delete($cl_id);
     $session = session();

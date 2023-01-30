@@ -93,7 +93,7 @@ class Pages extends BaseController
             $user_info = $user->where('email', $email)->first();
             // if($user_info['position'] === "Admin"){
             // if($user_info['active'] == 1){ 
-            if ($user_info['position'] === "Admin") {
+            if ($user_info['position'] === "Admin" || $user_info['position'] === "Secretary") {
                 
                 $pass = $user_info['password'];
 

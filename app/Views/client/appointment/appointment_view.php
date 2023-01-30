@@ -116,17 +116,13 @@
            <td><?php echo $appt->appt_code; ?></td>
            <td><?php echo $appt->appt_status; ?></td>
            <td>
-            <?php if($appt->set_status ==0):?>
-             <a href="<?php echo base_url('/appointment/'.$appt->appt_id);?>" class="btn btn-primary btn-sm">Edit</a>
-             <a href="#" id="<?php echo $appt->appt_id;?>" class="btn btn-info btn-sm view">View</a>
-             <a href="<?php echo base_url('/appointment/delete/'.$appt->appt_id);?>"class="btn btn-danger btn-sm del">Cancel</a>
-          <?php elseif($appt->set_status ==1):?>
-            <h6 style="color:green;"><b>Scheduled</h6>
+            
             <a href="#" id="<?php echo $appt->appt_id;?>" class="btn btn-info btn-sm view">View</a>
-          <?php else:?>
-            <h6 style="color:red;"><b>Rejected</h6>
-            <a href="#" id="<?php echo $appt->appt_id;?>" class="btn btn-info btn-sm view">View</a>
-          <?php endif;?>
+            <?php if($appt->appt_date >= date('Y-m-d') && $appt->appt_status != 'Cancelled' && $appt->appt_status != 'Done'):?>
+              <a href="<?php echo base_url('/appointment/'.$appt->appt_id);?>" class="btn btn-primary btn-sm">Edit</a>
+               
+              <a href="<?php echo base_url('/appointment/delete/'.$appt->appt_id);?>"class="btn btn-danger btn-sm del">Cancel</a>
+            <?php endif;?>
           </td>
        </tr>
     <?php endforeach; ?>

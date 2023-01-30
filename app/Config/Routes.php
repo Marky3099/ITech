@@ -60,7 +60,7 @@ $routes->post('/admin-appointment/add-to-calendar', 'FullCalendar::insertAppt',[
 $routes->get('/appointment/(:num)', 'AppointmentCrud::singleAppt/$1',['filter' => 'authGuard']);
 $routes->post('/appointment/update', 'AppointmentCrud::update',['filter' => 'authGuard']);
 $routes->get('appointment/delete/(:num)', 'AppointmentCrud::delete/$1',['filter' => 'authGuard']);
-$routes->post('/appointment/reject', 'AppointmentCrud::rejectAppt',['filter' => 'authGuard']);
+$routes->post('/appointment/cancel', 'AppointmentCrud::cancelAppt',['filter' => 'authGuard']);
 $routes->post('/appointment/view', 'AppointmentCrud::view',['filter' => 'authGuard']);
 $routes->post('/appointment/check-date', 'AppointmentCrud::checkDate',['filter' => 'authGuard']);
 

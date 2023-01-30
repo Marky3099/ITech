@@ -11,7 +11,7 @@ var formatDate;
         beforeShowDay: function(date){
             dmy = date.getDate() + "-" + (date.getMonth() + 1);
             // console.log(dmy);
-            if(disable.indexOf(dmy) != -1 || date.getDay() == 0 || date.getDay() == 6){
+            if(disable.indexOf(dmy) != -1){
                 return false;
             }
             else{

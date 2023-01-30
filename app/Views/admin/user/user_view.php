@@ -30,8 +30,11 @@
                  <td><?php echo $user['email']; ?></td>
                  <td><?php echo $user['address']; ?></td>
                  <td><?php echo $user['contact']; ?></td>
+                 <?php if($user['position'] == 'Employee'):?>
+                 <td>Technician</td>
+                 <?php else:?>
                  <td><?php echo $user['position']; ?></td>
-                 
+                 <?php endif;?>
                  <td>
                    <a href="<?php echo base_url('/user/'.$user['user_id']);?>" class="btn btn-primary btn-sm">Edit</a>
                    <a href="<?php echo base_url('/user/delete/'.$user['user_id']);?>" class="btn btn-danger btn-sm del" >Delete</a>

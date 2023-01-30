@@ -171,7 +171,7 @@
           location.reload();
           $.ajax({
              method:"POST",
-             url:"http://localhost/tsms/appointment/reject",
+             url:"http://localhost/tsms/appointment/cancel",
              data: {
                 'appt_id': apptId,
                 'user_id': userId,
