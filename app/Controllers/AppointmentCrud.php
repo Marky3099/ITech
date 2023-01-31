@@ -281,19 +281,20 @@ public function store() {
 
     $available_emp = $query2->getResult();
 
+
     }else{
         $available_emp = $Emp->orderBy('emp_name','ASC')->findAll();
 
     }
-
-    // dd($available_emp[0]['emp_id']);
+    $available_emp= json_decode(json_encode($available_emp), true);
+    // dd($available_emp);
     $expertEmp = array();
     for($a = 0; $a < count($available_emp); $a++){
-        $availEmp = $available_emp[$a]->emp_id;
-        $expert = $Expertise->where('emp_id', $availEmp)->findAll();
-        array_push($expertEmp, $expert);
+      $availEmp = $available_emp[$a]['emp_id'];
+      $expert = $Expertise->where('emp_id', $availEmp)->findAll();
+      array_push($expertEmp, $expert);
     }
-    // dd($expertEmp[0][0]['serv_name']);
+    // dd($expertEmp);
     $chosenEmp = array();
     for($b = 0; $b < count($expertEmp); $b++){
         for($c = 0; $c < count($expertEmp[$b]); $c++){
@@ -576,12 +577,9 @@ public function delete($appt_id = null){
     $Appoint = new Appointment();
     $event = new Event();
     
-    // $data['Appoint'] = $Appoint->where('appt_id', $appt_id)->delete($appt_id);
     $data['Appoint'] = $Appoint->where('appt_id', $appt_id)->first();
     $apptCode = $data['Appoint']['appt_code'];
-    // $formatCode = explode('-', $apptCode);
     $eventAppt = $event->where('appt_code', $apptCode)->delete();
-    // dd($eventAppt);
     if($eventAppt){
       $update_set = ['appt_status' => 'Cancelled'];
       $Appoint->update((int)$appt_id,$update_set);
@@ -591,11 +589,13 @@ public function delete($appt_id = null){
 
 public function cancelAppt(){
     $Appoint = new Appointment();
+    $event = new Event();
     $Bdo = new User_bdo();
     $appt_id = $this->request->getPost('appt_id');
     $user_id = $this->request->getPost('user_id');
     $reason = $this->request->getPost('reason');
     $data['appt']=$Appoint->find($appt_id);
+    $data['eventAppt'] = $event->where('appt_code',$data['appt']['appt_code'])->delete();
     $data['user_data'] = $Bdo->where('bdo_id',$user_id)->first();
     $user_email =  $data['user_data']['bdo_email'];
     $user =  $data['user_data']['bdo_lname'];

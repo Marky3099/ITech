@@ -114,7 +114,9 @@
            <td><?php echo $appt->appt_status; ?></td>
            <td>
              <a href="#" id="<?php echo $appt->appt_id;?>" class="btn btn-info btn-sm view">View</a>
-             <a href="#" id="<?php echo $appt->appt_id; ?>" data-id="<?php echo $appt->user_id;?>" class="btn btn-secondary btn-sm dec_btn">Cancel</a>
+             <?php if($appt->appt_status == 'Pending'):?>
+              <a href="#" id="<?php echo $appt->appt_id; ?>" data-id="<?php echo $appt->user_id;?>" class="btn btn-secondary btn-sm dec_btn">Cancel</a>
+             <?php endif;?>
           </td>
        </tr>
     <?php endforeach; ?>
@@ -178,7 +180,7 @@
                 'reason': valMsg,
              },
              success: function(response){
-              
+                console.log(response);
              }
           })
 

@@ -190,7 +190,7 @@ if($task){
         // dd($all_events);
     foreach($task as $dat){
      
-     $html .='     <tr style="font-size:9px; text-align: center;">
+     $html .='     <tr style="font-size:9px; text-align: center;" nobr="true">
      <td>'.date('m-d-Y',strtotime($dat->start_event)).'</td>
      <td>'.$dat->client_branch.'</td>
      <td>'.$dat->serv_type.'</td>

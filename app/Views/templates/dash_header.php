@@ -4,7 +4,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <?php if($_SESSION['position'] == USER_ROLE_ADMIN || $_SESSION['position'] == USER_ROLE_EMPLOYEE):?>
+    <?php if($_SESSION['position'] == USER_ROLE_ADMIN || $_SESSION['position'] == USER_ROLE_EMPLOYEE || $_SESSION['position'] == USER_ROLE_SECRETARY):?>
         <title>Task and Schedule Management System</title>
     <?php else:?>
         <title>Appointment System</title>

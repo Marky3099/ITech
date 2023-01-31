@@ -196,7 +196,7 @@
           <input type="hidden" name="title_update" id="title_update" placeholder="Title">
           <div class="form-row">
             <div class="form-group col-md-4">
-              <label for="event_code">Event Code: </label>
+              <label for="event_code">Task Code: </label>
               <input type="text" name="event_code" id="event_code" value="" disabled>
             </div>
             <div class="form-group col-md-4">
@@ -282,7 +282,7 @@
           <button type="button" class="btn py-2 btn-secondary" data-dismiss="modal">Close</button>
           
 
-          <button type="submit" name="update_sched" class="btn py-2 btn-success">Save changes</button>
+          <button type="submit" name="update_sched" class="btn py-2 btn-primary">Save changes</button>
         </div>
       </form>
     </div>

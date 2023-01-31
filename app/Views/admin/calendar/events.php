@@ -162,7 +162,9 @@
          </td>
       <?php endif;?>
       <td>
-        <a href="#" id="<?=$dat->id?>" class="btn btn-info btn-sm view">View</a>
+        <a href="#" id="<?=$dat->id?>" class="btn btn-info btn-sm view">View Task</a>
+        <a href="#" id="<?=$dat->id?>" class="btn btn-primary btn-sm view">Upload Report</a>
+        <a href="#" id="<?=$dat->id?>" class="btn btn-secondary btn-sm view">View Report</a>
      </td>
   </tr>
 <?php endforeach; ?>
