@@ -79,13 +79,6 @@
                     </a>
                     <!-- <span class="tooltip3">Exception</span> -->
                 </li>
-                <li class="nav-item">
-                    <a href="<?= base_url('/service-reports')?>">
-                        <i class="fa-solid fa-file-import"></i>
-                        <span class="links_name">Uploaded</span>
-                    </a>
-                    <!-- <span class="tooltip">Upload</span> -->
-                </li>
             </div>
             <?php if($_SESSION['position'] != USER_ROLE_SECRETARY):?>
                 <button class = "dropdown-btn">

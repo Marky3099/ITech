@@ -14,6 +14,6 @@ class Upload extends Model
     protected $returnType     = 'array';
   
 
-    protected $allowedFields = ['upload_title','upload_description','image','uploaded_at'];
+    protected $allowedFields = ['id','upload_description','image','uploaded_at'];
 
 }

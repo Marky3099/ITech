@@ -1,4 +1,69 @@
 <link rel="stylesheet" href="<?= base_url('assets/css/style.css')?>">
+
+<!-- modal for viewing uploaded reports -->
+<div class="modal fade" id="reportsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Reports</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+        <div class="container" id="report-container">
+        <div id="title-reports"></div>
+          <div class="row" id="report_files">
+            
+          </div>
+          <br>
+        <div id="note-reports"></div>
+          <div class="row" id="comments">
+            
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal for uploading reports -->
+<div class="modal fade" id="fileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Upload Report</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form method="post" action="<?= base_url('service-reports/add')?>" enctype="multipart/form-data">
+      <div class="modal-body">
+          <div class="form-group">
+            <input type="hidden" id="event_id" name="event_id">
+            <label for="fileuploads">Reports</label>
+            <input type="file" class="form-control" id="fileuploads" name="fileuploads[]" multiple aria-describedby="limitFile">
+            <small id="limitFile" class="form-text text-muted">Uploaded Files must not exceed <b>25mb</b></small>  
+          </div>
+          <div class="form-group">
+            <label for="notes">Notes/Comments</label>
+            <textarea type="text" class="form-control" id="notes" name="notes" placeholder="Description"></textarea>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- modal for View tasks -->
 <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
@@ -163,8 +228,10 @@
       <?php endif;?>
       <td>
         <a href="#" id="<?=$dat->id?>" class="btn btn-info btn-sm view">View Task</a>
-        <a href="#" id="<?=$dat->id?>" class="btn btn-primary btn-sm view">Upload Report</a>
-        <a href="#" id="<?=$dat->id?>" class="btn btn-secondary btn-sm view">View Report</a>
+        <?php if($dat->status!='Pending'):?>
+          <a href="#" id="<?=$dat->id?>" class="btn btn-primary btn-sm reports" data-toggle="modal" data-target="#fileModal">Upload Report</a>
+          <a href="#" id="<?=$dat->id?>" class="btn btn-secondary btn-sm view-reports">View Report</a>
+        <?php endif;?>
      </td>
   </tr>
 <?php endforeach; ?>
@@ -186,10 +253,60 @@
    var del = '';
    var add = '';
    var update = '';
+   <?php if(session()->has('limit')){?>
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: '<?= session()->getFlashdata('limit')?>',
+    })
+   <?php }?>;
    <?php if(session()->has('msg')){?>
       msg = true;
       del = 'Aircon is Deleted Successfully';
-      <?php }?>;
+   <?php }?>;
+   var myModal = new bootstrap.Modal(document.getElementById('reportsModal'));
+
+   $('.reports').click(function(){
+    var eventId = $(this).attr('id');
+    $('#event_id').val(eventId);
+   })
+   $('.view-reports').click(function(){
+    var eventId = $(this).attr('id');
+    // alert(eventId);
+    $.ajax({
+       method:"GET",
+       url:"<?=base_url('/service-reports')?>",
+       data: {
+          'id': eventId,
+       },
+       success: function(response){
+          // console.log(response.reports.length>0);
+          console.log(response.reports.length);
+          var dir = '<?=base_url('uploads/')?>';
+          $('#report_files').empty();
+          $('#title-reports').empty();
+          $('#note-reports').empty();
+          $('#comments').empty();
+          if(response.reports.length>0){
+            $('#report-container h1').empty();
+            $('#title-reports').append('<h3>Files:</h3>');
+            $('#note-reports').append('<h3>Notes:</h3>');
+            for(var i=0; i<response.reports.length; i++){
+              var image = response.reports[i].image;
+              $('#report_files').append('<div class="col-lg-4"><a target="__blank" href = '+dir+'/'+image+'><img src='+dir+'/'+image+' height="150px" width="150px"></a></div>');
+            }
+  
+            for (var i = 0; i < response.msg.length; i++) {
+              var msg = response.msg[i].upload_description;
+              $('#comments').append('<div style="margin-left:20px">- '+msg+'</div>');
+            }
+          }else{
+            $('#report-container').append('<h1><center>No Reports Yet<center></h1>')
+          }
+          myModal.show();
+       }
+    })
+   })
    </script>
    <script type="text/javascript" src="<?= base_url('assets/js/view.js')?>"></script>
    <script type="text/javascript" src="<?= base_url('assets/js/crud.js')?>"></script>

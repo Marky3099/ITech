@@ -17,6 +17,7 @@ use App\Models\Call_logs;
 use App\Models\Call_fcu;
 use App\Models\User_bdo;
 use App\Models\Restrict_date;
+use App\Models\Upload;
 use App\Models\Emp_expertise_views;
 
 class FullCalendar extends BaseController
@@ -298,7 +299,7 @@ public function event(){
         return $this->response->redirect(site_url('/dashboard'));
     }
     $event = new All_events();
-        // $emp = new Emp();
+    // $upload = new Upload();
     $client = new Client();
     $serv = new Serv();
     $event_emp = new Event_emp_views();
@@ -1441,6 +1442,56 @@ public function restrict_delete($date_id){
     $session = session();
     $session->setFlashdata('msg', 'value');
     return $this->response->redirect(site_url('calendar/dates'));
+}
+
+public function uploadMultiFiles(){
+    $Upload = new Upload();
+    $filesUploaded = 0;
+    $session = session();
+    // dd($_POST);
+    if($this->request->getFileMultiple('fileuploads'))
+    {
+        $files = $this->request->getFileMultiple('fileuploads');
+        
+        foreach ($files as $file) {
+            if($file->getSizeByUnit('mb') <= 25){
+                if ($file->isValid() && ! $file->hasMoved())
+                {
+                    $newName = $file->getRandomName();
+                    $file->move('uploads/', $newName);
+
+                    $data = [
+                        'id' => $this->request->getVar('event_id'),
+                        'upload_description' => $this->request->getVar('notes'),
+                        'image' => $newName,
+                    ];
+                    $Upload->save($data);
+                    $filesUploaded++;
+                }
+            }else{
+                $session->setFlashdata('limit','Your file must not exceed 25mb');
+                return $this->response->redirect(site_url('/calendar/events'));
+            }
+        }
+
+    }
+
+    if($filesUploaded <= 0) {
+        return redirect()->back()->with('error', 'Choose files to upload.');
+    }
+
+    return redirect()->back()->with('success', $filesUploaded . ' File/s uploaded successfully.');
+ 
+}
+
+public function viewReports(){
+    $upload = new Upload();
+    $id = $_GET['id'];
+    $data['reports'] = $upload->where('id',$id)->findAll();
+    $data['msg'] = $upload->select('upload_description')->where('id',$id)->groupBy('upload_description')->findAll();
+    
+    return $this->response->setJSON($data);
+
 }
 }
 ?>

@@ -144,13 +144,8 @@ $routes->get('/calendar/load', 'FullCalendar::load',['filter' => 'authGuard']);
 $routes->post('/calendar/update', 'FullCalendar::update',['filter' => 'authGuard']);
 $routes->get('calendar/count/(:any)', 'FullCalendar::countAircon/$1',['filter' => 'authGuard']);
 
-$routes->get('/service-reports', 'ImageCrud::index',['filter' => 'authGuard']);
-$routes->get('service-reports/upload', 'ImageCrud::create',['filter' => 'authGuard']);
-$routes->post('service-reports/add', 'ImageCrud::store',['filter' => 'authGuard']);
-$routes->get('/service-reports/edit/(:num)', 'ImageCrud::singleUpload/$1',['filter' => 'authGuard']);
-$routes->post('service-reports/update/(:num)', 'ImageCrud::update/$1',['filter' => 'authGuard']);
-$routes->get('service-reports/delete/(:num)', 'ImageCrud::delete/$1',['filter' => 'authGuard']);
-
+$routes->post('service-reports/add', 'FullCalendar::uploadMultiFiles',['filter' => 'authGuard']);
+$routes->get('/service-reports', 'FullCalendar::viewReports',['filter' => 'authGuard']);
 $routes->get('/profile/(:num)', 'Dashboard::profile/$1',['filter' => 'authGuard']);
 $routes->post('profile/update', 'Dashboard::update',['filter' => 'authGuard']);
 
