@@ -262,3 +262,20 @@ CRITICAL - 2023-01-30 23:45:07 --> filesize(): stat failed for C:\xampp\htdocs\t
 =======
 >>>>>>> 1062c53928e8fe14214450adbc70b957c3991d42
 >>>>>>> 16338d2a13eb77685c650a7063372ae819724678
+ERROR - 2023-01-30 23:50:11 --> Error connecting to the database: No connection could be made because the target machine actively refused it.
+
+CRITICAL - 2023-01-30 23:50:11 --> Unable to connect to the database.
+Main connection [MySQLi]: No connection could be made because the target machine actively refused it.
+
+#0 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(577): CodeIgniter\Database\BaseConnection->initialize()
+#1 C:\xampp\htdocs\tsms\system\Database\BaseBuilder.php(1443): CodeIgniter\Database\BaseConnection->query('SELECT 1\nFROM `...', Array, false)
+#2 C:\xampp\htdocs\tsms\system\Validation\Rules.php(116): CodeIgniter\Database\BaseBuilder->get()
+#3 C:\xampp\htdocs\tsms\system\Validation\Validation.php(277): CodeIgniter\Validation\Rules->is_not_unique('admin@gmail.com', 'email', Array, NULL)
+#4 C:\xampp\htdocs\tsms\system\Validation\Validation.php(151): CodeIgniter\Validation\Validation->processRules('email', 'email', 'admin@gmail.com', Array, Array)
+#5 C:\xampp\htdocs\tsms\system\Controller.php(160): CodeIgniter\Validation\Validation->run()
+#6 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(67): CodeIgniter\Controller->validate(Array)
+#7 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->check()
+#8 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#9 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#11 {main}
