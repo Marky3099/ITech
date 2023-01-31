@@ -21,8 +21,21 @@ canvas {
 	padding: 15px 10px 15px 10px;
 }
 
+.sidebar.active #ddown{
+	display: block;
+	position: absolute;
+	color: white;
+	top: 0px;
+	right: 15px;
+	font-size: 15px;
+}
+
+#ddown{
+	display: none;
+}
+
 #iconbox{
-	color: #344F21;
+	color: #799943;
 }
 
 h3.hfont{

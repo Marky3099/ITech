@@ -51,7 +51,7 @@
                                           <th>Branch</th>
                                           <th>Service</th>
                                           <th>Service Type</th>
-                                          <th>Employee</th>
+                                          <th>Technician</th>
                                           <th>Status</th>
                                         </tr>
                                       </thead>
@@ -116,7 +116,7 @@
                                       <th>Branch</th>
                                       <th>Service</th>
                                       <th>Service Type</th>
-                                      <th>Employee</th>
+                                      <th>Technician</th>
                                       <th>Status</th>
                                       
                                     </tr>
@@ -183,7 +183,7 @@
                                 <th>Branch</th>
                                 <th>Service</th>
                                 <th>Service Type</th>
-                                <th>Employee</th>
+                                <th>Technician</th>
                                 <th>Status</th>
                                 
                               </tr>
@@ -249,7 +249,7 @@
                             <th>Branch</th>
                             <th>Service</th>
                             <th>Service Type</th>
-                            <th>Employee</th>
+                            <th>Technician</th>
                             <th>Status</th>
                             
                           </tr>
@@ -314,7 +314,7 @@
                       <th>Branch</th>
                       <th>Service</th>
                       <th>Service Type</th>
-                      <th>Employee</th>
+                      <th>Technician</th>
                       <th>Status</th>
                       
                     </tr>

@@ -51,13 +51,94 @@
                 </a>
                 <span class="tooltip">Call Logs</span>
             </li>
-            <li>
+            <li class="apptmnt">
                 <a href="<?=base_url('/admin-appointment')?>">
                     <i class="fas fa-folder"></i>
                     <span class="links_name">Appointment</span>
                 </a>
                 <span class="tooltip">Appointment</span>
             </li>
+<<<<<<< HEAD
+              <button class = "dropdown-btn">
+                                    <i class="fa-solid fa-file-invoice"></i> <span class="links_name">&nbsp;&nbsp;&nbsp;&nbsp;Reports</span>
+                                    <i class = "fa fa-caret-down down2"></i>
+                                    <span class="tooltip4">Reports</span>
+                                </button>
+
+            <div class = "dropdown-container">
+                <li class="nav-item">
+                    <a href="<?= base_url('/reports/accomplished')?>">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <span class="links_name">Accomplished</span>
+                    </a>
+                    <!-- <span class="tooltip3">Accomplished</span> -->
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('/reports/exception')?>">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <span class="links_name">Pending</span>
+                    </a>
+                    <!-- <span class="tooltip3">Exception</span> -->
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('/service-reports')?>">
+                        <i class="fa-solid fa-file-import"></i>
+                        <span class="links_name">Uploaded</span>
+                    </a>
+                    <!-- <span class="tooltip">Upload</span> -->
+                </li>
+            </div>
+
+                <button class = "dropdown-btn">
+                                    <i class = "fa-solid fa-user-pen"></i> <span class="links_name">&nbsp;&nbsp;Manage Data</span>
+                                    <i class = "fa fa-caret-down down2"></i>
+                                    <span class="tooltip2">Manage Data</span>
+                                </button>
+
+                                <div class = "dropdown-container">
+                                     <li class="nav-item">
+                                        <a href="<?= base_url('/aircon');?>">
+                                            <i class="fas fa-box"></i>
+                                        <span class="links_name">&nbsp;&nbsp;Aircons</span>
+                                        </a>
+                                        <!-- <span class="tooltip3">Aircons</span> -->
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href = "<?= base_url('/client')?>" ><i class = "fa-solid fa-user"></i> <span class="links_name">&nbsp;&nbsp;Clients</span> </a> 
+                                        <!-- <span class="tooltip3">Clients</span> -->
+                                   </li>
+
+                                   <li class="nav-item">
+                                        <a href = "<?= base_url('/emp');?>" ><i class = "fa-solid fa-user"></i><span class="links_name">&nbsp;&nbsp;Employees</span></a>
+                                        <!-- <span class="tooltip3">Employees</span> -->
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="<?= base_url('/serv')?>">
+                                            <i class="fa fa-server" aria-hidden="true"></i>
+                                            <span class="links_name">&nbsp;&nbsp;Services</span>
+                                        </a>
+                                        <!-- <span class="tooltip3">Services</span> -->
+                                    </li>
+
+                                </div>
+            <button class = "dropdown-btn">
+                                    <i class = "fa-solid fa-user-pen"></i> <span class="links_name">&nbsp;&nbsp;&nbsp;Account</span>
+                                    <i class = "fa fa-caret-down down2"></i>
+                                    <span class="tooltip5">Accounts</span>
+                                </button>
+
+                                <div class = "dropdown-container">
+                                    <li class="nav-item">
+                                        <a href = "<?= base_url('/client-users');?>" ><i class = "fa-solid fa-user"></i><span class="links_name"> &nbsp;&nbsp;User Requests</span></a>
+                                        <!-- <span class="tooltip3">User Requests</span> -->
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href = "<?= base_url('/user');?>" ><i class = "fa-solid fa-user"></i><span class="links_name"> &nbsp;&nbsp;Users</span></a>
+                                        <!-- <span class="tooltip3">Users</span> -->
+                                    </li>
+                                </div>
+                                
+=======
             <h4>Reports</h4><hr>
             <li class="ar">
                 <a href="<?= base_url('/reports/accomplished')?>">
@@ -126,6 +207,7 @@
                 <span class="tooltip">Users</span>
             </li>
             <?php endif;?>      
+>>>>>>> 1062c53928e8fe14214450adbc70b957c3991d42
             
         <?php elseif($_SESSION['position'] == USER_ROLE_EMPLOYEE):?>
             <li>

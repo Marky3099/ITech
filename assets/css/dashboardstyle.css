@@ -37,4 +37,11 @@
     flex: 1 1 auto;
     min-height: 3px;
     padding: 10px 10px;
+    color: #344F21;
+}
+
+.card-body1:hover{
+    background-color: #344F21;
+    color: #fff;
+    cursor: pointer;
 }
