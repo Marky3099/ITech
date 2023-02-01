@@ -457,7 +457,7 @@ return view("templates/template",$data);
 
 
 public function clientDashboard(){
-    if($_SESSION['position'] != USER_ROLE_ADMIN || $_SESSION['position'] != USER_ROLE_SECRETARY){
+    if($_SESSION['position'] == USER_ROLE_ADMIN && $_SESSION['position'] == USER_ROLE_SECRETARY){
             return $this->response->redirect(site_url('/dashboard'));
         }
     else if($_SESSION['position'] == USER_ROLE_EMPLOYEE){
