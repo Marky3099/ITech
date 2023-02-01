@@ -2,7 +2,7 @@
 
 <!-- modal for viewing uploaded reports -->
 <div class="modal fade" id="reportsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Reports</h5>
@@ -13,13 +13,7 @@
       <div class="modal-body">
         
         <div class="container" id="report-container">
-        <div id="title-reports"></div>
           <div class="row" id="report_files">
-            
-          </div>
-          <br>
-        <div id="note-reports"></div>
-          <div class="row" id="comments">
             
           </div>
         </div>
@@ -281,32 +275,52 @@
        },
        success: function(response){
           // console.log(response.reports.length>0);
-          console.log(response.reports.length);
+          console.log(response);
           var dir = '<?=base_url('uploads/')?>';
           $('#report_files').empty();
-          $('#title-reports').empty();
-          $('#note-reports').empty();
-          $('#comments').empty();
           if(response.reports.length>0){
             $('#report-container h1').empty();
-            $('#title-reports').append('<h3>Files:</h3>');
-            $('#note-reports').append('<h3>Notes:</h3>');
-            for(var i=0; i<response.reports.length; i++){
+            $('#report_files').append('<table class="table table-bordered" id="report_table"><thead><tr><th>#</th><th>File</th><th>Comments/Notes</th><th>Uploader</th><th>Action</th></tr></thead>');
+            for(var i=0, a=0; i<response.reports.length; i++){
               var image = response.reports[i].image;
-              $('#report_files').append('<div class="col-lg-4"><a target="__blank" href = '+dir+'/'+image+'><img src='+dir+'/'+image+' height="150px" width="150px"></a></div>');
+              var notes = response.reports[i].upload_description;
+              var username = '';
+              var position = '';
+              for(var j =0; j<response.users.length; j++){
+                if(response.reports[i].user_id == response.users[j].user_id){
+                  username = response.users[j].name;
+                  position = response.users[j].position;
+                }
+              }
+
+              $('#report_table').append('<tbody id=a'+response.reports[i].upload_id+'><tr><td>'+(a+=1)+'</td><td><a target="__blank" href = '+dir+'/'+image+' style="z-index:-1;"><img src='+dir+'/'+image+' height="150px" width="150px"></a></td><td>'+notes+'</td><td>'+username+'('+position+')'+'</td><td><button id='+response.reports[i].upload_id+' class="btn btn-danger exis">Delete</button></td></tr></tbody></table>');
             }
-  
-            for (var i = 0; i < response.msg.length; i++) {
-              var msg = response.msg[i].upload_description;
-              $('#comments').append('<div style="margin-left:20px">- '+msg+'</div>');
-            }
+            $('.exis').click(function(){
+              var reportId = $(this).attr('id');
+              if(reportId){
+                $('#a'+reportId).remove();
+                
+                $.ajax({
+                 method:"GET",
+                 url:"<?=base_url('/service-reports/delete')?>",
+                 data: {
+                    'id': reportId,
+                 },
+                 success: function(response){
+                    console.log(response);
+                 }
+               });
+              }
+              // console.log();
+            })
           }else{
             $('#report-container').append('<h1><center>No Reports Yet<center></h1>')
           }
           myModal.show();
        }
     })
-   })
+   });
+   
    </script>
    <script type="text/javascript" src="<?= base_url('assets/js/view.js')?>"></script>
    <script type="text/javascript" src="<?= base_url('assets/js/crud.js')?>"></script>

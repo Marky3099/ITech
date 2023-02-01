@@ -19,6 +19,7 @@ use App\Models\User_bdo;
 use App\Models\Restrict_date;
 use App\Models\Upload;
 use App\Models\Emp_expertise_views;
+use App\Models\User;
 
 class FullCalendar extends BaseController
 {
@@ -1463,6 +1464,7 @@ public function uploadMultiFiles(){
                     $data = [
                         'id' => $this->request->getVar('event_id'),
                         'upload_description' => $this->request->getVar('notes'),
+                        'user_id' => $_SESSION['user_id'],
                         'image' => $newName,
                     ];
                     $Upload->save($data);
@@ -1486,12 +1488,31 @@ public function uploadMultiFiles(){
 
 public function viewReports(){
     $upload = new Upload();
+    $User = new User();
     $id = $_GET['id'];
-    $data['reports'] = $upload->where('id',$id)->findAll();
-    $data['msg'] = $upload->select('upload_description')->where('id',$id)->groupBy('upload_description')->findAll();
     
+    $data['reports'] = $upload->where('id',$id)->findAll();
+    $data['user_id']= $upload->select('user_id')->where('id',$id)->groupBy('user_id','ASC')->findAll();
+    $data['users'] = array();
+    for($i=0;$i<count($data['user_id']);$i++){
+        $userdata= $User->where('user_id',$data['user_id'][$i])->first();
+        array_push($data['users'],$userdata);
+    }
+    // $Userdata = $User->where('user_id',)->first();
+    // dd($data['reports']);
     return $this->response->setJSON($data);
 
 }
+public function deleteReports(){
+        $Upload = new Upload();
+        $upload_id = $_GET['id'];
+        $Upload_obj = $Upload->find($upload_id);
+        $imagefile = $Upload_obj['image'];
+        if (file_exists("uploads/".$imagefile)) {
+          unlink("uploads/".$imagefile);
+      }
+      $Upload->delete($upload_id);
+      return false;
+  }
 }
 ?>

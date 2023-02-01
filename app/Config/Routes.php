@@ -146,6 +146,7 @@ $routes->get('calendar/count/(:any)', 'FullCalendar::countAircon/$1',['filter' =
 
 $routes->post('service-reports/add', 'FullCalendar::uploadMultiFiles',['filter' => 'authGuard']);
 $routes->get('/service-reports', 'FullCalendar::viewReports',['filter' => 'authGuard']);
+$routes->get('/service-reports/delete', 'FullCalendar::deleteReports',['filter' => 'authGuard']);
 $routes->get('/profile/(:num)', 'Dashboard::profile/$1',['filter' => 'authGuard']);
 $routes->post('profile/update', 'Dashboard::update',['filter' => 'authGuard']);
 
