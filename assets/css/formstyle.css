@@ -291,6 +291,12 @@ body {
   color: #344F21;
 }
 
+.form-box label.explbl{
+  position: absolute;
+  margin-left: -100px;
+  top: 40px;
+}
+
 .form-box label.tdate, #Atype{
   margin-left: 142px;
 }
@@ -331,6 +337,12 @@ body {
 
 .form-box select #fcuno{
   top: -100px;
+}
+
+.form-box #expertise{
+  position: absolute;
+  left: 135px;
+  top: 240px; 
 }
 
 

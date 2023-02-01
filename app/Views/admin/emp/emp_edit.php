@@ -29,8 +29,8 @@
         <input type="tel" pattern="[0-9]{11}" name="emp_contact" value="<?php echo $Emp_obj['emp_contact']; ?>" placeholder="09XXXXXXXXX - 11 digits only">
       </div>
 
-      <div class="user-box">
-        <div class="icon-box"><i class="fas fa-user-alt"></i></div>
+      <div class="user-box" id="expertise">
+        <label class="explbl">Expertise</label>
         <select type="text" name="emp_expertise[]" class="selectpicker" multiple data-selected-text-format="count > 3" required>
           <?php foreach($service as $serv):?>
             <?php foreach($expertise as $exp):?>
@@ -44,7 +44,7 @@
           <?php endforeach;?>
         </select>
       </div>
-        <br>
+        <br><br><br>
 
         <div class="container1">
           <button type="submit" class="btn btn-success">Update</button>

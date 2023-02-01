@@ -33,14 +33,15 @@
         <input type="tel" pattern="[0-9]{11}" placeholder="09XXXXXXXXX - 11 digits only" name="emp_contact">
       </div>
 
-      <div class="user-box">
-        <div class="icon-box"><i class="fas fa-user-alt"></i></div>
-        <select type="text" name="emp_expertise[]" class="selectpicker" multiple data-selected-text-format="count > 3">
+      <div class="user-box" id="expertise">
+        <label class="explbl">Expertise</label>
+        <select type="text" name="emp_expertise[]" class="exp selectpicker" multiple data-selected-text-format="count > 3">
           <?php foreach($service as $serv):?>
             <option value="<?=$serv['serv_id']?>"><?=$serv['serv_name']?></option>
           <?php endforeach;?>
         </select>
       </div>
+      </br></br>
 
        <!--  <div class="user-box">
           <div class="icon-box"><i class="fas fa-user-alt"></i></div>
