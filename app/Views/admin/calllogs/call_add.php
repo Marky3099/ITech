@@ -152,7 +152,7 @@
                 <?php endforeach; ?>
               </select>
             </div>
-            <div class="select-dropdown" style="width: 40%; margin-left: 257px; top: -46px;">
+            <div class="select-dropdown" style="width: 42%; margin-left: 257px; top: -46px;">
               <select id="aircon_id" name="aircon_id">
               </select>
             </div>
@@ -162,9 +162,9 @@
             <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
             <input type="number" id="qty" name="qty" placeholder="Quantity" min="1" value="1" required>
           </div>
-          <div class="user-box" >
+          <div class="user-box" style="margin-top: -35px">
             <label>FCU Number</label>
-            <select id="fcuno" name="fcuno[]" class="selectpicker" multiple data-selected-text-format="count > 3" required>
+            <select id="fcuno" name="fcuno[]" class="selectpicker ml-1" multiple data-selected-text-format="count > 3" required>
               <?php foreach($fcu_no as $f):  ?>
                 <option value="<?php echo $f['fcuno']; ?>"><p id="s2option"><?php echo $f['fcu'];?></p></option>
               <?php endforeach; ?>

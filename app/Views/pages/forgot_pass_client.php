@@ -45,7 +45,7 @@
             </div>
           </div>
           <div class="form-group">
-            <input name="recover-submit" class="btn btn-lg btn-success btn-block" value="Reset Password" type="submit">
+            <input name="recover-submit" class="rpass btn btn-lg btn-success btn-block" value="Reset Password" type="submit">
           </div>
 
           <div class="container1">
