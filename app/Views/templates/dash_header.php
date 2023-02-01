@@ -67,14 +67,14 @@
             <div class = "dropdown-container">
                 <li class="nav-item">
                     <a href="<?= base_url('/reports/accomplished')?>">
-                        <i class="fa-solid fa-file-pdf"></i>
+                        <!-- <i class="fa-solid fa-file-pdf"></i> -->
                         <span class="links_name">Accomplished</span>
                     </a>
                     <!-- <span class="tooltip3">Accomplished</span> -->
                 </li>
                 <li class="nav-item">
                     <a href="<?= base_url('/reports/exception')?>">
-                        <i class="fa-solid fa-file-pdf"></i>
+                        <!-- <i class="fa-solid fa-file-pdf"></i> -->
                         <span class="links_name">Pending</span>
                     </a>
                     <!-- <span class="tooltip3">Exception</span> -->
@@ -90,23 +90,27 @@
                                 <div class = "dropdown-container">
                                      <li class="nav-item">
                                         <a href="<?= base_url('/aircon');?>">
-                                            <i class="fas fa-box"></i>
+                                            <!-- <i class="fas fa-box"></i> -->
                                         <span class="links_name">&nbsp;&nbsp;Aircons</span>
                                         </a>
                                         <!-- <span class="tooltip3">Aircons</span> -->
                                     </li>
                                     <li class="nav-item">
-                                        <a href = "<?= base_url('/client')?>" ><i class = "fa-solid fa-user"></i> <span class="links_name">&nbsp;&nbsp;Clients</span> </a> 
+                                        <a href = "<?= base_url('/client')?>"> 
+                                        <!-- <i class = "fa-solid fa-user"></i>  -->
+                                        <span class="links_name">&nbsp;&nbsp;Clients</span> </a> 
                                         <!-- <span class="tooltip3">Clients</span> -->
                                    </li>
 
                                    <li class="nav-item">
-                                        <a href = "<?= base_url('/emp');?>" ><i class = "fa-solid fa-user"></i><span class="links_name">&nbsp;&nbsp;Employees</span></a>
+                                        <a href = "<?= base_url('/emp');?>">
+                                        <!-- <i class = "fa-solid fa-user"></i> -->
+                                        <span class="links_name">&nbsp;&nbsp;Technicians</span></a>
                                         <!-- <span class="tooltip3">Employees</span> -->
                                     </li>
                                     <li class="nav-item">
                                         <a href="<?= base_url('/serv')?>">
-                                            <i class="fa fa-server" aria-hidden="true"></i>
+                                            <!-- <i class="fa fa-server" aria-hidden="true"></i> -->
                                             <span class="links_name">&nbsp;&nbsp;Services</span>
                                         </a>
                                         <!-- <span class="tooltip3">Services</span> -->
@@ -121,11 +125,15 @@
 
                                 <div class = "dropdown-container">
                                     <li class="nav-item">
-                                        <a href = "<?= base_url('/client-users');?>" ><i class = "fa-solid fa-user"></i><span class="links_name"> &nbsp;&nbsp;User Requests</span></a>
+                                        <a href = "<?= base_url('/client-users');?>">
+                                        <!-- <i class = "fa-solid fa-user"></i> -->
+                                        <span class="links_name"> &nbsp;&nbsp;User Requests</span></a>
                                         <!-- <span class="tooltip3">User Requests</span> -->
                                     </li>
                                     <li class="nav-item">
-                                        <a href = "<?= base_url('/user');?>" ><i class = "fa-solid fa-user"></i><span class="links_name"> &nbsp;&nbsp;Users</span></a>
+                                        <a href = "<?= base_url('/user');?>">
+                                        <!-- <i class = "fa-solid fa-user"></i> -->
+                                        <span class="links_name"> &nbsp;&nbsp;Users</span></a>
                                         <!-- <span class="tooltip3">Users</span> -->
                                     </li>
                                 </div>

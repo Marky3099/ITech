@@ -8,7 +8,7 @@
   <!-- <a href = "Account.html" ><button class = "buttonp buttonp2"><i style = "color: white"></i> Profile </button></a> -->
   <!-- <a href = "Dashboard.html" ><button class = "buttonp buttonp1"><i style = "color: white"></i> Home </button></a> -->
   
-  <div class="form-box" style="width: 600px; height: 550px; top: 45%;" >
+  <div class="form-box" id="clientfbox">
     <h3 class="sidef">Profile</h3>
     
     <div class="profilee">

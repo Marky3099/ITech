@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="<?= base_url('assets/css/formstyle.css')?>">
 <div class="body-content">
-   <div class="crud-text"><h3>Technician</h3></div>
+   <div class="crud-text"><h3>Technicians</h3></div>
    <div class="d-flex justify-content-left">
     <a href="<?= base_url('emp/create/view') ?>" class="btn">Add Technician</a>
     <a href="<?= base_url('emp/print') ?>" target="_blank" class="btn">Print</a>

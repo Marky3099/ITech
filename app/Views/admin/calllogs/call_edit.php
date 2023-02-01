@@ -38,7 +38,7 @@
         <input type="text" name="particulars" size="50" value="<?php echo $cl_obj['particulars']; ?>">
       </div>
 
-      <div class="user-box" style="height: 75px">
+      <div class="user-box" style="height: 75px; margin-left: 5px">
         <label>Device Brand</label>
         <label id="Atype">Aircon Type</label>
         <div class="select-dropdown" style="width: 40%; position: relative;">
@@ -48,7 +48,7 @@
             <?php endforeach; ?>
           </select>
         </div>
-        <div class="select-dropdown" style="width: 40%; margin-left: 257px; top: -46px;">
+        <div class="select-dropdown" style="width: 41%; margin-left: 258px; top: -46px;">
           <select id="aircon_id_update" name="aircon_id_update">
           </select>
         </div>
@@ -59,16 +59,16 @@
         <input type="number" name="qty" min="1" value="<?php echo $cl_obj['qty']; ?>">
       </div>
 
-      <div class="user-box" style="margin-top: 5px;">
+      <div class="user-box" style="margin-top: -40px; margin-left: 5px;">
         <label>FCU Number</label>
-          <select id="fcuno_update" name="fcuno_update[]" class="selectpicker" multiple data-selected-text-format="count > 3">
+          <select id="fcuno_update" name="fcuno_update[]" class="selectpicker ml-1" multiple data-selected-text-format="count > 3">
           <?php foreach($fcu_no as $f):  ?>
             <?php foreach($fcu_views as $fv):  ?>
               <option value="<?php echo $f['fcuno'];?>"<?php if($f['fcuno']==$fv['fcuno'])echo 'selected';?>><p id="s2option"><?php echo $f['fcu'];?></p></option>
             <?php endforeach; ?>
           <?php endforeach; ?>
         </select>
-      </div><br>
+      </div>
 
       <div class="container1">
         <button type="submit" class="btn btn-success">Update</button>

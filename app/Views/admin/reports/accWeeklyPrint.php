@@ -213,7 +213,7 @@ if($task){
     <th>Device Brand/<br>Type</th> 
     <th>Aircon Type</th> 
     <th>Qty</th> 
-    <th>Assigned Person</th>
+    <th>Assigned Technician</th>
     <th>Total Service/<br>Task Price</th>
     </tr>
     </thead>

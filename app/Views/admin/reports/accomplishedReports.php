@@ -75,7 +75,7 @@
                     <td id="modal_qty"></td>
                   </tr>
                   <tr>
-                    <th>Employee:</th>
+                    <th>Technician:</th>
                     <td id="modal_emp"></td>
                   </tr>
                   <tr>
