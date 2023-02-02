@@ -517,9 +517,11 @@ public function insert(){
     if($_SESSION['position'] != USER_ROLE_ADMIN && $_SESSION['position'] != USER_ROLE_SECRETARY){
         return $this->response->redirect(site_url('/dashboard'));
     }
-// dd($_POST);
+    // dd($_POST);
     $Event = new Event();
     $Event_emp = new Event_emp();
+    $Call_logs = new Call_logs();
+    $Call_fcu = new Call_fcu();
     $event_fcu = new Event_fcu();
     $Client = new Client();
         // $event_fcu = new Event_fcu();
@@ -535,403 +537,35 @@ public function insert(){
     $set = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $code = substr(str_shuffle($set), 0, 6);
     // dd($disableDates);
-    if(isset($_POST["title"]))
-    {
-
-        if($_POST['repeatable'] == "Weekly"){
-            function getWeekly($y) {
-                return new \DatePeriod(
-                    new \DateTime("first ".date("l", strtotime($_POST['start_event']))." of $y"),
-                    \DateInterval::createFromDateString('next '.date("l", strtotime($_POST['start_event']))),
-                    new \DateTime("last day of december $y"),
-                    
-                );
-            }
-
-                // Usage:
-            foreach (getWeekly(date("Y",strtotime($_POST['start_event']))) as $getw) {
-                // dd($getw->format("Y-m-d"));
-                if($getw->format("Y-m-d") >= $_POST['start_event']){
-                    array_push($weeklyEvent, $getw->format("Y-m-d"));
-                }
-            }
-            // REPEAT WEEKLY ------------------------------------------------------------------------------------------
-            
-            
-            for ($i=0; $i < count($weeklyEvent); $i++) { 
-                $formatWeekly = explode("-",$weeklyEvent[$i]);
-                $currDate = $formatWeekly[2]."-".$formatWeekly[1];
-                $counter = 0;
-                for ($a=0; $a < count($disableDates); $a++) { 
-                    if ($currDate == $disableDates[$a]) {
-                        $counter = 1;
-                    }
-                    
-                }
-                    // dd($counter);
-                if($counter == 0){
-                    $_POST['start_event'] = $weeklyEvent[$i];
-
-                    $_POST["title"] = date("g:ia",strtotime($_POST["time"]))." ".$client_branch['client_branch'];
-
-                    $success = $Event->insert($_POST);
-                    if($success){
-                        $event_code = ['event_code' => 'task-'.$code.'-'.(int)$success];
-
-                        $Event->update((int)$success,$event_code);
-                    }
-                    foreach($_POST['emp_id'] as $key => $value) {
-                        $Event_emp->insert([
-                            'emp_id'=> (int) $value,
-                            'id' => (int) $success
-                        ]);
-                    }
-
-                    foreach ($_POST['aircon_id'] as $index => $aircon) {
-                        foreach ($_POST['fcuno'.$index] as $key => $floor_num) {
-                            $event_fcu->insert([
-                                'id'=> (int) $success,
-                                'aircon_id'=> (int)$aircon,
-                                'quantity'=> (int)$_POST['quantity'][$index],
-                                'fcuno'=>$floor_num
-                            ]);
-
-                        }
-
-                    }
-                }
-
-            }
-             // EVERY 2 WEEKS
-        }else if($_POST['repeatable'] == "2Week"){
-            function get2Week($y) {
-                return new \DatePeriod(
-                    new \DateTime("first ".date("l", strtotime($_POST['start_event']))." of $y"),
-                    \DateInterval::createFromDateString('2 weeks'.date("l", strtotime($_POST['start_event']))),
-                    new \DateTime("last day of december $y"),
-                    
-                );
-            }
-
-                // Usage:
-            foreach (get2Week(date("Y",strtotime($_POST['start_event']))) as $getw) {
-                // $newDate = date();
-                if($getw->format("Y-m-d") >= $_POST['start_event']){
-                    $date= $getw->format("Y-m-d");
-                    $newDate=date("Y-m-d", strtotime($date . "-1 week"));
-                    array_push($weeklyEvent, $newDate);
-                }
-            }
-            // dd($weeklyEvent);
-            // REPEAT EVERY 2 WEEKS ------------------------------------------------------------------------------------------
-            
-            
-            for ($i=0; $i < count($weeklyEvent); $i++) { 
-                $formatWeekly = explode("-",$weeklyEvent[$i]);
-                $currDate = $formatWeekly[2]."-".$formatWeekly[1];
-                $counter = 0;
-                for ($a=0; $a < count($disableDates); $a++) { 
-                    if ($currDate == $disableDates[$a]) {
-                        $counter = 1;
-                    }
-                    
-                }
-                    // dd($counter);
-                if($counter == 0){
-                    $_POST['start_event'] = $weeklyEvent[$i];
-
-                    $_POST["title"] = date("g:ia",strtotime($_POST["time"]))." ".$client_branch['client_branch'];
-
-                    $success = $Event->insert($_POST);
-                    if($success){
-                        $event_code = ['event_code' => 'task-'.$code.'-'.(int)$success];
-
-                        $Event->update((int)$success,$event_code);
-                    }
-                    foreach($_POST['emp_id'] as $key => $value) {
-                        $Event_emp->insert([
-                            'emp_id'=> (int) $value,
-                            'id' => (int) $success
-                        ]);
-                    }
-
-                    foreach ($_POST['aircon_id'] as $index => $aircon) {
-                        foreach ($_POST['fcuno'.$index] as $key => $floor_num) {
-                            $event_fcu->insert([
-                                'id'=> (int) $success,
-                                'aircon_id'=> (int)$aircon,
-                                'quantity'=> (int)$_POST['quantity'][$index],
-                                'fcuno'=>$floor_num
-                            ]);
-
-                        }
-
-                    }
-                }
-
-            }
-        } 
-        // EVERY 3 WEEKS
-        else if($_POST['repeatable'] == "3Week"){
-            function get3Week($y) {
-                return new \DatePeriod(
-                    new \DateTime("first ".date("l", strtotime($_POST['start_event']))." of $y"),
-                    \DateInterval::createFromDateString('3 weeks'.date("l", strtotime($_POST['start_event']))),
-                    new \DateTime("last day of december $y"),
-                    
-                );
-            }
-
-                // Usage:
-            foreach (get3Week(date("Y",strtotime($_POST['start_event']))) as $getw) {
-                // $newDate = date();
-                if($getw->format("Y-m-d") >= $_POST['start_event']){
-                    // $date= $getw->format("Y-m-d");
-                    // $newDate=date("Y-m-d", strtotime($date . "-1 week"));
-                    
-                    array_push($weeklyEvent, $getw->format("Y-m-d"));
-                }
-            }
-            // dd($weeklyEvent);
-            // REPEAT EVERY 3 WEEKS ------------------------------------------------------------------------------------------
-            
-            
-            for ($i=0; $i < count($weeklyEvent); $i++) { 
-                $formatWeekly = explode("-",$weeklyEvent[$i]);
-                $currDate = $formatWeekly[2]."-".$formatWeekly[1];
-                $counter = 0;
-                for ($a=0; $a < count($disableDates); $a++) { 
-                    if ($currDate == $disableDates[$a]) {
-                        $counter = 1;
-                    }
-                    
-                }
-                    // dd($counter);
-                if($counter == 0){
-                    $_POST['start_event'] = $weeklyEvent[$i];
-
-                    $_POST["title"] = date("g:ia",strtotime($_POST["time"]))." ".$client_branch['client_branch'];
-
-                    $success = $Event->insert($_POST);
-                    if($success){
-                        $event_code = ['event_code' => 'task-'.$code.'-'.(int)$success];
-
-                        $Event->update((int)$success,$event_code);
-                    }
-                    foreach($_POST['emp_id'] as $key => $value) {
-                        $Event_emp->insert([
-                            'emp_id'=> (int) $value,
-                            'id' => (int) $success
-                        ]);
-                    }
-
-                    foreach ($_POST['aircon_id'] as $index => $aircon) {
-                        foreach ($_POST['fcuno'.$index] as $key => $floor_num) {
-                            $event_fcu->insert([
-                                'id'=> (int) $success,
-                                'aircon_id'=> (int)$aircon,
-                                'quantity'=> (int)$_POST['quantity'][$index],
-                                'fcuno'=>$floor_num
-                            ]);
-
-                        }
-
-                    }
-                }
-
-            }
-                // EVERY MONTH
-        }else if($_POST['repeatable'] == "Monthly"){
-            function getMonthly($y) {
-                return new \DatePeriod(
-                    new \DateTime(date("Y-m-d", strtotime($_POST['start_event']))),
-                    \DateInterval::createFromDateString('next month'),
-                    new \DateTime("last day of december $y"),
-
-                );
-            }
-
-                    // Usage:
-            foreach (getMonthly(date("Y",strtotime($_POST['start_event']))) as $getm) {
-                array_push($monthlyEvent, $getm->format("Y-m-d"));
-            }
-            // dd($monthlyEvent);
-        // REPEAT MONTHLY ------------------------------------------------------------------------------------------
-            for ($i=0; $i < count($monthlyEvent); $i++) { 
-                $formatMonthly = explode("-",$monthlyEvent[$i]);
-                $currDate = $formatMonthly[2]."-".$formatMonthly[1];
-                $counter = 0;
-                $date1 = strtotime($monthlyEvent[$i]);
-                $date2 = date("l", $date1);
-                $date3 = strtolower($date2);
-                for ($a=0; $a < count($disableDates); $a++) { 
-                    if (($currDate == $disableDates[$a])) {
-                        $counter = 1;
-                    }
-                    
-                }
-                if($counter == 0){
-                    $_POST['start_event'] = $monthlyEvent[$i];
-                    $_POST["title"] = date("g:ia",strtotime($_POST["time"]))." ".$client_branch['client_branch'];
-                    $success = $Event->insert($_POST);
-                    if($success){
-                        $event_code = ['event_code' => 'task-'.$code.'-'.(int)$success];
-
-                        $Event->update((int)$success,$event_code);
-                    }
-                    foreach($_POST['emp_id'] as $key => $value) {
-                        $Event_emp->insert([
-                            'emp_id'=> (int) $value,
-                            'id' => (int) $success
-                        ]);
-                    }
-                    foreach ($_POST['aircon_id'] as $index => $aircon) {
-                        foreach ($_POST['fcuno'.$index] as $key => $floor_num) {
-                         $event_fcu->insert([
-                            'id'=> (int) $success,
-                            'aircon_id'=> (int)$aircon,
-                            'quantity'=> (int)$_POST['quantity'][$index],
-                            'fcuno'=>$floor_num
-                        ]);
-
-                     }
-
-                 }
-             }
-         }
-         // REPEAT EVERY 2 MONTHS
-     } else if($_POST['repeatable'] == "2Month"){
-            function getMonthly($y) {
-                return new \DatePeriod(
-                    new \DateTime(date("Y-m-d", strtotime($_POST['start_event']))),
-                    \DateInterval::createFromDateString('2 months'),
-                    new \DateTime("last day of december $y"),
-
-                );
-            }
-
-                    // Usage:
-            foreach (getMonthly(date("Y",strtotime($_POST['start_event']))) as $getm) {
-
-                array_push($monthlyEvent, $getm->format("Y-m-d"));
-            }
-            // dd($monthlyEvent);
-        // REPEAT EVERY 2 MONTHS------------------------------------------------------------------------------------------
-            for ($i=0; $i < count($monthlyEvent); $i++) { 
-                $formatMonthly = explode("-",$monthlyEvent[$i]);
-                $currDate = $formatMonthly[2]."-".$formatMonthly[1];
-                $counter = 0;
-                $date1 = strtotime($monthlyEvent[$i]);
-                $date2 = date("l", $date1);
-                $date3 = strtolower($date2);
-                for ($a=0; $a < count($disableDates); $a++) { 
-                    if (($currDate == $disableDates[$a])) {
-                        $counter = 1;
-                    }
-                    
-                }
-                if($counter == 0){
-                    $_POST['start_event'] = $monthlyEvent[$i];
-                    $_POST["title"] = date("g:ia",strtotime($_POST["time"]))." ".$client_branch['client_branch'];
-                    $success = $Event->insert($_POST);
-                    if($success){
-                        $event_code = ['event_code' => 'task-'.$code.'-'.(int)$success];
-
-                        $Event->update((int)$success,$event_code);
-                    }
-                    foreach($_POST['emp_id'] as $key => $value) {
-                        $Event_emp->insert([
-                            'emp_id'=> (int) $value,
-                            'id' => (int) $success
-                        ]);
-                    }
-                    foreach ($_POST['aircon_id'] as $index => $aircon) {
-                        foreach ($_POST['fcuno'.$index] as $key => $floor_num) {
-                         $event_fcu->insert([
-                            'id'=> (int) $success,
-                            'aircon_id'=> (int)$aircon,
-                            'quantity'=> (int)$_POST['quantity'][$index],
-                            'fcuno'=>$floor_num
-                        ]);
-
-                     }
-
-                 }
-             }
-         }
-         // REPEAT EVERY 3 MONTHS
-     }else if($_POST['repeatable'] == "3Month"){
-            function getMonthly($y) {
-                return new \DatePeriod(
-                    new \DateTime(date("Y-m-d", strtotime($_POST['start_event']))),
-                    \DateInterval::createFromDateString('3 months'),
-                    new \DateTime("last day of december $y"),
-
-                );
-            }
-
-                    // Usage:
-            foreach (getMonthly(date("Y",strtotime($_POST['start_event']))) as $getm) {
-                
-                array_push($monthlyEvent, $getm->format("Y-m-d"));
-            }
-            // dd($monthlyEvent);
-        // REPEAT 3 MONTH------------------------------------------------------------------------------------------
-            for ($i=0; $i < count($monthlyEvent); $i++) { 
-                $formatMonthly = explode("-",$monthlyEvent[$i]);
-                $currDate = $formatMonthly[2]."-".$formatMonthly[1];
-                $counter = 0;
-                $date1 = strtotime($monthlyEvent[$i]);
-                $date2 = date("l", $date1);
-                $date3 = strtolower($date2);
-                for ($a=0; $a < count($disableDates); $a++) { 
-                    if (($currDate == $disableDates[$a])) {
-                        $counter = 1;
-                    }
-                    
-                }
-                if($counter == 0){
-                    $_POST['start_event'] = $monthlyEvent[$i];
-                    $_POST["title"] = date("g:ia",strtotime($_POST["time"]))." ".$client_branch['client_branch'];
-                    $success = $Event->insert($_POST);
-                    if($success){
-                        $event_code = ['event_code' => 'task-'.$code.'-'.(int)$success];
-
-                        $Event->update((int)$success,$event_code);
-                    }
-                    foreach($_POST['emp_id'] as $key => $value) {
-                        $Event_emp->insert([
-                            'emp_id'=> (int) $value,
-                            'id' => (int) $success
-                        ]);
-                    }
-                    foreach ($_POST['aircon_id'] as $index => $aircon) {
-                        foreach ($_POST['fcuno'.$index] as $key => $floor_num) {
-                         $event_fcu->insert([
-                            'id'=> (int) $success,
-                            'aircon_id'=> (int)$aircon,
-                            'quantity'=> (int)$_POST['quantity'][$index],
-                            'fcuno'=>$floor_num
-                        ]);
-
-                     }
-
-                 }
-             }
-         }
-
-     }
-
-     else{
-    // NO REPEAT ------------------------------------------------------------------------------------------
-        $_POST["title"] = date("g:ia",strtotime($_POST["time"]))." ".$client_branch['client_branch'];
-    // $_POST["cl_id"]= 0;
+    if(isset($_POST['checkLog'])){
     // dd($_POST);
-        $success = $Event->insert($_POST);
+    // Call_logs
+    // $start_date = explode('/',$_POST['date']);
+        $codeC = substr(str_shuffle($set), 0, 4);
+        $calllog_create = [
+            'date' => $_POST['start_event'],
+            'client_id' => $this->request->getVar('client_id'),
+        ];
+
+        $successC = $Call_logs->insert($calllog_create);
+        if($successC){
+            // dd('dito');
+            $log_code = ['log_code' => 'log-'.$codeC.'-'.(int)$successC];
+            $Call_logs->update((int)$successC,$log_code);
+        }
+        $success = $Event->insert([
+            'title' => date("g:ia",strtotime($_POST["time"]))." ".$client_branch['client_branch'],
+            'log_code' => $log_code,
+            'start_event' => $_POST['start_event'],
+            'time' => $_POST['time'],
+            'end_time' => $_POST['end_time'],
+            'client_id' => $_POST['client_id'],
+            'serv_id' => $_POST['serv_id'],
+
+        ]);
 
         if($success){
             $event_code = ['event_code' => 'task-'.$code.'-'.(int)$success];
-
             $Event->update((int)$success,$event_code);
         }
 
@@ -942,27 +576,484 @@ public function insert(){
             ]);
         }
     // dd($_POST);
+        // $airconArray = array();
         foreach ($_POST['aircon_id'] as $index => $aircon) {
+            // array_push($airconArray, $_POST['aircon_id']);
             foreach ($_POST['fcuno'.$index] as $key => $floor_num) {
-             $event_fcu->insert([
-                'id'=> (int) $success,
-                'aircon_id'=> (int)$aircon,
-                'quantity'=> (int)$_POST['quantity'][$index],
-                'fcuno'=>$floor_num
-            ]);
+                $Call_fcu->insert([
+                    'cl_id' => (int) $successC,
+                    'aircon_id'=> (int)$aircon,
+                    'qty'=> (int)$_POST['quantity'],
+                    'fcuno'=>$floor_num
+                ]);
+                $event_fcu->insert([
+                    'id'=> (int) $success,
+                    'aircon_id'=> (int)$aircon,
+                    'quantity'=> (int)$_POST['quantity'],
+                    'fcuno'=>$floor_num
+                ]);
+            }
+        }
+        // dd($airconArray);
+        return $this->response->redirect(site_url('/calendar'));   
+    }else{
+        if(isset($_POST["repeatable"]))
+        {
 
-         }
+            if($_POST['repeatable'] == "Weekly"){
+                function getWeekly($y) {
+                    return new \DatePeriod(
+                        new \DateTime("first ".date("l", strtotime($_POST['start_event']))." of $y"),
+                        \DateInterval::createFromDateString('next '.date("l", strtotime($_POST['start_event']))),
+                        new \DateTime("last day of december $y"),
+                        
+                    );
+                }
 
-     }
+                    // Usage:
+                foreach (getWeekly(date("Y",strtotime($_POST['start_event']))) as $getw) {
+                    // dd($getw->format("Y-m-d"));
+                    if($getw->format("Y-m-d") >= $_POST['start_event']){
+                        array_push($weeklyEvent, $getw->format("Y-m-d"));
+                    }
+                }
+                // REPEAT WEEKLY ------------------------------------------------------------------------------------------
+                
+                
+                for ($i=0; $i < count($weeklyEvent); $i++) { 
+                    $formatWeekly = explode("-",$weeklyEvent[$i]);
+                    $currDate = $formatWeekly[2]."-".$formatWeekly[1];
+                    $counter = 0;
+                    for ($a=0; $a < count($disableDates); $a++) { 
+                        if ($currDate == $disableDates[$a]) {
+                            $counter = 1;
+                        }
+                        
+                    }
+                        // dd($counter);
+                    if($counter == 0){
+                        $_POST['start_event'] = $weeklyEvent[$i];
 
- }            
+                        $_POST["title"] = date("g:ia",strtotime($_POST["time"]))." ".$client_branch['client_branch'];
 
-            // $eId = (int)$success;
+                        $success = $Event->insert($_POST);
+                        if($success){
+                            $event_code = ['event_code' => 'task-'.$code.'-'.(int)$success];
 
-        // return $this->response->redirect(site_url('/calendar/add-aircon/'.$eId));
- return $this->response->redirect(site_url('/calendar'));
+                            $Event->update((int)$success,$event_code);
+                        }
+                        foreach($_POST['emp_id'] as $key => $value) {
+                            $Event_emp->insert([
+                                'emp_id'=> (int) $value,
+                                'id' => (int) $success
+                            ]);
+                        }
 
-}
+                        foreach ($_POST['aircon_id'] as $index => $aircon) {
+                            foreach ($_POST['fcuno'.$index] as $key => $floor_num) {
+                                $event_fcu->insert([
+                                    'id'=> (int) $success,
+                                    'aircon_id'=> (int)$aircon,
+                                    'quantity'=> (int)$_POST['quantity'][$index],
+                                    'fcuno'=>$floor_num
+                                ]);
+
+                            }
+
+                        }
+                    }
+
+                }
+                // EVERY 2 WEEKS
+            }else if($_POST['repeatable'] == "2Week"){
+                function get2Week($y) {
+                    return new \DatePeriod(
+                        new \DateTime("first ".date("l", strtotime($_POST['start_event']))." of $y"),
+                        \DateInterval::createFromDateString('2 weeks'.date("l", strtotime($_POST['start_event']))),
+                        new \DateTime("last day of december $y"),
+                        
+                    );
+                }
+
+                    // Usage:
+                foreach (get2Week(date("Y",strtotime($_POST['start_event']))) as $getw) {
+                    // $newDate = date();
+                    if($getw->format("Y-m-d") >= $_POST['start_event']){
+                        $date= $getw->format("Y-m-d");
+                        $newDate=date("Y-m-d", strtotime($date . "-1 week"));
+                        array_push($weeklyEvent, $newDate);
+                    }
+                }
+                // dd($weeklyEvent);
+                // REPEAT EVERY 2 WEEKS ------------------------------------------------------------------------------------------
+                
+                
+                for ($i=0; $i < count($weeklyEvent); $i++) { 
+                    $formatWeekly = explode("-",$weeklyEvent[$i]);
+                    $currDate = $formatWeekly[2]."-".$formatWeekly[1];
+                    $counter = 0;
+                    for ($a=0; $a < count($disableDates); $a++) { 
+                        if ($currDate == $disableDates[$a]) {
+                            $counter = 1;
+                        }
+                        
+                    }
+                        // dd($counter);
+                    if($counter == 0){
+                        $_POST['start_event'] = $weeklyEvent[$i];
+
+                        $_POST["title"] = date("g:ia",strtotime($_POST["time"]))." ".$client_branch['client_branch'];
+
+                        $success = $Event->insert($_POST);
+                        if($success){
+                            $event_code = ['event_code' => 'task-'.$code.'-'.(int)$success];
+
+                            $Event->update((int)$success,$event_code);
+                        }
+                        foreach($_POST['emp_id'] as $key => $value) {
+                            $Event_emp->insert([
+                                'emp_id'=> (int) $value,
+                                'id' => (int) $success
+                            ]);
+                        }
+
+                        foreach ($_POST['aircon_id'] as $index => $aircon) {
+                            foreach ($_POST['fcuno'.$index] as $key => $floor_num) {
+                                $event_fcu->insert([
+                                    'id'=> (int) $success,
+                                    'aircon_id'=> (int)$aircon,
+                                    'quantity'=> (int)$_POST['quantity'][$index],
+                                    'fcuno'=>$floor_num
+                                ]);
+
+                            }
+
+                        }
+                    }
+
+                }
+            } 
+            // EVERY 3 WEEKS
+            else if($_POST['repeatable'] == "3Week"){
+                function get3Week($y) {
+                    return new \DatePeriod(
+                        new \DateTime("first ".date("l", strtotime($_POST['start_event']))." of $y"),
+                        \DateInterval::createFromDateString('3 weeks'.date("l", strtotime($_POST['start_event']))),
+                        new \DateTime("last day of december $y"),
+                        
+                    );
+                }
+
+                    // Usage:
+                foreach (get3Week(date("Y",strtotime($_POST['start_event']))) as $getw) {
+                    // $newDate = date();
+                    if($getw->format("Y-m-d") >= $_POST['start_event']){
+                        // $date= $getw->format("Y-m-d");
+                        // $newDate=date("Y-m-d", strtotime($date . "-1 week"));
+                        
+                        array_push($weeklyEvent, $getw->format("Y-m-d"));
+                    }
+                }
+                // dd($weeklyEvent);
+                // REPEAT EVERY 3 WEEKS ------------------------------------------------------------------------------------------
+                
+                
+                for ($i=0; $i < count($weeklyEvent); $i++) { 
+                    $formatWeekly = explode("-",$weeklyEvent[$i]);
+                    $currDate = $formatWeekly[2]."-".$formatWeekly[1];
+                    $counter = 0;
+                    for ($a=0; $a < count($disableDates); $a++) { 
+                        if ($currDate == $disableDates[$a]) {
+                            $counter = 1;
+                        }
+                        
+                    }
+                        // dd($counter);
+                    if($counter == 0){
+                        $_POST['start_event'] = $weeklyEvent[$i];
+
+                        $_POST["title"] = date("g:ia",strtotime($_POST["time"]))." ".$client_branch['client_branch'];
+
+                        $success = $Event->insert($_POST);
+                        if($success){
+                            $event_code = ['event_code' => 'task-'.$code.'-'.(int)$success];
+
+                            $Event->update((int)$success,$event_code);
+                        }
+                        foreach($_POST['emp_id'] as $key => $value) {
+                            $Event_emp->insert([
+                                'emp_id'=> (int) $value,
+                                'id' => (int) $success
+                            ]);
+                        }
+
+                        foreach ($_POST['aircon_id'] as $index => $aircon) {
+                            foreach ($_POST['fcuno'.$index] as $key => $floor_num) {
+                                $event_fcu->insert([
+                                    'id'=> (int) $success,
+                                    'aircon_id'=> (int)$aircon,
+                                    'quantity'=> (int)$_POST['quantity'][$index],
+                                    'fcuno'=>$floor_num
+                                ]);
+
+                            }
+
+                        }
+                    }
+
+                }
+                    // EVERY MONTH
+            }else if($_POST['repeatable'] == "Monthly"){
+                function getMonthly($y) {
+                    return new \DatePeriod(
+                        new \DateTime(date("Y-m-d", strtotime($_POST['start_event']))),
+                        \DateInterval::createFromDateString('next month'),
+                        new \DateTime("last day of december $y"),
+
+                    );
+                }
+
+                        // Usage:
+                foreach (getMonthly(date("Y",strtotime($_POST['start_event']))) as $getm) {
+                    array_push($monthlyEvent, $getm->format("Y-m-d"));
+                }
+                // dd($monthlyEvent);
+            // REPEAT MONTHLY ------------------------------------------------------------------------------------------
+                for ($i=0; $i < count($monthlyEvent); $i++) { 
+                    $formatMonthly = explode("-",$monthlyEvent[$i]);
+                    $currDate = $formatMonthly[2]."-".$formatMonthly[1];
+                    $counter = 0;
+                    $date1 = strtotime($monthlyEvent[$i]);
+                    $date2 = date("l", $date1);
+                    $date3 = strtolower($date2);
+                    for ($a=0; $a < count($disableDates); $a++) { 
+                        if (($currDate == $disableDates[$a])) {
+                            $counter = 1;
+                        }
+                        
+                    }
+                    if($counter == 0){
+                        $_POST['start_event'] = $monthlyEvent[$i];
+                        $_POST["title"] = date("g:ia",strtotime($_POST["time"]))." ".$client_branch['client_branch'];
+                        $success = $Event->insert($_POST);
+                        if($success){
+                            $event_code = ['event_code' => 'task-'.$code.'-'.(int)$success];
+
+                            $Event->update((int)$success,$event_code);
+                        }
+                        foreach($_POST['emp_id'] as $key => $value) {
+                            $Event_emp->insert([
+                                'emp_id'=> (int) $value,
+                                'id' => (int) $success
+                            ]);
+                        }
+                        foreach ($_POST['aircon_id'] as $index => $aircon) {
+                            foreach ($_POST['fcuno'.$index] as $key => $floor_num) {
+                            $event_fcu->insert([
+                                'id'=> (int) $success,
+                                'aircon_id'=> (int)$aircon,
+                                'quantity'=> (int)$_POST['quantity'][$index],
+                                'fcuno'=>$floor_num
+                            ]);
+
+                        }
+
+                    }
+                }
+            }
+            // REPEAT EVERY 2 MONTHS
+            } else if($_POST['repeatable'] == "2Month"){
+                function getMonthly($y) {
+                    return new \DatePeriod(
+                        new \DateTime(date("Y-m-d", strtotime($_POST['start_event']))),
+                        \DateInterval::createFromDateString('2 months'),
+                        new \DateTime("last day of december $y"),
+
+                    );
+                }
+
+                        // Usage:
+                foreach (getMonthly(date("Y",strtotime($_POST['start_event']))) as $getm) {
+
+                    array_push($monthlyEvent, $getm->format("Y-m-d"));
+                }
+                // dd($monthlyEvent);
+            // REPEAT EVERY 2 MONTHS------------------------------------------------------------------------------------------
+                for ($i=0; $i < count($monthlyEvent); $i++) { 
+                    $formatMonthly = explode("-",$monthlyEvent[$i]);
+                    $currDate = $formatMonthly[2]."-".$formatMonthly[1];
+                    $counter = 0;
+                    $date1 = strtotime($monthlyEvent[$i]);
+                    $date2 = date("l", $date1);
+                    $date3 = strtolower($date2);
+                    for ($a=0; $a < count($disableDates); $a++) { 
+                        if (($currDate == $disableDates[$a])) {
+                            $counter = 1;
+                        }
+                        
+                    }
+                    if($counter == 0){
+                        $_POST['start_event'] = $monthlyEvent[$i];
+                        $_POST["title"] = date("g:ia",strtotime($_POST["time"]))." ".$client_branch['client_branch'];
+                        $success = $Event->insert($_POST);
+                        if($success){
+                            $event_code = ['event_code' => 'task-'.$code.'-'.(int)$success];
+
+                            $Event->update((int)$success,$event_code);
+                        }
+                        foreach($_POST['emp_id'] as $key => $value) {
+                            $Event_emp->insert([
+                                'emp_id'=> (int) $value,
+                                'id' => (int) $success
+                            ]);
+                        }
+                        foreach ($_POST['aircon_id'] as $index => $aircon) {
+                            foreach ($_POST['fcuno'.$index] as $key => $floor_num) {
+                            $event_fcu->insert([
+                                'id'=> (int) $success,
+                                'aircon_id'=> (int)$aircon,
+                                'quantity'=> (int)$_POST['quantity'][$index],
+                                'fcuno'=>$floor_num
+                            ]);
+
+                        }
+
+                    }
+                }
+            }
+            // REPEAT EVERY 3 MONTHS
+            }else if($_POST['repeatable'] == "3Month"){
+                function getMonthly($y) {
+                    return new \DatePeriod(
+                        new \DateTime(date("Y-m-d", strtotime($_POST['start_event']))),
+                        \DateInterval::createFromDateString('3 months'),
+                        new \DateTime("last day of december $y"),
+
+                    );
+                }
+
+                        // Usage:
+                foreach (getMonthly(date("Y",strtotime($_POST['start_event']))) as $getm) {
+                    
+                    array_push($monthlyEvent, $getm->format("Y-m-d"));
+                }
+                // dd($monthlyEvent);
+            // REPEAT 3 MONTH------------------------------------------------------------------------------------------
+                for ($i=0; $i < count($monthlyEvent); $i++) { 
+                    $formatMonthly = explode("-",$monthlyEvent[$i]);
+                    $currDate = $formatMonthly[2]."-".$formatMonthly[1];
+                    $counter = 0;
+                    $date1 = strtotime($monthlyEvent[$i]);
+                    $date2 = date("l", $date1);
+                    $date3 = strtolower($date2);
+                    for ($a=0; $a < count($disableDates); $a++) { 
+                        if (($currDate == $disableDates[$a])) {
+                            $counter = 1;
+                        }
+                        
+                    }
+                    if($counter == 0){
+                        $_POST['start_event'] = $monthlyEvent[$i];
+                        $_POST["title"] = date("g:ia",strtotime($_POST["time"]))." ".$client_branch['client_branch'];
+                        $success = $Event->insert($_POST);
+                        if($success){
+                            $event_code = ['event_code' => 'task-'.$code.'-'.(int)$success];
+
+                            $Event->update((int)$success,$event_code);
+                        }
+                        foreach($_POST['emp_id'] as $key => $value) {
+                            $Event_emp->insert([
+                                'emp_id'=> (int) $value,
+                                'id' => (int) $success
+                            ]);
+                        }
+                        foreach ($_POST['aircon_id'] as $index => $aircon) {
+                            foreach ($_POST['fcuno'.$index] as $key => $floor_num) {
+                                $event_fcu->insert([
+                                    'id'=> (int) $success,
+                                    'aircon_id'=> (int)$aircon,
+                                    'quantity'=> (int)$_POST['quantity'][$index],
+                                    'fcuno'=>$floor_num
+                                ]);
+
+                            }
+
+                        }   
+                    }
+            }
+
+            }else{
+                // NO REPEAT ------------------------------------------------------------------------------------------
+                    $_POST["title"] = date("g:ia",strtotime($_POST["time"]))." ".$client_branch['client_branch'];
+                // $_POST["cl_id"]= 0;
+                // dd($_POST);
+                    $success = $Event->insert($_POST);
+    
+                    if($success){
+                        $event_code = ['event_code' => 'task-'.$code.'-'.(int)$success];
+    
+                        $Event->update((int)$success,$event_code);
+                    }
+    
+                    foreach($_POST['emp_id'] as $key => $value) {
+                        $Event_emp->insert([
+                            'emp_id'=> (int) $value,
+                            'id' => (int) $success
+                        ]);
+                    }
+                // dd($_POST);
+                    foreach ($_POST['aircon_id'] as $index => $aircon) {
+                        foreach ($_POST['fcuno'.$index] as $key => $floor_num) {
+                        $event_fcu->insert([
+                            'id'=> (int) $success,
+                            'aircon_id'=> (int)$aircon,
+                            'quantity'=> (int)$_POST['quantity'][$index],
+                            'fcuno'=>$floor_num
+                        ]);
+    
+                    }
+    
+                }
+    
+            }
+            return $this->response->redirect(site_url('/calendar'));
+
+        } else{
+            // NO REPEAT ------------------------------------------------------------------------------------------
+                $_POST["title"] = date("g:ia",strtotime($_POST["time"]))." ".$client_branch['client_branch'];
+            // $_POST["cl_id"]= 0;
+            // dd($_POST);
+                $success = $Event->insert($_POST);
+
+                if($success){
+                    $event_code = ['event_code' => 'task-'.$code.'-'.(int)$success];
+
+                    $Event->update((int)$success,$event_code);
+                }
+
+                foreach($_POST['emp_id'] as $key => $value) {
+                    $Event_emp->insert([
+                        'emp_id'=> (int) $value,
+                        'id' => (int) $success
+                    ]);
+                }
+            // dd($_POST);
+                foreach ($_POST['aircon_id'] as $index => $aircon) {
+                    foreach ($_POST['fcuno'.$index] as $key => $floor_num) {
+                    $event_fcu->insert([
+                        'id'=> (int) $success,
+                        'aircon_id'=> (int)$aircon,
+                        'quantity'=> (int)$_POST['quantity'][$index],
+                        'fcuno'=>$floor_num
+                    ]);
+
+                }
+
+            }
+
+        }
+        return $this->response->redirect(site_url('/calendar'));    
+    }
 
 return json_encode(["error"=>"error"],412);
 }

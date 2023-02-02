@@ -38,8 +38,8 @@
   <div class="modal-dialog" role="document" id="dialog">
     <div class="modal-content">
      <form action="<?= base_url('/calendar/insert');?>" method="POST"> 
-      <div class="modal-header">
-        <h4 class="modal-title">Add Schedule</h4>
+      <div class="modal-header headTask">
+        <h4 class="modal-title addTask">Add Schedule</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -48,6 +48,10 @@
 
         <input type="hidden" name="start_event" id="start_event" value="">
         <input type="hidden" name="cl_id" id="cl_id" value="">
+        <center><label class="switch">
+          <input type="checkbox" id="checkLog" name="checkLog">
+          <span class="slider round"></span>
+        </label></center>
         <div class="form-group">
           <input class="form-control" type="hidden" name="title" id="title" placeholder="Title">
         </div>
@@ -123,7 +127,7 @@
             <label for="dbrand">Device Brand</label>
             <div class="select-dropdown">
                 <select id="device_brand" name="device_brand[]" class="form-control " data-id="0"required>
-                  <option value="">Select Type</option>
+                  <option value="" selected disabled>Select Type</option>
                 <?php foreach($device_brand as $d_b):  ?>
                 <option value=<?php echo $d_b['device_brand']; ?>><?php echo $d_b['device_brand'];?></option>
                 <?php endforeach; ?>
@@ -515,7 +519,20 @@ var count_update = 1;
   $('#mymodal .selectpicker').selectpicker();
 
 
-  
+  $('#checkLog').click(function(){
+    if ($('#checkLog').is(":checked"))
+    {
+      $('.addTask').html("Add Call log");
+      $('.addTask').css('color','white');
+      $('.headTask').css('background-color','green');
+      $('#repeatable').prop('disabled', 'disabled');
+    }else{
+      $('.addTask').html("Add Schedule");
+      $('.addTask').css('color','black');
+      $('.headTask').css('background-color','white');
+      $('#repeatable').prop('disabled', false);
+    }
+  })
       
   
       </script>

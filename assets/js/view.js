@@ -37,6 +37,7 @@ $(document).on('click','.view',function(e){
             var fcuData = response.fcu_data;
             var fcuNo;
             var qty = new Array();
+            var quantity;
             var empArr = response.emp_data;
             var emp = new Array();
             var empData;
@@ -123,15 +124,23 @@ $(document).on('click','.view',function(e){
 
             for (var i = 0; i < fcuData.length; i++) {
               if(id == fcuData[i].id){
-               // console.log("true");
                fcuNoArr.push(response.fcu_data[i].fcu);
-               qty.push(response.fcu_data[i].quantity);
               }
               
             }
+            var pre = 0;
+            for (var i = 0; i < fcuData.length; i++) {
+                if(id == fcuData[i].id){
+                    if(fcuData[i].aircon_id!=pre){
+                        qty.push(response.fcu_data[i].quantity);
+                        pre = fcuData[i].aircon_id;
+                    }
+                }
+            }
             fcuNo = fcuNoArr.toString();
+            quantity = qty.toString();
             $('#modal_fcu').html(fcuNo);
-            $('#modal_qty').html(qty);
+            $('#modal_qty').html(quantity);
 
             for (var i = 0; i < empArr.length; i++) {
                emp.push(response.emp_data[i].emp_name);
