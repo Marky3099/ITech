@@ -13,6 +13,7 @@
       <div class="modal-body">
         
         <div class="container" id="report-container">
+          <h1 id="noreports"></h1>
           <div class="row" id="report_files">
             
           </div>
@@ -275,14 +276,30 @@
        },
        success: function(response){
           // console.log(response.reports.length>0);
-          console.log(response);
+          // console.log(response);
           var dir = '<?=base_url('uploads/')?>';
           $('#report_files').empty();
+          $('#report-container #noreports').empty();
           if(response.reports.length>0){
-            $('#report-container h1').empty();
             $('#report_files').append('<table class="table table-bordered" id="report_table"><thead><tr><th>#</th><th>File</th><th>Comments/Notes</th><th>Uploader</th><th>Action</th></tr></thead>');
             for(var i=0, a=0; i<response.reports.length; i++){
               var image = response.reports[i].image;
+              var imageSplit = image.split(".");
+              var imageFile;
+              // console.log(imageSplit);
+              if(imageSplit[1]=='pdf'){
+                // console.log('Tru');
+                imageFile = 'pdf.png';
+              }
+              else if(imageSplit[1]=='jpg' || imageSplit[1]=='png' || imageSplit[1]=='jpeg'){
+                imageFile = image;
+              }else if(imageSplit[1]=='docx'){
+                imageFile = 'docx.png';
+              }else if(imageSplit[1]=='pptx'){
+                imageFile = 'ppt.png';
+              }else if(imageSplit[1]=='xlsx'){
+                imageFile = 'excel.png';
+              }
               var notes = response.reports[i].upload_description;
               var username = '';
               var position = '';
@@ -293,7 +310,7 @@
                 }
               }
 
-              $('#report_table').append('<tbody id=a'+response.reports[i].upload_id+'><tr><td>'+(a+=1)+'</td><td><a target="__blank" href = '+dir+'/'+image+' style="z-index:-1;"><img src='+dir+'/'+image+' height="150px" width="150px"></a></td><td>'+notes+'</td><td>'+username+'('+position+')'+'</td><td><button id='+response.reports[i].upload_id+' class="btn btn-danger exis">Delete</button></td></tr></tbody></table>');
+              $('#report_table').append('<tbody id=a'+response.reports[i].upload_id+'><tr><td>'+(a+=1)+'</td><td><a target="__blank" href = '+dir+'/'+image+' style="z-index:-1;"><img src='+dir+'/'+imageFile+' height="150px" width="150px"></a></td><td>'+notes+'</td><td>'+username+'('+position+')'+'</td><td><button id='+response.reports[i].upload_id+' class="btn btn-danger exis">Delete</button></td></tr></tbody></table>');
             }
             $('.exis').click(function(){
               var reportId = $(this).attr('id');
@@ -314,7 +331,7 @@
               // console.log();
             })
           }else{
-            $('#report-container').append('<h1><center>No Reports Yet<center></h1>')
+            $('#report-container #noreports').append('<h1><center>No Reports Yet<center></h1>')
           }
           myModal.show();
        }

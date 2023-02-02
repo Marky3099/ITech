@@ -403,6 +403,115 @@ $datas['main'] = 'admin/calendar/events';
 return view("templates/template",$datas);
 
 }
+public function emp_event(){
+    if($_SESSION['position'] != USER_ROLE_EMPLOYEE){
+        return $this->response->redirect(site_url('/dashboard'));
+    }
+    $event = new All_events();
+    // $upload = new Upload();
+    $client = new Client();
+    $serv = new Serv();
+    $event_emp = new Event_emp_views();
+    $event_fcu = new Event_fcu_views();
+    // $aircon = new Aircon();
+
+    $db = \Config\Database::connect();
+    $query   = $db->query('SELECT DISTINCT aircon_id,id,device_brand,aircon_type,quantity
+        FROM event_fcu_views');
+    $datas['distinct'] = $query->getResult();
+
+    $db1 = \Config\Database::connect();
+    $query   = $db1->query('SELECT DISTINCT id
+        FROM event_fcu_views');
+    $datas['distinct_event'] = $query->getResult();
+          // dd($datas['distinct'] );
+
+    $datas['event'] = array();
+    $datas['cId'] ="";
+    $datas['cbranch']="";
+    $emp_id = $_SESSION['emp_id'];
+    $datas['client'] = $client->orderBy('client_id', 'ASC')->findAll();
+        // $datas['emp'] = $emp->orderBy('emp_id', 'ASC')->findAll();
+    $datas['serv'] = $serv->orderBy('serv_id', 'ASC')->findAll();
+    $datas['servName'] = $serv->select('serv_name, serv_color, serv_type')->groupBy('serv_name')->findAll();
+    $datas['servType'] = $serv->orderBy('serv_name','ASC')->findAll();
+    $datas['area'] = $client->select('area')->groupBy('area')->findAll();
+    $datas['event_emp'] = $event_emp->orderBy('id', 'ASC')->findAll();
+    $datas['event_fcu'] = $event_fcu->orderBy('id', 'ASC')->orderBy('fcuno', 'ASC')->findAll();
+    // $datas['aircon'] = $aircon->orderBy('aircon_id', 'ASC')->findAll();
+    $datas['all_events'] = $event_emp->where('emp_id', $emp_id)->findAll();
+        // dd($datas['groupby_fcu']);
+    foreach($datas['area'] as $k => $val) {
+
+            $area = [];
+
+            foreach($datas['client'] as $key => $value) {
+                if($val['area'] == $value['area']){
+                  array_push($area , (object)[
+                    'client_id' => (int)$value['client_id'],
+                    'client_branch' =>$value['client_branch']
+                ]);
+              }
+
+          }
+
+          $datas['client_area'][]= (object)[
+            $val['area'] => $area
+        ];
+        $datas['client_area2'][]=$area;
+    }
+
+    foreach ($datas['all_events'] as $key => $value) {
+
+        $emp_arr = "";
+        foreach ($datas['event_emp'] as $key => $value_emps) {
+            if ( $value['id'] == $value_emps['id']) {
+             $emp_arr .= $datas['event_emp'][$key]['emp_name'].",";
+         }
+     }
+     $fcu_arr = array();
+
+       // dd($datas['event_fcu']);
+     foreach ($datas['event_fcu'] as $key => $value_fcu) {
+       if ($value['id'] == $value_fcu['id']) {
+           array_push($fcu_arr , (object)[
+            'id' => (int)$value_fcu['id'],
+            'aircon_id' => (int)$value_fcu['aircon_id'],
+            'fcuno' =>(int)$value_fcu['fcuno'],
+            'quantity' =>(int)$value_fcu['quantity'],
+            'device_brand' =>$value_fcu['device_brand'],
+            'aircon_type' =>$value_fcu['aircon_type'],
+            'fcu' =>$value_fcu['fcu'],
+        ]);
+
+       }   
+
+   } 
+   $datas['event'][]= (object)[
+      "id"=> $value['id'],
+      "title"=>$value['title'],
+      "event_code"=> $value['event_code'],
+      "log_code"=> $value['log_code'],
+      "appt_code"=> $value['appt_code'],
+      "start_event"=> $value['start_event'],
+      "time"=> $value['time'],
+      "end_time"=>$value['end_time'],
+      "serv_id"=> $value['serv_id'],
+      "client_id"=>$value['client_id'],
+      "serv_name"=>$value['serv_name'],
+      "serv_type"=>$value['serv_type'],
+      "area"=> $value['area'],
+      "emp_array"=> $emp_arr,
+      "fcu_array"=> $fcu_arr,
+      "client_branch"=> $value['client_branch'],
+      "status"=> $value['status'],
+  ];
+}
+            // dd( $datas['event']);
+$datas['main'] = 'admin/calendar/events';
+return view("templates/template",$datas);
+
+}
 
 public function insert(){
     if($_SESSION['position'] != USER_ROLE_ADMIN && $_SESSION['position'] != USER_ROLE_SECRETARY){

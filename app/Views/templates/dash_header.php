@@ -146,6 +146,13 @@
                 </a>
                 <span class="tooltip">Calendar</span>
             </li>
+            <li>
+                <a href='<?=base_url('/calendar/emp-events')?>'>
+                    <i class="fa fa-tasks" aria-hidden="true"></i>
+                    <span class="links_name">Assigned Task</span>
+                </a>
+                <span class="tooltip">Assigned Task</span>
+            </li>
         <?php else:?>
             <li>
                 <a href="<?=base_url("/client-dashboard")?>">
