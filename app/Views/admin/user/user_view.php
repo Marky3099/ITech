@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="<?= base_url('assets/css/formstyle.css')?>">
 <div class="body-content">
-  <div class="crud-text"><h1>Admin/Secretary/Technician Users</h1></div>
+  <div class="crud-text"><h3>Admin/Secretary/Technician Users</h3></div>
   <div class="d-flex justify-content-left">
     <a href="<?= base_url('user/create/view') ?>" class="btn">Add User</a>
     <a href="<?= base_url('user/print') ?>" target="_blank" class="btn">Print</a>
@@ -48,7 +48,7 @@
     </tbody>
  </table>
  <br><br>
- <h1>Partnered/Non-partnered Company Users</h1>
+ <div class="crud-text"><h3>&emsp;&ensp;&nbsp;Partnered/Non-partnered Company Users</h3></div>
  <table class="table table-bordered table1" client_id="client-list">
          <thead>
           <tr>

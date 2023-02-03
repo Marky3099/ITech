@@ -166,7 +166,7 @@
 <div class="row">
 
   <!-- Card for displaying the total count of today's event -->
-  <div class="col-xl-3 col-md-6 mb-4">
+  <div class="ml-3 col-xl-3 col-md-6 mb-4">
     <div class="card border-left-primary shadow h-100 py-2">
       <div class="card-body1">
         <div class="row no-gutters align-items-center">
@@ -258,6 +258,7 @@
       <div class="modal-body" id="adata">
 
         <input type="hidden" name="start_event" id="start_event" value="">
+         <div class="crud-text"><h5>Client Details:</h5></div>
         <div class="form-group">
           <input class="form-control" type="hidden" name="title" id="title" placeholder="Title">
         </div>
@@ -275,7 +276,7 @@
             </select>
           </div>
         </div>
-        <h3>Client Details:</h3>
+        
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="area">Branch Area</label><br>
@@ -381,39 +382,41 @@
       <form action="<?= base_url('/calendar/update');?>" method="POST"> 
         <div class="modal-body" id="adata">
           <input type="hidden" name="id" id="id" value="">
-          <!-- <h5>Title</h5> -->
+          <div class="crud-text"><h5>Client Details:</h5></div>
+          
           <input class="form-control" type="hidden" name="title_update" id="title_update" placeholder="Title">
-          <label for="event_code">Event Code: </label>
-          <input type="text" name="event_code" id="event_code" value="" disabled>
           <div class="form-row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
+              <label for="event_code">Event Code: </label>
+              <input type="text" name="event_code" id="event_code" value="" disabled>
+            </div>
+            <div class="form-group col-md-4">
              <label for="start_event_update">Date</label><br>
              <input type="date" name="start_event_update" id="start_event_update" disabled>
            </div>
-           <div class="form-group col-md-6">
+           <div class="form-group col-md-4">
             <label for="time_update">Time</label><br>
             <input type="time" name="time_update" id="time_update" disabled>
           </div>
         </div>
-        <h3>Client Details:</h3>
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="area_update">Branch Area</label><br>
-            <select id="area_update" name="area_update" class="form-control" disabled>
-              
-            </select>
+            <div class="select-dropdown">
+              <select id="area_update" name="area_update" class="form-control" disabled></select>
+            </div>
           </div>
           <div class="form-group col-md-6">
             <label for="client_id_update">Branch Name</label><br>
-            <select id="client_id_update" name="client_id_update" class="form-control" disabled>
-
-            </select>
+            <div class="select-dropdown">
+              <select id="client_id_update" name="client_id_update" class="form-control" disabled></select>
+            </div>
           </div>
         </div>
         
-        <div class="form-group">
-          
+        <div class="form-group" id="serv-form">
           <label for="serv_id_update">Service</label><br>
+          <div class="select-dropdown" id="serv-select">
           <select class="form-control" id="serv_id_update" name="serv_id_update" disabled>
             <?php foreach($servName as $s):  ?>
               <optgroup label="<?= $s['serv_name']; ?>">
@@ -425,9 +428,10 @@
               </optgroup>
             <?php endforeach; ?>
           </select>
-        </div> 
+        </div>
+      </div> <br>
 
-         <h3>Aircon Details:</h3>
+      <div class="crud-text"><h5>Aircon Details:</h5></div>
 
         <!-- =================================================== -->
         <div id="auth-rows-edit"></div>
@@ -440,16 +444,15 @@
         </div> -->
 
         <div class="form-group">
-          
-          <label for="emp_id_update">Employee</label><br>
-          <select id="emp_id_update" name="emp_id_update[]" class="form-control selectpicker" multiple data-selected-text-format="count > 8" disabled>
+          <label class="ml-5 mt-3" for="emp_id_update">Employee</label><br>
+          <select id="emp_id_update" name="emp_id_update[]" class="form-control w-75 ml-5 selectpicker border border-dark" multiple data-selected-text-format="count > 8" disabled>
             <!--  -->
           </select>
         </div> 
       </div>
       <div class="modal-footer">
         <div class="form-group">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn py-1 btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </form>
     </div>

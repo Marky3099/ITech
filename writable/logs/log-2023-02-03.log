@@ -204,6 +204,7 @@ CRITICAL - 2023-02-03 00:17:59 --> Undefined index: status
 #11 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #12 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
 #13 {main}
+<<<<<<< HEAD
 ERROR - 2023-02-03 02:17:06 --> Unknown column 'appt_id' in 'where clause'
 CRITICAL - 2023-02-03 02:17:06 --> Unknown column 'appt_id' in 'where clause'
 #0 C:\xampp\htdocs\tsms\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *\nFROM `...', 0)
@@ -411,3 +412,19 @@ CRITICAL - 2023-02-03 06:04:23 --> syntax error, unexpected end of file
 #9 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #10 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
 #11 {main}
+=======
+CRITICAL - 2023-02-03 01:36:53 --> Undefined index: log_code
+#0 C:\xampp\htdocs\tsms\app\Controllers\FullCalendar.php(494): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 494, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\FullCalendar->emp_event()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FullCalendar))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-02-03 02:18:16 --> Undefined index: log_code
+#0 C:\xampp\htdocs\tsms\app\Controllers\FullCalendar.php(494): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 494, Array)
+#1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\FullCalendar->emp_event()
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FullCalendar))
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+>>>>>>> 1d685a921aed07f03aacdbc903537a4de49330a6
