@@ -81,8 +81,6 @@ $routes->get('emp/print', 'EmpCrud::printEmp',['filter' => 'authGuard']);
 $routes->get('emp/delete/(:num)', 'EmpCrud::delete/$1',['filter' => 'authGuard']);
 
 $routes->get('/client', 'ClientCrud::index',['filter' => 'authGuard']);
-$routes->get('client-users', 'ClientCrud::userClient',['filter' => 'authGuard']);
-$routes->get('client-users/(:num)/(:any)', 'ClientCrud::updateStatus/$1/$2',['filter' => 'authGuard']);
 $routes->get('client/create/view', 'ClientCrud::create',['filter' => 'authGuard']);
 $routes->post('client/add', 'ClientCrud::store',['filter' => 'authGuard']);
 $routes->get('client/(:num)', 'ClientCrud::singleClient/$1',['filter' => 'authGuard']);

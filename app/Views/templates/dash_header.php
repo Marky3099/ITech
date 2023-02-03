@@ -117,26 +117,19 @@
                                     </li>
 
                                 </div>
-            <button class = "dropdown-btn">
-                                    <i class = "fa-solid fa-user-pen"></i> <span class="links_name">&nbsp;&nbsp;&nbsp;Account</span>
-                                    <i class = "fa fa-caret-down down2"></i>
-                                    <span class="tooltip5">Accounts</span>
-                                </button>
-
-                                <div class = "dropdown-container">
-                                    <li class="nav-item">
-                                        <a href = "<?= base_url('/client-users');?>">
-                                        <!-- <i class = "fa-solid fa-user"></i> -->
-                                        <span class="links_name"> &nbsp;&nbsp;User Requests</span></a>
-                                        <!-- <span class="tooltip3">User Requests</span> -->
-                                    </li>
-                                    <li class="nav-item">
+                                    <!-- <li class="nav-item">
                                         <a href = "<?= base_url('/user');?>">
-                                        <!-- <i class = "fa-solid fa-user"></i> -->
+                                        <i class = "fa-solid fa-user"></i>
                                         <span class="links_name"> &nbsp;&nbsp;Users</span></a>
-                                        <!-- <span class="tooltip3">Users</span> -->
-                                    </li>
-                                </div>
+                                        <span class="tooltip3">Users</span>
+                                    </li> -->
+            <li class="apptmnt">
+                <a href="<?= base_url('/user');?>">
+                    <i class = "fa-solid fa-user"></i>
+                    <span class="links_name">Users</span>
+                </a>
+                <span class="tooltip">Users</span>
+            </li>
                 <?php endif;?>
         <?php elseif($_SESSION['position'] == USER_ROLE_EMPLOYEE):?>
             <li>

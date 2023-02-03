@@ -175,8 +175,6 @@ if($view_calllogs){
     <tr style = "background-color: #A8D08D; text-align: center; font-size:11px;">
     <th>Date</th>
     <th>Branch Name</th>
-    <th>Caller</th> 
-    <th>Particulars</th> 
     <th>Device Brand</th> 
     <th>Aircon Type</th>
     <th>Qty</th> 
@@ -190,13 +188,41 @@ if($view_calllogs){
      
      $html .=' <tr style="font-size:9px; text-align: center;">
      <td>'.date('m-d-Y',strtotime($call_log->date)).'</td>
-     <td>'.$call_log->client_branch.'</td>
-     <td>'.$call_log->caller.'</td>
-     <td>'.$call_log->particulars.'</td>
-     <td>'.$call_log->device_brand.'</td>
-     <td>'.$call_log->aircon_type.'</td>
-     <td>'.$call_log->qty.'</td>
-     <td style="color:#4F6FA6;">'.$call_log->status.'</td>
+     <td>'.$call_log->client_branch.'</td><td>';
+     $current ='';
+
+                   foreach($distinct as $data){
+                    if($call_log->cl_id ==  $data->cl_id){
+                        if($current !=  $data->device_brand){
+                            $html .=  '*'.$data->device_brand. '<br><br>';
+                             $current =$data->device_brand; 
+                        }   
+                    }
+                   }
+             $html .='</td>
+              <td>';
+              $current_aircon_type ='';
+
+                   foreach($distinct as $data){
+                    if($call_log->cl_id ==  $data->cl_id){
+                        if($current_aircon_type !=  $data->aircon_type){
+                            $html .=  '*'.$data->aircon_type. '<br><br>';
+                             $current_aircon_type =$data->aircon_type; 
+                        }   
+                    }
+                   }
+                   $html .='</td><td>';
+         $current ='';
+
+         foreach($distinct as $data){
+          if($call_log->cl_id ==  $data->cl_id){
+              if($current !=  $data->device_brand){
+                  $html .=  '*'.$data->qty. '<br><br>';
+                   $current =$data->device_brand; 
+              }   
+          }
+         }
+     $html .='</td><td style="color:#4F6FA6;">'.$call_log->status.'</td>
      </tr>';
  
 }

@@ -18,63 +18,6 @@ class ClientCrud extends Controller
         return view("templates/template",$data);
 
     }
-    public function userClient(){
-        if($_SESSION['position'] != USER_ROLE_ADMIN){
-            return $this->response->redirect(site_url('/dashboard'));
-        }
-        $User = new User_bdo();
-        $data['user'] = $User->orderBy('bdo_id', 'ASC')->findAll();
-        $data['main'] = 'admin/client/user_client';
-        return view("templates/template",$data);
-    }
-    public function updateStatus($id,$status){
-
-        if($_SESSION['position'] != USER_ROLE_ADMIN){
-            return $this->response->redirect(site_url('/dashboard'));
-        }
-
-        $User = new User_bdo();
-        $session = session();
-        $user = $User->where('bdo_id', $id)->first();
-        $data_insert = [
-            'status' => $status
-        ];
-        $User->update((int)$id, $data_insert);
-
-        // 
-        if($status == "Approved"){
-            $to = $user['bdo_email'];
-
-            $subject = "TSMS - Account Activation";
-            $message = "<html>
-            <head>
-            <title>Your Account has been Activated</title>
-            </head>
-            <body>
-            <h2>You can now login to our system TSMS.</h2>
-            <p>You can access by using your email: ".$to." with your password</p>
-            <h4><a href='".base_url("/bdo-login")." '>Login Now</a></h4>
-            </body>
-            </html>";
-            $email = \Config\Services::email();
-            $email->setTo($to);
-            $email->setFrom('Maylaflor@gmail.com','Maylaflor TSMS');
-            $email->setSubject($subject);
-            $email->setMessage($message);
-
-            if ($email->send()) {
-                echo "Success";
-            }else{
-                $data = $email->printDebugger(['headers']);
-                print_r($data);
-            }
-        }
-        // 
-        
-        $session->setFlashdata('msg', $status);
-
-        return $this->response->redirect(site_url('/client-users'));
-    }
 
     // add Client form
     public function create(){

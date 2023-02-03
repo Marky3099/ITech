@@ -346,13 +346,23 @@ public function dailyLogs(){
     $Emp = new Emp();
     $serv = new Serv();
 
+    $db = \Config\Database::connect();
+    $query   = $db->query('SELECT DISTINCT aircon_id,cl_id,device_brand,aircon_type,qty
+        FROM call_fcu_views');
+    $data['distinct'] = $query->getResult();
+
+    $db1 = \Config\Database::connect();
+    $query   = $db1->query('SELECT DISTINCT cl_id
+        FROM call_fcu_views');
+    $data['distinct_event'] = $query->getResult();
+
     $data['view_calllogs'] = [];
     $data['areas'] = array();
     $data['cBranch']="";
     $data['now'] = date('Y-m-d');
     $data['client'] = $Client->orderBy('client_id', 'ASC')->findAll();
     $data['area'] = $Client->select('area')->groupBy('area')->findAll();
-    $data['caller'] = $Call_logs->select('caller')->groupBy('caller', 'asc')->findAll();
+    // $data['caller'] = $Call_logs->select('caller')->groupBy('caller', 'asc')->findAll();
     // dd($data['caller']);
     $data['fcu_no'] = $fcu_no->orderBy('fcuno', 'ASC')->findAll();
     $data['call_fcu'] = $Call_fcu->orderBy('cl_id', 'ASC')->findAll();
@@ -395,10 +405,18 @@ public function dailyLogs(){
 
 foreach ($data['call_logs'] as $key => $value) {
     array_push($data['areas'],$value['area']);
-    $fcu_arr = "";
+    $fcu_arr =array();
     foreach ($data['call_fcu'] as $key => $value_fcu) {
         if ( $value['cl_id'] == $value_fcu['cl_id']) {
-         $fcu_arr .= $data['call_fcu'][$key]['fcu'].",";
+         array_push($fcu_arr , (object)[
+                'cl_id' => (int)$value_fcu['cl_id'],
+                'aircon_id' => (int)$value_fcu['aircon_id'],
+                'fcuno' =>(int)$value_fcu['fcuno'],
+                'qty' =>(int)$value_fcu['qty'],
+                'device_brand' =>$value_fcu['device_brand'],
+                'aircon_type' =>$value_fcu['aircon_type'],
+                'fcu' =>$value_fcu['fcu'],
+            ]);
      }
  }    
  $data['view_calllogs'][]= (object)[
@@ -408,14 +426,13 @@ foreach ($data['call_logs'] as $key => $value) {
     "client_id"=> $value['client_id'],
     "area"=> $value['area'],
     "client_branch"=> $value['client_branch'],
-    "aircon_id"=> $value['aircon_id'],
-    "aircon_type"=> $value['aircon_type'],
-    "device_brand"=> $value['device_brand'],
-    "caller"=> $value['caller'],
-    "particulars"=> $value['particulars'],
-    "qty"=> $value['qty'],
+    // "aircon_id"=> $value['aircon_id'],
+    // "aircon_type"=> $value['aircon_type'],
+    // "device_brand"=> $value['device_brand'],
+
+    // "qty"=> $value['qty'],
     "status"=> $value['status'],
-    "set_status"=> $value['set_status'],
+
     "fcu_arr"=> $fcu_arr,
 ];
 }
@@ -445,6 +462,16 @@ public function WeeklyLogs(){
     $Emp = new Emp();
     $serv = new Serv();
 
+    $db = \Config\Database::connect();
+    $query   = $db->query('SELECT DISTINCT aircon_id,cl_id,device_brand,aircon_type,qty
+        FROM call_fcu_views');
+    $data['distinct'] = $query->getResult();
+
+    $db1 = \Config\Database::connect();
+    $query   = $db1->query('SELECT DISTINCT cl_id
+        FROM call_fcu_views');
+    $data['distinct_event'] = $query->getResult();
+
     $monday = date('Y-m-d', strtotime('monday this week'));
     $sunday = date('Y-m-d', strtotime('sunday this week'));
     $data['view_calllogs'] = [];
@@ -453,7 +480,6 @@ public function WeeklyLogs(){
     $data['now'] = date('Y-m-d');
     $data['client'] = $Client->orderBy('client_id', 'ASC')->findAll();
     $data['area'] = $Client->select('area')->groupBy('area')->findAll();
-    $data['caller'] = $Call_logs->select('caller')->groupBy('caller', 'asc')->findAll();
     // dd($data['caller']);
     $data['fcu_no'] = $fcu_no->orderBy('fcuno', 'ASC')->findAll();
     $data['call_fcu'] = $Call_fcu->orderBy('cl_id', 'ASC')->findAll();
@@ -496,10 +522,18 @@ public function WeeklyLogs(){
 
 foreach ($data['call_logs'] as $key => $value) {
     array_push($data['areas'],$value['area']);
-    $fcu_arr = "";
+    $fcu_arr =array();
     foreach ($data['call_fcu'] as $key => $value_fcu) {
         if ( $value['cl_id'] == $value_fcu['cl_id']) {
-         $fcu_arr .= $data['call_fcu'][$key]['fcu'].",";
+         array_push($fcu_arr , (object)[
+                'cl_id' => (int)$value_fcu['cl_id'],
+                'aircon_id' => (int)$value_fcu['aircon_id'],
+                'fcuno' =>(int)$value_fcu['fcuno'],
+                'qty' =>(int)$value_fcu['qty'],
+                'device_brand' =>$value_fcu['device_brand'],
+                'aircon_type' =>$value_fcu['aircon_type'],
+                'fcu' =>$value_fcu['fcu'],
+            ]);
      }
  }    
  $data['view_calllogs'][]= (object)[
@@ -509,14 +543,11 @@ foreach ($data['call_logs'] as $key => $value) {
     "client_id"=> $value['client_id'],
     "area"=> $value['area'],
     "client_branch"=> $value['client_branch'],
-    "aircon_id"=> $value['aircon_id'],
-    "aircon_type"=> $value['aircon_type'],
-    "device_brand"=> $value['device_brand'],
-    "caller"=> $value['caller'],
-    "particulars"=> $value['particulars'],
-    "qty"=> $value['qty'],
+    // "aircon_id"=> $value['aircon_id'],
+    // "aircon_type"=> $value['aircon_type'],
+    // "device_brand"=> $value['device_brand'],
+    // "qty"=> $value['qty'],
     "status"=> $value['status'],
-    "set_status"=> $value['set_status'],
     "fcu_arr"=> $fcu_arr,
 ];
 }
@@ -546,13 +577,22 @@ public function monthlyLogs(){
     $Emp = new Emp();
     $serv = new Serv();
 
+    $db = \Config\Database::connect();
+    $query   = $db->query('SELECT DISTINCT aircon_id,cl_id,device_brand,aircon_type,qty
+        FROM call_fcu_views');
+    $data['distinct'] = $query->getResult();
+
+    $db1 = \Config\Database::connect();
+    $query   = $db1->query('SELECT DISTINCT cl_id
+        FROM call_fcu_views');
+    $data['distinct_event'] = $query->getResult();
+
     $data['view_calllogs'] = [];
     $data['areas'] = array();
     $data['cBranch']="";
     $data['now'] = date('Y-m-d');
     $data['client'] = $Client->orderBy('client_id', 'ASC')->findAll();
     $data['area'] = $Client->select('area')->groupBy('area')->findAll();
-    $data['caller'] = $Call_logs->select('caller')->groupBy('caller', 'asc')->findAll();
     // dd($data['caller']);
     $data['fcu_no'] = $fcu_no->orderBy('fcuno', 'ASC')->findAll();
     $data['call_fcu'] = $Call_fcu->orderBy('cl_id', 'ASC')->findAll();
@@ -595,12 +635,20 @@ public function monthlyLogs(){
 
 foreach ($data['call_logs'] as $key => $value) {
     array_push($data['areas'],$value['area']);
-    $fcu_arr = "";
+    $fcu_arr =array();
     foreach ($data['call_fcu'] as $key => $value_fcu) {
         if ( $value['cl_id'] == $value_fcu['cl_id']) {
-         $fcu_arr .= $data['call_fcu'][$key]['fcu'].",";
+         array_push($fcu_arr , (object)[
+                'cl_id' => (int)$value_fcu['cl_id'],
+                'aircon_id' => (int)$value_fcu['aircon_id'],
+                'fcuno' =>(int)$value_fcu['fcuno'],
+                'qty' =>(int)$value_fcu['qty'],
+                'device_brand' =>$value_fcu['device_brand'],
+                'aircon_type' =>$value_fcu['aircon_type'],
+                'fcu' =>$value_fcu['fcu'],
+            ]);
      }
- }    
+ }       
  $data['view_calllogs'][]= (object)[
     "cl_id"=> $value['cl_id'],
     "date"=> $value['date'],
@@ -608,14 +656,7 @@ foreach ($data['call_logs'] as $key => $value) {
     "client_id"=> $value['client_id'],
     "area"=> $value['area'],
     "client_branch"=> $value['client_branch'],
-    "aircon_id"=> $value['aircon_id'],
-    "aircon_type"=> $value['aircon_type'],
-    "device_brand"=> $value['device_brand'],
-    "caller"=> $value['caller'],
-    "particulars"=> $value['particulars'],
-    "qty"=> $value['qty'],
     "status"=> $value['status'],
-    "set_status"=> $value['set_status'],
     "fcu_arr"=> $fcu_arr,
 ];
 }
@@ -645,6 +686,16 @@ public function quarterlyLogs(){
     $Emp = new Emp();
     $serv = new Serv();
 
+    $db = \Config\Database::connect();
+    $query   = $db->query('SELECT DISTINCT aircon_id,cl_id,device_brand,aircon_type,qty
+        FROM call_fcu_views');
+    $data['distinct'] = $query->getResult();
+
+    $db1 = \Config\Database::connect();
+    $query   = $db1->query('SELECT DISTINCT cl_id
+        FROM call_fcu_views');
+    $data['distinct_event'] = $query->getResult();
+
     $month = date('n');
     $data['quarter'] = "";
     if($month <= 3){ 
@@ -665,7 +716,6 @@ public function quarterlyLogs(){
     $data['now'] = date('Y-m-d');
     $data['client'] = $Client->orderBy('client_id', 'ASC')->findAll();
     $data['area'] = $Client->select('area')->groupBy('area')->findAll();
-    $data['caller'] = $Call_logs->select('caller')->groupBy('caller', 'asc')->findAll();
     // dd($data['caller']);
     $data['fcu_no'] = $fcu_no->orderBy('fcuno', 'ASC')->findAll();
     $data['call_fcu'] = $Call_fcu->orderBy('cl_id', 'ASC')->findAll();
@@ -708,10 +758,18 @@ public function quarterlyLogs(){
 
 foreach ($data['call_logs'] as $key => $value) {
     array_push($data['areas'],$value['area']);
-    $fcu_arr = "";
+    $fcu_arr =array();
     foreach ($data['call_fcu'] as $key => $value_fcu) {
         if ( $value['cl_id'] == $value_fcu['cl_id']) {
-         $fcu_arr .= $data['call_fcu'][$key]['fcu'].",";
+         array_push($fcu_arr , (object)[
+                'cl_id' => (int)$value_fcu['cl_id'],
+                'aircon_id' => (int)$value_fcu['aircon_id'],
+                'fcuno' =>(int)$value_fcu['fcuno'],
+                'qty' =>(int)$value_fcu['qty'],
+                'device_brand' =>$value_fcu['device_brand'],
+                'aircon_type' =>$value_fcu['aircon_type'],
+                'fcu' =>$value_fcu['fcu'],
+            ]);
      }
  }    
  $data['view_calllogs'][]= (object)[
@@ -721,14 +779,7 @@ foreach ($data['call_logs'] as $key => $value) {
     "client_id"=> $value['client_id'],
     "area"=> $value['area'],
     "client_branch"=> $value['client_branch'],
-    "aircon_id"=> $value['aircon_id'],
-    "aircon_type"=> $value['aircon_type'],
-    "device_brand"=> $value['device_brand'],
-    "caller"=> $value['caller'],
-    "particulars"=> $value['particulars'],
-    "qty"=> $value['qty'],
     "status"=> $value['status'],
-    "set_status"=> $value['set_status'],
     "fcu_arr"=> $fcu_arr,
 ];
 }
@@ -758,13 +809,22 @@ public function yearlyLogs(){
     $Emp = new Emp();
     $serv = new Serv();
 
+    $db = \Config\Database::connect();
+    $query   = $db->query('SELECT DISTINCT aircon_id,cl_id,device_brand,aircon_type,qty
+        FROM call_fcu_views');
+    $data['distinct'] = $query->getResult();
+
+    $db1 = \Config\Database::connect();
+    $query   = $db1->query('SELECT DISTINCT cl_id
+        FROM call_fcu_views');
+    $data['distinct_event'] = $query->getResult();
+
     $data['view_calllogs'] = [];
     $data['areas'] = array();
     $data['cBranch']="";
     $data['now'] = date('Y-m-d');
     $data['client'] = $Client->orderBy('client_id', 'ASC')->findAll();
     $data['area'] = $Client->select('area')->groupBy('area')->findAll();
-    $data['caller'] = $Call_logs->select('caller')->groupBy('caller', 'asc')->findAll();
     // dd($data['caller']);
     $data['fcu_no'] = $fcu_no->orderBy('fcuno', 'ASC')->findAll();
     $data['call_fcu'] = $Call_fcu->orderBy('cl_id', 'ASC')->findAll();
@@ -807,10 +867,18 @@ public function yearlyLogs(){
 
 foreach ($data['call_logs'] as $key => $value) {
     array_push($data['areas'],$value['area']);
-    $fcu_arr = "";
+   $fcu_arr =array();
     foreach ($data['call_fcu'] as $key => $value_fcu) {
         if ( $value['cl_id'] == $value_fcu['cl_id']) {
-         $fcu_arr .= $data['call_fcu'][$key]['fcu'].",";
+         array_push($fcu_arr , (object)[
+                'cl_id' => (int)$value_fcu['cl_id'],
+                'aircon_id' => (int)$value_fcu['aircon_id'],
+                'fcuno' =>(int)$value_fcu['fcuno'],
+                'qty' =>(int)$value_fcu['qty'],
+                'device_brand' =>$value_fcu['device_brand'],
+                'aircon_type' =>$value_fcu['aircon_type'],
+                'fcu' =>$value_fcu['fcu'],
+            ]);
      }
  }    
  $data['view_calllogs'][]= (object)[
@@ -820,14 +888,7 @@ foreach ($data['call_logs'] as $key => $value) {
     "client_id"=> $value['client_id'],
     "area"=> $value['area'],
     "client_branch"=> $value['client_branch'],
-    "aircon_id"=> $value['aircon_id'],
-    "aircon_type"=> $value['aircon_type'],
-    "device_brand"=> $value['device_brand'],
-    "caller"=> $value['caller'],
-    "particulars"=> $value['particulars'],
-    "qty"=> $value['qty'],
     "status"=> $value['status'],
-    "set_status"=> $value['set_status'],
     "fcu_arr"=> $fcu_arr,
 ];
 }

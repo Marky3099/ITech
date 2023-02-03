@@ -2,6 +2,7 @@
 namespace App\Controllers;
 use App\Models\User;
 use App\Models\Emp;
+use App\Models\User_bdo;
 use CodeIgniter\Controller;
 use App\Libraries\Phpmailer_lib;
 
@@ -14,9 +15,12 @@ class UsersCrud extends Controller
         }
         $User = new User();
         $data['users'] = $User->orderBy('user_id', 'ASC')->findAll();
+
+        $UserClient = new User_bdo();
+        $data['usersClient'] = $UserClient->orderBy('bdo_id', 'ASC')->findAll();
+        
         $data['main'] = 'admin/user/user_view';
         return view("templates/template",$data);
-
     }
 
     // add User form

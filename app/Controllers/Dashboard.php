@@ -429,23 +429,23 @@ foreach ($data['pending_log'] as $key => $value) {
 ];
 }
 
-// Pending users
-$data['user_pending'] = [];
-$data['pending_user'] = $bdo_user->where('status = "Pending" ORDER BY bdo_id ASC')->findAll();
-$data['count_user'] = count($data['pending_user']);
-// dd($data['count_log']);
+// // Pending users
+// $data['user_pending'] = [];
+// $data['pending_user'] = $bdo_user->where('status = "Pending" ORDER BY bdo_id ASC')->findAll();
+// $data['count_user'] = count($data['pending_user']);
+// // dd($data['count_log']);
 
-foreach ($data['pending_user'] as $key => $value) {
+// foreach ($data['pending_user'] as $key => $value) {
     
- // dd($data['pending']);
- $data['user_pending'][]= (object)[
-    "bdo_id"=> $value['bdo_id'],
-    "bdo_fname"=> $value['bdo_fname']." ".$value['bdo_lname'],
-    "bdo_email"=>$value['bdo_email'],
-    "bdo_company"=>$value['bdo_company'],
-    "status"=>$value['status'],
-];
-}
+//  // dd($data['pending']);
+//  $data['user_pending'][]= (object)[
+//     "bdo_id"=> $value['bdo_id'],
+//     "bdo_fname"=> $value['bdo_fname']." ".$value['bdo_lname'],
+//     "bdo_email"=>$value['bdo_email'],
+//     "bdo_company"=>$value['bdo_company'],
+//     "status"=>$value['status'],
+// ];
+// }
 
 
 

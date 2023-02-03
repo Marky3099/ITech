@@ -1,11 +1,12 @@
 <link rel="stylesheet" href="<?= base_url('assets/css/formstyle.css')?>">
 <div class="body-content">
-  <div class="crud-text"><h3>Users</h3></div>
+  <div class="crud-text"><h1>Admin/Secretary/Technician Users</h1></div>
   <div class="d-flex justify-content-left">
     <a href="<?= base_url('user/create/view') ?>" class="btn">Add User</a>
     <a href="<?= base_url('user/print') ?>" target="_blank" class="btn">Print</a>
  </div>
  <div class="mt-3">
+   
     <table class="table table-bordered" user_id="users-list" id="table1">
      <thead>
         <tr>
@@ -46,6 +47,37 @@
        <?php endif; ?>
     </tbody>
  </table>
+ <br><br>
+ <h1>Partnered/Non-partnered Company Users</h1>
+ <table class="table table-bordered" client_id="client-list" id="table1">
+         <thead>
+          <tr>
+           <th>#</th>
+           <th>First Name</th>
+           <th>Last Name</th>
+           <th>Email</th>
+           <th>Contact</th>
+           <th>Company</th>
+           <th>Address</th>
+       </tr>
+   </thead>
+   <tbody>
+      <?php if($user): $c = 1;?>
+          <?php foreach($usersClient as $client):  ?>
+              <tr>
+               <td><?php echo $c ?></td>
+               <td><?php echo $client['bdo_fname']; ?></td>
+               <td><?php echo $client['bdo_lname']; ?></td>
+               <td><?php echo $client['bdo_email']; ?></td>
+               <td><?php echo $client['bdo_contact']; ?></td>
+               <td><?php echo $client['bdo_company']; ?></td>
+               <td><?php echo $client['bdo_address']; ?></td>
+        </tr>
+        <?php  $c=$c+1;
+    endforeach; ?>
+<?php endif; ?>
+</tbody>
+</table>
 </div>
 </div>
 </div>

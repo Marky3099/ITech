@@ -255,7 +255,6 @@ public function checkClient()
             // if($user_info['position'] === "Admin"){
         if($user_info['bdo_unique_code'] != ""){
             if ($user_info['position'] === "Client") {
-                if($user_info['status'] === "Approved"){
                     $pass = $user_info['bdo_password'];
 
                     $check_password = password_verify($password,$pass);
@@ -283,11 +282,7 @@ public function checkClient()
                   }
                   $session->set($getdata);
                   return redirect()->to('appointment');
-                }else{
-
-                   $data['errorAcc'] = "This account is not approved yet";
-                   return view('pages/bdo_login',$data);  
-                }
+                
             }else{
                               // $data['main'] = 'pages/admin_login';
               $data['errorAcc'] = "Account is not registered as Client";
@@ -338,7 +333,6 @@ public function checkClientNonBdo()
             // if($user_info['position'] === "Admin"){
         if($user_info['bdo_unique_code'] == ""){
             if ($user_info['position'] === "Client") {
-                if($user_info['status'] === "Approved"){
                     $pass = $user_info['bdo_password'];
 
                     $check_password = password_verify($password,$pass);
@@ -366,11 +360,6 @@ public function checkClientNonBdo()
                   }
                   $session->set($getdata);
                   return redirect()->to('appointment');
-                }else{
-
-                   $data['errorAcc'] = "This account is not approved yet";
-                   return view('pages/nonbdo_login',$data);  
-                }
             }else{
                               // $data['main'] = 'pages/admin_login';
               $data['errorAcc'] = "Account is not registered as Client";
@@ -415,7 +404,7 @@ public function registerBdo(){
                     return view("pages/bdo_register",$data);
                 }
                 if($userBdo->insert($userBdo_create)){
-                    $data['success'] = 'Sign up successful. Please wait for your account to be activated.';
+                    $data['success'] = 'Sign up successful.';
                     return view("pages/bdo_register",$data);
                 }
             }else{
@@ -472,7 +461,7 @@ public function registerNonBdo(){
               // 
                 $update_data = ['client_id' => (int)$success1];
                 $userBdo->update((int)$success,$update_data);
-                $data['success'] = 'Sign up successful. Please wait for your account to be activated.';
+                $data['success'] = 'Sign up successful.';
                 
             }else{
                 $data['error'] = 'There is a problem, Please Try again later.';
