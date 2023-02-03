@@ -53,6 +53,8 @@ $routes->get('/forgot-password-client/(:any)', 'Pages::change_pass_form_client/$
 $routes->post('/reset-password/(:any)', 'Pages::change_pass/$1');
 
 $routes->get('/appointment', 'AppointmentCrud::index',['filter' => 'authGuard']);
+$routes->get('/appointment/getEmp', 'AppointmentCrud::getEmp',['filter' => 'authGuard']);
+$routes->post('/appointment/rate-service', 'AppointmentCrud::rateService',['filter' => 'authGuard']);
 $routes->get('/admin-appointment', 'AppointmentCrud::adminAppointment',['filter' => 'authGuard']);
 $routes->get('/appointment/create', 'AppointmentCrud::create',['filter' => 'authGuard']);
 $routes->post('/appointment/add', 'AppointmentCrud::store',['filter' => 'authGuard']);

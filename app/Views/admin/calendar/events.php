@@ -156,7 +156,9 @@
      <div class="crud-text"><h3 class="headerfont">Scheduled Tasks</h3></div>
 
      <div class="tsk">
+      <?php if($_SESSION['position'] != USER_ROLE_EMPLOYEE):?>
         <a href="<?= base_url('/calendar') ?>" class="btn" >Calendar</a>
+      <?php endif;?>
      </div>
 </div>
 <div class="col-sm-12 mt-3 bg-light" style=" padding:10px;">

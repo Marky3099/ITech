@@ -10,6 +10,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      <form method="POST" action="<?=base_url('/appointment/rate-service')?>">
       <div class="modal-body">
         <div class="container">
           <center><h2>Service's Review</h2></center>
@@ -17,7 +18,7 @@
             <div class="col-lg-4">
                <p class="servq">Service Quality</p>
             </div>
-            <div class="rate col-lg-5">
+            <div class="rate col-lg-6">
               <input type="radio" id="star5" name="rate" value="5" />
               <label for="star5" title="Amazing">5 stars</label>
               <input type="radio" id="star4" name="rate" value="4" />
@@ -29,18 +30,24 @@
               <input type="radio" id="star1" name="rate" value="1" />
               <label for="star1" title="Terrible">1 star</label>
             </div>
+            <div class="col-lg-2 result"></div>
           </div>
+          <textarea name="comments" placeholder="Share more thoughts on our service..." rows="4" cols="50"></textarea>
+          <center><h2>Technician's Review</h2></center>
+          <div class="techRate">
+            
+          </div>
+          
         </div>
         
-        <br><br>
-        <textarea name="comments" placeholder="Share more thoughts on our service..." rows="4" cols="50"></textarea>
-        <center><h2>Technician's Review</h2></center>
+        
         <h6></h6>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
       </div>
+      </form>
     </div>
   </div>
 </div>
@@ -164,7 +171,9 @@
            <td><?php echo $appt->appt_status; ?></td>
            <td>
             <?php if($appt->appt_status == 'Done'):?>
-              <a href=# id="<?php echo $appt->appt_id;?>" class="btn btn-success btn-sm" data-toggle="modal" data-target="#rateModal">Rate</a>
+              <?php if($appt->rate == 0):?>
+                <a href=# id="<?php echo $appt->appt_id;?>" class="btn btn-success btn-sm ratea" data-toggle="modal" data-target="#rateModal">Rate</a>
+              <?php endif;?>
             <?php endif;?>
            </td>
            <td>
@@ -205,6 +214,14 @@
       update = true;
       del = 'Appointment Details are Updated Successfully';
       <?php }?>;
+
+    <?php if(session()->has('Error')){?>
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: '<?= session()->getFlashdata('Error')?>',
+    })
+   <?php }?>;
 
       $(document).on('click','.view',function(e){
       // console.log(e.target.id);
@@ -295,5 +312,87 @@
          })
       })
 
+
+      $('.ratea').click(function(){
+        var id = $(this).attr('id');
+        var employeeId = new Array();
+        var myModal = new bootstrap.Modal(document.getElementById('rateModal'));
+        $.ajax({
+           method: 'Get',
+           url: 'http://localhost/tsms/appointment/getEmp',
+           data:{
+              'appt_id': id
+           },
+           success: function(response){
+            var events = response.eventEmp;
+            // console.log(events);
+            var apptEvents = new Array();
+            var eventId;
+            var apptId;
+            var idEmp = new Array();
+            for(var i =0; i<events.length; i++){
+              var apptData = response.eventEmp[i];
+              var appt = apptData.appt_code.split("-");
+              var code = appt[2];
+              if(code == id){
+                apptEvents.push(apptData);
+                eventId = apptData.id;
+                apptId = code;
+              }
+            }
+            // console.log(eventId);
+            $('.techRate').empty();
+            for (var i = 0; i < apptEvents.length; i++) {
+              var empId = apptEvents[i].emp_id;
+              idEmp.push(empId);
+              // console.log(`resulttech`+empId+`"`);
+              // console.log('.resulttech'+empId);
+
+              $('.techRate').append(`<h5>`+apptEvents[i].emp_name+`</h5><div class="row rowa">
+            <div class="col-lg-5">
+               <p class="servq">Technician Quality</p>
+            </div>
+            <input type="hidden" value="`+eventId+`" name="event_id">
+            <input type="hidden" value="`+id+`" name="appt_id">
+            <input type="hidden" value="`+empId+`" name="emp_id[]" multiple>
+            
+            <div class="tech col-lg-6">
+              <input type="radio" id="star5`+empId+`" name="rate_`+empId+`" value="5" />
+              <label for="star5`+empId+`" title="Amazing">5 stars</label>
+              <input type="radio" id="star4`+empId+`" name="rate_`+empId+`" value="4" />
+              <label for="star4`+empId+`" title="Good">4 stars</label>
+              <input type="radio" id="star3`+empId+`" name="rate_`+empId+`" value="3" />
+              <label for="star3`+empId+`" title="Fair">3 stars</label>
+              <input type="radio" id="star2`+empId+`" name="rate_`+empId+`" value="2" />
+              <label for="star2`+empId+`" title="Poor">2 stars</label>
+              <input type="radio" id="star1`+empId+`" name="rate_`+empId+`" value="1" />
+              <label for="star1`+empId+`" title="Terrible">1 star</label>
+            </div>
+            <div class="col-lg-1 resulttech" id= a`+empId+`></div>
+          </div>
+          <textarea name="techComments[]" placeholder="Leave a comment..." rows="4" cols="50" multiple></textarea>`);
+            }
+           // console.log(idEmp);
+           }
+         })
+      })
+
+
+      // $('#star5').click(function(){
+      //   $('.result').html('<h6>Amazing</h6>');
+      // })
+      // $('#star4').click(function(){
+      //   $('.result').html('<h6>Good</h6>');
+      // })
+      // $('#star3').click(function(){
+      //   $('.result').html('<h6>Fair</h6>');
+      // })
+      // $('#star2').click(function(){
+      //   $('.result').html('<h6>Poor</h6>');
+      // })
+      // $('#star1').click(function(){
+      //   $('.result').html('<h6>Terrible</h6>');
+      // })
+      
    </script>
    <script type="text/javascript" src="<?= base_url('assets/js/crud.js')?>"></script>
