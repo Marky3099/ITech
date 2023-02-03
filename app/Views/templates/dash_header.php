@@ -117,12 +117,6 @@
                                     </li>
 
                                 </div>
-                                    <!-- <li class="nav-item">
-                                        <a href = "<?= base_url('/user');?>">
-                                        <i class = "fa-solid fa-user"></i>
-                                        <span class="links_name"> &nbsp;&nbsp;Users</span></a>
-                                        <span class="tooltip3">Users</span>
-                                    </li> -->
             <li class="apptmnt">
                 <a href="<?= base_url('/user');?>">
                     <i class = "fa-solid fa-user"></i>

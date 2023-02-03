@@ -1,5 +1,51 @@
 <link rel="stylesheet" href="<?= base_url('assets/css/style.css')?>">
 
+<!-- rate service -->
+<div class="modal fade" id="rateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Service Review</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <center><h2>Service's Review</h2></center>
+          <div class="row">
+            <div class="col-lg-4">
+               <p class="servq">Service Quality</p>
+            </div>
+            <div class="rate col-lg-5">
+              <input type="radio" id="star5" name="rate" value="5" />
+              <label for="star5" title="Amazing">5 stars</label>
+              <input type="radio" id="star4" name="rate" value="4" />
+              <label for="star4" title="Good">4 stars</label>
+              <input type="radio" id="star3" name="rate" value="3" />
+              <label for="star3" title="Fair">3 stars</label>
+              <input type="radio" id="star2" name="rate" value="2" />
+              <label for="star2" title="Poor">2 stars</label>
+              <input type="radio" id="star1" name="rate" value="1" />
+              <label for="star1" title="Terrible">1 star</label>
+            </div>
+          </div>
+        </div>
+        
+        <br><br>
+        <textarea name="comments" placeholder="Share more thoughts on our service..." rows="4" cols="50"></textarea>
+        <center><h2>Technician's Review</h2></center>
+        <h6></h6>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- view appointments -->
 <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
@@ -94,6 +140,7 @@
            <th>Time</th>
            <th>Appt Code</th>
            <th>Status</th>
+           <th>Review</th>
            <th>Action</th>
         </tr>
      </thead>
@@ -115,6 +162,11 @@
                   <?php endif;?>
            <td><?php echo $appt->appt_code; ?></td>
            <td><?php echo $appt->appt_status; ?></td>
+           <td>
+            <?php if($appt->appt_status == 'Done'):?>
+              <a href=# id="<?php echo $appt->appt_id;?>" class="btn btn-success btn-sm" data-toggle="modal" data-target="#rateModal">Rate</a>
+            <?php endif;?>
+           </td>
            <td>
             
             <a href="#" id="<?php echo $appt->appt_id;?>" class="btn btn-info btn-sm view">View</a>

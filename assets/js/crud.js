@@ -46,6 +46,10 @@ $(document).ready( function () {
         pageLength : 5,
         lengthMenu: [[5, 10, 15,20], [5, 10, 15, 20,]]
       });
+    $('.table1').DataTable({
+        pageLength : 5,
+        lengthMenu: [[5, 10, 15,20], [5, 10, 15, 20,]]
+      });
     $('#event-table').DataTable({
         pageLength : 5,
         ordering: false,

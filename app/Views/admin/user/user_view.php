@@ -7,7 +7,7 @@
  </div>
  <div class="mt-3">
    
-    <table class="table table-bordered" user_id="users-list" id="table1">
+    <table class="table table-bordered table1" user_id="users-list">
      <thead>
         <tr>
            <th>#</th>
@@ -49,7 +49,7 @@
  </table>
  <br><br>
  <h1>Partnered/Non-partnered Company Users</h1>
- <table class="table table-bordered" client_id="client-list" id="table1">
+ <table class="table table-bordered table1" client_id="client-list">
          <thead>
           <tr>
            <th>#</th>
