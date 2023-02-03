@@ -235,7 +235,7 @@
       </div>
       <div class="modal-footer">
         <div class="form-group">
-          <button type="button" class="btn py-2 px2 btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn py-1 btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </form>
     </div>
