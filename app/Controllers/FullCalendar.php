@@ -20,6 +20,7 @@ use App\Models\Restrict_date;
 use App\Models\Upload;
 use App\Models\Emp_expertise_views;
 use App\Models\User;
+use App\Models\Ratings;
 
 class FullCalendar extends BaseController
 {
@@ -439,7 +440,7 @@ public function emp_event(){
     $datas['event_emp'] = $event_emp->orderBy('id', 'ASC')->findAll();
     $datas['event_fcu'] = $event_fcu->orderBy('id', 'ASC')->orderBy('fcuno', 'ASC')->findAll();
     // $datas['aircon'] = $aircon->orderBy('aircon_id', 'ASC')->findAll();
-    $datas['all_events'] = $event_emp->where('emp_id', $emp_id)->findAll();
+    $datas['all_events'] = $event_emp->where('emp_id', $emp_id)->orderBy('id','DESC')->findAll();
         // dd($datas['groupby_fcu']);
     foreach($datas['area'] as $k => $val) {
 
@@ -1704,15 +1705,32 @@ public function viewReports(){
 
 }
 public function deleteReports(){
-        $Upload = new Upload();
-        $upload_id = $_GET['id'];
-        $Upload_obj = $Upload->find($upload_id);
-        $imagefile = $Upload_obj['image'];
-        if (file_exists("uploads/".$imagefile)) {
-          unlink("uploads/".$imagefile);
-      }
-      $Upload->delete($upload_id);
-      return false;
-  }
+    $Upload = new Upload();
+    $upload_id = $_GET['id'];
+    $Upload_obj = $Upload->find($upload_id);
+    $imagefile = $Upload_obj['image'];
+    if (file_exists("uploads/".$imagefile)) {
+      unlink("uploads/".$imagefile);
+    }
+    $Upload->delete($upload_id);
+    return false;
 }
+  public function viewRatings(){
+    $rate = new Ratings();
+    $emp = new Event_emp_views();
+    $id = $_GET['id'];
+
+    if($_SESSION['position'] == USER_ROLE_EMPLOYEE){
+       $emp_id = $_SESSION['emp_id']; 
+       $data['rate'] = $rate->where('id',$id)->where('emp_id',$emp_id )->findAll();
+       $data['emp'] = $emp->where('id',$id)->where('emp_id',$emp_id )->findAll();
+    }else{
+       $data['rate'] = $rate->where('id',$id)->findAll();
+       $data['emp'] = $emp->where('id',$id)->findAll();
+    }
+
+    return $this->response->setJSON($data);
+}
+}
+
 ?>

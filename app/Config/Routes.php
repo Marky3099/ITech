@@ -58,7 +58,6 @@ $routes->post('/appointment/rate-service', 'AppointmentCrud::rateService',['filt
 $routes->get('/admin-appointment', 'AppointmentCrud::adminAppointment',['filter' => 'authGuard']);
 $routes->get('/appointment/create', 'AppointmentCrud::create',['filter' => 'authGuard']);
 $routes->post('/appointment/add', 'AppointmentCrud::store',['filter' => 'authGuard']);
-$routes->post('/admin-appointment/add-to-calendar', 'FullCalendar::insertAppt',['filter' => 'authGuard']);
 $routes->get('/appointment/(:num)', 'AppointmentCrud::singleAppt/$1',['filter' => 'authGuard']);
 $routes->post('/appointment/update', 'AppointmentCrud::update',['filter' => 'authGuard']);
 $routes->get('appointment/delete/(:num)', 'AppointmentCrud::delete/$1',['filter' => 'authGuard']);
@@ -108,11 +107,6 @@ $routes->get('/calllogs/filtered-yearly', 'CalllogsCrud::yearlyLogs',['filter' =
 $routes->post('/calllogs/set-Calllogs', 'CalllogsCrud::setLog',['filter' => 'authGuard']);
 
 $routes->get('calllogs/create/view', 'CalllogsCrud::create',['filter' => 'authGuard']);
-$routes->post('/calllogs/add', 'CalllogsCrud::store',['filter' => 'authGuard']);
-$routes->post('/calllogs/add-to-calendar', 'FullCalendar::insertCal',['filter' => 'authGuard']);
-$routes->post('/calllogs/set-to-calendar', 'FullCalendar::setCal',['filter' => 'authGuard']);
-$routes->get('calllogs/(:num)', 'CalllogsCrud::singleCL/$1',['filter' => 'authGuard']);
-$routes->post('calllogs/update', 'CalllogsCrud::update',['filter' => 'authGuard']);
 $routes->post('/calllogs/cancel', 'CalllogsCrud::cancel',['filter' => 'authGuard']);
 $routes->get('calllogs/delete/(:num)', 'CalllogsCrud::delete/$1',['filter' => 'authGuard']);
 $routes->post('/calllogs/view', 'CalllogsCrud::view',['filter' => 'authGuard']);
@@ -138,6 +132,7 @@ $routes->get('/calendar/dates-delete/(:num)', 'FullCalendar::restrict_delete/$1'
 $routes->post('/calendar/checkEmp', 'FullCalendar::checkEmp',['filter' => 'authGuard']);
 $routes->get('/calendar/emp', 'FullCalendar::index1',['filter' => 'authGuard']);
 $routes->get('/calendar/events', 'FullCalendar::event',['filter' => 'authGuard']);
+$routes->get('/calendar/events/view-ratings', 'FullCalendar::viewRatings',['filter' => 'authGuard']);
 $routes->get('/calendar/emp-events', 'FullCalendar::emp_event',['filter' => 'authGuard']);
 $routes->post('/calendar/events/view', 'FullCalendar::view',['filter' => 'authGuard']);
 $routes->post('/calendar/insert', 'FullCalendar::insert',['filter' => 'authGuard']);
