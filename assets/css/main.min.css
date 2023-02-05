@@ -11,7 +11,7 @@
 	display: flex;
   flex-wrap: nowrap;
   width: 267px;
-  left: 115%;
+  left: 100%;
   margin-top: -70px;
   height: 130px;
   font-size: 12px;
@@ -71,7 +71,7 @@
 }
 
 .tsk .btn:hover{
-	background-color: black;
+	background-color: #4E693C;
 	color: white;
 }
 .tsk2 .btn{
@@ -84,7 +84,7 @@
 }
 
 .tsk2 .btn:hover{
-	background-color: black;
+	background-color: #4E693C;
 	color: white;
 }
 

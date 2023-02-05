@@ -81,7 +81,7 @@
                 </li>
             </div>
             <?php if($_SESSION['position'] != USER_ROLE_SECRETARY):?>
-                <button class = "dropdown-btn">
+                <button class = "dropdown-btn" id="managedata">
                                     <i class = "fa-solid fa-user-pen"></i> <span class="links_name">&nbsp;&nbsp;Manage Data</span>
                                     <i class = "fa fa-caret-down down2"></i>
                                     <span class="tooltip2">Manage Data</span>
@@ -181,6 +181,20 @@
                 </li>
             </div>
         </div>
+
+
+<script>
+    let dbtn = document.querySelector(".dropdown-btn");
+    let dbtn1 = document.querySelector("#managedata");
+
+    dbtn.onclick = function(){
+            sidebar.classList.toggle("active");
+        }
+
+    dbtn1.onclick = function(){
+            sidebar.classList.toggle("active");
+        }
+</script>
 
     
 <script src = "https://kit.fontawesome.com/0df98348d7.js" crossorigin = "anonymous"></script>

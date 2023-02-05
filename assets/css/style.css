@@ -242,6 +242,10 @@ body{
     color: black;
 }
 
+.dropdown-btn .tooltip4{
+    margin-top: -115px;
+}
+
 .dropdown-btn .tooltip2{
     margin-top: -60px;
 }
@@ -329,6 +333,7 @@ body{
 .sidebar.active .links_name{
     opacity: 1;
     pointer-events: auto;
+    font-size: 15px;
 }
 
 .sidebar-header{
@@ -422,20 +427,24 @@ body{
     margin-left: 70px;
 }
 
+table tr td .reports:hover{
+    background-color: #4E693C;
+}
+
  .d-flex{
-     margin-left: -50px;
+     margin-left: 0px;
  }
  .d-flex .btn{
     margin-right: 5px;
+    margin-left: -20px;
     font-size: 15px;
     color: white;
     background-color: #344F21;
 }
 .d-flex .btn:hover{
-   
     font-size: 15px;
     color: white;
-    background-color: #01381D;
+    background-color: #4E693C;
 }
 
 .body-content .mt-3{
@@ -553,7 +562,7 @@ body{
 
 
 .body-content .tsk .btn:hover{
-    background-color: black;
+    background-color: #4E693C;
     color: white;
 }
 .body-content .event-header .filter{

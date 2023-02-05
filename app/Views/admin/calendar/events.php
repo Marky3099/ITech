@@ -277,9 +277,9 @@
         <?php endif;?>
       </td>
       <td>
-        <a href="#" id="<?=$dat->id?>" class="btn btn-info btn-sm view">View Task</a>
+        <a href="#" id="<?=$dat->id?>" class="btn btn-info btn-sm mb-1 view">View Task</a><br>
         <?php if($dat->status!='Pending'):?>
-          <a href="#" id="<?=$dat->id?>" class="btn btn-primary btn-sm reports" data-toggle="modal" data-target="#fileModal">Upload Report</a>
+          <a href="#" id="<?=$dat->id?>" class="btn btn-primary btn-sm mb-1 reports" data-toggle="modal" data-target="#fileModal">Upload Report</a><br>
           <a href="#" id="<?=$dat->id?>" class="btn btn-secondary btn-sm view-reports">View Report</a>
         <?php endif;?>
      </td>
