@@ -19,15 +19,15 @@
                <p class="servq">Service Quality</p>
             </div>
             <div class="rate col-lg-6">
-              <input type="radio" id="star5" name="rate" value="5" />
+              <input type="radio" id="star5" name="rate" value="100" />
               <label for="star5" title="Amazing">5 stars</label>
-              <input type="radio" id="star4" name="rate" value="4" />
+              <input type="radio" id="star4" name="rate" value="80" />
               <label for="star4" title="Good">4 stars</label>
-              <input type="radio" id="star3" name="rate" value="3" />
+              <input type="radio" id="star3" name="rate" value="60" />
               <label for="star3" title="Fair">3 stars</label>
-              <input type="radio" id="star2" name="rate" value="2" />
+              <input type="radio" id="star2" name="rate" value="40" />
               <label for="star2" title="Poor">2 stars</label>
-              <input type="radio" id="star1" name="rate" value="1" />
+              <input type="radio" id="star1" name="rate" value="20" />
               <label for="star1" title="Terrible">1 star</label>
             </div>
             <div class="col-lg-2 result"></div>
@@ -357,15 +357,15 @@
             <input type="hidden" value="`+empId+`" name="emp_id[]" multiple>
             
             <div class="tech col-lg-6">
-              <input type="radio" id="star5`+empId+`" name="rate_`+empId+`" value="5" />
+              <input type="radio" id="star5`+empId+`" name="rate_`+empId+`" value="100" />
               <label for="star5`+empId+`" title="Amazing">5 stars</label>
-              <input type="radio" id="star4`+empId+`" name="rate_`+empId+`" value="4" />
+              <input type="radio" id="star4`+empId+`" name="rate_`+empId+`" value="80" />
               <label for="star4`+empId+`" title="Good">4 stars</label>
-              <input type="radio" id="star3`+empId+`" name="rate_`+empId+`" value="3" />
+              <input type="radio" id="star3`+empId+`" name="rate_`+empId+`" value="60" />
               <label for="star3`+empId+`" title="Fair">3 stars</label>
-              <input type="radio" id="star2`+empId+`" name="rate_`+empId+`" value="2" />
+              <input type="radio" id="star2`+empId+`" name="rate_`+empId+`" value="40" />
               <label for="star2`+empId+`" title="Poor">2 stars</label>
-              <input type="radio" id="star1`+empId+`" name="rate_`+empId+`" value="1" />
+              <input type="radio" id="star1`+empId+`" name="rate_`+empId+`" value="20" />
               <label for="star1`+empId+`" title="Terrible">1 star</label>
             </div>
             <div class="col-lg-1 resulttech" id= a`+empId+`></div>
