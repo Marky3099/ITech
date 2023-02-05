@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
@@ -46,10 +46,10 @@
           </div>
           <div class="form-group">
             <input name="recover-submit" class="rpass btn btn-lg btn-success btn-block" value="Reset Password" type="submit">
-          </div>
+          </div><br>
 
           <div class="container1">
-            <a href="<?= base_url('/user-type');?>" class="back-btn">Back</a>
+            <button class="btn btn-success" id="back-btn" onclick="history.back()">Back</button>
           </div>
           
           <input type="hidden" class="hide" name="token" id="token" value=""> 

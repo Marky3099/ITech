@@ -30,7 +30,7 @@ body {
   weight: 72px;
 }
 
-.container a.back-btn{
+.container #back-btn{
   position: relative;
   display: flex;
   background-color: #344F21;
@@ -67,7 +67,7 @@ body {
   font-weight: bold;
 }
 
-.container a.back-btn:hover{
+.container #back-btn:hover{
   background-color: #5c724d;
 }
 

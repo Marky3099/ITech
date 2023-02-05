@@ -18,13 +18,13 @@
 			<p class="mt-2"><i class="fas fa-chevron-circle-down"></i>&nbsp;Please click or tap type of account.</i></p>
 
 			<div class="btn-layer">
-				<a href="<?=base_url('/bdo-login')?>" class="btn btn-success"><div class="icon-box"><i class="fas fa-users"></i></div>Partner Company</a></br>
-				<a href="<?=base_url('/non-bdo-login')?>" class="btn btn-success"><div class="icon-box"><i class="fas fa-user-alt"></i></div>Non-Partner Company</a>
+				<a href="<?=base_url('/bdo-login')?>" class="btn btn-success"><div class="icon-box"><i class="fas fa-users"></i></div>Partnered Company</a></br>
+				<a href="<?=base_url('/non-bdo-login')?>" class="btn btn-success"><div class="icon-box"><i class="fas fa-user-alt"></i></div>Non-Partnered Company</a>
 			</div>
 			
 				<!-- <p class="para1">Want to book an Appointment?<a href="<?= base_url('/client-type')?>" style="font-style: italic; color: limegreen;">&nbsp;Click here.</a></p> -->
 		
-				</br></br></br>
+				</br></br>
 				<p class="para1"> By using this service, you understood and agree to Maylaflor’s Tasks and Schedule Monitoring System <i>Terms of Use and Privacy Statement.</i></p>
 				<a href="<?= base_url();?>" class="btn btn-success" id="back-btn">Back</a>
 			</div>

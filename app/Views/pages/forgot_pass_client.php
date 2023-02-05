@@ -49,7 +49,7 @@
           </div>
 
           <div class="container1">
-            <a href="<?= base_url('/client-type');?>" class="back-btn">Back</a>
+            <button class="btn btn-success" id="back-btn" onclick="history.back()">Back</button>
           </div>
           
           <input type="hidden" class="hide" name="token" id="token" value=""> 
