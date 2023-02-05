@@ -4,8 +4,7 @@
 
   var calendarEl = document.getElementById('calendar');
   var count = 0;
-  var holidays = ["01-01","01-02","25-02","09-04","14-04","16-04","01-05","09-05","12-06","29-08","21-08","31-10","01-11","02-11","30-11","08-12","24-12","25-12","30-12","31-12"];
-  // var today = new Date().toISOString().slice(0,10);
+  // var holidays = ["01-01","01-02","25-02","09-04","14-04","16-04","01-05","09-05","12-06","29-08","21-08","31-10","01-11","02-11","30-11","08-12","24-12","25-12","30-12","31-12"];
   var calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: 'dayGridMonth',
     handleWindowResize: false,
@@ -16,7 +15,6 @@
       center: 'title',
       right: 'today',
     },
-     
     events: event,
     dateClick: function(info) {
       var myModal = new bootstrap.Modal(document.getElementById('mymodal'));
@@ -30,7 +28,7 @@
              var formatDate = splitDate[2]+"-"+splitDate[1];
              disable.push(formatDate);
            }
-           var disDate =  disable.concat(holidays);
+           var disDate =  disable;
            var dateFormat = info.dateStr.split("-");
            var dateDisable = dateFormat[2]+"-"+dateFormat[1];
            // console.log(dateDisable);
@@ -45,6 +43,16 @@
            // console.log(counter);
           if(counter == 0){
             myModal.show();
+          }else{
+            // console.log($(this));
+            // $('.fc-daygrid-day-frame').css('backgroundColor: red');
+            // cell.css("background-color", "red");
+
+            Swal.fire({
+              icon: 'error',
+              title: 'Not Available',
+              text: info.dateStr+' is not Available',
+            })
           }
       // console.log();
           var em = document.getElementById('emp_id');

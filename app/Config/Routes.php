@@ -34,6 +34,7 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 
 $routes->get('/admin-login', 'Pages::adminLogin');
+$routes->get('/secretary-login', 'Pages::secretaryLogin');
 $routes->get('/employee-login', 'Pages::employeeLogin');
 $routes->get('/bdo-login', 'Pages::bdoLogin');
 $routes->get('/non-bdo-login', 'Pages::nonBdoLogin');

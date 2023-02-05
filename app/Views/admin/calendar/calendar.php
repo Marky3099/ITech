@@ -13,7 +13,7 @@
     
       <div class="tsk">
         <a href="<?= base_url('calendar/events') ?>" class="btn" >Tasks</a>
-        <a href="<?= base_url('/calendar/dates') ?>" class="btn" style="margin-left: 0.2rem;">Date</a><br>
+        <a href="<?= base_url('/calendar/dates') ?>" class="btn" style="margin-left: 0.2rem;">Restrict Date</a><br>
       </div>
       
     
@@ -303,6 +303,7 @@
 
 <!-- Time Picker -->
 <script src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>  
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src = "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>  
 <!-- <script src = "https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>   -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
@@ -522,7 +523,7 @@ var count_update = 1;
   $('#checkLog').click(function(){
     if ($('#checkLog').is(":checked"))
     {
-      $('.addTask').html("Add Call log");
+      $('.addTask').html("Add Schedule");
       $('.addTask').css('color','white');
       $('.headTask').css('background-color','green');
       $('#repeatable').prop('disabled', 'disabled');

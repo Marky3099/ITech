@@ -18,10 +18,11 @@
 
 				<div class="btn-layer">
 					<a href="<?= base_url('/admin-login')?>" class="btn btn-success"><div class="icon-box"><i class="fas fa-user-shield"></i></div>Admin</a></br>
+					<a href="<?= base_url('/secretary-login')?>" class="btn btn-success"><div class="icon-box"><i class="fas fa-user-shield"></i></div>Secretary</a></br>
 					<a href="<?= base_url('/employee-login')?>" class="btn btn-success"><div class="icon-box"><i class="fas fa-user-alt"></i></div>Technician</a>
 				</div>
-			
-				<p class="para1">Want to book an Appointment?<a href="<?= base_url('/client-type')?>" style="font-style: italic; color: limegreen;">&nbsp;Click here.</a></p></br>
+				<br><br>
+				<p class="para1">Want to book an Appointment?<a href="<?= base_url('/client-type')?>" style="font-style: italic; color: limegreen;">&nbsp;Click here.</a></p>
 		
 				<p class="para1"> By using this service, you understood and agree to Maylaflor’s Tasks and Schedule Monitoring System <i>Terms of Use and Privacy Statement.</i></p>
 				<a href="<?= base_url();?>" class="btn btn-success" id="back-btn">Back to Website</a>

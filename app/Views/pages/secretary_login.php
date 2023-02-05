@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Admin Login</title>
+  <title>Secretary Login</title>
   <link rel="stylesheet" href="<?= base_url('assets/css/loginstyle.css')?>">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
@@ -17,8 +17,8 @@
         <div class="header">
           <a href="<?= base_url('#home')?>" class="texthp"><img src="<?= base_url('assets/image/iicon.png')?>"></a>
         </div>
-        <h3>Admin Login</h3>
-        <form class="login100-form validate-form" action="<?= base_url('pages/check');?>" method="post">
+        <h3>Secretary Login</h3>
+        <form class="login100-form validate-form" action="<?= base_url('pages/checkSecretary');?>" method="post">
 
           <?php 
           if(!empty($errorAcc)){ ?>
