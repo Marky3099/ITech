@@ -614,7 +614,7 @@
 <div class="row">
   <div class="col-md-6" id="chart_div" style="width: 100%; height: 500px;"></div>
   <div class="col-md-6" id="piechart_3d" style="width: 100%; height: 500px;"></div>
-  
+  <!-- <div id="barchart_material" style="width: 900px; height: 500px;"></div> -->
 </div>
 
 
@@ -623,10 +623,9 @@
   <!-- Bootstrap core JavaScript-->
   
   <div class="row justify-content-center">
-    
-
 
   </div>
+
 </div>
 </div>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -722,6 +721,13 @@
          
         ]);
 
+        var empData = google.visualization.arrayToDataTable([
+          ['Name','Ratings'],
+          ['marky',.50],
+          
+        ]);
+
+
         var servOptions = {
           title: 'Services Trend',
           is3D: true,
@@ -734,8 +740,26 @@
           vAxis: {minValue: 0}
         };
 
+        var empOptions = {
+          title: 'Technician\'s Performance',
+          isStacked: 'percent',
+          bars: 'horizontal', // Required for Material Bar Charts.
+           // vAxis: { 
+           //    title: "Ratings on Performance", 
+           //    viewWindowMode:'explicit',
+           //    viewWindow:{
+           //      max:100,
+           //      min:0
+           //    }
+           //  }
+
+          // colors: servLabelColor
+        };
+
         var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
         var chart2 = new google.visualization.AreaChart(document.getElementById('chart_div'));
+        // var chart3 = new google.visualization.BarChart(document.getElementById('barchart_material'));
+        // chart3.draw(empData,empOptions);
         chart.draw(servData, servOptions);
         chart2.draw(taskData, taskOptions);
       };

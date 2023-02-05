@@ -10,6 +10,7 @@ use App\Models\Serv;
 use App\Models\Emp;
 use App\Models\Event;
 use App\Models\Event_emp;
+use App\Models\Event_emp_views;
 use App\Models\Event_fcu;
 use App\Models\Appt_fcu;
 use App\Models\Appt_fcu_views;
@@ -17,6 +18,7 @@ use App\Models\User_bdo;
 use App\Models\Restrict_date;
 use App\Models\All_events;
 use App\Models\Emp_expertise_views;
+use App\Models\Ratings;
 
 class AppointmentCrud extends Controller
 {
@@ -89,6 +91,7 @@ class AppointmentCrud extends Controller
         "qty"=> $value['qty'],
         "appt_status"=> $value['appt_status'],
         "fcu_arr"=> $fcu_arr,
+        "rate"=> $value['rate'],
     ];
 }
 
@@ -648,6 +651,44 @@ public function view(){
     $data['serv_data'] = $Serv->orderBy('serv_id','ASC')->findAll();
 
     return $this->response->setJSON($data);
+}
+public function getEmp(){
+    $event = new Event_emp_views();
+    $id = $this->request->getVar('appt_id');
+    $data['eventEmp'] = $event->where('appt_code !=', '')->findAll();
+    // $data['appt_data'] = $Appoint->where('appt_id',$id)->first();
+    // $data['fcu_data'] = $Fcu->where('appt_id',$id)->findAll();
+    // $data['client_data'] = $Client->orderBy('client_id','ASC')->findAll();
+    // $data['serv_data'] = $Serv->orderBy('serv_id','ASC')->findAll();
+
+    return $this->response->setJSON($data);
+}
+public function rateService(){
+    // dd($_POST);
+    $rate = new Ratings();
+    $Appoint = new Appointment();
+    $event = new Event();
+    $apptId = $_POST['appt_id'];
+    if(isset($_POST['rate'])){
+        foreach($_POST['emp_id'] as $k => $val){
+            // dd($_POST['techComments'][$k]);
+            $rate->insert([
+                'id'=> $_POST['event_id'],
+                'rate_event'=> $_POST['rate'],
+                'event_comments'=> $_POST['comments'],
+                'emp_id'=> $val,
+                'rate_emp'=> $_POST['rate_'.$val],
+                'emp_comments'=> $_POST['techComments'][$k],
+            ]);
+        }
+        $update_rate = ['rate' => 1];
+        $Appoint->update($apptId,$update_rate);
+    }
+    else{
+        $session = session();
+        $session->setFlashdata('Error','Please rate correctly');
+    }
+    return $this->response->redirect(site_url('/appointment'));
 }
 public function checkDate(){
     $events = new All_events();

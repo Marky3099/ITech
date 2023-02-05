@@ -3,7 +3,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 <link rel="stylesheet" href="<?= base_url('assets/css/style.css')?>">
-
+<link rel="stylesheet" href="<?= base_url('assets/css/map.css')?>">
 
 <div class="body-content">
   <div class="col-sm-8">
@@ -162,7 +162,7 @@
         <div class="modal-body" id="adata">
           <input type="hidden" name="id" id="id" value="">
           
-          <div class="crud-text"><h5>Client Details:</h5></div>
+          <!-- <div class="crud-text"><button class="btn btn-info clientMap" style="float: right;">View Client Location</button><h5>Client Details:</h5> </div> -->
           <input type="hidden" name="title_update" id="title_update" placeholder="Title">
           
           <div class="form-row">
@@ -232,6 +232,7 @@
             <!--  -->
           </select>
         </div> 
+
       </div>
       <div class="modal-footer">
         <div class="form-group">
@@ -241,7 +242,25 @@
     </div>
   </div>
 </div>
-
+<div class="modal fade" id="mapModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Location</h5>
+        <button type="button" class="close closeMap" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3263.240532433746!2d120.99173841427947!3d14.565696581837399!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397c978cf8fa931%3A0x49d18a0954259306!2sBDO%20Taft%20-%20Vito%20Cruz%20Branch!5e1!3m2!1sen!2sph!4v1675578495936!5m2!1sen!2sph" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary closeMap">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment-with-locales.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -460,6 +479,18 @@ var count_update = 1;
   });
 
   $('#mymodal .selectpicker').selectpicker();
+var mapModal = new bootstrap.Modal(document.getElementById('mapModal'));
+var yourModal = new bootstrap.Modal(document.getElementById('mymodal2'));
+
+  // $('.clientMap').click(function(e){
+  //   e.preventDefault();
+
+  //   mapModal.show();
+  // })
+  // $('.closeMap').click(function(e){
+  //   e.preventDefault();
+  //   mapModal.hide();
+  // });
       </script>
       <script type="text/javascript" src="<?=base_url('assets/js/empCalendar.js')?>"></script>
 
