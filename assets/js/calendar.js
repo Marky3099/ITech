@@ -195,7 +195,7 @@
         // console.log(info.event.id +'='+ dis.id +' '+  dis.id +'='+  disEvent.id);
          concut = `<div class="form-row" id="row" style="background-color:lightblue;">
     <div class="form-group col-md-3">
-    <label for="dbrand">Device Brand</label>
+    <label for="dbrand">Aircon Brand</label>
     <select id="device_brand_update" name="device_brand[]" class="form-control " data-id="`+dis.aircon_id+`"required>`;
       
       deviceBrand.forEach((dbrand, index)=>{
@@ -218,11 +218,11 @@
     </div>
     <div class="form-group col-md-3">
     
-    <label for="fcunos">Fcuno</label>
+    <label for="fcunos">FCU No.</label>
 
     
 
-    <select id="fcuno_update_`+dis.aircon_id+`" name="fcuno_update_`+dis.aircon_id+`[]" class="selectpicker" data-width="100%" multiple data-selected-text-format="count > 2">
+    <select id="fcuno_update_`+dis.aircon_id+`" name="fcuno_update_`+dis.aircon_id+`[]" class="selectpicker rounded" data-width="100%" multiple data-selected-text-format="count > 2">
     <option value="1">FCU 1</option>
     <option value="2">FCU 2</option>
     <option value="3">FCU 3</option>

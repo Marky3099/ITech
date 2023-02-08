@@ -32,8 +32,8 @@
     </div><br>
     
     <div class="container1">
-      <button type="submit" class="btn btn-success">Submit</button>
       <a href='<?=base_url('/client')?>' class="back-btn">Back</a>
+      <button type="submit" class="btn btn-success">Submit</button>
     </div>
   </div>
 

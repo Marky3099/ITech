@@ -27,24 +27,26 @@
         <input type="tel" name="contact" id="contact" pattern="[0-9]{11}" value="<?php echo $User_obj['contact']; ?>" placeholder="09XXXXXXXXX - 11 digits only">
       </div>
 
-      <label>Role</label>
-      <div class="select-dropdown">
+      <div class="row">
+      <label id="rolelbl">Role</label>
+      <div class="select-dropdown" id="cssroles">
         <select id="position" name="position">
           <?php if($User_obj['position' ]== "Admin"):?>
-            <option value="Employee">Employee</option>
+            <option value="Employee">Technician</option>
             <option value="Admin" selected>Admin</option>
           <?php elseif($User_obj['position'] == "Employee"):?>
-            <option value="Employee" selected>Employee</option>
+            <option value="Employee" selected>Technician</option>
             <option value="Admin" >Admin</option>
           <?php endif;?>
         </select>
-      </div><br>
+      </div>
       <div id="for">
         <!-- dont remove this div with id="for" -->
       </div>
+      </div><br><br>
       <div class="container1">
-        <button type="submit" class="btn btn-success">Update</button>
         <a href='<?=base_url('/user')?>' class="back-btn">Back</a>
+        <button type="submit" class="btn btn-success">Update</button>
       </div>
 
     </div>
@@ -63,8 +65,9 @@
     
     if ($count===0) {
       $('#for').append(`
-        <label>Account for</label>
+        <label id="accforlbl">Account for</label>
         
+        <div class="select-dropdown" id="accfor">
         <select id="emp_id" name="emp_id">
         <?php foreach($emp as $e):  ?>
           <option value=<?php echo $e['emp_id']; ?>><?php echo $e['emp_name'];?></option>
@@ -79,8 +82,9 @@
       
       if ($count===0) {
         $('#for').append(`
-          <label>Account for</label>
+          <label id="accforlbl">Account for</label>
           
+          <div class="select-dropdown" id="accfor">
           <select id="emp_id" name="emp_id">
           <?php foreach($emp as $e):  ?>
             <option value=<?php echo $e['emp_id']; ?>><?php echo $e['emp_name'];?></option>

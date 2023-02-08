@@ -47,8 +47,8 @@
         <br><br><br>
 
         <div class="container1">
-          <button type="submit" class="btn btn-success">Update</button>
           <a href='<?=base_url('/emp')?>' class="back-btn">Back</a>
+          <button type="submit" class="btn btn-success">Update</button>
         </div>
       </div>
 

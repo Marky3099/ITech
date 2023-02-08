@@ -35,7 +35,7 @@
                     }?>
                  </td>
                  <td>
-                   <a href="<?php echo base_url('/emp/'.$employee['emp_id']);?>" class="btn btn-primary btn-sm">Edit</a>
+                   <a href="<?php echo base_url('/emp/'.$employee['emp_id']);?>" class="btnn btn btn-primary border-0 btn-sm">Edit</a>
                    <a href="<?php echo base_url('/emp/delete/'.$employee['emp_id']);?>" class="btn btn-danger btn-sm del">Delete</a>
                 </td>
              </tr>

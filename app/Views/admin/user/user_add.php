@@ -36,16 +36,16 @@
         <select id="position" name="position">
           <option value="Admin">Admin</option>
           <option value="Secretary">Secretary</option>
-          <option value="Employee">Employee</option>
+          <option value="Employee">Technician</option>
           
         </select>
-      </div><br>
+      </div>
       <div id="for">
         <!-- dont remove this div with id="for" -->
-      </div>
+      </div><br>
       <div class="container1">
+         <a href='<?=base_url('/user')?>' class="back-btn">Back</a>
         <button type="submit" class="btn btn-success">Submit</button>
-        <a href='<?=base_url('/user')?>' class="back-btn">Back</a>
       </div>
     </div>
   </form>
@@ -78,6 +78,7 @@
           $('#for').append(`
             <label>Account for</label>
             
+            <div class="select-dropdown">
             <select id="emp_id" name="emp_id">
             <?php foreach($emp as $e):  ?>
               <option value=<?php echo $e['emp_id']; ?>><?php echo $e['emp_name'];?></option>

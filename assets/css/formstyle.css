@@ -123,6 +123,26 @@ body {
   top: 23px;
 }
 
+#cssroles{
+  width: 40%;
+  height: 45px;
+  top: 29px;
+  left: -45px;
+}
+
+#rolelbl{
+  margin-left: 30px;
+}
+
+#accfor{
+  left: -30px;
+  width: 208px;
+}
+
+#accforlbl{
+  margin-left: -15px;
+}
+
 .form-box .user-box input.dateee{
   width: 41%;
   position: absolute;
@@ -184,6 +204,10 @@ body {
   width: 89.2%;
 }
 
+a.btnn:hover{
+  background-color: #486037;
+}
+
 
 .form-box .user-box .icon-box{
     position: absolute;   
@@ -237,7 +261,8 @@ body {
   overflow: hidden;
   transition: .5s;
   top: -12.5px;
-  margin-left: 385px;
+  float: right;
+  right: -15px;
   border: none;
 }
 
@@ -260,9 +285,11 @@ body {
   text-decoration: none;
   overflow: hidden;
   transition: .5s;
-  margin-top: 0px;
+  margin-top: -12px;
   border: none;
-  border-radius: 3px;
+  float: right;
+  right: 100px;
+  border-radius: 5px;
 }
 
 .form-box .btn:hover, a.back-btn:hover {
@@ -383,7 +410,7 @@ body {
 
 
 #submitbtn{
-  right: -85px;
+  right: 10px;;
 }
 
 .form-box .select-dropdown:after {

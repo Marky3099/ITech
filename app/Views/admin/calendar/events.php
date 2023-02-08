@@ -39,7 +39,7 @@
       <div class="modal-body">
         
         <div class="container" id="report-container">
-          <h1 id="noreports"></h1>
+           <center><p><i class="fa-solid text-success fa-circle-exclamation"></i>&nbsp;There are no reports.</p></center>
           <div class="row" id="report_files">
             
           </div>
@@ -67,17 +67,17 @@
           <div class="form-group">
             <input type="hidden" id="event_id" name="event_id">
             <label for="fileuploads">Reports</label>
-            <input type="file" class="form-control" id="fileuploads" name="fileuploads[]" multiple aria-describedby="limitFile">
+            <input type="file" class="py-1 border-success form-control" id="fileuploads" name="fileuploads[]" multiple aria-describedby="limitFile">
             <small id="limitFile" class="form-text text-muted">Uploaded Files must not exceed <b>25mb</b></small>  
           </div>
           <div class="form-group">
             <label for="notes">Notes/Comments</label>
-            <textarea type="text" class="form-control" id="notes" name="notes" placeholder="Description"></textarea>
+            <textarea type="text" class="form-control border-success" id="notes" name="notes" placeholder="Description"></textarea>
           </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save changes</button>
+        <button type="submit" class="btnn btn btn-primary">Save changes</button>
       </div>
       </form>
     </div>
@@ -140,7 +140,7 @@
                     <td id="modal_serv_type"></td>
                   </tr>
                   <tr>
-                    <th>Device Brand:</th>
+                    <th>Aircon Brand:</th>
                     <td id="modal_dev_brand"></td>
                   </tr>
                   <tr>

@@ -89,7 +89,7 @@
 }
 
 .form-row{
-	margin: 0px 30px;
+	margin: 0px 40px;
 }
 
 
@@ -152,12 +152,13 @@
 }
 .infoEmp {
   visibility: hidden;
-  width: 200px;
+  width: 400px;;
   background-color: #FFFFFF;
-  color: black;
+  color: #344f21;
   text-align: center;
   border-radius: 6px;
   padding: 5px 0;
+  margin-top: -13px;
   
   /* Position the tooltip */
   position: absolute;
@@ -165,11 +166,11 @@
 }
 
 .form-group label.emp_idlbll{
-	margin-left: 35px;
+	margin-left: 45px;
 }
 
 .form-group label.serv_idlbl, .form-group label.serv_id_updatelbl{
-	margin-left: 5px;
+	margin-left: 15px;
 }
 
 .form-group label.serv_idlblll{
@@ -192,14 +193,15 @@
 }
 
 .form-group #serv-select{
-	margin-left: 5px;
-  width: 92%;
+	margin-left: 15px;
+  width: 91%;
 }
 
 .form-group #serv-select1{
-	margin-left: 35px;
-	width: 84%;
+  margin-left: 15px;
+  width: 89%;
 }
+
 
 .form-group .select-dropdown select{
   font-size: 1rem;
@@ -230,6 +232,10 @@
   border-top: 5px solid #aaa;
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
+}
+
+#Branchname{
+	width: 91%;%;
 }
 
 
@@ -395,6 +401,12 @@ tbody{
 .modal-footer .btn{
 	font-size: 12px;
 }
+
+.modal-footer .btnn:hover{
+	background-color: #486037;
+}
+
+
 .switch {
   position: relative;
   display: inline-block;

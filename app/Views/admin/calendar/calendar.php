@@ -48,10 +48,12 @@
 
         <input type="hidden" name="start_event" id="start_event" value="">
         <input type="hidden" name="cl_id" id="cl_id" value="">
-        <center><label class="switch">
+        <div class="swtch">
+          <label class="add2callloglbl">Add to Call logs</label><br>
+          <label class="switch">
           <input type="checkbox" id="checkLog" name="checkLog">
           <span class="slider round"></span>
-        </label></center>
+        </label></div><br><br>
         <div class="form-group">
           <input class="form-control" type="hidden" name="title" id="title" placeholder="Title">
         </div>
@@ -98,7 +100,7 @@
           </div>
           <div class="form-group col-md-6">
             <label for="client_id">Branch Name</label><br>
-            <div class="select-dropdown">
+            <div class="select-dropdown" id="Branchname">
               <select id="client_id" name="client_id" class="form-control" required>
               </select>
             </div>
@@ -124,7 +126,7 @@
         <div class="crud-text"><h5>Aircon Details:</h5></div>
         <div class="form-row">
           <div class="form-group col-md-3">
-            <label for="dbrand">Device Brand</label>
+            <label for="dbrand">Aircon Brand</label>
             <div class="select-dropdown">
                 <select id="device_brand" name="device_brand[]" class="form-control " data-id="0"required>
                   <option value="" selected disabled>Select Type</option>
@@ -144,8 +146,8 @@
           </div> 
           <div class="form-group col-md-3">
             
-            <label for="fcunos">Fcuno</label>
-            <select id="fcuno" name="fcuno0[]" class="selectpicker border border-dark" data-width="100%" multiple data-selected-text-format="count > 3" required>
+            <label for="fcunos">FCU No.</label>
+            <select id="fcuno" name="fcuno0[]" class="selectpicker rounded border border-dark" data-width="100%" multiple data-selected-text-format="count > 3" required>
               <?php foreach($fcu_no as $f):  ?>
                 <option value="<?php echo $f['fcuno']; ?>"><p id="s2option"><?php echo $f['fcu'];?></p></option>
               <?php endforeach; ?>
@@ -172,7 +174,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn py-2 btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn py-2 btn-primary">Save changes</button>
+        <button type="submit" class="btnn btn py-2 btn-primary">Save changes</button>
       </div>
     </form>
   </div>
@@ -246,7 +248,7 @@
         
         <div class="form-group" id="serv-form">
           <label class="serv_id_updatelbl" for="serv_id_update">Service</label><br>
-          <div class="select-dropdown" id="serv-select">
+          <div class="select-dropdown" id="serv-select1">
             <select class="form-control" id="serv_id_update" name="serv_id_update">
             <?php foreach($servName as $s):  ?>
               <optgroup label="<?= $s['serv_name']; ?>">
@@ -286,7 +288,7 @@
           <button type="button" class="btn py-2 btn-secondary" data-dismiss="modal">Close</button>
           
 
-          <button type="submit" name="update_sched" class="btn py-2 btn-primary">Save changes</button>
+          <button type="submit" name="update_sched" class="btnn btn py-2 btn-primary">Save changes</button>
         </div>
       </form>
     </div>
@@ -341,7 +343,7 @@ var count_update = 1;
     var html3 = `<div class="form-row" id="row">
     <div class="form-group col-md-3">
     
-    <label for="dbrand">Device Brand</label>
+    <label for="dbrand">Aircon Brand</label>
     <div class="select-dropdown">
       <select id="device_brand" name="device_brand[]" class="form-control " data-id="`+count+`"required>
       <option value="0">Select Brand</option>
@@ -362,8 +364,8 @@ var count_update = 1;
     </div> 
     <div class="form-group col-md-3">
     
-    <label for="fcunos">Fcuno</label>
-    <select id="fcuno" name="fcuno`+count+`[]" class="selectpicker border border-dark" data-width="100%" multiple data-selected-text-format="count > 2">
+    <label for="fcunos">FCU No.</label>
+    <select id="fcuno" name="fcuno`+count+`[]" class="selectpicker rounded border border-dark" data-width="100%" multiple data-selected-text-format="count > 2">
     <?php foreach($fcu_no as $f):  ?>
       <option value="<?php echo $f['fcuno']; ?>"><p id="s2option"><?php echo $f['fcu'];?></p></option>
     <?php endforeach; ?>
@@ -395,7 +397,7 @@ var count_update = 1;
     var html3 = `<div class="form-row" id="row" style="background-color:lightgreen;">
     <div class="form-group col-md-3">
     
-    <label for="dbrand">Device Brand</label>
+    <label for="dbrand">Aircon Brand</label>
     <div class="select-dropdown">
     <select id="device_brand_update" name="device_brand[]" class="form-control " data-id="`+count_update+`"required>
     <option value="0">Select Brand</option>
@@ -417,8 +419,8 @@ var count_update = 1;
 
     <div class="form-group col-md-3">
     
-    <label for="fcunos">Fcuno</label>
-    <select id="fcuno_update_`+count_update+`"  class="selectpicker border border-dark" data-width="100%" multiple data-selected-text-format="count > 2">
+    <label for="fcunos">FCU No.</label>
+    <select id="fcuno_update_`+count_update+`"  class="selectpicker rounded border border-dark" data-width="100%" multiple data-selected-text-format="count > 2">
     <option value="1">FCU 1</option>
     <option value="2">FCU 2</option>
     <option value="3">FCU 3</option>

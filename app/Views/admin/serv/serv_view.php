@@ -10,9 +10,11 @@
     <table class="table table-bordered" serv_id="users-list" id="table1">
      <thead>
         <tr>
-           <th>#</th>
+           <th>ID</th>
            <th>Service Name</th>
            <th>Service Type</th>
+           <th>Aircon Brand</th>
+           <th>Aircon Type</th>
            <th>Price</th>
            <th>Color</th>
            <th>Action</th>
@@ -25,10 +27,16 @@
                  <td><?php echo $n ?></td>
                  <td><?php echo $service['serv_name']; ?></td>
                  <td><?php echo $service['serv_type']; ?></td>
+                 <td>
+                  n/a
+                  </td>
+                 <td>
+                  n/a
+                 </td>
                  <td><?php echo $service['price']; ?></td>
                  <td style="background-color:<?php echo $service['serv_color']; ?>"></td>
                  <td>
-                   <a href="<?php echo base_url('/serv/'.$service['serv_id']);?>" class="btn btn-primary btn-sm">Edit</a>
+                   <a href="<?php echo base_url('/serv/'.$service['serv_id']);?>" class="btnn btn btn-primary border-0 btn-sm">Edit</a>
                    <a href="<?php echo base_url('/serv/delete/'.$service['serv_id']);?>" class="btn btn-danger btn-sm del">Delete</a>
                 </td>
              </tr>

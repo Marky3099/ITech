@@ -10,7 +10,7 @@
     <table class="table table-bordered table1" user_id="users-list">
      <thead>
         <tr>
-           <th>#</th>
+           <th>ID</th>
            <th>User Name</th>
            <th>Email Address</th>
            <th>Address</th>
@@ -37,7 +37,7 @@
                  <td><?php echo $user['position']; ?></td>
                  <?php endif;?>
                  <td>
-                   <a href="<?php echo base_url('/user/'.$user['user_id']);?>" class="btn btn-primary btn-sm">Edit</a>
+                   <a href="<?php echo base_url('/user/'.$user['user_id']);?>" class="btnn btn btn-primary border-0 btn-sm">Edit</a>
                    <a href="<?php echo base_url('/user/delete/'.$user['user_id']);?>" class="btn btn-danger btn-sm del" >Delete</a>
                    <!-- <a href="#" >Click me</a> -->
                 </td>
@@ -52,7 +52,7 @@
  <table class="table table-bordered table1" client_id="client-list">
          <thead>
           <tr>
-           <th>#</th>
+           <th>ID</th>
            <th>First Name</th>
            <th>Last Name</th>
            <th>Email</th>

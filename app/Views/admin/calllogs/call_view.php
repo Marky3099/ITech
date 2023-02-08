@@ -170,7 +170,7 @@
 </div>
 <div class="mt-3 mr-5">
     <?php if($view_calllogs):?>
-       <table class="table stable-bordered table-hover" serv_id="users-list" id="event-table" style="font-size: 1rem;">
+       <table class="table table-bordered table-hover" serv_id="users-list" id="event-table" style="font-size: 1rem;">
          <thead>
           <tr>
            <th>Date</th>

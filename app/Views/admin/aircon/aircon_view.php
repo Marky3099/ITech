@@ -10,8 +10,8 @@
     <table class="table table-bordered" client_id="aircon-list" id="table1">
      <thead>
         <tr>
-           <th>#</th>
-           <th>Device Brand/Type</th>
+           <th>ID</th>
+           <th>Aircon Brand</th>
            <th>Aircon Type</th>
            <th>Action</th>
         </tr>
@@ -24,7 +24,7 @@
                  <td><?php echo $devices['device_brand']; ?></td>
                  <td><?php echo $devices['aircon_type']; ?></td>
                  <td>
-                   <a href="<?php echo base_url('/aircon/'.$devices['aircon_id']);?>" class="btn btn-primary btn-sm">Edit</a>
+                   <a href="<?php echo base_url('/aircon/'.$devices['aircon_id']);?>" class="btnn btn btn-primary border-0 btn-sm">Edit</a>
                    <a href="<?php echo base_url('/aircon/delete/'.$devices['aircon_id']);?>" class="btn btn-danger btn-sm del">Delete</a>
                 </td>
              </tr>

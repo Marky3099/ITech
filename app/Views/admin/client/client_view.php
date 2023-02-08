@@ -31,7 +31,7 @@
                  <td><?php echo $client['client_email']; ?></td>
                  <td><?php echo $client['client_contact']; ?></td>
                  <td>
-                   <a href="<?php echo base_url('/client/'.$client['client_id']);?>" class="btn btn-primary btn-sm">Edit</a>
+                   <a href="<?php echo base_url('/client/'.$client['client_id']);?>" class="btnn btn btn-primary border-0 btn-sm">Edit</a>
                    <a href="<?php echo base_url('/client/delete/'.$client['client_id']);?>" class="btn btn-danger btn-sm del">Delete</a>
                 </td>
              </tr>
