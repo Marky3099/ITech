@@ -51,7 +51,7 @@
                     <td id="modal_aircon_type"></td>
                   </tr>
                   <tr>
-                    <th>FCU #:</th>
+                    <th>FCU No.:</th>
                     <td id="modal_fcu"></td>
                   </tr>
                   <tr>
@@ -174,10 +174,13 @@
          <thead>
           <tr>
            <th>Date</th>
-           <th>Log Code</th>
+           <th>Time</th>
+           <th>Call log code</th>
+           <th>Branch Name</th>
+           <th>Service</th>
            <th>Status</th>
            <th>Action</th>
-           <!-- <th>Branch Name</th> -->
+            
        </tr>
    </thead>
    <tbody>
@@ -185,8 +188,10 @@
       <?php foreach($view_calllogs as $call_log):  ?>
           <tr>
            <td><?php echo $call_log->date; ?></td>
+           <td>time</td>
            <td><?php echo $call_log->log_code; ?></td>
-      
+           <td><?php echo $call_log->client_branch; ?></td>
+           <td>n/a</td>
           <td><?php echo $call_log->status; ?></td>
          <td>
              <a href="#" id="<?php echo $call_log->cl_id;?>" class="btn btn-info btn-sm view">View</a>

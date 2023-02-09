@@ -11,10 +11,10 @@
      <thead>
         <tr>
            <th>ID</th>
-           <th>User Name</th>
+           <th>Name</th>
            <th>Email Address</th>
            <th>Address</th>
-           <th>Contact Number</th>
+           <th>Contact No.</th>
            <th>Role</th>
            <!-- <th>Status</th> -->
            <th>Action</th>
@@ -56,7 +56,7 @@
            <th>First Name</th>
            <th>Last Name</th>
            <th>Email</th>
-           <th>Contact</th>
+           <th>Contact No.</th>
            <th>Company</th>
            <th>Address</th>
        </tr>

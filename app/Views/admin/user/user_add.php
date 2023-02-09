@@ -13,7 +13,7 @@
       <h3>Add User</h3>
       <div class="user-box">
         <div class="icon-box"><i class="fas fa-user-alt"></i></div>
-        <input type="text" name="name" id="name" placeholder="Username" required>
+        <input type="text" name="name" id="name" placeholder="Name" required>
       </div>
 
       <div class="user-box">

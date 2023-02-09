@@ -100,7 +100,7 @@
                     <td id="modal_serv_type"></td>
                   </tr>
                   <tr>
-                    <th>Device Brand:</th>
+                    <th>Aircon Brand:</th>
                     <td id="modal_dev_brand"></td>
                   </tr>
                   <tr>
@@ -108,7 +108,7 @@
                     <td id="modal_aircon_type"></td>
                   </tr>
                   <tr>
-                    <th>FCU #:</th>
+                    <th>FCU No.:</th>
                     <td id="modal_fcu"></td>
                   </tr>
                   <tr>
@@ -140,12 +140,13 @@
  </div>
  <div class="mt-3">
    <?php if($view_appoint):?>
-    <table class="table table-bordered" id="appt-table" style="font-size: 1.2rem;">
+    <table class="table table-bordered" id="appt-table" style="font-size: 1rem;">
      <thead>
         <tr>
            <th>Date</th>
            <th>Time</th>
            <th>Appt Code</th>
+           <th>Service</th>
            <th>Status</th>
            <th>Review</th>
            <th>Action</th>
@@ -168,6 +169,7 @@
                       <td><?php echo  ltrim($hour, '0') . ":" . $time[1] . " " . $amPm;?></td>
                   <?php endif;?>
            <td><?php echo $appt->appt_code; ?></td>
+           <td>n/a</td>
            <td><?php echo $appt->appt_status; ?></td>
            <td>
             <?php if($appt->appt_status == 'Done'):?>

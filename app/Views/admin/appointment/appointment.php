@@ -90,7 +90,9 @@
            <th>Date</th>
            <th>Time</th>
            <th>Appt Code</th>
+           <th>Branch Name</th>
            <th>Status</th>
+           <th>Review</th>
            <th>Action</th>
         </tr>
      </thead>
@@ -111,7 +113,9 @@
                 <td><?php echo ltrim($hour, '0') . ":" . $time[1] . " " . $amPm;?></td>
             <?php endif;?>
            <td><?php echo $appt->appt_code; ?></td>
+           <td><?php echo $appt->client_branch; ?></td>
            <td><?php echo $appt->appt_status; ?></td>
+           <td><a href="#" class="btn btn-success btn-sm viewReport">View</a></td>
            <td>
              <a href="#" id="<?php echo $appt->appt_id;?>" class="btn btn-info btn-sm view">View</a>
              <?php if($appt->appt_status == 'Pending'):?>
