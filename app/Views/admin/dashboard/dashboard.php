@@ -300,7 +300,7 @@
             <div class="modal-content">
 
               <div class="modal-header">
-                <h4 class="modal-title">Pending Requests</h4>
+                <h4 class="modal-title">Pending Tasks</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 
               </div>
@@ -311,9 +311,9 @@
                     <tr>
                       <th>Date</th>
                       <th>Task Code</th>
-                      <th>Branch</th>
+                      <th>Branch Name</th>
+                      <!-- <th>Service</th> -->
                       <th>Service</th>
-                      <th>Service Type</th>
                       <th>Technician</th>
                       <th>Status</th>
                       
@@ -326,7 +326,6 @@
                         <td><?php echo date('m-d-Y',strtotime($nd->start_event)); ?></td>
                         <td><?php echo $nd->event_code; ?></td>
                         <td><?php echo $nd->client_branch; ?></td>
-                        <td><?php echo $nd->serv_name; ?></td>
                         <td><?php echo $nd->serv_type; ?></td>
                         <td>
                          <?php $data = explode(',',$nd->emp_array);
@@ -563,7 +562,7 @@
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
               <div class="text-xs font-weight-bold text-uppercase mb-1">
-              Pending Requests</div>
+              Pending Tasks</div>
               <div class="h5 mb-0 font-weight-bold text-gray-800">Number of task:&nbsp;<a href="#" data-toggle="modal" data-target="#pendingModal" id="iconbox"><?= json_encode($pending_event);?></a></div>
             </div>
             <div class="col-auto">

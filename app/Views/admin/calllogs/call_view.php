@@ -39,7 +39,7 @@
                     <td id="modal_branch"></td>
                   </tr>
                   <tr>
-                    <th>Device Brand:</th>
+                    <th>Aircon Brand:</th>
                     <td id="modal_dev_brand"></td>
                   </tr>
               </table>
@@ -177,6 +177,7 @@
            <th>Log Code</th>
            <th>Status</th>
            <th>Action</th>
+           <!-- <th>Branch Name</th> -->
        </tr>
    </thead>
    <tbody>

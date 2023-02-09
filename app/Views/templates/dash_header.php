@@ -188,11 +188,15 @@
     let dbtn1 = document.querySelector("#managedata");
 
     dbtn.onclick = function(){
-            sidebar.classList.toggle("active");
+            if (!sidebar.classList.contains("active")) {
+                sidebar.classList.add("active");
+            } 
         }
 
     dbtn1.onclick = function(){
-            sidebar.classList.toggle("active");
+            if (!sidebar.classList.contains("active")) {
+                sidebar.classList.add("active");
+            } 
         }
 </script>
 

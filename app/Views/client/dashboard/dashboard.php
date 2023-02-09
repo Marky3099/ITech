@@ -229,7 +229,9 @@
   <div class="col-sm-8">
     <div class="crud-text"><h3>Calendar</h3></div>
  </div>
-<div class="card legend-box" id="cal1">
+<div class="row">
+  <div class="col-lg-12 col-md-12 col-sm-12">
+    <div class="card legend-box" id="cal1">
     <div class="card-header">Legend</div>
     <div class="card-body">
       <ul class="legend-list">
@@ -238,7 +240,9 @@
         <?php endforeach ?>
       </ul>
     </div>
-    </div>
+    </div> 
+  </div>
+</div>
 
 <div id='calendar' class="col-lg-12 col-md-10" style="width:100%;"></div>
 <div id='datepicker'></div>
