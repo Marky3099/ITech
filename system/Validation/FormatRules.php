@@ -250,21 +250,21 @@ class FormatRules
             return false;
         }
 
-        switch (strtolower($which)) {
+        switch (strtolower($which ?? '')) {
             case 'ipv4':
-                $which = FILTER_FLAG_IPV4;
+                $option = FILTER_FLAG_IPV4;
                 break;
 
             case 'ipv6':
-                $which = FILTER_FLAG_IPV6;
+                $option = FILTER_FLAG_IPV6;
                 break;
 
             default:
-                $which = null;
-                break;
+                $option = 0;
         }
 
-        return (bool) filter_var($ip, FILTER_VALIDATE_IP, $which) || (! ctype_print($ip) && (bool) filter_var(inet_ntop($ip), FILTER_VALIDATE_IP, $which));
+        return filter_var($ip, FILTER_VALIDATE_IP, $option) !== false
+            || (! ctype_print($ip) && filter_var(inet_ntop($ip), FILTER_VALIDATE_IP, $option) !== false);
     }
 
     /**
