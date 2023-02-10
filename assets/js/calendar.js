@@ -57,48 +57,48 @@
       // console.log();
           var em = document.getElementById('emp_id');
 
-//   $(document).on('change','#serv_id', function(){
-//     var timeee = $('#end_time').val();
-//     var startTime = $('#time').val();
-//     var servId = $(this).val();
-//     // console.log(servName);
-//     $.ajax({
-//            type: "POST",
-//            url: '<?= base_url("/calendar/checkEmp")?>',
-//              data: {
-//                 'start_event' : info.dateStr,
-//                 'time' : startTime,
-//                 'end_time' : timeee,
-//                 'serv_id': servId
-//              } ,// serializes form input
-//              success: function(data){
-//                // console.log(data.service);
-//               em.innerHTML="";
-//               data.available_emp.map((emp)=>{
-//                  var opt_one = document.createElement('option');
-//                   opt_one.value = emp.emp_id;
-//                   opt_one.innerHTML = emp.emp_name;
-//                   console.log(data.expertise);
-//                   data.expertise.map((exp)=>{
-//                     if(emp.emp_id == exp.emp_id){
+  $(document).on('change','#serv_id', function(){
+    var timeee = $('#end_time').val();
+    var startTime = $('#time').val();
+    var servId = $(this).val();
+    // console.log(servName);
+    $.ajax({
+           type: "POST",
+           url: 'https://puptcapstone.net/tsms/calendar/checkEmp',
+             data: {
+                'start_event' : info.dateStr,
+                'time' : startTime,
+                'end_time' : timeee,
+                'serv_id': servId
+             } ,// serializes form input
+             success: function(data){
+               // console.log(data.service);
+              em.innerHTML="";
+              data.available_emp.map((emp)=>{
+                 var opt_one = document.createElement('option');
+                  opt_one.value = emp.emp_id;
+                  opt_one.innerHTML = emp.emp_name;
+                  console.log(data.expertise);
+                  data.expertise.map((exp)=>{
+                    if(emp.emp_id == exp.emp_id){
                       
-//                       // console.log( exp.emp_name);
-//                       // console.log(emp.emp_name+" "+ exp.emp_name);
-//                       if(emp.emp_name == exp.emp_name){
-//                         opt_one.style.backgroundColor='#7BCB76';
-//                       }
+                      // console.log( exp.emp_name);
+                      // console.log(emp.emp_name+" "+ exp.emp_name);
+                      if(emp.emp_name == exp.emp_name){
+                        opt_one.style.backgroundColor='#7BCB76';
+                      }
                         
                       
                       
-//                     }
-//                   });
-//                   em.appendChild(opt_one);
-//                   // if (emp.area == info.event.extendedProps.area ) {
-//                   //   s1.value = emp.area;
-//                   //   int_index_area = count;
-//                   // }
+                    }
+                  });
+                  em.appendChild(opt_one);
+                  // if (emp.area == info.event.extendedProps.area ) {
+                  //   s1.value = emp.area;
+                  //   int_index_area = count;
+                  // }
                   
-//               });
+              });
               $('#mymodal .selectpicker').selectpicker("refresh");
 
              }
