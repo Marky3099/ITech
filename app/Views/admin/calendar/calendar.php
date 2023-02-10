@@ -48,10 +48,13 @@
 
         <input type="hidden" name="start_event" id="start_event" value="">
         <input type="hidden" name="cl_id" id="cl_id" value="">
-        <center><label class="switch">
-          <input type="checkbox" id="checkLog" name="checkLog">
+        <label class="switch">
+          <input type="checkbox" id="checkLog" name="checkLog"> 
           <span class="slider round"></span>
-        </label></center>
+        </label>
+        <h3 id="logtext">Call Logs</h3>
+        
+
         <div class="form-group">
           <input class="form-control" type="hidden" name="title" id="title" placeholder="Title">
         </div>
@@ -104,27 +107,11 @@
             </div>
           </div>
         </div>
-        <div class="form-group" id="serv-form">
-          <label class="serv_idlbl" for="serv_id">Service</label><br>
-          <div class="select-dropdown" id="serv-select">
-            <select id="serv_id" name="serv_id" class="form-control" required>
-              <option selected disabled>Select Service</option>
-            <?php foreach($servName as $s):  ?>
-              <optgroup label="<?= $s['serv_name']; ?>">
-                <?php foreach($servType as $st):  ?>
-                  <?php if($st['serv_name'] == $s['serv_name']):?>
-                    <option value=<?= $st['serv_id'];?>><?= $st['serv_type'];?></option>
-                  <?php endif;?>
-                <?php endforeach; ?>
-              </optgroup>
-            <?php endforeach; ?>
-            </select>
-          </div>
-        </div><br>
+        <br>
         <div class="crud-text"><h5>Aircon Details:</h5></div>
         <div class="form-row">
-          <div class="form-group col-md-3">
-            <label for="dbrand">Device Brand</label>
+          <div class="form-group col-md-6">
+            <label for="dbrand">Aircon Brand</label>
             <div class="select-dropdown">
                 <select id="device_brand" name="device_brand[]" class="form-control " data-id="0"required>
                   <option value="" selected disabled>Select Type</option>
@@ -134,15 +121,25 @@
             </select>
             </div>
           </div> 
-          <div class="form-group col-md-3">
+          <div class="form-group col-md-6">
             <label for="aircont">Aircon Type</label>
             <div class="select-dropdown">
               <select id="aircon_id_0" name="aircon_id[]" class="form-control aircon" required>
-              <option value="">Select Type</option>
+              <option value="" selected disabled>Select Type</option>
             </select>
             </div>
           </div> 
-          <div class="form-group col-md-3">
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-5">
+          <label class="serv_idlbl" for="serv_id">Service</label>
+          <div class="select-dropdown" id="serv-select">
+            <select id="serv_id_0" name="serv_id[]" class="form-control" required>
+              <option value="" selected disabled>Select Service</option>
+            </select>
+            </div>
+          </div>
+          <div class="form-group col-md-4">
             
             <label for="fcunos">Fcuno</label>
             <select id="fcuno" name="fcuno0[]" class="selectpicker border border-dark" data-width="100%" multiple data-selected-text-format="count > 3" required>
@@ -164,7 +161,7 @@
         <div class="form-group">
           
           <label class="emp_idlbll" for="emp_id">Technician <i class="fa-regular fa-circle-question"><span class="infoEmp">Highlighted Technicians with expertise of the chosen task</span></i></label><br>
-          <select id="emp_id" name="emp_id[]" class="form-control w-75 ml-5 selectpicker border border-dark" multiple data-selected-text-format="count > 8" required>
+          <select id="emp_id" name="emp_id[]" class="form-control w-75 ml-5 selectpicker border border-dark" multiple data-selected-text-format="count > 8" >
           </select>
         </div> 
 
@@ -243,23 +240,6 @@
             </div>
           </div>
         </div>
-        
-        <div class="form-group" id="serv-form">
-          <label class="serv_id_updatelbl" for="serv_id_update">Service</label><br>
-          <div class="select-dropdown" id="serv-select">
-            <select class="form-control" id="serv_id_update" name="serv_id_update">
-            <?php foreach($servName as $s):  ?>
-              <optgroup label="<?= $s['serv_name']; ?>">
-                <?php foreach($servType as $st):  ?>
-                  <?php if($st['serv_name'] == $s['serv_name']):?>
-                    <option value=<?= $st['serv_id'];?>><?= $st['serv_type'];?></option>
-                  <?php endif;?>
-                <?php endforeach; ?>
-              </optgroup>
-            <?php endforeach; ?>
-          </select>
-          </div>
-        </div> <br>
 
         <div class="crud-text"><h5>Aircon Details:</h5></div>
 
@@ -332,14 +312,21 @@ var airconD = <?php echo json_encode($client_area); ?> ;
 var distinct = <?php echo json_encode($distinct); ?> ;
 var distinctEvent = <?php echo json_encode($distinct_event); ?> ;
 var deviceBrand = <?php echo json_encode($device_brand); ?> ;
+var servName = <?php echo json_encode($servName); ?> ;
+var servType = <?php echo json_encode($servType); ?> ;
+var typeServ = <?php echo json_encode($typeServ); ?> ;
+var airconDetails = <?php echo json_encode($aircon); ?> ;
  
 var count = 1;
+var countFcu = 1;
+var countServ = 0;
 var count_update = 1;
 
   // console.log(event);
   $("#add_aut").click(function(e){
-    var html3 = `<div class="form-row" id="row">
-    <div class="form-group col-md-3">
+    // console.log('aircon_id_'+count);
+    var html3 = `<div id="row"><hr style="border-top: 1px solid red;"><div class="form-row">
+    <div class="form-group col-md-6">
     
     <label for="dbrand">Device Brand</label>
     <div class="select-dropdown">
@@ -351,7 +338,7 @@ var count_update = 1;
       </select>
     </div>
     </div> 
-    <div class="form-group col-md-3">
+    <div class="form-group col-md-6">
     
     <label for="aircont">Aircon Type</label>
     <div class="select-dropdown">
@@ -359,11 +346,29 @@ var count_update = 1;
     <option value="0">Select Type</option>
     </select>
     </div>
-    </div> 
-    <div class="form-group col-md-3">
-    
+    </div>
+    </div>
+    <div class="form-row">
+    <div class="form-group col-md-5">
+          <label class="serv_idlbl" for="serv_id">Service</label>
+          <div class="select-dropdown" id="serv-select">
+            <select id="serv_id_`+count+`" name="serv_id[]" class="form-control" required>
+              <option selected disabled>Select Service</option>
+              <?php foreach($servName as $s):  ?>
+              <optgroup label="<?= $s['serv_name']; ?>">
+                <?php foreach($servType as $st):  ?>
+                  <?php if($st['serv_name'] == $s['serv_name']):?>
+                    <option value=<?= $st['serv_id'];?>><?= $st['serv_type'];?></option>
+                  <?php endif;?>
+                <?php endforeach; ?>
+              </optgroup>
+            <?php endforeach; ?>
+            </select>
+            </div>
+          </div>
+    <div class="form-group col-md-4">
     <label for="fcunos">Fcuno</label>
-    <select id="fcuno" name="fcuno`+count+`[]" class="selectpicker border border-dark" data-width="100%" multiple data-selected-text-format="count > 2">
+    <select id="fcuno" name="fcuno`+countFcu+`[]" class="selectpicker border border-dark" data-width="100%" multiple data-selected-text-format="count > 2">
     <?php foreach($fcu_no as $f):  ?>
       <option value="<?php echo $f['fcuno']; ?>"><p id="s2option"><?php echo $f['fcu'];?></p></option>
     <?php endforeach; ?>
@@ -379,21 +384,24 @@ var count_update = 1;
     </div>
     </div>`;
 
-
-
-    
     count++;
+    countFcu++;
     $('#auth-rows').append(html3);
-    
+    $('#client_id').attr('data-id',count);
     $('#mymodal .selectpicker').selectpicker();
 
   });
 
+// $('#aircon_id_1').on('change',function(){
+//   console.log($(this).val());
+// });
+
 // ------------------------------------
 
    $("#add_aut_update").click(function(e){
-    var html3 = `<div class="form-row" id="row" style="background-color:lightgreen;">
-    <div class="form-group col-md-3">
+
+    var html3 = `<div id="row" style="background-color:lightgreen;"><div class="form-row" >
+    <div class="form-group col-md-6">
     
     <label for="dbrand">Device Brand</label>
     <div class="select-dropdown">
@@ -405,7 +413,7 @@ var count_update = 1;
     </select>
     </div>
     </div> 
-    <div class="form-group col-md-3">
+    <div class="form-group col-md-6">
     
     <label for="aircont">Aircon Type</label>
     <div class="select-dropdown">
@@ -414,8 +422,28 @@ var count_update = 1;
     </select>
     </div>
     </div> 
+    </div>
+    <div class="form-row">
+    <div class="form-group col-md-5">
+          <label class="serv_idlbl" for="serv_id">Service</label>
+          <div class="select-dropdown" id="serv-select">
+            <select id="serv_id_`+count+`" name="serv_id[]" class="form-control" required>
+              <option selected disabled>Select Service</option>
+              <?php foreach($servName as $s):  ?>
+              <optgroup label="<?= $s['serv_name']; ?>">
+                <?php foreach($servType as $st):  ?>
+                  <?php if($st['serv_name'] == $s['serv_name']):?>
+                    <option value=<?= $st['serv_id'];?>><?= $st['serv_type'];?></option>
+                  <?php endif;?>
+                <?php endforeach; ?>
+              </optgroup>
+            <?php endforeach; ?>
+            </select>
+            </div>
+          </div>
 
-    <div class="form-group col-md-3">
+
+    <div class="form-group col-md-4">
     
     <label for="fcunos">Fcuno</label>
     <select id="fcuno_update_`+count_update+`"  class="selectpicker border border-dark" data-width="100%" multiple data-selected-text-format="count > 2">
@@ -440,11 +468,12 @@ var count_update = 1;
     <div class="form-group col-md-1"><br>
     <span id="auth-del-edit" class="btn"><i class="fas fa-minus"></i></span>
     </div>
-    </div>`;
+    </div></div></div>`;
 
 
 
     count_update++;
+    count++;
     $('#auth-rows-edit').append(html3);
     
     $('#mymodal2 .selectpicker').selectpicker();
@@ -456,6 +485,7 @@ var count_update = 1;
   $('#auth-rows').on('click', '#auth-del', function(E){
 
     $(this).parents('#row').remove();
+    $('#client_id').attr('data-id',count-1);
 
   });
   $('#auth-rows-edit').on('click', '#auth-del-edit', function(E){
@@ -466,16 +496,19 @@ var count_update = 1;
 
   $(document).on('change', '#device_brand', function(){
     var category_id = $(this).val();
+    var html = '<option value="" selected disabled>Select Type</option>';
     var aircon = $(this).data('id');
-  
+    $('#aircon_id_'+aircon).html(html);
     $.ajax({
-      url: 'http://localhost/tsms/aircon/brand/'+category_id,
+      url: '<?= base_url('aircon/brand')?>',
       method:"GET",
+      data:{
+        'brand': category_id
+      },
       success:function(data)
       {
         var res = JSON.parse(data);
-        console.log(res.options);
-        var html = '';
+        // console.log(res.options);
         html += res.options;
         $('#aircon_id_'+aircon).html(html);
 
@@ -491,8 +524,11 @@ var count_update = 1;
     var aircon = $(this).data('id');
     
     $.ajax({
-      url: 'http://localhost/tsms/aircon/brand/'+category_id,
+      url: '<?= base_url('aircon/brand/')?>',
       method:"GET",
+      data:{
+        'brand': category_id
+      },
       success:function(data)
       {
         var res = JSON.parse(data);
@@ -533,9 +569,225 @@ var count_update = 1;
       $('.headTask').css('background-color','white');
       $('#repeatable').prop('disabled', false);
     }
-  })
+  });
       
   
+  $('#aircon_id_0').on('change',function(){
+    var airconId = $(this).val();
+    // alert(airconId);
+    $.ajax({
+      method: 'GET',
+      url: '<?=base_url('/calendar/service')?>',
+      data: {
+        'airconId': airconId
+      },
+      success: function(response){
+        $('#serv_id_0').empty();
+        $('#serv_id_0').append('<option value="" selected disabled>Select Service</option>')
+        var service = response.serviceType;
+        var serviceName = response.serviceName;
+        for (var i = 0; i < serviceName.length; i++) {
+           $('#serv_id_0').append('<optgroup label="'+serviceName[i].serv_name+'"></optgroup');
+           for (var j = 0; j < service.length; j++) {
+            if(serviceName[i].serv_name == service[j].serv_name){
+              $('#serv_id_0').append('<option value="'+service[j].serv_id+'">'+service[j].serv_type+'</option>')
+            }
+            
+          }
+        }
+        
+        // 
+      }
+    });
+  });
+
+$(document).on('change','#serv_id_0', function(){
+    var timeee = $('#end_time').val();
+    var startTime = $('#time').val();
+    var startDate = $('#start_event').val();
+    var serv0 = $('#serv_id_0').val();
+    var servId = new Array(serv0);
+    var servCount = $(this).attr('data-id');
+     $.ajax({
+           type: "POST",
+           url: '<?= base_url("calendar/checkEmp");?>',
+             data: {
+                'start_event' : startDate,
+                'time' : startTime,
+                'end_time' : timeee,
+                'serv_id[]': servId
+             } ,// serializes form input
+             success: function(data){
+               // console.log(data.servId);
+              $('#emp_id').empty();
+              var availEmp = data.available_emp;
+              var expertEmp = data.output_array;
+              for (var i = 0; i < availEmp.length; i++) {
+                $('#emp_id').append('<option id="'+availEmp[i].emp_id+'" value="'+availEmp[i].emp_id+'">'+availEmp[i].emp_name+'</option>')
+                for (var j = 0; j < expertEmp.length; j++) {
+                  if(availEmp[i].emp_id == expertEmp[j].emp_id){
+                    $('#'+availEmp[i].emp_id).css('background-color','#7BCB76');
+                  }
+                }
+              }
+              $('#mymodal .selectpicker').selectpicker("refresh");
+
+             }
+           });
+  });
+
+
+
+  $(document).on('change','#serv_id_1', function(){
+    var timeee = $('#end_time').val();
+    var startTime = $('#time').val();
+    var startDate = $('#start_event').val();
+    var serv0 = $('#serv_id_0').val();
+    var serv1 = $(this).val();
+    var servId = new Array(serv0,serv1);
+    var servCount = $(this).attr('data-id');
+     $.ajax({
+           type: "POST",
+           url: '<?= base_url("calendar/checkEmp");?>',
+             data: {
+                'start_event' : startDate,
+                'time' : startTime,
+                'end_time' : timeee,
+                'serv_id[]': servId
+             } ,// serializes form input
+             success: function(data){
+               // console.log(data.servId);
+              $('#emp_id').empty();
+              var availEmp = data.available_emp;
+              var expertEmp = data.output_array;
+              for (var i = 0; i < availEmp.length; i++) {
+                $('#emp_id').append('<option id="'+availEmp[i].emp_id+'" value="'+availEmp[i].emp_id+'">'+availEmp[i].emp_name+'</option>')
+                for (var j = 0; j < expertEmp.length; j++) {
+                  if(availEmp[i].emp_id == expertEmp[j].emp_id){
+                    $('#'+availEmp[i].emp_id).css('background-color','#7BCB76');
+                  }
+                }
+              }
+              $('#mymodal .selectpicker').selectpicker("refresh");
+
+             }
+           });
+  });
+
+
+  $(document).on('change','#serv_id_2', function(){
+    var timeee = $('#end_time').val();
+    var startTime = $('#time').val();
+    var startDate = $('#start_event').val();
+    var serv0 = $('#serv_id_0').val();
+    var serv1 = $('#serv_id_1').val();
+    var serv2 = $(this).val();
+    var servId = new Array(serv0,serv1,serv2);
+    var servCount = $(this).attr('data-id');
+     $.ajax({
+           type: "POST",
+           url: '<?= base_url("calendar/checkEmp");?>',
+             data: {
+                'start_event' : startDate,
+                'time' : startTime,
+                'end_time' : timeee,
+                'serv_id[]': servId
+             } ,// serializes form input
+             success: function(data){
+               // console.log(data.servId);
+              $('#emp_id').empty();
+              var availEmp = data.available_emp;
+              var expertEmp = data.output_array;
+              for (var i = 0; i < availEmp.length; i++) {
+                $('#emp_id').append('<option id="'+availEmp[i].emp_id+'" value="'+availEmp[i].emp_id+'">'+availEmp[i].emp_name+'</option>')
+                for (var j = 0; j < expertEmp.length; j++) {
+                  if(availEmp[i].emp_id == expertEmp[j].emp_id){
+                    $('#'+availEmp[i].emp_id).css('background-color','#7BCB76');
+                  }
+                }
+              }
+              $('#mymodal .selectpicker').selectpicker("refresh");
+
+             }
+           });
+  });
+  $(document).on('change','#serv_id_3', function(){
+    var timeee = $('#end_time').val();
+    var startTime = $('#time').val();
+    var startDate = $('#start_event').val();
+    var serv0 = $('#serv_id_0').val();
+    var serv1 = $('#serv_id_1').val();
+    var serv2 = $('#serv_id_2').val();
+    var serv3 = $(this).val();
+    var servId = new Array(serv0,serv1,serv2,serv3);
+    var servCount = $(this).attr('data-id');
+     $.ajax({
+           type: "POST",
+           url: '<?= base_url("calendar/checkEmp");?>',
+             data: {
+                'start_event' : startDate,
+                'time' : startTime,
+                'end_time' : timeee,
+                'serv_id[]': servId
+             } ,// serializes form input
+             success: function(data){
+               // console.log(data.servId);
+              $('#emp_id').empty();
+              var availEmp = data.available_emp;
+              var expertEmp = data.output_array;
+              for (var i = 0; i < availEmp.length; i++) {
+                $('#emp_id').append('<option id="'+availEmp[i].emp_id+'" value="'+availEmp[i].emp_id+'">'+availEmp[i].emp_name+'</option>')
+                for (var j = 0; j < expertEmp.length; j++) {
+                  if(availEmp[i].emp_id == expertEmp[j].emp_id){
+                    $('#'+availEmp[i].emp_id).css('background-color','#7BCB76');
+                  }
+                }
+              }
+              $('#mymodal .selectpicker').selectpicker("refresh");
+
+             }
+           });
+  });
+
+  $(document).on('change','#serv_id_4', function(){
+    var timeee = $('#end_time').val();
+    var startTime = $('#time').val();
+    var startDate = $('#start_event').val();
+    var serv0 = $('#serv_id_0').val();
+    var serv1 = $('#serv_id_1').val();
+    var serv2 = $('#serv_id_2').val();
+    var serv3 = $('#serv_id_2').val();
+    var serv4 = $(this).val();
+    var servId = new Array(serv0,serv1,serv2,serv3,serv4);
+    var servCount = $(this).attr('data-id');
+     $.ajax({
+           type: "POST",
+           url: '<?= base_url("calendar/checkEmp");?>',
+             data: {
+                'start_event' : startDate,
+                'time' : startTime,
+                'end_time' : timeee,
+                'serv_id[]': servId
+             } ,// serializes form input
+             success: function(data){
+               // console.log(data.servId);
+              $('#emp_id').empty();
+              var availEmp = data.available_emp;
+              var expertEmp = data.output_array;
+              for (var i = 0; i < availEmp.length; i++) {
+                $('#emp_id').append('<option id="'+availEmp[i].emp_id+'" value="'+availEmp[i].emp_id+'">'+availEmp[i].emp_name+'</option>')
+                for (var j = 0; j < expertEmp.length; j++) {
+                  if(availEmp[i].emp_id == expertEmp[j].emp_id){
+                    $('#'+availEmp[i].emp_id).css('background-color','#7BCB76');
+                  }
+                }
+              }
+              $('#mymodal .selectpicker').selectpicker("refresh");
+
+             }
+           });
+  });
+
       </script>
       <script type="text/javascript" src="<?=base_url('assets/js/calendar.js')?>"></script>
 

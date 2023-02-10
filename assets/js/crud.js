@@ -8,7 +8,7 @@ $('.del').click(function(e){
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
           cancelButtonColor: '#d33',
-          confirmButtonText: 'Yes, delete it!'
+          confirmButtonText: 'Yes'
         }).then((result) => {
           if (result.isConfirmed) {
             document.location.href = href;
@@ -20,7 +20,7 @@ $('.del').click(function(e){
    if(msg){
       Swal.fire({
              icon: 'success',
-             title: 'Deleted!',
+             title: 'Deleted/Cancelled!',
              text: del,
              type: 'success',
             })

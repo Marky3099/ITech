@@ -15,7 +15,7 @@
           <input type="hidden" name="unavailDate" id="unavailDate" value="<?php if(session()->has('unavailDate')){ echo session()->getFlashdata('unavailDate');}?>">
           <label id="label1">Date</label>
           <label class="ttime">Time</label>
-          <input type="text" name="appt_date" id="appt_date" class="datepicker dateee" placeholder="mm-dd-yyyy" value="<?php if(session()->has('date')) { echo session()->getFlashdata('date'); } ?>"required>
+          <input type="text" name="appt_date" id="appt_date" class="datepicker dateee" autocomplete="off" placeholder="mm-dd-yyyy" value="<?php if(session()->has('date')) { echo session()->getFlashdata('date'); } ?>"required>
           <input type="time" name="appt_time" class="timee" step="3600" required>
         </div><br><br>
 
@@ -36,89 +36,92 @@
           </div>
         </div>
 
-        <div class="user-box">
-          <label>Service</label>
-          <div class="select-dropdown" style="width: 90%;">
-            <select id="serv_id" name="serv_id" required>
-            <?php foreach($servName as $s):  ?>
-              <optgroup label="<?= $s['serv_name']; ?>">
-                <?php foreach($servType as $st):  ?>
-                  
-                    <?php if(session()->has('serv')):?>
-                      <?php if(session()->getFlashdata('serv')== $st['serv_id']):?>
-                        <?php if($st['serv_name'] == $s['serv_name']):?>
-                          <option value=<?= $st['serv_id'];?> selected><?= $st['serv_type'];?></option>
-                        <?php endif;?>
-                      <?php else:?>
-                        <?php if($st['serv_name'] == $s['serv_name']):?>
-                          <option value=<?= $st['serv_id'];?>><?= $st['serv_type'];?></option>
-                        <?php endif;?>
-                      <?php endif;?>
-                    <?php else:?>
-                      <?php if($st['serv_name'] == $s['serv_name']):?>
-                        <option value=<?= $st['serv_id'];?>><?= $st['serv_type'];?></option>
-                      <?php endif;?>
-                    <?php endif;?>
-                  
+        <div class="crud-text-aircon"><h5>Aircon Details:</h5></div>
+        <div class="form-row">
+          <div class="user-box col-md-6">
+            <label for="dbrand">Aircon Brand</label>
+            <div class="select-dropdown">
+                <select id="device_brand" name="device_brand[]" class="form-control " data-id="0"required>
+                  <option value="" selected disabled>Select Type</option>
+                <?php foreach($device_brand as $d_b):  ?>
+                  <?php if(session()->has('device_brand')):?>
+                    <?php if(session()->getFlashdata('device_brand')[0] == $d_b['device_brand']):?>
+                      <option value=<?php echo $d_b['device_brand']; ?> selected><?php echo $d_b['device_brand'];?></option>
+                    <?php else: ?>
+                      <option value=<?php echo $d_b['device_brand']; ?>><?php echo $d_b['device_brand'];?></option>
+                    <?php endif; ?>
+                  <?php else: ?>
+                    <option value=<?php echo $d_b['device_brand']; ?>><?php echo $d_b['device_brand'];?></option>
+                  <?php endif; ?>
                 <?php endforeach; ?>
-              </optgroup>
-            <?php endforeach; ?>
             </select>
-          </div>
-        </div>
+            </div>
+          </div> 
+          <div class="user-box col-md-6">
+            <label for="aircont">Aircon Type</label>
+            <div class="select-dropdown">
+              <select id="aircon_id_0" name="aircon_id[]" class="form-control aircon" required>
+              <option value="" selected disabled>Select Type</option>
+              <?php if(session()->has('aircon_id')):?>
+                <?php foreach($aircon as $a):?>
+                
+                  <?php if($a['aircon_id'] == session()->getFlashdata('aircon_id')[0]):?>
 
-        <div class="user-box" style="margin-bottom: -30px">
-          <label>Device Brand</label>
-          <label class="bname">Aircon Type</label>
-          <div class="select-dropdown" style="width: 40%;">
-            <select id="device_brand" name="device_brand">
-            <?php foreach($device_brand as $d_b):  ?>
-              <?php if(session()->has('device_brand')):?>
-                <?php if(session()->getFlashdata('device_brand')== $d_b['device_brand']):?>
-              <option value=<?php echo $d_b['device_brand']; ?> selected><?php echo $d_b['device_brand'];?></option>
-                <?php else:?>
-                <option value=<?php echo $d_b['device_brand']; ?>><?php echo $d_b['device_brand'];?></option>
-                <?php endif;?>
-              <?php else:?>
-                <option value=<?php echo $d_b['device_brand']; ?>><?php echo $d_b['device_brand'];?></option>
-              <?php endif;?>
-            <?php endforeach; ?>
-          </select>
-          </div>
-           <div class="select-dropdown" style="width: 40%;" id="cid">
-            <select id="aircon_id" name="aircon_id">
-              <?php if(session()->has('aircon_brand')):?>
-              <?php foreach(session()->getFlashdata('aircon_brand') as $aircon):?>
-                <?php if($aircon['aircon_id'] == session()->getFlashdata('aircon_id')):?>
-                  <option value="<?=$aircon['aircon_id']?>" selected><?=$aircon['aircon_type']?></option>
-                <?php else:?>
-                  <option value="<?=$aircon['aircon_id']?>"><?=$aircon['aircon_type']?></option>
-                <?php endif;?>
-              <?php endforeach;?>
+                    <option value=<?php echo $a['aircon_id']; ?> selected><?php echo $a['aircon_type'];?></option>
+                  <?php endif;?>
+                <?php endforeach;?>
               <?php endif;?>
             </select>
-          </div>
+            </div>
+          </div> 
         </div>
-
-        <div class="user-box">
-          <input class="number" type="number" name="qty" placeholder="Quantity" min="1" value="<?php if(session()->has('qty')){ echo session()->getFlashdata('qty');};?>" required></input>
-          <label class="fcunum">FCU Number</label>
-          <select id="fcuno" name="fcuno[]" class="selectpicker" multiple data-selected-text-format="count > 3" required>
-            <?php foreach($fcu_no as $f):  ?>
+        <div class="form-row">
+          <div class="user-box col-md-5">
+          <label class="serv_idlbl" for="serv_id">Service</label>
+          <div class="select-dropdown" id="serv-select">
+            <select id="serv_id_0" name="serv_id[]" class="form-control" required>
+              <option value="" selected disabled>Select Service</option>
+            </select>
+            </div>
+          </div>
+          <label for="fcuno">Fcuno</label>
+          <div class="user-box col-md-3 fcuClass">
+            
+            
+            <select id="fcuno" name="fcuno0[]" class="selectpicker" data-width="100%" multiple data-selected-text-format="count > 3" required>
+              <?php foreach($fcu_no as $f):  ?>
               <?php if(session()->has('fcuno')):?>
+              <?php $fcuCurr = ''?>
+              <?php $postCurr = ''?>
               <?php foreach(session()->getFlashdata('fcuno') as $postFcu): ?>
                 <?php if($postFcu == $f['fcuno']):?>
                   <option value="<?php echo $f['fcuno']; ?>" selected><p id="s2option"><?php echo $f['fcu'];?></p></option>
-                <?php else:?>
-                  <option value="<?php echo $f['fcuno']; ?>"><p id="s2option"><?php echo $f['fcu'];?></p></option>
+                  <?php $postCurr = $postFcu;?>
+                <?php elseif($postFcu != $f['fcuno']):?>
+                  <?php if($fcuCurr != $f['fcuno']):?>
+                    <?php if($fcuCurr == $postCurr):?>
+                      <option value="<?php echo $f['fcuno']; ?>"><p id="s2option"><?php echo $f['fcu'];?></p></option>
+                    <?php endif;?>
+                  <?php $fcuCurr = $f['fcuno'];?>
+                <?php endif;?>
                 <?php endif;?>
                 <?php endforeach; ?>
               <?php else:?>
                 <option value="<?php echo $f['fcuno']; ?>"><p id="s2option"><?php echo $f['fcu'];?></p></option>
               <?php endif;?>
             <?php endforeach; ?>
-          </select>
-        </div><br>
+            </select>
+          </div> 
+          <div class="user-box col-md-2 qtyClass">
+            
+            <label for="quantity">Quantity</label>
+            <input type="number" class="form-control" name="quantity[]" id="quantity" min="1" value="1" required>
+          </div> 
+          <div class="user-box col-md-1 plusbtn">
+            <span id="add_aut" class="btn btn-primary"><i class="fa-solid fa-plus"></i></span>
+          </div>
+        </div>
+        <div id="auth-rows"></div>
 
         <div class="container1">
           <button type="submit" class="btn btn-success">Submit</button>
@@ -137,17 +140,20 @@
 <!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
 <script type="text/javascript">
 
-  $("#aircon_id option").each(function() {
-    if($(this).attr('selected')){
-      $(this).siblings('[value="'+ this.value +'"]').remove();
-    }
-  });
-  $(".aircon_id option").each(function() {
-    $(this).siblings('[value="'+ this.value +'"]').remove();
-  });
-  $("#aircon_id").html($("#aircon_id option").sort(function (a, b) {
-    return a.text == b.text ? 0 : a.text < b.text ? -1 : 1
-  }));
+  var count = 1;
+  var countFcu = 1;
+
+  // $("#aircon_id option").each(function() {
+  //   if($(this).attr('selected')){
+  //     $(this).siblings('[value="'+ this.value +'"]').remove();
+  //   }
+  // });
+  // $(".aircon_id option").each(function() {
+  //   $(this).siblings('[value="'+ this.value +'"]').remove();
+  // });
+  // $("#aircon_id").html($("#aircon_id option").sort(function (a, b) {
+  //   return a.text == b.text ? 0 : a.text < b.text ? -1 : 1
+  // }));
   $('#fcuno .selectpicker').selectpicker();
 // ---------------------------------
 
@@ -156,27 +162,57 @@
       // console.log(areas);
       
 
-      $.each(devbrand[0], function(key, v) {
-          // alert(value.client_id+" "+value.client_branch);
-           // console.log(v);
-           $.each(v, function(key, value) {
-            <?php if(!session()->has('aircon_brand')):?>
-            $("#aircon_id").append('<option value='+value.aircon_id+'>'+value.aircon_type+'</option>');
-          <?php endif;?>
-          });
-         });
-      $("#device_brand").change(function(){
-        $("#aircon_id").empty();
-        var current_value = document.getElementById("device_brand").selectedIndex;
-        $.each(devbrand[current_value], function(key, v) {
-          // alert(value.client_id+" "+value.client_branch);
-          $.each(v, function(key, value) {
-            $("#aircon_id").append('<option value="'+value.aircon_id+'" >'+value.aircon_type+'</option>')
-          });
-        });
-        // $("#area").append('<option value='+'>My option</option>');
-      });
+      // $.each(devbrand[0], function(key, v) {
+      //     // alert(value.client_id+" "+value.client_branch);
+      //      // console.log(v);
+      //      $.each(v, function(key, value) {
+      //       <?php if(!session()->has('aircon_brand')):?>
+      //       $("#aircon_id").append('<option value='+value.aircon_id+'>'+value.aircon_type+'</option>');
+      //     <?php endif;?>
+      //     });
+      //    });
+      // $("#device_brand").change(function(){
+      //   $(".aircon").empty();
+      //   var current_value = document.getElementById("device_brand").selectedIndex;
+      //   $.each(devbrand[current_value], function(key, v) {
+      //     // alert(value.client_id+" "+value.client_branch);
+      //     $(".aircon").append('<option value="" selected disabled>Select Type</option>')
+          
+      //     $.each(v, function(key, value) {
+      //       $(".aircon").append('<option value="'+value.aircon_id+'" >'+value.aircon_type+'</option>')
+      //     });
+      //   });
+      //   // $("#area").append('<option value='+'>My option</option>');
+      // });
 
+$('.aircon').on('change',function(){
+    var airconId = $(this).val();
+    // alert(airconId);
+    $.ajax({
+      method: 'GET',
+      url: '<?=base_url('/calendar/service')?>',
+      data: {
+        'airconId': airconId
+      },
+      success: function(response){
+        $('#serv_id_0').empty();
+        $('#serv_id_0').append('<option value="" selected disabled>Select Service</option>')
+        var service = response.serviceType;
+        var serviceName = response.serviceName;
+        for (var i = 0; i < serviceName.length; i++) {
+           $('#serv_id_0').append('<optgroup label="'+serviceName[i].serv_name+'"></optgroup');
+           for (var j = 0; j < service.length; j++) {
+            if(serviceName[i].serv_name == service[j].serv_name){
+              $('#serv_id_0').append('<option value="'+service[j].serv_id+'">'+service[j].serv_type+'</option>')
+            }
+            
+          }
+        }
+        
+        // 
+      }
+    });
+  });
 
 var disableDates = <?php echo json_encode($date);?>;
 var availTime = ['8:00 AM','9:00 AM','10:00 AM','11:00 AM','1:00 PM','2:00 PM','3:00 PM','4:00 PM','5:00 PM','6:00 PM'];
@@ -191,14 +227,15 @@ $("#appt_date").on("change", function() {
             'date': date
          },
          success: function(response){
+          // console.log(response.events_data);
           var availableTime =[];
           // var result = [];
           var time = [];
           var timee = [];
 
           for (var i = 0; i < response.events_data.length; i++) {
-            var resTime = response.events_data[i].TIME;
-            timee.push(response.events_data[i].TIME);
+            var resTime = response.events_data[i].time;
+            timee.push(response.events_data[i].time);
             var formatTime = resTime.split(":");
             var timeFormatted;
             if(formatTime[0]>=12){
@@ -283,5 +320,118 @@ $("#appt_date").on("change", function() {
           footer: '<center>Allowed Time: ['+availTime+']',
         });
   <?php }?>
+
+
+  $("#add_aut").click(function(e){
+    // console.log('aircon_id_'+count);
+    var html3 = `<div id="row"><hr style="border-top: 1px solid red;"><div class="form-row">
+    <div class="form-group col-md-6">
+    
+    <label for="dbrand">Device Brand</label>
+    <div class="select-dropdown">
+      <select id="device_brand" name="device_brand[]" class="form-control " data-id="`+count+`"required>
+      <option value="0">Select Brand</option>
+      <?php foreach($device_brand as $d_b):  ?>
+      <option value=<?php echo $d_b['device_brand']; ?>><?php echo $d_b['device_brand'];?></option>
+      <?php endforeach; ?>
+      </select>
+    </div>
+    </div> 
+    <div class="form-group col-md-6">
+    
+    <label for="aircont">Aircon Type</label>
+    <div class="select-dropdown">
+    <select id="aircon_id_`+count+`" name="aircon_id[]" class="form-control aircon" required>
+    <option value="0">Select Type</option>
+    </select>
+    </div>
+    </div>
+    </div>
+    <div class="form-row">
+    <div class="form-group col-md-5">
+          <label class="serv_idlbl" for="serv_id">Service</label>
+          <div class="select-dropdown" id="serv-select">
+            <select id="serv_id_`+count+`" name="serv_id[]" class="form-control" required>
+              <option selected disabled>Select Service</option>
+              <?php foreach($servName as $s):  ?>
+              <optgroup label="<?= $s['serv_name']; ?>">
+                <?php foreach($servType as $st):  ?>
+                  <?php if($st['serv_name'] == $s['serv_name']):?>
+                    <option value=<?= $st['serv_id'];?>><?= $st['serv_type'];?></option>
+                  <?php endif;?>
+                <?php endforeach; ?>
+              </optgroup>
+            <?php endforeach; ?>
+            </select>
+            </div>
+          </div>
+    <label for="fcunos">Fcuno</label>
+    <div class="user-box col-md-3 fcuClass">
+    
+    <select id="fcuno" name="fcuno`+countFcu+`[]" class="selectpicker fcuAdd" data-width="100%" multiple data-selected-text-format="count > 2">
+    <?php foreach($fcu_no as $f):  ?>
+      <option value="<?php echo $f['fcuno']; ?>"><p id="s2option"><?php echo $f['fcu'];?></p></option>
+    <?php endforeach; ?>
+    </select>
+    </div> 
+    <div class="user-box col-md-2 qtyClass">
+    
+    <label for="quantity">Quantity</label>
+    <input type="number" class="form-control" name="quantity[]" id="quantity" min="1" value="1" required>
+    </div> 
+    <div class="user-box col-md-1 plusbtn">
+    <span id="auth-del" class="btn minusbtn"><i class="fas fa-minus"></i></span>
+    </div>
+    </div>`;
+
+    count++;
+    countFcu++;
+    $('#auth-rows').append(html3);
+    $('#client_id').attr('data-id',count);
+    $('.selectpicker').selectpicker();
+
+  });
+
+$('#auth-rows').on('click', '#auth-del', function(E){
+
+    $(this).parents('#row').remove();
+    $('#client_id').attr('data-id',count-1);
+
+  });
+
+$(document).on('change', '#device_brand', function(){
+    var category_id = $(this).val();
+    var html = '<option value="" selected disabled>Select Type</option>';
+    var aircon = $(this).data('id');
+    $('#aircon_id_'+aircon).html(html);
+    $.ajax({
+      url: '<?= base_url('aircon/brand')?>',
+      method:"GET",
+      data:{
+        'brand': category_id
+      },
+      success:function(data)
+      {
+        var res = JSON.parse(data);
+        // console.log(res.options);
+        html += res.options;
+        $('#aircon_id_'+aircon).html(html);
+
+      },
+      error:function(e){
+        console.log(e);
+      }
+    })
+  });
+
+$(document).on('change','.aircon', function(){
+    var aircon_id = $(this).val();
+    var count_aircon = $(this).data('id');
+    // document.getElementById('fcuno_update_'+aircon).id = 'fcuno_update_';
+    $('#fcuno_update_'+count_aircon).attr('name','fcuno_update_'+aircon_id+'[]');
+    
+   
+  });
+
     </script>
 <script type="text/javascript" src="<?= base_url('assets/js/resDate.js') ?>"></script>

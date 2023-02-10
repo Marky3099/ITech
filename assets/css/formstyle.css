@@ -335,11 +335,36 @@ body {
   border: 5px solid #344F21;
 }
 
-
-.form-box select #fcuno{
-  top: -100px;
+.form-box .show-tick{
+  margin-top: -50px;
+margin-right: -200px;
 }
-
+.form-box .fcuClass{
+  margin-top: 20px;
+  left: 30px;
+}
+.form-box .qtyClass{
+  left: -100px;
+}
+.form-box .plusbtn{
+  top: -50px;
+  left: 450px;
+}
+.form-box #add_aut{
+  top: 10px;
+  left: -350px;
+}
+.form-box .minusbtn{
+/*  top: -50px;*/
+  left: -350px;
+}
+.form-box .fcuAdd{
+  top: 10px;
+  left: 10px;
+}
+.form-box .crud-text-aircon{
+  left: 100px;
+}
 .form-box #expertise{
   position: absolute;
   left: 135px;

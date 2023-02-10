@@ -148,6 +148,8 @@ if($service){
     <tr style = "background-color: #A8D08D; text-align: center; font-size:10px; white-space:no-wrap;">
     <th>Service Name</th>
     <th>Service Type</th>
+    <th>Aircon Brand</th>
+    <th>Aircon Type</th>
     <th>Description</th>
     <th>Price</th>
     
@@ -162,6 +164,8 @@ if($service){
      
      <td>'.$ser->serv_name.'</td>
      <td>'.$ser->serv_type.'</td>
+     <td>'.$ser->device_brand.'</td>
+     <td>'.$ser->aircon_type.'</td>
      <td>'.$ser->serv_description.'</td>
      <td>'.$ser->price.'</td></tr>';
      

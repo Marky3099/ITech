@@ -68,6 +68,7 @@ $routes->post('/appointment/check-date', 'AppointmentCrud::checkDate',['filter' 
 
 $routes->get('/serv', 'ServCrud::index',['filter' => 'authGuard']);
 $routes->get('serv/create/view', 'ServCrud::create',['filter' => 'authGuard']);
+$routes->get('/serv/aircon-type', 'ServCrud::airconType',['filter' => 'authGuard']);
 $routes->post('serv/add', 'ServCrud::store',['filter' => 'authGuard']);
 $routes->get('serv/(:num)', 'ServCrud::singleServ/$1',['filter' => 'authGuard']);
 $routes->post('serv/update', 'ServCrud::update',['filter' => 'authGuard']);
@@ -118,12 +119,13 @@ $routes->post('aircon/add', 'AirconCrud::store',['filter' => 'authGuard']);
 $routes->get('aircon/(:num)', 'AirconCrud::singleAircon/$1',['filter' => 'authGuard']);
 $routes->post('aircon/update', 'AirconCrud::update',['filter' => 'authGuard']);
 $routes->get('aircon/delete/(:num)', 'AirconCrud::delete/$1',['filter' => 'authGuard']);
-$routes->get('aircon/brand/(:any)', 'AirconCrud::show_aircon/$1',['filter' => 'authGuard']);
+$routes->get('aircon/brand', 'AirconCrud::show_aircon',['filter' => 'authGuard']);
 
 $routes->get('/dashboard', 'Dashboard::dashboard',['filter' => 'authGuard']);
 $routes->post('/dashboard/auto-done', 'Dashboard::autoDone',['filter' => 'authGuard']);
 $routes->get('/client-dashboard', 'Dashboard::clientDashboard',['filter' => 'authGuard']);
 $routes->get('/calendar', 'FullCalendar::index',['filter' => 'authGuard']);
+$routes->get('/calendar/service', 'FullCalendar::getService',['filter' => 'authGuard']);
 $routes->get('/calendar/dates', 'FullCalendar::restrict_date',['filter' => 'authGuard']);
 $routes->get('/calendar/dates-form', 'FullCalendar::restrict_form',['filter' => 'authGuard']);
 $routes->post('/calendar/dates-add', 'FullCalendar::restrict_add',['filter' => 'authGuard']);

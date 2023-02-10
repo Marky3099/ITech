@@ -206,7 +206,7 @@
    var update = '';
    <?php if(session()->has('msg')){?>
       msg = true;
-      del = 'Appointment is Deleted Successfully';
+      del = 'Appointment is Cancelled';
    <?php }elseif(session()->has('add')){?>
       add = true;
       del = 'New Appointment is Added Successfully';

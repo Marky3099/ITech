@@ -70,10 +70,10 @@ class Dashboard extends BaseController
                     $empEmail = $data['empDeploy'][$j]['emp_email'];
                     $empName = $data['empDeploy'][$j]['emp_name'];
                     $taskCode = $data['eventsToday'][$i]['event_code'];
-                    $servName = $data['eventsToday'][$i]['serv_type'];
+                    // $servName = $data['eventsToday'][$i]['serv_type'];
                     $client = $data['eventsToday'][$i]['client_branch'];
                     $clientAddress = $data['eventsToday'][$i]['client_address'];
-                    $eventTime = explode(":", $data['eventsToday'][$i]['TIME']);
+                    $eventTime = explode(":", $data['eventsToday'][$i]['time']);
                     $formatEventTime;
                     if($eventTime[0] == '00'){
                         $formatEventTime = 'Any time of the day';
@@ -98,7 +98,7 @@ class Dashboard extends BaseController
                     </head>
                     <body>
                     <h6>Dear ".$empName."</h6>
-                    <p>You assigned to do a service named <b>".$servName."</b> to <b>".$client."</b> at <b>".$clientAddress."</b> at exactly <b>".$formatEventTime."</b>. Please be on time and have a safe travel.</p>
+                    <p>You assigned to do a service named <b></b> to <b>".$client."</b> at <b>".$clientAddress."</b> at exactly <b>".$formatEventTime."</b>. Please be on time and have a safe travel.</p>
                     </body>
                     </html>";
                     $email = \Config\Services::email();
@@ -169,16 +169,16 @@ class Dashboard extends BaseController
           "log_code"=>$value['log_code'],
           "appt_code"=>$value['appt_code'],
           "start_event"=> $value['start_event'],
-          "time"=> $value['TIME'],
+          "time"=> $value['time'],
           "end_time"=>$value['end_time'],
-          "serv_id"=> $value['serv_id'],
+          // "serv_id"=> $value['serv_id'],
           "client_id"=>$value['client_id'],
-          "serv_name"=>$value['serv_name'],
-          "serv_type"=>$value['serv_type'],
+          // "serv_name"=>$value['serv_name'],
+          // "serv_type"=>$value['serv_type'],
           "area"=> $value['area'],
           "emp_array"=> $emp_arr,
           "client_branch"=> $value['client_branch'],
-          "status"=> $value['STATUS'],
+          "status"=> $value['status'],
       ];
   }
 
@@ -202,101 +202,37 @@ class Dashboard extends BaseController
    $data['taskDate'][] = "['".date("M",strtotime($value->start_event))."', ".$value->count."],";
 }
 
-     //chart data for services 
-$servQuery   = $db->query('SELECT DISTINCT serv_name, serv_color, Count(serv_id) as count
-    FROM All_events GROUP BY serv_id'
+     // chart data for services 
+$servQuery   = $db->query('SELECT DISTINCT serv_name, serv_color, Count(serv_id) as count, id
+    FROM event_fcu_views GROUP BY serv_name'
 );
 
 $data['servData'] = $servQuery->getResult();
 json_encode($data['servData']);
+
+$servCountQuery   = $db->query('SELECT DISTINCT serv_id,serv_name, id
+    FROM event_fcu_views GROUP BY serv_id ORDER BY id'
+);
+
+$data['servDataCount'] = $servCountQuery->getResult();
+json_encode($data['servDataCount']);
+
       // dd($data['servData']);
 foreach ($data['servData'] as $key => $value) {
-        // ['Work',     11]
-   $data['serviceData'][] = "['".$value->serv_name."', ".$value->count."],";
+    $servTotal = 0;
+    foreach ($data['servDataCount'] as $kk => $vv) {
+        if($value->serv_name == $vv->serv_name){
+            $servTotal+=1;
+        }
+    }
+   $data['serviceData'][] = "['".$value->serv_name."', ".$servTotal."],";
    $data['servLabelColor'][]= $value->serv_color;
 
 }
-// dd($data['serviceName']);
+$data['serviceDataUniq']=array_unique($data['serviceData']);
+$data['servLabelColorUniq']=array_unique($data['servLabelColor']);
+// dd($data['servData']);
 
-// rating chart
-$ratings = array();
-// $data['ratingsName'] = array();
-
-
-$data['empPerformance'] = array();
-$ratingsQuery   = $db->query('SELECT emp_id,serv_name, serv_color,rate_event,emp_name,rate_emp
-    FROM ratings_view'
-);
-
-$data['ratingsData'] = $ratingsQuery->getResult();
-json_encode($data['ratingsData']);
-foreach ($data['ratingsData'] as $key => $value) {
-    array_push($ratings, $value);
-    // array_push($ratingsName,$value->serv_name);
-}
-
-$empQuery   = $db->query('SELECT emp_id,emp_name
-    FROM employees'
-);
-
-$data['empQuery'] = $empQuery->getResult();
-json_encode($data['empQuery']);
-$data['empData'] = array();
-foreach ($data['empQuery'] as $key => $value) {
-    array_push($data['empData'], $value->emp_name);
-}
-
-// dd($data['ratingsData']);
-// $data['empDataPerformance'] = array();
-// foreach($data['empData'] as $key => $value){
-//     foreach($ratings as $k => $v){
-//         if($value == $v->emp_name){
-//             array_push($data['empDataPerformance'],$value.'\'-'.$v->rate_emp);
-//         }
-//     }        
-// }
-// dd($data['empDataPerformance']);
-// $techArray = array();
-// for($i = 0; $i < count($data['empDataPerformance']); $i++){
-//     $techData = $data['empDataPerformance'][$i];
-//     $techFormat = explode('-',$techData);
-//     $techName = $techFormat[0];
-//     array_push($techArray, '*'.$techName);
-//     foreach($data['empDataPerformance'] as $perform){
-//         $performFormat = explode('-',$perform);
-//         if($techName == $performFormat[0]){
-//             array_push($techArray, $performFormat[1]);
-//         }
-//     }
-// }
-// $techString = implode(',',$techArray);
-// $techStringtoArray = explode(',*',$techString );
-// // $techAsk = explode('*',$techStringtoArray );
-// $data['techChart'] = array();
-// $countTech =0;
-// foreach($techStringtoArray as $techArr){
-//     // $techh = implode('*',$techArr );
-//     $techstr = str_replace('*','',$techArr);
-//     $techCount = count(explode(',',$techstr));
-//     if($techCount > $countTech){
-//         $countTech = $techCount;
-//     }
-// }
-// foreach($techStringtoArray as $techArr){
-//     // $techh = implode('*',$techArr );
-//     $techstr = str_replace('*','',$techArr);
-//     $techCount = count(explode(',',$techstr));
-//     $plusZero = ',0';
-//     if($techCount<$countTech){
-//         $d =$countTech - $techCount;
-//         for($j = 0; $j < $d;$j++){
-//           $techstr = $techstr . $plusZero;
-//         }
-//     }
-//     // dd($techstr . $plusZero);
-//     array_push($data['techChart'], "['".$techstr."],");
-// }
-// $data['techValue'] = array_unique($data['techChart']);
 
 //count today's tasks
 $query = $db->query('SELECT COUNT(start_event) as count FROM All_events WHERE start_event = curdate()');
@@ -327,14 +263,14 @@ foreach ($data['weekly'] as $key => $value) {
     "log_code"=>$value['log_code'],
     "appt_code"=>$value['appt_code'],
     "start_event"=> $value['start_event'],
-    "time"=> $value['TIME'],
+    "time"=> $value['time'],
     "end_time"=>$value['end_time'],
-    "serv_id"=> $value['serv_id'],
+    // "serv_id"=> $value['serv_id'],
     "client_id"=>$value['client_id'],
     "area"=> $value['area'],
-    "status"=> $value['STATUS'],
-    "serv_name"=> $value['serv_name'],
-    "serv_type"=>$value['serv_type'],
+    "status"=> $value['status'],
+    // "serv_name"=> $value['serv_name'],
+    // "serv_type"=>$value['serv_type'],
     "client_branch"=> $value['client_branch'],
     "emp_array"=> $emp_arr,
 ];
@@ -371,14 +307,14 @@ foreach ($data['monthly'] as $key => $value) {
     "log_code"=>$value['log_code'],
     "appt_code"=>$value['appt_code'],
     "start_event"=> $value['start_event'],
-    "time"=> $value['TIME'],
+    "time"=> $value['time'],
     "end_time"=>$value['end_time'],
-    "serv_id"=> $value['serv_id'],
+    // "serv_id"=> $value['serv_id'],
     "client_id"=>$value['client_id'],
     "area"=> $value['area'],
-    "status"=> $value['STATUS'],
-    "serv_name"=> $value['serv_name'],
-    "serv_type"=>$value['serv_type'],
+    "status"=> $value['status'],
+    // "serv_name"=> $value['serv_name'],
+    // "serv_type"=>$value['serv_type'],
     "client_branch"=> $value['client_branch'],
     "emp_array"=> $emp_arr,
 ];
@@ -411,14 +347,14 @@ foreach ($data['complete'] as $key => $value) {
     "log_code"=>$value['log_code'],
     "appt_code"=>$value['appt_code'],
     "start_event"=> $value['start_event'],
-    "time"=> $value['TIME'],
+    "time"=> $value['time'],
     "end_time"=>$value['end_time'],
-    "serv_id"=> $value['serv_id'],
+    // "serv_id"=> $value['serv_id'],
     "client_id"=>$value['client_id'],
     "area"=> $value['area'],
-    "status"=> $value['STATUS'],
-    "serv_name"=> $value['serv_name'],
-    "serv_type"=>$value['serv_type'],
+    "status"=> $value['status'],
+    // "serv_name"=> $value['serv_name'],
+    // "serv_type"=>$value['serv_type'],
     "client_branch"=> $value['client_branch'],
     "emp_array"=> $emp_arr,
 ];
@@ -455,14 +391,14 @@ foreach ($data['pending'] as $key => $value) {
     "log_code"=>$value['log_code'],
     "appt_code"=>$value['appt_code'],
     "start_event"=> $value['start_event'],
-    "time"=> $value['TIME'],
+    "time"=> $value['time'],
     "end_time"=>$value['end_time'],
-    "serv_id"=> $value['serv_id'],
+    // "serv_id"=> $value['serv_id'],
     "client_id"=>$value['client_id'],
     "area"=> $value['area'],
-    "status"=> $value['STATUS'],
-    "serv_name"=> $value['serv_name'],
-    "serv_type"=>$value['serv_type'],
+    "status"=> $value['status'],
+    // "serv_name"=> $value['serv_name'],
+    // "serv_type"=>$value['serv_type'],
     "client_branch"=> $value['client_branch'],
     "emp_array"=> $emp_arr,
 ];
@@ -663,11 +599,11 @@ foreach ($data['all_events'] as $key => $value) {
     "event_code"=> $value['event_code'],
     "title"=> $value['title'],
     "start"=> $value['start_event'],
-    "time"=>$value['TIME'],
+    "time"=>$value['time'],
     "end_time"=>$value['end_time'],
-    "serv_id"=> $value['serv_id'],
+    // "serv_id"=> $value['serv_id'],
     "client_id"=> $value['client_id'],
-    "serv_name"=> $value['serv_name'],
+    // "serv_name"=> $value['serv_name'],
     "area"=> $value['area'],
     "client_branch"=> $value['client_branch'],
     "emp_array"=> $emp_arr,

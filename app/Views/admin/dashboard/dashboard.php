@@ -49,8 +49,6 @@
                                         <tr>
                                           <th>Task Code</th>
                                           <th>Branch</th>
-                                          <th>Service</th>
-                                          <th>Service Type</th>
                                           <th>Technician</th>
                                           <th>Status</th>
                                         </tr>
@@ -61,8 +59,6 @@
                                           <tr>
                                             <td><?php echo $tday->event_code; ?></td>
                                             <td><?php echo $tday->client_branch; ?></td>
-                                            <td><?php echo $tday->serv_name; ?></td>
-                                            <td><?php echo $tday->serv_type; ?></td>
                                             <td>
                                              <?php $data = explode(',',$tday->emp_array);
                                              $count = 0;
@@ -114,8 +110,6 @@
                                       <th>Date</th>
                                       <th>Task Code</th>
                                       <th>Branch</th>
-                                      <th>Service</th>
-                                      <th>Service Type</th>
                                       <th>Technician</th>
                                       <th>Status</th>
                                       
@@ -128,8 +122,6 @@
                                         <td><?php echo date('m-d-Y',strtotime($week->start_event)); ?></td>
                                         <td><?php echo $week->event_code; ?></td>
                                         <td><?php echo $week->client_branch; ?></td>
-                                        <td><?php echo $week->serv_name; ?></td>
-                                        <td><?php echo $week->serv_type; ?></td>
                                         <td>
                                          <?php $data = explode(',',$week->emp_array);
                                          $count = 0;
@@ -181,8 +173,8 @@
                                 <th>Date</th>
                                 <th>Task Code</th>
                                 <th>Branch</th>
-                                <th>Service</th>
-                                <th>Service Type</th>
+           
+                
                                 <th>Technician</th>
                                 <th>Status</th>
                                 
@@ -195,8 +187,8 @@
                                   <td><?php echo date('m-d-Y',strtotime($m->start_event)); ?></td>
                                   <td><?php echo $m->event_code; ?></td>
                                   <td><?php echo $m->client_branch; ?></td>
-                                  <td><?php echo $m->serv_name; ?></td>
-                                  <td><?php echo $m->serv_type; ?></td>
+                                  
+                                  
                                   <td>
                                    <?php $data = explode(',',$m->emp_array);
                                    $count = 0;
@@ -247,8 +239,6 @@
                             <th>Date</th>
                             <th>Task Code</th>
                             <th>Branch</th>
-                            <th>Service</th>
-                            <th>Service Type</th>
                             <th>Technician</th>
                             <th>Status</th>
                             
@@ -261,8 +251,6 @@
                               <td><?php echo date('m-d-Y',strtotime($cm->start_event)); ?></td>
                               <td><?php echo $cm->event_code; ?></td>
                               <td><?php echo $cm->client_branch; ?></td>
-                              <td><?php echo $cm->serv_name; ?></td>
-                              <td><?php echo $cm->serv_type; ?></td>
                               <td>
                                <?php $data = explode(',',$cm->emp_array);
                                $count = 0;
@@ -312,8 +300,6 @@
                       <th>Date</th>
                       <th>Task Code</th>
                       <th>Branch</th>
-                      <th>Service</th>
-                      <th>Service Type</th>
                       <th>Technician</th>
                       <th>Status</th>
                       
@@ -326,8 +312,6 @@
                         <td><?php echo date('m-d-Y',strtotime($nd->start_event)); ?></td>
                         <td><?php echo $nd->event_code; ?></td>
                         <td><?php echo $nd->client_branch; ?></td>
-                        <td><?php echo $nd->serv_name; ?></td>
-                        <td><?php echo $nd->serv_type; ?></td>
                         <td>
                          <?php $data = explode(',',$nd->emp_array);
                          $count = 0;
@@ -694,8 +678,8 @@
     }
   }, 1000);
 
-  let servLabelColor = <?= json_encode($servLabelColor); ?>;
-
+  let servLabelColorUniq = <?= json_encode($servLabelColorUniq); ?>;
+console.log(servLabelColorUniq);
   google.charts.load("current", {packages:["corechart"]});
       google.charts.setOnLoadCallback(drawChart);
       function drawChart() {
@@ -703,7 +687,7 @@
           ['Service', 'Service total'],
           // ['Checkup', 1],['General cleaning', 13],['Installation', 1]
           <?php
-            foreach ($serviceData as $serviceData) {
+            foreach ($serviceDataUniq as $serviceData) {
               echo $serviceData;
             }
           ?>
@@ -731,7 +715,7 @@
         var servOptions = {
           title: 'Services Trend',
           is3D: true,
-          colors: servLabelColor
+          colors: servLabelColorUniq
         };
 
         var taskOptions = {

@@ -13,6 +13,8 @@
            <th>#</th>
            <th>Service Name</th>
            <th>Service Type</th>
+           <th>Aircon Brand</th>
+           <th>Aircon Type</th>
            <th>Price</th>
            <th>Color</th>
            <th>Action</th>
@@ -25,6 +27,12 @@
                  <td><?php echo $n ?></td>
                  <td><?php echo $service['serv_name']; ?></td>
                  <td><?php echo $service['serv_type']; ?></td>
+                 <?php foreach($aircon as $a):?>
+                  <?php if($a['aircon_id'] == $service['aircon_id']):?>
+                     <td><?= $a['device_brand']?></td>
+                     <td><?= $a['aircon_type']?></td>
+                  <?php endif;?>
+                 <?php endforeach;?>
                  <td><?php echo $service['price']; ?></td>
                  <td style="background-color:<?php echo $service['serv_color']; ?>"></td>
                  <td>

@@ -4,6 +4,7 @@
 
   var calendarEl = document.getElementById('calendar');
   var count = 0;
+  var prevOption = '';
   // var holidays = ["01-01","01-02","25-02","09-04","14-04","16-04","01-05","09-05","12-06","29-08","21-08","31-10","01-11","02-11","30-11","08-12","24-12","25-12","30-12","31-12"];
   var calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: 'dayGridMonth',
@@ -56,55 +57,6 @@
           }
       // console.log();
           var em = document.getElementById('emp_id');
-
-  $(document).on('change','#serv_id', function(){
-    var timeee = $('#end_time').val();
-    var startTime = $('#time').val();
-    var servId = $(this).val();
-    // console.log(servName);
-    $.ajax({
-           type: "POST",
-           url: "http://localhost/tsms/calendar/checkEmp",
-             data: {
-                'start_event' : info.dateStr,
-                'time' : startTime,
-                'end_time' : timeee,
-                'serv_id': servId
-             } ,// serializes form input
-             success: function(data){
-               // console.log(data.service);
-              em.innerHTML="";
-              data.available_emp.map((emp)=>{
-                 var opt_one = document.createElement('option');
-                  opt_one.value = emp.emp_id;
-                  opt_one.innerHTML = emp.emp_name;
-                  console.log(data.expertise);
-                  data.expertise.map((exp)=>{
-                    if(emp.emp_id == exp.emp_id){
-                      
-                      // console.log( exp.emp_name);
-                      // console.log(emp.emp_name+" "+ exp.emp_name);
-                      if(emp.emp_name == exp.emp_name){
-                        opt_one.style.backgroundColor='#7BCB76';
-                      }
-                        
-                      
-                      
-                    }
-                  });
-                  em.appendChild(opt_one);
-                  // if (emp.area == info.event.extendedProps.area ) {
-                  //   s1.value = emp.area;
-                  //   int_index_area = count;
-                  // }
-                  
-              });
-              $('#mymodal .selectpicker').selectpicker("refresh");
-
-             }
-           });
-
-  });
 
     // alert('Date: ' + info.dateStr);
      
@@ -178,23 +130,18 @@
       });
       s2.value = info.event.extendedProps.client_id;
       // -------------------------------------------------------------------------
-      // select brand and aircon type
-     //  var s3 = document.getElementById('device_brand_update');
-     //  var s4 = document.getElementById('aircon_id_update');
-      
-     //  var int_index_area1 = 0;
-     //  var count1 = 0;
+
      $('#auth-rows-edit').html('');
     // console.log(distinctEvent);
      distinctEvent.forEach((disEvent, index)=>{
-      
+          
           var concut = '';
+          // var concut2 = '';
           // console.log(disEvent,distinct);
         distinct.forEach((dis, index)=>{
     if ( info.event.id == dis.id &&  dis.id == disEvent.id) {
-        // console.log(info.event.id +'='+ dis.id +' '+  dis.id +'='+  disEvent.id);
-         concut = `<div class="form-row" id="row" style="background-color:lightblue;">
-    <div class="form-group col-md-3">
+         concut = `<div id="row" style="background-color:lightblue;"><div class="form-row" >
+    <div class="form-group col-md-6">
     <label for="dbrand">Device Brand</label>
     <select id="device_brand_update" name="device_brand[]" class="form-control " data-id="`+dis.aircon_id+`"required>`;
       
@@ -209,14 +156,61 @@
         
     concut = concut + ` </select>
     </div> 
-    <div class="form-group col-md-3">
+    <div class="form-group col-md-6">
     
     <label for="aircont">Aircon Type</label>
-    <select id="aircon_update_id_`+dis.aircon_id+`" name="aircon_update_id[]" class="form-control aircon" data-id="`+dis.aircon_id+`" required>
-    <option value="`+dis.aircon_id+`">`+dis.aircon_type+`</option>
-    </select>
+    <select id="aircon_update_id_`+dis.aircon_id+`" name="aircon_update_id[]" class="form-control aircon" data-id="`+dis.aircon_id+`" required>`;
+    
+    airconDetails.forEach((airconD, index)=>{
+      if(airconD.device_brand == dis.device_brand){
+        if(airconD.aircon_id == dis.aircon_id){
+          concut = concut + `<option value="`+airconD.aircon_id+`"selected>`+airconD.aircon_type+`</option>`;
+        }else{
+          concut = concut + `<option value="`+airconD.aircon_id+`">`+airconD.aircon_type+`</option>`;
+        }
+      }
+    });
+    concut = concut + `</select>
     </div>
-    <div class="form-group col-md-3">
+    </div>
+    <div class="form-row">
+    <div class="form-group col-md-5">
+      <label class="serv_idlbl" for="serv_id">Service</label>
+      <div class="select-dropdown" id="serv-select">
+        <select id="serv_id_`+countServ+`" name="serv_id[]" class="form-control" required>
+          <option selected disabled>Select Service</option>`;
+          countServ++;
+           servName.forEach((s, index)=>{
+            // 
+              concut = concut + `<optgroup label=`+s.serv_name+`>`;
+              typeServ.forEach((st, index)=>{
+                // console.log(st.device_brand);
+                if(dis.device_brand == st.device_brand){
+                  if(st.serv_name == s.serv_name){
+                    
+                    if(st.serv_id == dis.serv_id){
+                      concut = concut + `<option value="`+st.serv_id+`"selected >`+st.serv_type+`</option>`;
+                      prevOption = st.serv_type;
+                    }else{
+                      
+                      if(prevOption != st.serv_type){
+                        concut = concut + `<option value="`+st.serv_id+`" >`+st.serv_type+`</option>`;
+                        prevOption = st.serv_type;
+                      }
+                      
+                    }
+                    
+                  }
+                }
+              `</optgroup>`;
+            });
+          });
+       concut = concut + `</select>
+      </div>
+    </div>
+
+
+    <div class="form-group col-md-4">
     
     <label for="fcunos">Fcuno</label>
 
@@ -244,10 +238,9 @@
     <div class="form-group col-md-1"><br>
     <span id="auth-del-edit" class="btn"><i class="fas fa-minus"></i></span>
     </div>
-    </div>`;
+    </div></div>`;
     $('#auth-rows-edit').append(concut);
     }
-    
           info.event.extendedProps.fcu_array.forEach((fcuData, index)=>{
           if (disEvent.id == dis.id) {
             if (dis.id == fcuData.id && dis.aircon_id == fcuData.aircon_id) {
@@ -300,7 +293,7 @@
       t.value = info.event.title;
       ti.value = info.event.extendedProps.time;
       eti.value = info.event.extendedProps.end_time;
-      s.value = info.event.extendedProps.serv_id;
+      // s.value = info.event.extendedProps.serv_id;
       $("#frmdate").datepicker('update', dateFormat);
      
       // var disableDates = ["01-01","01-02","25-02","09-04","14-04","16-04","01-05","09-05","12-06","29-08","21-08","31-10","01-11","02-11","30-11","08-12","24-12","25-12","30-12","31-12"];
@@ -418,8 +411,6 @@
         });
         // $("#area").append('<option value='+'>My option</option>');
     });
-
-    
 
 
     $("#mymodal2").on('hidden.bs.modal', function(e){

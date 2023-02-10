@@ -10,8 +10,8 @@
     <?php }?>
     
     <div class="form-box">
-      <h3>Add Service</h3><br>
-      <div class="user-box" id="ibserv1">
+     <h3>Add Service</h3><br>
+     <div class="user-box" id="ibserv1">
        <div class="icon-box"><i class="fas fa-wrench"></i></div>
        <input type="text" name="serv_name" placeholder="Service Name" required>
      </div>
@@ -19,6 +19,25 @@
        <div class="icon-box"><i class="fas fa-wrench"></i></div>
        <input type="text" name="serv_type" placeholder="Service Type" required>
      </div>
+     <div class="user-box">
+      <label for="dbrand">Aircon Brand</label>
+      <div class="select-dropdown">
+          <select id="device_brand" name="device_brand" class="form-control" required>
+            <option value="" selected disabled>Select Type</option>
+          <?php foreach($aircon as $d_b):  ?>
+          <option value=<?php echo $d_b['device_brand']; ?>><?php echo $d_b['device_brand'];?></option>
+          <?php endforeach; ?>
+      </select>
+      </div>
+    </div> 
+     <div class="user-box">
+        <label for="aircont">Aircon Type</label>
+        <div class="select-dropdown">
+          <select id="aircon_id" name="aircon_id" class="form-control aircon" required>
+          <option value="" selected disabled>Select Type</option>
+        </select>
+        </div>
+      </div> 
 
      <div class="user-box" id="ibserv3">
       <div class="icon-box"><i class="fas fa-wrench"></i></div>
@@ -43,5 +62,10 @@
 </form>
 </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+  var Url = '<?= base_url('/serv/aircon-type')?>';
+</script>
+<script src="<?=base_url('assets/js/onChangeAircon.js')?>"></script>
 
 

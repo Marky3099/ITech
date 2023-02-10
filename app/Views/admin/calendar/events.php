@@ -403,7 +403,7 @@ var rateModal = new bootstrap.Modal(document.getElementById('rateModal'));
               'id': id,
            },
            success: function(response){
-            console.log(response);
+            // console.log(response);
             var rate = response.rate;
             var emp = response.emp;
             $('.rate-container').empty();

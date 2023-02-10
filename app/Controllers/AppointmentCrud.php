@@ -82,13 +82,13 @@ class AppointmentCrud extends Controller
         "appt_date"=> $value['appt_date'],
         "appt_time"=> $value['appt_time'],
         "client_id"=> $value['client_id'],
-        "serv_name" =>$value['serv_name'],
+        // "serv_name" =>$value['serv_name'],
         "area"=> $value['area'],
         "client_branch"=> $value['client_branch'],
-        "aircon_id"=> $value['aircon_id'],
-        "aircon_type"=> $value['aircon_type'],
-        "device_brand"=> $value['device_brand'],
-        "qty"=> $value['qty'],
+        // "aircon_id"=> $value['aircon_id'],
+        // "aircon_type"=> $value['aircon_type'],
+        // "device_brand"=> $value['device_brand'],
+        // "qty"=> $value['qty'],
         "appt_status"=> $value['appt_status'],
         "fcu_arr"=> $fcu_arr,
         "rate"=> $value['rate'],
@@ -181,6 +181,7 @@ return view("templates/template",$data);
 
 public function create(){
     $Client = new Client();
+    $Appt_fcu = new Appt_fcu();
     $Aircon = new Aircon();
     $fcu_no = new Fcu_no();
     $resDate = new Restrict_date;
@@ -192,11 +193,12 @@ public function create(){
     $data['client'] = $Client->orderBy('client_id', 'ASC')->findAll();
     $data['area'] = $Client->select('area')->where('client_id', $client_id)->groupBy('area')->findAll();
     $data['client_name'] = $Client->where('client_id', $client_id)->first();
-    // dd($data['client_name']);
     $data['aircon'] = $Aircon->orderBy('aircon_id', 'ASC')->findAll();
     $data['serv'] = $Serv->orderBy('serv_id', 'ASC')->findAll();
     $data['servName'] = $Serv->select('serv_name, serv_color, serv_type')->groupBy('serv_name')->findAll();
-    $data['servType'] = $Serv->orderBy('serv_name','ASC')->findAll();
+
+    $data['servType'] = $Serv->groupBy('serv_type','ASC')->findAll();
+    // dd($data['servType']);
     $data['device_brand'] = $Aircon->select('device_brand')->groupBy('device_brand')->findAll();
 
 foreach($data['device_brand'] as $k => $val) {
@@ -240,16 +242,35 @@ public function store() {
     $operatingTime = ['8:00 AM','9:00 AM','10:00 AM','11:00 AM','1:00 PM','2:00 PM','3:00 PM','4:00 PM','5:00 PM','6:00 PM'];
     // dd($operatingTime);
     $client_branch = $Client->where('client_id',$this->request->getVar('client_id'))->first();
-    $aircon_brand = $Aircon->where('aircon_id', $this->request->getVar('aircon_id'))->first();
-    $aircon_details = $Aircon->where('device_brand', $aircon_brand['device_brand'])->findAll();
+    // $aircon_brand = $Aircon->where('aircon_id', $this->request->getVar('aircon_id'))->first();
+    // $aircon_details = $Aircon->where('device_brand', $aircon_brand['device_brand'])->findAll();
     // dd($aircon_details);
     // dd($client_branch);
     $start_date = explode('/',$this->request->getVar('appt_date'));
     $session = session();
     $user_id =$_SESSION['user_id'];
-    $servId =$this->request->getVar('serv_id');
-    $service = $Serv->where('serv_id',$servId)->first();
-    $serviceName = $service['serv_name'];
+    $aircon1 = array();
+    foreach ($_POST['serv_id'] as $k => $v) {
+        $service = $Serv->where('serv_id', $v)->first();
+        $serviceName = $service['serv_name'];
+        // array_push($aircon1, );
+        foreach ($_POST['aircon_id'] as $index => $aircon) {
+            if($k ==$index ){
+                $servAircon = $Serv->select('serv_id, aircon_id, serv_name')->where('aircon_id', $aircon)->where('serv_name',$serviceName)->first();
+                array_push($aircon1, $servAircon);
+            }
+            
+        }
+    }
+    if(count($aircon1)>1){
+        $countAircon = count($aircon1)/2;
+    }else{
+        $countAircon = count($aircon1);
+    }
+    // dd($aircon1);
+    // $servId =$this->request->getVar('serv_id');
+    // $service = $Serv->where('serv_id',$servId)->first();
+    // $serviceName = $service['serv_name'];
     $date = $start_date[2].'-'.$start_date[0].'-'.$start_date[1];
     // dd($date);
     $time =$this->request->getVar('appt_time');
@@ -359,14 +380,17 @@ public function store() {
                         $session = session();
                         $session->setFlashdata('errorTime', 'Selected Time is not Available, Please choose another time');
                         $session->setFlashdata('date', $_POST['appt_date']);
-                        $session->setFlashdata('serv', $_POST['serv_id']);
+                        
+                        // $session->setFlashdata('serv', $_POST['serv_id']);
                         $session->setFlashdata('device_brand', $_POST['device_brand']);
+
                         $session->setFlashdata('aircon_id', $_POST['aircon_id']);
-                        $session->setFlashdata('fcuno', $_POST['fcuno']);
-                        $session->setFlashdata('qty', $_POST['qty']);
+                        // dd($session->getFlashdata('aircon_id'));
+                        $session->setFlashdata('fcuno', $_POST['fcuno0']);
+                        // $session->setFlashdata('qty', $_POST['qty']);
                         $session->setFlashdata('availTime', $restrictTime);
                         $session->setFlashdata('unavailDate', $unavailDate);
-                        $session->setFlashdata('aircon_brand', $aircon_details);
+                        // $session->setFlashdata('aircon_brand', $aircon_details);
                         return $this->response->redirect(site_url('/appointment/create'));
                     }
                 }
@@ -378,17 +402,17 @@ public function store() {
                         // 'bdo_id' => $this->request->getVar('bdo_id'),
                         'appt_time' => $this->request->getVar('appt_time'),
                         'area' => $this->request->getVar('area'),
-                        'serv_id' => $this->request->getVar('serv_id'),
+                        // 'serv_id' => $this->request->getVar('serv_id'),
                         'client_id' => $this->request->getVar('client_id'),
-                        'device_brand' => $this->request->getVar('device_brand'),
-                        'aircon_id' => $this->request->getVar('aircon_id'),
-                        'qty' => $this->request->getVar('qty'),
+                        // 'device_brand' => $this->request->getVar('device_brand'),
+                        // 'aircon_id' => $this->request->getVar('aircon_id'),
+                        // 'qty' => $this->request->getVar('qty'),
                         // 'status' => $this->request->getVar('status'),
                         'user_id' => $user_id,
                     ];
                     // dd($appoint_create);
                     $success = $Appoint->insert($appoint_create);
-                
+
                     if($success){
                         // dd("here");
                             $appt_code = ['appt_code' => 'appt-'.$code.'-'.(int)$success];
@@ -421,22 +445,42 @@ public function store() {
                                 }
 
 
-                                foreach ( $_POST['fcuno'] as $key => $floor_num) {
-                                    $event_fcu->insert([
-                                        'id'=> (int) $success3,
-                                        'aircon_id'=> (int) $this->request->getVar('aircon_id'),
-                                        'quantity'=> (int)$this->request->getVar('qty'),
-                                        'fcuno'=>$floor_num
-                                    ]);
+                                // foreach ( $_POST['fcuno'] as $key => $floor_num) {
+                                //     $event_fcu->insert([
+                                //         'id'=> (int) $success3,
+                                //         'aircon_id'=> (int) $this->request->getVar('aircon_id'),
+                                //         'quantity'=> (int)$this->request->getVar('qty'),
+                                //         'fcuno'=>$floor_num
+                                //     ]);
+                                // }
+
+                                foreach ($_POST['aircon_id'] as $index => $aircon) {
+                                    foreach ($_POST['fcuno'.$index] as $key => $floor_num) {
+                                            $event_fcu->insert([
+                                                'id'=> (int) $success3,
+                                                'aircon_id'=> (int)$aircon,
+                                                'quantity'=> (int)$_POST['quantity'],
+                                                'fcuno'=>$floor_num,
+                                                'serv_id'=>(int)$aircon1[$index]['serv_id']
+                                            ]);
+                                            $Appt_fcu->insert([
+                                                'aircon_id'=> (int)$aircon,
+                                                'quantity'=> (int)$_POST['quantity'],
+                                                'fcuno'=>$floor_num,
+                                                'appt_id' => (int) $success,
+                                                'serv_id'=>(int)$aircon1[$index]['serv_id']
+                                            ]);
+                                        
+                                    }
                                 }
                             }
                         }
-                    foreach($this->request->getVar('fcuno') as $key => $value) {
-                        $Appt_fcu->insert([
-                            'fcuno'=>(int) $value,
-                            'appt_id' => (int) $success
-                        ]);
-                    }
+                    // foreach($this->request->getVar('fcuno') as $key => $value) {
+                    //     $Appt_fcu->insert([
+                    //         'fcuno'=>(int) $value,
+                    //         'appt_id' => (int) $success
+                    //     ]);
+                    // }
                     $session = session();
                     $session->setFlashdata('add', 'value');
                     return $this->response->redirect(site_url('/appointment'));

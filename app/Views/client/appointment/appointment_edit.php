@@ -169,34 +169,6 @@
         });
         // $("#area").append('<option value='+'>My option</option>');
       });
-
-  // ----------------------------------------
-  // document.getElementById('fcuno_update').innerHTML='';
-
-  //     var arr1 = info.event.extendedProps.fcu_array.split(',');
-
-  //     var fcu_all = <?php echo json_encode($fcu_no); ?>;
-  //     fcu_all.map((all_fcu)=>{
-  //       let a = 0;
-  //        while(arr1) {
-  //            if(parseInt(arr1[a]) == all_fcu.fcuno){
-  //             $("#fcuno_update").append(`
-  //                 <option value="`+ all_fcu.fcuno+`" selected>`+all_fcu.fcu+`</option>`
-  //               );
-  //             break;
-  //            }
-
-  //            if (fcu_all.length == a) {
-  //             $("#fcuno_update").append(`
-  //                 <option value="`+ all_fcu.fcuno+`">`+all_fcu.fcu+`</option>`
-  //               );
-  //             break;
-  //            }
-  
-  //           a++;
-  //         }
-
-  //     });
                       //dd-mm
   var disableDates = ["1-1","1-2","25-2","9-4","14-4","16-4","1-5","9-5","12-6","29-8","21-8","31-10","1-11","2-11","30-11","8-12","24-12","25-12","30-12","31-12"];
       
