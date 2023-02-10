@@ -87,11 +87,9 @@ class AirconCrud extends Controller
         return $this->response->redirect(site_url('/aircon'));
     }
 
-    public function show_aircon($Brand){
+    public function show_aircon(){
         $output = '';
-        if($_SESSION['position'] != USER_ROLE_ADMIN){
-            return $this->response->redirect(site_url('/dashboard'));
-        }
+        $Brand = $_GET['brand'];
 
         $Aircon = new Aircon();
         $data = $Aircon->where('device_brand', $Brand)->orderBy('aircon_type', 'ASC')->findAll();
