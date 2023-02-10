@@ -12,7 +12,7 @@ use App\Models\Serv;
 use App\Models\Event_emp_views;
 use App\Models\Call_logs;
 use App\Models\Appointment;
-use App\Models\view_appointment;
+use App\Models\View_appointment;
 use App\Models\Event_fcu_views;
 use App\Models\Fcu_no;
 use App\Models\Event_emp;
@@ -544,7 +544,7 @@ public function clientDashboard(){
     else if($_SESSION['position'] == USER_ROLE_EMPLOYEE){
         return $this->response->redirect(site_url('/appointment'));
     }
-    $Appoint = new view_appointment();
+    $Appoint = new View_appointment();
     $event = new All_events();
     $emp = new Emp();
     $event_fcu = new Event_fcu_views();
