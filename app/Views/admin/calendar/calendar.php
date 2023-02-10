@@ -471,8 +471,11 @@ var count_update = 1;
     var aircon = $(this).data('id');
   
     $.ajax({
-      url: 'http://localhost/tsms/aircon/brand/'+category_id,
+      url: '<?= base_url("/aircon/brand/"?>',
       method:"GET",
+      data:{
+      'category_id': category_id
+      }.
       success:function(data)
       {
         var res = JSON.parse(data);
@@ -493,8 +496,11 @@ var count_update = 1;
     var aircon = $(this).data('id');
     
     $.ajax({
-      url: 'http://localhost/tsms/aircon/brand/'+category_id,
+      url: '<?= base_url("/aircon/brand/"?>',
       method:"GET",
+      data:{
+      'category_id': category_id
+      }.
       success:function(data)
       {
         var res = JSON.parse(data);
