@@ -185,7 +185,7 @@ class Dashboard extends BaseController
 // chart data for total of tasks every month
   $db = \Config\Database::connect();
   $query   = $db->query('SELECT start_event,COUNT(start_event) as count
-    FROM All_events
+    FROM all_events
     GROUP BY YEAR(start_event), MONTH(start_event) ASC'
 );
   $data['data'] = $query->getResult();
@@ -204,7 +204,7 @@ class Dashboard extends BaseController
 
      //chart data for services 
 $servQuery   = $db->query('SELECT DISTINCT serv_name, serv_color, Count(serv_id) as count
-    FROM All_events GROUP BY serv_id'
+    FROM all_events GROUP BY serv_id'
 );
 
 $data['servData'] = $servQuery->getResult();
@@ -299,7 +299,7 @@ foreach ($data['empQuery'] as $key => $value) {
 // $data['techValue'] = array_unique($data['techChart']);
 
 //count today's tasks
-$query = $db->query('SELECT COUNT(start_event) as count FROM All_events WHERE start_event = curdate()');
+$query = $db->query('SELECT COUNT(start_event) as count FROM all_events WHERE start_event = curdate()');
 $data['event_today'] = $query->getResult();
 json_encode($data['event_today']);
 foreach ($data['event_today'] as $key => $value) {
@@ -343,14 +343,14 @@ foreach ($data['weekly'] as $key => $value) {
 //count weekly tasks
 $data['weekly_event']= count($data['weekly']);
         // Total
-$query = $db->query('SELECT COUNT(start_event) as count FROM All_events');
+$query = $db->query('SELECT COUNT(start_event) as count FROM all_events');
 $data['total_event'] = $query->getResult();
 json_encode($data['total_event']);
 foreach ($data['total_event'] as $key => $value) {
     $data['event_total']= (int)$value->count;
 }
         //count monthly tasks
-$query = $db->query('SELECT COUNT(start_event) as count FROM All_events WHERE MONTH(start_event) = MONTH(CURRENT_DATE())');
+$query = $db->query('SELECT COUNT(start_event) as count FROM all_events WHERE MONTH(start_event) = MONTH(CURRENT_DATE())');
 $data['event_month'] = $query->getResult();
 
 $data['monthly'] = $allevent->where('MONTH(start_event) = MONTH(CURRENT_DATE()) ORDER BY start_event ASC')->findAll();
@@ -390,7 +390,7 @@ foreach ($data['event_month'] as $key => $value) {
     $data['monthly_event']= (int)$value->count;
 }
         // Completed task
-$query = $db->query('SELECT COUNT(start_event) as count FROM All_events WHERE status = "Done"');
+$query = $db->query('SELECT COUNT(start_event) as count FROM all_events WHERE status = "Done"');
 $data['event_complete'] = $query->getResult();
 
 $data['complete'] = $allevent->where('status = "Done" ORDER BY start_event ASC')->findAll();
@@ -434,7 +434,7 @@ if($data['event_total'] > 0){
 }
 
         // Pending task
-$query = $db->query('SELECT COUNT(start_event) as count FROM All_events WHERE status = "Pending"');
+$query = $db->query('SELECT COUNT(start_event) as count FROM all_events WHERE status = "Pending"');
 $data['event_pending'] = $query->getResult();
 
 $data['pending'] = $allevent->where('status = "Pending" ORDER BY start_event ASC')->findAll();
