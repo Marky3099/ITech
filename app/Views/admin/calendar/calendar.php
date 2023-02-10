@@ -471,7 +471,7 @@ var count_update = 1;
     var aircon = $(this).data('id');
   
     $.ajax({
-      url: '<?= base_url("/aircon/brand/"?>',
+      url: '<?= base_url("/aircon/brand/")?>',
       method:"GET",
       data:{
       'brand': category_id
@@ -496,7 +496,7 @@ var count_update = 1;
     var aircon = $(this).data('id');
     
     $.ajax({
-      url: '<?= base_url("/aircon/brand/"?>',
+      url: '<?= base_url("/aircon/brand/")?>',
       method:"GET",
       data:{
       'brand': category_id
