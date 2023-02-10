@@ -516,8 +516,8 @@ var rateModal = new bootstrap.Modal(document.getElementById('rateModal'));
 
       rateModal.show();
    })
-
-  var viewTask = `<?= base_url('/events/view')?>`;
+  
+  var viewTask = "<?= base_url('/events/view')?>";
    
    </script>
    <script type="text/javascript" src="<?= base_url('assets/js/view.js')?>"></script>
