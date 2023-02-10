@@ -516,7 +516,7 @@ var rateModal = new bootstrap.Modal(document.getElementById('rateModal'));
 
       rateModal.show();
    })
-  var viewTask = "https://puptcapstone.net/tsms/calendar/events";
+  var viewTask = "https://puptcapstone.net/tsms/calendar/events/view";
    
    </script>
    <script type="text/javascript" src="<?= base_url('assets/js/view.js')?>"></script>
