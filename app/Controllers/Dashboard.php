@@ -317,7 +317,7 @@ $monday = date('Y-m-d', strtotime('monday this week'));
 $sunday = date('Y-m-d', strtotime('sunday this week'));
 
 if($_SESSION['position'] == USER_ROLE_EMPLOYEE){
-    $data['weekly'] = $event_emp->where('start_event BETWEEN "'. date('Y-m-d', strtotime($monday)). '" and "'. date('Y-m-d', strtotime($sunday)).'"ORDER BY start_event ASC')->where('emp_id', $emp_id)->findAll();
+    $data['weekly'] = $event_emp->where('start_event BETWEEN "'. date('Y-m-d', strtotime($monday)). '" and "'. date('Y-m-d', strtotime($sunday)).'" AND emp_id = '.$emp_id.'ORDER BY start_event ASC')->findAll();
 }else{
     $data['weekly'] = $allevent->where('start_event BETWEEN "'. date('Y-m-d', strtotime($monday)). '" and "'. date('Y-m-d', strtotime($sunday)).'"ORDER BY start_event ASC')->findAll();
 }
