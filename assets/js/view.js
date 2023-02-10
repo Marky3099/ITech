@@ -6,7 +6,7 @@ $(document).on('click','.view',function(e){
       var myModal = new bootstrap.Modal(document.getElementById('viewModal'));
       $.ajax({
          method: 'Post',
-         url: 'http://localhost/tsms/calendar/events/view',
+         url: '<?= base_url('/events/view')?>',
          data:{
             'id': id
          },
