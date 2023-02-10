@@ -140,7 +140,7 @@ class FullCalendar extends BaseController
         "appt_code"=> $value['appt_code'],
         "start"=> $value['start_event'],
                  // "repeatable"=> $value['repeatable'],
-        "time"=>$value['TIME'],
+        "time"=>$value['time'],
         "end_time"=>$value['end_time'],
         "serv_id"=> $value['serv_id'],
                  // "aircon_id"=> $value['aircon_id'],
@@ -386,7 +386,7 @@ public function event(){
       "log_code"=> $value['log_code'],
       "appt_code"=> $value['appt_code'],
       "start_event"=> $value['start_event'],
-      "time"=> $value['TIME'],
+      "time"=> $value['time'],
       "end_time"=>$value['end_time'],
       "serv_id"=> $value['serv_id'],
       "client_id"=>$value['client_id'],
@@ -396,7 +396,7 @@ public function event(){
       "emp_array"=> $emp_arr,
       "fcu_array"=> $fcu_arr,
       "client_branch"=> $value['client_branch'],
-      "status"=> $value['STATUS'],
+      "status"=> $value['status'],
   ];
 }
             // dd( $datas['event']);
