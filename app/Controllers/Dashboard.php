@@ -317,7 +317,7 @@ $monday = date('Y-m-d', strtotime('monday this week'));
 $sunday = date('Y-m-d', strtotime('sunday this week'));
 
 if($_SESSION['position'] == USER_ROLE_EMPLOYEE){
-    $data['weekly'] = $event_emp->where('start_event BETWEEN "'. date('Y-m-d', strtotime($monday)). '" and "'. date('Y-m-d', strtotime($sunday)).'" AND emp_id = '.$emp_id.'ORDER BY start_event ASC')->findAll();
+    $data['weekly'] = $event_emp->where('start_event BETWEEN "'. date('Y-m-d', strtotime($monday)). '" and "'. date('Y-m-d', strtotime($sunday)).'" AND emp_id = "'.$emp_id.'"ORDER BY start_event ASC')->findAll();
 }else{
     $data['weekly'] = $allevent->where('start_event BETWEEN "'. date('Y-m-d', strtotime($monday)). '" and "'. date('Y-m-d', strtotime($sunday)).'"ORDER BY start_event ASC')->findAll();
 }
@@ -353,7 +353,11 @@ foreach ($data['weekly'] as $key => $value) {
 //count weekly tasks
 $data['weekly_event']= count($data['weekly']);
         // Total
-$query = $db->query('SELECT COUNT(start_event) as count FROM all_events');
+if($_SESSION['position'] == USER_ROLE_EMPLOYEE){
+    $query = $db->query('SELECT COUNT(start_event) as count FROM event_emp_views WHERE emp_id ='.$emp_id);
+}else{
+    $query = $db->query('SELECT COUNT(start_event) as count FROM all_events');
+}
 $data['total_event'] = $query->getResult();
 json_encode($data['total_event']);
 foreach ($data['total_event'] as $key => $value) {
@@ -363,7 +367,7 @@ foreach ($data['total_event'] as $key => $value) {
 $query = $db->query('SELECT COUNT(start_event) as count FROM all_events WHERE MONTH(start_event) = MONTH(CURRENT_DATE())');
 $data['event_month'] = $query->getResult();
 if($_SESSION['position'] == USER_ROLE_EMPLOYEE){
-    $data['monthly'] = $event_emp->where('MONTH(start_event) = MONTH(CURRENT_DATE()) ORDER BY start_event ASC')->where('emp_id', $emp_id)->findAll();
+    $data['monthly'] = $event_emp->where('MONTH(start_event) = MONTH(CURRENT_DATE()) AND emp_id = "'.$emp_id.'" ORDER BY start_event ASC')->findAll();
 }else{
     $data['monthly'] = $allevent->where('MONTH(start_event) = MONTH(CURRENT_DATE()) ORDER BY start_event ASC')->findAll();
 }
@@ -402,10 +406,14 @@ foreach ($data['event_month'] as $key => $value) {
     $data['monthly_event']= (int)$value->count;
 }
         // Completed task
-$query = $db->query('SELECT COUNT(start_event) as count FROM all_events WHERE status = "Done"');
+if($_SESSION['position'] == USER_ROLE_EMPLOYEE){
+    $query = $db->query('SELECT COUNT(start_event) as count FROM event_emp_views WHERE status = "Done" AND emp_id ='.$emp_id);
+}else{
+    $query = $db->query('SELECT COUNT(start_event) as count FROM all_events WHERE status = "Done"');
+}
 $data['event_complete'] = $query->getResult();
 if($_SESSION['position'] == USER_ROLE_EMPLOYEE){
-    $data['complete'] = $event_emp->where('status = "Done" ORDER BY start_event ASC')->where('emp_id', $emp_id)->findAll();
+    $data['complete'] = $event_emp->where('status = "Done" AND emp_id = "'. $emp_id.'" ORDER BY start_event ASC')->findAll();
 }else{
     $data['complete'] = $allevent->where('status = "Done" ORDER BY start_event ASC')->findAll();
 }
@@ -448,11 +456,15 @@ if($data['event_total'] > 0){
 }
 
         // Pending task
-$query = $db->query('SELECT COUNT(start_event) as count FROM all_events WHERE status = "Pending"');
+if($_SESSION['position'] == USER_ROLE_EMPLOYEE){
+    $query = $db->query('SELECT COUNT(start_event) as count FROM event_emp_views WHERE status = "Pending" AND emp_id ='.$emp_id);
+}else{
+    $query = $db->query('SELECT COUNT(start_event) as count FROM all_events WHERE status = "Pending"');
+}
 $data['event_pending'] = $query->getResult();
 
 if($_SESSION['position'] == USER_ROLE_EMPLOYEE){
-    $data['pending'] = $event_emp->where('status = "Pending" ORDER BY start_event ASC')->where('emp_id', $emp_id)->findAll();
+    $data['pending'] = $event_emp->where('status = "Pending" AND emp_id="'. $emp_id.'" ORDER BY start_event ASC')->findAll();
 }else{
     $data['pending'] = $allevent->where('status = "Pending" ORDER BY start_event ASC')->findAll();
 }
