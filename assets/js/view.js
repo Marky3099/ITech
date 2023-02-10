@@ -6,7 +6,7 @@ $(document).on('click','.view',function(e){
       var myModal = new bootstrap.Modal(document.getElementById('viewModal'));
       $.ajax({
          method: 'Post',
-         url: '<?= base_url('/events/view')?>',
+         url: viewTask,
          data:{
             'id': id
          },
