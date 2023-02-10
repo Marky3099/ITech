@@ -273,7 +273,7 @@ $('#mymodal .selectpicker').selectpicker();
             // alert(logCode);
             $.ajax({
              type: "POST",
-             url:"http://localhost/tsms/calllogs/cancel",
+             url:"<?= base_url('/calllogs/cancel')?>",
              data: {
                 'log_code': logCode
              },
@@ -297,7 +297,7 @@ $('#mymodal .selectpicker').selectpicker();
       var myModal = new bootstrap.Modal(document.getElementById('viewModal'));
       $.ajax({
          method: 'Post',
-         url: 'http://localhost/tsms/calllogs/view',
+         url: '<?= base_url('/calllogs/view')?>',
          data:{
             'cl_id': id
          },
