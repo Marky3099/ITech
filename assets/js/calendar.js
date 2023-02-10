@@ -64,7 +64,7 @@
     // console.log(servName);
     $.ajax({
            type: "POST",
-           url: "http://localhost/tsms/calendar/checkEmp",
+           url: '<?= base_url("/calendar/checkEmp")?>',
              data: {
                 'start_event' : info.dateStr,
                 'time' : startTime,
