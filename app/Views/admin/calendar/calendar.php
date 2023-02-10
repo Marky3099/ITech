@@ -474,7 +474,7 @@ var count_update = 1;
       url: '<?= base_url("/aircon/brand/"?>',
       method:"GET",
       data:{
-      'category_id': category_id
+      'brand': category_id
       }.
       success:function(data)
       {
@@ -499,7 +499,7 @@ var count_update = 1;
       url: '<?= base_url("/aircon/brand/"?>',
       method:"GET",
       data:{
-      'category_id': category_id
+      'brand': category_id
       }.
       success:function(data)
       {
