@@ -364,7 +364,11 @@ foreach ($data['total_event'] as $key => $value) {
     $data['event_total']= (int)$value->count;
 }
         //count monthly tasks
-$query = $db->query('SELECT COUNT(start_event) as count FROM all_events WHERE MONTH(start_event) = MONTH(CURRENT_DATE())');
+if($_SESSION['position'] == USER_ROLE_EMPLOYEE){
+    $query = $db->query('SELECT COUNT(start_event) as count FROM event_emp_views WHERE MONTH(start_event) = MONTH(CURRENT_DATE()) AND emp_id ='.$emp_id);
+}else{
+    $query = $db->query('SELECT COUNT(start_event) as count FROM all_events WHERE MONTH(start_event) = MONTH(CURRENT_DATE())');
+}
 $data['event_month'] = $query->getResult();
 if($_SESSION['position'] == USER_ROLE_EMPLOYEE){
     $data['monthly'] = $event_emp->where('MONTH(start_event) = MONTH(CURRENT_DATE()) AND emp_id = "'.$emp_id.'" ORDER BY start_event ASC')->findAll();
