@@ -475,7 +475,7 @@ var count_update = 1;
       method:"GET",
       data:{
       'brand': category_id
-      }.
+      },
       success:function(data)
       {
         var res = JSON.parse(data);
@@ -500,7 +500,7 @@ var count_update = 1;
       method:"GET",
       data:{
       'brand': category_id
-      }.
+      },
       success:function(data)
       {
         var res = JSON.parse(data);
