@@ -25,7 +25,7 @@
  */
 
 // Include the main TCPDF library (search for installation path).
-require_once(base_url('libraries\tcpdf\tcpdf.php'));
+require_once($_SERVER['DOCUMENT_ROOT'].'libraries\tcpdf\tcpdf.php');
 
 
 // Extend the TCPDF class to create custom Header and Footer
