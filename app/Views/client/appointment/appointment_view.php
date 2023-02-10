@@ -234,7 +234,7 @@
       var myModal = new bootstrap.Modal(document.getElementById('viewModal'));
       $.ajax({
          method: 'Post',
-         url: 'http://localhost/tsms/appointment/view',
+         url: '<?= base_url("/appointment/view")?>',
          data:{
             'appt_id': id
          },
@@ -321,7 +321,7 @@
         var myModal = new bootstrap.Modal(document.getElementById('rateModal'));
         $.ajax({
            method: 'Get',
-           url: 'http://localhost/tsms/appointment/getEmp',
+           url: '<?= base_url("/appointment/getEmp")?>',
            data:{
               'appt_id': id
            },
