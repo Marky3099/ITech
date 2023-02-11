@@ -118,7 +118,7 @@ $routes->post('aircon/add', 'AirconCrud::store',['filter' => 'authGuard']);
 $routes->get('aircon/(:num)', 'AirconCrud::singleAircon/$1',['filter' => 'authGuard']);
 $routes->post('aircon/update', 'AirconCrud::update',['filter' => 'authGuard']);
 $routes->get('aircon/delete/(:num)', 'AirconCrud::delete/$1',['filter' => 'authGuard']);
-$routes->get('aircon/brand/(:any)', 'AirconCrud::show_aircon/$1',['filter' => 'authGuard']);
+$routes->get('aircon/brand/', 'AirconCrud::show_aircon',['filter' => 'authGuard']);
 
 $routes->get('/dashboard', 'Dashboard::dashboard',['filter' => 'authGuard']);
 $routes->post('/dashboard/auto-done', 'Dashboard::autoDone',['filter' => 'authGuard']);
@@ -130,7 +130,7 @@ $routes->post('/calendar/dates-add', 'FullCalendar::restrict_add',['filter' => '
 $routes->get('/calendar/dates-edit-form/(:num)', 'FullCalendar::restrict_form_edit/$1',['filter' => 'authGuard']);
 $routes->post('/calendar/dates-edit/(:num)', 'FullCalendar::restrict_edit/$1',['filter' => 'authGuard']);
 $routes->get('/calendar/dates-delete/(:num)', 'FullCalendar::restrict_delete/$1',['filter' => 'authGuard']);
-$routes->post('/calendar/checkEmp', 'FullCalendar::checkEmp',['filter' => 'authGuard']);
+$routes->get('/calendar/checkEmp', 'FullCalendar::checkEmp',['filter' => 'authGuard']);
 $routes->get('/calendar/emp', 'FullCalendar::index1',['filter' => 'authGuard']);
 $routes->get('/calendar/events', 'FullCalendar::event',['filter' => 'authGuard']);
 $routes->get('/calendar/events/view-ratings', 'FullCalendar::viewRatings',['filter' => 'authGuard']);

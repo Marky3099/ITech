@@ -471,8 +471,11 @@ var count_update = 1;
     var aircon = $(this).data('id');
   
     $.ajax({
-      url: 'http://localhost/tsms/aircon/brand/'+category_id,
+      url: '<?= base_url("/aircon/brand/")?>',
       method:"GET",
+      data:{
+      'brand': category_id
+      },
       success:function(data)
       {
         var res = JSON.parse(data);
@@ -493,8 +496,11 @@ var count_update = 1;
     var aircon = $(this).data('id');
     
     $.ajax({
-      url: 'http://localhost/tsms/aircon/brand/'+category_id,
+      url: '<?= base_url("/aircon/brand/")?>',
       method:"GET",
+      data:{
+      'brand': category_id
+      },
       success:function(data)
       {
         var res = JSON.parse(data);
@@ -535,8 +541,42 @@ var count_update = 1;
       $('.headTask').css('background-color','white');
       $('#repeatable').prop('disabled', false);
     }
-  })
-      
+  });
+      $('#serv_id').on('change',function(){
+    var timeee = $('#end_time').val();
+    var startDate = $('#start_event').val();
+    var startTime = $('#time').val();
+    var servId = $(this).val();
+    // console.log(servName);
+    $.ajax({
+           method: "GET",
+           url: '<?= base_url("/calendar/checkEmp")?>',
+             data: {
+                'start_event' : startDate,
+                'time' : startTime,
+                'end_time' : timeee,
+                'serv_id': servId
+             } ,// serializes form input
+             success: function(data){
+               
+              $('#emp_id').empty();
+              var availEmp = data.available_emp;
+
+              var expertEmp = data.expertise;
+              for (var i = 0; i < availEmp.length; i++) {
+                $('#emp_id').append('<option id="'+availEmp[i].emp_id+'" value="'+availEmp[i].emp_id+'">'+availEmp[i].emp_name+'</option>')
+                for (var j = 0; j < expertEmp.length; j++) {
+                  if(availEmp[i].emp_id == expertEmp[j].emp_id){
+                    $('#'+availEmp[i].emp_id).css('background-color','#7BCB76');
+                  }
+                }
+              }
+              $('#mymodal .selectpicker').selectpicker("refresh");
+
+             }
+           });
+
+  });
   
       </script>
       <script type="text/javascript" src="<?=base_url('assets/js/calendar.js')?>"></script>

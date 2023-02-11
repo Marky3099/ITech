@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 CRITICAL - 2023-02-10 15:08:47 --> Undefined index: time
 #0 C:\xampp\htdocs\tsms\app\Controllers\Dashboard.php(330): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 330, Array)
 #1 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Dashboard->dashboard()
@@ -12,3 +13,28 @@ CRITICAL - 2023-02-10 01:44:59 --> Undefined index: TIME
 #3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
 #5 {main}
+=======
+ERROR - 2023-02-10 19:24:42 --> Error connecting to the database: Access denied for user '****'@'localhost' (using password: YES)
+CRITICAL - 2023-02-10 19:24:42 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+#0 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(577): CodeIgniter\Database\BaseConnection->initialize()
+#1 C:\xampp\htdocs\tsms\app\Controllers\FullCalendar.php(41): CodeIgniter\Database\BaseConnection->query('SELECT DISTINCT...')
+#2 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\FullCalendar->index()
+#3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FullCalendar))
+#4 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#6 {main}
+ERROR - 2023-02-10 19:45:21 --> Error connecting to the database: Access denied for user '****'@'localhost' (using password: YES)
+CRITICAL - 2023-02-10 19:45:21 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+#0 C:\xampp\htdocs\tsms\system\Database\BaseConnection.php(577): CodeIgniter\Database\BaseConnection->initialize()
+#1 C:\xampp\htdocs\tsms\system\Database\BaseBuilder.php(1443): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#2 C:\xampp\htdocs\tsms\system\Model.php(210): CodeIgniter\Database\BaseBuilder->get()
+#3 C:\xampp\htdocs\tsms\system\BaseModel.php(622): CodeIgniter\Model->doFirst()
+#4 C:\xampp\htdocs\tsms\app\Controllers\FullCalendar.php(1530): CodeIgniter\BaseModel->first()
+#5 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\FullCalendar->checkEmp()
+#6 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FullCalendar))
+#7 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+>>>>>>> 92173fb890a5e98e4d004674553f98b090ad670e

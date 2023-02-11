@@ -12,7 +12,7 @@ use App\Models\Serv;
 use App\Models\Event_emp_views;
 use App\Models\Call_logs;
 use App\Models\Appointment;
-use App\Models\view_appointment;
+use App\Models\View_appointment;
 use App\Models\Event_fcu_views;
 use App\Models\Fcu_no;
 use App\Models\Event_emp;
@@ -46,8 +46,10 @@ class Dashboard extends BaseController
         $appt = new Appointment();
         $logs = new Call_logs();
         $bdo_user = new User_bdo();
-        // $session = session();
-        
+        $emp_id = '';
+        if($_SESSION['position'] == USER_ROLE_EMPLOYEE){
+            $emp_id = $_SESSION['emp_id'];
+        }
         date_default_timezone_set('Asia/Hong_Kong'); 
         $date = new \DateTime();
         $date->setTimezone(new \DateTimeZone('+0800'));
@@ -151,7 +153,14 @@ class Dashboard extends BaseController
         }
         $data['serv'] = $serv->orderBy('serv_id', 'ASC')->findAll();
         $data['event_emp'] = $event_emp->orderBy('id', 'ASC')->findAll();
-        $data['today'] = $allevent->where('start_event', date('Y-m-d'))->findAll();
+
+        if($_SESSION['position'] == USER_ROLE_EMPLOYEE){
+            $data['today'] = $event_emp->where('start_event', date('Y-m-d'))->where('emp_id', $emp_id)->findAll();
+        }else{
+            $data['today'] = $allevent->where('start_event', date('Y-m-d'))->findAll();
+        }
+
+        
         
 
         foreach ($data['today'] as $key => $value) {
@@ -309,8 +318,11 @@ foreach ($data['event_today'] as $key => $value) {
 $monday = date('Y-m-d', strtotime('monday this week'));
 $sunday = date('Y-m-d', strtotime('sunday this week'));
 
-$data['weekly'] = $allevent->where('start_event BETWEEN "'. date('Y-m-d', strtotime($monday)). '" and "'. date('Y-m-d', strtotime($sunday)).'"ORDER BY start_event ASC')->findAll();
-
+if($_SESSION['position'] == USER_ROLE_EMPLOYEE){
+    $data['weekly'] = $event_emp->where('start_event BETWEEN "'. date('Y-m-d', strtotime($monday)). '" and "'. date('Y-m-d', strtotime($sunday)).'" AND emp_id = "'.$emp_id.'"ORDER BY start_event ASC')->findAll();
+}else{
+    $data['weekly'] = $allevent->where('start_event BETWEEN "'. date('Y-m-d', strtotime($monday)). '" and "'. date('Y-m-d', strtotime($sunday)).'"ORDER BY start_event ASC')->findAll();
+}
 
 foreach ($data['weekly'] as $key => $value) {
     $emp_arr = "";
@@ -343,18 +355,28 @@ foreach ($data['weekly'] as $key => $value) {
 //count weekly tasks
 $data['weekly_event']= count($data['weekly']);
         // Total
-$query = $db->query('SELECT COUNT(start_event) as count FROM all_events');
+if($_SESSION['position'] == USER_ROLE_EMPLOYEE){
+    $query = $db->query('SELECT COUNT(start_event) as count FROM event_emp_views WHERE emp_id ='.$emp_id);
+}else{
+    $query = $db->query('SELECT COUNT(start_event) as count FROM all_events');
+}
 $data['total_event'] = $query->getResult();
 json_encode($data['total_event']);
 foreach ($data['total_event'] as $key => $value) {
     $data['event_total']= (int)$value->count;
 }
         //count monthly tasks
-$query = $db->query('SELECT COUNT(start_event) as count FROM all_events WHERE MONTH(start_event) = MONTH(CURRENT_DATE())');
+if($_SESSION['position'] == USER_ROLE_EMPLOYEE){
+    $query = $db->query('SELECT COUNT(start_event) as count FROM event_emp_views WHERE MONTH(start_event) = MONTH(CURRENT_DATE()) AND emp_id ='.$emp_id);
+}else{
+    $query = $db->query('SELECT COUNT(start_event) as count FROM all_events WHERE MONTH(start_event) = MONTH(CURRENT_DATE())');
+}
 $data['event_month'] = $query->getResult();
-
-$data['monthly'] = $allevent->where('MONTH(start_event) = MONTH(CURRENT_DATE()) ORDER BY start_event ASC')->findAll();
-
+if($_SESSION['position'] == USER_ROLE_EMPLOYEE){
+    $data['monthly'] = $event_emp->where('MONTH(start_event) = MONTH(CURRENT_DATE()) AND emp_id = "'.$emp_id.'" ORDER BY start_event ASC')->findAll();
+}else{
+    $data['monthly'] = $allevent->where('MONTH(start_event) = MONTH(CURRENT_DATE()) ORDER BY start_event ASC')->findAll();
+}
 
 foreach ($data['monthly'] as $key => $value) {
     $emp_arr = "";
@@ -390,11 +412,17 @@ foreach ($data['event_month'] as $key => $value) {
     $data['monthly_event']= (int)$value->count;
 }
         // Completed task
-$query = $db->query('SELECT COUNT(start_event) as count FROM all_events WHERE status = "Done"');
+if($_SESSION['position'] == USER_ROLE_EMPLOYEE){
+    $query = $db->query('SELECT COUNT(start_event) as count FROM event_emp_views WHERE status = "Done" AND emp_id ='.$emp_id);
+}else{
+    $query = $db->query('SELECT COUNT(start_event) as count FROM all_events WHERE status = "Done"');
+}
 $data['event_complete'] = $query->getResult();
-
-$data['complete'] = $allevent->where('status = "Done" ORDER BY start_event ASC')->findAll();
-
+if($_SESSION['position'] == USER_ROLE_EMPLOYEE){
+    $data['complete'] = $event_emp->where('status = "Done" AND emp_id = "'. $emp_id.'" ORDER BY start_event ASC')->findAll();
+}else{
+    $data['complete'] = $allevent->where('status = "Done" ORDER BY start_event ASC')->findAll();
+}
 
 foreach ($data['complete'] as $key => $value) {
     $emp_arr = "";
@@ -434,11 +462,18 @@ if($data['event_total'] > 0){
 }
 
         // Pending task
-$query = $db->query('SELECT COUNT(start_event) as count FROM all_events WHERE status = "Pending"');
+if($_SESSION['position'] == USER_ROLE_EMPLOYEE){
+    $query = $db->query('SELECT COUNT(start_event) as count FROM event_emp_views WHERE status = "Pending" AND emp_id ='.$emp_id);
+}else{
+    $query = $db->query('SELECT COUNT(start_event) as count FROM all_events WHERE status = "Pending"');
+}
 $data['event_pending'] = $query->getResult();
 
-$data['pending'] = $allevent->where('status = "Pending" ORDER BY start_event ASC')->findAll();
-
+if($_SESSION['position'] == USER_ROLE_EMPLOYEE){
+    $data['pending'] = $event_emp->where('status = "Pending" AND emp_id="'. $emp_id.'" ORDER BY start_event ASC')->findAll();
+}else{
+    $data['pending'] = $allevent->where('status = "Pending" ORDER BY start_event ASC')->findAll();
+}
 
 foreach ($data['pending'] as $key => $value) {
     $emp_arr = "";
@@ -544,7 +579,7 @@ public function clientDashboard(){
     else if($_SESSION['position'] == USER_ROLE_EMPLOYEE){
         return $this->response->redirect(site_url('/appointment'));
     }
-    $Appoint = new view_appointment();
+    $Appoint = new View_appointment();
     $event = new All_events();
     $emp = new Emp();
     $event_fcu = new Event_fcu_views();

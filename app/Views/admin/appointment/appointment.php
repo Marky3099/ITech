@@ -203,7 +203,7 @@
       var myModal = new bootstrap.Modal(document.getElementById('viewModal'));
       $.ajax({
          method: 'Post',
-         url: 'http://localhost/tsms/appointment/view',
+         url: '<?= base_url("/appointment/view")?>',
          data:{
             'appt_id': id
          },

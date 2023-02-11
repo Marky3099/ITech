@@ -2,7 +2,7 @@
 namespace App\Controllers;
 use CodeIgniter\Controller;
 use App\Models\Appointment;
-use App\Models\view_appointment;
+use App\Models\View_appointment;
 use App\Models\Client;
 use App\Models\Aircon;
 use App\Models\Fcu_no;
@@ -32,7 +32,7 @@ class AppointmentCrud extends Controller
         $Aircon = new Aircon();
         $fcu_no = new Fcu_no();
         $Serv = new Serv();
-        $Appoint = new view_appointment();
+        $Appoint = new View_appointment();
         // $Apptfcu = new Appt_fcu();
         $Appt_fcu_views = new Appt_fcu_views();
         $session = session();
@@ -109,7 +109,7 @@ public function adminAppointment(){
         $fcu_no = new Fcu_no();
         $Serv = new Serv();
         $Emp = new Emp();
-        $Appoint = new view_appointment();
+        $Appoint = new View_appointment();
         // $Apptfcu = new Appt_fcu();
         $Appt_fcu_views = new Appt_fcu_views();
 
@@ -458,7 +458,7 @@ public function store() {
 public function singleAppt($appt_id){
     
     $Appoint = new Appointment();
-    $Appoint_view = new view_appointment();
+    $Appoint_view = new View_appointment();
     $Client = new Client();
     $Aircon = new Aircon();
     $fcu_no = new Fcu_no();
@@ -639,7 +639,7 @@ public function cancelAppt(){
 }
 
 public function view(){
-    $Appoint = new view_appointment();
+    $Appoint = new View_appointment();
     $Fcu = new Appt_fcu_views();
     $Client = new Client();
     // $Emp = new Event_emp_views();

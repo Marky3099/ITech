@@ -169,7 +169,7 @@
                       <td><?php echo  ltrim($hour, '0') . ":" . $time[1] . " " . $amPm;?></td>
                   <?php endif;?>
            <td><?php echo $appt->appt_code; ?></td>
-           <td>n/a</td>
+           <td><?php echo $appt->serv_name; ?></td>
            <td><?php echo $appt->appt_status; ?></td>
            <td>
             <?php if($appt->appt_status == 'Done'):?>
@@ -234,7 +234,7 @@
       var myModal = new bootstrap.Modal(document.getElementById('viewModal'));
       $.ajax({
          method: 'Post',
-         url: 'http://localhost/tsms/appointment/view',
+         url: '<?= base_url("/appointment/view")?>',
          data:{
             'appt_id': id
          },
@@ -321,7 +321,7 @@
         var myModal = new bootstrap.Modal(document.getElementById('rateModal'));
         $.ajax({
            method: 'Get',
-           url: 'http://localhost/tsms/appointment/getEmp',
+           url: '<?= base_url("/appointment/getEmp")?>',
            data:{
               'appt_id': id
            },

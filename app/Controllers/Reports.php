@@ -98,7 +98,7 @@ class Reports extends BaseController
         "log_code"=> $value['log_code'],
         "appt_code"=> $value['appt_code'],
         "start_event"=> $value['start_event'],
-        "time"=> $value['TIME'],
+        "time"=> $value['time'],
         "serv_id"=> $value['serv_id'],
         "client_id"=>$value['client_id'],
         "serv_name"=>$value['serv_name'],
@@ -108,7 +108,7 @@ class Reports extends BaseController
         "fcu_array"=> $fcu_arr,
         "client_branch"=> $value['client_branch'],
         "price"=> $value['price'],
-        "status"=> $value['STATUS'],
+        "status"=> $value['status'],
     ];
 
 }
@@ -195,7 +195,7 @@ public function dailyAccomplish(){
           "log_code"=> $value['log_code'],
           "appt_code"=> $value['appt_code'],
           "start_event"=> $value['start_event'],
-          "time"=> $value['TIME'],
+          "time"=> $value['time'],
           "serv_id"=> $value['serv_id'],
           "client_id"=>$value['client_id'],
           "serv_name"=>$value['serv_name'],
@@ -204,7 +204,7 @@ public function dailyAccomplish(){
           "emp_array"=> $emp_arr,
           "fcu_array"=> $fcu_arr,
           "client_branch"=> $value['client_branch'],
-          "status"=> $value['STATUS'],
+          "status"=> $value['status'],
           "price"=> $value['price'],
       ];
   }
@@ -298,7 +298,7 @@ public function weeklyAccomplish(){
       "log_code"=> $value['log_code'],
       "appt_code"=> $value['appt_code'],
       "start_event"=> $value['start_event'],
-      "time"=> $value['TIME'],
+      "time"=> $value['time'],
       "serv_id"=> $value['serv_id'],
       "client_id"=>$value['client_id'],
       "serv_name"=>$value['serv_name'],
@@ -307,7 +307,7 @@ public function weeklyAccomplish(){
       "emp_array"=> $emp_arr,
       "fcu_array"=> $fcu_arr,
       "client_branch"=> $value['client_branch'],
-      "status"=> $value['STATUS'],
+      "status"=> $value['status'],
       "price"=> $value['price'],
   ];
 }
@@ -396,7 +396,7 @@ public function monthlyAccomplish(){
          "log_code"=> $value['log_code'],
          "appt_code"=> $value['appt_code'],
          "event_code"=>$value['event_code'],
-         "time"=> $value['TIME'],
+         "time"=> $value['time'],
          "serv_id"=> $value['serv_id'],
          "client_id"=>$value['client_id'],
          "serv_name"=>$value['serv_name'],
@@ -405,7 +405,7 @@ public function monthlyAccomplish(){
          "emp_array"=> $emp_arr,
          "fcu_array"=> $fcu_arr,
          "client_branch"=> $value['client_branch'],
-         "status"=> $value['STATUS'],
+         "status"=> $value['status'],
          "price"=> $value['price'],
      ];
  }
@@ -510,7 +510,7 @@ public function quarterlyAccomplish(){
          "log_code"=> $value['log_code'],
          "appt_code"=> $value['appt_code'],
          "event_code"=>$value['event_code'],
-         "time"=> $value['TIME'],
+         "time"=> $value['time'],
          "serv_id"=> $value['serv_id'],
          "client_id"=>$value['client_id'],
          "serv_name"=>$value['serv_name'],
@@ -519,7 +519,7 @@ public function quarterlyAccomplish(){
          "emp_array"=> $emp_arr,
          "fcu_array"=> $fcu_arr,
          "client_branch"=> $value['client_branch'],
-         "status"=> $value['STATUS'],
+         "status"=> $value['status'],
          "price"=> $value['price'],
      ];
  }
@@ -610,7 +610,7 @@ public function yearlyAccomplish(){
          "log_code"=> $value['log_code'],
          "appt_code"=> $value['appt_code'],
          "event_code"=>$value['event_code'],
-         "time"=> $value['TIME'],
+         "time"=> $value['time'],
          "serv_id"=> $value['serv_id'],
          "client_id"=>$value['client_id'],
          "serv_name"=>$value['serv_name'],
@@ -619,7 +619,7 @@ public function yearlyAccomplish(){
          "emp_array"=> $emp_arr,
          "fcu_array"=> $fcu_arr,
          "client_branch"=> $value['client_branch'],
-         "status"=> $value['STATUS'],
+         "status"=> $value['status'],
          "price"=> $value['price'],
      ];
  }
@@ -717,7 +717,7 @@ public function showException(){
         "log_code"=> $value['log_code'],
         "appt_code"=> $value['appt_code'],
         "start_event"=> $value['start_event'],
-        "time"=> $value['TIME'],
+        "time"=> $value['time'],
         "serv_id"=> $value['serv_id'],
         "client_id"=>$value['client_id'],
         "serv_name"=>$value['serv_name'],
@@ -727,7 +727,7 @@ public function showException(){
         "fcu_array"=> $fcu_arr,
         "client_branch"=> $value['client_branch'],
         "price"=> $value['price'],
-        "status"=> $value['STATUS'],
+        "status"=> $value['status'],
     ];
 
 }
@@ -814,7 +814,7 @@ public function dailyException(){
           "log_code"=> $value['log_code'],
           "appt_code"=> $value['appt_code'],
           "start_event"=> $value['start_event'],
-          "time"=> $value['TIME'],
+          "time"=> $value['time'],
           "serv_id"=> $value['serv_id'],
           "client_id"=>$value['client_id'],
           "serv_name"=>$value['serv_name'],
@@ -823,7 +823,7 @@ public function dailyException(){
           "emp_array"=> $emp_arr,
           "fcu_array"=> $fcu_arr,
           "client_branch"=> $value['client_branch'],
-          "status"=> $value['STATUS'],
+          "status"=> $value['status'],
           "price"=> $value['price'],
       ];
   }
@@ -916,7 +916,7 @@ public function weeklyException(){
       "log_code"=> $value['log_code'],
       "appt_code"=> $value['appt_code'],
       "start_event"=> $value['start_event'],
-      "time"=> $value['TIME'],
+      "time"=> $value['time'],
       "serv_id"=> $value['serv_id'],
       "client_id"=>$value['client_id'],
       "serv_name"=>$value['serv_name'],
@@ -925,7 +925,7 @@ public function weeklyException(){
       "emp_array"=> $emp_arr,
       "fcu_array"=> $fcu_arr,
       "client_branch"=> $value['client_branch'],
-      "status"=> $value['STATUS'],
+      "status"=> $value['status'],
       "price"=> $value['price'],
   ];
 }
@@ -1014,7 +1014,7 @@ public function monthlyException(){
          "log_code"=> $value['log_code'],
          "appt_code"=> $value['appt_code'],
          "event_code"=>$value['event_code'],
-         "time"=> $value['TIME'],
+         "time"=> $value['time'],
          "serv_id"=> $value['serv_id'],
          "client_id"=>$value['client_id'],
          "serv_name"=>$value['serv_name'],
@@ -1023,7 +1023,7 @@ public function monthlyException(){
          "emp_array"=> $emp_arr,
          "fcu_array"=> $fcu_arr,
          "client_branch"=> $value['client_branch'],
-         "status"=> $value['STATUS'],
+         "status"=> $value['status'],
          "price"=> $value['price'],
      ];
  }
@@ -1128,7 +1128,7 @@ public function quarterlyException(){
          "log_code"=> $value['log_code'],
          "appt_code"=> $value['appt_code'],
          "event_code"=>$value['event_code'],
-         "time"=> $value['TIME'],
+         "time"=> $value['time'],
          "serv_id"=> $value['serv_id'],
          "client_id"=>$value['client_id'],
          "serv_name"=>$value['serv_name'],
@@ -1137,7 +1137,7 @@ public function quarterlyException(){
          "emp_array"=> $emp_arr,
          "fcu_array"=> $fcu_arr,
          "client_branch"=> $value['client_branch'],
-         "status"=> $value['STATUS'],
+         "status"=> $value['status'],
          "price"=> $value['price'],
      ];
  }
@@ -1228,7 +1228,7 @@ public function yearlyException(){
          "log_code"=> $value['log_code'],
          "appt_code"=> $value['appt_code'],
          "event_code"=>$value['event_code'],
-         "time"=> $value['TIME'],
+         "time"=> $value['time'],
          "serv_id"=> $value['serv_id'],
          "client_id"=>$value['client_id'],
          "serv_name"=>$value['serv_name'],
@@ -1237,7 +1237,7 @@ public function yearlyException(){
          "emp_array"=> $emp_arr,
          "fcu_array"=> $fcu_arr,
          "client_branch"=> $value['client_branch'],
-         "status"=> $value['STATUS'],
+         "status"=> $value['status'],
          "price"=> $value['price'],
      ];
  }
@@ -1355,7 +1355,7 @@ public function getException(){
         "log_code"=> $value['log_code'],
         "appt_code"=> $value['appt_code'],
         "start_event"=> $value['start_event'],
-        "time"=> $value['TIME'],
+        "time"=> $value['time'],
         "serv_id"=> $value['serv_id'],
         //"aircon_id"=> $value['aircon_id'],
         "client_id"=>$value['client_id'],
@@ -1366,7 +1366,7 @@ public function getException(){
         "fcu_array"=> $fcu_arr,
         "client_branch"=> $value['client_branch'],
         "price"=> $value['price'],
-        "status"=> $value['STATUS'],
+        "status"=> $value['status'],
     ];
 }
 
@@ -1439,11 +1439,11 @@ public function printException($strt,$end,$serv,$client_id){
     "title"=> $value['title'],
     "event_code"=>$value['event_code'],
     "start_event"=> $value['start_event'],
-    "time"=> $value['TIME'],
+    "time"=> $value['time'],
     "serv_id"=> $value['serv_id'],
     "client_id"=>$value['client_id'],
     "area"=> $value['area'],
-    "status"=> $value['STATUS'],
+    "status"=> $value['status'],
     "serv_name"=> $value['serv_name'],
     "serv_type"=>$value['serv_type'],
     "client_branch"=> $value['client_branch'],
