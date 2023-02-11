@@ -563,7 +563,6 @@ var count_update = 1;
               var availEmp = data.available_emp;
 
               var expertEmp = data.expertise;
-              console.log(expertEmp.length);
               for (var i = 0; i < availEmp.length; i++) {
                 $('#emp_id').append('<option id="'+availEmp[i].emp_id+'" value="'+availEmp[i].emp_id+'">'+availEmp[i].emp_name+'</option>')
                 for (var j = 0; j < expertEmp.length; j++) {
