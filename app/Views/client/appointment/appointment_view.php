@@ -169,7 +169,7 @@
                       <td><?php echo  ltrim($hour, '0') . ":" . $time[1] . " " . $amPm;?></td>
                   <?php endif;?>
            <td><?php echo $appt->appt_code; ?></td>
-           <td>n/a</td>
+           <td><?php echo $appt->serv_name; ?></td>
            <td><?php echo $appt->appt_status; ?></td>
            <td>
             <?php if($appt->appt_status == 'Done'):?>
