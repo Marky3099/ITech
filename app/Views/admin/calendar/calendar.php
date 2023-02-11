@@ -541,8 +541,8 @@ var count_update = 1;
       $('.headTask').css('background-color','white');
       $('#repeatable').prop('disabled', false);
     }
-  })
-      $(document).on('change','#serv_id', function(){
+  });
+      $('#serv_id').on('change',function(){
     var timeee = $('#end_time').val();
     var startDate = $('#start_event').val();
     var startTime = $('#time').val();
