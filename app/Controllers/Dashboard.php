@@ -46,8 +46,10 @@ class Dashboard extends BaseController
         $appt = new Appointment();
         $logs = new Call_logs();
         $bdo_user = new User_bdo();
-        $emp_id = $_SESSION['emp_id'];
-        
+        $emp_id = '';
+        if($_SESSION['position'] == USER_ROLE_EMPLOYEE){
+            $emp_id = $_SESSION['emp_id'];
+        }
         date_default_timezone_set('Asia/Hong_Kong'); 
         $date = new \DateTime();
         $date->setTimezone(new \DateTimeZone('+0800'));
