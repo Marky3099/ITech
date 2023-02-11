@@ -549,7 +549,7 @@ var count_update = 1;
     var servId = $(this).val();
     // console.log(servName);
     $.ajax({
-           type: "GET",
+           method: "GET",
            url: '<?= base_url("/calendar/checkEmp")?>',
              data: {
                 'start_event' : startDate,
