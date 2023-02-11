@@ -118,7 +118,7 @@ $routes->post('aircon/add', 'AirconCrud::store',['filter' => 'authGuard']);
 $routes->get('aircon/(:num)', 'AirconCrud::singleAircon/$1',['filter' => 'authGuard']);
 $routes->post('aircon/update', 'AirconCrud::update',['filter' => 'authGuard']);
 $routes->get('aircon/delete/(:num)', 'AirconCrud::delete/$1',['filter' => 'authGuard']);
-$routes->get('aircon/brand/(:any)', 'AirconCrud::show_aircon/$1',['filter' => 'authGuard']);
+$routes->get('aircon/brand/', 'AirconCrud::show_aircon',['filter' => 'authGuard']);
 
 $routes->get('/dashboard', 'Dashboard::dashboard',['filter' => 'authGuard']);
 $routes->post('/dashboard/auto-done', 'Dashboard::autoDone',['filter' => 'authGuard']);
