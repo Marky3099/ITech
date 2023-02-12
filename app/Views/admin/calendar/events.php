@@ -11,7 +11,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <div class="container rate-container">
+        <div class="container" id="rate-container">
           
           
         </div>
@@ -403,12 +403,11 @@ var rateModal = new bootstrap.Modal(document.getElementById('rateModal'));
               'id': id,
            },
            success: function(response){
-            console.log(response);
             var rate = response.rate;
             var emp = response.emp;
-            $('.rate-container').empty();
+            $('#rate-container').empty();
             if(rate.length > 0){
-              $('.rate-container').append(`<center><h2>Service's Review</h2></center>
+              $('#rate-container').append(`<center><h2>Service's Review</h2></center>
           <div class="row">
             <div class="col-lg-4">
                <p class="servq">Service Quality</p>
