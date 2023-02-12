@@ -57,7 +57,7 @@
                     <td id="modal_serv_type"></td>
                   </tr>
                   <tr>
-                    <th>Device Brand:</th>
+                    <th>Aircon Brand:</th>
                     <td id="modal_dev_brand"></td>
                   </tr>
                   <tr>

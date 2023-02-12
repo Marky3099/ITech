@@ -79,6 +79,11 @@ class CalllogsCrud extends Controller{
         "client_id"=> $value['client_id'],
         "area"=> $value['area'],
         "client_branch"=> $value['client_branch'],
+        "serv_id"=> $value['serv_id'],
+        "serv_name"=> $value['serv_name'],
+        "serv_type"=> $value['serv_type'],
+        "time"=> $value['time'],
+        "end_time"=> $value['end_time'],
         // "aircon_id"=> $value['aircon_id'],
         // "aircon_type"=> $value['aircon_type'],
         // "device_brand"=> $value['device_brand'],
@@ -252,19 +257,25 @@ foreach ($data['call_logs'] as $key => $value) {
  }    
  $data['view_calllogs'][]= (object)[
     "cl_id"=> $value['cl_id'],
-    "date"=> $value['date'],
-    "log_code"=> $value['log_code'],
-    "client_id"=> $value['client_id'],
-    "area"=> $value['area'],
-    "client_branch"=> $value['client_branch'],
-    // "aircon_id"=> $value['aircon_id'],
-    // "aircon_type"=> $value['aircon_type'],
-    // "device_brand"=> $value['device_brand'],
-
-    // "qty"=> $value['qty'],
-    "status"=> $value['status'],
-
-    "fcu_arr"=> $fcu_arr,
+        "date"=> $value['date'],
+        "log_code"=> $value['log_code'],
+        "client_id"=> $value['client_id'],
+        "area"=> $value['area'],
+        "client_branch"=> $value['client_branch'],
+        "serv_id"=> $value['serv_id'],
+        "serv_name"=> $value['serv_name'],
+        "serv_type"=> $value['serv_type'],
+        "time"=> $value['time'],
+        "end_time"=> $value['end_time'],
+        // "aircon_id"=> $value['aircon_id'],
+        // "aircon_type"=> $value['aircon_type'],
+        // "device_brand"=> $value['device_brand'],
+        // "caller"=> $value['caller'],
+        // "particulars"=> $value['particulars'],
+        // "qty"=> $value['qty'],
+        "status"=> $value['status'],
+        // "set_status"=> $value['set_status'],
+        "fcu_arr"=> $fcu_arr,
 ];
 }
 if($this->request->getVar('print')){
@@ -369,17 +380,25 @@ foreach ($data['call_logs'] as $key => $value) {
  }    
  $data['view_calllogs'][]= (object)[
     "cl_id"=> $value['cl_id'],
-    "date"=> $value['date'],
-    "log_code"=> $value['log_code'],
-    "client_id"=> $value['client_id'],
-    "area"=> $value['area'],
-    "client_branch"=> $value['client_branch'],
-    // "aircon_id"=> $value['aircon_id'],
-    // "aircon_type"=> $value['aircon_type'],
-    // "device_brand"=> $value['device_brand'],
-    // "qty"=> $value['qty'],
-    "status"=> $value['status'],
-    "fcu_arr"=> $fcu_arr,
+        "date"=> $value['date'],
+        "log_code"=> $value['log_code'],
+        "client_id"=> $value['client_id'],
+        "area"=> $value['area'],
+        "client_branch"=> $value['client_branch'],
+        "serv_id"=> $value['serv_id'],
+        "serv_name"=> $value['serv_name'],
+        "serv_type"=> $value['serv_type'],
+        "time"=> $value['time'],
+        "end_time"=> $value['end_time'],
+        // "aircon_id"=> $value['aircon_id'],
+        // "aircon_type"=> $value['aircon_type'],
+        // "device_brand"=> $value['device_brand'],
+        // "caller"=> $value['caller'],
+        // "particulars"=> $value['particulars'],
+        // "qty"=> $value['qty'],
+        "status"=> $value['status'],
+        // "set_status"=> $value['set_status'],
+        "fcu_arr"=> $fcu_arr,
 ];
 }
 if($this->request->getVar('print')){
@@ -487,7 +506,19 @@ foreach ($data['call_logs'] as $key => $value) {
     "client_id"=> $value['client_id'],
     "area"=> $value['area'],
     "client_branch"=> $value['client_branch'],
+    "serv_id"=> $value['serv_id'],
+    "serv_name"=> $value['serv_name'],
+    "serv_type"=> $value['serv_type'],
+    "time"=> $value['time'],
+    "end_time"=> $value['end_time'],
+    // "aircon_id"=> $value['aircon_id'],
+    // "aircon_type"=> $value['aircon_type'],
+    // "device_brand"=> $value['device_brand'],
+    // "caller"=> $value['caller'],
+    // "particulars"=> $value['particulars'],
+    // "qty"=> $value['qty'],
     "status"=> $value['status'],
+    // "set_status"=> $value['set_status'],
     "fcu_arr"=> $fcu_arr,
 ];
 }
@@ -610,7 +641,19 @@ foreach ($data['call_logs'] as $key => $value) {
     "client_id"=> $value['client_id'],
     "area"=> $value['area'],
     "client_branch"=> $value['client_branch'],
+    "serv_id"=> $value['serv_id'],
+    "serv_name"=> $value['serv_name'],
+    "serv_type"=> $value['serv_type'],
+    "time"=> $value['time'],
+    "end_time"=> $value['end_time'],
+    // "aircon_id"=> $value['aircon_id'],
+    // "aircon_type"=> $value['aircon_type'],
+    // "device_brand"=> $value['device_brand'],
+    // "caller"=> $value['caller'],
+    // "particulars"=> $value['particulars'],
+    // "qty"=> $value['qty'],
     "status"=> $value['status'],
+    // "set_status"=> $value['set_status'],
     "fcu_arr"=> $fcu_arr,
 ];
 }
@@ -719,7 +762,19 @@ foreach ($data['call_logs'] as $key => $value) {
     "client_id"=> $value['client_id'],
     "area"=> $value['area'],
     "client_branch"=> $value['client_branch'],
+    "serv_id"=> $value['serv_id'],
+    "serv_name"=> $value['serv_name'],
+    "serv_type"=> $value['serv_type'],
+    "time"=> $value['time'],
+    "end_time"=> $value['end_time'],
+    // "aircon_id"=> $value['aircon_id'],
+    // "aircon_type"=> $value['aircon_type'],
+    // "device_brand"=> $value['device_brand'],
+    // "caller"=> $value['caller'],
+    // "particulars"=> $value['particulars'],
+    // "qty"=> $value['qty'],
     "status"=> $value['status'],
+    // "set_status"=> $value['set_status'],
     "fcu_arr"=> $fcu_arr,
 ];
 }
@@ -783,12 +838,14 @@ public function view(){
     $Call_logs = new Calllogs_views();
     $Fcu = new Call_fcu_views();
     $Client = new Client();
+    $Serv = new Serv();
     // $Emp = new Event_emp_views();
     $Serv = new Serv();
     $id = $this->request->getPost('cl_id');
     $data['cl_data'] = $Call_logs->where('cl_id',$id)->first();
     $data['fcu_data'] = $Fcu->where('cl_id',$id)->findAll();
     $data['client_data'] = $Client->orderBy('client_id','ASC')->findAll();
+    $data['serv_data'] = $Serv->orderBy('serv_id','ASC')->findAll();
      $db = \Config\Database::connect();
       $query   = $db->query('SELECT DISTINCT aircon_id,cl_id,device_brand,aircon_type,qty
         FROM call_fcu_views where cl_id = '.$id);

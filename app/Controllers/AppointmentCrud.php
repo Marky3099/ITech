@@ -699,4 +699,23 @@ public function checkDate(){
     
     return $this->response->setJSON($data);
 }
+public function viewRatings(){
+    $rate = new Ratings();
+    $emp = new Event_emp_views();
+    $event = new Event();
+    $appt_code = $_GET['id'];
+
+    $id = $event->select('id')->where('appt_code',$appt_code)->first();
+
+    if($_SESSION['position'] == USER_ROLE_EMPLOYEE){
+       $emp_id = $_SESSION['emp_id']; 
+       $data['rate'] = $rate->where('id',$id)->where('emp_id',$emp_id )->findAll();
+       $data['emp'] = $emp->where('id',$id)->where('emp_id',$emp_id )->findAll();
+    }else{
+       $data['rate'] = $rate->where('id',$id)->findAll();
+       $data['emp'] = $emp->where('id',$id)->findAll();
+    }
+
+    return $this->response->setJSON($data);
+}
 }

@@ -13,7 +13,7 @@
       <h3>Add Aircon Details</h3><br>
       <div class="user-box">
        <div class="icon-box"><i class="fas fa-wrench"></i></div>
-       <input type="text" name="device_brand" placeholder="Device Brand" required>
+       <input type="text" name="device_brand" placeholder="Aircon Brand" required>
      </div>
 
      <div class="user-box">
