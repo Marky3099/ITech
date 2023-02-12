@@ -43,7 +43,7 @@
     <div class="user-box">
       <div class="icon-box"><i class="fas fa-phone"></i></div>
       <div class="icon-box1"><i class="fas fa-phone"></i></div>
-      <input type="password" class="ppassword" id="password" name = "bdo_password" style="color: grey" placeholder="Password">
+      <input type="password" class="ppassword" id="password" name = "bdo_password" style="color: grey" placeholder="Password" autocomplete="off">
       <input type="password" class="pcpassword" id="c_password" name = "c_password" style="color: grey" placeholder="Confirm Password">
     </div>
 
