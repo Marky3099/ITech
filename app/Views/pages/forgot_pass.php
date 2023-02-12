@@ -1,22 +1,24 @@
+<br>
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Tasks and Schedule Monitoring and Appointment System</title>
+  
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
   <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/fpass.css');?>">
-
 </head>
 <body>
-
   <div class="container">
     <div class="row">
-      <div class="col-md-4 col-md-offset-4">
+      <div class="col-4 col-lg-4 col-md-4 col-sm-offset-4 col-md-offset-4">
         <div class="panel panel-default" id="panell">
           <div class="panel-body">
             <div class="header">
-             <a href="<?= base_url('#home')?>" class="texthp"><img src="<?= base_url('assets/image/logo.png')?>">&nbsp;&nbsp;Tasks and Schedule Monitoring System</a>
+             <a href="<?= base_url('#home')?>" class="texthp"><img src="<?= base_url('assets/image/logo.png')?>">&nbsp;&nbsp;Tasks and Schedule Monitoring and Appointment System</a>
            </div>
            <div class="text-center">
             <h3><i class="fa fa-lock fa-4x"></i></h3>

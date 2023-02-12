@@ -1,10 +1,11 @@
+<!-- links -->
 <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/main.min.css')?>">
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 <link rel="stylesheet" href="<?= base_url('assets/css/style.css')?>">
 <link rel="stylesheet" href="<?= base_url('assets/css/map.css')?>">
-
+<br><br><br>
 <div class="body-content">
   <div class="col-sm-8">
     <div class="crud-text"><h3>Calendar</h3></div>
@@ -262,22 +263,17 @@
   </div>
 </div>
 
+
+
+<!-- scripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment-with-locales.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.js"></script>
-
-
-
-
 <!-- Time Picker -->
 <script src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>  
 <script src = "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>  
-<!-- <script src = "https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>   -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/js/bootstrap-select.min.js"></script>
 <script src = "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
-<!--  -->
-
-<!-- <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"></script> -->
 <script src="<?=base_url("assets/js/main.min.js")?>"></script>
 
 

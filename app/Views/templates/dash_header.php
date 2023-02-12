@@ -2,10 +2,12 @@
 <html>
 <head>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <?php if($_SESSION['position'] == USER_ROLE_ADMIN || $_SESSION['position'] == USER_ROLE_EMPLOYEE || $_SESSION['position'] == USER_ROLE_SECRETARY):?>
-        <title>Task and Schedule Management System</title>
+        <title>Task and Schedule Monitoring System</title>
     <?php else:?>
         <title>Appointment System</title>
     <?php endif;?>
@@ -17,8 +19,7 @@
     <link rel="stylesheet" href="<?= base_url('assets/css/style.css')?>">
 </head>
 
-<body>
-    
+<body>   
     <div class="sidebar">
         <div class="logo_content">
             <div class="logo">
@@ -160,27 +161,31 @@
             
         </ul>
     </div>
-    <div class="sidebar-header">
-        <div class="text1">
-            <?php if($_SESSION['position'] == USER_ROLE_ADMIN || $_SESSION['position'] == USER_ROLE_EMPLOYEE || $_SESSION['position'] == USER_ROLE_SECRETARY):?>
-                    Task and Schedule Monitoring System
-            <?php else:?>
-                    Appointment System
-            <?php endif;?>
-            <div class="drop-content">
-                <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Hi, <?php echo $_SESSION['username']?></a>
-                    <ul class="dropdown-menu">
-                        <?php if($_SESSION['position'] != USER_ROLE_CLIENT):?>
-                        <li><a class="dropdown-item" href="<?= base_url('/profile/'.$_SESSION['user_id'] )?>">Account Settings</a></li>
-                    <?php else:?>
-                        <li><a class="dropdown-item" href="<?= base_url('/profile-bdo/'.$_SESSION['user_id'] )?>">Account Settings</a></li>
-                    <?php endif;?>
-                        <li><a class="dropdown-item" href="<?= base_url('/logout')?>">Sign out</a></li>
-                    </ul>
-                </li>
+    <div class="container">
+        <div class="row">
+            <div class="sidebar-header">
+                <div class="text1">
+                <?php if($_SESSION['position'] == USER_ROLE_ADMIN || $_SESSION['position'] == USER_ROLE_EMPLOYEE || $_SESSION['position'] == USER_ROLE_SECRETARY):?>
+                        Task and Schedule Monitoring System
+                <?php else:?>
+                        Appointment System
+                <?php endif;?>
+                <div class="drop-content">
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Hi, <?php echo $_SESSION['username']?></a>
+                        <ul class="dropdown-menu">
+                            <?php if($_SESSION['position'] != USER_ROLE_CLIENT):?>
+                            <li><a class="dropdown-item" href="<?= base_url('/profile/'.$_SESSION['user_id'] )?>">Account Settings</a></li>
+                        <?php else:?>
+                            <li><a class="dropdown-item" href="<?= base_url('/profile-bdo/'.$_SESSION['user_id'] )?>">Account Settings</a></li>
+                        <?php endif;?>
+                            <li><a class="dropdown-item" href="<?= base_url('/logout')?>">Sign out</a></li>
+                        </ul>
+                    </li>
+                </div>
             </div>
         </div>
+    </div>
 
 
 <script>

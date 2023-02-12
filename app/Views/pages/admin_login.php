@@ -8,7 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Admin Login<</title>
+  <title>Admin Login</title>
 
   <link rel="stylesheet" href="<?= base_url('assets/css/loginstyle.css')?>">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
@@ -25,58 +25,58 @@
         <h3>Admin Login</h3>
         <form class="login100-form validate-form" action="<?= base_url('pages/check');?>" method="post">
 
-        <?php 
-          if(!empty($errorAcc)){ ?>
-            <div class="err-msg">
-             <center><h4><?php echo $errorAcc;?></h4></center>
-           </div>
-         <?php }?>
-         <?php 
-         if(!empty($success)){ ?>
-          <div class="suc-msg">
-           <center><h4><?php echo $success;?></h4></center>
-         </div>
-       <?php }?>
+          <?php 
+            if(!empty($errorAcc)){ ?>
+              <div class="err-msg">
+               <center><h4><?php echo $errorAcc;?></h4></center>
+              </div>
+          <?php }?>
+          <?php 
+            if(!empty($success)){ ?>
+              <div class="suc-msg">
+                <center><h4><?php echo $success;?></h4></center>
+              </div>
+          <?php }?>
 
-        <br>
-        <div class="form-group user-box">
-          <div class="icon-box"><i class="fas fa-user-alt"></i></div>
-          <input class="form-control" type="text" name="email" placeholder="Enter your Email" value="<?php if(isset($_POST['email'])) { echo $_POST['email']; } ?>"><?php if($validation1->getError('email')) {?>
-            <span style="margin-left: 80px; color: #FF6969; font-size: 12px;">
-              <?= $error = $validation1->getError('email'); ?>
+          <br>
+          <div class="form-group user-box">
+            <div class="icon-box"><i class="fas fa-user-alt"></i></div>
+            <input class="form-control" type="text" name="email" placeholder="Enter your Email" value="<?php if(isset($_POST['email'])) { echo $_POST['email']; } ?>"><?php if($validation1->getError('email')) {?>
+              <span id="wronginput_msg">
+                <?= $error = $validation1->getError('email'); ?>
+              </span>
+              <?php }?>
+          </div>
+
+          <div class="form-group user-box">
+            <div class="icon-box"><i class="fas fa-key"></i></div>
+            <input type="password" class="form-control" name="password" id="id_password" placeholder="Enter your Password" value="<?php if(isset($_POST['password'])) { echo $_POST['password']; }?>"><i class="far fa-eye fa-eye-slash" id="togglePassword"></i>
+          </div>
+
+          <?php if($validation1->getError('password')) {?>
+            <span id="wronginput_msg1">
+              <?= $error = $validation1->getError('password'); ?>
             </span>
-            <?php }?>
-        </div>
+          <?php }?>
+          <?php 
+          if(!empty($errorMessage)){ ?>
+            <span id="wronginput_msg1">
+              <?php echo $errorMessage;?>
+            </span>
+          <?php }?>
 
-        <div class="form-group user-box">
-          <div class="icon-box"><i class="fas fa-key"></i></div>
-          <input type="password" class="form-control" name="password" id="id_password" placeholder="Enter your Password" value="<?php if(isset($_POST['password'])) { echo $_POST['password']; }?>"><i class="far fa-eye fa-eye-slash" id="togglePassword"></i>
-        </div>
+          <div class="fpass" >
+            <a href="<?=base_url('/forgot-password');?>">Forgot Password?</a>
+          </div>
 
-        <div class="fpass" >
-          <a href="<?=base_url('/forgot-password');?>">Forgot Password?</a>
-        </div>
+          <div class="Login-btn-class col-sm-12 col-md-12 col-lg-12">
+            <button class="btn">Login</button>
+          </div>
 
-        <?php if($validation1->getError('password')) {?>
-          <span style="margin-left: 80px; color: #FF6969; font-size: 12px;">
-            <?= $error = $validation1->getError('password'); ?>
-          </span>
-        <?php }?>
-        <?php 
-        if(!empty($errorMessage)){ ?>
-          <span style="margin-left: 80px; color: #FF6969;">
-            <?php echo $errorMessage;?>
-          </span>
-        <?php }?>
-
-        <div class="Login-btn-class col-sm-12 col-lg-12">
-        <button class="btn">Login</button>
-        </div>
-
-        <br><br>
-        <div class="back-btn-class mb-2">
-            <a href="<?= base_url('/user-type');?>" class="back-btn">Back</a>
-        </div>
+          <br><br>
+          <div class="back-btn-class mb-2">
+              <a href="<?= base_url('/user-type');?>" class="back-btn">Back</a>
+          </div>
         </form>
       </div>
     </div>
