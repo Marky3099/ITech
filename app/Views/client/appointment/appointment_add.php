@@ -186,7 +186,7 @@ $("#appt_date").on("change", function() {
     console.log(date);
      $.ajax({
          method: 'Post',
-         url: 'http://localhost/tsms/appointment/check-date',
+         url: '<?= base_url("/appointment/check-date")?>',
          data:{
             'date': date
          },
