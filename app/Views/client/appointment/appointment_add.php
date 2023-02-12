@@ -197,8 +197,8 @@ $("#appt_date").on("change", function() {
           var timee = [];
 
           for (var i = 0; i < response.events_data.length; i++) {
-            var resTime = response.events_data[i].TIME;
-            timee.push(response.events_data[i].TIME);
+            var resTime = response.events_data[i].time;
+            timee.push(response.events_data[i].time);
             var formatTime = resTime.split(":");
             var timeFormatted;
             if(formatTime[0]>=12){
