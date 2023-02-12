@@ -17,7 +17,9 @@
           
           
         </div>
-        
+        <div class="techRate">
+            
+          </div>
         
         <h6></h6>
       </div>
@@ -239,6 +241,7 @@ var rateModal = new bootstrap.Modal(document.getElementById('rateModal'));
             var rate = response.rate;
             var emp = response.emp;
             $('.rate-container').empty();
+            $('.techRate').empty();
             if(rate.length > 0){
               $('.rate-container').append(`<center><h2>Service's Review</h2></center>
           <div class="row">
@@ -261,14 +264,12 @@ var rateModal = new bootstrap.Modal(document.getElementById('rateModal'));
           </div>
           <textarea name="comments" id="event_comments" placeholder="Share more thoughts on our service..." rows="4" cols="50" disabled></textarea>
           <center><h2>Technician's Review</h2></center>
-          <div class="techRate" id="techRate">
-            
-          </div>`);
+          `);
 
               for(var i =0; i <rate.length; i++){
                 var empId = rate[i].emp_id;
                 if(empId == emp[i].emp_id){
-                  $('#techRate').append(`<h5>`+emp[i].emp_name+`</h5><div class="row rowa">
+                  $('.techRate').append(`<h5>`+emp[i].emp_name+`</h5><div class="row rowa">
                   <div class="col-lg-5">
                      <p class="servq">Technician Quality</p>
                   </div>
