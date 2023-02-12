@@ -5,3 +5,60 @@ CRITICAL - 2023-02-11 08:58:20 --> Undefined index: time
 #3 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #4 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
 #5 {main}
+CRITICAL - 2023-02-11 09:32:36 --> include(templates/headerlink.php): failed to open stream: No such file or directory
+#0 C:\xampp\htdocs\tsms\app\Views\pages\user.php(1): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(templat...', 'C:\\xampp\\htdocs...', 1, Array)
+#1 C:\xampp\htdocs\tsms\app\Views\pages\user.php(1): include()
+#2 C:\xampp\htdocs\tsms\system\View\View.php(214): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#4 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('pages/user', Array, true)
+#5 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(30): view('pages/user')
+#6 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->userType()
+#7 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#8 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2023-02-11 09:32:40 --> include(templates/headerlink.php): failed to open stream: No such file or directory
+#0 C:\xampp\htdocs\tsms\app\Views\pages\user.php(1): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(templat...', 'C:\\xampp\\htdocs...', 1, Array)
+#1 C:\xampp\htdocs\tsms\app\Views\pages\user.php(1): include()
+#2 C:\xampp\htdocs\tsms\system\View\View.php(214): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#4 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('pages/user', Array, true)
+#5 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(30): view('pages/user')
+#6 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->userType()
+#7 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#8 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2023-02-11 09:33:02 --> include(headerlink.php): failed to open stream: No such file or directory
+#0 C:\xampp\htdocs\tsms\app\Views\pages\user.php(1): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(headerl...', 'C:\\xampp\\htdocs...', 1, Array)
+#1 C:\xampp\htdocs\tsms\app\Views\pages\user.php(1): include()
+#2 C:\xampp\htdocs\tsms\system\View\View.php(214): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#4 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('pages/user', Array, true)
+#5 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(30): view('pages/user')
+#6 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->userType()
+#7 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#8 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2023-02-11 09:37:18 --> Invalid file: templates/headerlinks.php
+#0 C:\xampp\htdocs\tsms\system\View\View.php(198): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('templates/heade...')
+#1 C:\xampp\htdocs\tsms\system\View\View.php(230): CodeIgniter\View\View->render('templates/heade...', Array, true)
+#2 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('pages/user', Array, true)
+#3 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(30): view('pages/user')
+#4 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->userType()
+#5 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#6 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2023-02-11 11:19:13 --> Undefined variable: validation1
+#0 C:\xampp\htdocs\tsms\app\Views\pages\admin_login.php(43): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 43, Array)
+#1 C:\xampp\htdocs\tsms\system\View\View.php(214): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\tsms\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\tsms\system\Common.php(1097): CodeIgniter\View\View->render('pages/admin_log...', Array, true)
+#4 C:\xampp\htdocs\tsms\app\Controllers\Pages.php(34): view('pages/admin_log...')
+#5 C:\xampp\htdocs\tsms\system\CodeIgniter.php(824): App\Controllers\Pages->adminLogin()
+#6 C:\xampp\htdocs\tsms\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+#7 C:\xampp\htdocs\tsms\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\tsms\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}

@@ -5,31 +5,30 @@ body {
   background: url(../image/home-img.jpg);
   height: auto; 
   width: 100%;
-  /*background-position: center;*/
   background-repeat: no-repeat;
-  background-size: cover;
-  align-content: center;
+  background-size: 100% 100%;
+  overflow: hidden;
 }
 
 .login-box {
   position: absolute;
   top: 50%;
   left: 50%;
-  height: 70%;
-  width: 550px;
-  padding: 20px;
+  height: auto;
+  width: 100%;
+/*  padding: 20px;*/
   background-color: #fff;
   transform: translate(-50%, -50%);
   box-sizing: border-box;
   box-shadow: 0 15px 25px rgba(0,0,0,.8);
   border-radius: 50px;
+  text-align: center;
 }
 
 .login-box .header img{
   position: relative;
-  left: 35px;
-  height: 110px;
-  width: 400px;
+  height: auto;
+  width: 70%;
 }
 
 .login-box h4 {
@@ -67,10 +66,9 @@ body {
 
 .login-box .user-box {
   position: relative;
+  margin-left: 5px;
 }
-/*.form-group{
-  margin-bottom: 0 !important;
-}*/
+
 
 .btn {     
     background-color: Transparent;
@@ -98,16 +96,24 @@ body {
   margin-top: 7px;
 }
 
+#togglePassword{
+  position: absolute;
+  top: 13px;
+  right: 18%;
+  color: #344F21;
+  cursor: pointer;
+}
+
 
 .login-box .user-box .icon-box{
-    position: absolute;   
+    position: absolute;
     width: 24px;
-    font-size: 22px;
+    font-size: 26px;
     line-height: 20px;
     padding: 8px 9px;
     background-color: #344F21;
     color: #fff;
-    margin-top: 6px;
+    /* margin-top: 0px; */
     margin-left: 40px;
     box-sizing: unset !important;
 }
@@ -135,10 +141,14 @@ input:-webkit-autofill{
   font-size: 16px;
 }
 
+.login-box .Login-btn-class{
+  align-items: center;
+}
+
 .login-box form .btn {
   position: relative;
   display: inline-block;
-  width: 82%;
+  width: 75%;
   background-color: #344F21;
   padding: 10px 20px;
   color: #fff;
@@ -147,8 +157,7 @@ input:-webkit-autofill{
   text-transform: uppercase;
   overflow: hidden;
   transition: .5s;
-  margin-top: 15px;
-  margin-left: 40px;
+  margin-top: 20px;
   letter-spacing: 4px;
   font-weight: bold;
 }
@@ -162,8 +171,10 @@ input:-webkit-autofill{
 
 .login-box .fpass{
   float: right;
-  margin-right: 55px;
+  margin-right: 50px;
+  margin-top: -10px;
 }
+
 .login-box .fpass a{
   color: #344F21; 
   font-size: 12px;
@@ -173,11 +184,15 @@ input:-webkit-autofill{
   text-decoration: underline;
 }
 
+.login-box .back-btn-class{
+  float: right;
+}
+
 .login-box a.back-btn{
   position: relative;
-  bottom: 0px;
-  left: 40px;
-  margin-bottom: 0;
+  bottom: 15px;
+  right: 40px;;
+  padding: 1rem;
   font-size: 15px;
   text-decoration: none;
   letter-spacing: normal;
