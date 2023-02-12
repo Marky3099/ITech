@@ -657,7 +657,7 @@
           if(splitt[0] <= dateHour){
             $.ajax({
              method:"POST",
-             url:"http://localhost/tsms/dashboard/auto-done",
+             url:'<?=base_url("/dashboard/auto-done")?>',
              data: {
                 'id': pendingEvents[i].id
              },
@@ -670,7 +670,7 @@
           if(splitt[0] <= dateHour){
             $.ajax({
              method:"POST",
-             url:"http://localhost/tsms/dashboard/auto-done",
+             url:'<?=base_url("/dashboard/auto-done")?>',
              data: {
                 'id': pendingEvents[i].id
              },
