@@ -208,7 +208,7 @@ if($task){
     <th>Date</th>
     <th>Branch Name</th> 
     <th>Service Type</th>
-    <th>Device Brand/<br>Type</th> 
+    <th>Aircon Brand/<br>Type</th> 
     <th>Aircon Type</th> 
     <th>Qty</th> 
     <th>Assigned Technician</th>

@@ -174,7 +174,8 @@ if($view_calllogs){
     <tr style = "background-color: #A8D08D; text-align: center; font-size:11px;">
     <th>Date</th>
     <th>Branch Name</th>
-    <th>Device Brand</th> 
+    <th>Service Type</th>
+    <th>Aircon Brand</th> 
     <th>Aircon Type</th>
     <th>Qty</th> 
     <th>Status</th>
@@ -187,7 +188,9 @@ if($view_calllogs){
      
      $html .=' <tr style="font-size:9px; text-align: center;">
      <td>'.date('m-d-Y',strtotime($call_log->date)).'</td>
-     <td>'.$call_log->client_branch.'</td><td>';
+     <td>'.$call_log->client_branch.'</td>
+     <td>'.$call_log->serv_type.'</td><td>';
+
      $current ='';
 
                    foreach($distinct as $data){

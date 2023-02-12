@@ -27,6 +27,10 @@
                     <td id="modal_start_event"></td>
                   </tr>
                   <tr>
+                    <th>Time:</th>
+                    <td id="modal_time"></td>
+                  </tr>
+                  <tr>
                     <th>Log Code:</th>
                     <td id="modal_log_code"></td>
                   </tr>
@@ -39,13 +43,21 @@
                     <td id="modal_branch"></td>
                   </tr>
                   <tr>
-                    <th>Aircon Brand:</th>
-                    <td id="modal_dev_brand"></td>
+                    <th>Service Name:</th>
+                    <td id="modal_serv_name"></td>
                   </tr>
               </table>
             </div>
            <div class="col-md-6">
             <table class="table-hover" style="width:100%">
+                  <tr>
+                    <th>Service Type:</th>
+                    <td id="modal_serv_type"></td>
+                  </tr>
+                  <tr>
+                    <th>Aircon Brand:</th>
+                    <td id="modal_dev_brand"></td>
+                  </tr>
                   <tr>
                     <th>Aircon Type:</th>
                     <td id="modal_aircon_type"></td>
@@ -188,10 +200,40 @@
       <?php foreach($view_calllogs as $call_log):  ?>
           <tr>
            <td><?php echo $call_log->date; ?></td>
-           <td>time</td>
+           <?php $time = explode(":",$call_log->time);
+                        $endTime = explode(":",$call_log->end_time);?>
+                  <?php if($time[0] == '00'):?>
+                     <td>N/A</td>
+                  <?php elseif ($time[0]>=12):?>
+                      <?php $hour = $time[0] - 12;?>
+                      <?php $amPm = "PM";?>
+                      <?php $startTime = $hour . ":" . $time[1] . " " . $amPm;?>
+                  <?php else:?>
+                      <?php $hour = $time[0]; ?>
+                      <?php $amPm = "AM"; ?>
+                      <?php $startTime = ltrim($hour, '0') . ":" . $time[1] . " " . $amPm;?>
+                  <?php endif;?>
+
+                  <?php if($endTime[0] == '00'):?>
+                     <td>N/A</td>
+                  <?php elseif ($endTime[0]==12):?>
+                      <?php $hour = $endTime[0];?>
+                      <?php $amPm = "PM";?>
+                      <?php $end = $hour . ":" . $endTime[1] . " " . $amPm;?>
+                  <?php elseif ($endTime[0]>12):?>
+                      <?php $hour = $endTime[0] - 12;?>
+                      <?php $amPm = "PM";?>
+                      <?php $end = $hour . ":" . $endTime[1] . " " . $amPm;?>
+                  <?php else:?>
+                      <?php $hour = $endTime[0]; ?>
+                      <?php $amPm = "AM"; ?>
+                      <?php $end = ltrim($hour, '0') . ":" . $endTime[1] . " " . $amPm;?>
+                  <?php endif;?>
+
+                  <td><?php echo $startTime.' - '.$end;?></td>
            <td><?php echo $call_log->log_code; ?></td>
            <td><?php echo $call_log->client_branch; ?></td>
-           <td>n/a</td>
+           <td><?php echo $call_log->serv_type; ?></td>
           <td><?php echo $call_log->status; ?></td>
          <td>
              <a href="#" id="<?php echo $call_log->cl_id;?>" class="btn btn-info btn-sm view">View</a>
@@ -307,6 +349,12 @@ $('#mymodal .selectpicker').selectpicker();
             var startEvent = date.toLocaleDateString("en-US",(options));
             var apptCode = response.cl_data.log_code;
             var clientId = response.cl_data.client_id;
+            var servId = response.cl_data.serv_id;
+            var servData = response.serv_data;
+            var servName;
+            var servType;
+            var time = response.cl_data.time.split(":");
+            var endTime = response.cl_data.end_time.split(":");
             var clientData = response.client_data;
             var area;
             var branch;
@@ -326,6 +374,41 @@ $('#mymodal .selectpicker').selectpicker();
 
             $('#modalTitle').html("["+apptCode+"] Schedule");
             $('#modal_start_event').html(startEvent);
+
+            if(time[0] == '00'){
+               formatTime = 'N/A';
+            }else if (time[0]>12){
+                var hour = time[0] - 12;
+                var amPm = "PM";
+                formatTime = hour + ":" + time[1] + " " + amPm;
+            }else if (time[0]==12){
+                var hour = time[0];
+                var amPm = "PM";
+                formatTime = hour + ":" + time[1] + " " + amPm;
+            } else {
+                var hour = time[0]; 
+                var amPm = "AM";
+                formatTime = parseInt(hour) + ":" + time[1] + " " + amPm;
+            }
+
+            if(endTime[0] == '00'){
+               formatEndTime = 'N/A';
+            }else if (endTime[0]>12){
+                var hour = endTime[0] - 12;
+                var amPm = "PM";
+                formatEndTime = hour + ":" + endTime[1] + " " + amPm;
+            }else if (endTime[0]==12){
+                var hour = endTime[0];
+                var amPm = "PM";
+                formatEndTime = hour + ":" + endTime[1] + " " + amPm;
+            } else {
+                var hour = endTime[0]; 
+                var amPm = "AM";
+                formatEndTime = parseInt(hour) + ":" + endTime[1] + " " + amPm;
+            }
+            
+             $('#modal_time').html(formatTime+" - "+formatEndTime);
+
             $('#modal_log_code').html(apptCode);
 
              for (var a = 0; a < clientData.length; a++) {
@@ -336,6 +419,15 @@ $('#mymodal .selectpicker').selectpicker();
              }
              $('#modal_area').html(area);
              $('#modal_branch').html(branch);
+
+             for (var b = 0; b < servData.length; b++) {
+                if(servId == servData[b].serv_id){
+                  servName = servData[b].serv_name;
+                  servType = servData[b].serv_type;
+                }
+             }
+             $('#modal_serv_name').html(servName);
+             $('#modal_serv_type').html(servType);
 
             for (var i = 0; i < dis.length; i++) {
               dBrandArr.push(response.distinct[i].device_brand);

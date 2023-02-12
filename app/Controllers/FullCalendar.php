@@ -547,6 +547,8 @@ public function insert(){
             'date' => $_POST['start_event'],
             'client_id' => $this->request->getVar('client_id'),
             'serv_id' => $_POST['serv_id'],
+            'time' => $_POST['time'],
+            'end_time' => $_POST['end_time'],
         ];
 
         $successC = $Call_logs->insert($calllog_create);

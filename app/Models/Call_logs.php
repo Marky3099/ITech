@@ -13,6 +13,6 @@ class Call_logs extends Model
 
     protected $returnType     = 'array';
 
-    protected $allowedFields = ['date','client_id','log_code','status'];
+    protected $allowedFields = ['date','client_id','serv_id','time','end_time','log_code','status'];
 
 }
