@@ -450,7 +450,7 @@
 <div class="row">
 
   <!-- Card for displaying the total count of today's event -->
-  <div class="col-xl-3 col-md-6 mb-4">
+  <div class="col-12 col-lg-3 col-md-6 col-sm-12 mb-4">
     <div class="card border-left-primary shadow h-100 py-2">
       <div class="card-body1">
         <div class="row no-gutters align-items-center">
@@ -468,7 +468,7 @@
     </div>
 
     <!-- Weekly -->
-    <div class="col-xl-3 col-md-6 mb-4">
+    <div class="col-12 col-lg-3 col-md-6 col-sm-12 mb-4">
       <div class="card border-left-success shadow h-100 py-2">
         <div class="card-body1">
           <div class="row no-gutters align-items-center">
@@ -490,7 +490,7 @@
       </div>
 
       <!-- Monthly -->
-      <div class="col-xl-3 col-md-6 mb-4">
+      <div class="col-12 col-lg-3 col-md-6 col-sm-12 mb-4">
         <div class="card border-left-success shadow h-100 py-2">
           <div class="card-body1">
             <div class="row no-gutters align-items-center">
@@ -510,7 +510,7 @@
       <!--Completed -->
 
 
-      <div class="col-xl-3 col-md-6 mb-4">
+      <div class="col-12 col-lg-3 col-md-6 col-sm-12 mb-4">
         <div class="card border-left-info shadow h-100 py-2">
           <div class="card-body1">
             <div class="row no-gutters align-items-center">
@@ -547,7 +547,7 @@
     </div>
 
     <!-- Pending Requests Card Example -->
-    <div class="col-xl-3 col-md-6 mb-4">
+    <div class="col-12 col-lg-3 col-md-6 col-sm-12 mb-4">
       <div class="card border-left-warning shadow h-100 py-2">
         <div class="card-body1">
           <div class="row no-gutters align-items-center">
@@ -565,7 +565,7 @@
     </div>
     <!-- Pending Appointments -->
     <?php if($_SESSION['position'] == USER_ROLE_ADMIN){?>
-    <div class="col-xl-3 col-md-6 mb-4">
+    <div class="col-12 col-lg-3 col-md-6 col-sm-12 mb-4">
       <div class="card border-left-warning shadow h-100 py-2">
         <div class="card-body1">
           <div class="row no-gutters align-items-center">
@@ -582,7 +582,7 @@
       </div>
     </div>
     <!-- Pending Call logs -->
-    <div class="col-xl-3 col-md-6 mb-4">
+    <div class="col-12 col-lg-3 col-md-6 col-sm-12 mb-4">
       <div class="card border-left-warning shadow h-100 py-2">
         <div class="card-body1">
           <div class="row no-gutters align-items-center">
@@ -602,8 +602,8 @@
   </div>
 
 <div class="row">
-  <div class="col-md-6" id="chart_div" style="width: 100%; height: 500px;"></div>
-  <div class="col-md-6" id="piechart_3d" style="width: 100%; height: 500px;"></div>
+  <div class="col-12 col-lg-6 col-md-6 col-sm-12" id="chart_div" style="width: 100%; height: 500px;"></div>
+  <div class="col-12 col-lg-6 col-md-6 col-sm-12" id="piechart_3d" style="width: 100%; height: 500px;"></div>
   <!-- <div id="barchart_material" style="width: 900px; height: 500px;"></div> -->
 </div>
 
