@@ -48,30 +48,69 @@
     </tbody>
  </table>
  <br><br>
- <div class="crud-text"><h3>&emsp;&ensp;&nbsp;Partnered/Non-partnered Company Users</h3></div>
+ <div class="crud-text"><h3>&emsp;&ensp;&nbsp;Partnered Company Users</h3></div>
+ <div class="d-flex justify-content-left">
+   <a href="<?=base_url('user/print-client/partnered')?>" target="_blank" class="btn" style="margin-left:10px">Print</a>
+ </div>
+ <br>
  <table class="table table-bordered table1" client_id="client-list">
          <thead>
           <tr>
-           <th>ID</th>
+           <th>#</th>
            <th>First Name</th>
            <th>Last Name</th>
-           <th>Email</th>
-           <th>Contact No.</th>
            <th>Company</th>
            <th>Address</th>
+           <th>Email</th>
+           <th>Contact No.</th>
        </tr>
    </thead>
    <tbody>
-      <?php if($user): $c = 1;?>
+      <?php if($usersClient): $c = 1;?>
           <?php foreach($usersClient as $client):  ?>
               <tr>
                <td><?php echo $c ?></td>
                <td><?php echo $client['bdo_fname']; ?></td>
                <td><?php echo $client['bdo_lname']; ?></td>
-               <td><?php echo $client['bdo_email']; ?></td>
-               <td><?php echo $client['bdo_contact']; ?></td>
                <td><?php echo $client['bdo_company']; ?></td>
                <td><?php echo $client['bdo_address']; ?></td>
+               <td><?php echo $client['bdo_email']; ?></td>
+               <td><?php echo $client['bdo_contact']; ?></td>
+        </tr>
+        <?php  $c=$c+1;
+    endforeach; ?>
+<?php endif; ?>
+</tbody>
+</table>
+ <br><br>
+ <div class="crud-text"><h3>&emsp;&ensp;&nbsp;Non-Partnered Company Users</h3></div>
+ <div class="d-flex justify-content-left">
+   <a href="<?=base_url('user/print-client/non-partnered')?>" target="_blank" class="btn" style="margin-left:10px">Print</a>
+ </div>
+ <br>
+ <table class="table table-bordered table1" client_id="client-list">
+         <thead>
+          <tr>
+           <th>#</th>
+           <th>First Name</th>
+           <th>Last Name</th>
+           <th>Company</th>
+           <th>Address</th>
+           <th>Email</th>
+           <th>Contact No.</th>
+       </tr>
+   </thead>
+   <tbody>
+      <?php if($nonPartnered): $c = 1;?>
+          <?php foreach($nonPartnered as $client):  ?>
+              <tr>
+               <td><?php echo $c ?></td>
+               <td><?php echo $client['bdo_fname']; ?></td>
+               <td><?php echo $client['bdo_lname']; ?></td>
+               <td><?php echo $client['bdo_company']; ?></td>
+               <td><?php echo $client['bdo_address']; ?></td>
+               <td><?php echo $client['bdo_email']; ?></td>
+               <td><?php echo $client['bdo_contact']; ?></td>
         </tr>
         <?php  $c=$c+1;
     endforeach; ?>

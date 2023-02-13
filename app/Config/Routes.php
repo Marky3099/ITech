@@ -98,6 +98,7 @@ $routes->post('user/add', 'UsersCrud::store',['filter' => 'authGuard']);
 $routes->get('user/(:num)', 'UsersCrud::singleUser/$1',['filter' => 'authGuard']);
 $routes->post('user/update/(:num)', 'UsersCrud::update/$1',['filter' => 'authGuard']);
 $routes->get('user/print', 'UsersCrud::printUser',['filter' => 'authGuard']);
+$routes->get('user/print-client/(:any)', 'UsersCrud::printUserClient/$1',['filter' => 'authGuard']);
 $routes->get('user/delete/(:num)', 'UsersCrud::delete/$1',['filter' => 'authGuard']);
 
 $routes->get('/calllogs', 'CalllogsCrud::index',['filter' => 'authGuard']);

@@ -29,6 +29,10 @@
     <div class="user-box">
       <div class="icon-box"><i class="fas fa-user-alt"></i></div>
       <input type="email" name="client_email" placeholder="E-mail" value="<?php if(isset($_POST['client_email'])) { echo $_POST['client_email']; } ?>">
+    </div>
+    <div class="user-box">
+      <div class="icon-box"><i class="fas fa-user-alt"></i></div>
+      <input type="text" name="code" placeholder="Unique Code" value="<?php if(isset($_POST['code'])) { echo $_POST['code']; } ?>">
     </div><br>
     
     <div class="container1">

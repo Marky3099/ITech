@@ -13,8 +13,8 @@
            <th>ID</th>
            <th>Service Name</th>
            <th>Service Type</th>
-           <th>Aircon Brand</th>
-           <th>Aircon Type</th>
+<!--            <th>Aircon Brand</th>
+           <th>Aircon Type</th> -->
            <th>Price</th>
            <th>Color</th>
            <th>Action</th>
@@ -27,12 +27,12 @@
                  <td><?php echo $n ?></td>
                  <td><?php echo $service['serv_name']; ?></td>
                  <td><?php echo $service['serv_type']; ?></td>
-                 <td>
+                 <!-- <td>
                   n/a
                   </td>
                  <td>
                   n/a
-                 </td>
+                 </td> -->
                  <td><?php echo $service['price']; ?></td>
                  <td style="background-color:<?php echo $service['serv_color']; ?>"></td>
                  <td>

@@ -236,19 +236,14 @@
             <!--  -->
           </select>
         </div>    
+        <div class="form-group">
+          <label class="emp_idlbll" for="comments">Comments/Suggestions</label><br>
+          <textarea name="comments_update" id="comments_update" class="form-control w-75 ml-5 selectpicker border border-dark" cols="50" rows="4" disabled></textarea>
+        </div> 
       </form>
       </div>
       <div class="modal-footer">
-        <div class="form-group">
-          <form method="POST" action="<?=base_url('/calendar/map')?>">
-          <input type="hidden" name="address" id="address_loc" >
-          <input type="hidden" name="long" id="long" >
-          <input type="hidden" name="lat" id="lat" >
-          <button type="submit" class="btn btn-success" formtarget="__blank">Locate</button>
-        </form>
-        </div>
-      
-        
+        <button type="button" class="btn py-2 btn-secondary" data-dismiss="modal">Close</button>
     </div>
   </div>
 </div>

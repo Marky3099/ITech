@@ -173,6 +173,10 @@
           <select id="emp_id" name="emp_id[]" class="form-control w-75 ml-5 selectpicker border border-dark" multiple data-selected-text-format="count > 8" required>
           </select>
         </div> 
+        <div class="form-group">
+          <label class="emp_idlbll" for="comments">Comments/Suggestions</label><br>
+          <textarea name="comments" class="form-control w-75 ml-5 selectpicker border border-dark" cols="50" rows="4"></textarea>
+        </div> 
 
 
       </div>
@@ -285,6 +289,10 @@
           <select id="emp_id_update" name="emp_id_update[]" class="form-control w-75 ml-5 selectpicker border border-dark" multiple data-selected-text-format="count > 8">
             <!--  -->
           </select>
+        </div> 
+        <div class="form-group">
+          <label class="emp_idlbll" for="comments">Comments/Suggestions</label><br>
+          <textarea name="comments_update" id="comments_update" class="form-control w-75 ml-5 selectpicker border border-dark" cols="50" rows="4"></textarea>
         </div> 
       </div>
       <div class="modal-footer">

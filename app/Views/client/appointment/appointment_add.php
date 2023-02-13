@@ -118,6 +118,10 @@
               <?php endif;?>
             <?php endforeach; ?>
           </select>
+        </div>
+        <div class="user-box">
+          <label>Comments/Suggestions</label>
+          <textarea name="comments" id="comments" rows="2" cols="40"></textarea>
         </div><br>
 
         <div class="container1">

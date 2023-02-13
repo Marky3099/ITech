@@ -35,6 +35,7 @@
      // var a = document.getElementById('aircon_id_update');
      // var q = document.getElementById('quantity_update');
     var r = document.getElementById('start_event_update');
+    var comments = document.getElementById('comments_update');
    
 
     
@@ -222,6 +223,7 @@
       ti.value = info.event.extendedProps.time;
      
       s.value = info.event.extendedProps.serv_id;
+      comments.value = info.event.extendedProps.comments;
       // a.value = info.event.extendedProps.aircon_id;
       // q.value = info.event.extendedProps.quantity;
 

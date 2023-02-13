@@ -17,8 +17,9 @@ class UsersCrud extends Controller
         $data['users'] = $User->orderBy('user_id', 'ASC')->findAll();
 
         $UserClient = new User_bdo();
-        $data['usersClient'] = $UserClient->orderBy('bdo_id', 'ASC')->findAll();
-        
+        $data['usersClient'] = $UserClient->orderBy('bdo_id', 'ASC')->where('bdo_unique_code !=', '')->findAll();
+        $data['nonPartnered'] = $UserClient->orderBy('bdo_id', 'ASC')->where('bdo_unique_code', '')->findAll();
+        // dd($data['nonPartnered']);
         $data['main'] = 'admin/user/user_view';
         return view("templates/template",$data);
     }
@@ -156,6 +157,33 @@ class UsersCrud extends Controller
         return view('admin/user/userReports',$data);
         
     }
+    public function printUserClient($type){
+        // dd($type);
+        if($_SESSION['position'] == USER_ROLE_EMPLOYEE){
+            return $this->response->redirect(site_url('/dashboard'));
+        }
+        $User_bdo = new User_bdo();
+        if($type == 'partnered'){
+            $data['user'] = $User_bdo->orderBy('bdo_id', 'ASC')->where('bdo_unique_code !=','')->findAll();
+            $data['type'] = $type;
+        }else{
+            $data['user'] = $User_bdo->orderBy('bdo_id', 'ASC')->where('bdo_unique_code','')->findAll();
+            $data['type'] = $type;
+        }
+        
+        // foreach ($data['user'] as $key => $value) {
+        //     $data['user_data'][]=(object)[
+        //         "name"=>$value['name'],
+        //         "email"=>$value['email'],
+        //         "address"=>$value['address'],
+        //         "contact"=>$value['contact'],
+        //         "position"=>$value['position'],
+        //     ];
+        // }
+        return view('admin/user/userClientReports',$data);
+        
+    }
+
     // delete User
     public function delete($user_id = null){
         if($_SESSION['position'] != USER_ROLE_ADMIN){

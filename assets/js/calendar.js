@@ -96,6 +96,7 @@
      // var a = document.getElementById('aircon_id_update');
      // var q = document.getElementById('quantity_update');
     var r = document.getElementById('start_event_update');
+    var comments = document.getElementById('comments_update');
     var dt = document.getElementById('date');
     
       // console.log(ecode);
@@ -271,6 +272,8 @@
       ti.value = info.event.extendedProps.time;
       eti.value = info.event.extendedProps.end_time;
       s.value = info.event.extendedProps.serv_id;
+      comments.value = info.event.extendedProps.comments;
+      // console.log('hello?'+info.event.extendedProps.comments);
       $("#frmdate").datepicker('update', dateFormat);
      
       // var disableDates = ["01-01","01-02","25-02","09-04","14-04","16-04","01-05","09-05","12-06","29-08","21-08","31-10","01-11","02-11","30-11","08-12","24-12","25-12","30-12","31-12"];

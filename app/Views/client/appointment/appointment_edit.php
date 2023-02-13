@@ -9,7 +9,7 @@
     
     <div class="form-box">
       <h3>Edit Appointment</h3>
-
+      <input type="hidden" name="appt_code" value="<?php echo $appt['appt_code']; ?>">
       <div class="user-box">
         <label id="label1">Date</label>
         <label class="ttime">Time</label>
@@ -40,7 +40,11 @@
               <optgroup label="<?= $s['serv_name']; ?>">
                 <?php foreach($servType as $st):  ?>
                   <?php if($st['serv_name'] == $s['serv_name']):?>
-                    <option value=<?= $st['serv_id'];?>><?= $st['serv_type'];?></option>
+                    <?php if($st['serv_id'] == $appt['serv_id']):?>
+                      <option value=<?= $st['serv_id'];?> selected><?= $st['serv_type'];?></option>
+                    <?php else:?>
+                      <option value=<?= $st['serv_id'];?>><?= $st['serv_type'];?></option>
+                    <?php endif;?>
                   <?php endif;?>
                 <?php endforeach; ?>
               </optgroup>
@@ -74,7 +78,11 @@
           <?php endforeach; ?>
         <?php endforeach; ?>
       </select>
-      </div><br>
+      </div>
+      <div class="user-box">
+          <label>Comments/Suggestions</label>
+          <textarea name="comments" id="comments" rows="2" cols="40" ><?php echo htmlspecialchars($appt['comments']); ?></textarea>
+        </div><br>
 
       <div class="container1">
         <button type="submit" class="btn btn-success">Submit</button>

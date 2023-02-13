@@ -29,6 +29,10 @@
       <div class="user-box">
         <div class="icon-box"><i class="fas fa-user-alt"></i></div>
         <input type="email" name="client_email" value="<?php echo $Client_obj['client_email']; ?>" placeholder="E-mail">
+      </div>
+      <div class="user-box">
+        <div class="icon-box"><i class="fas fa-user-alt"></i></div>
+        <input type="text" name="code" value="<?php echo $Client_obj['code']; ?>" placeholder="Unique Code">
       </div><br>
       
       <div class="container1">

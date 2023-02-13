@@ -53,8 +53,8 @@ class ClientCrud extends Controller
                 return view("templates/template",$data);
             }
         }
-        $set = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $code = substr(str_shuffle($set), 0, 12);
+        // $set = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $code = $this->request->getVar('code');
         $areaUpper = strtoupper($this->request->getVar('area'));
         $branchUpper = strtoupper($this->request->getVar('client_branch'));
         $client_create = [
@@ -137,6 +137,7 @@ class ClientCrud extends Controller
             'client_address' => $this->request->getVar('client_address'),
             'client_email' => $this->request->getVar('client_email'),
             'client_contact'  => $this->request->getVar('client_contact'),
+            'code'  => $this->request->getVar('code'),
         ];
         $Client->update($client_id, $data);
         $session = session();

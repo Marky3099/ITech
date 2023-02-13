@@ -99,6 +99,7 @@ class FullCalendar extends BaseController
     }
 
     $datas['all_events'] = $event->orderBy('time', 'ASC')->findAll();
+    // dd($datas['all_events']);
     // dd($datas['all_events'] );
         // $datas['all_events'] = $event->where('STATUS', 'Done')->findAll();
         // dd($data[0]['title']);
@@ -154,6 +155,7 @@ class FullCalendar extends BaseController
         "emp_array"=> $emp_arr,
         "fcu_array"=> $fcu_arr,
         "color" => $value['serv_color'],
+        "comments" => $value['comments'],
     ];
 // dd($datas['event']);
     
@@ -282,6 +284,7 @@ foreach ($datas['all_events'] as $key => $value) {
     "emp_array"=> $emp_arr,
     "fcu_array"=> $fcu_arr,
     "color" => $value['serv_color'],
+    "comments" => $value['comments'],
 ];
 
 
@@ -565,6 +568,7 @@ public function insert(){
             'end_time' => $_POST['end_time'],
             'client_id' => $_POST['client_id'],
             'serv_id' => $_POST['serv_id'],
+            'comments' =>$_POST['comments'],
 
         ]);
 
@@ -1402,6 +1406,7 @@ public function update(){
         'client_id'  => (int)($this->request->getVar('client_id_update')),
             // 'fcuno' => (int)($this->request->getVar('fcuno_update')),
         'serv_id' => (int)($this->request->getVar('serv_id_update')),
+        'comments' => $this->request->getVar('comments_update'),
         
         
             // 'quantity' => $this->request->getVar('quantity_update'),

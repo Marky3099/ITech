@@ -385,6 +385,7 @@ public function store() {
                         'qty' => $this->request->getVar('qty'),
                         // 'status' => $this->request->getVar('status'),
                         'user_id' => $user_id,
+                        'comments' => $this->request->getVar('comments'),
                     ];
                     // dd($appoint_create);
                     $success = $Appoint->insert($appoint_create);
@@ -404,6 +405,7 @@ public function store() {
                                     'end_time' => $endTime,
                                     'client_id' => $this->request->getVar('client_id'),
                                     'serv_id' => $this->request->getVar('serv_id'),
+                                    'comments' => $this->request->getVar('comments'),
 
                                 ]);
                                 
@@ -524,14 +526,26 @@ return view("templates/template",$data);
 }
 public function update(){
     
+    // dd($_POST);
     $Appoint = new Appointment();
     
     $Appt_fcu = new Appt_fcu();
     $Client = new Client();
     $Aircon = new Aircon();
-
+    $Event = new Event();
+    $event_fcu = new Event_fcu();
     $appt_id = $this->request->getVar('appt_id');
     $start_date = explode('/',$this->request->getVar('appt_date'));
+    $client_branch = $Client->where('client_id',$this->request->getVar('client_id_update'))->first();
+    $time =$this->request->getVar('appt_time');
+    // dd($time);
+    $end_time = strtotime($time) + 60*60*2;
+    $event_data = $Event->where('appt_code', $_POST['appt_code'])->first();
+    // dd($event_data['id']);
+    $timeMinus = strtotime($time) - 60*60;
+    $startTime= date('H:i', $timeMinus);
+    // $timestamp = strtotime($end_time) + 60*60;
+    $endTime = date('H:i', $end_time);
     if(count($start_date) == 1){
         $start_date = explode('-',$this->request->getVar('appt_date'));
         $data = [
@@ -544,6 +558,7 @@ public function update(){
             'client_id'  => (int)($this->request->getVar('client_id_update')),
             'device_brand' => $this->request->getVar('device_brand'),
             'qty' => $this->request->getVar('qty'),
+            'comments' => $this->request->getVar('comments'),
             'status' => $this->request->getVar('status')
         ];
     }else{
@@ -557,11 +572,37 @@ public function update(){
             'client_id'  => (int)($this->request->getVar('client_id_update')),
             'device_brand' => $this->request->getVar('device_brand'),
             'qty' => $this->request->getVar('qty'),
+            'comments' => $this->request->getVar('comments'),
             'status' => $this->request->getVar('status')
         ];
     }
     
-    $Appoint->update($appt_id, $data);
+    $success=$Appoint->update($appt_id, $data);
+    if($success){
+        // dd("here2");
+        $success2=$Event->update($event_data['id'],[
+            'title' => date("g:ia",strtotime($this->request->getVar('appt_time')))." ".$client_branch['client_branch'],
+            // 'log_code' => $log_code,
+            'start_event' => $start_date[2].'-'.$start_date[0].'-'.$start_date[1],
+            // 'appt_code' => $appt_code,
+            'time' => $this->request->getVar('appt_time'),
+            'end_time' => $endTime,
+            'client_id' => $this->request->getVar('client_id_update'),
+            'serv_id' => $this->request->getVar('serv_id'),
+            'comments' => $this->request->getVar('comments'),
+
+        ]);
+
+        foreach ( $_POST['fcuno_update'] as $key => $floor_num) {
+            // dd($floor_num);
+            $event_fcu->update($event_data['id'],[
+                'id'=> (int) $event_data['id'],
+                'aircon_id'=> (int) $this->request->getVar('aircon_id_update'),
+                'quantity'=> (int)$this->request->getVar('qty'),
+                'fcuno'=>$floor_num
+            ]);
+        }
+    }
     $Appt_fcu->where('appt_id', $appt_id)->delete();
     if (isset($_POST['fcuno_update'])) {
         foreach($_POST['fcuno_update'] as $key => $value) {
