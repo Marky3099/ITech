@@ -3,9 +3,10 @@ body {
   padding:0;
   font-family: "Arial", sans-serif;
   background: url(../image/home-img.jpg);
-  height: 100%; 
+  width: 100%;
+  height: 111%; 
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 100% 100%;
   align-content: center;
 }
 
@@ -24,11 +25,32 @@ body {
   border-radius: 50px;
 }
 
+@media (max-width: 600.98px) {
+    .register-box{
+      width: 100%;
+    }
+
+    .register-box input.fname, .register-box input.email, .register-box input.contact, .register-box input.lname{
+      width: 87%;
+    }
+
+    #ib1{
+      margin-left: -260px;
+      top: 89px;
+    }
+
+    #ib2{
+      margin-left: -260px;
+      top: 88px;
+    }
+
+  }
+
 .register-box .header img{
   position: relative;
-  left: 70px;
-  height: 90px;
-  width: 390px;
+  height: auto;
+  width: 70%;
+  left: 20%;
 }
 
 .register-box .back{
@@ -49,6 +71,7 @@ body {
   margin-right: 10px;
   font-size: 13px;
   color: #344F21;
+  padding: 0px 5px;
 }
 
 .register-box .user-box{
@@ -78,6 +101,7 @@ body {
 
 .register-box .user-box input.lname, .register-box .user-box input.contact{
   /*margin-left: 57.5px;*/
+/*  width: 38%;*/
 }
 
 .register-box .user-box input.cname, .register-box .user-box input.address, .register-box .user-box input.unqcode, .register-box .user-box input.password, .register-box .user-box input.cpassword{
@@ -105,7 +129,7 @@ body {
     padding: 8px 9px;
     background-color: #344F21;
     color: #fff;
-    margin-top: 5px;
+    margin-top: -39px;
     left: 255px;
 }
 
@@ -136,20 +160,24 @@ input:-webkit-autofill{
 .register-box form .btn{
   position: relative;
   display: inline-block;
-  width: 82%;
+  width: 75%;
   background-color: #344F21;
-  padding: 8px;
+  padding: 10px 20px;
   color: #fff;
   font-size: 16px;
   text-decoration: none;
   text-transform: uppercase;
   overflow: hidden;
   transition: .5s;
-  margin-top: 15px;
-  margin-left: 40px;
+  margin-top: 20px;
   letter-spacing: 4px;
   font-weight: bold;
+  left: 10%;
   border-radius: 5px;
+}
+
+.reg-btn-class{
+  align-items: center;
 }
 
 .register-box .btn:hover {
@@ -172,8 +200,9 @@ input:-webkit-autofill{
 
 .register-box a.back-btn{
   position: relative;
+  float: right;
   top: -40px;
-  left: 10px;
+  right: 25px;
   font-size: 15px;
   border: none;
   background-color: #344F21;
