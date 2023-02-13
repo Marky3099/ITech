@@ -14,6 +14,25 @@
       left: 'prev,next',
       center: 'title',
       right: 'today',
+    }, 
+    dayCellDidMount: ({ date, el }) => {
+
+        var disable=[];
+        // console.log(disableDates);
+      for (var i = 0; i < disableDates.length; i++) {
+         var splitDate = disableDates[i].date.split("-");
+         var formatDate = splitDate[2]+"-"+splitDate[1];
+         disable.push(formatDate);
+       }
+
+         
+
+       for (var i = 0; i < disable.length; i++) {
+        // console.log(el);
+             if (date.getDate() +'-'+ date.getMonth()+1 == disable[i])
+                el.style.backgroundColor = '#FF684A'
+           }
+      
     },
     events: event,
     dateClick: function(info) {

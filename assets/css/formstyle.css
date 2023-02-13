@@ -426,4 +426,6 @@ a.btnn:hover{
   border-left: 5px solid transparent;
 }
 
-
+.datepicker table tr td.disabled{
+  color: red !important;
+}
