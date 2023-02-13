@@ -345,6 +345,7 @@ body{
     left: 78px;
     transition: all 0.5s ease;
 }
+
 .sidebar-header .text1{
     padding: 10px 5px;
     background-color: #fff;
@@ -353,9 +354,25 @@ body{
     font-weight: bold;
 }
 
+@media (min-width: 1200px) {
+  .sidebar-header .text1{
+    font-size: 30px;
+  }
+}
+/* If the screen size is smaller than 1200px, set the font-size to 80px */
+@media (max-width: 1199.98px) {
+  .sidebar-header .text1 .title-header{
+    display: none;
+  }
+
+  .sidebar-header .text1{
+    height: 50px;
+  }
+}
+
 .sidebar-header .drop-content{
     position: absolute;
-    right: 5px;
+    right: -40px;
     top: 5px;
     width: 200px;
 }

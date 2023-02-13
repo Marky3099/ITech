@@ -1,16 +1,18 @@
-<!-- links -->
 <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/main.min.css')?>">
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 <link rel="stylesheet" href="<?= base_url('assets/css/style.css')?>">
 <link rel="stylesheet" href="<?= base_url('assets/css/map.css')?>">
-<br><br><br>
+
 <div class="body-content">
   <div class="col-sm-8">
     <div class="crud-text"><h3>Calendar</h3></div>
  </div>
-<div class="card legend-box" id="cal1">
+ <br><br>
+<div class="row justify-content-end">
+  <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+    <div class="card legend-box" id="cal1">
     <div class="card-header">Legend</div>
     <div class="card-body">
       <ul class="legend-list">
@@ -20,6 +22,8 @@
       </ul>
     </div>
     </div>
+  </div>
+</div>
 
 <div id='calendar' class="col-lg-12 col-md-10" style="width:100%;"></div>
 <div id='datepicker'></div>
@@ -74,7 +78,6 @@
           </div>
         </div>
         <div class="form-group">
-          
           <label for="serv_id">Service</label><br>
           <select id="serv_id" name="serv_id" class="form-control" required>
             <?php foreach($servName as $s):  ?>
@@ -199,7 +202,7 @@
         </div>
         
         <div class="form-group" id="serv-form">
-          <label for="serv_id_update">Service</label><br>
+          <label for="serv_id_update" id="serv_id1">Service</label><br>
           <div class="select-dropdown" id="serv-select">
           <select class="form-control" id="serv_id_update" name="serv_id_update" disabled>
             <?php foreach($servName as $s):  ?>
@@ -232,14 +235,20 @@
           <select id="emp_id_update" name="emp_id_update[]" class="form-control w-75 ml-5 selectpicker border border-dark" multiple data-selected-text-format="count > 8" disabled>
             <!--  -->
           </select>
-        </div> 
-
+        </div>    
+      </form>
       </div>
       <div class="modal-footer">
         <div class="form-group">
-          <button type="button" class="btn py-1 btn-secondary" data-dismiss="modal">Close</button>
+          <form method="POST" action="<?=base_url('/calendar/map')?>">
+          <input type="hidden" name="address" id="address_loc" >
+          <input type="hidden" name="long" id="long" >
+          <input type="hidden" name="lat" id="lat" >
+          <button type="submit" class="btn btn-success" formtarget="__blank">Locate</button>
+        </form>
         </div>
-      </form>
+      
+        
     </div>
   </div>
 </div>
@@ -263,17 +272,22 @@
   </div>
 </div>
 
-
-
-<!-- scripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment-with-locales.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.js"></script>
+
+
+
+
 <!-- Time Picker -->
 <script src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>  
 <script src = "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>  
+<!-- <script src = "https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>   -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/js/bootstrap-select.min.js"></script>
 <script src = "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
+<!--  -->
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"></script> -->
 <script src="<?=base_url("assets/js/main.min.js")?>"></script>
 
 
@@ -294,14 +308,15 @@ var distinct = <?php echo json_encode($distinct); ?> ;
 var distinctEvent = <?php echo json_encode($distinct_event); ?> ;
 var deviceBrand = <?php echo json_encode($device_brand); ?> ;
  
- console.log(distinct);
-  console.log(deviceBrand);
+ // console.log(distinct);
+ //  console.log(deviceBrand);
 
 
 var count = 1;
 var count_update = 1;
 
   // console.log(event);
+
   $("#add_aut").click(function(e){
     var html3 = `<div class="form-row" id="row">
     <div class="form-group col-md-3">

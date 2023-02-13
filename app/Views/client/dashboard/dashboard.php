@@ -163,11 +163,10 @@
 </div>
 
 <!-- Content Row -->
-<div class="row">
-
+<div class="row" id="cards">
   <!-- Card for displaying the total count of today's event -->
-  <div class="ml-3 col-xl-3 col-md-6 mb-4">
-    <div class="card border-left-primary shadow h-100 py-2">
+  <div class="ml-3 col-12 col-lg-4 col-md-4 col-sm-8 mb-4">
+    <div class="card border-left-primary shadow h-100 w-75 py-2">
       <div class="card-body1">
         <div class="row no-gutters align-items-center">
           <div class="col mr-2">
@@ -181,13 +180,11 @@
           </div>
         </div>
       </div>
-    </div>
+  </div>
 
       <!--Completed -->
-
-
-      <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-info shadow h-100 py-2">
+      <div class="ml-3 col-12 col-lg-4 col-md-4 col-sm-8 mb-4">
+        <div class="card border-left-info shadow h-100 w-75 py-2" id="card2">
           <div class="card-body1">
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
@@ -221,7 +218,8 @@
         </div>
       </div>
     </div>
-  </div>
+</div>
+
 
   <!-- Calendar -->
 
@@ -229,8 +227,9 @@
   <div class="col-sm-8">
     <div class="crud-text"><h3>Calendar</h3></div>
  </div>
-<div class="row">
-  <div class="col-lg-12 col-md-12 col-sm-12">
+<br><br>
+<div class="row justify-content-end">
+  <div class="col-12 col-lg-4 col-md-4 col-sm-12">
     <div class="card legend-box" id="cal1">
     <div class="card-header">Legend</div>
     <div class="card-body">
@@ -240,7 +239,7 @@
         <?php endforeach ?>
       </ul>
     </div>
-    </div> 
+    </div>
   </div>
 </div>
 
