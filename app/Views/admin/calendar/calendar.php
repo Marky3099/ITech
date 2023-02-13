@@ -8,7 +8,7 @@
 
 
 <div class="body-content">
-  <div class="col-sm-8">
+  <div class="col-sm-12">
     <div class="crud-text"><h3>Calendar</h3></div>
     
       <div class="tsk">
@@ -16,8 +16,10 @@
         <a href="<?= base_url('/calendar/dates') ?>" class="btn" style="margin-left: 0.2rem;">Restrict Date</a><br>
       </div>
       
-    
-    <div class="card legend-box">
+    <br><br>
+   <div class="row justify-content-end">
+    <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+    <div class="card legend-box" id="cal2">
     <div class="card-header">Legend</div>
     <div class="card-body">
       <ul class="legend-list">
@@ -27,6 +29,8 @@
       </ul>
     </div>
     </div>
+  </div>
+</div>
   </div><br> 
  
 <div id='calendar' class="col-lg-12 col-md-10" style="width:100%;"></div>
@@ -147,7 +151,7 @@
           <div class="form-group col-md-3">
             
             <label for="fcunos">FCU No.</label>
-            <select id="fcuno" name="fcuno0[]" class="selectpicker rounded border border-dark" data-width="100%" multiple data-selected-text-format="count > 3" required>
+            <select id="fcuno" name="fcuno0[]" class="selectpicker rounded border border-dark" data-width="87%" multiple data-selected-text-format="count > 3" required>
               <?php foreach($fcu_no as $f):  ?>
                 <option value="<?php echo $f['fcuno']; ?>"><p id="s2option"><?php echo $f['fcu'];?></p></option>
               <?php endforeach; ?>
@@ -365,7 +369,7 @@ var count_update = 1;
     <div class="form-group col-md-3">
     
     <label for="fcunos">FCU No.</label>
-    <select id="fcuno" name="fcuno`+count+`[]" class="selectpicker rounded border border-dark" data-width="100%" multiple data-selected-text-format="count > 2">
+    <select id="fcuno" name="fcuno`+count+`[]" class="selectpicker rounded border border-dark" data-width="87%" multiple data-selected-text-format="count > 2">
     <?php foreach($fcu_no as $f):  ?>
       <option value="<?php echo $f['fcuno']; ?>"><p id="s2option"><?php echo $f['fcu'];?></p></option>
     <?php endforeach; ?>
