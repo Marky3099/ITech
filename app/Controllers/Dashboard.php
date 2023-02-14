@@ -37,7 +37,7 @@ class Dashboard extends BaseController
         if($_SESSION['position'] == USER_ROLE_CLIENT){
             return $this->response->redirect(site_url('/profile-bdo/'.$_SESSION['user_id']));
         }
-        
+        // dd(date('Y-m-d'));
         $allevent = new All_events();
         $event = new Event();
         $client = new Client();
@@ -55,7 +55,7 @@ class Dashboard extends BaseController
         $date->setTimezone(new \DateTimeZone('+0800'));
         $data['pending_events'] = $event->where('status','Pending')->findAll();
         $data['events'] = $event->where('status','Pending')->where('start_event', date('Y-m-d'))->findAll();
-
+        
         $data['event'] = array();
         $data['week1'] = array();
         $data['month'] = array();
