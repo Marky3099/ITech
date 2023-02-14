@@ -267,8 +267,7 @@ for ($i=0; $i < count($ratings); $i++) {
         $e = $c;
         if($d < count($ratings)){
             if($empId == $ratings[$d]->emp_name){
-                $average = ($rateEmp+$ratings[$c+1]->rate_emp)/2;
-                $aveRate = ($aveRate + $average)/2;
+                $aveRate = ($rateEmp+$ratings[$c+1]->rate_emp)/2;
                 // dd($aveRate);
             }
             
