@@ -244,16 +244,15 @@ foreach ($data['ratingsData'] as $key => $value) {
     // array_push($ratingsName,$value->serv_name);
 }
 
-$empQuery   = $db->query('SELECT emp_id,emp_name
-    FROM employees'
-);
+$overall = 0;
 
-$data['empQuery'] = $empQuery->getResult();
-json_encode($data['empQuery']);
-$data['empData'] = array();
-foreach ($data['empQuery'] as $key => $value) {
-    array_push($data['empData'], $value->emp_name);
+foreach ($ratings as $key => $value) {
+    $overall += $value->rate_event;
 }
+$data['overallPerformance']=$overall/count($ratings);
+$data['totality'] = 100 - $data['overallPerformance'];
+// dd($data['totality']);
+// dd($overallPerformance);
 $performEmp = array();
 $aveRate = 0;
 for ($i=0; $i < count($ratings); $i++) { 

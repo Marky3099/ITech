@@ -23,7 +23,8 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $baseURL = 'https://puptcapstone.net/tsms';
+    public $baseURL = 'https://tsms.puptcapstone.net/';
+    // public $baseURL = 'http://localhost/tsms';
 
     /**
      * --------------------------------------------------------------------------

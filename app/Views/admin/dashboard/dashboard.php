@@ -605,6 +605,8 @@
   <div class="col-12 col-lg-6 col-md-6 col-sm-12 col-xss-12" id="chart_div" style="width: 100%; height: 500px;"></div>
   <div class="col-12 col-lg-6 col-md-6 col-sm-12 col-xss-12" id="piechart_3d" style="width: 100%; height: 500px;"></div>
   <div class="col-12 col-lg-6 col-md-6 col-sm-12 col-xss-12" id="barchart_material" style="width: 100%; height: 500px;"></div>
+  <div class="col-12 col-lg-6 col-md-6 col-sm-12 col-xss-12" id="piechart1_3d" style="width: 100%; height: 500px;"></div>
+
 </div>
 
 
@@ -698,6 +700,16 @@
             }
           ?>
         ]);
+        var overallData = google.visualization.arrayToDataTable([
+          ['Name', 'Ratings'],
+          // ['Checkup', 1],['General cleaning', 13],['Installation', 1]
+          ['Positive Ratings',<?php
+              echo $overallPerformance;
+          ?>],
+          ['Negative Ratings',<?php
+              echo $totality;
+          ?>],
+        ]);
 
         var taskData = google.visualization.arrayToDataTable([
           ['Task', 'Total Tasks'],
@@ -727,6 +739,11 @@
           is3D: true,
           colors: servLabelColor
         };
+        var overallOptions = {
+          title: 'Company Ratings',
+          is3D: true,
+          colors: ['#1AEF17','#EC0D03']
+        };
 
         var taskOptions = {
           title: 'Task Summary per Month',
@@ -753,6 +770,8 @@
         var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
         var chart2 = new google.visualization.AreaChart(document.getElementById('chart_div'));
         var chart3 = new google.visualization.BarChart(document.getElementById('barchart_material'));
+        var chart4 = new google.visualization.PieChart(document.getElementById('piechart1_3d'));
+        chart4.draw(overallData, overallOptions);
         chart3.draw(empData,empOptions);
         chart.draw(servData, servOptions);
         chart2.draw(taskData, taskOptions);
