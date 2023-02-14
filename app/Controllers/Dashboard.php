@@ -55,7 +55,7 @@ class Dashboard extends BaseController
         $date->setTimezone(new \DateTimeZone('+0800'));
         $data['pending_events'] = $event->where('status','Pending')->findAll();
         $data['events'] = $event->where('status','Pending')->where('start_event', date('Y-m-d'))->findAll();
-        dd(date('Y-m-d'));
+        // dd(date('Y-m-d'));
         $data['event'] = array();
         $data['week1'] = array();
         $data['month'] = array();
