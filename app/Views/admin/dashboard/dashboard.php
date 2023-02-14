@@ -602,9 +602,9 @@
   </div>
 
 <div class="row">
-  <div class="col-12 col-lg-6 col-md-6 col-sm-12" id="chart_div" style="width: 100%; height: 500px;"></div>
-  <div class="col-12 col-lg-6 col-md-6 col-sm-12" id="piechart_3d" style="width: 100%; height: 500px;"></div>
-  <!-- <div id="barchart_material" style="width: 900px; height: 500px;"></div> -->
+  <div class="col-12 col-lg-6 col-md-6 col-sm-12 col-xss-12" id="chart_div" style="width: 100%; height: 500px;"></div>
+  <div class="col-12 col-lg-6 col-md-6 col-sm-12 col-xss-12" id="piechart_3d" style="width: 100%; height: 500px;"></div>
+  <div class="col-12 col-lg-6 col-md-6 col-sm-12 col-xss-12" id="barchart_material" style="width: 100%; height: 500px;"></div>
 </div>
 
 
@@ -713,7 +713,11 @@
 
         var empData = google.visualization.arrayToDataTable([
           ['Name','Ratings'],
-          ['marky',.50],
+          <?php
+            foreach ($performEmp as $perEmp) {
+              echo $perEmp;
+            }
+          ?>
           
         ]);
 
@@ -732,7 +736,7 @@
 
         var empOptions = {
           title: 'Technician\'s Performance',
-          isStacked: 'percent',
+          // isStacked: 'percent',
           bars: 'horizontal', // Required for Material Bar Charts.
            // vAxis: { 
            //    title: "Ratings on Performance", 
@@ -748,8 +752,8 @@
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
         var chart2 = new google.visualization.AreaChart(document.getElementById('chart_div'));
-        // var chart3 = new google.visualization.BarChart(document.getElementById('barchart_material'));
-        // chart3.draw(empData,empOptions);
+        var chart3 = new google.visualization.BarChart(document.getElementById('barchart_material'));
+        chart3.draw(empData,empOptions);
         chart.draw(servData, servOptions);
         chart2.draw(taskData, taskOptions);
       };

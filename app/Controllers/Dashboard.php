@@ -225,7 +225,7 @@ foreach ($data['servData'] as $key => $value) {
    $data['servLabelColor'][]= $value->serv_color;
 
 }
-// dd($data['serviceName']);
+// dd($data['serviceData']);
 
 // rating chart
 $ratings = array();
@@ -254,8 +254,51 @@ $data['empData'] = array();
 foreach ($data['empQuery'] as $key => $value) {
     array_push($data['empData'], $value->emp_name);
 }
-
-
+$performEmp = array();
+$aveRate = 0;
+for ($i=0; $i < count($ratings); $i++) { 
+    $c = $i;
+    $d = $c+1;
+    $e = $c-1;
+    // $rate = 0;
+    $empId = $ratings[$i]->emp_name;
+    $rateEmp = $ratings[$i]->rate_emp;
+    if($e<0){
+        $e = $c;
+        if($d < count($ratings)){
+            if($empId == $ratings[$d]->emp_name){
+                $average = ($rateEmp+$ratings[$c+1]->rate_emp)/2;
+                $aveRate = ($aveRate + $average)/2;
+                // dd($aveRate);
+            }
+            
+        }
+    }else{
+        // dd($performEmp);
+        if($d < count($ratings)){
+            if($empId == $ratings[$d]->emp_name){
+                $aveRate = ($rateEmp+$ratings[$c+1]->rate_emp)/2;
+                // dd($aveRate);
+            }elseif($empId == $ratings[$e]->emp_name){
+                array_push($performEmp,["['".$empId."', ".$aveRate."],"]);
+                $aveRate = 0;
+            }else{
+                array_push($performEmp,["['".$empId."', ".$rateEmp."],"]);
+            }
+        }else{
+            array_push($performEmp,["['".$empId."', ".$aveRate."],"]);
+            $aveRate = 0;
+        }
+    }   
+}
+$data['performEmp'] = array();
+for ($i=0; $i < count($performEmp); $i++) { 
+    for($j=0; $j < count($performEmp[$i]); $j++){
+        array_push($data['performEmp'],$performEmp[$i][$j]);
+    }
+}
+// dd($data['performEmp']);
+// dd($ratings);
 
 //count today's tasks
 $query = $db->query('SELECT COUNT(start_event) as count FROM all_events WHERE start_event = curdate()');
