@@ -234,7 +234,7 @@ $ratings = array();
 
 $data['empPerformance'] = array();
 $ratingsQuery   = $db->query('SELECT emp_id,serv_name, serv_color,rate_event,emp_name,rate_emp
-    FROM ratings_view'
+    FROM ratings_view order by emp_id'
 );
 
 $data['ratingsData'] = $ratingsQuery->getResult();
@@ -255,57 +255,7 @@ foreach ($data['empQuery'] as $key => $value) {
     array_push($data['empData'], $value->emp_name);
 }
 
-// dd($data['ratingsData']);
-// $data['empDataPerformance'] = array();
-// foreach($data['empData'] as $key => $value){
-//     foreach($ratings as $k => $v){
-//         if($value == $v->emp_name){
-//             array_push($data['empDataPerformance'],$value.'\'-'.$v->rate_emp);
-//         }
-//     }        
-// }
-// dd($data['empDataPerformance']);
-// $techArray = array();
-// for($i = 0; $i < count($data['empDataPerformance']); $i++){
-//     $techData = $data['empDataPerformance'][$i];
-//     $techFormat = explode('-',$techData);
-//     $techName = $techFormat[0];
-//     array_push($techArray, '*'.$techName);
-//     foreach($data['empDataPerformance'] as $perform){
-//         $performFormat = explode('-',$perform);
-//         if($techName == $performFormat[0]){
-//             array_push($techArray, $performFormat[1]);
-//         }
-//     }
-// }
-// $techString = implode(',',$techArray);
-// $techStringtoArray = explode(',*',$techString );
-// // $techAsk = explode('*',$techStringtoArray );
-// $data['techChart'] = array();
-// $countTech =0;
-// foreach($techStringtoArray as $techArr){
-//     // $techh = implode('*',$techArr );
-//     $techstr = str_replace('*','',$techArr);
-//     $techCount = count(explode(',',$techstr));
-//     if($techCount > $countTech){
-//         $countTech = $techCount;
-//     }
-// }
-// foreach($techStringtoArray as $techArr){
-//     // $techh = implode('*',$techArr );
-//     $techstr = str_replace('*','',$techArr);
-//     $techCount = count(explode(',',$techstr));
-//     $plusZero = ',0';
-//     if($techCount<$countTech){
-//         $d =$countTech - $techCount;
-//         for($j = 0; $j < $d;$j++){
-//           $techstr = $techstr . $plusZero;
-//         }
-//     }
-//     // dd($techstr . $plusZero);
-//     array_push($data['techChart'], "['".$techstr."],");
-// }
-// $data['techValue'] = array_unique($data['techChart']);
+
 
 //count today's tasks
 $query = $db->query('SELECT COUNT(start_event) as count FROM all_events WHERE start_event = curdate()');

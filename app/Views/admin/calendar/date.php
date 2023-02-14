@@ -4,9 +4,9 @@
    <div class="event-header">
      <h3 id="mod" class="mt-2 headerfont"><b>Restrict Date</b></h3>
      
-     <div class="d-flex justify-content-left" style="margin-left:20px;">
+     <div class="d-flex justify-content-left" style="margin-left:60px;">
          <a href="<?= base_url('/calendar');?>" class="btn">Calendar</a>
-        <a href="<?= base_url('/calendar/dates-form') ?>" class="btn" style="margin-left: 0.2rem;">Add Restriction   </a><br>
+        <a href="<?= base_url('/calendar/dates-form') ?>" class="btn">Add Restriction   </a><br>
       </div>
     
    </div>
