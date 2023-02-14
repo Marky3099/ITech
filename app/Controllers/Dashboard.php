@@ -53,16 +53,19 @@ class Dashboard extends BaseController
         date_default_timezone_set('Asia/Hong_Kong'); 
         $date = new \DateTime();
         $date->setTimezone(new \DateTimeZone('+0800'));
+        $date1 = $date->format('Y-m-d');
         $data['pending_events'] = $event->where('status','Pending')->findAll();
-        $data['events'] = $event->where('status','Pending')->where('start_event', date('Y-m-d'))->findAll();
-        // dd(date('Y-m-d'));
+        $data['events'] = $event->where('status','Pending')->where('start_event', $date1)->findAll();
+        // dd($date);
+        
+        // dd($date1);
         $data['event'] = array();
         $data['week1'] = array();
         $data['month'] = array();
         $data['completed'] = array();
         $data['notdone'] = array();
         $data['client'] = $client->orderBy('client_id', 'ASC')->findAll();
-        $data['eventsToday'] = $allevent->where('start_event', date('Y-m-d'))->where('notif',0)->findAll();
+        $data['eventsToday'] = $allevent->where('start_event', $date1)->where('notif',0)->findAll();
         if($data['eventsToday']){
             for ($i=0; $i < count($data['eventsToday']); $i++) { 
                 // dd($data['eventsToday'][$i]['id']);
@@ -155,9 +158,9 @@ class Dashboard extends BaseController
         $data['event_emp'] = $event_emp->orderBy('id', 'ASC')->findAll();
 
         if($_SESSION['position'] == USER_ROLE_EMPLOYEE){
-            $data['today'] = $event_emp->where('start_event', date('Y-m-d'))->where('emp_id', $emp_id)->findAll();
+            $data['today'] = $event_emp->where('start_event', $date1)->where('emp_id', $emp_id)->findAll();
         }else{
-            $data['today'] = $allevent->where('start_event', date('Y-m-d'))->findAll();
+            $data['today'] = $allevent->where('start_event', $date1)->findAll();
         }
 
         
