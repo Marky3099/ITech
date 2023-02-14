@@ -537,7 +537,7 @@ public function insert(){
     
     $weeklyEvent = [];
     $monthlyEvent = [];
-    $disableDates = ["01-01","01-02","25-02","09-04","14-04","16-04","01-05","09-05","12-06","29-08","21-08","31-10","01-11","02-11","30-11","08-12","24-12","25-12","30-12","31-12"];
+    // $disableDates = ["01-01","01-02","25-02","09-04","14-04","16-04","01-05","09-05","12-06","29-08","21-08","31-10","01-11","02-11","30-11","08-12","24-12","25-12","30-12","31-12"];
     $set = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $code = substr(str_shuffle($set), 0, 6);
     // dd($disableDates);
@@ -631,15 +631,15 @@ public function insert(){
                 for ($i=0; $i < count($weeklyEvent); $i++) { 
                     $formatWeekly = explode("-",$weeklyEvent[$i]);
                     $currDate = $formatWeekly[2]."-".$formatWeekly[1];
-                    $counter = 0;
-                    for ($a=0; $a < count($disableDates); $a++) { 
-                        if ($currDate == $disableDates[$a]) {
-                            $counter = 1;
-                        }
+                    // $counter = 0;
+                    // for ($a=0; $a < count($disableDates); $a++) { 
+                    //     if ($currDate == $disableDates[$a]) {
+                    //         $counter = 1;
+                    //     }
                         
-                    }
+                    // }
                         // dd($counter);
-                    if($counter == 0){
+                    // if($counter == 0){
                         $_POST['start_event'] = $weeklyEvent[$i];
 
                         $_POST["title"] = date("g:ia",strtotime($_POST["time"]))." ".$client_branch['client_branch'];
@@ -669,7 +669,7 @@ public function insert(){
                             }
 
                         }
-                    }
+                    // }
 
                 }
                 // EVERY 2 WEEKS
@@ -699,15 +699,15 @@ public function insert(){
                 for ($i=0; $i < count($weeklyEvent); $i++) { 
                     $formatWeekly = explode("-",$weeklyEvent[$i]);
                     $currDate = $formatWeekly[2]."-".$formatWeekly[1];
-                    $counter = 0;
-                    for ($a=0; $a < count($disableDates); $a++) { 
-                        if ($currDate == $disableDates[$a]) {
-                            $counter = 1;
-                        }
+                    // $counter = 0;
+                    // for ($a=0; $a < count($disableDates); $a++) { 
+                    //     if ($currDate == $disableDates[$a]) {
+                    //         $counter = 1;
+                    //     }
                         
-                    }
+                    // }
                         // dd($counter);
-                    if($counter == 0){
+                    // if($counter == 0){
                         $_POST['start_event'] = $weeklyEvent[$i];
 
                         $_POST["title"] = date("g:ia",strtotime($_POST["time"]))." ".$client_branch['client_branch'];
@@ -737,7 +737,7 @@ public function insert(){
                             }
 
                         }
-                    }
+                    // }
 
                 }
             } 
@@ -769,15 +769,15 @@ public function insert(){
                 for ($i=0; $i < count($weeklyEvent); $i++) { 
                     $formatWeekly = explode("-",$weeklyEvent[$i]);
                     $currDate = $formatWeekly[2]."-".$formatWeekly[1];
-                    $counter = 0;
-                    for ($a=0; $a < count($disableDates); $a++) { 
-                        if ($currDate == $disableDates[$a]) {
-                            $counter = 1;
-                        }
+                    // $counter = 0;
+                    // for ($a=0; $a < count($disableDates); $a++) { 
+                    //     if ($currDate == $disableDates[$a]) {
+                    //         $counter = 1;
+                    //     }
                         
-                    }
+                    // }
                         // dd($counter);
-                    if($counter == 0){
+                    // if($counter == 0){
                         $_POST['start_event'] = $weeklyEvent[$i];
 
                         $_POST["title"] = date("g:ia",strtotime($_POST["time"]))." ".$client_branch['client_branch'];
@@ -807,7 +807,7 @@ public function insert(){
                             }
 
                         }
-                    }
+                    // }
 
                 }
                     // EVERY MONTH
@@ -830,17 +830,17 @@ public function insert(){
                 for ($i=0; $i < count($monthlyEvent); $i++) { 
                     $formatMonthly = explode("-",$monthlyEvent[$i]);
                     $currDate = $formatMonthly[2]."-".$formatMonthly[1];
-                    $counter = 0;
+                    // $counter = 0;
                     $date1 = strtotime($monthlyEvent[$i]);
                     $date2 = date("l", $date1);
                     $date3 = strtolower($date2);
-                    for ($a=0; $a < count($disableDates); $a++) { 
-                        if (($currDate == $disableDates[$a])) {
-                            $counter = 1;
-                        }
+                    // for ($a=0; $a < count($disableDates); $a++) { 
+                    //     if (($currDate == $disableDates[$a])) {
+                    //         $counter = 1;
+                    //     }
                         
-                    }
-                    if($counter == 0){
+                    // }
+                    // if($counter == 0){
                         $_POST['start_event'] = $monthlyEvent[$i];
                         $_POST["title"] = date("g:ia",strtotime($_POST["time"]))." ".$client_branch['client_branch'];
                         $success = $Event->insert($_POST);
@@ -867,7 +867,7 @@ public function insert(){
                         }
 
                     }
-                }
+                // }
             }
             // REPEAT EVERY 2 MONTHS
             } else if($_POST['repeatable'] == "2Month"){
@@ -890,17 +890,17 @@ public function insert(){
                 for ($i=0; $i < count($monthlyEvent); $i++) { 
                     $formatMonthly = explode("-",$monthlyEvent[$i]);
                     $currDate = $formatMonthly[2]."-".$formatMonthly[1];
-                    $counter = 0;
+                    // $counter = 0;
                     $date1 = strtotime($monthlyEvent[$i]);
                     $date2 = date("l", $date1);
                     $date3 = strtolower($date2);
-                    for ($a=0; $a < count($disableDates); $a++) { 
-                        if (($currDate == $disableDates[$a])) {
-                            $counter = 1;
-                        }
+                    // for ($a=0; $a < count($disableDates); $a++) { 
+                    //     if (($currDate == $disableDates[$a])) {
+                    //         $counter = 1;
+                    //     }
                         
-                    }
-                    if($counter == 0){
+                    // }
+                    // if($counter == 0){
                         $_POST['start_event'] = $monthlyEvent[$i];
                         $_POST["title"] = date("g:ia",strtotime($_POST["time"]))." ".$client_branch['client_branch'];
                         $success = $Event->insert($_POST);
@@ -927,7 +927,7 @@ public function insert(){
                         }
 
                     }
-                }
+                // }
             }
             // REPEAT EVERY 3 MONTHS
             }else if($_POST['repeatable'] == "3Month"){
@@ -950,17 +950,17 @@ public function insert(){
                 for ($i=0; $i < count($monthlyEvent); $i++) { 
                     $formatMonthly = explode("-",$monthlyEvent[$i]);
                     $currDate = $formatMonthly[2]."-".$formatMonthly[1];
-                    $counter = 0;
+                    // $counter = 0;
                     $date1 = strtotime($monthlyEvent[$i]);
                     $date2 = date("l", $date1);
                     $date3 = strtolower($date2);
-                    for ($a=0; $a < count($disableDates); $a++) { 
-                        if (($currDate == $disableDates[$a])) {
-                            $counter = 1;
-                        }
+                    // for ($a=0; $a < count($disableDates); $a++) { 
+                    //     if (($currDate == $disableDates[$a])) {
+                    //         $counter = 1;
+                    //     }
                         
-                    }
-                    if($counter == 0){
+                    // }
+                    // if($counter == 0){
                         $_POST['start_event'] = $monthlyEvent[$i];
                         $_POST["title"] = date("g:ia",strtotime($_POST["time"]))." ".$client_branch['client_branch'];
                         $success = $Event->insert($_POST);
@@ -987,7 +987,7 @@ public function insert(){
                             }
 
                         }   
-                    }
+                    // }
             }
 
             }else{
