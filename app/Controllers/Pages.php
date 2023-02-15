@@ -512,7 +512,7 @@ public function registerNonBdo(){
             ];
         }else{
             $data['error'] = 'Password didn\'t match, Please try again';
-            return view("pages/bdo_register",$data);
+            return view("pages/nonbdo_register",$data);
         }
         $success = $userBdo->insert($userBdo_create);
         if($success){

@@ -58,6 +58,14 @@
           <input class="cname" type="text" name="company" placeholder="Company name (ex.BDO Taguig)" value="<?php if(isset($_POST['company'])) { echo $_POST['company']; }?>">
         </div>
       </div>
+      
+      <div class="col-8 col-lg-8 col-md-8 col-sm-12">
+        <div class="user-box">
+          <div class="icon-box"><i class="fas fa-user-alt"></i></div>
+          <input class="address" type="text" name="address" placeholder="Address" value="<?php if(isset($_POST['address'])) { echo $_POST['address']; }?>">
+        </div>
+      </div>
+            
 
       <div class="col-8 col-lg-8 col-md-8 col-sm-12">
         <div class="user-box">
@@ -81,7 +89,7 @@
 
       <div class="col-8 col-lg-8 col-md-8 col-sm-12">
         <div class="user-box">
-          <p class="px-2">NOTE: Partner Company’s account is subject to approval. Once approved, a message will be sent to your registered E-mail.</p>
+          <p class="px-2">NOTE: The password should contain characters, capital and small letters, and numbers.</p>
         </div>
       </div>
 

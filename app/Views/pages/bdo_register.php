@@ -114,7 +114,7 @@
             <div class="row">
               <div class="col-8 col-lg-8 col-md-8 col-sm-12">
                 <div class="user-box">
-                  <p class="px-2">NOTE: Partner Company’s account is subject to approval. Once approved, a message will be sent to your registered E-mail.</p>
+                  <p class="px-2">NOTE: The password should contain characters, capital and small letters, and numbers.</p>
                 </div>
               </div>
             </div>
