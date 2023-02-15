@@ -129,13 +129,6 @@
                 <?php endif;?>
         <?php elseif($_SESSION['position'] == USER_ROLE_EMPLOYEE):?>
             <li>
-                <a href="<?= base_url('/calendar/emp')?>">
-                    <i class="fa fa-calendar" aria-hidden="true"></i>
-                    <span class="links_name">Calendar</span>
-                </a>
-                <span class="tooltip">Calendar</span>
-            </li>
-            <li>
                 <a href='<?=base_url('/calendar/emp-events')?>'>
                     <i class="fa fa-tasks" aria-hidden="true"></i>
                     <span class="links_name">Assigned Task</span>

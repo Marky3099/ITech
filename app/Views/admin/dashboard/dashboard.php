@@ -17,6 +17,13 @@
   />
   <!-- Custom styles for this template-->
   <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/dashstyle.css')?>">
+<?php if($_SESSION['position'] == USER_ROLE_EMPLOYEE):?>
+<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/main.min.css')?>">
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+<link rel="stylesheet" href="<?= base_url('assets/css/style.css')?>">
+<?php endif;?>
 
 </head>
 <body>
@@ -43,7 +50,7 @@
                                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
                                 <div class="modal-body">
-                                  <?php if($event):?>
+                                  <?php if($eventToday):?>
                                     <table class="table table-bordered">
                                       <thead>
                                         <tr>
@@ -56,7 +63,7 @@
                                       </thead>
                                       <tbody>
                                         
-                                        <?php foreach($event as $tday):  ?>
+                                        <?php foreach($eventToday as $tday):  ?>
                                           <tr>
                                             <td><?php echo $tday->event_code; ?></td>
                                             <td><?php echo $tday->client_branch; ?></td>
@@ -600,7 +607,7 @@
     </div>
     <?php }?>
   </div>
-
+<?php if($_SESSION['position'] == USER_ROLE_ADMIN || $_SESSION['position'] == USER_ROLE_SECRETARY):?>
 <div class="row">
   <div class="col-12 col-lg-6 col-md-6 col-sm-12 col-xss-12" id="chart_div" style="width: 100%; height: 500px;"></div>
   <div class="col-12 col-lg-6 col-md-6 col-sm-12 col-xss-12" id="piechart_3d" style="width: 100%; height: 500px;"></div>
@@ -608,7 +615,149 @@
   <div class="col-12 col-lg-6 col-md-6 col-sm-12 col-xss-12" id="piechart1_3d" style="width: 100%; height: 500px;"></div>
 
 </div>
+<?php else:?>
+  <div class="body-content">
+  <div class="col-sm-8">
+    <div class="crud-text"><h3>Calendar</h3></div>
+ </div>
+ <br><br>
+<div class="row justify-content-end">
+  <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+    <div class="card legend-box" id="cal1">
+    <div class="card-header">Legend</div>
+    <div class="card-body">
+      <ul class="legend-list">
+        <?php foreach ($servName as $s): ?>
+          <li ><i class="fas fa-circle" style="color: <?=$s['serv_color'];?>"></i><?=$s['serv_name'];?></li>
+        <?php endforeach ?>
+      </ul>
+    </div>
+    </div>
+  </div>
+</div>
 
+<div id='calendar' class="col-lg-12 col-md-10" style="width:100%;"></div>
+<div id='datepicker'></div>
+</div>
+</div>
+
+<!-- update -->
+<div class="modal fade" id="mymodal2" tabindex="-1" role="dialog">
+  <div class="modal-dialog" id="dialog2" role="document">
+    <div class="modal-content">
+     
+      <div class="modal-header">
+        <h3 class="modal-title">Your Schedule</h3>
+        
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="<?= base_url('/calendar/update');?>" method="POST"> 
+        <div class="modal-body" id="adata">
+          <input type="hidden" name="id" id="id" value="">
+          
+          <!-- <div class="crud-text"><button class="btn btn-info clientMap" style="float: right;">View Client Location</button><h5>Client Details:</h5> </div> -->
+          <input type="hidden" name="title_update" id="title_update" placeholder="Title">
+          
+          <div class="form-row">
+          <div class="form-group col-md-4">
+              <label for="event_code">Event Code: </label>
+              <input type="text" name="event_code" id="event_code" value="" disabled>
+            </div>
+            <div class="form-group col-md-4">
+             <label for="start_event_update">Date</label><br>
+             <input type="date" name="start_event_update" id="start_event_update" disabled>
+           </div>
+           <div class="form-group col-md-4">
+            <label for="time_update">Time</label><br>
+            <input type="time" name="time_update" id="time_update" disabled>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="area_update">Branch Area</label><br>
+            <div class="select-dropdown">
+              <select id="area_update" name="area_update" class="form-control" disabled>
+            </select>
+            </div>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="client_id_update">Branch Name</label><br>
+            <div class="select-dropdown">
+              <select id="client_id_update" name="client_id_update" class="form-control" disabled>
+            </select>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-group" id="serv-form">
+          <label for="serv_id_update" id="serv_id1">Service</label><br>
+          <div class="select-dropdown" id="serv-select">
+          <select class="form-control" id="serv_id_update" name="serv_id_update" disabled>
+            <?php foreach($servName as $s):  ?>
+              <optgroup label="<?= $s['serv_name']; ?>">
+                <?php foreach($servType as $st):  ?>
+                  <?php if($st['serv_name'] == $s['serv_name']):?>
+                    <option value=<?= $st['serv_id'];?>><?= $st['serv_type'];?></option>
+                  <?php endif;?>
+                <?php endforeach; ?>
+              </optgroup>
+            <?php endforeach; ?>
+          </select>
+        </div> 
+      </div><br>
+
+         <div class="crud-text"><h5>Aircon Details:</h5></div>
+
+        <!-- =================================================== -->
+        <div id="auth-rows-edit"></div>
+
+
+        <!-- <div class="form-row" >
+          <div class="form-group col-md-12" align="center" style="background-color:lightgreen;">
+            <span id="add_aut_update" class="btn btn-primary"><i class="fa-solid fa-plus"></i></span>
+          </div> 
+        </div> -->
+
+        <div class="form-group">
+          <label class="ml-5 mt-3" for="emp_id_update">Technician</label><br>
+          <select id="emp_id_update" name="emp_id_update[]" class="form-control w-75 ml-5 selectpicker border border-dark" multiple data-selected-text-format="count > 8" disabled>
+            <!--  -->
+          </select>
+        </div>    
+        <div class="form-group">
+          <label class="emp_idlbll" for="comments">Comments/Suggestions</label><br>
+          <textarea name="comments_update" id="comments_update" class="form-control w-75 ml-5 selectpicker border border-dark" cols="50" rows="4" disabled></textarea>
+        </div> 
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn py-2 btn-secondary" data-dismiss="modal">Close</button>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="mapModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Location</h5>
+        <button type="button" class="close closeMap" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3263.240532433746!2d120.99173841427947!3d14.565696581837399!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397c978cf8fa931%3A0x49d18a0954259306!2sBDO%20Taft%20-%20Vito%20Cruz%20Branch!5e1!3m2!1sen!2sph!4v1675578495936!5m2!1sen!2sph" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary closeMap">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<?php endif;?>
 
 
 
@@ -685,7 +834,7 @@
       }
     }
   }, 1000);
-
+<?php if($_SESSION['position'] == USER_ROLE_ADMIN || $_SESSION['position'] == USER_ROLE_SECRETARY):?>
   let servLabelColor = <?= json_encode($servLabelColor); ?>;
 
   google.charts.load("current", {packages:["corechart"]});
@@ -776,6 +925,7 @@
         chart.draw(servData, servOptions);
         chart2.draw(taskData, taskOptions);
       };
+  <?php endif;?>
 
   let done = ''; 
   let pending = '';
@@ -801,9 +951,233 @@
     }
   <?php endif;?>
 <?php endif;?>
-
-
 </script>
 <script type="text/javascript" src="<?=base_url('assets/js/dashboardjs.js')?>"></script>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment-with-locales.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.js"></script>
+<!-- Time Picker -->
+<!-- <script src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>   -->
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>  
+<!-- <script src = "https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>   -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/js/bootstrap-select.min.js"></script>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
+<!--  -->
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"></script> -->
+<script src="<?=base_url("assets/js/main.min.js")?>"></script>
+
+
+<script type="text/javascript">
+// Calendar Variables--------------------
+<?php if($_SESSION['position'] == USER_ROLE_EMPLOYEE):?>
+var event = <?php echo json_encode($event); ?>;
+
+var areas = <?php echo json_encode($area); ?>;
+var c_area = <?php echo json_encode($client_area2); ?> ;
+
+var emp_all = <?php echo json_encode($empDatas); ?>;
+// console.log();
+var areas1 = <?php echo json_encode($client_area); ?> ;
+var airconD = <?php echo json_encode($client_area); ?> ;
+var distinct = <?php echo json_encode($distinct); ?> ;
+var distinctEvent = <?php echo json_encode($distinct_event); ?> ;
+var deviceBrand = <?php echo json_encode($device_brand); ?> ;
+ 
+ // console.log(distinct);
+ //  console.log(deviceBrand);
+
+
+var count = 1;
+var count_update = 1;
+
+  // console.log(event);
+
+  $("#add_aut").click(function(e){
+    var html3 = `<div class="form-row" id="row">
+    <div class="form-group col-md-3">
+    
+    <label for="dbrand">Device Brand</label>
+    <select id="device_brand" name="device_brand[]" class="form-control " data-id="`+count+`"required>
+    <option value="0">Select Brand</option>
+    <?php foreach($device_brand as $d_b):  ?>
+      <option value=<?php echo $d_b['device_brand']; ?>><?php echo $d_b['device_brand'];?></option>
+    <?php endforeach; ?>
+    </select>
+    </div> 
+    <div class="form-group col-md-3">
+    
+    <label for="aircont">Aircon Type</label>
+    <select id="aircon_id_`+count+`" name="aircon_id[]" class="form-control aircon" required>
+    <option value="0">Select Type</option>
+    </select>
+    </div> 
+    <div class="form-group col-md-3">
+    
+    <label for="fcunos">Fcuno</label>
+    <select id="fcuno" name="fcuno`+count+`[]" class="selectpicker" data-width="100%" multiple data-selected-text-format="count > 2">
+    <?php foreach($fcu_no as $f):  ?>
+      <option value="<?php echo $f['fcuno']; ?>"><p id="s2option"><?php echo $f['fcu'];?></p></option>
+    <?php endforeach; ?>
+    </select>
+    </div> 
+    <div class="form-group col-md-2">
+    
+    <label for="fcunos">Quantity</label>
+    <input type="number" class="form-control" name="quantity[]" id="quantity" min="1" value="1" required>
+    </div> 
+    <div class="form-group col-md-1"><br>
+    <span id="auth-del" class="btn"><i class="fas fa-minus"></i></span>
+    </div>
+    </div>`;
+
+
+
+    
+    count++;
+    $('#auth-rows').append(html3);
+    
+    $('#mymodal .selectpicker').selectpicker();
+
+  });
+
+// ------------------------------------
+
+   $("#add_aut_update").click(function(e){
+    var html3 = `<div class="form-row" id="row" style="background-color:lightgreen;">
+    <div class="form-group col-md-3">
+    
+    <label for="dbrand">Device Brand</label>
+    <select id="device_brand_update" name="device_brand[]" class="form-control " data-id="`+count_update+`"required>
+    <option value="0">Select Brand</option>
+    <?php foreach($device_brand as $d_b):  ?>
+      <option value=<?php echo $d_b['device_brand']; ?>><?php echo $d_b['device_brand'];?></option>
+    <?php endforeach; ?>
+    </select>
+    </div> 
+    <div class="form-group col-md-3">
+    
+    <label for="aircont">Aircon Type</label>
+    <select id="aircon_update_id_`+count_update+`" name="aircon_update_id[]" class="form-control aircon" data-id="`+count_update+`" required>
+    <option value="0">Select Type</option>
+    </select>
+    </div> 
+
+    <div class="form-group col-md-3">
+    
+    <label for="fcunos">Fcuno</label>
+    <select id="fcuno_update_`+count_update+`"  class="selectpicker" data-width="100%" multiple data-selected-text-format="count > 2">
+    <option value="1">FCU 1</option>
+    <option value="2">FCU 2</option>
+    <option value="3">FCU 3</option>
+    <option value="4">FCU 4</option>
+    <option value="5">FCU 5</option>
+    <option value="6">FCU 6</option>
+    <option value="7">FCU 7</option>
+    <option value="8">FCU 8</option>
+    <option value="9">FCU 9</option>
+    <option value="10">FCU 10</option>
+    </select>
+    </div>
+
+    <div class="form-group col-md-2">
+    
+    <label for="fcunos">Quantity</label>
+    <input type="number" class="form-control" name="quantity[]" id="quantity" min="1" value="1" required>
+    </div> 
+    <div class="form-group col-md-1"><br>
+    <span id="auth-del-edit" class="btn"><i class="fas fa-minus"></i></span>
+    </div>
+    </div>`;
+
+
+
+    count_update++;
+    $('#auth-rows-edit').append(html3);
+    
+    $('#mymodal2 .selectpicker').selectpicker();
+
+  });
+
+
+
+  $('#auth-rows').on('click', '#auth-del', function(E){
+
+    $(this).parents('#row').remove();
+
+  });
+  $('#auth-rows-edit').on('click', '#auth-del-edit', function(E){
+
+    $(this).parents('#row').remove();
+
+  });
+
+  $(document).on('change', '#device_brand', function(){
+    var category_id = $(this).val();
+    var aircon = $(this).data('id');
+  
+    $.ajax({
+      url: 'http://localhost/tsms/aircon/brand/'+category_id,
+      method:"GET",
+      success:function(data)
+      {
+        var res = JSON.parse(data);
+        console.log(res.options);
+        var html = '';
+        html += res.options;
+        $('#aircon_id_'+aircon).html(html);
+
+      },
+      error:function(e){
+        console.log(e);
+      }
+    })
+  });
+
+  $(document).on('change', '#device_brand_update', function(){
+    var category_id = $(this).val();
+    var aircon = $(this).data('id');
+    alert(aircon+' '+category_id);
+    $.ajax({
+      url: 'http://localhost/tsms/aircon/brand/'+category_id,
+      method:"GET",
+      success:function(data)
+      {
+        var res = JSON.parse(data);
+        
+        var html = '';
+        html += res.options;
+        $('#aircon_update_id_'+aircon).html(html);
+
+      },
+      error:function(e){
+        console.log(e);
+      }
+    })
+  });
+
+  $(document).on('change','.aircon', function(){
+    var aircon_id = $(this).val();
+    var count_aircon = $(this).data('id');
+    // document.getElementById('fcuno_update_'+aircon).id = 'fcuno_update_';
+    $('#fcuno_update_'+count_aircon).attr('name','fcuno_update_'+aircon_id+'[]');
+    alert(aircon_id);
+   
+  });
+
+  $('#mymodal .selectpicker').selectpicker();
+var mapModal = new bootstrap.Modal(document.getElementById('mapModal'));
+var yourModal = new bootstrap.Modal(document.getElementById('mymodal2'));
+
+<?php endif;?>
+      </script>
+<?php if($_SESSION['position'] == USER_ROLE_EMPLOYEE):?>
+<script type="text/javascript" src="<?=base_url('assets/js/empCalendar.js')?>"></script>
+<?php endif;?>
+
+
 </body>
 

@@ -25,7 +25,7 @@
     // },
     eventClick: function(info) {
      var myModal = new bootstrap.Modal(document.getElementById('mymodal2'));
-     var tt = document.getElementById('start_event');
+     // var tt = document.getElementById('start_event');
      // var i = document.getElementById('time');
      var ad = document.getElementById('id');
      var ecode = document.getElementById('event_code');
@@ -215,7 +215,7 @@
          
      //  });
       // s4.value = info.event.extendedProps.aircon_id;
-      tt.value = info.event.start_event;
+      // tt.value = info.event.start_event;
       ad.value = info.event.id;
       ecode.value = info.event.extendedProps.event_code;
       r.value = new Date(info.event.start).toLocaleDateString("fr-CA");
@@ -231,7 +231,7 @@
 // ---------------------------------------------------------------------
        document.getElementById('emp_id_update').innerHTML='';
               var arr = info.event.extendedProps.emp_array.split(',');
-
+      // console.log(emp_all);
       emp_all.map((all_emp)=>{
         let i = 0;
          while(arr) {
@@ -259,51 +259,7 @@
       // // });
       $("#emp_id_update").selectpicker("refresh");
 
-      // ---------------------------------------------------
-    //   var html3 = `<div class="form-row" id="row">
-    // <div class="form-group col-md-3">
-    
-    // <label for="dbrand">Device Brand</label>
-    // <select id="device_brand" name="device_brand[]" class="form-control " data-id="`+count+`"required>
-    // <option value="0">Select Brand</option>
-    // <?php foreach($device_brand as $d_b):  ?>
-    //   <option value=<?php echo $d_b['device_brand']; ?>><?php echo $d_b['device_brand'];?></option>
-    // <?php endforeach; ?>
-    // </select>
-    // </div> 
-    // <div class="form-group col-md-3">
-    
-    // <label for="aircont">Aircon Type</label>
-    // <select id="aircon_id_`+count+`" name="aircon_id[]" class="form-control aircon" required>
-    // <option value="0">Select Type</option>
-    // </select>
-    // </div> 
-    // <div class="form-group col-md-3">
-    
-    // <label for="fcunos">Fcuno</label>
-    // <select id="fcuno" name="fcuno`+count+`[]" class="selectpicker" data-width="100%" multiple data-selected-text-format="count > 2">
-    // <?php foreach($fcu_no as $f):  ?>
-    //   <option value="<?php echo $f['fcuno']; ?>"><p id="s2option"><?php echo $f['fcu'];?></p></option>
-    // <?php endforeach; ?>
-    // </select>
-    // </div> 
-    // <div class="form-group col-md-2">
-    
-    // <label for="fcunos">Quantity</label>
-    // <input type="number" class="form-control" name="quantity[]" id="quantity" min="1" value="1" required>
-    // </div> 
-    // <div class="form-group col-md-1"><br>
-    // <span id="auth-del" class="btn"><i class="fas fa-minus"></i></span>
-    // </div>
-    // </div>`;
-
-
-
-    
-    // count++;s
-    // $('#auth-rows-edit').append(html3);
-    
-    
+  
       // ---------------------------------------------------
      myModal.show();
 

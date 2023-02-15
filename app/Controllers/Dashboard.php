@@ -46,10 +46,13 @@ class Dashboard extends BaseController
         $appt = new Appointment();
         $logs = new Call_logs();
         $bdo_user = new User_bdo();
+        $emp = new Emp();
+        $event_fcu = new Event_fcu_views();
+        $fcu_no = new Fcu_no();
+
+        $aircon = new Aircon();
         $emp_id = '';
-        if($_SESSION['position'] == USER_ROLE_EMPLOYEE){
-            $emp_id = $_SESSION['emp_id'];
-        }
+
         date_default_timezone_set('Asia/Hong_Kong'); 
         $date = new \DateTime();
         $date->setTimezone(new \DateTimeZone('+0800'));
@@ -59,12 +62,111 @@ class Dashboard extends BaseController
         // dd($date);
         
         // dd($date1);
-        $data['event'] = array();
+        $data['eventToday'] = array();
         $data['week1'] = array();
         $data['month'] = array();
         $data['completed'] = array();
         $data['notdone'] = array();
         $data['client'] = $client->orderBy('client_id', 'ASC')->findAll();
+        $data['empDatas'] = $emp->orderBy('emp_id', 'ASC')->findAll();
+        if($_SESSION['position'] == USER_ROLE_EMPLOYEE){
+           $db = \Config\Database::connect();
+            $query   = $db->query('SELECT DISTINCT aircon_id,id,device_brand,aircon_type,quantity
+                FROM event_fcu_views');
+            $data['distinct'] = $query->getResult();
+
+            $db1 = \Config\Database::connect();
+            $query   = $db1->query('SELECT DISTINCT id
+                FROM event_fcu_views');
+            $data['distinct_event'] = $query->getResult();
+            $emp_id = $_SESSION['emp_id'];
+            $data['branch'] = array();
+
+            $data['area'] = $client->select('area')->groupBy('area')->findAll();
+            
+            // dd($data['emp']);
+            $data['fcu_no'] = $fcu_no->orderBy('fcuno', 'ASC')->findAll();
+            $data['event_fcu'] = $event_fcu->orderBy('id', 'ASC')->findAll();
+            $data['event_emp'] = $event_emp->orderBy('id', 'ASC')->findAll();
+            $data['serv'] = $serv->orderBy('serv_id', 'ASC')->findAll();
+            $data['servName'] = $serv->select('serv_name, serv_color, serv_type')->groupBy('serv_name')->findAll();
+            $data['servType'] = $serv->orderBy('serv_name','ASC')->findAll();
+            $data['aircon'] = $aircon->orderBy('aircon_id', 'ASC')->findAll();
+            $data['device_brand'] = $aircon->select('device_brand')->groupBy('device_brand')->findAll();
+
+            foreach($data['area'] as $k => $val) {
+
+                    $area = [];
+
+                    foreach($data['client'] as $key => $value) {
+                        if($val['area'] == $value['area']){
+                          array_push($area , (object)[
+                            'client_id' => (int)$value['client_id'],
+                            'client_branch' =>$value['client_branch']
+                        ]);
+                      }
+
+                  }
+
+                  $data['client_area'][]= (object)[
+                    $val['area'] => $area
+                ];
+                $data['client_area2'][]=$area;
+            }
+            $data['eventsForEmp'] = $event_emp ->where('emp_id', $emp_id)->findAll();
+            foreach ($data['eventsForEmp'] as $key => $value) {
+                $emp_arr = "";
+                $fcu_arr =array();
+
+                foreach ($data['event_emp'] as $key => $value_emps) {
+                    if ( $value['id'] == $value_emps['id']) {
+                       $emp_arr .= $data['event_emp'][$key]['emp_id'].",";
+                   }
+               }
+
+
+               foreach ($data['event_fcu'] as $key => $value_fcu) {
+                   if ($value['id'] == $value_fcu['id']) {
+                       array_push($fcu_arr , (object)[
+                        'id' => (int)$value_fcu['id'],
+                        'aircon_id' => (int)$value_fcu['aircon_id'],
+                        'fcuno' =>(int)$value_fcu['fcuno'],
+                        'quantity' =>(int)$value_fcu['quantity'],
+                        'device_brand' =>$value_fcu['device_brand'],
+                        'aircon_type' =>$value_fcu['aircon_type'],
+                        'fcu' =>$value_fcu['fcu'],
+                    ]);
+
+                   }   
+
+               } 
+
+
+
+               $data['event'][]= (object)[
+                "id"=> $value['id'],
+                "event_code"=> $value['event_code'],
+                "title"=> $value['title'],
+                "start"=> $value['start_event'],
+                "time"=>$value['time'],
+                "end_time"=>$value['end_time'],
+                "serv_id"=> $value['serv_id'],
+                "client_id"=> $value['client_id'],
+                "serv_name"=> $value['serv_name'],
+                "area"=> $value['area'],
+                "client_branch"=> $value['client_branch'],
+                "emp_array"=> $emp_arr,
+                "fcu_array"=> $fcu_arr,
+                "color" => $value['serv_color'],
+                "comments" => $value['comments'],
+            ];
+
+
+
+
+            }
+        }
+
         $data['eventsToday'] = $allevent->where('start_event', $date1)->where('notif',0)->findAll();
         if($data['eventsToday']){
             for ($i=0; $i < count($data['eventsToday']); $i++) { 
@@ -174,7 +276,7 @@ class Dashboard extends BaseController
              }
          }
 
-         $data['event'][]= (object)[
+         $data['eventToday'][]= (object)[
           "id"=> $value['id'],
           "title"=>$value['title'],
           "event_code"=>$value['event_code'],
@@ -302,7 +404,11 @@ for ($i=0; $i < count($performEmp); $i++) {
 // dd($ratings);
 
 //count today's tasks
-$query = $db->query('SELECT COUNT(start_event) as count FROM all_events WHERE start_event = CURDATE()');
+if($_SESSION['position'] == USER_ROLE_EMPLOYEE){
+    $query = $db->query('SELECT COUNT(start_event) as count FROM event_emp_views WHERE emp_id ='.$emp_id.' and start_event = CURDATE()');
+}else{
+    $query = $db->query('SELECT COUNT(start_event) as count FROM all_events WHERE start_event = CURDATE()');
+}
 $data['event_today'] = $query->getResult();
 json_encode($data['event_today']);
 foreach ($data['event_today'] as $key => $value) {
@@ -539,28 +645,6 @@ foreach ($data['pending_log'] as $key => $value) {
 ];
 }
 
-// // Pending users
-// $data['user_pending'] = [];
-// $data['pending_user'] = $bdo_user->where('status = "Pending" ORDER BY bdo_id ASC')->findAll();
-// $data['count_user'] = count($data['pending_user']);
-// // dd($data['count_log']);
-
-// foreach ($data['pending_user'] as $key => $value) {
-    
-//  // dd($data['pending']);
-//  $data['user_pending'][]= (object)[
-//     "bdo_id"=> $value['bdo_id'],
-//     "bdo_fname"=> $value['bdo_fname']." ".$value['bdo_lname'],
-//     "bdo_email"=>$value['bdo_email'],
-//     "bdo_company"=>$value['bdo_company'],
-//     "status"=>$value['status'],
-// ];
-// }
-
-
-
-        // $query = $db->query('SELECT * FROM All_events WHERE start_event = curdate()');
-        // $data['today'] = $query->getResult();
 $data['main'] = 'admin/dashboard/dashboard';
 return view("templates/template",$data);
 }

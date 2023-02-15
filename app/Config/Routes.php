@@ -133,7 +133,6 @@ $routes->get('/calendar/dates-edit-form/(:num)', 'FullCalendar::restrict_form_ed
 $routes->post('/calendar/dates-edit/(:num)', 'FullCalendar::restrict_edit/$1',['filter' => 'authGuard']);
 $routes->get('/calendar/dates-delete/(:num)', 'FullCalendar::restrict_delete/$1',['filter' => 'authGuard']);
 $routes->get('/calendar/checkEmp', 'FullCalendar::checkEmp',['filter' => 'authGuard']);
-$routes->get('/calendar/emp', 'FullCalendar::index1',['filter' => 'authGuard']);
 $routes->get('/calendar/events', 'FullCalendar::event',['filter' => 'authGuard']);
 $routes->get('/calendar/events/view-ratings', 'FullCalendar::viewRatings',['filter' => 'authGuard']);
 $routes->get('/calendar/emp-events', 'FullCalendar::emp_event',['filter' => 'authGuard']);
