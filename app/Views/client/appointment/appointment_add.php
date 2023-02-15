@@ -67,8 +67,8 @@
           </div>
         </div>
 
-        <div class="user-box" style="margin-bottom: -30px">
-          <label>Device Brand</label>
+        <div class="user-box">
+          <label>Aircon Brand</label>
           <label class="bname">Aircon Type</label>
           <div class="select-dropdown" style="width: 40%;">
             <select id="device_brand" name="device_brand">
