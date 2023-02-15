@@ -302,7 +302,7 @@ for ($i=0; $i < count($performEmp); $i++) {
 // dd($ratings);
 
 //count today's tasks
-$query = $db->query('SELECT COUNT(start_event) as count FROM all_events WHERE start_event = '.$date1);
+$query = $db->query('SELECT COUNT(start_event) as count FROM all_events WHERE start_event = CURDATE()');
 $data['event_today'] = $query->getResult();
 json_encode($data['event_today']);
 foreach ($data['event_today'] as $key => $value) {
