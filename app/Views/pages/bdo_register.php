@@ -42,9 +42,9 @@
               <div class="col-8 col-lg-8 col-md-8 col-sm-12">
                 <div class="user-box">
                   <div class="icon-box"><i class="fas fa-user-alt"></i></div>
-                    <input class="fname" type="text" name="fname" placeholder="First name" value="<?php if(isset($_POST['fname'])) { echo $_POST['fname']; }?>">
+                    <input class="fname" type="text" name="fname" placeholder="First name" value="<?php if(isset($_POST['fname'])) { echo $_POST['fname']; }?>" required>
                     <div class="icon-box1" id="ib1"><i class="fas fa-user-alt"></i></div>
-                    <input class="lname" id="lname" type="text" name="lname" placeholder="Last name" value="<?php if(isset($_POST['lname'])) { echo $_POST['lname']; }?>">
+                    <input class="lname" id="lname" type="text" name="lname" placeholder="Last name" value="<?php if(isset($_POST['lname'])) { echo $_POST['lname']; }?>"required> 
                 </div>
               </div>
             </div>
@@ -53,9 +53,9 @@
               <div class="col-8 col-lg-8 col-md-8 col-sm-12">
                 <div class="user-box">
                   <div class="icon-box"><i class="fas fa-user-alt"></i></div>
-                    <input class="email" type="email" name="email" placeholder="E-mail" value="<?php if(isset($_POST['email'])) { echo $_POST['email']; }?>">
+                    <input class="email" type="email" name="email" placeholder="E-mail" value="<?php if(isset($_POST['email'])) { echo $_POST['email']; }?>" required>
                     <div class="icon-box1" id="ib2"><i class="fas fa-user-alt"></i></div>
-                    <input class="contact" type="tel" pattern="[0-9]{11}" name="contact" placeholder="Contact Number" value="<?php if(isset($_POST['contact'])) { echo $_POST['contact']; }?>">
+                    <input class="contact" type="tel" pattern="[0-9]{11}" name="contact" placeholder="Contact Number" value="<?php if(isset($_POST['contact'])) { echo $_POST['contact']; }?>" required>
                   </div>
               </div>
             </div>
@@ -64,7 +64,7 @@
               <div class="col-8 col-lg-8 col-md-8 col-sm-12">
                 <div class="user-box">
                   <div class="icon-box"><i class="fas fa-user-alt"></i></div>
-                  <input class="cname" type="text" name="company" placeholder="Company name (ex.BDO Taguig)" value="<?php if(isset($_POST['company'])) { echo $_POST['company']; }?>">
+                  <input class="cname" type="text" name="company" placeholder="Company name (ex.BDO Taguig)" value="<?php if(isset($_POST['company'])) { echo $_POST['company']; }?>" required>
                   </div>
               </div>
             </div>
@@ -73,7 +73,7 @@
               <div class="col-8 col-lg-8 col-md-8 col-sm-12">
                 <div class="user-box">
                   <div class="icon-box"><i class="fas fa-user-alt"></i></div>
-                  <input class="address" type="text" name="address" placeholder="Address" value="<?php if(isset($_POST['address'])) { echo $_POST['address']; }?>">
+                  <input class="address" type="text" name="address" placeholder="Address" value="<?php if(isset($_POST['address'])) { echo $_POST['address']; }?>" required>
                 </div>
               </div>
             </div>
@@ -82,7 +82,7 @@
               <div class="col-8 col-lg-8 col-md-8 col-sm-12">
                 <div class="user-box">
                   <div class="icon-box"><i class="fas fa-user-alt"></i></div>
-                  <input class="unqcode" type="text" name="code" placeholder="Unique code" value="<?php if(isset($_POST['code'])) { echo $_POST['code']; }?>">  
+                  <input class="unqcode" type="text" name="code" placeholder="Unique code" value="<?php if(isset($_POST['code'])) { echo $_POST['code']; }?>" required>  
                 </div>
               </div>
             </div>
@@ -91,7 +91,7 @@
               <div class="col-8 col-lg-8 col-md-8 col-sm-12">
                 <div class="user-box">
                     <div class="icon-box"><i class="fas fa-key"></i></div>
-                    <input class="password" type="password" name="password" id="password" placeholder="Enter your Password" value="<?php if(isset($_POST['password'])) { echo $_POST['password']; }?>"><i class="far fa-eye fa-eye-slash" id="togglePassword"></i>
+                    <input class="password" type="password" name="password" id="password" placeholder="Enter your Password" value="<?php if(isset($_POST['password'])) { echo $_POST['password']; }?>" required><i class="far fa-eye fa-eye-slash" id="togglePassword"></i>
                       <?php 
                       if(!empty($error_pass)){ ?>
                       <div class="pass-err-msg">
@@ -106,7 +106,7 @@
               <div class="col-8 col-lg-8 col-md-8 col-sm-12">
                 <div class="user-box">
                     <div class="icon-box"><i class="fas fa-key"></i></div>
-                    <input class="cpassword" type="password" name="c_password" id="cpassword" placeholder="Confirm your Password" value="<?php if(isset($_POST['c_password'])) { echo $_POST['c_password']; }?>"><i class="far fa-eye fa-eye-slash" id="togglePassword1"></i>  
+                    <input class="cpassword" type="password" name="c_password" id="cpassword" placeholder="Confirm your Password" value="<?php if(isset($_POST['c_password'])) { echo $_POST['c_password']; }?>" required><i class="far fa-eye fa-eye-slash" id="togglePassword1"></i>  
                 </div>
               </div>
             </div>
