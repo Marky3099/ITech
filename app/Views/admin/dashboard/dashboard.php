@@ -28,9 +28,6 @@
   <div class="d-sm-flex align-items-center justify-content-between mb-4" style="margin-top: 10px;">
     <h3 class="hfont">Dashboard</h3>
   </div>
-
-<<<<<<< Updated upstream
-
                         <!-- Modal for displaying today's event -->
 
                         <div class="container">
@@ -221,186 +218,16 @@
                   </div>
                 </div>
               </div>
-=======
   <!-- Modal for displaying today's event -->
-  <div class="container">
+<!--   <div class="container">
     <div class="modal fade" id="todayModal" role="dialog">
       <div class="col-12 col-lg-12 col-md-12 col-sm-12 overflow-auto">
         <div class="modal-dialog" style="max-width: 1000px;">
           <div class="modal-content"  style="width: 100%">
             <div class="modal-header">
               <h4 class="modal-title">Today's Scheduled Task</h4>
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
->>>>>>> Stashed changes
-            </div>
+              <button type="button" class="close" data-dismiss="modal">&times;</button> -->
 
-            <div class="modal-body">
-            <?php if($event):?>
-              <table class="display" id="example" style="width: 100%">
-                <thead>
-                  <tr>
-                    <th>Task Code</th>
-                    <th>Branch</th>
-                    <th>Service</th>
-                    <th>Technician</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody>                       
-                  <?php foreach($event as $tday):  ?>
-                    <tr>
-                      <td><?php echo $tday->event_code; ?></td>
-                      <td><?php echo $tday->client_branch; ?></td>
-                      <td><?php echo $tday->serv_type; ?></td>
-                      <td>
-                        <?php $data = explode(',',$tday->emp_array);
-                        $count = 0;
-                        ?>
-                        <?php foreach($data as $emp):  ?>
-                          <?php if($count < (count($data) - 1) ):  ?>
-                          ` <?php echo $emp; $count+=1; ?> <br>
-                          <?php endif;  ?>
-                        <?php endforeach; ?>
-                      </td> 
-                      <td><?php echo $tday->status;?></td>
-                    </tr>
-                  <?php endforeach;?>
-                </tbody>
-                </table>
-                <?php else:?>
-                  <div class="Nowork">
-                    <p class="noworkstatement"><i class="fa-solid text-success fa-circle-exclamation"></i>&nbsp;Relax.. No work for Today!</p>
-                </div>
-                <?php endif;?>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal for displaying Week's event -->
-  <div class="container">
-    <div class="modal fade" id="weekModal" role="dialog">
-      <div class="col-12 col-lg-12 col-md-12 col-sm-12 overflow-auto">
-        <div class="modal-dialog" style="max-width: 1000px;">
-          <div class="modal-content" style="width: 100%">
-            <div class="modal-header">
-              <h4 class="modal-title">Weekly Scheduled Task</h4>
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-              <?php if($week1):?>
-              <table class="display" id="example1" style="width: 100%">
-                <thead>
-                  <tr>
-                    <th>Date</th>
-                    <th>Task Code</th>
-                    <th>Branch</th>
-                    <th>Service</th>
-                    <th>Technician</th>
-                    <th>Status</th>    
-                  </tr>
-                </thead>
-                <tbody>                                    
-                  <?php foreach($week1 as $week):  ?>
-                  <tr>
-                    <td><?php echo date('m-d-Y',strtotime($week->start_event)); ?></td>
-                    <td><?php echo $week->event_code; ?></td>
-                    <td><?php echo $week->client_branch; ?></td>
-                    <td><?php echo $week->serv_type; ?></td>
-                    <td>
-                      <?php $data = explode(',',$week->emp_array);
-                      $count = 0;
-                      ?>
-                      <?php foreach($data as $emp):  ?>
-                        <?php if($count < (count($data) - 1) ):  ?>
-                         ` <?php echo $emp; $count+=1; ?> <br>
-                        <?php endif;  ?>
-                      <?php endforeach; ?>
-                    </td> 
-                    <td><?php echo $week->status;?></td>                   
-                  </tr>
-                  <?php endforeach;?>              
-              </tbody>
-              </table>
-              <?php else:?>
-                <div class="Nowork">
-                  <p class="noworkstatement"><i class="fa-solid text-success fa-circle-exclamation"></i>&nbsp;Relax.. No work for this week!</p>
-                </div>
-              <?php endif;?>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal for displaying Month's event -->
-  <div class="container">
-    <div class="modal fade" id="monthModal" role="dialog">
-      <div class="col-12 col-lg-12 col-md-12 col-sm-12 overflow-auto">
-        <div class="modal-dialog" style="max-width: 1000px;">
-          <div class="modal-content" style="width: 100%">
-            <div class="modal-header">
-              <h4 class="modal-title">Monthly Scheduled Task</h4>
-              <button type="button" class="close" data-dismiss="modal">&times;</button>                          
-            </div>
-            <div class="modal-body">
-              <?php if($month):?>
-              <table class="display" id="example2" style="width: 100%">
-                <thead>
-                  <tr>
-                    <th>Date</th>
-                    <th>Task Code</th>
-                    <th>Branch</th>
-                    <th>Service</th>
-                    <th>Technician</th>
-                    <th>Status</th>                                
-                  </tr>
-                </thead>
-                <tbody>                             
-                  <?php foreach($month as $m):  ?>
-                    <tr>
-                      <td><?php echo date('m-d-Y',strtotime($m->start_event)); ?></td>
-                      <td><?php echo $m->event_code; ?></td>
-                      <td><?php echo $m->client_branch; ?></td>
-                      <td><?php echo $m->serv_type; ?></td>
-                      <td>
-                       <?php $data = explode(',',$m->emp_array);
-                       $count = 0;
-                       ?>
-                       <?php foreach($data as $emp):  ?>
-                         <?php if($count < (count($data) - 1) ):  ?>
-                           ` <?php echo $emp; $count+=1; ?> <br>
-                         <?php endif;  ?>
-                       <?php endforeach; ?>
-                      </td> 
-                      <td><?php echo $m->status;?></td>                                 
-                    </tr>
-                  <?php endforeach;?>
-                </tbody>
-              </table>
-              <?php else:?>
-                <div class="Nowork">
-                  <p class="noworkstatement"><i class="fa-solid text-success fa-circle-exclamation"></i>&nbsp;Relax.. No work for this month!</p>
-                </div>
-              <?php endif;?>
-            </div>
-          <div class="modal-footer">
-              <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
-          </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- Modal for displaying Completed event -->
   <div class="container">
@@ -766,7 +593,6 @@
     </div>
     <?php }?>
   </div>
-<<<<<<< Updated upstream
 <?php if($_SESSION['position'] == USER_ROLE_ADMIN || $_SESSION['position'] == USER_ROLE_SECRETARY):?>
 <div class="row">
   <div class="col-12 col-lg-6 col-md-6 col-sm-12 col-xss-12" id="chart_div" style="width: 100%; height: 500px;"></div>
@@ -795,14 +621,6 @@
     </div>
   </div>
 </div>
-=======
-
-  <div class="row">
-    <div class="col-12 col-lg-6 col-md-6 col-sm-12" id="chart_div" style="width: 100%; height: 500px;"></div>
-    <div class="col-12 col-lg-6 col-md-6 col-sm-12" id="piechart_3d" style="width: 100%; height: 500px;"></div>
-    <!-- <div id="barchart_material" style="width: 900px; height: 500px;"></div> -->
-  </div>
->>>>>>> Stashed changes
 
 <div id='calendar' class="col-lg-12 col-md-10" style="width:100%;"></div>
 <div id='datepicker'></div>
