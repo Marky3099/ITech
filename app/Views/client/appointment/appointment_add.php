@@ -94,43 +94,12 @@
               <option value="" selected disabled>Select Type</option>
               <?php if(session()->has('aircon_id')):?>
                 <?php foreach($aircon as $a):?>
-                
                   <?php if($a['aircon_id'] == session()->getFlashdata('aircon_id')[0]):?>
-
-<<<<<<< HEAD
-                    <option value=<?php echo $a['aircon_id']; ?> selected><?php echo $a['aircon_type'];?></option>
+                    <option value="<?=$aircon['aircon_id']?>" selected><?=$aircon['aircon_type']?></option>
+                  <?php else:?>
+                    <option value="<?=$aircon['aircon_id']?>"><?=$aircon['aircon_type']?></option>
                   <?php endif;?>
                 <?php endforeach;?>
-=======
-        <div class="user-box">
-          <label>Aircon Brand</label>
-          <label class="bname">Aircon Type</label>
-          <div class="select-dropdown" style="width: 40%;">
-            <select id="device_brand" name="device_brand">
-            <?php foreach($device_brand as $d_b):  ?>
-              <?php if(session()->has('device_brand')):?>
-                <?php if(session()->getFlashdata('device_brand')== $d_b['device_brand']):?>
-              <option value=<?php echo $d_b['device_brand']; ?> selected><?php echo $d_b['device_brand'];?></option>
-                <?php else:?>
-                <option value=<?php echo $d_b['device_brand']; ?>><?php echo $d_b['device_brand'];?></option>
-                <?php endif;?>
-              <?php else:?>
-                <option value=<?php echo $d_b['device_brand']; ?>><?php echo $d_b['device_brand'];?></option>
-              <?php endif;?>
-            <?php endforeach; ?>
-          </select>
-          </div>
-           <div class="select-dropdown" style="width: 40%;" id="cid">
-            <select id="aircon_id" name="aircon_id">
-              <?php if(session()->has('aircon_brand')):?>
-              <?php foreach(session()->getFlashdata('aircon_brand') as $aircon):?>
-                <?php if($aircon['aircon_id'] == session()->getFlashdata('aircon_id')):?>
-                  <option value="<?=$aircon['aircon_id']?>" selected><?=$aircon['aircon_type']?></option>
-                <?php else:?>
-                  <option value="<?=$aircon['aircon_id']?>"><?=$aircon['aircon_type']?></option>
-                <?php endif;?>
-              <?php endforeach;?>
->>>>>>> 0147565b51328756c33a1f63cd78232792c982be
               <?php endif;?>
             </select>
             </div>
@@ -443,4 +412,5 @@ $(document).on('change','.aircon', function(){
    
   });
     </script>
+  
 <script type="text/javascript" src="<?= base_url('assets/js/resDate.js') ?>"></script>
