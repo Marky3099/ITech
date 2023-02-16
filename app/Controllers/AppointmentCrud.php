@@ -152,12 +152,21 @@ public function adminAppointment(){
     }
 
     foreach ($data['appoint'] as $key => $value) {
-        $fcu_arr = "";
+        $fcu_arr = array();
         foreach ($data['fcu_appt'] as $key => $value_fcu) {
             if ( $value['appt_id'] == $value_fcu['appt_id']) {
-             $fcu_arr .= $data['fcu_appt'][$key]['fcu'].",";
+             array_push($fcu_arr , (object)[
+                'appt_id' => (int)$value_fcu['appt_id'],
+                'aircon_id' => (int)$value_fcu['aircon_id'],
+                'fcuno' =>(int)$value_fcu['fcuno'],
+                'qty' =>(int)$value_fcu['qty'],
+                'device_brand' =>$value_fcu['device_brand'],
+                'aircon_type' =>$value_fcu['aircon_type'],
+                'fcu' =>$value_fcu['fcu'],
+            ]);
          }
      }    
+     // dd($fcu_arr);
      $data['view_appoint'][]= (object)[
         "appt_id"=> $value['appt_id'],
         "user_id"=> $value['user_id'],
@@ -168,10 +177,6 @@ public function adminAppointment(){
         "serv_name" =>$value['serv_name'],
         "area"=> $value['area'],
         "client_branch"=> $value['client_branch'],
-        "aircon_id"=> $value['aircon_id'],
-        "aircon_type"=> $value['aircon_type'],
-        "device_brand"=> $value['device_brand'],
-        "qty"=> $value['qty'],
         "appt_status"=> $value['appt_status'],
         "fcu_arr"=> $fcu_arr,
     ];

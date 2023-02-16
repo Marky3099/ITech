@@ -393,12 +393,15 @@ var rateModal = new bootstrap.Modal(document.getElementById('rateModal'));
             var servType;
             var time = response.appt_data.appt_time.split(":");
             var formatTime;
-            var devBrand = response.appt_data.device_brand;
-            var airconType = response.appt_data.aircon_type;
+            var dBrandArr = new Array();
+            var airconTypeArr = new Array();
+            var devBrand;
+            var airconType;
             var fcuNoArr = new Array();
             var fcuData = response.fcu_data;
             var fcuNo;
-            var qty = response.appt_data.qty;
+            var qty = new Array();
+            var quantity;
             var statusData = response.appt_data.appt_status;
 
             $('#modalTitle').html("["+apptCode+"] Schedule");
@@ -436,6 +439,15 @@ var rateModal = new bootstrap.Modal(document.getElementById('rateModal'));
              }
              $('#modal_serv_name').html(servName);
              $('#modal_serv_type').html(servType);
+
+             for (var i = 0; i < fcuData.length; i++) {
+              dBrandArr.push(fcuData[i].device_brand);
+              airconTypeArr.push(fcuData[i].aircon_type);
+            }
+            
+            devBrand = dBrandArr.toString();
+            airconType = airconTypeArr.toString();
+
             $('#modal_dev_brand').html(devBrand);
             $('#modal_aircon_type').html(airconType);
 
@@ -446,6 +458,17 @@ var rateModal = new bootstrap.Modal(document.getElementById('rateModal'));
             }
             fcuNo = fcuNoArr.toString();
             $('#modal_fcu').html(fcuNo);
+
+            var pre = 0;
+            for (var i = 0; i < fcuData.length; i++) {
+                if(id == fcuData[i].appt_id){
+                    if(fcuData[i].aircon_id!=pre){
+                        qty.push(fcuData[i].qty);
+                        pre = fcuData[i].aircon_id;
+                    }
+                }
+            }
+            quantity = qty.toString();
             $('#modal_qty').html(qty);
             $('#modal_status').html(statusData);
             console.log(response);
