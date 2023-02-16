@@ -786,6 +786,7 @@ foreach ($data['all_events'] as $key => $value) {
     "emp_array"=> $emp_arr,
     "fcu_array"=> $fcu_arr,
     "color" => $value['serv_color'],
+    "comments" => $value['comments'],
 ];
 
 

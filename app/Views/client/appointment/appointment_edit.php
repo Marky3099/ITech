@@ -53,32 +53,14 @@
         </div>
       </div>
 
-      <div class="user-box" style="margin-bottom: -30px">
-        <label>Device Brand</label>
-        <label class="bname">Aircon Type</label>
-        <div class="select-dropdown" style="width: 40%;">
-        <select id="device_brand_update" name="device_brand_update">
-          <?php foreach($device_brand as $d_b):  ?>
-            <option value="<?php echo $d_b['device_brand']; ?>"<?php if($d_b['device_brand']==$view_appoint['device_brand'])echo 'selected="selected"';?>><?php echo $d_b['device_brand'];?></option>
-          <?php endforeach; ?>
-        </select>
-        </div>
-        <div class="select-dropdown" style="width: 40%;" id="cid">
-          <select id="aircon_id_update" name="aircon_id_update"  required></select>
-        </div>
-      </div>
+      <div class="crud-text-aircon"><h5>Aircon Details:</h5></div>
 
-      <div class="user-box">
-        <input class="number" type="number" name="qty" placeholder="Quantity" value="<?php echo $appt['qty']; ?>">
-        <label class="fcunum">FCU Number</label>
-        <select id="fcuno_update" name="fcuno_update[]" class="selectpicker" multiple="multiple" required>
-        <?php foreach($fcu_no as $f):  ?>
-          <?php foreach($fcu_views as $fv):  ?>
-            <option value="<?php echo $f['fcuno'];?>"<?php if($f['fcuno']==$fv['fcuno'])echo 'selected';?>><p id="s2option"><?php echo $f['fcu'];?></p></option>
-          <?php endforeach; ?>
-        <?php endforeach; ?>
-      </select>
-      </div>
+        <!-- =================================================== -->
+        <div id="auth-rows-edit"></div>
+          <!-- <div class="user-box addUpdateBtn">
+            <span id="add_aut_update" class="btn btn-primary"><i class="fa-solid fa-plus"></i></span>
+          </div>  -->
+          <br>
       <div class="user-box">
           <label>Comments/Suggestions</label>
           <textarea name="comments" id="comments" rows="2" cols="40" ><?php echo htmlspecialchars($appt['comments']); ?></textarea>
@@ -100,6 +82,11 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/js/bootstrap-select.min.js"></script>
 <script type="text/javascript">
+var distinct = <?php echo json_encode($distinct); ?> ;
+var distinctEvent = <?php echo json_encode($distinct_event); ?> ;
+var deviceBrand = <?php echo json_encode($device_brand); ?> ;
+var appt_fcu = <?php echo json_encode($appt_fcu); ?> ;
+var fcu_select = <?php echo json_encode($fcu_select); ?> ;
 
   // $('#fcuno_update').select2();
   var areas = <?php echo json_encode($client_area); ?> ;
@@ -149,62 +136,7 @@
 
 
   // ---------------------------------------------
-  var devbrand = <?php echo json_encode($brand); ?> ;
-
-  $("#aircon_id_update").empty();
-  var current_value = document.getElementById("device_brand_update").selectedIndex;
-  $.each(devbrand[current_value], function(key, v) {
-          // alert(value.client_id+" "+value.client_branch);
-          
-          $.each(v, function(key, value) {
-            if (client_current_area.aircon_id == value.aircon_id) {
-              $("#aircon_id_update").append('<option value='+value.aircon_id+' selected>'+value.aircon_type+'</option>')
-            }else{
-              $("#aircon_id_update").append('<option value='+value.aircon_id+'>'+value.aircon_type+'</option>')
-            }
-          });
-        });
-
-  $("#device_brand_update").change(function(){
-    $("#aircon_id_update").empty();
-    var current_value = document.getElementById("device_brand_update").selectedIndex;
-    $.each(devbrand[current_value], function(key, v) {
-          // alert(value.client_id+" "+value.client_branch);
-          console.log(v);
-          $.each(v, function(key, value) {
-            $("#aircon_id_update").append('<option value='+value.aircon_id+'>'+value.aircon_type+'</option>')
-          });
-        });
-        // $("#area").append('<option value='+'>My option</option>');
-      });
-
-  // ----------------------------------------
-  // document.getElementById('fcuno_update').innerHTML='';
-
-  //     var arr1 = info.event.extendedProps.fcu_array.split(',');
-
-  //     var fcu_all = <?php echo json_encode($fcu_no); ?>;
-  //     fcu_all.map((all_fcu)=>{
-  //       let a = 0;
-  //        while(arr1) {
-  //            if(parseInt(arr1[a]) == all_fcu.fcuno){
-  //             $("#fcuno_update").append(`
-  //                 <option value="`+ all_fcu.fcuno+`" selected>`+all_fcu.fcu+`</option>`
-  //               );
-  //             break;
-  //            }
-
-  //            if (fcu_all.length == a) {
-  //             $("#fcuno_update").append(`
-  //                 <option value="`+ all_fcu.fcuno+`">`+all_fcu.fcu+`</option>`
-  //               );
-  //             break;
-  //            }
   
-  //           a++;
-  //         }
-
-  //     });
                       //dd-mm
   var disableDates = ["1-1","1-2","25-2","9-4","14-4","16-4","1-5","9-5","12-6","29-8","21-8","31-10","1-11","2-11","30-11","8-12","24-12","25-12","30-12","31-12"];
       
@@ -221,4 +153,139 @@
             }
         }
     });
+
+    $('#auth-rows-edit').html('');
+    // console.log(distinctEvent);
+     distinctEvent.forEach((disEvent, index)=>{
+      console.log(appt_fcu.appt_id);
+          var concut = '';
+          // console.log(disEvent,distinct);
+        distinct.forEach((dis, index)=>{
+    if ( appt_fcu[0].appt_id == dis.appt_id &&  dis.appt_id == disEvent.appt_id) {
+        
+         concut = `<div class="form-row" id="row" style="background-color:lightblue;">
+    <div class="user-box col-md-6">
+    <label for="dbrand">Aircon Brand</label>
+    <select id="device_brand_update" name="device_brand[]" class="form-control " data-id="`+dis.aircon_id+`"required>`;
+      
+      deviceBrand.forEach((dbrand, index)=>{
+        if (dis.device_brand == dbrand.device_brand) {
+          concut = concut + `<option value="`+dbrand.device_brand+`" selected>`+dbrand.device_brand+`</option>`;
+        }else{
+          concut = concut + `<option value="`+dbrand.device_brand+`">`+dbrand.device_brand+`</option>`;
+        }
+         
+      });
+        
+    concut = concut + ` </select>
+    </div> 
+    <div class="user-box col-md-6">
+    
+    <label for="aircont">Aircon Type</label>
+    <select id="aircon_update_id_`+dis.aircon_id+`" name="aircon_update_id[]" class="form-control aircon" data-id="`+dis.aircon_id+`" required>
+    <option value="`+dis.aircon_id+`">`+dis.aircon_type+`</option>
+    </select>
+    </div>
+    <div class="user-box col-md-6 fcuClass fcuAdded">
+    
+    <label for="fcunos">FCU No.</label>
+
+    
+
+    <select id="fcuno_update_`+dis.aircon_id+`" name="fcuno_update_`+dis.aircon_id+`[]" class="selectpicker rounded" data-width="100%" multiple data-selected-text-format="count > 2">
+    <option value="1">FCU 1</option>
+    <option value="2">FCU 2</option>
+    <option value="3">FCU 3</option>
+    <option value="4">FCU 4</option>
+    <option value="5">FCU 5</option>
+    <option value="6">FCU 6</option>
+    <option value="7">FCU 7</option>
+    <option value="8">FCU 8</option>
+    <option value="9">FCU 9</option>
+    <option value="10">FCU 10</option>
+    </select>
+    </div> 
+
+    <div class="user-box col-md-4 qtyClass qtyAdded1">
+    
+    <label for="quantity">Quantity</label>
+    <input type="number" class="form-control" name="quantity[]" id="quantity" min="1" value="`+dis.qty+`" required>
+    </div> 
+    <div class="user-box col-md-2 minusbtn1"><br>
+    <span id="auth-del-edit" class="btn"><i class="fas fa-minus"></i></span>
+    </div>
+    </div>`;
+    $('#auth-rows-edit').append(concut);
+    }
+    
+          appt_fcu.forEach((fcuData, index)=>{
+          if (disEvent.appt_id == dis.appt_id) {
+            if (dis.appt_id == fcuData.appt_id && dis.aircon_id == fcuData.aircon_id) {
+              
+
+
+                for(let i=1;i<=10;i++){
+                    if (fcuData.fcuno == i) {
+                       
+                       $("#fcuno_update_"+dis.aircon_id +" option[value='" + fcuData.fcuno + "']").prop("selected", true);
+                      
+                    }
+                    
+                
+    
+                
+              } 
+            }
+
+
+          }
+        });
+          
+         
+          $('#auth-rows-edit').on('click', '#auth-del-edit', function(E){
+
+            $(this).parents('#row').remove();
+
+          });
+          
+        });
+          
+
+
+      });
+     var devbrand = <?php echo json_encode($brand); ?> ;
+
+  $("#aircon_id_update").empty();
+  var current_value = document.getElementById("device_brand_update").selectedIndex;
+
+  $.each(devbrand[current_value], function(key, v) {
+          // alert(value.client_id+" "+value.client_branch);
+          
+          $.each(v, function(key, value) {
+            $.each(fcu_select, function(key, fcuSelect) {
+
+              if (fcuSelect.aircon_id == value.aircon_id) {
+                console.log(value.aircon_id);
+                $("#aircon_id_update").append('<option value='+value.aircon_id+' selected>'+value.aircon_type+'</option>')
+              }else{
+                console.log('flase');
+                $("#aircon_id_update").append('<option value='+value.aircon_id+'>'+value.aircon_type+'</option>')
+              }
+            });
+          });
+        });
+
+  $("#device_brand_update").change(function(){
+    $("#aircon_id_update").empty();
+    var current_value = document.getElementById("device_brand_update").selectedIndex;
+    $.each(devbrand[current_value], function(key, v) {
+          // alert(value.client_id+" "+value.client_branch);
+          console.log(v);
+          $.each(v, function(key, value) {
+            $("#aircon_id_update").append('<option value='+value.aircon_id+'>'+value.aircon_type+'</option>')
+          });
+        });
+        // $("#area").append('<option value='+'>My option</option>');
+      });
+
 </script>

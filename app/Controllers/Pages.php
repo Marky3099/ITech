@@ -283,7 +283,7 @@ public function checkEmployee()
                     // }
       }else{
           
-        $data['errorAcc'] = "Account is not registered as Employee";
+        $data['errorAcc'] = "Account is not registered as Technician";
         return view('pages/employee_login',$data);  
     }
 }

@@ -69,10 +69,18 @@ class AppointmentCrud extends Controller
     }
 
     foreach ($data['appoint'] as $key => $value) {
-        $fcu_arr = "";
+        $fcu_arr = array();
         foreach ($data['fcu_appt'] as $key => $value_fcu) {
             if ( $value['appt_id'] == $value_fcu['appt_id']) {
-             $fcu_arr .= $data['fcu_appt'][$key]['fcu'].",";
+             array_push($fcu_arr , (object)[
+                'appt_id' => (int)$value_fcu['appt_id'],
+                'aircon_id' => (int)$value_fcu['aircon_id'],
+                'fcuno' =>(int)$value_fcu['fcuno'],
+                'qty' =>(int)$value_fcu['qty'],
+                'device_brand' =>$value_fcu['device_brand'],
+                'aircon_type' =>$value_fcu['aircon_type'],
+                'fcu' =>$value_fcu['fcu'],
+            ]);
          }
      }    
      $data['view_appoint'][]= (object)[
@@ -85,10 +93,6 @@ class AppointmentCrud extends Controller
         "serv_name" =>$value['serv_name'],
         "area"=> $value['area'],
         "client_branch"=> $value['client_branch'],
-        "aircon_id"=> $value['aircon_id'],
-        "aircon_type"=> $value['aircon_type'],
-        "device_brand"=> $value['device_brand'],
-        "qty"=> $value['qty'],
         "appt_status"=> $value['appt_status'],
         "fcu_arr"=> $fcu_arr,
         "rate"=> $value['rate'],
@@ -240,7 +244,7 @@ public function store() {
     $operatingTime = ['8:00 AM','9:00 AM','10:00 AM','11:00 AM','1:00 PM','2:00 PM','3:00 PM','4:00 PM','5:00 PM','6:00 PM'];
     // dd($operatingTime);
     $client_branch = $Client->where('client_id',$this->request->getVar('client_id'))->first();
-    $aircon_brand = $Aircon->where('aircon_id', $this->request->getVar('aircon_id'))->first();
+    $aircon_brand = $Aircon->where('aircon_id', $this->request->getVar('aircon_id')[0])->first();
     $aircon_details = $Aircon->where('device_brand', $aircon_brand['device_brand'])->findAll();
     // dd($aircon_details);
     // dd($client_branch);
@@ -380,9 +384,6 @@ public function store() {
                         'area' => $this->request->getVar('area'),
                         'serv_id' => $this->request->getVar('serv_id'),
                         'client_id' => $this->request->getVar('client_id'),
-                        'device_brand' => $this->request->getVar('device_brand'),
-                        'aircon_id' => $this->request->getVar('aircon_id'),
-                        'qty' => $this->request->getVar('qty'),
                         // 'status' => $this->request->getVar('status'),
                         'user_id' => $user_id,
                         'comments' => $this->request->getVar('comments'),
@@ -422,22 +423,28 @@ public function store() {
                                     ]);
                                 }
 
+                                foreach ($_POST['aircon_id'] as $index => $aircon) {
+                                    foreach ($_POST['fcuno'.$index] as $key => $floor_num) {
+                                        $event_fcu->insert([
+                                            'id'=> (int) $success3,
+                                            'aircon_id'=> (int)$aircon,
+                                            'quantity'=> (int)$_POST['quantity'][$index],
+                                            'fcuno'=>$floor_num
+                                        ]);
+                                    }
 
-                                foreach ( $_POST['fcuno'] as $key => $floor_num) {
-                                    $event_fcu->insert([
-                                        'id'=> (int) $success3,
-                                        'aircon_id'=> (int) $this->request->getVar('aircon_id'),
-                                        'quantity'=> (int)$this->request->getVar('qty'),
-                                        'fcuno'=>$floor_num
-                                    ]);
                                 }
                             }
                         }
-                    foreach($this->request->getVar('fcuno') as $key => $value) {
-                        $Appt_fcu->insert([
-                            'fcuno'=>(int) $value,
-                            'appt_id' => (int) $success
-                        ]);
+                    foreach ($_POST['aircon_id'] as $index => $aircon) {
+                        foreach ($_POST['fcuno'.$index] as $key => $floor_num) {
+                            $Appt_fcu->insert([
+                                'appt_id' => (int) $success,
+                                'aircon_id' => (int)$aircon,
+                                'qty' => (int)$_POST['quantity'][$index],
+                                'fcuno'=>$floor_num
+                            ]);
+                        }
                     }
                     $session = session();
                     $session->setFlashdata('add', 'value');
@@ -459,6 +466,16 @@ public function store() {
 }
 public function singleAppt($appt_id){
     
+    $db = \Config\Database::connect();
+        $query   = $db->query('SELECT DISTINCT aircon_id,appt_id,device_brand,aircon_type,qty
+            FROM appt_fcu_views');
+        $data['distinct'] = $query->getResult();
+
+        $db1 = \Config\Database::connect();
+        $query   = $db1->query('SELECT DISTINCT appt_id
+            FROM appt_fcu_views');
+        $data['distinct_event'] = $query->getResult();
+
     $Appoint = new Appointment();
     $Appoint_view = new View_appointment();
     $Client = new Client();
@@ -473,6 +490,7 @@ public function singleAppt($appt_id){
     $data['servName'] = $Serv->select('serv_name, serv_color, serv_type')->groupBy('serv_name')->findAll();
     $data['servType'] = $Serv->orderBy('serv_name','ASC')->findAll();
     $data['appt_fcu'] = $Appt_fcu->orderBy('appt_id', 'ASC')->findAll();
+    $data['fcu_select'] = $Appt_fcu->where('appt_id', $appt_id)->findAll();
     $data['aircon'] = $Aircon->orderBy('aircon_id', 'ASC')->findAll();
     $data['device_brand'] = $Aircon->select('device_brand')->groupBy('device_brand')->findAll();
     $data['appt'] = $Appoint->where('appt_id', $appt_id)->first();
@@ -554,10 +572,7 @@ public function update(){
             'appt_time' => $this->request->getVar('appt_time'),
             'area' => $this->request->getVar('area'),
             'serv_id'=> $this->request->getVar('serv_id'),
-            'aircon_id' => (int)($this->request->getVar('aircon_id_update')),
             'client_id'  => (int)($this->request->getVar('client_id_update')),
-            'device_brand' => $this->request->getVar('device_brand'),
-            'qty' => $this->request->getVar('qty'),
             'comments' => $this->request->getVar('comments'),
             'status' => $this->request->getVar('status')
         ];
@@ -568,10 +583,7 @@ public function update(){
             'appt_time' => $this->request->getVar('appt_time'),
             'area' => $this->request->getVar('area'),
             'serv_id'=> $this->request->getVar('serv_id'),
-            'aircon_id' => (int)($this->request->getVar('aircon_id_update')),
             'client_id'  => (int)($this->request->getVar('client_id_update')),
-            'device_brand' => $this->request->getVar('device_brand'),
-            'qty' => $this->request->getVar('qty'),
             'comments' => $this->request->getVar('comments'),
             'status' => $this->request->getVar('status')
         ];
@@ -592,22 +604,26 @@ public function update(){
             'comments' => $this->request->getVar('comments'),
 
         ]);
-
-        foreach ( $_POST['fcuno_update'] as $key => $floor_num) {
-            // dd($floor_num);
-            $event_fcu->update($event_data['id'],[
-                'id'=> (int) $event_data['id'],
-                'aircon_id'=> (int) $this->request->getVar('aircon_id_update'),
-                'quantity'=> (int)$this->request->getVar('qty'),
-                'fcuno'=>$floor_num
-            ]);
+        $event_fcu->where('id', $event_data['id'])->delete();
+        foreach ($_POST['aircon_update_id'] as $index => $aircon) {
+            foreach ($_POST['fcuno_update_'.$aircon] as $key => $floor_num) {
+                // dd($floor_num);
+                $event_fcu->insert([
+                    'id'=> (int) $event_data['id'],
+                    'aircon_id'=> (int)$aircon,
+                    'quantity'=> (int)$_POST['quantity'][$index],
+                    'fcuno'=>$floor_num
+                ]);
+            }
         }
     }
     $Appt_fcu->where('appt_id', $appt_id)->delete();
-    if (isset($_POST['fcuno_update'])) {
-        foreach($_POST['fcuno_update'] as $key => $value) {
+    foreach ($_POST['aircon_update_id'] as $index => $aircon) {
+        foreach ($_POST['fcuno_update_'.$aircon] as $key => $floor_num) {
             $Appt_fcu->insert([
-                'fcuno'=>(int)$value,
+                'fcuno'=>(int)$floor_num,
+                'aircon_id'=> (int)$aircon,
+                'qty'=> (int)$_POST['quantity'][$index],
                 'appt_id' => $appt_id
             ]);
         }
@@ -615,6 +631,7 @@ public function update(){
     $session = session();
     $session->setFlashdata('update', 'value');
     return $this->response->redirect(site_url('/appointment'));
+    
 }
 public function delete($appt_id = null){
     

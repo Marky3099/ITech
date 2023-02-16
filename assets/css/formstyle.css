@@ -87,7 +87,7 @@ body {
   border-radius: 50%;
 }
 
-.form-box .user-box{
+.form-box .user-box, .user-box{
   position: relative;
 }
 
@@ -337,7 +337,7 @@ a.btnn:hover{
   margin-left: 165px;
 }
 
-.form-box label.fcunum{
+.form-box label.fcunum,label.fcunum{
   margin-top: -100px;
 }
 
@@ -428,4 +428,53 @@ a.btnn:hover{
 
 .datepicker table tr td.disabled{
   color: red !important;
+}
+.form-box .fcuClass{
+  margin-left: 10px;
+}
+
+.form-box .fcuClass .dropdown{
+  height: 30px;
+  width: 200px !important;
+  margin-top: -60px;
+  margin-left: 90px;
+}
+.form-box .fcuClass .dropdown-toggle{
+  margin-top: 50px;
+}
+.form-box .qtyClass #quantity{
+/*  margin-top:40px;*/
+  margin-left: -5px;
+}
+.form-box .qtyClass label{
+  margin-left: -5px;
+}
+.form-box .plusbtn{
+  margin-top: 45px;
+  margin-left: -30px;
+}
+.form-box .fcuAdd{
+  margin-top: -50px;
+}
+.form-box .fcuAdded{
+  height: 20px;
+}
+.form-box .qtyAdded{
+  margin-top: 20px;
+}
+.form-box .minusbtn{
+  margin-top: 33px;
+    margin-left: -30PX;
+}
+.form-box .minusbtn1{
+  margin-top: 20px;
+    margin-left: -80PX;
+}
+.form-box .minusbtn .minusbtn{
+  background-color: grey;
+}
+.form-box .addUpdateBtn{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  left: -270px;
 }

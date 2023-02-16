@@ -39,7 +39,7 @@
    
 
     
-      console.log(ecode);
+      // console.log(ecode);
 
       // select cliend and branch
       var s1 = document.getElementById('area_update');
@@ -94,7 +94,7 @@
      //  var int_index_area1 = 0;
      //  var count1 = 0;
      $('#auth-rows-edit').html('');
-    console.log(distinctEvent);
+    // console.log(distinctEvent);
      distinctEvent.forEach((disEvent, index)=>{
       
           var concut = '';
@@ -104,7 +104,7 @@
         // console.log(info.event.id +'='+ dis.id +' '+  dis.id +'='+  disEvent.id);
          concut = `<div class="form-row" id="row" style="background-color:lightblue;">
     <div class="form-group col-md-3">
-    <label for="dbrand">Device Brand</label>
+    <label for="dbrand">Aircon Brand</label>
     <select id="device_brand_update" name="device_brand[]" class="form-control " data-id="`+dis.aircon_id+`"disabled>`;
       
       deviceBrand.forEach((dbrand, index)=>{
@@ -223,6 +223,7 @@
       ti.value = info.event.extendedProps.time;
      
       s.value = info.event.extendedProps.serv_id;
+      // console.log(info.event.extendedProps.comments);
       comments.value = info.event.extendedProps.comments;
       // a.value = info.event.extendedProps.aircon_id;
       // q.value = info.event.extendedProps.quantity;

@@ -8,6 +8,6 @@ class Appt_fcu extends Model
 {
     protected $table      = 'appt_fcu';
     protected $returnType     = 'array';
-    protected $allowedFields = ['appt_id','fcuno'];
+    protected $allowedFields = ['appt_id','aircon_id','fcuno','qty'];
 
 }

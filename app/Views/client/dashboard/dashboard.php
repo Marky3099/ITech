@@ -447,10 +447,14 @@
         </div> -->
 
         <div class="form-group">
-          <label class="ml-5 mt-3" for="emp_id_update">Employee</label><br>
+          <label class="ml-5 mt-3" for="emp_id_update">Technician</label><br>
           <select id="emp_id_update" name="emp_id_update[]" class="form-control w-75 ml-5 selectpicker border border-dark" multiple data-selected-text-format="count > 8" disabled>
             <!--  -->
           </select>
+        </div> 
+        <div class="form-group">
+          <label class="emp_idlbll" for="comments">Comments/Suggestions</label><br>
+          <textarea name="comments_update" id="comments_update" class="form-control w-75 ml-5 selectpicker border border-dark" cols="50" rows="4"></textarea>
         </div> 
       </div>
       <div class="modal-footer">
