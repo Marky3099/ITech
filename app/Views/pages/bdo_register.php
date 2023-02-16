@@ -91,7 +91,7 @@
               <div class="col-8 col-lg-8 col-md-8 col-sm-12">
                 <div class="user-box">
                     <div class="icon-box"><i class="fas fa-key"></i></div>
-                    <input class="password" type="password" name="password" id="password" placeholder="Enter your Password" value="<?php if(isset($_POST['password'])) { echo $_POST['password']; }?>" required><i class="far fa-eye fa-eye-slash" id="togglePassword"></i>
+                    <input class="password" type="password" name="password" id="password" placeholder="Enter your Password" value="<?php if(isset($_POST['password'])) { echo $_POST['password']; }?>" minlength="8" required><i class="far fa-eye fa-eye-slash" id="togglePassword"></i>
                       <?php 
                       if(!empty($error_pass)){ ?>
                       <div class="pass-err-msg">
