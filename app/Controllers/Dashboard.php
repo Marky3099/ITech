@@ -348,14 +348,18 @@ foreach ($data['ratingsData'] as $key => $value) {
     array_push($ratings, $value);
     // array_push($ratingsName,$value->serv_name);
 }
+$data['overallPerformance']=0;
+$data['totality'] = 0;
+if($ratings){
+    $overall = 0;
 
-$overall = 0;
-
-foreach ($ratings as $key => $value) {
-    $overall += $value->rate_event;
+    foreach ($ratings as $key => $value) {
+        $overall += $value->rate_event;
+    }
+    $data['overallPerformance']=$overall/count($ratings);
+    $data['totality'] = 100 - $data['overallPerformance'];
 }
-$data['overallPerformance']=$overall/count($ratings);
-$data['totality'] = 100 - $data['overallPerformance'];
+
 // dd($data['totality']);
 // dd($overallPerformance);
 $performEmp = array();
