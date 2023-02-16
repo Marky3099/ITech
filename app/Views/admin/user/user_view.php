@@ -1,13 +1,15 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/rowreorder/1.2.8/css/rowReorder.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css">
 <link rel="stylesheet" href="<?= base_url('assets/css/formstyle.css')?>">
-<div class="body-content">
-  <div class="crud-text"><h3>Admin/Secretary/Technician Users</h3></div>
+<div class="body-content" style="width: 100%;">
+  <div class="crud-text" style="width: 100%"><h3>Admin/Secretary/Technician Users</h3></div>
   <div class="d-flex justify-content-left">
     <a href="<?= base_url('user/create/view') ?>" class="btn">Add User</a>
     <a href="<?= base_url('user/print') ?>" target="_blank" class="btn">Print</a>
  </div>
- <div class="mt-3">
-   
-    <table class="table table-bordered table1" user_id="users-list">
+ <div class="col-12 col-lg-12 col-md-12 col-sm-12 mt-3">
+    <table class="display" user_id="users-list"  style="width:100%;" id="example">
      <thead>
         <tr>
            <th>ID</th>
@@ -48,12 +50,12 @@
     </tbody>
  </table>
  <br><br>
- <div class="crud-text"><h3>&emsp;&ensp;&nbsp;Partnered Company Users</h3></div>
+ <div class="crud-text"><h3>&emsp;&ensp;&nbsp;&emsp;Partnered Company Users</h3></div>
  <div class="d-flex justify-content-left">
    <a href="<?=base_url('user/print-client/partnered')?>" target="_blank" class="btn" style="margin-left:10px">Print</a>
  </div>
  <br>
- <table class="table table-bordered table1" client_id="client-list">
+ <table class="display" client_id="client-list"  style="width:100%;" id="example1">
          <thead>
           <tr>
            <th>#</th>
@@ -83,12 +85,12 @@
 </tbody>
 </table>
  <br><br>
- <div class="crud-text"><h3>&emsp;&ensp;&nbsp;Non-Partnered Company Users</h3></div>
+ <div class="crud-text"><h3 class="npusers">&emsp;&ensp;&emsp;Non-Partnered Company Users</h3></div>
  <div class="d-flex justify-content-left">
    <a href="<?=base_url('user/print-client/non-partnered')?>" target="_blank" class="btn" style="margin-left:10px">Print</a>
  </div>
  <br>
- <table class="table table-bordered table1" client_id="client-list">
+ <table class="display" client_id="client-list" style="width:100%;" id="example2">
          <thead>
           <tr>
            <th>#</th>
@@ -100,7 +102,7 @@
            <th>Contact No.</th>
        </tr>
    </thead>
-   <tbody>
+   <tbody style="width: 100%">
       <?php if($nonPartnered): $c = 1;?>
           <?php foreach($nonPartnered as $client):  ?>
               <tr>
@@ -123,7 +125,34 @@
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/rowreorder/1.2.8/js/dataTables.rowReorder.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+$(document).ready(function() {
+   var table = $('#example').DataTable( {
+         responsive: true
+   } );
+} );
+</script>
+
+<script>
+   $(document).ready(function() {
+   var table = $('#example1').DataTable( {
+         responsive: true
+   } );
+} );
+</script>
+
+<script>
+   $(document).ready(function() {
+   var table = $('#example2').DataTable( {
+         responsive: true
+   } );
+} );
+</script>
+
 <script type="text/javascript">
    var msg = ''; 
    var del = '';

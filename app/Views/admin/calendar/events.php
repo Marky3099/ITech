@@ -1,4 +1,6 @@
 <link rel="stylesheet" href="<?= base_url('assets/css/style.css')?>">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/rowreorder/1.2.8/css/rowReorder.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css">
 
 <!-- modal for viewing rate service -->
 <div class="modal fade" id="rateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -138,7 +140,7 @@
            <div class="col-md-6">
             <table class="table-hover" style="width:100%">
                   <tr>
-                    <th>Service Type:</th>
+                    <th style="width: 42%">Service Type:</th>
                     <td id="modal_serv_type"></td>
                   </tr>
                   <tr>
@@ -178,10 +180,9 @@
 </div>
 
 
-<div class="body-content">
+<div class="body-content" style="width: 100%;">
    <div class="event-header">
-      
-     <div class="crud-text"><h3 class="headerfont">Scheduled Tasks</h3></div>
+     <div class="crud-text" style="width: 100%"><h3 class="headerfont">Scheduled Tasks</h3></div>
 
      <div class="tsk">
       <?php if($_SESSION['position'] != USER_ROLE_EMPLOYEE):?>
@@ -189,9 +190,9 @@
       <?php endif;?>
      </div>
 </div>
-<div class="col-sm-12 mt-3 bg-light" style=" padding:10px;">
+<div class="col-12 col-lg-12 col-md-12 col-sm-12 mt-3 bg-light" style=" padding:10px;">
    <?php if($event): ?>
-      <table class="table table-bordered table-hover" id="event-table">
+      <table class="table table-bordered table-hover" id="example" style="width: 100%;">
         <thead>
            <tr>
               <th>Date</th>
@@ -298,6 +299,16 @@
 </div>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/rowreorder/1.2.8/js/dataTables.rowReorder.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+<script>
+$(document).ready(function() {
+   var table = $('#example').DataTable( {
+         responsive: true
+   } );
+} );
+</script>
+
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script type="text/javascript">

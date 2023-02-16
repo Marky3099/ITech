@@ -14,7 +14,7 @@
 		<div class="left-half col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
 		</div>
 		<div class="right-half col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
-			<div class="containerr">
+			<div class="containerr" style="width: 100%">
 				<div class="header">
 					<a href="<?= base_url('#home')?>" class="texthp"><img src="<?= base_url('assets/image/iicon.png')?>"></a>
 				</div>

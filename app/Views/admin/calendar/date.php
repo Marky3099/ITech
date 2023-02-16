@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="<?= base_url('assets/css/style.css')?>">
-
-<div class="body-content">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/rowreorder/1.2.8/css/rowReorder.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css">
+<div class="body-content" style="width: 100%;">
    <div class="event-header">
      <h3 id="mod" class="mt-2 headerfont"><b>Restrict Date</b></h3>
      
@@ -10,9 +11,9 @@
       </div>
     
    </div>
-    <div class="col-sm-12 mt-3 bg-light" style=" padding:10px;">
+    <div class="col-12 col-lg-12 col-md-12 col-sm-12 mt-3 bg-light" style=" padding:10px;">
       <?php if($dates): ?>
-         <table class="table table-bordered" id="table1">
+         <table class="table table-bordered" id="example" style="width: 100%;">
            <thead>
               <tr>
                  <th>Date</th>
@@ -41,6 +42,17 @@
 </div>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/rowreorder/1.2.8/js/dataTables.rowReorder.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+
+<script>
+$(document).ready(function() {
+   var table = $('#example').DataTable( {
+         responsive: true
+   } );
+} );
+</script>
+
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript">
    var msg = ''; 

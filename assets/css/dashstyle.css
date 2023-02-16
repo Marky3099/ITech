@@ -45,11 +45,5 @@ h3.hfont{
 
 table thead{
 	background-color: #344F21;
-}
-
-@media (max-width: 600.99px){
-	#chartdiv{
-		width: 100%; 
-		height: 250px;
-	}
+	color: #fff;
 }

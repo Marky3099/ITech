@@ -61,8 +61,14 @@
 	#cards{
 		margin-left: 20px;
 	}
-
 }
+
+@media(max-width: 600.99px){
+  #st{
+    width: 44%;
+  }
+}
+
 
 .form-group #serv-select{
 	margin-left: 20px;

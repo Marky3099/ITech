@@ -2,6 +2,9 @@
 <link rel="stylesheet" href="<?= base_url('assets/css/formstyle.css')?>">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/rowreorder/1.2.8/css/rowReorder.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css">
+
 <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
@@ -92,21 +95,21 @@
   </div>
 </div>
 
-<div class="body-content">
+<div class="body-content" style="width: 100%">
 	<div class="title">
 		<h3>Detailed Exception Report</h3>
 		<h4>From <?php if(isset($_GET['start_date'])){echo $_GET['start_date'];} ?> to <?php if(isset($_GET['to_date'])){echo $_GET['to_date'];} ?> </h4>
 	</div>
-	<div class="container">
+	<div class="container" style="width: 100%">
 		<div class="row justify-content-center">
-			<div class="col-md-12">
-				<div class="card mt-5 mb-5 card1">
+			<div class="col-12 col-md-12 col-lg-12 col-sm-12">
+				<div class="card mt-5 mb-5 card1" style="width: 100%;">
 					<div class="card-header">
 						<h3>Detailed Exception Report (Pending Tasks)</h3>
 					</div>				
-					<div class="card-body filter">
+					<div class="card-body filter" id="cbfilter">
         <div class="row">
-            <div class="col-lg-5">
+            <div class="col-12 col-md-6 col-lg-6 col-sm-12 mb-2">
                 <select id="select-filter" class="form-control selectpicker">
                     <option disabled selected>Filter</option>
                     <?php $url = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];?>
@@ -149,7 +152,7 @@
                 <?php endif;?>
                 </select>
             </div>
-            <div class="col-lg-5">
+            <div class="col-12 col-md-6 col-lg-6 col-sm-12 mb-2">
                 <?php $url = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];?>
                 <?php if(strpos($url,'filtered')):?>
                     <form method="Get" id="filter-client" action="<?php base_url($url)?>">
@@ -172,7 +175,7 @@
                     </form>
                 <?php endif;?>
             </div>
-            <div class="col-lg-2">
+            <div class="col-12 col-md-6 col-lg-6 col-sm-12">
                 <?php $url = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];?>
                 <?php if(strpos($url,'filtered')):?>
                     <form method="get" action="<?= $url;?>" target="_blank">
@@ -181,7 +184,7 @@
                             <input type="hidden" name="filter_client" value="<?=$_GET['filter_client']?>">
                         <?php endif;?>
                         
-                        <button type="submit" class="btn btn-primary">Print</button>
+                        <button type="submit" class="btn border-0 btn-primary">Print</button>
                     </form>
                 <?php endif;?>
             </div>
@@ -190,10 +193,10 @@
 			</div>
 			
 
-			<div class="card mt-4 card2">
+			<div class="card mt-4 card2" style="width: 100%">
 				<div class="card-body">
 					<?php if($task):?>
-						<table class="table table-bordered table-hover" id="table1">
+						<table class="table table-bordered table-hover" id="example">
 							<thead>
 								<tr>
 									<th>Date</th>
@@ -205,7 +208,7 @@
 					                <th>Action</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody style="width: 100%;">
 								
 								<?php if(isset($task)): ?>
 									
@@ -260,6 +263,16 @@
 <script type="text/javascript" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+<script src="https://cdn.datatables.net/rowreorder/1.2.8/js/dataTables.rowReorder.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+
+<script>
+$(document).ready(function() {
+   var table = $('#example').DataTable( {
+         responsive: true
+   } );
+} );
+</script>
 
 <script type="text/javascript">
 

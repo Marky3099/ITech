@@ -1,4 +1,6 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/rowreorder/1.2.8/css/rowReorder.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css">
 <link rel="stylesheet" href="<?= base_url('assets/css/main.min.css')?>">
 
 
@@ -42,11 +44,11 @@
       </div>
       <div class="modal-body">
         <div class="row">
-           <div class="col-md-6">
+           <div class="col-12 col-lg-6 col-md-6 col-sm-12">
             
                <table class="table-hover" style="width:100%">
                   <tr>
-                    <th>Date:</th>
+                    <th style="width: 44%;">Date:</th>
                     <td id="modal_start_event"></td>
                   </tr>
                   <tr>
@@ -71,10 +73,10 @@
                   </tr>
               </table>
             </div>
-           <div class="col-md-6">
+           <div class="col-12 col-lg-6 col-md-6 col-sm-12">
             <table class="table-hover" style="width:100%">
                   <tr>
-                    <th>Service Type:</th>
+                    <th style="width: 44%">Service Type:</th>
                     <td id="modal_serv_type"></td>
                   </tr>
                   <tr>
@@ -114,7 +116,7 @@
    <br>
  <div class="mt-3">
    <?php if($view_appoint):?>
-    <table class="table table-bordered" id="appt-table" style="font-size: 1rem;">
+    <table class="table table-bordered" id="example" style="width: 100%;">
      <thead>
         <tr>
            <th>Date</th>
@@ -169,7 +171,18 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/js/bootstrap-select.min.js"></script>
+<script src="https://cdn.datatables.net/rowreorder/1.2.8/js/dataTables.rowReorder.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+$(document).ready(function() {
+   var table = $('#example').DataTable( {
+         responsive: true
+   } );
+} );
+</script>
+
 <script type="text/javascript">
    var msg = ''; 
    var del = '';
@@ -342,7 +355,7 @@ var rateModal = new bootstrap.Modal(document.getElementById('rateModal'));
 
 
             }else{
-              $('.rate-container').append('<center><h1>No Reviews Yet</h1></center>');
+              $('.rate-container').append('<h5 class="text-center">There no reviews yet</h5>');
             }
            }
       });

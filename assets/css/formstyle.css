@@ -41,7 +41,7 @@ body {
 
 .form-box{
   position: absolute;
-  margin-top: 20px;
+/*  margin-top: 20px;*/
   top: 60%;
   left: 50%;
   height: auto;
@@ -54,6 +54,163 @@ body {
   box-shadow: 0 15px 25px rgba(0,0,0,.8);
   border-radius: 50px;
 }
+
+
+
+@media (max-width: 540px){
+  #aircon-form, #client-form1{
+    left: 23%;
+  }
+
+  #dateformbox, #emp-form, #service-form, #user-form, #profile-form{
+    left: 24%;
+  }
+
+  #service-form, #user-form1{
+    height: 500px;
+  }
+
+  #profile-form{
+    height: 800px;;
+  }
+
+  #clientfbox{
+    height: 850px;
+  }
+
+  #profile-form, #clientfbox{
+    top: 350px;
+  }
+
+  #ibserv5{
+    margin-left: -175px;
+    margin-top: 175px;
+  }
+
+  #client-form, #emp-form1, #service-form1, #user-form1{
+    left: 36%;
+  }
+
+  #name-icon, #pemail-icon, #paddress-icon, #ppassword-icon, #file-icon, #bdo_email-icon, #ppassword-icon1, #user_img1-icon{
+    margin-left: -24px;
+  }
+
+  #paddress-icon, #ppassword-icon, #bdo_email-icon, #pcpassword-icon1, #user_img1-icon, #file-icon{
+    top: 50px;
+  }
+
+  #user_img1-icon{
+    height: 46px;
+  }
+
+  #pcpassword-icon1{
+    margin-left: -270px;
+  }
+
+  #pcpassword-icon{
+    margin-left: -270px;
+    margin-top: 104px;
+  }
+
+  #name.plname{
+    left: -39px;
+    top: 50px;
+  }
+
+  #email.bdo_email{
+    margin-left: 14px;
+    margin-top: 54px;
+    width: 100%;
+  }
+
+  #pemail-icon{
+    margin-left: -270px;
+    top: 50px;
+  }
+
+  #pcontact-icon{
+    margin-left: -270px;
+    top: 100px;
+  }
+
+  .user-box #name.pname{
+    margin-left: 15px;
+  }
+
+  .user-box #email.pemail{
+    margin-left: -215px;
+    margin-top: 55px;
+  }
+
+  .user-box #address.paddress{
+    margin-top: 55px;
+    margin-left: 13px;
+  }
+
+  .user-box #contact.pcontact{
+    left: -40px;
+    top: 100px;
+  }
+
+  .user-box #password.ppassword{
+    margin-left: 15px;
+    margin-top: 54px;
+  }
+
+  .user-box #password.ppassword1{
+    margin-left: 15px;
+    width: 100%;
+  }
+
+  .user-box #c_password.pcpassword{
+    margin-left: -215px;
+    margin-top: 104px;
+  }
+
+  .user-box #c_password.pcpassword1{
+    margin-left: -215px;
+    margin-top: 55px;
+  }
+
+  .user-box #user_img1{
+    width: 100%;
+    margin-top: 55px;
+    margin-left: 15px;
+  }
+
+  .user-box #user_img{
+    margin-left: 16px;
+    margin-top: 54px;
+  }
+
+  #cssroles{
+    width: 70%;
+  }
+
+  #accfor{
+    position: absolute;
+    margin-left: 82px;
+    width: 35%;
+    top: 370px;
+  }
+
+  #user-edit-submit{
+    margin-top: 80px;
+  }
+
+  #updateprofsubmitbtn{
+    position: absolute;
+    bottom: 90px;
+    left: 0px;  }
+
+  #accforlbl{
+    position: absolute;
+    left: 70px;
+    margin-top: 75px;
+  }
+}
+
+
 
 .form-box h3 {
   margin: 5px 0 5px;
@@ -77,7 +234,11 @@ body {
 }
 
 .form-box .profilee{
-  margin-left: 225px;
+  margin-left: 32px;
+}
+
+.form-box .profileee{
+  margin-left: 32px;
 }
 
 .form-box .profilee img.pimg{
@@ -190,18 +351,23 @@ body {
 }
 
 .form-box .user-box input.pname,  .form-box .user-box input.paddress, .form-box .user-box input.ppassword{
-    width: 40%;
+    width: 100%;
     left: 0px;
 }
 
-.form-box .user-box input.pemail, .form-box .user-box input.plname, .form-box .user-box input.pcontact, .form-box .user-box input.pcpassword{
-  width: 41%;
+.form-box .user-box input.pemail, .form-box .user-box input.plname, .form-box .user-box input.pcontact, .form-box .user-box input.pcpassword, .form-box .user-box input.pcpassword1{
+  width: 100%;
   position: absolute;
-  left: 270px;
+  left: 230px;
   top: 0px;
 }
+
+.form-box .user-box #pemail-icon, .form-box .user-box #pcontact-icon, .form-box .user-box #pcpassword-icon{
+  left: 246px;
+}
+
 .form-box .user-box input.bdo_email{
-  width: 89.2%;
+  width: 405px;
 }
 
 a.btnn:hover{
@@ -320,7 +486,7 @@ a.btnn:hover{
 
 .form-box label.explbl{
   position: absolute;
-  margin-left: -100px;
+  margin-left: -85px;
   top: 40px;
 }
 
@@ -370,9 +536,8 @@ a.btnn:hover{
 .form-box #expertise{
   position: absolute;
   left: 135px;
-  top: 240px; 
+  top: 260px;
 }
-
 
 .form-box .select-dropdown, .select-dropdown * {
   margin-left: 15px;

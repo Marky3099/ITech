@@ -15,8 +15,8 @@
 body{
     position: relative;
     min-height: 100vh;
-    width: 100%;
-    overflow: hidden;
+    max-width: 100%;
+    overflow-y: hidden;
 }
 
 ::-webkit-scrollbar {
@@ -466,6 +466,22 @@ body{
     color: #344F21;
 }
 
+@media(max-width: 600.99px){
+    .body-content .crud-text h3{
+        font-size: 20px;
+    }
+
+    .body-content .crud-text h3.pusers, .body-content .crud-text h3.npusers{
+        margin-left: 15px;
+    }
+
+    .body-content .crud-text h3.npusers{
+        font-size: 17px;
+    }
+}
+
+
+
 .body-content .crud-text h3.headerfont{
     margin-left: 70px;
 }
@@ -491,9 +507,10 @@ table tr td .reports:hover{
 }
 
 .body-content .mt-3{
-    margin-left: -50px;
+    margin-left: -60px;
     margin-right: 10px;
     color:  #344F21;
+    width: 100%;
 }
 .body-content .mt-3 th{
     background-color: #344F21;
@@ -502,13 +519,12 @@ table tr td .reports:hover{
 }
 .body-content .add-form h1{
     color: #344F21;
-    
     font-weight: bold;
 }
-.body-content .add-form form{
+/*.body-content .add-form form{
     margin-left: -50px;
     margin-right: 20px;
-}
+}*/
 .body-content .add-form form .form-content{
     position: absolute;
     background-color: white;

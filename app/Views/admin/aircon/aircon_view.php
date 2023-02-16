@@ -1,13 +1,16 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/rowreorder/1.2.8/css/rowReorder.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css">
 <link rel="stylesheet" href="<?= base_url('assets/css/formstyle.css')?>">
-<div class="body-content">
+<div class="body-content" style="width: 100%">
 	<div class="crud-text"> <h3>Aircon Details</h3></div>
 
   <div class="d-flex justify-content-left">
     <a href="<?= base_url('/aircon/create/view');?>" class="btn">Add Aircon</a>
     
  </div>
- <div class="mt-3">
-    <table class="table table-bordered" client_id="aircon-list" id="table1">
+ <div class="col-12 col-lg-12 col-md-12 col-sm-12 mt-3">
+    <table class="table table-bordered" client_id="aircon-list" id="example" style="width: 100%">
      <thead>
         <tr>
            <th>ID</th>
@@ -38,7 +41,18 @@
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/rowreorder/1.2.8/js/dataTables.rowReorder.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+$(document).ready(function() {
+   var table = $('#example').DataTable( {
+         responsive: true
+   } );
+} );
+</script>
+
 <script type="text/javascript">
    var msg = ''; 
    var del = '';

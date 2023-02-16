@@ -1,4 +1,6 @@
 <link rel="stylesheet" href="<?= base_url('assets/css/style.css')?>">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/rowreorder/1.2.8/css/rowReorder.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css">
 
 <!-- rate service -->
 <div class="modal fade" id="rateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -140,7 +142,7 @@
  </div>
  <div class="mt-3">
    <?php if($view_appoint):?>
-    <table class="table table-bordered" id="appt-table" style="font-size: 1rem;">
+    <table class="table table-bordered" id="example" style="width: 100%;">
      <thead>
         <tr>
            <th>Date</th>
@@ -200,7 +202,17 @@
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/rowreorder/1.2.8/js/dataTables.rowReorder.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+$(document).ready(function() {
+   var table = $('#example').DataTable( {
+         responsive: true
+   } );
+} );
+</script>
+
 <script type="text/javascript">
    var msg = ''; 
    var del = '';

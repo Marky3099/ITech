@@ -11,12 +11,27 @@
 	width: 73rem;
 }
 .card1 .card-header{
-	height: 60px;
+	height: auto;
 /*	width: 100%;*/
 }
 .card1 .card-header h3{
 	font-weight: bold;
 }
+
+@media (max-width:600.99px){
+	.card1 .card-header h3{
+		font-size: 20px;
+	}
+
+	.card2{
+		top: 50px;
+	}
+
+	#c2{
+		top: 100px;
+	}
+}
+
 #sub{
 	float: left;
 /*	margin-top: 22px;*/
@@ -30,7 +45,7 @@
 	display: none;
 	visibility: none;
 }
-#table1 th{
+#example th{
 	background-color: #344F21;
 	color: #fff;
 	font-weight: normal;

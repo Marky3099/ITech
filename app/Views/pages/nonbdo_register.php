@@ -97,7 +97,7 @@
         <button class="btn">Sign Up</button>
       </div>
 
-      <p class="para1">Already have an account? <a href="<?=base_url('/bdo-login')?>"><i><b>Login now</b></i></a>.</p></a>
+      <p class="para1">Already have an account? <a href="<?=base_url('/non-bdo-login')?>"><i><b>Login now</b></i></a>.</p></a>
       <br><br><br>
       <a href="<?= base_url('/client-type');?>" class="back-btn">Back</a>
 

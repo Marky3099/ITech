@@ -6,16 +6,11 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <!-- Custom fonts for this template-->
-  <link
-  href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-  rel="stylesheet">
-
-<link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-  />
-  <!-- Custom styles for this template-->
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/rowreorder/1.2.8/css/rowReorder.dataTables.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/dashstyle.css')?>">
 <?php if($_SESSION['position'] == USER_ROLE_EMPLOYEE):?>
 <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/main.min.css')?>">
@@ -27,16 +22,14 @@
 
 </head>
 <body>
- <!-- Begin Page Content -->
- <div class="container-fluid">
-
+<!-- Begin Page Content -->
+<div class="container-fluid">
   <!-- Page Heading -->
   <div class="d-sm-flex align-items-center justify-content-between mb-4" style="margin-top: 10px;">
     <h3 class="hfont">Dashboard</h3>
-                        <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                          class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
-                        </div>
+  </div>
 
+<<<<<<< Updated upstream
 
                         <!-- Modal for displaying today's event -->
 
@@ -228,84 +221,262 @@
                   </div>
                 </div>
               </div>
+=======
+  <!-- Modal for displaying today's event -->
+  <div class="container">
+    <div class="modal fade" id="todayModal" role="dialog">
+      <div class="col-12 col-lg-12 col-md-12 col-sm-12 overflow-auto">
+        <div class="modal-dialog" style="max-width: 1000px;">
+          <div class="modal-content"  style="width: 100%">
+            <div class="modal-header">
+              <h4 class="modal-title">Today's Scheduled Task</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+>>>>>>> Stashed changes
             </div>
-            <!-- Modal for displaying Completed event -->
-            <div class="container">
-              <div class="modal fade" id="completeModal" role="dialog">
-                <div class="modal-dialog" style="max-width: 1000px;">
-                  <div class="modal-content">
 
-                    <div class="modal-header">
-                      <h4 class="modal-title">Completed Tasks</h4>
-                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      
-                    </div>
-                    <div class="modal-body">
-                     <?php if($completed):?>
-                      <table class="table table-bordered">
-                        <thead>
-                          <tr>
-                            <th>Date</th>
-                            <th>Task Code</th>
-                            <th>Branch</th>
-                            <th>Service</th>
-                            <th>Technician</th>
-                            <th>Status</th>
-                            
-                          </tr>
-                        </thead>
-                        <tbody>
-                         
-                          <?php foreach($completed as $cm):  ?>
-                            <tr>
-                              <td><?php echo date('m-d-Y',strtotime($cm->start_event)); ?></td>
-                              <td><?php echo $cm->event_code; ?></td>
-                              <td><?php echo $cm->client_branch; ?></td>
-                              <td><?php echo $cm->serv_type; ?></td>
-                              <td>
-                               <?php $data = explode(',',$cm->emp_array);
-                               $count = 0;
-                               ?>
-                               <?php foreach($data as $emp):  ?>
-                                 <?php if($count < (count($data) - 1) ):  ?>
-                                   ` <?php echo $emp; $count+=1; ?> <br>
-                                 <?php endif;  ?>
-                               <?php endforeach; ?>
-                             </td> 
-                             <td><?php echo $cm->status;?></td>
-                             
-                           </tr>
-                         <?php endforeach;?>
-
-                       </tbody>
-                     </table>
-                   <?php else:?>
-                    <div class="Nowork">
-                     <p class="noworkstatement"><i class="fa-solid text-success fa-circle-exclamation"></i>&nbsp;No completed tasks so far.</p>
-                   </div>
-                 <?php endif;?>
-               </div>
-               <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
-              </div>
+            <div class="modal-body">
+            <?php if($event):?>
+              <table class="display" id="example" style="width: 100%">
+                <thead>
+                  <tr>
+                    <th>Task Code</th>
+                    <th>Branch</th>
+                    <th>Service</th>
+                    <th>Technician</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>                       
+                  <?php foreach($event as $tday):  ?>
+                    <tr>
+                      <td><?php echo $tday->event_code; ?></td>
+                      <td><?php echo $tday->client_branch; ?></td>
+                      <td><?php echo $tday->serv_type; ?></td>
+                      <td>
+                        <?php $data = explode(',',$tday->emp_array);
+                        $count = 0;
+                        ?>
+                        <?php foreach($data as $emp):  ?>
+                          <?php if($count < (count($data) - 1) ):  ?>
+                          ` <?php echo $emp; $count+=1; ?> <br>
+                          <?php endif;  ?>
+                        <?php endforeach; ?>
+                      </td> 
+                      <td><?php echo $tday->status;?></td>
+                    </tr>
+                  <?php endforeach;?>
+                </tbody>
+                </table>
+                <?php else:?>
+                  <div class="Nowork">
+                    <p class="noworkstatement"><i class="fa-solid text-success fa-circle-exclamation"></i>&nbsp;Relax.. No work for Today!</p>
+                </div>
+                <?php endif;?>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
             </div>
           </div>
         </div>
       </div>
-      <!-- Modal for displaying Pending event -->
-      <div class="container">
-        <div class="modal fade" id="pendingModal" role="dialog">
-          <div class="modal-dialog" style="max-width: 1000px;">
-            <div class="modal-content">
+    </div>
+  </div>
 
-              <div class="modal-header">
-                <h4 class="modal-title">Pending Tasks</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                
-              </div>
-              <div class="modal-body">
-               <?php if($notdone):?>
-                <table class="table table-bordered">
+  <!-- Modal for displaying Week's event -->
+  <div class="container">
+    <div class="modal fade" id="weekModal" role="dialog">
+      <div class="col-12 col-lg-12 col-md-12 col-sm-12 overflow-auto">
+        <div class="modal-dialog" style="max-width: 1000px;">
+          <div class="modal-content" style="width: 100%">
+            <div class="modal-header">
+              <h4 class="modal-title">Weekly Scheduled Task</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <?php if($week1):?>
+              <table class="display" id="example1" style="width: 100%">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Task Code</th>
+                    <th>Branch</th>
+                    <th>Service</th>
+                    <th>Technician</th>
+                    <th>Status</th>    
+                  </tr>
+                </thead>
+                <tbody>                                    
+                  <?php foreach($week1 as $week):  ?>
+                  <tr>
+                    <td><?php echo date('m-d-Y',strtotime($week->start_event)); ?></td>
+                    <td><?php echo $week->event_code; ?></td>
+                    <td><?php echo $week->client_branch; ?></td>
+                    <td><?php echo $week->serv_type; ?></td>
+                    <td>
+                      <?php $data = explode(',',$week->emp_array);
+                      $count = 0;
+                      ?>
+                      <?php foreach($data as $emp):  ?>
+                        <?php if($count < (count($data) - 1) ):  ?>
+                         ` <?php echo $emp; $count+=1; ?> <br>
+                        <?php endif;  ?>
+                      <?php endforeach; ?>
+                    </td> 
+                    <td><?php echo $week->status;?></td>                   
+                  </tr>
+                  <?php endforeach;?>              
+              </tbody>
+              </table>
+              <?php else:?>
+                <div class="Nowork">
+                  <p class="noworkstatement"><i class="fa-solid text-success fa-circle-exclamation"></i>&nbsp;Relax.. No work for this week!</p>
+                </div>
+              <?php endif;?>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for displaying Month's event -->
+  <div class="container">
+    <div class="modal fade" id="monthModal" role="dialog">
+      <div class="col-12 col-lg-12 col-md-12 col-sm-12 overflow-auto">
+        <div class="modal-dialog" style="max-width: 1000px;">
+          <div class="modal-content" style="width: 100%">
+            <div class="modal-header">
+              <h4 class="modal-title">Monthly Scheduled Task</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>                          
+            </div>
+            <div class="modal-body">
+              <?php if($month):?>
+              <table class="display" id="example2" style="width: 100%">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Task Code</th>
+                    <th>Branch</th>
+                    <th>Service</th>
+                    <th>Technician</th>
+                    <th>Status</th>                                
+                  </tr>
+                </thead>
+                <tbody>                             
+                  <?php foreach($month as $m):  ?>
+                    <tr>
+                      <td><?php echo date('m-d-Y',strtotime($m->start_event)); ?></td>
+                      <td><?php echo $m->event_code; ?></td>
+                      <td><?php echo $m->client_branch; ?></td>
+                      <td><?php echo $m->serv_type; ?></td>
+                      <td>
+                       <?php $data = explode(',',$m->emp_array);
+                       $count = 0;
+                       ?>
+                       <?php foreach($data as $emp):  ?>
+                         <?php if($count < (count($data) - 1) ):  ?>
+                           ` <?php echo $emp; $count+=1; ?> <br>
+                         <?php endif;  ?>
+                       <?php endforeach; ?>
+                      </td> 
+                      <td><?php echo $m->status;?></td>                                 
+                    </tr>
+                  <?php endforeach;?>
+                </tbody>
+              </table>
+              <?php else:?>
+                <div class="Nowork">
+                  <p class="noworkstatement"><i class="fa-solid text-success fa-circle-exclamation"></i>&nbsp;Relax.. No work for this month!</p>
+                </div>
+              <?php endif;?>
+            </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for displaying Completed event -->
+  <div class="container">
+    <div class="modal fade" id="completeModal" role="dialog">
+      <div class="col-12 col-lg-12 col-md-12 col-sm-12 overflow-auto">
+        <div class="modal-dialog" style="max-width: 1000px;">
+          <div class="modal-content" style="width: 100%">
+            <div class="modal-header">
+              <h4 class="modal-title">Completed Tasks</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>                      
+            </div>
+
+            <div class="modal-body">
+              <?php if($completed):?>
+                <table class="display" id="example3" style="width: 100%">
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Task Code</th>
+                      <th>Branch</th>
+                      <th>Service</th>
+                      <th>Technician</th>
+                      <th>Status</th>        
+                    </tr>
+                  </thead>
+                  <tbody>                         
+                    <?php foreach($completed as $cm):  ?>
+                      <tr>
+                        <td><?php echo date('m-d-Y',strtotime($cm->start_event)); ?></td>
+                        <td><?php echo $cm->event_code; ?></td>
+                        <td><?php echo $cm->client_branch; ?></td>
+                        <td><?php echo $cm->serv_type; ?></td>
+                        <td>
+                         <?php $data = explode(',',$cm->emp_array);
+                         $count = 0;
+                         ?>
+                         <?php foreach($data as $emp):  ?>
+                           <?php if($count < (count($data) - 1) ):  ?>
+                             ` <?php echo $emp; $count+=1; ?> <br>
+                           <?php endif;  ?>
+                         <?php endforeach; ?>
+                        </td> 
+                        <td><?php echo $cm->status;?></td>  
+                      </tr>
+                    <?php endforeach;?>
+                  </tbody>
+                </table>
+                <?php else:?>
+                  <div class="Nowork">
+                    <p class="noworkstatement"><i class="fa-solid text-success fa-circle-exclamation"></i>&nbsp;No completed tasks so far.</p>
+                  </div>
+                <?php endif;?>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for displaying Pending event -->
+  <div class="container">
+    <div class="modal fade" id="pendingModal" role="dialog">
+      <div class="col-12 col-lg-12 col-md-12 col-sm-12 overflow-auto">
+        <div class="modal-dialog" style="max-width: 1000px;">
+          <div class="modal-content"  style="width: 100%">
+            <div class="modal-header">
+              <h4 class="modal-title">Pending Tasks</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+              <?php if($notdone):?>
+                <table class="display" id="example4" style="width: 100%">
                   <thead>
                     <tr>
                       <th>Date</th>
@@ -314,11 +485,9 @@
                       <th>Service</th>
                       <th>Technician</th>
                       <th>Status</th>
-                      
                     </tr>
                   </thead>
-                  <tbody>
-                   
+                  <tbody>                   
                     <?php foreach($notdone as $nd):  ?>
                       <tr>
                         <td><?php echo date('m-d-Y',strtotime($nd->start_event)); ?></td>
@@ -336,122 +505,114 @@
                          <?php endforeach; ?>
                        </td> 
                        <td><?php echo $nd->status;?></td>
-                       
                       </tr>
                     <?php endforeach;?>
-
                   </tbody>
                 </table>
-               <?php else:?>
-                <div class="Nowork">
-                 <p class="noworkstatement"><i class="fa-solid text-success fa-circle-exclamation"></i>&nbsp;Hoorayyy!!.. All Tasks are Complete!</p>
-               </div>
-               <?php endif;?>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
-              </div>
+                <?php else:?>
+                  <div class="Nowork">
+                    <p class="noworkstatement"><i class="fa-solid text-success fa-circle-exclamation"></i>&nbsp;Hoorayyy!!.. All Tasks are Complete!</p>
+                  </div>
+                <?php endif;?>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
             </div>
           </div>
         </div>
       </div>
-      <!-- Modal for displaying Pending Appointments -->
-      <div class="container">
-        <div class="modal fade" id="apptModal" role="dialog">
-          <div class="modal-dialog" style="max-width:700px;">
-            <div class="modal-content">
+    </div>
+  </div>
 
-              <div class="modal-header">
-                <h4 class="modal-title">Pending Appointments</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                
-              </div>
-              <div class="modal-body">
-               <?php if($appt_pending):?>
-                <table class="table table-bordered">
+  <!-- Modal for displaying Pending Appointments -->
+  <div class="container">
+    <div class="modal fade" id="apptModal" role="dialog">
+      <div class="col-12 col-lg-12 col-md-12 col-sm-12 overflow-auto">
+        <div class="modal-dialog" style="max-width: 700px;">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Pending Appointments</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <?php if($appt_pending):?>
+                <table class="display" id="example5" style="width: 100%">
                   <thead>
                     <tr>
                       <th>Date</th>
                       <th>Appt Code</th>
                       <th>Status</th>
-                      
                     </tr>
                   </thead>
                   <tbody>
-                   
                     <?php foreach($appt_pending as $p):  ?>
                       <tr>
                         <td><?php echo date('m-d-Y',strtotime($p->appt_date)); ?></td>
                         <td><?php echo $p->appt_code; ?></td>
                         <td><?php echo $p->appt_status;?></td>
-                       
                       </tr>
                     <?php endforeach;?>
-
                   </tbody>
                 </table>
-               <?php else:?>
-                <div class="Nowork">
-                 <p class="noworkstatement"><i class="fa-solid text-success fa-circle-exclamation"></i>&nbsp;No Pending Appointments!</p>
-               </div>
-               <?php endif;?>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
-              </div>
+                <?php else:?>
+                  <div class="Nowork">
+                    <p class="noworkstatement"><i class="fa-solid text-success fa-circle-exclamation"></i>&nbsp;No Pending Appointments!</p>
+                  </div>
+                <?php endif;?>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
             </div>
           </div>
         </div>
       </div>
-      <!-- Modal for displaying Pending Call Logs -->
-      <div class="container">
-        <div class="modal fade" id="logModal" role="dialog">
-          <div class="modal-dialog" style="max-width:700px;">
-            <div class="modal-content">
+    </div>
+  </div>
 
-              <div class="modal-header">
-                <h4 class="modal-title">Pending Logs</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                
-              </div>
-              <div class="modal-body">
-               <?php if($log_pending):?>
-                <table class="table table-bordered">
+  <!-- Modal for displaying Pending Call Logs -->
+  <div class="container">
+    <div class="modal fade" id="logModal" role="dialog">
+      <div class="col-12 col-lg-12 col-md-12 col-sm-12 overflow-auto">
+        <div class="modal-dialog" style="max-width:700px;">
+          <div class="modal-content" style="width: 100%">
+            <div class="modal-header">
+              <h4 class="modal-title">Pending Logs</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <?php if($log_pending):?>
+                <table class="display" id="example6" style="width: 100%">
                   <thead>
                     <tr>
                       <th>Date</th>
                       <th>Log Code</th>
                       <th>Status</th>
-                      
                     </tr>
                   </thead>
                   <tbody>
-                   
                     <?php foreach($log_pending as $p):  ?>
                       <tr>
                         <td><?php echo date('m-d-Y',strtotime($p->date)); ?></td>
                         <td><?php echo $p->log_code; ?></td>
                         <td><?php echo $p->status;?></td>
-                       
                       </tr>
                     <?php endforeach;?>
-
                   </tbody>
                 </table>
-               <?php else:?>
-                <div class="Nowork">
-                 <p class="noworkstatement"><i class="fa-solid text-success fa-circle-exclamation"></i>&nbsp;No Pending Appointments!</p>
-               </div>
+                <?php else:?>
+                  <div class="Nowork">
+                    <p class="noworkstatement"><i class="fa-solid text-success fa-circle-exclamation"></i>&nbsp;No Pending Appointments!</p>
+                  </div>
                <?php endif;?>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
-              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
             </div>
           </div>
         </div>
       </div>
-
+    </div>
+  </div>
 
 <!-- Content Row -->
 <div class="row">
@@ -515,8 +676,6 @@
       </div>
 
       <!--Completed -->
-
-
       <div class="col-12 col-lg-3 col-md-6 col-sm-12 mb-4">
         <div class="card border-left-info shadow h-100 py-2">
           <div class="card-body1">
@@ -607,6 +766,7 @@
     </div>
     <?php }?>
   </div>
+<<<<<<< Updated upstream
 <?php if($_SESSION['position'] == USER_ROLE_ADMIN || $_SESSION['position'] == USER_ROLE_SECRETARY):?>
 <div class="row">
   <div class="col-12 col-lg-6 col-md-6 col-sm-12 col-xss-12" id="chart_div" style="width: 100%; height: 500px;"></div>
@@ -635,6 +795,14 @@
     </div>
   </div>
 </div>
+=======
+
+  <div class="row">
+    <div class="col-12 col-lg-6 col-md-6 col-sm-12" id="chart_div" style="width: 100%; height: 500px;"></div>
+    <div class="col-12 col-lg-6 col-md-6 col-sm-12" id="piechart_3d" style="width: 100%; height: 500px;"></div>
+    <!-- <div id="barchart_material" style="width: 900px; height: 500px;"></div> -->
+  </div>
+>>>>>>> Stashed changes
 
 <div id='calendar' class="col-lg-12 col-md-10" style="width:100%;"></div>
 <div id='datepicker'></div>
@@ -764,16 +932,63 @@
   <!-- Bootstrap core JavaScript-->
   
   <div class="row justify-content-center">
-
   </div>
 
+  </div>
 </div>
-</div>
+
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+<script src="https://cdn.datatables.net/rowreorder/1.2.8/js/dataTables.rowReorder.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+
+<script>
+$(document).ready(function() {
+   var table = $('#example').DataTable( {
+         responsive: true
+   } );
+} );
+
+$(document).ready(function() {
+   var table = $('#example1').DataTable( {
+         responsive: true
+   } );
+} );
+
+$(document).ready(function() {
+   var table = $('#example2').DataTable( {
+         responsive: true
+   } );
+} );
+
+$(document).ready(function() {
+   var table = $('#example3').DataTable( {
+         responsive: true
+   } );
+} );
+
+$(document).ready(function() {
+   var table = $('#example4').DataTable( {
+         responsive: true
+   } );
+} );
+
+$(document).ready(function() {
+   var table = $('#example5').DataTable( {
+         responsive: true
+   } );
+} );
+
+$(document).ready(function() {
+   var table = $('#example6').DataTable( {
+         responsive: true
+   } );
+} );
+</script>
+
 <script type="text/javascript">
   // var eventsToday = <?= json_encode($eventsToday); ?>;
   var pendingEvents = <?= json_encode($pending_events); ?>;
