@@ -17,6 +17,7 @@ use App\Models\Event_fcu_views;
 use App\Models\Fcu_no;
 use App\Models\Event_emp;
 use App\Models\Aircon;
+use App\Models\Event_fcu;
 
 class Dashboard extends BaseController
 {   
@@ -42,12 +43,14 @@ class Dashboard extends BaseController
         $event = new Event();
         $client = new Client();
         $serv = new Serv();
+        $emp_event = new Event_emp();
         $event_emp = new Event_emp_views();
         $appt = new Appointment();
         $logs = new Call_logs();
         $bdo_user = new User_bdo();
         $emp = new Emp();
         $event_fcu = new Event_fcu_views();
+        $fcu_event = new Event_fcu();
         $fcu_no = new Fcu_no();
 
         $aircon = new Aircon();
@@ -60,7 +63,134 @@ class Dashboard extends BaseController
         $data['pending_events'] = $event->where('status','Pending')->findAll();
         $data['events'] = $event->where('status','Pending')->where('start_event', $date1)->findAll();
         // dd($date);
-        
+
+        // -------------------------AUTO SCHEDULING GENERAL CLEANING----------------------------------
+        $autoSched = $allevent->where('serv_name','General Cleaning')->where('area !=','Other')->groupBy('client_branch','ASC')->findAll();
+        $autoSchedFcuData = '';
+        $autoSchedEmpData = '';
+        if(isset($autoSched)){
+            for ($i=0; $i < count($autoSched); $i++) { 
+               $autoSchedId = $autoSched[$i]['id'];
+               $autoSched_startEvent = $autoSched[$i]['start_event'];
+               $autoSched_servId = $autoSched[$i]['serv_id'];
+               $autoSched_clientId = $autoSched[$i]['client_id'];
+               $autoSched_title = $autoSched[$i]['title'];
+               $autoSched_time = $autoSched[$i]['time'];
+               $autoSched_endTime = $autoSched[$i]['end_time'];
+               $autoSched_comments = $autoSched[$i]['comments'];
+               $autoSchedFcuData= $event_fcu->where('id', $autoSchedId)->findAll();
+               $autoSchedEmpData= $event_emp->where('id', $autoSchedId)->findAll();
+               // dd($autoSchedEmpData);
+               $autoSchedMonth = date('m',strtotime($autoSched_startEvent));
+               $autoSchedDay = date('d',strtotime($autoSched_startEvent));
+               $autoSched_date = ['01','02','04','05','07','08','10','11'];
+               for ($j=0; $j < count($autoSched_date); $j++) { 
+                   if($autoSchedMonth != $autoSched_date[$j]){
+                    $dateNew = date('Y-'.$autoSched_date[$j].'-'.$autoSchedDay);
+                    $checkAuto = $allevent->where('client_id', $autoSched_clientId)->where('serv_name','General Cleaning')->where('start_event',$dateNew)->first();
+                    $set = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                    $code = substr(str_shuffle($set), 0, 6);
+                        if(!isset($checkAuto)){
+                            $success = $event->insert([
+                                'title' => $autoSched_title,
+                                'start_event' => date('Y-'.$autoSched_date[$j].'-'.$autoSchedDay),
+                                'time' => $autoSched_time,
+                                'end_time' => $autoSched_endTime,
+                                'client_id' => $autoSched_clientId,
+                                'serv_id' => $autoSched_servId,
+                                'comments' =>$autoSched_comments,
+                            ]);
+                           if($success){
+                                $event_code = ['event_code' => 'task-'.$code.'-'.(int)$success];
+                                $event->update((int)$success,$event_code);
+
+                                foreach ($autoSchedEmpData as $key => $value) {
+                                    $emp_event->insert([
+                                        'emp_id'=> (int) $value['emp_id'],
+                                        'id' => (int) $success
+                                    ]);
+                                }
+
+                                foreach ($autoSchedFcuData as $key => $value) {
+                                    $fcu_event->insert([
+                                        'id'=> (int) $success,
+                                        'aircon_id'=> (int)$value['aircon_id'],
+                                        'quantity'=> (int)$value['quantity'],
+                                        'fcuno'=>$value['fcuno']
+                                    ]);
+                                }
+                           }
+                        }
+                    }
+               }
+            }
+        }
+        // -------------------------AUTO SCHEDULING FILTER CLEANING----------------------------------
+        // dd($value );
+        $autoSchedFilter = $allevent->where('serv_name','Filter Cleaning')->where('area !=','Other')->groupBy('client_branch','ASC')->findAll();
+        // dd($autoSchedFilter);
+        $autoSchedFcuDataFilter = '';
+        $autoSchedEmpDataFilter = '';
+        if(isset($autoSched)){
+            for ($i=0; $i < count($autoSchedFilter); $i++) { 
+               $autoSchedIdFilter = $autoSchedFilter[$i]['id'];
+               $autoSched_startEventFilter = $autoSchedFilter[$i]['start_event'];
+               $autoSched_servIdFilter = $autoSchedFilter[$i]['serv_id'];
+               $autoSched_clientIdFilter = $autoSchedFilter[$i]['client_id'];
+               $autoSched_titleFilter = $autoSchedFilter[$i]['title'];
+               $autoSched_timeFilter = $autoSchedFilter[$i]['time'];
+               $autoSched_endTimeFilter = $autoSchedFilter[$i]['end_time'];
+               $autoSched_commentsFilter = $autoSchedFilter[$i]['comments'];
+               $autoSchedFcuDataFilter= $event_fcu->where('id', $autoSchedIdFilter)->findAll();
+               $autoSchedEmpDataFilter= $event_emp->where('id', $autoSchedIdFilter)->findAll();
+               // dd($autoSchedEmpData);
+               $autoSchedMonthFilter = date('m',strtotime($autoSched_startEventFilter));
+               $autoSchedDayFilter = date('d',strtotime($autoSched_startEventFilter));
+               $autoSched_dateFilter = ['03','06','09','12'];
+               for ($j=0; $j < count($autoSched_dateFilter); $j++) { 
+                   if($autoSchedMonthFilter != $autoSched_dateFilter[$j]){
+                    $dateNewFilter = date('Y-'.$autoSched_dateFilter[$j].'-'.$autoSchedDayFilter);
+                    $checkAutoFilter = $allevent->where('client_id', $autoSched_clientIdFilter)->where('serv_name','General Cleaning')->where('start_event',$dateNewFilter)->first();
+                    $setF = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                    $codeF = substr(str_shuffle($setF), 0, 6);
+                        if(!isset($checkAutoFilter)){
+                            $successF = $event->insert([
+                                'title' => $autoSched_titleFilter,
+                                'start_event' => date('Y-'.$autoSched_dateFilter[$j].'-'.$autoSchedDayFilter),
+                                'time' => $autoSched_timeFilter,
+                                'end_time' => $autoSched_endTimeFilter,
+                                'client_id' => $autoSched_clientIdFilter,
+                                'serv_id' => $autoSched_servIdFilter,
+                                'comments' =>$autoSched_commentsFilter,
+                            ]);
+                           if($successF){
+                                $event_codeF = ['event_code' => 'task-'.$codeF.'-'.(int)$successF];
+                                $event->update((int)$successF,$event_codeF);
+
+                                foreach ($autoSchedEmpDataFilter as $key => $value) {
+                                    $emp_event->insert([
+                                        'emp_id'=> (int) $value['emp_id'],
+                                        'id' => (int) $successF
+                                    ]);
+                                }
+
+                                foreach ($autoSchedFcuDataFilter as $key => $value) {
+                                    $fcu_event->insert([
+                                        'id'=> (int) $successF,
+                                        'aircon_id'=> (int)$value['aircon_id'],
+                                        'quantity'=> (int)$value['quantity'],
+                                        'fcuno'=>$value['fcuno']
+                                    ]);
+                                }
+                           }
+                        }
+                    }
+               }
+            }
+        }
+
+        // -------------------------END OF AUTO SCHEDULING -----------------------------------
+
         // dd($date1);
         $data['eventToday'] = array();
         $data['week1'] = array();
