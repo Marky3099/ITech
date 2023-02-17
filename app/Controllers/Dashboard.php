@@ -361,7 +361,6 @@ if($ratings){
 }
 
 // dd($data['totality']);
-// dd($overallPerformance);
 $performEmp = array();
 $aveRate = 0;
 for ($i=0; $i < count($ratings); $i++) { 
@@ -372,11 +371,16 @@ for ($i=0; $i < count($ratings); $i++) {
     $empId = $ratings[$i]->emp_name;
     $rateEmp = $ratings[$i]->rate_emp;
     if($e<0){
-        $e = $c;
+        // dd('true');
+        // $e = $c;
         if($d < count($ratings)){
+            // dd($empId == $ratings[$d]->emp_name);
             if($empId == $ratings[$d]->emp_name){
                 $aveRate = ($rateEmp+$ratings[$c+1]->rate_emp)/2;
                 // dd($aveRate);
+            }elseif($aveRate==0){
+                array_push($performEmp,["['".$empId."', ".$rateEmp."],"]);
+                $aveRate = 0;
             }
             
         }
@@ -392,6 +396,9 @@ for ($i=0; $i < count($ratings); $i++) {
             }else{
                 array_push($performEmp,["['".$empId."', ".$rateEmp."],"]);
             }
+        }elseif($aveRate==0){
+            array_push($performEmp,["['".$empId."', ".$rateEmp."],"]);
+            $aveRate = 0;
         }else{
             array_push($performEmp,["['".$empId."', ".$aveRate."],"]);
             $aveRate = 0;
@@ -404,7 +411,7 @@ for ($i=0; $i < count($performEmp); $i++) {
         array_push($data['performEmp'],$performEmp[$i][$j]);
     }
 }
-// dd($data['performEmp']);
+// dd($ratings);
 // dd($ratings);
 
 //count today's tasks
