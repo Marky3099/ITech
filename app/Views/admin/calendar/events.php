@@ -43,7 +43,9 @@
       <div class="modal-body">
         
         <div class="container" id="report-container">
-           <center><p><i class="fa-solid text-success fa-circle-exclamation"></i>&nbsp;There are no reports.</p></center>
+          <div id="noreports">
+            
+          </div>
           <div class="row" id="report_files">
             
           </div>
@@ -315,6 +317,8 @@ $(document).ready(function() {
    var msg = ''; 
    var del = '';
    var add = '';
+   var userSession = <?= json_encode($userSession)?>;
+   // console.log(userSession);
    var update = '';
    <?php if(session()->has('limit')){?>
     Swal.fire({
@@ -374,11 +378,23 @@ $(document).ready(function() {
               for(var j =0; j<response.users.length; j++){
                 if(response.reports[i].user_id == response.users[j].user_id){
                   username = response.users[j].name;
-                  position = response.users[j].position;
+                  if(response.users[j].position == 'Employee'){
+                    position = 'Technician';
+                  }else{
+                    position = response.users[j].position;
+                  }
+                  userId = response.users[j].user_id;
+                  // console.log(userId);
                 }
               }
 
-              $('#report_table').append('<tbody id=a'+response.reports[i].upload_id+'><tr><td>'+(a+=1)+'</td><td><a target="__blank" href = '+dir+'/'+image+' style="z-index:-1;"><img src='+dir+'/'+imageFile+' height="150px" width="150px"></a></td><td>'+notes+'</td><td>'+username+'('+position+')'+'</td><td><button id='+response.reports[i].upload_id+' class="btn btn-danger exis">Delete</button></td></tr></tbody></table>');
+              var appendReport = '<tbody id=a'+response.reports[i].upload_id+'><tr><td>'+(a+=1)+'</td><td><a target="__blank" href = '+dir+'/'+image+' style="z-index:-1;"><img src='+dir+'/'+imageFile+' height="150px" width="150px"></a></td><td>'+notes+'</td><td>'+username+'('+position+')'+'</td><td>';
+                if(userSession == userId){
+                  appendReport += '<button id='+response.reports[i].upload_id+' class="btn btn-danger exis">Delete</button>';
+                }
+                appendReport += '</td></tr></tbody></table>';
+
+              $('#report_table').append(appendReport);
             }
             $('.exis').click(function(){
               var reportId = $(this).attr('id');
@@ -392,14 +408,14 @@ $(document).ready(function() {
                     'id': reportId,
                  },
                  success: function(response){
-                    console.log(response);
+                    // console.log(response);
                  }
                });
               }
               // console.log();
             })
           }else{
-            $('#report-container #noreports').append('<h1><center>No Reports Yet<center></h1>')
+            $('#report-container #noreports').append('<center><p><i class="fa-solid text-success fa-circle-exclamation"></i>&nbsp;There are no reports.</p></center>')
           }
           myModal.show();
        }

@@ -190,7 +190,8 @@ public function event(){
         FROM event_fcu_views');
     $datas['distinct_event'] = $query->getResult();
           // dd($datas['distinct'] );
-
+    $session = session();
+    $datas['userSession'] = $_SESSION['user_id'];
     $datas['event'] = array();
     $datas['cId'] ="";
     $datas['cbranch']="";
@@ -302,6 +303,8 @@ public function emp_event(){
     $datas['event'] = array();
     $datas['cId'] ="";
     $datas['cbranch']="";
+    $session = session();
+    $datas['userSession'] = $_SESSION['user_id'];
     $emp_id = $_SESSION['emp_id'];
     $datas['client'] = $client->orderBy('client_id', 'ASC')->findAll();
         // $datas['emp'] = $emp->orderBy('emp_id', 'ASC')->findAll();
