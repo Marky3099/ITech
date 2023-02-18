@@ -127,67 +127,67 @@ class Dashboard extends BaseController
         }
         // -------------------------AUTO SCHEDULING FILTER CLEANING----------------------------------
         // dd($value );
-        $autoSchedFilter = $allevent->where('serv_name','Filter Cleaning')->where('area !=','Other')->groupBy('client_branch','ASC')->findAll();
-        // dd($autoSchedFilter);
-        $autoSchedFcuDataFilter = '';
-        $autoSchedEmpDataFilter = '';
-        if(isset($autoSched)){
-            for ($i=0; $i < count($autoSchedFilter); $i++) { 
-               $autoSchedIdFilter = $autoSchedFilter[$i]['id'];
-               $autoSched_startEventFilter = $autoSchedFilter[$i]['start_event'];
-               $autoSched_servIdFilter = $autoSchedFilter[$i]['serv_id'];
-               $autoSched_clientIdFilter = $autoSchedFilter[$i]['client_id'];
-               $autoSched_titleFilter = $autoSchedFilter[$i]['title'];
-               $autoSched_timeFilter = $autoSchedFilter[$i]['time'];
-               $autoSched_endTimeFilter = $autoSchedFilter[$i]['end_time'];
-               $autoSched_commentsFilter = $autoSchedFilter[$i]['comments'];
-               $autoSchedFcuDataFilter= $event_fcu->where('id', $autoSchedIdFilter)->findAll();
-               $autoSchedEmpDataFilter= $event_emp->where('id', $autoSchedIdFilter)->findAll();
-               // dd($autoSchedEmpData);
-               $autoSchedMonthFilter = date('m',strtotime($autoSched_startEventFilter));
-               $autoSchedDayFilter = date('d',strtotime($autoSched_startEventFilter));
-               $autoSched_dateFilter = ['03','06','09','12'];
-               for ($j=0; $j < count($autoSched_dateFilter); $j++) { 
-                   if($autoSchedMonthFilter != $autoSched_dateFilter[$j]){
-                    $dateNewFilter = date('Y-'.$autoSched_dateFilter[$j].'-'.$autoSchedDayFilter);
-                    $checkAutoFilter = $allevent->where('client_id', $autoSched_clientIdFilter)->where('serv_name','General Cleaning')->where('start_event',$dateNewFilter)->first();
-                    $setF = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-                    $codeF = substr(str_shuffle($setF), 0, 6);
-                        if(!isset($checkAutoFilter)){
-                            $successF = $event->insert([
-                                'title' => $autoSched_titleFilter,
-                                'start_event' => date('Y-'.$autoSched_dateFilter[$j].'-'.$autoSchedDayFilter),
-                                'time' => $autoSched_timeFilter,
-                                'end_time' => $autoSched_endTimeFilter,
-                                'client_id' => $autoSched_clientIdFilter,
-                                'serv_id' => $autoSched_servIdFilter,
-                                'comments' =>$autoSched_commentsFilter,
-                            ]);
-                           if($successF){
-                                $event_codeF = ['event_code' => 'task-'.$codeF.'-'.(int)$successF];
-                                $event->update((int)$successF,$event_codeF);
+        // $autoSchedFilter = $allevent->where('serv_name','Filter Cleaning')->where('area !=','Other')->groupBy('client_branch','ASC')->findAll();
+        // // dd($autoSchedFilter);
+        // $autoSchedFcuDataFilter = '';
+        // $autoSchedEmpDataFilter = '';
+        // if(isset($autoSched)){
+        //     for ($i=0; $i < count($autoSchedFilter); $i++) { 
+        //        $autoSchedIdFilter = $autoSchedFilter[$i]['id'];
+        //        $autoSched_startEventFilter = $autoSchedFilter[$i]['start_event'];
+        //        $autoSched_servIdFilter = $autoSchedFilter[$i]['serv_id'];
+        //        $autoSched_clientIdFilter = $autoSchedFilter[$i]['client_id'];
+        //        $autoSched_titleFilter = $autoSchedFilter[$i]['title'];
+        //        $autoSched_timeFilter = $autoSchedFilter[$i]['time'];
+        //        $autoSched_endTimeFilter = $autoSchedFilter[$i]['end_time'];
+        //        $autoSched_commentsFilter = $autoSchedFilter[$i]['comments'];
+        //        $autoSchedFcuDataFilter= $event_fcu->where('id', $autoSchedIdFilter)->findAll();
+        //        $autoSchedEmpDataFilter= $event_emp->where('id', $autoSchedIdFilter)->findAll();
+        //        // dd($autoSchedEmpData);
+        //        $autoSchedMonthFilter = date('m',strtotime($autoSched_startEventFilter));
+        //        $autoSchedDayFilter = date('d',strtotime($autoSched_startEventFilter));
+        //        $autoSched_dateFilter = ['03','06','09','12'];
+        //        for ($j=0; $j < count($autoSched_dateFilter); $j++) { 
+        //            if($autoSchedMonthFilter != $autoSched_dateFilter[$j]){
+        //             $dateNewFilter = date('Y-'.$autoSched_dateFilter[$j].'-'.$autoSchedDayFilter);
+        //             $checkAutoFilter = $allevent->where('client_id', $autoSched_clientIdFilter)->where('serv_name','General Cleaning')->where('start_event',$dateNewFilter)->first();
+        //             $setF = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        //             $codeF = substr(str_shuffle($setF), 0, 6);
+        //                 if(!isset($checkAutoFilter)){
+        //                     $successF = $event->insert([
+        //                         'title' => $autoSched_titleFilter,
+        //                         'start_event' => date('Y-'.$autoSched_dateFilter[$j].'-'.$autoSchedDayFilter),
+        //                         'time' => $autoSched_timeFilter,
+        //                         'end_time' => $autoSched_endTimeFilter,
+        //                         'client_id' => $autoSched_clientIdFilter,
+        //                         'serv_id' => $autoSched_servIdFilter,
+        //                         'comments' =>$autoSched_commentsFilter,
+        //                     ]);
+        //                    if($successF){
+        //                         $event_codeF = ['event_code' => 'task-'.$codeF.'-'.(int)$successF];
+        //                         $event->update((int)$successF,$event_codeF);
 
-                                foreach ($autoSchedEmpDataFilter as $key => $value) {
-                                    $emp_event->insert([
-                                        'emp_id'=> (int) $value['emp_id'],
-                                        'id' => (int) $successF
-                                    ]);
-                                }
+        //                         foreach ($autoSchedEmpDataFilter as $key => $value) {
+        //                             $emp_event->insert([
+        //                                 'emp_id'=> (int) $value['emp_id'],
+        //                                 'id' => (int) $successF
+        //                             ]);
+        //                         }
 
-                                foreach ($autoSchedFcuDataFilter as $key => $value) {
-                                    $fcu_event->insert([
-                                        'id'=> (int) $successF,
-                                        'aircon_id'=> (int)$value['aircon_id'],
-                                        'quantity'=> (int)$value['quantity'],
-                                        'fcuno'=>$value['fcuno']
-                                    ]);
-                                }
-                           }
-                        }
-                    }
-               }
-            }
-        }
+        //                         foreach ($autoSchedFcuDataFilter as $key => $value) {
+        //                             $fcu_event->insert([
+        //                                 'id'=> (int) $successF,
+        //                                 'aircon_id'=> (int)$value['aircon_id'],
+        //                                 'quantity'=> (int)$value['quantity'],
+        //                                 'fcuno'=>$value['fcuno']
+        //                             ]);
+        //                         }
+        //                    }
+        //                 }
+        //             }
+        //        }
+        //     }
+        // }
 
         // -------------------------END OF AUTO SCHEDULING -----------------------------------
 
