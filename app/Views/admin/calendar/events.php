@@ -437,7 +437,7 @@ var rateModal = new bootstrap.Modal(document.getElementById('rateModal'));
             $('.rate-container').empty();
             $('.techRate').empty();
             if(rate.length > 0){
-              $('.rate-container').append(`<center><h2>Service's Review</h2></center>
+              $('.rate-container').append(`<center><h2>Review</h2></center>
           <div class="row">
             <div class="col-lg-4">
                <p class="servq">Service Quality</p>
@@ -535,7 +535,7 @@ var rateModal = new bootstrap.Modal(document.getElementById('rateModal'));
 
 
             }else{
-              $('.rate-container').append('<center><h1>No Reviews Yet</h1></center>');
+              $('.rate-container').append('<center><p><i class="fa-solid text-success fa-circle-exclamation"></i>&nbsp;There are no reviews yet.</p></center>');
             }
            }
       });

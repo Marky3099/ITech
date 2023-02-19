@@ -479,7 +479,7 @@ $(document).ready(function() {
             $('.rate-container').empty();
             $('.techRate-view').empty();
             if(rate.length > 0){
-              $('.rate-container').append(`<center><h2>Service's Review</h2></center>
+              $('.rate-container').append(`<center><h2>Review</h2></center>
           <div class="row">
             <div class="col-lg-4">
                <p class="servq">Service Quality</p>
@@ -578,7 +578,7 @@ $(document).ready(function() {
 
 
             }else{
-              $('.rate-container').append('<h5 class="text-center">There are no reviews yet</h5>');
+              $('.rate-container').append('<center><p><i class="fa-solid text-success fa-circle-exclamation"></i>&nbsp;There are no reviews yet.</p></center>');
             }
            }
       });
