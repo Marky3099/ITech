@@ -463,7 +463,7 @@ $(document).ready(function() {
       //   $('.result').html('<h6>Terrible</h6>');
       // })
       
-      var rateModal = new bootstrap.Modal(document.getElementById('rateModal'));
+      var rateModal = new bootstrap.Modal(document.getElementById('rateModal1'));
    $('.viewReport').click(function(){
       var id = $(this).attr('id');
 
