@@ -3,7 +3,7 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css">
 
 <!-- modal for viewing rate service -->
-<div class="modal fade" id="rateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="rateModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -17,7 +17,7 @@
           
           
         </div>
-        <div class="techRate">
+        <div class="techRate1">
             
           </div>
         
@@ -477,7 +477,7 @@ $(document).ready(function() {
             var rate = response.rate;
             var emp = response.emp;
             $('.rate-container').empty();
-            $('.techRate').empty();
+            $('.techRate1').empty();
             if(rate.length > 0){
               $('.rate-container').append(`<center><h2>Service's Review</h2></center>
           <div class="row">
@@ -505,7 +505,7 @@ $(document).ready(function() {
               for(var i =0; i <rate.length; i++){
                 var empId = rate[i].emp_id;
                 if(empId == emp[i].emp_id){
-                  $('.techRate').append(`<h5>`+emp[i].emp_name+`</h5><div class="row rowa">
+                  $('.techRate1').append(`<h5>`+emp[i].emp_name+`</h5><div class="row rowa">
                   <div class="col-lg-5">
                      <p class="servq">Technician Quality</p>
                   </div>
