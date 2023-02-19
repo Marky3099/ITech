@@ -2,6 +2,35 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/rowreorder/1.2.8/css/rowReorder.dataTables.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css">
 
+<!-- modal for viewing rate service -->
+<div class="modal fade" id="rateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Service Review</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container rate-container">
+          
+          
+        </div>
+        <div class="techRate">
+            
+          </div>
+        
+        <h6></h6>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <!-- rate service -->
 <div class="modal fade" id="rateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -177,6 +206,8 @@
             <?php if($appt->appt_status == 'Done'):?>
               <?php if($appt->rate == 0):?>
                 <a href=# id="<?php echo $appt->appt_id;?>" class="btn btn-success btn-sm ratea" data-toggle="modal" data-target="#rateModal">Rate</a>
+              <?php else:?>
+                <a href="#" id="<?=$appt->appt_code?>" class="btn btn-success btn-sm viewReport">View</a>
               <?php endif;?>
             <?php endif;?>
            </td>
@@ -432,5 +463,128 @@ $(document).ready(function() {
       //   $('.result').html('<h6>Terrible</h6>');
       // })
       
+      var rateModal = new bootstrap.Modal(document.getElementById('rateModal'));
+   $('.viewReport').click(function(){
+      var id = $(this).attr('id');
+
+      $.ajax({
+           method:"GET",
+           url:"<?=base_url('/appointment/view-ratings')?>",
+           data: {
+              'id': id,
+           },
+           success: function(response){
+            var rate = response.rate;
+            var emp = response.emp;
+            $('.rate-container').empty();
+            $('.techRate').empty();
+            if(rate.length > 0){
+              $('.rate-container').append(`<center><h2>Service's Review</h2></center>
+          <div class="row">
+            <div class="col-lg-4">
+               <p class="servq">Service Quality</p>
+            </div>
+            <div class="rate col-lg-6">
+              <input type="radio" id="star5" name="rate" value="5" disabled/>
+              <label for="star5" title="Amazing">5 stars</label>
+              <input type="radio" id="star4" name="rate" value="4" disabled/>
+              <label for="star4" title="Good">4 stars</label>
+              <input type="radio" id="star3" name="rate" value="3" disabled/>
+              <label for="star3" title="Fair">3 stars</label>
+              <input type="radio" id="star2" name="rate" value="2" disabled/>
+              <label for="star2" title="Poor">2 stars</label>
+              <input type="radio" id="star1" name="rate" value="1" disabled/>
+              <label for="star1" title="Terrible">1 star</label>
+            </div>
+            <div class="col-lg-2 result"></div>
+          </div>
+          <textarea name="comments" id="event_comments" placeholder="Share more thoughts on our service..." rows="4" cols="50" disabled></textarea>
+          <center><h2>Technician's Review</h2></center>
+          `);
+
+              for(var i =0; i <rate.length; i++){
+                var empId = rate[i].emp_id;
+                if(empId == emp[i].emp_id){
+                  $('.techRate').append(`<h5>`+emp[i].emp_name+`</h5><div class="row rowa">
+                  <div class="col-lg-5">
+                     <p class="servq">Technician Quality</p>
+                  </div>
+                  <div class="tech col-lg-6">
+                    <input type="radio" id="star5`+empId+`" name="rate_`+empId+`" value="5" disabled/>
+                    <label for="star5`+empId+`" title="Amazing">5 stars</label>
+                    <input type="radio" id="star4`+empId+`" name="rate_`+empId+`" value="4" disabled/>
+                    <label for="star4`+empId+`" title="Good">4 stars</label>
+                    <input type="radio" id="star3`+empId+`" name="rate_`+empId+`" value="3" disabled/>
+                    <label for="star3`+empId+`" title="Fair">3 stars</label>
+                    <input type="radio" id="star2`+empId+`" name="rate_`+empId+`" value="2" disabled/>
+                    <label for="star2`+empId+`" title="Poor">2 stars</label>
+                    <input type="radio" id="star1`+empId+`" name="rate_`+empId+`" value="1" disabled/>
+                    <label for="star1`+empId+`" title="Terrible">1 star</label>
+                  </div>
+                  <div class="col-lg-1 resulttech" id= a`+empId+`></div>
+                  </div>
+                  <textarea name="techComments[]" id="tech`+empId+`" placeholder="Leave a comment..." rows="4" cols="50" multiple disabled></textarea>`);
+
+                  if(rate[i].rate_emp == '100'){
+                    $('#star5'+empId).prop('checked',true);
+                    $('#a'+empId).html('Amazing');
+                  }else if(rate[i].rate_emp == '80'){
+                    $('#star4'+empId).prop('checked',true);
+                    $('#a'+empId).html('Good');
+                  }else if(rate[i].rate_emp == '60'){
+                    $('#star3'+empId).prop('checked',true);
+                    $('#a'+empId).html('Fair');
+                  }else if(rate[i].rate_emp == '40'){
+                    $('#star2'+empId).prop('checked',true);
+                    $('#a'+empId).html('Poor');
+                  }else if(rate[i].rate_emp == '20'){
+                    $('#star1'+empId).prop('checked',true);
+                    $('#a'+empId).html('Terrible');
+                  }
+                  if(rate[i].emp_comments.length > 0){
+                    // console.log('com');
+                    $('#tech'+empId).html(rate[i].emp_comments);
+                  }else{
+                    $('#tech'+empId).html('No Comments');
+                  }
+
+
+                }
+              }
+
+              if(rate[0].rate_event == '100'){
+                $('#star5').prop('checked',true);
+                $('.result').html('Amazing');
+              }else if(rate[0].rate_event == '80'){
+                $('#star4').prop('checked',true);
+                $('.result').html('Good');
+              }else if(rate[0].rate_event == '60'){
+                $('#star3').prop('checked',true);
+                $('.result').html('Fair');
+              }else if(rate[0].rate_event == '40'){
+                $('#star2').prop('checked',true);
+                $('.result').html('Poor');
+              }else if(rate[0].rate_event == '20'){
+                $('#star1').prop('checked',true);
+                $('.result').html('Terrible');
+              }
+
+              if(rate[0].event_comments.length > 0){
+                $('#event_comments').html(rate[0].event_comments);
+              }else{
+                $('#event_comments').html('No Comments');
+              }
+
+
+
+            }else{
+              $('.rate-container').append('<h5 class="text-center">There are no reviews yet</h5>');
+            }
+           }
+      });
+
+      rateModal.show();
+   })
+
    </script>
    <script type="text/javascript" src="<?= base_url('assets/js/crud.js')?>"></script>

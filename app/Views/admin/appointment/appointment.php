@@ -355,7 +355,7 @@ var rateModal = new bootstrap.Modal(document.getElementById('rateModal'));
 
 
             }else{
-              $('.rate-container').append('<h5 class="text-center">There no reviews yet</h5>');
+              $('.rate-container').append('<h5 class="text-center">There are no reviews yet</h5>');
             }
            }
       });
