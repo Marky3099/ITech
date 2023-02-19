@@ -17,7 +17,7 @@
           
           
         </div>
-        <div class="techRate1">
+        <div class="techRate-view">
             
           </div>
         
@@ -477,7 +477,7 @@ $(document).ready(function() {
             var rate = response.rate;
             var emp = response.emp;
             $('.rate-container').empty();
-            $('.techRate1').empty();
+            $('.techRate-view').empty();
             if(rate.length > 0){
               $('.rate-container').append(`<center><h2>Service's Review</h2></center>
           <div class="row">
@@ -505,7 +505,7 @@ $(document).ready(function() {
               for(var i =0; i <rate.length; i++){
                 var empId = rate[i].emp_id;
                 if(empId == emp[i].emp_id){
-                  $('.techRate1').append(`<h5>`+emp[i].emp_name+`</h5><div class="row rowa">
+                  $('.techRate-view').append(`<h5>`+emp[i].emp_name+`</h5><div class="row rowa">
                   <div class="col-lg-5">
                      <p class="servq">Technician Quality</p>
                   </div>
