@@ -505,6 +505,7 @@ $(document).ready(function() {
               for(var i =0; i <rate.length; i++){
                 var empId = rate[i].emp_id;
                 if(empId == emp[i].emp_id){
+                  console.log(emp[i]);
                   $('#rateModal1 .techRate-view').append(`<h5>`+emp[i].emp_name+`</h5><div class="row rowa">
                   <div class="col-lg-5">
                      <p class="servq">Technician Quality</p>
