@@ -184,17 +184,20 @@
     let dbtn = document.querySelector(".dropdown-btn");
     let dbtn1 = document.querySelector("#managedata");
 
-    dbtn.onclick = function(){
+    if(dbtn !== null){
+        dbtn.onclick = function(){
             if (!sidebar.classList.contains("active")) {
                 sidebar.classList.add("active");
             } 
         }
 
-    dbtn1.onclick = function(){
-            if (!sidebar.classList.contains("active")) {
-                sidebar.classList.add("active");
-            } 
-        }
+        dbtn1.onclick = function(){
+                if (!sidebar.classList.contains("active")) {
+                    sidebar.classList.add("active");
+                } 
+            }
+    }
+    
 </script>
 
     
