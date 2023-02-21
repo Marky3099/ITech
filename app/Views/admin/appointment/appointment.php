@@ -230,7 +230,7 @@ $(document).ready(function() {
                 'reason': valMsg,
              },
              success: function(response){
-                console.log(response);
+                // console.log(response);
              }
           })
 
@@ -381,7 +381,7 @@ var rateModal = new bootstrap.Modal(document.getElementById('rateModal'));
             'appt_id': id
          },
          success: function(response){
-          console.log(response);
+          // console.log(response);
             var date = new Date(response.appt_data.appt_date);
             var startEvent = date.toLocaleDateString("en-US",(options));
             var apptCode = response.appt_data.appt_code;
@@ -473,7 +473,7 @@ var rateModal = new bootstrap.Modal(document.getElementById('rateModal'));
             quantity = qty.toString();
             $('#modal_qty').html(qty);
             $('#modal_status').html(statusData);
-            console.log(response);
+            // console.log(response);
             myModal.show();
          }
       })

@@ -1158,14 +1158,14 @@ var count_update = 1;
       success:function(data)
       {
         var res = JSON.parse(data);
-        console.log(res.options);
+        // console.log(res.options);
         var html = '';
         html += res.options;
         $('#aircon_id_'+aircon).html(html);
 
       },
       error:function(e){
-        console.log(e);
+        // console.log(e);
       }
     })
   });

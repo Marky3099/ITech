@@ -282,7 +282,7 @@ $(document).ready(function() {
             'appt_id': id
          },
          success: function(response){
-          console.log(response);
+          // console.log(response);
             var date = new Date(response.appt_data.appt_date);
             var startEvent = date.toLocaleDateString("en-US",(options));
             var apptCode = response.appt_data.appt_code;
@@ -375,7 +375,7 @@ $(document).ready(function() {
 
             $('#modal_qty').html(quantity);
             $('#modal_status').html(statusData);
-            console.log(response);
+            // console.log(response);
             myModal.show();
             }
          })
