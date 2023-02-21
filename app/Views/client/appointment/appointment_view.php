@@ -504,7 +504,7 @@ $(document).ready(function() {
 
               for(var i =0; i <rate.length; i++){
                 var empId = rate[i].emp_id;
-                console.log(emp[i]);
+                console.log(emp[i].emp_id+' '+empId);
                 if(empId == emp[i].emp_id){
 
                   $('#rateModal1 .techRate-view').append(`<h5>`+emp[i].emp_name+`</h5><div class="row rowa">
