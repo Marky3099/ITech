@@ -462,7 +462,7 @@ var rateModal = new bootstrap.Modal(document.getElementById('rateModal'));
               for(var i =0; i <rate.length; i++){
                 for (var j = 0; j < emp.length; j++) {
                   var empId = rate[i].emp_id;
-                  // console.log(emp[j].emp_id+' '+empId);
+                  console.log(emp[j].emp_id+' '+empId);
                   if(emp[j].emp_id == empId){
 
                     $('#rateModal1 .techRate-view').append(`<h5>`+emp[j].emp_name+`</h5><div class="row rowa">
