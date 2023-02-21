@@ -280,52 +280,54 @@ var rateModal = new bootstrap.Modal(document.getElementById('rateModal'));
           `);
 
               for(var i =0; i <rate.length; i++){
-                var empId = rate[i].emp_id;
-                if(empId == emp[i].emp_id){
-                  $('.techRate').append(`<h5>`+emp[i].emp_name+`</h5><div class="row rowa">
-                  <div class="col-lg-5">
-                     <p class="servq">Technician Quality</p>
-                  </div>
-                  <div class="tech col-lg-6">
-                    <input type="radio" id="star5`+empId+`" name="rate_`+empId+`" value="5" disabled/>
-                    <label for="star5`+empId+`" title="Amazing">5 stars</label>
-                    <input type="radio" id="star4`+empId+`" name="rate_`+empId+`" value="4" disabled/>
-                    <label for="star4`+empId+`" title="Good">4 stars</label>
-                    <input type="radio" id="star3`+empId+`" name="rate_`+empId+`" value="3" disabled/>
-                    <label for="star3`+empId+`" title="Fair">3 stars</label>
-                    <input type="radio" id="star2`+empId+`" name="rate_`+empId+`" value="2" disabled/>
-                    <label for="star2`+empId+`" title="Poor">2 stars</label>
-                    <input type="radio" id="star1`+empId+`" name="rate_`+empId+`" value="1" disabled/>
-                    <label for="star1`+empId+`" title="Terrible">1 star</label>
-                  </div>
-                  <div class="col-lg-1 resulttech" id= a`+empId+`></div>
-                  </div>
-                  <textarea name="techComments[]" id="tech`+empId+`" placeholder="Leave a comment..." rows="4" cols="50" multiple disabled></textarea>`);
+                for (var j = 0; j < emp.length; j++) {
+                  var empId = rate[i].emp_id;
+                  // console.log(emp[j].emp_id+' '+empId);
+                  if(emp[j].emp_id == empId){
 
-                  if(rate[i].rate_emp == '100'){
-                    $('#star5'+empId).prop('checked',true);
-                    $('#a'+empId).html('Amazing');
-                  }else if(rate[i].rate_emp == '80'){
-                    $('#star4'+empId).prop('checked',true);
-                    $('#a'+empId).html('Good');
-                  }else if(rate[i].rate_emp == '60'){
-                    $('#star3'+empId).prop('checked',true);
-                    $('#a'+empId).html('Fair');
-                  }else if(rate[i].rate_emp == '40'){
-                    $('#star2'+empId).prop('checked',true);
-                    $('#a'+empId).html('Poor');
-                  }else if(rate[i].rate_emp == '20'){
-                    $('#star1'+empId).prop('checked',true);
-                    $('#a'+empId).html('Terrible');
+                    $('#rateModal1 .techRate-view').append(`<h5>`+emp[j].emp_name+`</h5><div class="row rowa">
+                    <div class="col-lg-5">
+                       <p class="servq">Technician Quality</p>
+                    </div>
+                    <div class="tech col-lg-6">
+                      <input type="radio" id="star5`+empId+`" name="rate_`+empId+`" value="5" disabled/>
+                      <label for="star5`+empId+`" title="Amazing">5 stars</label>
+                      <input type="radio" id="star4`+empId+`" name="rate_`+empId+`" value="4" disabled/>
+                      <label for="star4`+empId+`" title="Good">4 stars</label>
+                      <input type="radio" id="star3`+empId+`" name="rate_`+empId+`" value="3" disabled/>
+                      <label for="star3`+empId+`" title="Fair">3 stars</label>
+                      <input type="radio" id="star2`+empId+`" name="rate_`+empId+`" value="2" disabled/>
+                      <label for="star2`+empId+`" title="Poor">2 stars</label>
+                      <input type="radio" id="star1`+empId+`" name="rate_`+empId+`" value="1" disabled/>
+                      <label for="star1`+empId+`" title="Terrible">1 star</label>
+                    </div>
+                    <div class="col-lg-1 resulttech" id= a`+empId+`></div>
+                    </div>
+                    <textarea name="techComments[]" id="tech`+empId+`" placeholder="Leave a comment..." rows="4" cols="50" multiple disabled></textarea>`);
+
+                    if(rate[i].rate_emp == '100'){
+                      $('#star5'+empId).prop('checked',true);
+                      $('#a'+empId).html('Amazing');
+                    }else if(rate[i].rate_emp == '80'){
+                      $('#star4'+empId).prop('checked',true);
+                      $('#a'+empId).html('Good');
+                    }else if(rate[i].rate_emp == '60'){
+                      $('#star3'+empId).prop('checked',true);
+                      $('#a'+empId).html('Fair');
+                    }else if(rate[i].rate_emp == '40'){
+                      $('#star2'+empId).prop('checked',true);
+                      $('#a'+empId).html('Poor');
+                    }else if(rate[i].rate_emp == '20'){
+                      $('#star1'+empId).prop('checked',true);
+                      $('#a'+empId).html('Terrible');
+                    }
+                    if(rate[i].emp_comments.length > 0){
+                      // console.log('com');
+                      $('#tech'+empId).html(rate[i].emp_comments);
+                    }else{
+                      $('#tech'+empId).html('No Comments');
+                    }
                   }
-                  if(rate[i].emp_comments.length > 0){
-                    // console.log('com');
-                    $('#tech'+empId).html(rate[i].emp_comments);
-                  }else{
-                    $('#tech'+empId).html('No Comments');
-                  }
-
-
                 }
               }
 
