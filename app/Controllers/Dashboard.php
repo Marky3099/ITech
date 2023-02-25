@@ -507,42 +507,47 @@ if($ratings){
         if($a<count($ratings1)){
             $rateMonthNext = date('M',strtotime($ratings1[$a]->start_event));
             if($b<0){
+                
                 if($rateMonth==$rateMonthNext){
                     $totalRatings = $ratings1[$i]->rate_event + $ratings1[$a]->rate_event;
                     $countRate++;
                 }else{
-                    array_push($data['monthRate'],["['".$rateMonth."',".$ratings1[$i]->rate_event."]"]);
-                    // $totalRatings=0;
+                    array_push($data['monthRate'],["['".$rateMonth."',".$ratings1[$i]->rate_event."],"]);
+                    $totalRatings=0;
                 }
             }else{
+                
                 if($rateMonth==$rateMonthNext){
                     $totalRatings = $totalRatings + $ratings1[$a]->rate_event;
                     $countRate++;
                 }elseif($totalRatings == 0){
-                    array_push($data['monthRate'],["['".$rateMonth."',".$ratings1[$i]->rate_event."]"]);
+                    array_push($data['monthRate'],["['".$rateMonth."',".$ratings1[$i]->rate_event."],"]);
+                    $totalRatings=0;
                 }else{
                     // $totalRatings = $ratings1[$i]->rate_event;
                     $countRate++;
                     $totalAve = number_format(($totalRatings/$countRate),1);
-                    array_push($data['monthRate'],["['".$rateMonth."',".$totalAve."]"]);
+                    array_push($data['monthRate'],["['".$rateMonth."',".$totalAve."],"]);
                     $totalRatings=0;
                     $totalAve=0;
                 }
             }
         }else{
-            if($totalRatings == 0){
-                array_push($data['monthRate'],["['".$rateMonth."',".$ratings1[$i]->rate_event."]"]);
-            }else{
-                // $totalRatings = $ratings1[$i]->rate_event;
-                $countRate++;
-                $totalAve = number_format(($totalRatings/$countRate),1);
-                array_push($data['monthRate'],["['".$rateMonth."',".$totalAve."]"]);
-                $totalRatings=0;
-                $totalAve=0;
-            }
+            // dd($totalRatings);
+            // if($totalRatings == 0){
+                // dd($ratings1[$i]->rate_event);
+                array_push($data['monthRate'],["['".$rateMonth."',".$ratings1[$i]->rate_event."],"]);
+            // }else{
+            //     // $totalRatings = $ratings1[$i]->rate_event;
+            //     $countRate++;
+            //     $totalAve = number_format(($totalRatings/$countRate),1);
+            //     array_push($data['monthRate'],["['".$rateMonth."',".$totalAve."],"]);
+            //     $totalRatings=0;
+            //     $totalAve=0;
+            // }
         }
     }
-    
+    // dd($data['monthRate']);
     for ($i=0; $i < count($data['monthRate']); $i++) { 
         for($j=0; $j < count($data['monthRate'][$i]); $j++){
             array_push($data['monthlyAveRate'],$data['monthRate'][$i][$j]);
@@ -552,7 +557,7 @@ if($ratings){
     foreach ($ratings as $key => $value) {
         $overall += $value->rate_event;
     }
-    $data['overallPerformance']=$overall/count($ratings);
+    $data['overallPerformance']=number_format(($overall/count($ratings)),1);
     $data['totality'] = 5 - $data['overallPerformance'];
 }
 
