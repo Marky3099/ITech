@@ -494,6 +494,7 @@ foreach ($data['ratingsData1'] as $key => $value) {
 $data['overallPerformance']=0;
 $data['totality'] = 0;
 $data['monthRate'] = array();
+$data['monthlyAveRate'] = array();
 if($ratings){
     $overall = 0;
     $totalRatings = 0;
@@ -541,7 +542,7 @@ if($ratings){
             }
         }
     }
-    $data['monthlyAveRate'] = array();
+    
     for ($i=0; $i < count($data['monthRate']); $i++) { 
         for($j=0; $j < count($data['monthRate'][$i]); $j++){
             array_push($data['monthlyAveRate'],$data['monthRate'][$i][$j]);
