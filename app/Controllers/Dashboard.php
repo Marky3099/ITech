@@ -481,7 +481,7 @@ foreach ($data['ratingsData'] as $key => $value) {
 }
 
 $ratingsQuery1   = $db->query('SELECT start_event,rate_event
-    FROM ratings_view order by start_event'
+    FROM ratings_view group by id order by start_event'
 );
 
 $data['ratingsData1'] = $ratingsQuery1->getResult();
@@ -534,17 +534,26 @@ if($ratings){
             }
         }else{
             // dd($totalRatings);
-            // if($totalRatings == 0){
+            $rateMonthPast = date('M',strtotime($ratings1[$b]->start_event));
+            if($rateMonthPast == $rateMonth){
+                // $totalRatings = $ratings1[$i]->rate_event;
+                $countRate++;
+                $totalAve = number_format(($totalRatings/$countRate),1);
+                array_push($data['monthRate'],["['".$rateMonth."',".$totalAve."],"]);
+                $totalRatings=0;
+                $totalAve=0;
+            }
+            if($totalRatings == 0){
                 // dd($ratings1[$i]->rate_event);
                 array_push($data['monthRate'],["['".$rateMonth."',".$ratings1[$i]->rate_event."],"]);
-            // }else{
-            //     // $totalRatings = $ratings1[$i]->rate_event;
-            //     $countRate++;
-            //     $totalAve = number_format(($totalRatings/$countRate),1);
-            //     array_push($data['monthRate'],["['".$rateMonth."',".$totalAve."],"]);
-            //     $totalRatings=0;
-            //     $totalAve=0;
-            // }
+            }else{
+                // $totalRatings = $ratings1[$i]->rate_event;
+                $countRate++;
+                $totalAve = number_format(($totalRatings/$countRate),1);
+                array_push($data['monthRate'],["['".$rateMonth."',".$totalAve."],"]);
+                $totalRatings=0;
+                $totalAve=0;
+            }
         }
     }
     // dd($data['monthRate']);
@@ -557,8 +566,8 @@ if($ratings){
     foreach ($ratings as $key => $value) {
         $overall += $value->rate_event;
     }
-    $data['overallPerformance']=number_format(($overall/count($ratings)),1);
-    $data['totality'] = 5 - $data['overallPerformance'];
+    $data['overallPerformance']=number_format($overall/count($ratings),1);
+    // $data['totality'] = 5 - $data['overallPerformance'];
 }
 
 // dd($data['totality']);
