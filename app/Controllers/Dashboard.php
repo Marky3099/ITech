@@ -543,7 +543,7 @@ if($ratings){
                 $totalRatings=0;
                 $totalAve=0;
             }
-            if($totalRatings == 0){
+            elseif($totalRatings == 0){
                 // dd($ratings1[$i]->rate_event);
                 array_push($data['monthRate'],["['".$rateMonth."',".$ratings1[$i]->rate_event."],"]);
             }else{
