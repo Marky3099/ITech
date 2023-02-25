@@ -50,15 +50,15 @@
                <p class="servq">Service Quality</p>
             </div>
             <div class="rate col-lg-6">
-              <input type="radio" id="star5" name="rate" value="100" />
+              <input type="radio" id="star5" name="rate" value="5" />
               <label for="star5" title="Amazing">5 stars</label>
-              <input type="radio" id="star4" name="rate" value="80" />
+              <input type="radio" id="star4" name="rate" value="4" />
               <label for="star4" title="Good">4 stars</label>
-              <input type="radio" id="star3" name="rate" value="60" />
+              <input type="radio" id="star3" name="rate" value="3" />
               <label for="star3" title="Fair">3 stars</label>
-              <input type="radio" id="star2" name="rate" value="40" />
+              <input type="radio" id="star2" name="rate" value="2" />
               <label for="star2" title="Poor">2 stars</label>
-              <input type="radio" id="star1" name="rate" value="20" />
+              <input type="radio" id="star1" name="rate" value="1" />
               <label for="star1" title="Terrible">1 star</label>
             </div>
             <div class="col-lg-2 result"></div>
@@ -426,15 +426,15 @@ $(document).ready(function() {
             <input type="hidden" value="`+empId+`" name="emp_id[]" multiple>
             
             <div class="tech col-lg-6">
-              <input type="radio" id="star5`+empId+`" name="rate_`+empId+`" value="100" />
+              <input type="radio" id="star5`+empId+`" name="rate_`+empId+`" value="5" />
               <label for="star5`+empId+`" title="Amazing">5 stars</label>
-              <input type="radio" id="star4`+empId+`" name="rate_`+empId+`" value="80" />
+              <input type="radio" id="star4`+empId+`" name="rate_`+empId+`" value="4" />
               <label for="star4`+empId+`" title="Good">4 stars</label>
-              <input type="radio" id="star3`+empId+`" name="rate_`+empId+`" value="60" />
+              <input type="radio" id="star3`+empId+`" name="rate_`+empId+`" value="3" />
               <label for="star3`+empId+`" title="Fair">3 stars</label>
-              <input type="radio" id="star2`+empId+`" name="rate_`+empId+`" value="40" />
+              <input type="radio" id="star2`+empId+`" name="rate_`+empId+`" value="2" />
               <label for="star2`+empId+`" title="Poor">2 stars</label>
-              <input type="radio" id="star1`+empId+`" name="rate_`+empId+`" value="20" />
+              <input type="radio" id="star1`+empId+`" name="rate_`+empId+`" value="1" />
               <label for="star1`+empId+`" title="Terrible">1 star</label>
             </div>
             <div class="col-lg-1 resulttech" id= a`+empId+`></div>
@@ -446,22 +446,6 @@ $(document).ready(function() {
          })
       })
 
-
-      // $('#star5').click(function(){
-      //   $('.result').html('<h6>Amazing</h6>');
-      // })
-      // $('#star4').click(function(){
-      //   $('.result').html('<h6>Good</h6>');
-      // })
-      // $('#star3').click(function(){
-      //   $('.result').html('<h6>Fair</h6>');
-      // })
-      // $('#star2').click(function(){
-      //   $('.result').html('<h6>Poor</h6>');
-      // })
-      // $('#star1').click(function(){
-      //   $('.result').html('<h6>Terrible</h6>');
-      // })
       
       var rateModal = new bootstrap.Modal(document.getElementById('rateModal1'));
    $('.viewReport').click(function(){
@@ -528,19 +512,19 @@ $(document).ready(function() {
                     </div>
                     <textarea name="techComments[]" id="tech`+empId+`" placeholder="Leave a comment..." rows="4" cols="50" multiple disabled></textarea>`);
 
-                    if(rate[i].rate_emp == '100'){
+                    if(rate[i].rate_emp == '5'){
                       $('#star5'+empId).prop('checked',true);
                       $('#a'+empId).html('Amazing');
-                    }else if(rate[i].rate_emp == '80'){
+                    }else if(rate[i].rate_emp == '4'){
                       $('#star4'+empId).prop('checked',true);
                       $('#a'+empId).html('Good');
-                    }else if(rate[i].rate_emp == '60'){
+                    }else if(rate[i].rate_emp == '3'){
                       $('#star3'+empId).prop('checked',true);
                       $('#a'+empId).html('Fair');
-                    }else if(rate[i].rate_emp == '40'){
+                    }else if(rate[i].rate_emp == '2'){
                       $('#star2'+empId).prop('checked',true);
                       $('#a'+empId).html('Poor');
-                    }else if(rate[i].rate_emp == '20'){
+                    }else if(rate[i].rate_emp == '1'){
                       $('#star1'+empId).prop('checked',true);
                       $('#a'+empId).html('Terrible');
                     }
@@ -554,19 +538,19 @@ $(document).ready(function() {
                 }
               }
 
-              if(rate[0].rate_event == '100'){
+              if(rate[0].rate_event == '5'){
                 $('#star5').prop('checked',true);
                 $('.result').html('Amazing');
-              }else if(rate[0].rate_event == '80'){
+              }else if(rate[0].rate_event == '4'){
                 $('#star4').prop('checked',true);
                 $('.result').html('Good');
-              }else if(rate[0].rate_event == '60'){
+              }else if(rate[0].rate_event == '3'){
                 $('#star3').prop('checked',true);
                 $('.result').html('Fair');
-              }else if(rate[0].rate_event == '40'){
+              }else if(rate[0].rate_event == '2'){
                 $('#star2').prop('checked',true);
                 $('.result').html('Poor');
-              }else if(rate[0].rate_event == '20'){
+              }else if(rate[0].rate_event == '1'){
                 $('#star1').prop('checked',true);
                 $('.result').html('Terrible');
               }

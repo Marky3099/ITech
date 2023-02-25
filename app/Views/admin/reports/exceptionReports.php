@@ -455,7 +455,7 @@ $(document).ready(function() {
             $('#modal_emp').html(empData);
             $('#modal_status').html(statusData);
             // console.log();
-            console.log(response);
+            // console.log(response);
             myModal.show();
          }
       })

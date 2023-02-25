@@ -423,15 +423,15 @@ class Dashboard extends BaseController
           "emp_array"=> $emp_arr,
           "client_branch"=> $value['client_branch'],
           "status"=> $value['status'],
-      ];
-  }
+        ];
+    }
 
 // chart data for total of tasks every month
   $db = \Config\Database::connect();
   $query   = $db->query('SELECT start_event,COUNT(start_event) as count
     FROM all_events
     GROUP BY YEAR(start_event), MONTH(start_event) ASC'
-);
+    );
   $data['data'] = $query->getResult();
   $data['label'][] ="";
   $data['linedata'][]="";
@@ -444,12 +444,12 @@ class Dashboard extends BaseController
   foreach ($data['data'] as $key => $value) {
 
    $data['taskDate'][] = "['".date("M",strtotime($value->start_event))."', ".$value->count."],";
-}
+    }
 
      //chart data for services 
 $servQuery   = $db->query('SELECT DISTINCT serv_name, serv_color, Count(serv_id) as count
     FROM all_events GROUP BY serv_id'
-);
+    );
 
 $data['servData'] = $servQuery->getResult();
 json_encode($data['servData']);
@@ -459,16 +459,17 @@ foreach ($data['servData'] as $key => $value) {
    $data['serviceData'][] = "['".$value->serv_name."', ".$value->count."],";
    $data['servLabelColor'][]= $value->serv_color;
 
-}
+    }
 // dd($data['serviceData']);
 
 // rating chart
 $ratings = array();
+$ratings1 = array();
 // $data['ratingsName'] = array();
 
 
 $data['empPerformance'] = array();
-$ratingsQuery   = $db->query('SELECT emp_id,serv_name, serv_color,rate_event,emp_name,rate_emp
+$ratingsQuery   = $db->query('SELECT emp_id,start_event,serv_name, serv_color,rate_event,emp_name,rate_emp
     FROM ratings_view order by emp_id'
 );
 
@@ -478,16 +479,80 @@ foreach ($data['ratingsData'] as $key => $value) {
     array_push($ratings, $value);
     // array_push($ratingsName,$value->serv_name);
 }
+
+$ratingsQuery1   = $db->query('SELECT start_event,rate_event
+    FROM ratings_view order by start_event'
+);
+
+$data['ratingsData1'] = $ratingsQuery1->getResult();
+json_encode($data['ratingsData1']);
+foreach ($data['ratingsData1'] as $key => $value) {
+    array_push($ratings1, $value);
+    // array_push($ratingsName,$value->serv_name);
+}
+// dd($ratings1);
 $data['overallPerformance']=0;
 $data['totality'] = 0;
+$data['monthRate'] = array();
 if($ratings){
     $overall = 0;
-
+    $totalRatings = 0;
+    $countRate = 0;
+    for ($i=0; $i < count($ratings1); $i++) { 
+        $a = $i+1;
+        $b = $i-1;
+        
+        $rateMonth = date('M',strtotime($ratings1[$i]->start_event));
+        if($a<count($ratings1)){
+            $rateMonthNext = date('M',strtotime($ratings1[$a]->start_event));
+            if($b<0){
+                if($rateMonth==$rateMonthNext){
+                    $totalRatings = $ratings1[$i]->rate_event + $ratings1[$a]->rate_event;
+                    $countRate++;
+                }else{
+                    array_push($data['monthRate'],["['".$rateMonth."',".$ratings1[$i]->rate_event."]"]);
+                    // $totalRatings=0;
+                }
+            }else{
+                if($rateMonth==$rateMonthNext){
+                    $totalRatings = $totalRatings + $ratings1[$a]->rate_event;
+                    $countRate++;
+                }elseif($totalRatings == 0){
+                    array_push($data['monthRate'],["['".$rateMonth."',".$ratings1[$i]->rate_event."]"]);
+                }else{
+                    // $totalRatings = $ratings1[$i]->rate_event;
+                    $countRate++;
+                    $totalAve = number_format(($totalRatings/$countRate),1);
+                    array_push($data['monthRate'],["['".$rateMonth."',".$totalAve."]"]);
+                    $totalRatings=0;
+                    $totalAve=0;
+                }
+            }
+        }else{
+            if($totalRatings == 0){
+                array_push($data['monthRate'],["['".$rateMonth."',".$ratings1[$i]->rate_event."]"]);
+            }else{
+                // $totalRatings = $ratings1[$i]->rate_event;
+                $countRate++;
+                $totalAve = number_format(($totalRatings/$countRate),1);
+                array_push($data['monthRate'],["['".$rateMonth."',".$totalAve."]"]);
+                $totalRatings=0;
+                $totalAve=0;
+            }
+        }
+    }
+    $data['monthlyAveRate'] = array();
+    for ($i=0; $i < count($data['monthRate']); $i++) { 
+        for($j=0; $j < count($data['monthRate'][$i]); $j++){
+            array_push($data['monthlyAveRate'],$data['monthRate'][$i][$j]);
+        }
+    }
+    // dd($data['monthlyAveRate']);
     foreach ($ratings as $key => $value) {
         $overall += $value->rate_event;
     }
     $data['overallPerformance']=$overall/count($ratings);
-    $data['totality'] = 100 - $data['overallPerformance'];
+    $data['totality'] = 5 - $data['overallPerformance'];
 }
 
 // dd($data['totality']);
@@ -506,7 +571,8 @@ for ($i=0; $i < count($ratings); $i++) {
         if($d < count($ratings)){
             // dd($empId == $ratings[$d]->emp_name);
             if($empId == $ratings[$d]->emp_name){
-                $aveRate = ($rateEmp+$ratings[$c+1]->rate_emp)/2;
+                $aveRateDecimal = number_format((($rateEmp+$ratings[$c+1]->rate_emp)/2),1);
+                $aveRate = $aveRateDecimal;
                 // dd($aveRate);
             }elseif($aveRate==0){
                 array_push($performEmp,["['".$empId."', ".$rateEmp."],"]);
@@ -518,7 +584,8 @@ for ($i=0; $i < count($ratings); $i++) {
         // dd($performEmp);
         if($d < count($ratings)){
             if($empId == $ratings[$d]->emp_name){
-                $aveRate = ($rateEmp+$ratings[$c+1]->rate_emp)/2;
+                $aveRateDecimal = number_format((($rateEmp+$ratings[$c+1]->rate_emp)/2),1);
+                $aveRate = $aveRateDecimal;
                 // dd($aveRate);
             }elseif($empId == $ratings[$e]->emp_name){
                 array_push($performEmp,["['".$empId."', ".$aveRate."],"]);

@@ -598,7 +598,8 @@
   <div class="col-12 col-lg-6 col-md-6 col-sm-12 col-xss-12" id="chart_div" style="width: 100%; height: 500px;"></div>
   <div class="col-12 col-lg-6 col-md-6 col-sm-12 col-xss-12" id="piechart_3d" style="width: 100%; height: 500px;"></div>
   <div class="col-12 col-lg-6 col-md-6 col-sm-12 col-xss-12" id="barchart_material" style="width: 100%; height: 500px;"></div>
-  <div class="col-12 col-lg-6 col-md-6 col-sm-12 col-xss-12" id="piechart1_3d" style="width: 100%; height: 500px;"></div>
+  <div class="col-12 col-lg-6 col-md-6 col-sm-12 col-xss-12" id="chart_div1" style="width: 100%; height: 500px;"></div>
+  <div class="col-12 col-lg-6 col-md-6 col-sm-12 col-xss-12" style="background-color: white;width: 100%; height: 500px;"><h2>Overall Rating: <?=$overallPerformance?>%</h2></div>
 
 </div>
 <?php else:?>
@@ -882,16 +883,16 @@ $(document).ready(function() {
             }
           ?>
         ]);
-        var overallData = google.visualization.arrayToDataTable([
-          ['Name', 'Ratings'],
-          // ['Checkup', 1],['General cleaning', 13],['Installation', 1]
-          ['Positive Ratings',<?php
-              echo $overallPerformance;
-          ?>],
-          ['Negative Ratings',<?php
-              echo $totality;
-          ?>],
-        ]);
+        // var overallData = google.visualization.arrayToDataTable([
+        //   ['Name', 'Ratings'],
+        //   // ['Checkup', 1],['General cleaning', 13],['Installation', 1]
+        //   ['Positive Ratings',<?php
+        //       echo $overallPerformance;
+        //   ?>],
+        //   ['Negative Ratings',<?php
+        //       echo $totality;
+        //   ?>],
+        // ]);
 
         var taskData = google.visualization.arrayToDataTable([
           ['Task', 'Total Tasks'],
@@ -915,17 +916,26 @@ $(document).ready(function() {
           
         ]);
 
+        var monthlyRatingdata = google.visualization.arrayToDataTable([
+          ['Month', 'Rate'],
+          <?php
+            foreach ($monthlyAveRate as $mon) {
+              echo $mon;
+            }
+          ?>
+        ]);
+
 
         var servOptions = {
           title: 'Services Trend',
           is3D: true,
           colors: servLabelColor
         };
-        var overallOptions = {
-          title: 'Company Ratings',
-          is3D: true,
-          colors: ['#1AEF17','#EC0D03']
-        };
+        // var overallOptions = {
+        //   title: 'Company Ratings',
+        //   is3D: true,
+        //   colors: ['#1AEF17','#EC0D03']
+        // };
 
         var taskOptions = {
           title: 'Task Summary per Month',
@@ -937,23 +947,20 @@ $(document).ready(function() {
           title: 'Technician\'s Performance',
           // isStacked: 'percent',
           bars: 'horizontal', // Required for Material Bar Charts.
-           // vAxis: { 
-           //    title: "Ratings on Performance", 
-           //    viewWindowMode:'explicit',
-           //    viewWindow:{
-           //      max:100,
-           //      min:0
-           //    }
-           //  }
-
-          // colors: servLabelColor
+        };
+        var monthlyRatingOptions = {
+          title: 'Monthly Rating',
+          hAxis: {title: 'Month',  titleTextStyle: {color: '#333'}},
+          vAxis: {minValue: 0}
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
         var chart2 = new google.visualization.AreaChart(document.getElementById('chart_div'));
         var chart3 = new google.visualization.BarChart(document.getElementById('barchart_material'));
-        var chart4 = new google.visualization.PieChart(document.getElementById('piechart1_3d'));
-        chart4.draw(overallData, overallOptions);
+        // var chart4 = new google.visualization.PieChart(document.getElementById('piechart1_3d'));
+        var chart5 = new google.visualization.AreaChart(document.getElementById('chart_div1'));
+        chart5.draw(monthlyRatingdata, monthlyRatingOptions);
+        // chart4.draw(overallData, overallOptions);
         chart3.draw(empData,empOptions);
         chart.draw(servData, servOptions);
         chart2.draw(taskData, taskOptions);
@@ -1187,7 +1194,7 @@ var count_update = 1;
 
       },
       error:function(e){
-        console.log(e);
+        // console.log(e);
       }
     })
   });

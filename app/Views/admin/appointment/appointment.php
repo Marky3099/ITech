@@ -305,19 +305,19 @@ var rateModal = new bootstrap.Modal(document.getElementById('rateModal'));
                     </div>
                     <textarea name="techComments[]" id="tech`+empId+`" placeholder="Leave a comment..." rows="4" cols="50" multiple disabled></textarea>`);
 
-                    if(rate[i].rate_emp == '100'){
+                    if(rate[i].rate_emp == '5'){
                       $('#star5'+empId).prop('checked',true);
                       $('#a'+empId).html('Amazing');
-                    }else if(rate[i].rate_emp == '80'){
+                    }else if(rate[i].rate_emp == '4'){
                       $('#star4'+empId).prop('checked',true);
                       $('#a'+empId).html('Good');
-                    }else if(rate[i].rate_emp == '60'){
+                    }else if(rate[i].rate_emp == '3'){
                       $('#star3'+empId).prop('checked',true);
                       $('#a'+empId).html('Fair');
-                    }else if(rate[i].rate_emp == '40'){
+                    }else if(rate[i].rate_emp == '2'){
                       $('#star2'+empId).prop('checked',true);
                       $('#a'+empId).html('Poor');
-                    }else if(rate[i].rate_emp == '20'){
+                    }else if(rate[i].rate_emp == '1'){
                       $('#star1'+empId).prop('checked',true);
                       $('#a'+empId).html('Terrible');
                     }
@@ -331,19 +331,19 @@ var rateModal = new bootstrap.Modal(document.getElementById('rateModal'));
                 }
               }
 
-              if(rate[0].rate_event == '100'){
+              if(rate[0].rate_event == '5'){
                 $('#star5').prop('checked',true);
                 $('.result').html('Amazing');
-              }else if(rate[0].rate_event == '80'){
+              }else if(rate[0].rate_event == '4'){
                 $('#star4').prop('checked',true);
                 $('.result').html('Good');
-              }else if(rate[0].rate_event == '60'){
+              }else if(rate[0].rate_event == '3'){
                 $('#star3').prop('checked',true);
                 $('.result').html('Fair');
-              }else if(rate[0].rate_event == '40'){
+              }else if(rate[0].rate_event == '2'){
                 $('#star2').prop('checked',true);
                 $('.result').html('Poor');
-              }else if(rate[0].rate_event == '20'){
+              }else if(rate[0].rate_event == '1'){
                 $('#star1').prop('checked',true);
                 $('.result').html('Terrible');
               }
