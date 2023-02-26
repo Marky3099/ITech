@@ -44,12 +44,9 @@
         </div>
 
         <div class="content">
-            <h3>Our Company</h3>
-            <p>The company was established at Malibay, Pasay City, before 2000 as a single proprietorship business. It officially became a corporation on September 20, 2000. They first handled services with people that reach them. Later on, their contract with certain company branches started in 2012, where they give them monthly service or whenever needed. Still, they accept clients, aside from their contracted clients, depending on their availability.</p>
-            <h3>Our Vision</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus qui ea ullam, enim tempora ipsum fuga alias quae ratione a officiis id temporibus autem? Quod nemo facilis cupiditate. Ex, vel?</p>
-            <h3>Our Mission</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus qui ea ullam, enim tempora ipsum fuga alias quae ratione a officiis id temporibus autem? Quod nemo facilis cupiditate. Ex, vel?</p>
+            <h3>COB PLAN</h3>
+            <p>Maylaflor Airconditioning & Refrigeration Services, Inc., a company engaged in REFRIGERATION and AIRCONDITIONING, caters services to both public and private business and establishments. The company aims to contribute towards nation's growth and development. Thereby, improving and developing services that are presently needed and used by all types of business using ventilation system.
+            As mechanical contractor Maylaflor adheres and certifies to render services and responsibilities to client's needs and answers requirements on mechanical works. And in order to fully serve our clients, the following procedures and guidelines are observed, improvised and implemented for a satisfactory performance of assigned jobs/contract.</p>
         </div>
 
     </div>
@@ -62,7 +59,7 @@
 
 <section class="services" id="services">
 
-        <section>
+    <section>
       <h1 class="heading"> <span>our</span> services </h1>
       <div class="row">
         <div class="column">
@@ -84,7 +81,7 @@
             <h3>Installation</h3>
             <p>
               The company offers the installation of various airconditioning units, including replacement or installation of its new parts.
-            </p>
+            </p> 
           </div>
         </div>
         <div class="column">
@@ -95,7 +92,7 @@
             <h3>Repair</h3>
             <p>
               The company offers repair of various airconditioning units. There are different types of repair that the company have that will help solve the problem at hand.
-            </p>
+            </p> 
           </div>
         </div>
         <div class="column">
@@ -103,10 +100,10 @@
             <div class="icon-wrapper">
              <i class="fas fa-brush"></i>
             </div>
-            <h3>Filtration</h3>
+            <h3>Filter Cleaning</h3>
             <p>
-              The company offers filtration of various airconditioning units. It includes the removal of build-up dirt, dust, and other materials that prevent airconditioning units from circulating throughout the home with clean air.
-            </p>
+              The company offers filter cleaning of various airconditioning units. It includes the removal of build-up dirt, dust, and other materials that prevent airconditioning units from circulating throughout the home with clean air.
+            </p> 
           </div>
         </div>
         <div class="column">
@@ -120,16 +117,6 @@
             </p>
           </div>
         </div>
-        <div class="column">
-          <div class="card">
-            <div class="icon-wrapper">
-              <i class="fa-regular fa-ellipsis"></i>
-            </div>
-            <h3>Others</h3>
-            <p>
-              The company offers different services that will help cater airconditioning units problems that clients have.
-            </p>
-          </div>
         </div>
       </div>
     </section>
@@ -137,6 +124,39 @@
 </section>
 
 <!-- services section ends -->
+
+<!-- Aircon section -->
+<section class="aircon" id="aircon">
+    <h1 class="heading"> <span>Aircon</span></h1>
+    <div class="row">
+        <div class="image">
+            <img src="<?= base_url('assets/image/about-img.jpeg')?>">
+        </div>
+
+        <div class="content" style="display: flex;">
+            <div class="column">
+              <h3>Aircon Brands</h3>
+              <ul>
+                <li><p style="font-size: 2rem;">Carrier</p></li>
+                <li><p style="font-size: 2rem;">Koppel</p></li>
+                <li><p style="font-size: 2rem;">Mitsubishi</p></li>
+                <li><p style="font-size: 2rem;">LG</p></li>
+              </ul>
+
+            </div>
+            <div class="column" style="flex: 50%; float: right; margin-left: 80px;">
+            <h3>Aircon Type</h3>
+              <ul>
+                <li><p style="font-size: 2rem;">Floor Mounted</p></li>
+                <li><p style="font-size: 2rem;">Ceiling Mounted</p></li>
+                <li><p style="font-size: 2rem;">Wall Mounted</p></li>
+                <li><p style="font-size: 2rem;">Ceiling Cassette</p></li>
+              </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Aircon section ends -->
 
 <!-- contact section starts  -->
 
@@ -156,7 +176,6 @@
             <h3>Email Address</h3>
             <p>maylaflorairconditioningref27@gmail.com</p>
         </div>
-        
 
     </div>
 
