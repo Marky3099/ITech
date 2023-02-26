@@ -36,7 +36,7 @@ class Database extends Config
         'username' => 'u395184583_maylaflor',
         'password' => '=TV[#uQ0',
         'database' => 'u395184583_tsms',
-        'DBDriver' => 'MySQLi',
+        'DBDriver' => '',
         'DBPrefix' => '',
         'pConnect' => false,
         'DBDebug'  => (ENVIRONMENT !== 'production'),

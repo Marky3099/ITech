@@ -463,7 +463,7 @@ $(document).ready(function() {
             $('.rate-container').empty();
             $('.techRate-view').empty();
             if(rate.length > 0){
-              $('.rate-container').append(`<center><h2>Review</h2></center>
+              $('.rate-container').append(`<center><h3 id="headerrate">Review</h3></center>
           <div class="row">
             <div class="col-lg-4">
                <p class="servq">Service Quality</p>
@@ -482,8 +482,8 @@ $(document).ready(function() {
             </div>
             <div class="col-lg-2 result"></div>
           </div>
-          <textarea name="comments" id="event_comments" placeholder="Share more thoughts on our service..." rows="4" cols="50" disabled></textarea>
-          <center><h2>Technician's Review</h2></center>
+          <textarea style="padding: 0.5rem;" name="comments" id="event_comments" placeholder="Share more thoughts on our service..." rows="4" cols="50" disabled></textarea>
+          <center><h3 id="headerrate">Technician's Review</h3></center>
           `);
 
               for(var i =0; i <rate.length; i++){
@@ -492,7 +492,7 @@ $(document).ready(function() {
                   // console.log(emp[j].emp_id+' '+empId);
                   if(emp[j].emp_id == empId){
 
-                    $('#rateModal1 .techRate-view').append(`<h5>`+emp[j].emp_name+`</h5><div class="row rowa">
+                    $('#rateModal1 .techRate-view').append(`<h6 style="color: #344F21; font-weight: bold; font-style: italic;">`+emp[j].emp_name+`</h6><div class="row rowa">
                     <div class="col-lg-5">
                        <p class="servq">Technician Quality</p>
                     </div>
@@ -510,7 +510,7 @@ $(document).ready(function() {
                     </div>
                     <div class="col-lg-1 resulttech" id= a`+empId+`></div>
                     </div>
-                    <textarea name="techComments[]" id="tech`+empId+`" placeholder="Leave a comment..." rows="4" cols="50" multiple disabled></textarea>`);
+                    <textarea style="padding: 0.5rem;" name="techComments[]" id="tech`+empId+`" placeholder="Leave a comment..." rows="4" cols="50" multiple disabled></textarea>`);
 
                     if(rate[i].rate_emp == '5'){
                       $('#star5'+empId).prop('checked',true);
