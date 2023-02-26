@@ -130,13 +130,13 @@
     <h1 class="heading"> <span>Aircon</span></h1>
     <div class="row">
         <div class="image">
-            <img src="<?= base_url('assets/image/about-img.jpeg')?>">
+            <img src="<?= base_url('assets/image/aircon.png')?>">
         </div>
 
-        <div class="content" style="display: flex;">
+        <div class="content" id="aircon-content">
             <div class="column">
               <h3>Aircon Brands</h3>
-              <ul>
+              <ul style="list-style: none;">
                 <li><p style="font-size: 2rem;">Carrier</p></li>
                 <li><p style="font-size: 2rem;">Koppel</p></li>
                 <li><p style="font-size: 2rem;">Mitsubishi</p></li>
@@ -144,9 +144,9 @@
               </ul>
 
             </div>
-            <div class="column" style="flex: 50%; float: right; margin-left: 80px;">
+            <div class="column" id="aircon-column">
             <h3>Aircon Type</h3>
-              <ul>
+              <ul style="list-style: none;">
                 <li><p style="font-size: 2rem;">Floor Mounted</p></li>
                 <li><p style="font-size: 2rem;">Ceiling Mounted</p></li>
                 <li><p style="font-size: 2rem;">Wall Mounted</p></li>

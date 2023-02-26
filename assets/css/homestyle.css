@@ -238,6 +238,16 @@ section{
     text-align: justify;
 }
 
+.aircon .row #aircon-content{
+    display: flex;
+}
+
+.aircon .row .content .column#aircon-column{
+    flex: 50%; 
+    float: right; 
+    margin-left: 80px
+}
+
 .services {
   padding: 0;
   margin: 0;
