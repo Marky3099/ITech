@@ -25,7 +25,7 @@
 
             <div class="user-box" id="ibserv3">
               <div class="icon-box"><i class="fas fa-wrench"></i></div>
-              <input type="text" name="serv_description" placeholder="Service Description" required>
+              <input type="text" name="serv_description" placeholder="Service Description">
             </div>
 
             <div class="user-box" id="ibserv4">
