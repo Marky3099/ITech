@@ -1,83 +1,86 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
 <link rel="stylesheet" href="<?= base_url('assets/css/formstyle.css')?>">
-<div class="body-content">
-  <div class="edit-form">
-    <form method="post" id="update_appoint" name="update_appoint" 
-    action="<?=base_url("/appointment/update")?>">
-    <input type="hidden" name="appt_id" id="id" value="<?php echo $appt['appt_id']; ?>">
-    
-    <div class="form-box">
-      <h3>Edit Appointment</h3>
-      <input type="hidden" name="appt_code" value="<?php echo $appt['appt_code']; ?>">
-      <div class="user-box">
-        <label id="label1">Date</label>
-        <label class="ttime">Time</label>
-        <input type="text" name="appt_date" id="appt_date" class="datepicker dateee" placeholder="mm-dd-yyyy" value="<?php echo $new_date; ?>" autocomplete="off" required>
-        <input type="time" name="appt_time" class="timee" value="<?php echo $appt['appt_time']; ?>">
-      </div><br><br>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-      <div class="user-box">
-        <label>Branch Area</label>
-        <label class="bname">Branch Name</label>
-        <div class="select-dropdown" style="width: 41%;">
-          <select id="area_update" name="area_update">
-          <?php foreach($area as $a):  ?>
-            <option value="<?php echo $a['area'];?>"<?php if($a['area'] == $view_appoint['area']) echo 'selected="selected"';?>><?php echo $a['area'];?></option>
-          <?php endforeach; ?>
-          </select>
-        </div>
-        <div class="select-dropdown" id="cid">
-            <select id="client_id_update" name="client_id_update"></select>
-        </div>
-      </div>
+<div class="container">
+  <div class="row">
+    <div class="body-content" style="width: 100%">
+      <div class="edit-form">
+        <form method="post" id="update_appoint" name="update_appoint" action="<?=base_url("/appointment/update")?>">
+          <input type="hidden" name="appt_id" id="id" value="<?php echo $appt['appt_id']; ?>">
 
-      <div class="user-box">
-        <label>Service</label>
-        <div class="select-dropdown" style="width: 90%;">
-          <select id="serv_id" name="serv_id" required>
-          <?php foreach($servName as $s):  ?>
-              <optgroup label="<?= $s['serv_name']; ?>">
-                <?php foreach($servType as $st):  ?>
-                  <?php if($st['serv_name'] == $s['serv_name']):?>
-                    <?php if($st['serv_id'] == $appt['serv_id']):?>
-                      <option value=<?= $st['serv_id'];?> selected><?= $st['serv_type'];?></option>
-                    <?php else:?>
-                      <option value=<?= $st['serv_id'];?>><?= $st['serv_type'];?></option>
-                    <?php endif;?>
-                  <?php endif;?>
+          <div class="form-box col-12 col-lg-5 col-md-5 col-sm-12" id="appt-form" style="postion: absolute; top: 400px; padding: 35px;">
+            <h3>Edit Appointment</h3>
+
+            <div class="user-box">
+              <label id="label1">Date</label>
+              <label class="ttime">Time</label>
+              <input type="text" name="appt_date" id="appt_date" class="datepicker dateee" placeholder="mm-dd-yyyy" value="<?php echo $new_date; ?>" autocomplete="off" required>
+              <input type="time" name="appt_time" class="timee" value="<?php echo $appt['appt_time']; ?>">
+            </div><br><br>
+
+            <div class="user-box">
+              <label>Branch Area</label>
+              <label class="bname">Branch Name</label>
+              <div class="select-dropdown" style="width: 41%;">
+                <select id="area_update" name="area_update">
+                <?php foreach($area as $a):  ?>
+                  <option value="<?php echo $a['area'];?>"<?php if($a['area'] == $view_appoint['area']) echo 'selected="selected"';?>><?php echo $a['area'];?></option>
                 <?php endforeach; ?>
-              </optgroup>
-            <?php endforeach; ?>
-        </select>
-        </div>
+                </select>
+              </div>
+              <div class="select-dropdown" id="cid">
+                  <select id="client_id_update" name="client_id_update"></select>
+              </div>
+            </div>
+
+            <div class="user-box">
+              <label>Service</label>
+              <div class="select-dropdown" style="width: 90%;">
+                <select id="serv_id" name="serv_id" required>
+                <?php foreach($servName as $s):  ?>
+                    <optgroup label="<?= $s['serv_name']; ?>">
+                      <?php foreach($servType as $st):  ?>
+                        <?php if($st['serv_name'] == $s['serv_name']):?>
+                          <?php if($st['serv_id'] == $appt['serv_id']):?>
+                            <option value=<?= $st['serv_id'];?> selected><?= $st['serv_type'];?></option>
+                          <?php else:?>
+                            <option value=<?= $st['serv_id'];?>><?= $st['serv_type'];?></option>
+                          <?php endif;?>
+                        <?php endif;?>
+                      <?php endforeach; ?>
+                    </optgroup>
+                  <?php endforeach; ?>
+              </select>
+              </div>
+            </div>
+
+
+            <div class="crud-text m-2"><h5>Aircon Details:</h5></div>
+            <div id="auth-rows-edit"></div>
+              <!-- <div class="user-box addUpdateBtn">
+                <span id="add_aut_update" class="btn btn-primary"><i class="fa-solid fa-plus"></i></span>
+              </div>  -->
+            <br>
+            <div class="user-box">
+              <label>Comments/Suggestions</label>
+              <textarea name="comments" id="comments" rows="2" cols="40" ><?php echo htmlspecialchars($appt['comments']); ?></textarea>
+            </div><br>
+
+            <div class="container1">
+              <button type="submit" class="btn btn-success">Submit</button>
+              <a href="<?= base_url('/appointment');?>" class="back-btn">Back</a>
+            </div>
+
+          </div>
+        </form>
       </div>
-
-      <div class="crud-text-aircon"><h5>Aircon Details:</h5></div>
-
-        <!-- =================================================== -->
-        <div id="auth-rows-edit"></div>
-          <!-- <div class="user-box addUpdateBtn">
-            <span id="add_aut_update" class="btn btn-primary"><i class="fa-solid fa-plus"></i></span>
-          </div>  -->
-          <br>
-      <div class="user-box">
-          <label>Comments/Suggestions</label>
-          <textarea name="comments" id="comments" rows="2" cols="40" ><?php echo htmlspecialchars($appt['comments']); ?></textarea>
-        </div><br>
-
-      <div class="container1">
-        <button type="submit" class="btn btn-success">Submit</button>
-        <a href="<?= base_url('/appointment');?>" class="back-btn">Back</a>
-      </div>
-
     </div>
-
   </div>
-</form>
 </div>
-</div>
-</div>
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/js/bootstrap-select.min.js"></script>

@@ -513,3 +513,9 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+h3#headerrate{
+    color: #344F21;
+    font-weight: bold;
+    font-size: 18px;
+}

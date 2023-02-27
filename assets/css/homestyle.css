@@ -95,7 +95,7 @@ section{
 
 .header .navbar a{
     margin:0 1rem;
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     color:#fff;
     font-family: 'Bradley Hand', cursive;
 }
@@ -196,6 +196,56 @@ section{
     padding:1rem 0;
     line-height: 1.8;
     text-align: justify;
+}
+
+.aircon .row{
+    display: flex;
+    align-items: center;
+    background:var(--black);
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.aircon .row .image{
+    flex:1 1 45rem;
+    margin-top: -5px;
+    margin-bottom: 10px;
+}
+
+.aircon .row .image img{
+    height: 430px;
+    width: 100%;
+}
+.aircon .row .content{
+    flex:1 1 45rem;
+    padding:2rem;
+    margin-top: -5px;
+    margin-bottom: -15px;
+    text-align: justify;
+}
+
+.aircon .row .content h3{
+    font-size: 3rem;
+    color:#344F21;
+}
+
+.aircon .row .content p{
+    font-size: 1.6rem;
+    text-transform: none;
+    color:BLACK;
+    padding:1rem 0;
+    line-height: 1.8;
+    text-align: justify;
+}
+
+.aircon .row #aircon-content{
+    display: flex;
+}
+
+.aircon .row .content .column#aircon-column{
+    flex: 50%; 
+    float: right; 
+    margin-left: 80px
 }
 
 .services {

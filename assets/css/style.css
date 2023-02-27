@@ -678,6 +678,7 @@ table tr td .reports:hover{
     left: 25%;
     top: 15%;
 }
+
 .body-content .edit-form form .img{
     position: absolute;
     background-color: white;
@@ -743,6 +744,12 @@ table{
     font-size: 16px;
 }
 
+h3#headerrate{
+    color: #344F21;
+    font-weight: bold;
+    font-size: 18px;
+}
+
 /*Stars Style*/
 *{
     margin: 0;
@@ -764,6 +771,8 @@ table{
 .tech {
     left: -60px;
 }
+
+
 .rate:not(:checked) > input, .tech:not(:checked) > input  {
     position:absolute;
     top:-9999px;

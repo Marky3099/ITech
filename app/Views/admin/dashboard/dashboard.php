@@ -12,13 +12,13 @@
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/dashstyle.css')?>">
-<?php if($_SESSION['position'] == USER_ROLE_EMPLOYEE):?>
-<link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/main.min.css')?>">
-<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
-<link rel="stylesheet" href="<?= base_url('assets/css/style.css')?>">
-<?php endif;?>
+  <?php if($_SESSION['position'] == USER_ROLE_EMPLOYEE):?>
+  <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/main.min.css')?>">
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+  <link rel="stylesheet" href="<?= base_url('assets/css/style.css')?>">
+  <?php endif;?>
 
 </head>
 <body>
@@ -41,7 +41,7 @@
                                 </div>
                                 <div class="modal-body">
                                   <?php if($eventToday):?>
-                                    <table class="table table-bordered">
+                                    <table class="display" id="example" style="width: 100%;">
                                       <thead>
                                         <tr>
                                           <th>Task Code</th>
@@ -103,7 +103,7 @@
                             </div>
                             <div class="modal-body">
                               <?php if($week1):?>
-                                <table class="table table-bordered">
+                                <table class="display" id="example1" style="width: 100%;">
                                   <thead>
                                     <tr>
                                       <th>Date</th>
@@ -168,7 +168,7 @@
                         </div>
                         <div class="modal-body">
                          <?php if($month):?>
-                          <table class="table table-bordered">
+                          <table class="display" id="example2" style="width: 100%;">
                             <thead>
                               <tr>
                                 <th>Date</th>
@@ -597,9 +597,10 @@
 <div class="row">
   <div class="col-12 col-lg-6 col-md-6 col-sm-12 col-xss-12" id="chart_div" style="width: 100%; height: 500px;"></div>
   <div class="col-12 col-lg-6 col-md-6 col-sm-12 col-xss-12" id="piechart_3d" style="width: 100%; height: 500px;"></div>
-  <div class="col-12 col-lg-6 col-md-6 col-sm-12 col-xss-12" id="barchart_material" style="width: 100%; height: 500px;"></div>
+  <div class="col-12 col-lg-6 col-md-6 col-sm-12 col-xss-12 mt-3" style="background-color: none;width: 100%; height: 40px;"><h3 class="hfont">Overall Rating: <?=$overallPerformance?>%</h3></div>
+  <div class="col-12 col-lg-6 col-md-6 col-sm-12 col-xss-12 mt-3" style="background-color: none;width: 100%; height: 40px;"><h3 class="hfont">&nbsp;</h3></div>
   <div class="col-12 col-lg-6 col-md-6 col-sm-12 col-xss-12" id="chart_div1" style="width: 100%; height: 500px;"></div>
-  <div class="col-12 col-lg-6 col-md-6 col-sm-12 col-xss-12" style="background-color: white;width: 100%; height: 500px;"><h2>Overall Rating: <?=$overallPerformance?>%</h2></div>
+  <div class="col-12 col-lg-6 col-md-6 col-sm-12 col-xss-12" id="barchart_material" style="width: 100%; height: 500px;"></div>
 
 </div>
 <?php else:?>

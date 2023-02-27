@@ -62,7 +62,7 @@ body {
     left: 23%;
   }
 
-  #dateformbox, #emp-form, #service-form, #user-form, #profile-form{
+  #dateformbox, #emp-form, #service-form, #user-form, #profile-form, #appt-form{
     left: 24%;
   }
 
@@ -76,6 +76,43 @@ body {
 
   #clientfbox{
     height: 850px;
+  }
+
+  #appt-form{
+    margin-top: 100px;
+    height: auto;
+  }
+
+
+  .form-box .user-box  input.timee{
+    margin-left: -90px;
+  }
+
+  .form-box .user-box label.ttime{
+    margin-left: 85px;
+  }
+
+  .form-box .user-box label.bname{
+    margin-top: -45px;
+    margin-left: 22px;
+  }
+
+  #cid{
+    margin-left: -130px;
+  }
+
+  #qtyapptlbl{
+    margin-top: 20px;
+    margin-left: 23px;
+  }
+
+  .form-box .qtyClass #quantity{
+    left: 30px;
+    position: relative;
+  }
+
+  .form-box .plusbtn{
+    left: -110px;
   }
 
   #profile-form, #clientfbox{
