@@ -33,9 +33,9 @@ class Database extends Config
     public $default = [
         'DSN'      => '',
         'hostname' => 'localhost',
-        'username' => 'root',
-        'password' => '',
-        'database' => 'tsms',
+        'username' => 'u395184583_maylaflor',
+        'password' => '=TV[#uQ0',
+        'database' => 'u395184583_tsms',
         'DBDriver' => '',
         'DBPrefix' => '',
         'pConnect' => false,
