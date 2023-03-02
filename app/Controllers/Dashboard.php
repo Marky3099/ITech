@@ -448,7 +448,7 @@ class Dashboard extends BaseController
 
      //chart data for services 
 $servQuery   = $db->query('SELECT DISTINCT serv_name, serv_color, Count(serv_id) as count
-    FROM all_events GROUP BY serv_id'
+    FROM all_events GROUP BY serv_name'
     );
 
 $data['servData'] = $servQuery->getResult();

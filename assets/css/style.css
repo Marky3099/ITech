@@ -809,3 +809,28 @@ h3#headerrate{
 .tech > label:hover ~ input:checked ~ label {
     color: #c59b08;
 }
+
+/*circle-progress*/
+.circular-progress{
+    position: relative;
+    height: 150px;
+    width: 150px;
+    background-color: orange;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+}
+.circular-progress:before{
+    content:"";
+    position: absolute;
+    height: 60%;
+    width: 60%;
+    background-color: #ffffff;
+    border-radius: 50%;
+}
+.value-container{
+    position: relative;
+    font-family: "Poppins", sans-serif;
+    font-size: 25px;
+    color: black;
+}

@@ -446,13 +446,13 @@
 
   <!-- Card for displaying the total count of today's event -->
   <div class="col-12 col-lg-3 col-md-6 col-sm-12 mb-4">
-    <div class="card border-left-primary shadow h-100 py-2">
+    <div class="card border-left-primary shadow h-100 py-2" data-toggle="modal" data-target="#todayModal">
       <div class="card-body1">
         <div class="row no-gutters align-items-center">
           <div class="col mr-2">
             <div class="text-xs font-weight-bold text-uppercase mb-1">
               Daily: <?= date('F j, Y');?></div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">Number of task:&nbsp;<a href="#" data-toggle="modal" data-target="#todayModal" id="iconbox"><?= json_encode($today_event);?></a></div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">Number of task:&nbsp;<?= json_encode($today_event);?></a></div>
             </div>
             <div class="col-auto">
               <i class="fas fa-calendar fa-2x text-gray-300" id="iconbox"></i>
@@ -464,7 +464,7 @@
 
     <!-- Weekly -->
     <div class="col-12 col-lg-3 col-md-6 col-sm-12 mb-4">
-      <div class="card border-left-success shadow h-100 py-2">
+      <div class="card border-left-success shadow h-100 py-2" data-toggle="modal" data-target="#weekModal">
         <div class="card-body1">
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
@@ -474,7 +474,7 @@
 
                 $sunday = strtotime('+6 days', $monday);
                 echo date('F j', $monday) . " - " . date('F j, Y', $sunday);?></div>
-                <div class="h5 mb-0 font-weight-bold text-gray-800">Number of task: <a href="#" data-toggle="modal" data-target="#weekModal" id="iconbox"><?= json_encode($weekly_event);?></a></div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">Number of task: <?= json_encode($weekly_event);?></a></div>
               </div>
               <div class="col-auto">
                 <i class="fas fa-calendar fa-2x text-gray-300" id="iconbox"></i>
@@ -486,13 +486,13 @@
 
       <!-- Monthly -->
       <div class="col-12 col-lg-3 col-md-6 col-sm-12 mb-4">
-        <div class="card border-left-success shadow h-100 py-2">
+        <div class="card border-left-success shadow h-100 py-2" data-toggle="modal" data-target="#monthModal">
           <div class="card-body1">
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
                 <div class="text-xs font-weight-bold text-uppercase mb-1">
                  Monthly: <?= date('F Y');?></div>
-                 <div class="h5 mb-0 font-weight-bold text-gray-800">Number of task:&nbsp;<a href="#" data-toggle="modal" data-target="#monthModal" id="iconbox"><?= json_encode($monthly_event);?></a></div>
+                 <div class="h5 mb-0 font-weight-bold text-gray-800">Number of task:&nbsp;<?= json_encode($monthly_event);?></a></div>
                </div>
                <div class="col-auto">
                 <i class="fas fa-calendar fa-2x text-gray-300" id="iconbox"></i>
@@ -504,7 +504,7 @@
 
       <!--Completed -->
       <div class="col-12 col-lg-3 col-md-6 col-sm-12 mb-4">
-        <div class="card border-left-info shadow h-100 py-2">
+        <div class="card border-left-info shadow h-100 py-2" data-toggle="modal" data-target="#completeModal">
           <div class="card-body1">
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
@@ -512,21 +512,12 @@
               </div>
               <div class="row no-gutters align-items-center">
                 <div class="col-auto">
-                  <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" ><a href="#" data-toggle="modal" data-target="#completeModal" id="iconbox">
-
-                    <?php if(json_encode($event_total) > 0):?>
-                      <?= json_encode($percent);?>%
-                      <?php else:?>0%
-                    <?php endif;?>
-                  </a></div>
+                  <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" ></div>
                 </div>
-                <div class="col">
-                  <div class="progress progress-sm mr-2">
-                    <div class="progress-bar bg-success" role="progressbar"
-                    style="width: <?php if(json_encode($event_total) > 0):?>
-                    <?= json_encode($percent);?>%
-                    <?php else:?>0%
-                    <?php endif;?>;" aria-valuenow="<?= json_encode($complete_event);?>" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="col container-progress-circle">
+                  <div class="circular-progress">
+                    <div class="value-container"><?php if(json_encode($event_total) > 0):?><?= json_encode($percent);?><?php else:?>0%
+                    <?php endif;?></div>
                   </div>
                 </div>
               </div>
@@ -541,13 +532,13 @@
 
     <!-- Pending Requests Card Example -->
     <div class="col-12 col-lg-3 col-md-6 col-sm-12 mb-4">
-      <div class="card border-left-warning shadow h-100 py-2">
+      <div class="card border-left-warning shadow h-100 py-2" data-toggle="modal" data-target="#pendingModal">
         <div class="card-body1">
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
               <div class="text-xs font-weight-bold text-uppercase mb-1">
               Pending Tasks</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">Number of task:&nbsp;<a href="#" data-toggle="modal" data-target="#pendingModal" id="iconbox"><?= json_encode($pending_event);?></a></div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">Number of task:&nbsp;<?= json_encode($pending_event);?></a></div>
             </div>
             <div class="col-auto">
               <i class="fas fa-comments fa-2x text-gray-300" id="iconbox"></i>
@@ -559,13 +550,13 @@
     <!-- Pending Appointments -->
     <?php if($_SESSION['position'] == USER_ROLE_ADMIN){?>
     <div class="col-12 col-lg-3 col-md-6 col-sm-12 mb-4">
-      <div class="card border-left-warning shadow h-100 py-2">
+      <div class="card border-left-warning shadow h-100 py-2" data-toggle="modal" data-target="#apptModal">
         <div class="card-body1">
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
               <div class="text-xs font-weight-bold text-uppercase mb-1">
               Pending Appointments</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">Number of task:&nbsp;<a href="#" data-toggle="modal" data-target="#apptModal" id="iconbox"><?= json_encode($count_appt);?></a></div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">Number of task:&nbsp;<?= json_encode($count_appt);?></a></div>
             </div>
             <div class="col-auto">
             <i class="fas fa-comments fa-2x text-gray-300" id="iconbox"></i>
@@ -576,13 +567,13 @@
     </div>
     <!-- Pending Call logs -->
     <div class="col-12 col-lg-3 col-md-6 col-sm-12 mb-4">
-      <div class="card border-left-warning shadow h-100 py-2">
+      <div class="card border-left-warning shadow h-100 py-2" data-toggle="modal" data-target="#logModal">
         <div class="card-body1">
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
               <div class="text-xs font-weight-bold text-uppercase mb-1">
               Pending Logs</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">Number of task:&nbsp;<a href="#" data-toggle="modal" data-target="#logModal" id="iconbox"><?= json_encode($count_log);?></a></div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">Number of task:&nbsp;<?= json_encode($count_log);?></a></div>
             </div>
             <div class="col-auto">
               <i class="fas fa-phone-alt fa-2x text-gray-300" id="iconbox"></i>
@@ -595,12 +586,30 @@
   </div>
 <?php if($_SESSION['position'] == USER_ROLE_ADMIN || $_SESSION['position'] == USER_ROLE_SECRETARY):?>
 <div class="row">
-  <div class="col-12 col-lg-6 col-md-6 col-sm-12 col-xss-12" id="chart_div" style="width: 100%; height: 500px;"></div>
-  <div class="col-12 col-lg-6 col-md-6 col-sm-12 col-xss-12" id="piechart_3d" style="width: 100%; height: 500px;"></div>
-  <div class="col-12 col-lg-6 col-md-6 col-sm-12 col-xss-12 mt-3" style="background-color: none;width: 100%; height: 40px;"><h3 class="hfont">Overall Rating: <?=$overallPerformance?>%</h3></div>
-  <div class="col-12 col-lg-6 col-md-6 col-sm-12 col-xss-12 mt-3" style="background-color: none;width: 100%; height: 40px;"><h3 class="hfont">&nbsp;</h3></div>
-  <div class="col-12 col-lg-6 col-md-6 col-sm-12 col-xss-12" id="chart_div1" style="width: 100%; height: 500px;"></div>
-  <div class="col-12 col-lg-6 col-md-6 col-sm-12 col-xss-12" id="barchart_material" style="width: 100%; height: 500px;"></div>
+  
+  <div class="col-12 col-lg-12 col-md-6 col-sm-12 col-xss-12">
+    <h5>Analytics: <select id="selectAnalytics">
+    <option value="taskSummary" selected>Task Summary Per Month</option>
+    <option value="servTrend">Services Trend</option>
+    <option value="servRating">Service Rating</option>
+    <option value="techRating">Technician Rating</option>
+  </select></h5>
+  <div class="analyticsDiv">
+    <div id="chart_div" style="width: 100%; height: 500px;"></div>
+    <div id="piechart_3d" style="width: 100%; height: 500px;display: none;"></div>
+    <div id="ratingAnalytic" style="display: none;">
+      <h3 class="hfont">Overall Rating: <?=$overallPerformance?>%</h3>
+      <div id="chart_div1" style="width: 100%; height: 500px;"></div>
+    </div>
+    <div id="barchart_material" style="width: 100%; height: 500px;display: none;"></div>
+    </div>
+  </div>
+  
+  <!-- <div class="col-12 col-lg-6 col-md-6 col-sm-12 col-xss-12" id="piechart_3d" style="width: 100%; height: 500px;"></div> -->
+  <!-- <div class="col-12 col-lg-6 col-md-6 col-sm-12 col-xss-12 mt-3" style="background-color: none;width: 100%; height: 40px;"><h3 class="hfont">Overall Rating: <?=$overallPerformance?>%</h3></div> -->
+  <!-- <div class="col-12 col-lg-6 col-md-6 col-sm-12 col-xss-12 mt-3" style="background-color: none;width: 100%; height: 40px;"><h3 class="hfont">&nbsp;</h3></div> -->
+  <!-- <div class="col-12 col-lg-6 col-md-6 col-sm-12 col-xss-12" id="chart_div1" style="width: 100%; height: 500px;"></div> -->
+  <!-- <div class="col-12 col-lg-6 col-md-6 col-sm-12 col-xss-12" id="barchart_material" style="width: 100%; height: 500px;"></div> -->
 
 </div>
 <?php else:?>
@@ -764,8 +773,48 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
 <script src="https://cdn.datatables.net/rowreorder/1.2.8/js/dataTables.rowReorder.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+<script src="assets/js/circularProgress.js"></script>
 
 <script>
+
+if($('#selectAnalytics').val()=='taskSummary'){
+  $("#chart_div").css("display", "block");
+  $("#piechart_3d").css("display", "none");
+  $("#ratingAnalytic").css("display", "none");
+  $("#barchart_material").css("display", "none");
+
+}
+
+$('#selectAnalytics').on('change',function(){
+  var selected = $(this).val();
+
+  if(selected == 'taskSummary'){
+    // $('#chart_div').removeClass("hideAnalytic");
+    $("#chart_div").css("display", "block");
+    // $("#piechart_3d").css("display", "none");
+    // $("#ratingAnalytic").css("display", "none");
+    // $("#barchart_material").css("display", "none");
+  }else if(selected == 'servTrend'){
+    $("#chart_div").css("display", "none");
+    $("#piechart_3d").css("display", "block");
+    $("#ratingAnalytic").css("display", "none");
+    $("#barchart_material").css("display", "none");
+  }else if(selected == 'servRating'){
+    $("#chart_div").css("display", "none");
+    $("#piechart_3d").css("display", "none");
+    $("#ratingAnalytic").css("display", "block");
+    $("#barchart_material").css("display", "none");
+  }else{
+    $("#chart_div").css("display", "none");
+    $("#piechart_3d").css("display", "none");
+    $("#ratingAnalytic").css("display", "none");
+    $("#barchart_material").css("display", "block");
+  }
+  // $(".analyticsDiv").load(location.href + " .analyticsDiv", "");
+  // location.reload();
+});
+
+
 $(document).ready(function() {
    var table = $('#example').DataTable( {
          responsive: true
@@ -930,7 +979,9 @@ $(document).ready(function() {
         var servOptions = {
           title: 'Services Trend',
           is3D: true,
-          colors: servLabelColor
+          colors: servLabelColor,
+          height: 500
+          ,width: 1110
         };
         // var overallOptions = {
         //   title: 'Company Ratings',
@@ -939,27 +990,38 @@ $(document).ready(function() {
         // };
 
         var taskOptions = {
-          title: 'Task Summary per Month',
+          // title: 'Task Summary per Month',
           hAxis: {title: 'Month',  titleTextStyle: {color: '#333'}},
-          vAxis: {minValue: 0}
+          vAxis: {minValue: 0},
+          height: 500
+          ,width: 1110
         };
 
         var empOptions = {
           title: 'Technician\'s Performance',
-          // isStacked: 'percent',
-          bars: 'horizontal', // Required for Material Bar Charts.
+          bar: {groupWidth: "95%"},
+          height: 500
+          ,width: 1110,
+          vAxis: {
+            // title: '[0, 1, 2, 3, 4, 5]',
+            // format: 'none',
+            ticks: [0, 1, 2, 3, 4, 5],
+          }
+
         };
         var monthlyRatingOptions = {
           title: 'Monthly Rating',
           hAxis: {title: 'Month',  titleTextStyle: {color: '#333'}},
-          vAxis: {minValue: 0}
+          vAxis: {minValue: 0},
+          height: 500
+          ,width: 1110
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
         var chart2 = new google.visualization.AreaChart(document.getElementById('chart_div'));
-        var chart3 = new google.visualization.BarChart(document.getElementById('barchart_material'));
+        var chart3 = new google.visualization.ColumnChart(document.getElementById('barchart_material'));
         // var chart4 = new google.visualization.PieChart(document.getElementById('piechart1_3d'));
-        var chart5 = new google.visualization.AreaChart(document.getElementById('chart_div1'));
+        var chart5 = new google.visualization.ColumnChart(document.getElementById('chart_div1'));
         chart5.draw(monthlyRatingdata, monthlyRatingOptions);
         // chart4.draw(overallData, overallOptions);
         chart3.draw(empData,empOptions);
@@ -1214,6 +1276,7 @@ var mapModal = new bootstrap.Modal(document.getElementById('mapModal'));
 var yourModal = new bootstrap.Modal(document.getElementById('mymodal2'));
 
 <?php endif;?>
+
       </script>
 <?php if($_SESSION['position'] == USER_ROLE_EMPLOYEE):?>
 <script type="text/javascript" src="<?=base_url('assets/js/empCalendar.js')?>"></script>
