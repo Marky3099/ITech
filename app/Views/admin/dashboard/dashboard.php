@@ -76,7 +76,7 @@
                                 
                               <?php else:?>
                                 <div class="Nowork">
-                                  <p class="noworkstatement"><i class="fa-solid text-success fa-circle-exclamation"></i>&nbsp;Relax.. No work for Today!</p>
+                                  <p class="noworkstatement"><i class="fa-solid text-success fa-circle-exclamation"></i>&nbsp;Relax.. No work for today.</p>
                                 </div>
                               <?php endif;?>
                               
@@ -143,7 +143,7 @@
                                </table>
                              <?php else:?>
                               <div class="Nowork">
-                               <p class="noworkstatement"><i class="fa-solid text-success fa-circle-exclamation"></i>&nbsp;Relax.. No work for this week!</p>
+                               <p class="noworkstatement"><i class="fa-solid text-success fa-circle-exclamation"></i>&nbsp;Relax.. No work for this week.</p>
                              </div>
                            <?php endif;?>
                          </div>
@@ -207,7 +207,7 @@
                          </table>
                        <?php else:?>
                         <div class="Nowork">
-                          <p class="noworkstatement"><i class="fa-solid text-success fa-circle-exclamation"></i>&nbsp;Relax.. No work for this month!</p>
+                          <p class="noworkstatement"><i class="fa-solid text-success fa-circle-exclamation"></i>&nbsp;Relax.. No work for this month.</p>
                         </div>
                       <?php endif;?>
                     </div>
@@ -338,7 +338,7 @@
                 </table>
                 <?php else:?>
                   <div class="Nowork">
-                    <p class="noworkstatement"><i class="fa-solid text-success fa-circle-exclamation"></i>&nbsp;Hoorayyy!!.. All Tasks are Complete!</p>
+                    <p class="noworkstatement"><i class="fa-solid text-success fa-circle-exclamation"></i>&nbsp;Good job! All tasks are complete.</p>
                   </div>
                 <?php endif;?>
             </div>
@@ -383,7 +383,7 @@
                 </table>
                 <?php else:?>
                   <div class="Nowork">
-                    <p class="noworkstatement"><i class="fa-solid text-success fa-circle-exclamation"></i>&nbsp;No Pending Appointments!</p>
+                    <p class="noworkstatement"><i class="fa-solid text-success fa-circle-exclamation"></i>&nbsp;No pending appointments.</p>
                   </div>
                 <?php endif;?>
             </div>
@@ -428,7 +428,7 @@
                 </table>
                 <?php else:?>
                   <div class="Nowork">
-                    <p class="noworkstatement"><i class="fa-solid text-success fa-circle-exclamation"></i>&nbsp;No Pending Appointments!</p>
+                    <p class="noworkstatement"><i class="fa-solid text-success fa-circle-exclamation"></i>&nbsp;No pending call logs.</p>
                   </div>
                <?php endif;?>
             </div>
@@ -442,158 +442,179 @@
   </div>
 
 <!-- Content Row -->
-<div class="row">
-
-  <!-- Card for displaying the total count of today's event -->
-  <div class="col-12 col-lg-3 col-md-6 col-sm-12 mb-4">
-    <div class="card border-left-primary shadow h-100 py-2" data-toggle="modal" data-target="#todayModal">
-      <div class="card-body1">
-        <div class="row no-gutters align-items-center">
-          <div class="col mr-2">
-            <div class="text-xs font-weight-bold text-uppercase mb-1">
-              Daily: <?= date('F j, Y');?></div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">Number of task:&nbsp;<?= json_encode($today_event);?></a></div>
-            </div>
-            <div class="col-auto">
-              <i class="fas fa-calendar fa-2x text-gray-300" id="iconbox"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Weekly -->
-    <div class="col-12 col-lg-3 col-md-6 col-sm-12 mb-4">
-      <div class="card border-left-success shadow h-100 py-2" data-toggle="modal" data-target="#weekModal">
-        <div class="card-body1">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-uppercase mb-1">
-                Weekly: <?php 
-                $monday = strtotime('last monday', strtotime('tomorrow'));
-
-                $sunday = strtotime('+6 days', $monday);
-                echo date('F j', $monday) . " - " . date('F j, Y', $sunday);?></div>
-                <div class="h5 mb-0 font-weight-bold text-gray-800">Number of task: <?= json_encode($weekly_event);?></a></div>
+<div class="row mb-5">
+  <div class="col-lg-8">
+    <div class="row">
+      
+      <div class="col-lg-4 col-md-6 col-12 mb-1">
+        <div class="card shadow h-80">
+          <div class="card-body no-padding">
+            <div class="row no-gutters align-items-start">
+              <div class="col mr-2">
+                <div class="text-md font-weight-bold text-uppercase">
+                  Daily tasks: <i class="font-weight-normal"><?= date('F j, Y');?></i></div>
               </div>
               <div class="col-auto">
-                <i class="fas fa-calendar fa-2x text-gray-300" id="iconbox"></i>
+                <h2 style="  background-color: #344f22; padding: 0.5rem; border-radius: 25px; color: #fff; font-weight: bold; "><?= json_encode($count_appt);?></h2>
               </div>
             </div>
+          </div>
+          <div class="card-footer d-flex align-items-center justify-content-between" data-toggle="modal" data-target="#todayModal">
+            <a class="h6 text-black stretched-link" href="#">View Details</a>
+            <div class="h6 text-black"><i class="fas fa-angle-right"></i></div>
           </div>
         </div>
       </div>
 
-      <!-- Monthly -->
-      <div class="col-12 col-lg-3 col-md-6 col-sm-12 mb-4">
-        <div class="card border-left-success shadow h-100 py-2" data-toggle="modal" data-target="#monthModal">
-          <div class="card-body1">
-            <div class="row no-gutters align-items-center">
+      <div class="col-lg-4 col-md-6 col-12 mb-1">
+        <div class="card shadow h-80">
+          <div class="card-body no-padding">
+            <div class="row no-gutters align-items-start">
               <div class="col mr-2">
-                <div class="text-xs font-weight-bold text-uppercase mb-1">
-                 Monthly: <?= date('F Y');?></div>
-                 <div class="h5 mb-0 font-weight-bold text-gray-800">Number of task:&nbsp;<?= json_encode($monthly_event);?></a></div>
-               </div>
-               <div class="col-auto">
-                <i class="fas fa-calendar fa-2x text-gray-300" id="iconbox"></i>
+                <div class="text-md font-weight-bold text-uppercase">
+                  Weekly: <p style="font-size: 13px; margin: 0px; font-style: italic; font-weight: normal;"> <?php 
+                    $monday = strtotime('last monday', strtotime('tomorrow'));
+                    $sunday = strtotime('+6 days', $monday);
+                    echo date('F j', $monday) . " - " . date('F j, Y', $sunday);?></p></div>
+              </div>
+              <div class="col-auto">
+                <h2 style="  background-color: #344f22; padding: 0.5rem; border-radius: 25px; color: #fff; font-weight: bold; "><?= json_encode($weekly_event);?></h2>
               </div>
             </div>
+          </div>
+          <div class="card-footer d-flex align-items-center justify-content-between" data-toggle="modal" data-target="#weekModal">
+            <a class="h6 text-black stretched-link" href="#">View Details</a>
+            <div class="h6 text-black"><i class="fas fa-angle-right"></i></div>
           </div>
         </div>
       </div>
 
-      <!--Completed -->
-      <div class="col-12 col-lg-3 col-md-6 col-sm-12 mb-4">
-        <div class="card border-left-info shadow h-100 py-2" data-toggle="modal" data-target="#completeModal">
-          <div class="card-body1">
-            <div class="row no-gutters align-items-center">
+      <div class="col-lg-4 col-md-6 col-12 mb-1">
+        <div class="card shadow h-80">
+          <div class="card-body no-padding">
+            <div class="row no-gutters align-items-start">
               <div class="col mr-2">
-                <div class="text-xs font-weight-bold text-uppercase mb-1">Completed: <?= json_encode($complete_event);?> out of <?= json_encode($event_total);?>
+                <div class="text-md font-weight-bold text-uppercase mb-1">
+                  Monthly: <i class="font-weight-normal"><?= date('F Y');?></i></div>
               </div>
-              <div class="row no-gutters align-items-center">
-                <div class="col-auto">
-                  <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" ></div>
-                </div>
-                <div class="col container-progress-circle">
-                  <div class="circular-progress">
-                    <div class="value-container"><?php if(json_encode($event_total) > 0):?><?= json_encode($percent);?><?php else:?>0%
-                    <?php endif;?></div>
-                  </div>
-                </div>
+              <div class="col-auto">
+                <h2 style="  background-color: #344f22; padding: 0.5rem; border-radius: 25px; color: #fff; font-weight: bold; "><?= json_encode($monthly_event);?></h2>
               </div>
             </div>
-            <div class="col-auto">
-              <i class="fas fa-clipboard-list fa-2x text-gray-300" id="iconbox"></i>
-            </div>
+          </div>
+          <div class="card-footer d-flex align-items-center justify-content-between" data-toggle="modal" data-target="#monthModal">
+            <a class="h6 text-black stretched-link" href="#">View Details</a>
+            <div class="h6 text-black"><i class="fas fa-angle-right"></i></div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Pending Requests Card Example -->
-    <div class="col-12 col-lg-3 col-md-6 col-sm-12 mb-4">
-      <div class="card border-left-warning shadow h-100 py-2" data-toggle="modal" data-target="#pendingModal">
-        <div class="card-body1">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-uppercase mb-1">
-              Pending Tasks</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">Number of task:&nbsp;<?= json_encode($pending_event);?></a></div>
+      <div class="col-lg-4 col-md-6 col-12 mb-1">
+        <div class="card shadow h-80">
+          <div class="card-body no-padding">
+            <div class="row no-gutters align-items-start">
+              <div class="col mr-2">
+                <div class="text-md font-weight-bold text-uppercase mb-1">
+                  Pending Tasks</div>
+              </div>
+              <div class="col-auto">
+                <h2 style="  background-color: #344f22; padding: 0.5rem; border-radius: 25px; color: #fff; font-weight: bold; "><?= json_encode($pending_event);?></h2>
+              </div>
             </div>
-            <div class="col-auto">
-              <i class="fas fa-comments fa-2x text-gray-300" id="iconbox"></i>
-            </div>
+          </div>
+          <div class="card-footer d-flex align-items-center justify-content-between" data-toggle="modal" data-target="#pendingModal">
+              <a class="h6 text-black stretched-link" href="#">View Details</a>
+              <div class="h6 text-black"><i class="fas fa-angle-right"></i></div>
           </div>
         </div>
       </div>
-    </div>
-    <!-- Pending Appointments -->
-    <?php if($_SESSION['position'] == USER_ROLE_ADMIN){?>
-    <div class="col-12 col-lg-3 col-md-6 col-sm-12 mb-4">
-      <div class="card border-left-warning shadow h-100 py-2" data-toggle="modal" data-target="#apptModal">
-        <div class="card-body1">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-uppercase mb-1">
-              Pending Appointments</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">Number of task:&nbsp;<?= json_encode($count_appt);?></a></div>
+
+      <?php if($_SESSION['position'] == USER_ROLE_ADMIN){?>
+      <div class="col-lg-4 col-md-6 col-12 mb-1">
+        <div class="card shadow h-80">
+          <div class="card-body no-padding">
+            <div class="row no-gutters align-items-start">
+              <div class="col mr-2">
+                <div class="text-md font-weight-bold text-uppercase mb-1">
+                  Pending Appointments</div>
+              </div>
+              <div class="col-auto">
+                <h2 style="  background-color: #344f22; padding: 0.5rem; border-radius: 25px; color: #fff; font-weight: bold; "><?= json_encode($count_appt);?></h2>
+              </div>
             </div>
-            <div class="col-auto">
-            <i class="fas fa-comments fa-2x text-gray-300" id="iconbox"></i>
+          </div>
+              <div class="card-footer d-flex align-items-center justify-content-between" data-toggle="modal" data-target="#apptModal">
+                 <a class="h6 text-black stretched-link" href="#">View Details</a>
+                 <div class="h6 text-black"><i class="fas fa-angle-right"></i></div>
+              </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 col-12 mt-1">
+        <div class="card shadow h-80">
+          <div class="card-body no-padding">
+            <div class="row no-gutters align-items-start">
+              <div class="col mr-2">
+                <div class="text-md font-weight-bold text-uppercase mb-1">
+                  Pending Logs</div>
+              </div>
+              <div class="col-auto">
+                <h2 style="  background-color: #344f22; padding: 0.5rem; border-radius: 25px; color: #fff; font-weight: bold; "><?= json_encode($count_log);?></h2>
+              </div>
             </div>
+          </div>
+          <div class="card-footer d-flex align-items-center justify-content-between" data-toggle="modal" data-target="#logModal">
+              <a class="h6 text-black stretched-link" href="#">View Details</a>
+              <div class="h6 text-black"><i class="fas fa-angle-right"></i></div>
           </div>
         </div>
       </div>
+      <?php }?>
     </div>
-    <!-- Pending Call logs -->
-    <div class="col-12 col-lg-3 col-md-6 col-sm-12 mb-4">
-      <div class="card border-left-warning shadow h-100 py-2" data-toggle="modal" data-target="#logModal">
-        <div class="card-body1">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-uppercase mb-1">
-              Pending Logs</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">Number of task:&nbsp;<?= json_encode($count_log);?></a></div>
-            </div>
-            <div class="col-auto">
-              <i class="fas fa-phone-alt fa-2x text-gray-300" id="iconbox"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <?php }?>
   </div>
+
+  <div class="col-lg-4">
+    <div class="row">
+      <div class="col-lg-12 col-md-6 col-12 mt-1">
+        <div class="card shadow h-80">
+          <div class="card-body" style="padding: 1.85rem">
+            <div class="row no-gutters align-items-center">
+              <div class="col">
+                <div class="text-md font-weight-bold text-uppercase mb-1">
+                  Completed<br><?= json_encode($complete_event);?> out of <?= json_encode($event_total);?></div>
+              </div>
+              <div class="col-auto mb-3">
+                <div class="col container-progress-circle">
+                    <div class="circular-progress">
+                      <div class="value-container"><?php if(json_encode($event_total) > 0):?><?= json_encode($percent);?><?php else:?>0%
+                      <?php endif;?></div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer d-flex align-items-center justify-content-between" data-toggle="modal" data-target="#completeModal">
+            <a class="h6 text-black stretched-link" href="#">View Details</a>
+            <div class="h6 text-black"><i class="fas fa-angle-right"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>  
+  </div>
+
+</div>
+
+  
 <?php if($_SESSION['position'] == USER_ROLE_ADMIN || $_SESSION['position'] == USER_ROLE_SECRETARY):?>
 <div class="row">
   
   <div class="col-12 col-lg-12 col-md-6 col-sm-12 col-xss-12">
-    <h5>Analytics: <select id="selectAnalytics">
+    <h3 class="hfont">Analytics: </h3><select class="form-control mb-3 w-25" id="selectAnalytics">
     <option value="taskSummary" selected>Task Summary Per Month</option>
     <option value="servTrend">Services Trend</option>
     <option value="servRating">Service Rating</option>
     <option value="techRating">Technician Rating</option>
-  </select></h5>
+  </select>
   <div class="analyticsDiv">
     <div id="chart_div" style="width: 100%; height: 500px;"></div>
     <div id="piechart_3d" style="width: 100%; height: 500px;display: none;"></div>

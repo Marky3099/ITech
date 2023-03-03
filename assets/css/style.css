@@ -815,7 +815,7 @@ h3#headerrate{
     position: relative;
     height: 150px;
     width: 150px;
-    background-color: orange;
+    background-color: grey;
     border-radius: 50%;
     display: grid;
     place-items: center;

@@ -2,6 +2,9 @@ canvas {
   border: 1px dotted red;
 }
 
+.no-padding{
+	padding: 10px !important;
+}
 
 
 .chart-container {

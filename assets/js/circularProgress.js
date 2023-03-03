@@ -10,7 +10,7 @@ let progress = setInterval(()=>{
 	valueContainer.textContent = `${progressValue}%`;
 	progressBar.style.background = `conic-gradient(
 		#344F21 ${progressValue * 3.6}deg,
-		#2F6440 ${progressValue * 3.6}deg
+		#d3d3d3 ${progressValue * 3.6}deg
 	)`;
 	if(progressValue == progressEndValue){
 		clearInterval(progress);
