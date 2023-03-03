@@ -812,9 +812,9 @@ $('#selectAnalytics').on('change',function(){
   if(selected == 'taskSummary'){
     // $('#chart_div').removeClass("hideAnalytic");
     $("#chart_div").css("display", "block");
-    // $("#piechart_3d").css("display", "none");
-    // $("#ratingAnalytic").css("display", "none");
-    // $("#barchart_material").css("display", "none");
+    $("#piechart_3d").css("display", "none");
+    $("#ratingAnalytic").css("display", "none");
+    $("#barchart_material").css("display", "none");
   }else if(selected == 'servTrend'){
     $("#chart_div").css("display", "none");
     $("#piechart_3d").css("display", "block");
