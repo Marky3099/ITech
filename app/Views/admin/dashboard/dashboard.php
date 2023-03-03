@@ -529,7 +529,7 @@
         </div>
       </div>
 
-      <?php if($_SESSION['position'] == USER_ROLE_ADMIN){?>
+      <?php if($_SESSION['position'] == USER_ROLE_ADMIN || $_SESSION['position'] == USER_ROLE_SECRETARY){?>
       <div class="col-lg-4 col-md-6 col-12 mb-1">
         <div class="card shadow h-80">
           <div class="card-body no-padding">
