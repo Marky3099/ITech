@@ -163,61 +163,62 @@
 </div>
 
 <!-- Content Row -->
-<div class="row" id="cards">
-  <!-- Card for displaying the total count of today's event -->
-  <div class="ml-3 col-12 col-lg-4 col-md-4 col-sm-8 mb-4">
-    <div class="card border-left-primary shadow h-100 w-75 py-2">
-      <div class="card-body1">
-        <div class="row no-gutters align-items-center">
-          <div class="col mr-2">
-            <div class="text-xs font-weight-bold text-uppercase mb-1">
-              Pending Appointment</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">#:&nbsp;<a href="#" data-toggle="modal" data-target="#pendingModal" id="iconbox"><?= json_encode($count_pending);?></a></div>
-            </div>
-            <div class="col-auto">
-              <i class="fas fa-calendar fa-2x text-gray-300" id="iconbox"></i>
+<div class="row ml-5">
+  <div class="col-lg-6">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-12 mb-1">
+        <div class="card shadow h-80">
+          <div class="card-body no-padding">
+            <div class="row no-gutters align-items-start">
+              <div class="col mr-2">
+                <div class="text-md font-weight-bold text-uppercase mb-2 mt-2">
+                  Pending Appointment</div>
+              </div>
+              <div class="col-auto mb-2">
+                <h2 style="  background-color: #344f22; padding: 0.5rem; border-radius: 25px; color: #fff; font-weight: bold; "><?= json_encode($count_pending);?></h2>
+              </div>
             </div>
           </div>
+              <div class="card-footer d-flex align-items-center justify-content-between" data-toggle="modal" data-target="#pendingModal">
+                 <a class="h6 text-black stretched-link" href="#">View Details</a>
+                 <div class="h6 text-black"><i class="fas fa-angle-right"></i></div>
+              </div>
         </div>
       </div>
-  </div>
 
-      <!--Completed -->
-      <div class="ml-3 col-12 col-lg-4 col-md-4 col-sm-8 mb-4">
-        <div class="card border-left-info shadow h-100 w-75 py-2" id="card2">
-          <div class="card-body1">
-            <div class="row no-gutters align-items-center">
+      <div class="col-lg-6 col-md-6 col-12 mb-1">
+        <div class="card shadow h-80">
+          <div class="card-body no-padding">
+            <div class="row no-gutters align-items-start">
               <div class="col mr-2">
-                <div class="text-xs font-weight-bold text-uppercase mb-1">Completed: <?= json_encode($count_complete);?> out of <?= json_encode($count_total);?>
+                <div class="text-md font-weight-bold text-uppercase mb-1 mt-1">
+                  Completed: <?= json_encode($count_complete);?> out of <?= json_encode($count_total);?></div>
               </div>
-              <div class="row no-gutters align-items-center">
-                <div class="col-auto">
-                  <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" ><a href="#" data-toggle="modal" data-target="#completeModal" id="iconbox">
-                    
-                   <?php if(json_encode($count_total) > 0):?>
+              <div class="col-auto">
+                 <b style="background-color: #344f22; border-radius: 10px; color: #fff; padding: .5rem"><?php if(json_encode($count_total) > 0):?>
                       <?= json_encode($percent);?>%
                       <?php else:?>0%
-                    <?php endif;?>
+                    <?php endif;?></b>
                   </a></div>
                 </div>
                 <div class="col">
-                  <div class="progress progress-sm mr-2">
+                  <div class="progress border border-dark progress-sm mr-2">
                     <div class="progress-bar bg-success" role="progressbar"
                     style="width: <?php if(json_encode($count_total) > 0):?>
                     <?= json_encode($percent);?>%
                     <?php else:?>0%
                     <?php endif;?>;" aria-valuenow="<?= json_encode($count_complete);?>" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </div>
               </div>
             </div>
-            <div class="col-auto">
-              <i class="fas fa-clipboard-list fa-2x text-gray-300" id="iconbox"></i>
-            </div>
           </div>
+              <div class="card-footer d-flex align-items-center justify-content-between" data-toggle="modal" data-target="#completeModal">
+                 <a class="h6 text-black stretched-link" href="#">View Details</a>
+                 <div class="h6 text-black"><i class="fas fa-angle-right"></i></div>
+              </div>
         </div>
       </div>
     </div>
+  </div>
 </div>
 
 
