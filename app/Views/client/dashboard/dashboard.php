@@ -14,7 +14,7 @@
 
   <!-- Custom styles for this template-->
   <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/dashstyle.css')?>">
-
+  <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/style.css')?>">
 
   <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/main.min.css')?>">
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
@@ -195,20 +195,13 @@
                   Completed: <?= json_encode($count_complete);?> out of <?= json_encode($count_total);?></div>
               </div>
               <div class="col-auto">
-                 <b style="background-color: #344f22; border-radius: 10px; color: #fff; padding: .5rem"><?php if(json_encode($count_total) > 0):?>
-                      <?= json_encode($percent);?>%
-                      <?php else:?>0%
-                    <?php endif;?></b>
-                  </a></div>
+                 <div class="col container-progress-circle">
+                    <div class="circular-progress" style="height: 70px; width: 70px;">
+                      <div class="value-container" style="font-size: 15px; font-weight: bold;"><?php if(json_encode($count_total) > 0):?><?= json_encode($percent);?><?php else:?>0%
+                      <?php endif;?></div>
+                    </div>
+                  </div>
                 </div>
-                <div class="col">
-                  <div class="progress border border-dark progress-sm mr-2">
-                    <div class="progress-bar bg-success" role="progressbar"
-                    style="width: <?php if(json_encode($count_total) > 0):?>
-                    <?= json_encode($percent);?>%
-                    <?php else:?>0%
-                    <?php endif;?>;" aria-valuenow="<?= json_encode($count_complete);?>" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
             </div>
           </div>
               <div class="card-footer d-flex align-items-center justify-content-between" data-toggle="modal" data-target="#completeModal">
@@ -515,5 +508,7 @@ var deviceBrand = <?php echo json_encode($device_brand); ?> ;
 
 </script>
 <script type="text/javascript" src="<?=base_url('assets/js/empCalendar.js')?>"></script>
+<script src="assets/js/circularProgress.js"></script>
+
 </body>
 
