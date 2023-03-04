@@ -31,7 +31,7 @@
 				<!-- <p class="para1">Want to book an Appointment?<a href="<?= base_url('/client-type')?>" style="font-style: italic; color: limegreen;">&nbsp;Click here.</a></p> -->
 		
 					</br></br>
-					<p class="para1"> By using this service, you understood and agree to Maylaflor’s Tasks and Schedule Monitoring System <i>Terms of Use and Privacy Statement.</i></p>
+					<p class="para1"> @ 2022 by ITechs.</i></p>
 					<a href="<?= base_url();?>" class="btn btn-success" id="back-btn">Back</a>
 				</div>
 			</div>
