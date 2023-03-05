@@ -163,7 +163,13 @@ if($user_data){
      <td>'.$u->email.'</td>
      <td>'.$u->address.'</td>
      <td>'.$u->contact.'</td>
-     <td>'.$u->position.'</td></tr>';
+     <td>';
+     if($u->position == 'Employee'){
+        $html .= 'Technician';
+     }else{
+        $html .= $u->position;
+     }
+     $html .='</td></tr>';
      
  }
 
