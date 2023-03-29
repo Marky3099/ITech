@@ -39,8 +39,8 @@
                  <td><?php echo $service['price']; ?></td>
                  <td style="background-color:<?php echo $service['serv_color']; ?>"></td>
                  <td>
-                   <a href="<?php echo base_url('/serv/'.$service['serv_id']);?>" class="btnn btn btn-primary border-0 btn-sm">Edit</a>
-                   <a href="<?php echo base_url('/serv/delete/'.$service['serv_id']);?>" class="btn btn-danger btn-sm del">Delete</a>
+                   <a href="<?php echo base_url('/serv/'.$service['serv_id']);?>" class="btnn btn btn-primary border-0 btn-sm"><i class="fas fa-edit"></i></a>
+                   <a href="<?php echo base_url('/serv/delete/'.$service['serv_id']);?>" class="btn btn-danger btn-sm del"><i class="fas fa-trash"></i></a>
                 </td>
              </tr>
              <?php $n=$n+1; endforeach; ?>

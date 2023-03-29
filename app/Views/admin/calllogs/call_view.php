@@ -239,7 +239,7 @@
            <td><?php echo $call_log->serv_type; ?></td>
           <td><?php echo $call_log->status; ?></td>
          <td>
-             <a href="#" id="<?php echo $call_log->cl_id;?>" class="btn btn-info btn-sm view">View</a>
+             <a href="#" id="<?php echo $call_log->cl_id;?>" class="btn btn-info btn-sm view"><i class="fas fa-eye"></i></a>
           </td>
           </tr>
       <?php endforeach; ?>

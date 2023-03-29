@@ -27,8 +27,8 @@
                  <td><?php echo $devices['device_brand']; ?></td>
                  <td><?php echo $devices['aircon_type']; ?></td>
                  <td>
-                   <a href="<?php echo base_url('/aircon/'.$devices['aircon_id']);?>" class="btnn btn btn-primary border-0 btn-sm">Edit</a>
-                   <a href="<?php echo base_url('/aircon/delete/'.$devices['aircon_id']);?>" class="btn btn-danger btn-sm del">Delete</a>
+                   <a href="<?php echo base_url('/aircon/'.$devices['aircon_id']);?>" class="btnn btn btn-primary border-0 btn-sm"><i class="fas fa-edit"></i></a>
+                   <a href="<?php echo base_url('/aircon/delete/'.$devices['aircon_id']);?>" class="btn btn-danger btn-sm del"><i class="fas fa-trash"></i></a>
                 </td>
              </tr>
              <?php  $d=$d+1;

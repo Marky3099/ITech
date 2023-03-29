@@ -39,8 +39,8 @@
                  <td><?php echo $user['position']; ?></td>
                  <?php endif;?>
                  <td>
-                   <a href="<?php echo base_url('/user/'.$user['user_id']);?>" class="btnn btn btn-primary border-0 btn-sm">Edit</a>
-                   <a href="<?php echo base_url('/user/delete/'.$user['user_id']);?>" class="btn btn-danger btn-sm del" >Delete</a>
+                   <a href="<?php echo base_url('/user/'.$user['user_id']);?>" class="btnn btn btn-primary border-0 btn-sm"><i class="fas fa-edit"></i></a>
+                   <a href="<?php echo base_url('/user/delete/'.$user['user_id']);?>" class="btn btn-danger btn-sm del" ><i class="fas fa-trash"></i></a>
                    <!-- <a href="#" >Click me</a> -->
                 </td>
              </tr>

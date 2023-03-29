@@ -230,7 +230,7 @@
 											<td><?php echo $dat->client_branch ?></td>
                                             <td><?php echo $dat->serv_type ?></td>
 						                    <td><?php echo $dat->status; ?></td>
-						                    <td><a href="#" id="<?=$dat->id?>" class="btn btn-info btn-sm view">View</a></td>
+						                    <td><a href="#" id="<?=$dat->id?>" class="btn btn-info btn-sm view"><i class="fas fa-eye"></i></a></td>
 										</tr>
 									<?php endforeach; ?>
 								<?php endif; ?>

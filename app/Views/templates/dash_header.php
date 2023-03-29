@@ -156,28 +156,29 @@
         </ul>
     </div>
     <div class="sidebar-header">
-        <div class="text1">
+        <div class="text1" id="navbar1" style="position: fixed; top: 0; width: 95%; z-index: 999;">
             <div class="title-header">
                 <?php if($_SESSION['position'] == USER_ROLE_ADMIN || $_SESSION['position'] == USER_ROLE_EMPLOYEE || $_SESSION['position'] == USER_ROLE_SECRETARY):?>
                     Task and Schedule Monitoring System
                 <?php else:?>
                     Appointment System
                 <?php endif;?>
+            
+                <div class="drop-content">
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Hi, <?php echo $_SESSION['username']?></a>
+                        <ul class="dropdown-menu">
+                            <?php if($_SESSION['position'] != USER_ROLE_CLIENT):?>
+                            <li><a class="dropdown-item" href="<?= base_url('/profile/'.$_SESSION['user_id'] )?>">Account Settings</a></li>
+                        <?php else:?>
+                            <li><a class="dropdown-item" href="<?= base_url('/profile-bdo/'.$_SESSION['user_id'] )?>">Account Settings</a></li>
+                        <?php endif;?>
+                            <li><a class="dropdown-item" href="<?= base_url('/logout')?>">Sign out</a></li>
+                        </ul>
+                    </li>
+                </div>
             </div>
-            <div class="drop-content">
-                <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Hi, <?php echo $_SESSION['username']?></a>
-                    <ul class="dropdown-menu">
-                        <?php if($_SESSION['position'] != USER_ROLE_CLIENT):?>
-                        <li><a class="dropdown-item" href="<?= base_url('/profile/'.$_SESSION['user_id'] )?>">Account Settings</a></li>
-                    <?php else:?>
-                        <li><a class="dropdown-item" href="<?= base_url('/profile-bdo/'.$_SESSION['user_id'] )?>">Account Settings</a></li>
-                    <?php endif;?>
-                        <li><a class="dropdown-item" href="<?= base_url('/logout')?>">Sign out</a></li>
-                    </ul>
-                </li>
-            </div>
-        </div>
+        </div><br><br><br>
 
 
 <script>

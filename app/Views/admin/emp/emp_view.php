@@ -38,8 +38,8 @@
                     }?>
                  </td>
                  <td>
-                   <a href="<?php echo base_url('/emp/'.$employee['emp_id']);?>" class="btnn btn btn-primary border-0 btn-sm">Edit</a>
-                   <a href="<?php echo base_url('/emp/delete/'.$employee['emp_id']);?>" class="btn btn-danger btn-sm del">Delete</a>
+                   <a href="<?php echo base_url('/emp/'.$employee['emp_id']);?>" class="btnn btn btn-primary border-0 btn-sm"><i class="fas fa-edit"></i></a>
+                   <a href="<?php echo base_url('/emp/delete/'.$employee['emp_id']);?>" class="btn btn-danger btn-sm del"><i class="fas fa-trash"></i></a>
                 </td>
              </tr>
              <?php  $c=$c+1;

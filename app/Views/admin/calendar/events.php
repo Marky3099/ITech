@@ -281,10 +281,13 @@
         <?php endif;?>
       </td>
       <td>
-        <a href="#" id="<?=$dat->id?>" class="btn btn-info btn-sm mb-1 view">View Task</a><br>
+        <a href="#" id="<?=$dat->id?>" class="btn btn-info btn-sm view"><i class="fas fa-eye"></i></a>
+        <!-- <span class="tooltip">View</span> -->
         <?php if($dat->status!='Pending'):?>
-          <a href="#" id="<?=$dat->id?>" class="btn btn-primary btn-sm mb-1 reports" data-toggle="modal" data-target="#fileModal">Upload Report</a><br>
-          <a href="#" id="<?=$dat->id?>" class="btn btn-secondary btn-sm view-reports">View Report</a>
+        <a href="#" id="<?=$dat->id?>" class="btn btn-primary btn-sm reports border-0" data-toggle="modal" data-target="#fileModal">&nbsp;<i class="fas fa-file-upload"></i>&nbsp;</a>
+        <!-- <span class="tooltip">Upload Report</span> -->
+        <a href="#" id="<?=$dat->id?>" class="btn btn-secondary btn-sm view-reports"><i class="fas fa-eye"></i></a>
+        <!-- <span class="tooltip">View Report</span> -->
         <?php endif;?>
      </td>
   </tr>

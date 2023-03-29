@@ -148,11 +148,11 @@
            <td><?php echo $appt->client_branch; ?></td>
            <td><?php echo $appt->appt_status; ?></td>
            <td><?php if($appt->appt_status == 'Done'):?>
-                <a href="#" id="<?=$appt->appt_code?>" class="btn btn-success btn-sm viewReport">View</a>
+                <a href="#" id="<?=$appt->appt_code?>" class="btn btn-success btn-sm viewReport"><i class="fas fa-eye"></i></a>
               <?php endif;?>
           </td>
            <td>
-             <a href="#" id="<?php echo $appt->appt_id;?>" class="btn btn-info btn-sm view">View</a>
+             <a href="#" id="<?php echo $appt->appt_id;?>" class="btn btn-info btn-sm view"><i class="fas fa-eye"></i></a>
              <?php if($appt->appt_status == 'Pending'):?>
               <a href="#" id="<?php echo $appt->appt_id; ?>" data-id="<?php echo $appt->user_id;?>" class="btn btn-secondary btn-sm dec_btn">Cancel</a>
              <?php endif;?>

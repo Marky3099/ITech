@@ -452,10 +452,11 @@
             <div class="row no-gutters align-items-start">
               <div class="col mr-2">
                 <div class="text-md font-weight-bold text-uppercase">
-                  Daily tasks: <i class="font-weight-normal"><?= date('F j, Y');?></i></div>
+                  <i class="font-weight-normal"><?= date('F j, Y');?></i>
+                  Daily tasks: <?= json_encode($count_appt);?></div>
               </div>
               <div class="col-auto">
-                <h2 style="  background-color: #344f22; padding: 0.5rem; border-radius: 25px; color: #fff; font-weight: bold; "><?= json_encode($count_appt);?></h2>
+                <h2 style="  background-color: #344f22; padding: 0.5rem; border-radius: 25px; color: #fff; font-weight: bold; "><i class="fas fa-calendar"></i></h2>
               </div>
             </div>
           </div>
@@ -472,13 +473,15 @@
             <div class="row no-gutters align-items-start">
               <div class="col mr-2">
                 <div class="text-md font-weight-bold text-uppercase">
-                  Weekly: <p style="font-size: 13px; margin: 0px; font-style: italic; font-weight: normal;"> <?php 
+                  <p style="font-size: 13px; margin: 0px; font-style: italic; font-weight: normal;"> <?php 
                     $monday = strtotime('last monday', strtotime('tomorrow'));
                     $sunday = strtotime('+6 days', $monday);
-                    echo date('F j', $monday) . " - " . date('F j, Y', $sunday);?></p></div>
+                    echo date('F j', $monday) . " - " . date('F j, Y', $sunday);?></p>
+                  Weekly: <?= json_encode($weekly_event);?>
+                </div>
               </div>
               <div class="col-auto">
-                <h2 style="  background-color: #344f22; padding: 0.5rem; border-radius: 25px; color: #fff; font-weight: bold; "><?= json_encode($weekly_event);?></h2>
+                <h2 style="  background-color: #344f22; padding: 0.5rem; border-radius: 25px; color: #fff; font-weight: bold; "><i class="fas fa-calendar"></i></h2>
               </div>
             </div>
           </div>
@@ -495,10 +498,12 @@
             <div class="row no-gutters align-items-start">
               <div class="col mr-2">
                 <div class="text-md font-weight-bold text-uppercase mb-1">
-                  Monthly: <i class="font-weight-normal"><?= date('F Y');?></i></div>
+                  <i class="font-weight-normal"><?= date('F Y');?></i>
+                  Monthly: <?= json_encode($monthly_event);?>
+                </div>
               </div>
               <div class="col-auto">
-                <h2 style="  background-color: #344f22; padding: 0.5rem; border-radius: 25px; color: #fff; font-weight: bold; "><?= json_encode($monthly_event);?></h2>
+                <h2 style="  background-color: #344f22; padding: 0.5rem; border-radius: 25px; color: #fff; font-weight: bold; "><i class="fas fa-calendar"></i></h2>
               </div>
             </div>
           </div>
@@ -515,10 +520,10 @@
             <div class="row no-gutters align-items-start">
               <div class="col mr-2">
                 <div class="text-md font-weight-bold text-uppercase mb-1">
-                  Pending Tasks</div>
+                  Pending Tasks: <?= json_encode($pending_event);?></div>
               </div>
               <div class="col-auto">
-                <h2 style="  background-color: #344f22; padding: 0.5rem; border-radius: 25px; color: #fff; font-weight: bold; "><?= json_encode($pending_event);?></h2>
+                <h2 style="  background-color: #344f22; padding: 0.5rem; border-radius: 25px; color: #fff; font-weight: bold; "><i class="far fa-hourglass-half"></i></h2>
               </div>
             </div>
           </div>
@@ -535,11 +540,11 @@
           <div class="card-body no-padding">
             <div class="row no-gutters align-items-start">
               <div class="col mr-2">
-                <div class="text-md font-weight-bold text-uppercase mb-1">
-                  Pending Appointments</div>
+                <div class="text-md font-weight-bold text-uppercase mb-1" style="font-size: 15px;"> 
+                  Pending Appointments: <?= json_encode($count_appt);?></div>
               </div>
               <div class="col-auto">
-                <h2 style="  background-color: #344f22; padding: 0.5rem; border-radius: 25px; color: #fff; font-weight: bold; "><?= json_encode($count_appt);?></h2>
+                <h2 style="  background-color: #344f22; padding: 0.5rem; border-radius: 25px; color: #fff; font-weight: bold; "><i class="far fa-hourglass-half"></i></h2>
               </div>
             </div>
           </div>
@@ -556,10 +561,10 @@
             <div class="row no-gutters align-items-start">
               <div class="col mr-2">
                 <div class="text-md font-weight-bold text-uppercase mb-1">
-                  Pending Logs</div>
+                  Pending Logs: <?= json_encode($count_log);?></div>
               </div>
               <div class="col-auto">
-                <h2 style="  background-color: #344f22; padding: 0.5rem; border-radius: 25px; color: #fff; font-weight: bold; "><?= json_encode($count_log);?></h2>
+                <h2 style="  background-color: #344f22; padding: 0.5rem; border-radius: 25px; color: #fff; font-weight: bold; "><i class="far fa-hourglass-half"></i></h2>
               </div>
             </div>
           </div>
