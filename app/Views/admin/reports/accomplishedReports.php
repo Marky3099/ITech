@@ -293,9 +293,9 @@ $(document).ready(function() {
 		});
 	} );
 	
-	$(document).on('click','.view',function(e){
+	$(document).on('click','.view',function(){
       // console.log(e.target.id);
-      var id = e.target.id;
+      var id = $(this).attr('id');
       var options = { year: 'numeric', month: 'long', day: 'numeric' };
 
       var myModal = new bootstrap.Modal(document.getElementById('viewModal'));

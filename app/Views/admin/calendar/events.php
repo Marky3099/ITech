@@ -547,9 +547,9 @@ var rateModal = new bootstrap.Modal(document.getElementById('rateModal'));
       rateModal.show();
    })
   var viewTask = "https://puptcapstone.net/tsms/calendar/events/view";
-  $(document).on('click','.view',function(e){
+  $('.view').click(function(){
       // console.log(e.target.id);
-      var id = e.target.id;
+      var id =  $(this).attr('id');
       var options = { year: 'numeric', month: 'long', day: 'numeric' };
 
       var myModal = new bootstrap.Modal(document.getElementById('viewModal'));

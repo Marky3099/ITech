@@ -201,8 +201,8 @@ $(document).ready(function() {
 
     $('#mymodal .selectpicker').selectpicker();
 
-   $(document).on('click','.dec_btn',function(e){
-    var apptId = e.target.id;
+   $(document).on('click','.dec_btn',function(){
+    var apptId = $(this).attr('id');
     var userId = $(this).data("id");
 
     // console.log(userId);
@@ -367,9 +367,9 @@ var rateModal = new bootstrap.Modal(document.getElementById('rateModal'));
 
 
 
-   $(document).on('click','.view',function(e){
+   $(document).on('click','.view',function(){
       // console.log(e.target.id);
-      var id = e.target.id;
+      var id = $(this).attr('id');
       // console.log(id);
       var options = { year: 'numeric', month: 'long', day: 'numeric' };
 
