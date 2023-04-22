@@ -44,7 +44,7 @@
       <form method="POST" action="<?=base_url('/appointment/rate-service')?>">
       <div class="modal-body">
         <div class="container">
-          <center><h2>Service's Review</h2></center>
+          <center><h3 id="headerrate">Service's Review</h3></center>
           <div class="row">
             <div class="col-lg-4">
                <p class="servq">Service Quality</p>
@@ -64,7 +64,7 @@
             <div class="col-lg-2 result"></div>
           </div>
           <textarea name="comments" placeholder="Share more thoughts on our service..." rows="4" cols="50"></textarea>
-          <center><h2>Technician's Review</h2></center>
+          <center><h3 id="headerrate">Technician's Review</h3></center>
           <div class="techRate">
             
           </div>
@@ -205,7 +205,7 @@
            <td>
             <?php if($appt->appt_status == 'Done'):?>
               <?php if($appt->rate == 0):?>
-                <a href=# id="<?php echo $appt->appt_id;?>" class="btn btn-success btn-sm ratea" data-toggle="modal" data-target="#rateModal">Rate</a>
+                <a href=# id="<?php echo $appt->appt_id;?>" class="btn btn-warning btn-sm ratea" data-toggle="modal" data-target="#rateModal"><i class="fas fa-star"></i></a>
               <?php else:?>
                 <a href="#" id="<?=$appt->appt_code?>" class="btn btn-success btn-sm viewReport"><i class="fas fa-eye"></i></a>
               <?php endif;?>
@@ -215,7 +215,7 @@
             
             <a href="#" id="<?php echo $appt->appt_id;?>" class="btn btn-info btn-sm view"><i class="fas fa-eye"></i></a>
             <?php if($appt->appt_date >= date('Y-m-d') && $appt->appt_status != 'Cancelled' && $appt->appt_status != 'Done'):?>
-              <a href="<?php echo base_url('/appointment/'.$appt->appt_id);?>" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
+              <a href="<?php echo base_url('/appointment/'.$appt->appt_id);?>" class="btn btn-primary btn-sm border-0"><i class="fas fa-edit"></i></a>
                
               <a href="<?php echo base_url('/appointment/delete/'.$appt->appt_id);?>"class="btn btn-danger btn-sm cancel"><i class="fas fa-ban"></i></a>
             <?php endif;?>
@@ -417,7 +417,7 @@ $(document).ready(function() {
               // console.log(`resulttech`+empId+`"`);
               // console.log('.resulttech'+empId);
 
-              $('.techRate').append(`<h5>`+apptEvents[i].emp_name+`</h5><div class="row rowa">
+              $('.techRate').append(`<h6 style="color: #344F21; font-weight: bold; font-style: italic;">`+apptEvents[i].emp_name+`</h6><div class="row rowa">
             <div class="col-lg-5">
                <p class="servq">Technician Quality</p>
             </div>
