@@ -207,17 +207,17 @@
               <?php if($appt->rate == 0):?>
                 <a href=# id="<?php echo $appt->appt_id;?>" class="btn btn-success btn-sm ratea" data-toggle="modal" data-target="#rateModal">Rate</a>
               <?php else:?>
-                <a href="#" id="<?=$appt->appt_code?>" class="btn btn-success btn-sm viewReport">View</a>
+                <a href="#" id="<?=$appt->appt_code?>" class="btn btn-success btn-sm viewReport"><i class="fas fa-eye"></i></a>
               <?php endif;?>
             <?php endif;?>
            </td>
            <td>
             
-            <a href="#" id="<?php echo $appt->appt_id;?>" class="btn btn-info btn-sm view">View</a>
+            <a href="#" id="<?php echo $appt->appt_id;?>" class="btn btn-info btn-sm view"><i class="fas fa-eye"></i></a>
             <?php if($appt->appt_date >= date('Y-m-d') && $appt->appt_status != 'Cancelled' && $appt->appt_status != 'Done'):?>
-              <a href="<?php echo base_url('/appointment/'.$appt->appt_id);?>" class="btn btn-primary btn-sm">Edit</a>
+              <a href="<?php echo base_url('/appointment/'.$appt->appt_id);?>" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
                
-              <a href="<?php echo base_url('/appointment/delete/'.$appt->appt_id);?>"class="btn btn-danger btn-sm del">Cancel</a>
+              <a href="<?php echo base_url('/appointment/delete/'.$appt->appt_id);?>"class="btn btn-danger btn-sm cancel"><i class="fas fa-ban"></i></a>
             <?php endif;?>
           </td>
        </tr>

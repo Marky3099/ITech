@@ -276,7 +276,7 @@
       <?php endif;?>
       <td><?php if($dat->appt_code != ''):?>
           <?php if($dat->status == 'Done'):?>
-            <a href="#" id="<?=$dat->id?>" class="btn btn-success btn-sm viewReport">View</a>
+            <a href="#" id="<?=$dat->id?>" class="btn btn-success btn-sm viewReport"><i class="fas fa-eye"></i></a>
           <?php endif;?>
         <?php endif;?>
       </td>

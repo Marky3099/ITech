@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="<?= base_url('assets/css/style.css')?>">
+<link rel="stylesheet" href="<?= base_url('assets/css/formstyle.css')?>">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/rowreorder/1.2.8/css/rowReorder.dataTables.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css">
 <div class="body-content" style="width: 100%;">
@@ -28,8 +29,8 @@
                   <tr>
                      <td><?= $d['date'];?></td>
                      <td><?= $d['description'];?></td>
-                     <td><a href="<?= base_url('/calendar/dates-edit-form/'.$d['date_id'])?>" class="btn btn-info btn-sm">Edit</a>
-                     <a href="<?= base_url('/calendar/dates-delete/'.$d['date_id'])?>" class="btn btn-danger btn-sm del">Delete</a></td>
+                     <td><a href="<?= base_url('/calendar/dates-edit-form/'.$d['date_id'])?>" class="btnn btn btn-primary border-0 btn-sm"><i class="fas fa-edit"></i></a>
+                     <a href="<?= base_url('/calendar/dates-delete/'.$d['date_id'])?>" class="btn btn-danger btn-sm del"><i class="fas fa-trash"></i></a></td>
                   </tr>
                <?php endforeach; ?>
             </tbody>

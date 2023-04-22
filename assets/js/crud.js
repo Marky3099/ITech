@@ -17,6 +17,27 @@ $('.del').click(function(e){
         })
 
  });
+
+$('.cancel').click(function(e){
+    e.preventDefault();
+    const href = $(this).attr('href');
+    Swal.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, cancel it!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            document.location.href = href;
+            
+          }
+        })
+
+ });
+
    if(msg){
       Swal.fire({
              icon: 'success',
