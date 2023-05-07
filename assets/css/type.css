@@ -17,6 +17,12 @@ div {
   height: 100%;
 }
 
+@media (max-width: 1140.98px) {
+  br.spacing {
+      margin-top: 30px;
+  }
+}
+
 .left-half {
   background: url(../image/home-img.jpg);
   background-size: 100% 100%;

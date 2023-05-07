@@ -1,4 +1,4 @@
-<br>
+<br><br><br>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +14,7 @@
 <body>
   <div class="container">
     <div class="row">
-      <div class="col-4 col-lg-4 col-md-4 col-sm-offset-4 col-md-offset-4">
+      <div class="col-4 col-xl-4 col-lg-4 col-md-4 col-sm-offset-4 col-md-offset-4">
         <div class="panel panel-default" id="panell">
           <div class="panel-body">
             <div class="header">

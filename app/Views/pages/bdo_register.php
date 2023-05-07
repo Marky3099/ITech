@@ -1,4 +1,4 @@
-<br>
+<br><br><br>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +15,7 @@
 <body>
   <div class="container">
     <div class="row justify-content-center">
-      <div class="register-box col-8 col-lg-8 col-md-8 col-sm-12">
+      <div class="register-box col-8 col-xl-8 col-lg-8 col-md-8 col-sm-12">
         <div class="header">
           <a href="<?= base_url('#home')?>" class="texthp"><img src="<?= base_url('assets/image/iicon.png')?>"></a>
         </div>

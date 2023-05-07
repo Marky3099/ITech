@@ -1,5 +1,5 @@
 <?php $validation1 = \Config\Services::validation();?>
-<br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 <!DOCTYPE html>
 <html>
@@ -17,7 +17,7 @@
 <body>
   <div class="container">
     <div class="row">
-      <div class="login-box col-12 col-lg-6 col-md-6 col-sm-12">
+      <div class="login-box col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
         <div class="header mt-2">
           <a href="<?= base_url('#home')?>" class="texthp"><img src="<?= base_url('assets/image/iicon.png')?>"></a>
         </div>

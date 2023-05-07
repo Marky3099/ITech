@@ -18,13 +18,13 @@
 				<div class="header">
 					<a href="<?= base_url('#home')?>" class="texthp"><img src="<?= base_url('assets/image/iicon.png')?>"></a>
 				</div>
-				<br>
+				<br><br>
 				<div class="box-content">
 				<h2 class="mt-2">Hi, User!</h2>
 				<p class="mt-2"><i class="fas fa-chevron-circle-down"></i>&nbsp;Please click or tap type of account.</i></p>
-				<br>
+			
 				<div class="btn-layer">
-					<a href="<?=base_url('/bdo-login')?>" class="btn btn-success"><div class="icon-box"><i class="fas fa-users"></i></div>Partnered Company</a>
+					<a href="<?=base_url('/bdo-login')?>" class="btn btn-success"><div class="icon-box"><i class="fas fa-users"></i></div>Partnered Company</a><br>
 					<a href="<?=base_url('/non-bdo-login')?>" class="btn btn-success"><div class="icon-box"><i class="fas fa-user-alt"></i></div>Non-Partnered Company</a>
 				</div>
 			

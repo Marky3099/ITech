@@ -18,7 +18,7 @@
 				<div class="header">
 					<a href="<?= base_url('#home')?>" class="texthp"><img src="<?= base_url('assets/image/iicon.png')?>"></a>
 				</div>
-		
+				<br class="spacing">
 				<div class="box-content">
 					<h2 class="mt-2">Hi, User!</h2>
 					<p class="mt-2"><i class="fas fa-chevron-circle-down"></i>&nbsp;Please click or tap type of account.</i></p>
