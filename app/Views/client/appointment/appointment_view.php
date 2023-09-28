@@ -271,7 +271,7 @@ $(document).ready(function() {
       $(document).on('click','.view',function(e){
       // console.log(e.target.id);
       var id = e.target.id;
-      // console.log(id);
+      console.log(id);
       var options = { year: 'numeric', month: 'long', day: 'numeric' };
 
       var myModal = new bootstrap.Modal(document.getElementById('viewModal'));
