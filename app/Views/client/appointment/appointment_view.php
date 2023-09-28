@@ -282,7 +282,7 @@ $(document).ready(function() {
             'appt_id': id
          },
          success: function(response){
-          console.log(response);
+          console.log(response.appt_data);
             var date = new Date(response.appt_data.appt_date);
 	console.log(date);
             var startEvent = date.toLocaleDateString("en-US",(options));
