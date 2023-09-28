@@ -712,7 +712,7 @@ public function view(){
     $data['fcu_data'] = $Fcu->where('appt_id',$id)->findAll();
     $data['client_data'] = $Client->orderBy('client_id','ASC')->findAll();
     $data['serv_data'] = $Serv->orderBy('serv_id','ASC')->findAll();
-    dd($data['appt_data']);
+    $data['id'] = $id;
     return $this->response->setJSON($data);
 }
 public function getEmp(){
