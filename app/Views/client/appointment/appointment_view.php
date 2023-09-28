@@ -284,6 +284,7 @@ $(document).ready(function() {
          success: function(response){
           // console.log(response);
             var date = new Date(response.appt_data.appt_date);
+	console.log(date);
             var startEvent = date.toLocaleDateString("en-US",(options));
             var apptCode = response.appt_data.appt_code;
             var clientId = response.appt_data.client_id;
